@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Исследование, продукт и смыслы · Екатерина Арея</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,500;0,700;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#101A2E; --slate:#2C3A52; --ink:#1B2333; --muted:#6B7488;
+    --stone:#EDEAE3; --card:#FFFFFF; --rule:#D8D4CB;
+    --brass:#B8873B; --brass-soft:#FBF3E4;
+    --violet:#7A6A93; --violet-soft:#F4F1F8;
+    --teal:#3E7A76; --teal-soft:#ECF4F3;
+    --display:'Spectral',Georgia,serif;
+    --body:'IBM Plex Sans',-apple-system,Segoe UI,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);background:var(--stone);color:var(--ink);
+    line-height:1.55;-webkit-font-smoothing:antialiased;padding:56px 32px 100px}
+  .wrap{max-width:1180px;margin:0 auto}
+
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  h1{font-family:var(--display);font-weight:300;font-size:clamp(36px,5vw,64px);
+    line-height:1.03;letter-spacing:-.02em;color:var(--night);max-width:18ch}
+  h1 em{font-style:italic;font-weight:500}
+  .lede{margin-top:22px;max-width:66ch;font-size:17px;color:var(--slate)}
+
+  h2{font-family:var(--display);font-weight:500;font-size:32px;color:var(--night);
+    letter-spacing:-.01em;line-height:1.15}
+  h3{font-family:var(--body);font-weight:600;font-size:17px;color:var(--night);margin-bottom:10px}
+  h4{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass);margin-bottom:12px}
+
+  section{margin-top:72px}
+  .sec-head{display:flex;align-items:baseline;gap:20px;padding-bottom:16px;
+    border-bottom:2px solid var(--night);margin-bottom:32px}
+  .sec-num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--brass);
+    letter-spacing:.1em;padding-top:6px}
+  .sec-sub{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);white-space:nowrap;padding-top:8px}
+
+  p{margin-bottom:14px;max-width:78ch}
+  .card{background:var(--card);border:1px solid var(--rule);padding:26px 28px;margin-bottom:18px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+
+  /* Главный тезис */
+  .thesis{background:var(--night);color:#EDEFF3;padding:44px 48px;margin:36px 0}
+  .thesis .q{font-family:var(--display);font-size:clamp(24px,3.2vw,38px);font-weight:300;
+    line-height:1.25;color:#fff;max-width:22ch}
+  .thesis .q b{font-weight:500;color:var(--brass);font-style:italic}
+  .thesis p{color:#AFB7C6;margin-top:22px;font-size:15px;max-width:64ch}
+
+  /* Цитаты клиентов */
+  .quote{border-left:3px solid var(--brass);padding:4px 0 4px 18px;margin:14px 0;
+    font-family:var(--display);font-style:italic;font-size:16.5px;color:var(--ink);max-width:70ch}
+  .quote .who{display:block;font-family:var(--mono);font-style:normal;font-size:10.5px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+
+  /* Паттерны боли */
+  .pattern{background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--violet);
+    padding:22px 26px;margin-bottom:14px}
+  .pattern .n{font-family:var(--mono);font-size:11px;color:var(--violet);
+    letter-spacing:.14em;font-weight:600;margin-bottom:8px}
+  .pattern h3{margin-bottom:8px}
+  .pattern p{font-size:14.5px;color:var(--slate);margin-bottom:10px}
+
+  /* JTBD */
+  .jtbd{background:var(--brass-soft);border:1px solid #E8D9BC;padding:22px 26px;margin-bottom:14px}
+  .jtbd .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--brass);margin-bottom:10px;font-weight:600}
+  .jtbd .job{font-family:var(--display);font-size:19px;line-height:1.4;color:var(--night)}
+  .jtbd .job b{font-weight:500;font-style:italic}
+  .jtbd .meta{margin-top:14px;padding-top:12px;border-top:1px solid #E0CFB0;
+    font-size:13.5px;color:var(--slate)}
+
+  /* Персона */
+  .persona{background:var(--card);border:1px solid var(--rule);border-top:4px solid var(--accent);
+    margin-bottom:26px}
+  .persona.a{--accent:var(--brass);--soft:var(--brass-soft)}
+  .persona.b{--accent:var(--violet);--soft:var(--violet-soft)}
+  .p-head{padding:24px 28px;border-bottom:1px solid var(--rule);display:flex;
+    align-items:flex-start;gap:20px;flex-wrap:wrap}
+  .p-tag{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:#fff;background:var(--accent);padding:6px 12px;margin-top:5px}
+  .p-head h2{flex:1;min-width:200px;font-size:28px}
+  .p-price{text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted)}
+  .p-price b{display:block;font-size:18px;color:var(--accent);letter-spacing:0;
+    text-transform:none;margin-top:4px;font-weight:600}
+  .p-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+  .p-col{padding:24px 28px;border-right:1px solid var(--rule)}
+  .p-col:last-child{border-right:none}
+  .p-col.mid{background:var(--soft)}
+  .facts{font-size:13.5px;line-height:1.8;margin-bottom:20px}
+  .facts b{color:var(--night)}
+
+  ul{list-style:none}
+  li{position:relative;padding-left:15px;margin-bottom:8px;font-size:14.5px;color:var(--slate)}
+  li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;
+    background:var(--brass);opacity:.6}
+  .persona.b li::before{background:var(--violet)}
+  li b{color:var(--ink);font-weight:600}
+
+  /* Лестница Ханта */
+  .ladder{display:flex;gap:2px;margin:24px 0 10px;align-items:flex-end}
+  .rung{flex:1;background:var(--card);border:1px solid var(--rule);padding:16px 14px;
+    display:flex;flex-direction:column;justify-content:flex-end}
+  .rung .lv{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:8px}
+  .rung .nm{font-weight:600;font-size:13.5px;margin-bottom:6px;color:var(--night)}
+  .rung .ds{font-size:12.5px;color:var(--muted);line-height:1.4}
+  .rung.hot{background:var(--brass-soft);border-color:var(--brass);border-width:2px}
+  .rung.hot .lv{color:var(--brass);font-weight:600}
+  .h0{min-height:110px} .h1{min-height:130px} .h2{min-height:155px}
+  .h3{min-height:185px} .h4{min-height:215px}
+
+  /* Конкуренты */
+  .comp{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);
+    background:var(--card);margin-bottom:14px}
+  .comp>div{padding:20px 24px}
+  .comp>div:first-child{border-right:1px solid var(--rule);background:#FAFAF8}
+
+  /* Продукт */
+  .tier{background:var(--card);border:1px solid var(--rule);padding:0;margin-bottom:18px;overflow:hidden}
+  .tier-head{background:var(--night);color:#fff;padding:20px 26px;display:flex;
+    justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .tier-head .nm{font-family:var(--display);font-size:23px;font-weight:500}
+  .tier-head .pr{font-family:var(--mono);font-size:17px;color:var(--brass);font-weight:600;white-space:nowrap}
+  .tier-body{padding:24px 26px}
+  .tier.lead .tier-head{background:var(--brass)}
+  .tier.lead .tier-head .pr{color:#fff}
+
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;background:var(--card)}
+  th{background:var(--night);color:#fff;text-align:left;padding:11px 14px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+  td{padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--slate)}
+  td:first-child{font-weight:600;color:var(--ink)}
+  tr:last-child td{border-bottom:none}
+
+  /* Смыслы: прогревы */
+  .beat{display:grid;grid-template-columns:56px 1fr;gap:0;background:var(--card);
+    border:1px solid var(--rule);margin-bottom:12px}
+  .beat-n{background:var(--night);color:#fff;display:flex;align-items:center;
+    justify-content:center;font-family:var(--mono);font-size:18px;font-weight:600}
+  .beat-b{padding:20px 24px}
+  .beat-b .ttl{font-weight:600;font-size:16px;color:var(--night);margin-bottom:6px}
+  .beat-b .fmt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--brass);margin-bottom:10px}
+  .beat-b p{font-size:14.5px;margin-bottom:8px}
+  .hook{background:var(--brass-soft);border-left:3px solid var(--brass);padding:10px 14px;
+    font-family:var(--display);font-style:italic;font-size:15px;color:var(--night);margin-top:10px}
+
+  /* Сайт */
+  .screen{background:var(--card);border:1px solid var(--rule);margin-bottom:12px;
+    display:grid;grid-template-columns:180px 1fr}
+  .screen .lbl{background:#FAFAF8;border-right:1px solid var(--rule);padding:18px 20px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--slate);font-weight:600}
+  .screen .cnt{padding:18px 22px}
+  .screen .cnt p{font-size:14.5px;margin-bottom:8px}
+  .screen .cnt .h{font-family:var(--display);font-size:19px;color:var(--night);
+    margin-bottom:8px;line-height:1.3}
+
+  .warn{background:#FFF4F0;border-left:4px solid #C0562B;padding:20px 24px;margin:18px 0}
+  .warn h3{color:#8C3D1F}
+  .warn p{font-size:14.5px;color:#6B3620;margin-bottom:8px}
+
+  .note{border-left:3px solid var(--rule);padding-left:16px;font-size:14px;
+    color:var(--muted);font-style:italic;margin:16px 0;max-width:74ch}
+
+  footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);
+    display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted)}
+
+  @media (max-width:900px){
+    .grid2,.grid3,.p-body,.comp,.screen{grid-template-columns:1fr}
+    .p-col{border-right:none;border-bottom:1px solid var(--rule)}
+    .screen .lbl{border-right:none;border-bottom:1px solid var(--rule)}
+    .ladder{flex-direction:column}
+    .rung{min-height:auto!important}
+  }
+  @media (max-width:560px){
+    body{padding:32px 16px 60px}
+    .thesis{padding:28px 24px}
+    .sec-head{flex-wrap:wrap;gap:10px}
+    .sec-sub{margin-left:0}
+  }
+  @media print{
+    body{background:#fff;padding:0}
+    section,.persona,.tier,.beat{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Исследование · продукт · смыслы · сентябрь 2026</div>
+  <h1>Что на самом деле покупают <em>у Екатерины Ареи</em></h1>
+  <p class="lede">Документ собран на материале восьми глубинных интервью с предпринимателями, проведённых Екатериной 31 августа — 3 сентября, и установочной встречи по пересборке продукта. Инструменты анализа: Jobs To Be Done, лестница осведомлённости Бена Ханта, карта конкурентных альтернатив.</p>
+</header>
+
+<div class="thesis">
+  <div class="q">Они приходят не за знанием и не за исцелением. Они приходят за <b>проходом</b> — за одной фразой, после которой становится ясно, куда идти, и появляется энергия туда пойти.</div>
+  <p>Это не гипотеза маркетолога. Это дословная формулировка одного из респондентов, повторённая в разных словах ещё пятью. Всё остальное в документе — следствие.</p>
+</div>
+
+<!-- ============ 1. ГЛАВНАЯ БОЛЬ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2>Главная боль</h2>
+    <span class="sec-sub">8 интервью · сквозной паттерн</span>
+  </div>
+
+  <p>Одна боль прозвучала в семи интервью из восьми. Екатерина сформулировала её точнее всех сама, в разговоре с Сашей:</p>
+
+  <div class="quote">То, что я поняла, и то, кем я являюсь — это сильно разные вещи. И вот эта нестыковка между пониманием и бытием, это и есть основной конфликт.
+    <span class="who">Екатерина, интервью 7</span></div>
+
+  <p>В речи клиентов это звучит проще и всегда одинаково: <b>«знаю, что делать, и не делаю»</b>. Это не лень, не отсутствие информации и не проблема мотивации. Это разрыв между интеллектуальным пониманием и способностью действовать — то, что Екатерина называет болезнью интеллектуализации.</p>
+
+  <p>Важное следствие для маркетинга: <b>информация не продаётся</b>. Все респонденты об этом сказали прямо — любую тему можно за день разобрать через нейросеть. Продаётся то, что закрывает разрыв: поле, сдвиг, ясность.</p>
+
+  <h4 style="margin-top:34px">Шесть форм, в которых эта боль проявляется</h4>
+
+  <div class="pattern">
+    <div class="n">Паттерн 01</div>
+    <h3>Плато после достижения</h3>
+    <p>Человек дошёл до цели — и обнаружил, что за ней ничего нет. Энергия, которая его вела, исчезла вместе с целью.</p>
+    <div class="quote">Всё было ради денег. Теперь они есть — ради чего же теперь жить? Я не мог даже дальше работать: я работал ради денег, а теперь деньги есть.
+      <span class="who">Роман, предприниматель</span></div>
+  </div>
+
+  <div class="pattern">
+    <div class="n">Паттерн 02</div>
+    <h3>Качели вместо потока</h3>
+    <p>Доход есть, но он держится только на личном усилии. Каждый месяц заново. Гонка изматывает быстрее, чем радует результат.</p>
+    <div class="quote">Я то миллионер, то нихрена нет. И вот так вот на протяжении пяти лет. Нету какого-то потока, который сам мне эти деньги приносит.
+      <span class="who">Роман, предприниматель</span></div>
+  </div>
+
+  <div class="pattern">
+    <div class="n">Паттерн 03</div>
+    <h3>Сопротивление действию</h3>
+    <p>Самый частый паттерн. Человек знает шаги, оплатил обучение, нанял людей — и всё равно не делает. Тело начинает говорить вместо него.</p>
+    <div class="quote">Хочу, но не делаю. Хочу хотеть. Хочу, чтобы это было легко и радостно.
+      <span class="who">Максим, ментор предпринимателей</span></div>
+    <div class="quote">Я накапливаю потенциал, и понимаю, что вот уже подошёл к тому месту, где можно квантово перейти. Но какие-то мои части сами гасят. Жду, пока матрица меня вытолкнет.
+      <span class="who">Респондент, целительская практика</span></div>
+  </div>
+
+  <div class="pattern">
+    <div class="n">Паттерн 04</div>
+    <h3>Расфокус: слишком много вариантов</h3>
+    <p>У сильного человека всегда несколько направлений, в каждом он хорош. Именно это и парализует — непонятно, какое тянуть.</p>
+    <div class="quote">Если у меня есть пять направлений, в которых я хорош, и ещё десять, куда мне интересно, то какое же выбирать?
+      <span class="who">Респондент, авторская технология</span></div>
+    <div class="note">Тот же респондент назвал и решение: «Одно из самых эффективных решений было отбросить в жизни вообще всё, оставив одну всего цель». Это прямая подсказка по механике продукта.</div>
+  </div>
+
+  <div class="pattern">
+    <div class="n">Паттерн 05</div>
+    <h3>Тело как тормоз</h3>
+    <p>Травмы, болезни, падение энергии ровно в тот момент, когда нужно расти. Респонденты сами читают это как психосоматику и как знак, но выйти не могут.</p>
+    <div class="quote">Уровень энергии низкий, ещё меньше стало хотеться делать. Нужен уровень энергии такой, чтобы вставало и хотелось делать то, что я знаю, надо делать, но не делаю.
+      <span class="who">Максим, ментор предпринимателей</span></div>
+  </div>
+
+  <div class="pattern">
+    <div class="n">Паттерн 06</div>
+    <h3>Самозванец на новой территории</h3>
+    <p>То, что человек умеет, ему уже неинтересно. То, что интересно, он пока не умеет. Между этими двумя точками — застревание.</p>
+    <div class="quote">То, что умею хорошо, уже неинтересно. А то, что интересно, пока ещё не умею хорошо — и там возникает комплекс самозванца.
+      <span class="who">Респондент, авторская технология</span></div>
+    <div class="note">Отдельная ценность: это ровно тот конфликт, в котором сейчас находится сама Екатерина. Она может говорить об этом изнутри, а не сверху — и это её сильнейший контентный ресурс на ближайшие месяцы.</div>
+  </div>
+</section>
+
+<!-- ============ 2. JTBD ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2>Работа, на которую её нанимают</h2>
+    <span class="sec-sub">Jobs To Be Done</span>
+  </div>
+
+  <p>Формулировки ниже собраны из речи респондентов, а не придуманы. Один из них — практикующий целитель с собственной школой — фактически надиктовал техническое задание на продукт. Приводим его четыре пункта как есть, они лучше любой аналитики.</p>
+
+  <div class="jtbd">
+    <div class="lbl">Работа 1 · Сдвиг</div>
+    <div class="job">Когда я упёрся в потолок, который сам не вижу, <b>я нанимаю кого-то, кто даст мне квантовый переход</b> — чтобы за два месяца оказаться там, куда сам шёл бы годами.</div>
+    <div class="meta">Голос клиента: «Некий квантовый переход. У тебя есть какие-то коды, ключи, загрузки — что-то, что может человеку дать переход к x10, x100».</div>
+  </div>
+
+  <div class="jtbd">
+    <div class="lbl">Работа 2 · Энергия на действие</div>
+    <div class="job">Когда я знаю, что делать, но не двигаюсь, <b>я нанимаю поле, в котором просто появляется желание идти</b> — чтобы перестать себя заставлять.</div>
+    <div class="meta">Голос клиента: «Вдохновение на этот переход. Когда просто в твоём окружении находишься, как будто энергия такая появляется, и такое — а, всё, я пошёл делать».</div>
+  </div>
+
+  <div class="jtbd">
+    <div class="lbl">Работа 3 · Ясность и отсечение</div>
+    <div class="job">Когда у меня слишком много вариантов и все хорошие, <b>я нанимаю того, кто скажет, что убрать</b> — чтобы сфокусироваться как лазер, а не распыляться.</div>
+    <div class="meta">Голос клиента: «Ясность по пути, потому что иногда слишком много вариантов. Какое-то прояснение: что лишнее убрать, куда сконцентрироваться больше».</div>
+  </div>
+
+  <div class="jtbd">
+    <div class="lbl">Работа 4 · Проход</div>
+    <div class="job">Когда я блуждаю по бесконечным коридорам, <b>я нанимаю того, кто покажет короткий проход</b> — чтобы одна фраза пересобрала всю картину.</div>
+    <div class="meta">Голос клиента: «Блуждаешь по куче коридоров, по лесу — а ты говоришь: вот проход вот там. Причём иногда одна фраза уже всё начинает собирать по-другому, всё направлять. И вот это самое главное».</div>
+  </div>
+
+  <p style="margin-top:26px">Четвёртая работа — центральная. Она же полностью совпадает с тем, что Екатерина называет своим методом: <b>квантовый проход</b>, короткий путь, на котором человек сдвигается быстро. Собственный термин эксперта и язык клиента совпали дословно. Это редкий случай, и на нём нужно строить всё позиционирование.</p>
+</section>
+
+<!-- ============ 3. ПЕРСОНЫ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2>Кто эти люди</h2>
+    <span class="sec-sub">Сегменты A и Б</span>
+  </div>
+
+  <p>Ключевая пропорция, названная Екатериной: тех, кто задаёт себе вопрос о наследии и миссии — примерно один на миллион. Тех, кто хочет денег, свободы и меньше работать — практически все. Это не повод отказываться от глубины. Это повод <b>продавать вход на языке денег и свободы, а глубину давать внутри</b>.</p>
+
+  <div class="warn">
+    <h3>Вывод, который нельзя пропустить</h3>
+    <p>На вход тема наследия не работает. Респондент сформулировал: «Все хотят деньги, отношения, классную жизнь, свободное время. А когда я говорю — а как же большая цель за пределами твоей жизни? Такие: не, не хочу».</p>
+    <p>Но тот же респондент дал и решение: люди, которым нужна миссия, существуют — это <b>состоявшиеся предприниматели на распутье</b>, у которых уже есть деньги. Их нельзя ловить на слово «миссия». Их ловят на боль: «заработал не первый миллион, вроде всё есть, а радости нет, и непонятно, что дальше».</p>
+  </div>
+
+  <!-- Персона A -->
+  <div class="persona a">
+    <div class="p-head">
+      <span class="p-tag">Сегмент A</span>
+      <h2>Тот, кто дошёл и остановился</h2>
+      <div class="p-price">Готов платить<b>300 000 – 550 000 ₽</b></div>
+    </div>
+    <div class="p-body">
+      <div class="p-col">
+        <div class="facts">
+          <div><b>Кто:</b> предприниматель или эксперт с собственным делом</div>
+          <div><b>Возраст:</b> 38–50</div>
+          <div><b>Доход:</b> от 300 тыс. ₽/мес, часть — от 1 млн</div>
+          <div><b>Состояние:</b> цель достигнута, следующая не видна</div>
+          <div><b>Насмотренность:</b> высокая. Прошёл сообщества, ретриты, наставников</div>
+        </div>
+        <h4>Как говорит о себе</h4>
+        <ul>
+          <li>«Я в гонке. Каждый месяц заново.»</li>
+          <li>«Раньше зажигало, сейчас непонятно зачем.»</li>
+          <li>«Я всё знаю и всё понимаю. И ничего не делаю.»</li>
+          <li>«Мозгов через край. Применения нет.»</li>
+        </ul>
+      </div>
+      <div class="p-col mid">
+        <h4>Что покупает на самом деле</h4>
+        <ul>
+          <li><b>Сдвиг за короткое время</b>, а не программу обучения</li>
+          <li><b>Одну фразу</b>, которая пересобирает картину</li>
+          <li><b>Поле людей своего уровня</b> — горизонталь, а не лекции</li>
+          <li><b>Разрешение отсечь лишнее</b> и остаться с одной целью</li>
+          <li><b>Измеримый результат</b>, чаще всего деньги</li>
+        </ul>
+        <h4 style="margin-top:22px">Чего не купит никогда</h4>
+        <ul>
+          <li>Курс с лекциями — «любую тему разберу за день через нейросеть»</li>
+          <li>Гипотетические советы вместо решений</li>
+          <li>Обязательный офлайн — он в перелётах</li>
+          <li>Группу, где рядом человек с доходом 150 тыс. ₽</li>
+          <li>Допродажи внутри уже оплаченного сообщества</li>
+        </ul>
+      </div>
+      <div class="p-col">
+        <h4>Триггеры покупки</h4>
+        <ul>
+          <li>Увидел эксперта в длинном контенте и почувствовал совпадение за пять минут</li>
+          <li>Понял, что стоит перед выбором, который сам не разрешит</li>
+          <li>Кто-то из его круга получил результат в этом поле</li>
+        </ul>
+        <h4 style="margin-top:22px">Стоп-факторы</h4>
+        <ul>
+          <li>Космический язык, за которым не видно результата</li>
+          <li>Сроки без границ: «полгода-год» звучит как отказ</li>
+          <li>Ощущение, что его будут учить, а не сдвигать</li>
+        </ul>
+        <div class="quote" style="margin-top:20px;font-size:15px">Моё время стоит минимум полтинник в час. Вы сейчас 50 тысяч моих съели.
+          <span class="who">Евгений, три направления бизнеса</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Персона Б -->
+  <div class="persona b">
+    <div class="p-head">
+      <span class="p-tag">Сегмент Б</span>
+      <h2>Тот, кто копит потенциал</h2>
+      <div class="p-price">Готов платить<b>30 000 – 150 000 ₽</b></div>
+    </div>
+    <div class="p-body">
+      <div class="p-col">
+        <div class="facts">
+          <div><b>Кто:</b> эксперт, наставник, практик со своей темой</div>
+          <div><b>Возраст:</b> 33–48</div>
+          <div><b>Доход:</b> 100–400 тыс. ₽/мес, нестабильный</div>
+          <div><b>Состояние:</b> много делает, результат не растёт</div>
+          <div><b>Насмотренность:</b> очень высокая. Учится постоянно</div>
+        </div>
+        <h4>Как говорит о себе</h4>
+        <ul>
+          <li>«Количество контента выросло, деньги те же.»</li>
+          <li>«Я накапливаю потенциал. Жду, когда вытолкнет.»</li>
+          <li>«Начинаю и бросаю, привычку не выработал.»</li>
+          <li>«Осенью планирую три продукта.» — и ни одного не запускает</li>
+        </ul>
+      </div>
+      <div class="p-col mid">
+        <h4>Что покупает на самом деле</h4>
+        <ul>
+          <li><b>Внешнюю силу, которая заставит доделать</b> — сам не доводит</li>
+          <li><b>Сокращение вариантов</b> с трёх продуктов до одного</li>
+          <li><b>Регулярность и ритм</b>, которых нет внутри</li>
+          <li><b>Причастность к сильному полю</b> — заряжается от людей</li>
+        </ul>
+        <h4 style="margin-top:22px">Ключевая механика для него</h4>
+        <p style="font-size:14.5px;color:var(--slate)">Работает только внешнее обязательство. Один респондент прямо описал: платил СММ-специалисту, чтобы тот приезжал снимать — иначе не снимал бы вообще. Другой: «Мне сказали, что не допустят на следующую встречу, если не сделаю. И я взял и сделал».</p>
+      </div>
+      <div class="p-col">
+        <h4>Триггеры покупки</h4>
+        <ul>
+          <li>Очередной цикл «опять не сделал» замкнулся</li>
+          <li>Тело или обстоятельства дали сигнал</li>
+          <li>Увидел, что кто-то похожий сдвинулся</li>
+        </ul>
+        <h4 style="margin-top:22px">Стоп-факторы</h4>
+        <ul>
+          <li>Ещё один объём информации — у него его и так избыток</li>
+          <li>Продукт, который можно тихо не делать</li>
+          <li>Высокий чек без ощущения гарантии сдвига</li>
+        </ul>
+        <div class="note" style="margin-top:20px">Сегмент Б — это не «недо-A». Это отдельная работа: им нужен не проход, а конвейер, который не даёт слиться. И платить за это они готовы кратно меньше.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. БЕН ХАНТ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <h2>Лестница осведомлённости</h2>
+    <span class="sec-sub">Бен Хант · где стоит целевой клиент</span>
+  </div>
+
+  <p>Особенность аудитории Екатерины: люди приходят к ней с высокой ступени. Они прошли всё — сообщества, наставников, ретриты, випассаны. Проблему они осознали давно, решений перепробовали много, и ни одно не сработало до конца.</p>
+
+  <div class="ladder">
+    <div class="rung h0"><div class="lv">0</div><div class="nm">Нет проблемы</div><div class="ds">«У меня всё хорошо». Не наш клиент</div></div>
+    <div class="rung h1"><div class="lv">1</div><div class="nm">Проблема есть</div><div class="ds">Смутное ощущение, что застрял</div></div>
+    <div class="rung h2"><div class="lv">2</div><div class="nm">Ищет решение</div><div class="ds">Читает, слушает, пробует</div></div>
+    <div class="rung hot h3"><div class="lv">3 · ЯДРО</div><div class="nm">Сравнивает способы</div><div class="ds">Ретрит? Айваска? Наставник? Ещё одно сообщество? Выбирает между категориями</div></div>
+    <div class="rung hot h4"><div class="lv">4 · ЯДРО</div><div class="nm">Выбирает мастера</div><div class="ds">Способ понятен. Решает, кому доверить. Смотрит длинный контент и ищет совпадение</div></div>
+  </div>
+
+  <p style="margin-top:24px">Отсюда два практических вывода.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Контент не должен объяснять проблему</h3>
+      <p style="font-size:14.5px">Клиент на ступени 3–4 знает, что застрял. Контент, который убеждает его в наличии проблемы, тратит его время и раздражает. Контент должен <b>называть способ и показывать разницу между способами</b>.</p>
+    </div>
+    <div class="card">
+      <h3>Решение принимается за пять минут</h3>
+      <p style="font-size:14.5px">Респонденты описывают одинаково: посмотрел длинное видео, почувствовал совпадение, пришёл. Значит длинный контент — YouTube и Telegram — это не прогрев, а <b>сам механизм продажи</b>. Короткие форматы только приводят к нему.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. КОНКУРЕНТЫ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">05</span>
+    <h2>С чем на самом деле конкурируем</h2>
+    <span class="sec-sub">карта альтернатив</span>
+  </div>
+
+  <p>Самый неочевидный вывод исследования. Конкуренты Екатерины — не другие наставники и не онлайн-школы. Респондент назвал это прямо:</p>
+
+  <div class="quote">Ты конкурируешь с этими ребятками. Ретрит и айваска продаются как идея, что ты познаёшь себя. А твоя идея пока не названа и не продаётся.
+    <span class="who">Стас, интервью 3</span></div>
+
+  <p>Когда предприниматель попадает в точку «всё есть, а зачем — непонятно», он выбирает из короткого списка. И ни один пункт этого списка не является обучающим продуктом.</p>
+
+  <div class="comp">
+    <div><h3>Айваска, психоделики, тёмный ретрит</h3><p style="font-size:14px">Обещание: за неделю получить встряску, после которой всё изменится. Респонденты называли это первым, когда их спрашивали о способах сдвига.</p></div>
+    <div><h4>Наше преимущество</h4><p style="font-size:14px">Тот же эффект без риска, без перелёта и без потери недели. Формулировка респондента: «Нужен эффект такой же, как у айваски, но безопасно. Тогда это будет покупаться».</p></div>
+  </div>
+
+  <div class="comp">
+    <div><h3>Випассана, монастыри, места силы</h3><p style="font-size:14px">Обещание: тишина и контакт с собой. Требует 7–10 дней полного выпадения из жизни.</p></div>
+    <div><h4>Наше преимущество</h4><p style="font-size:14px">«Я могу неделю не терять, а поговорить с тобой несколько раз по пару часов». Плюс после випассаны человек возвращается в ту же жизнь — а здесь сдвиг переводится в действие.</p></div>
+  </div>
+
+  <div class="comp">
+    <div><h3>Крупные бизнес-сообщества</h3><p style="font-size:14px">Обещание: окружение и динамика. Респонденты, состоящие в них, дали жёсткую критику: перегруз эфирами, разноуровневые участники, гипотетические советы, допродажи внутри оплаченного, обязательный офлайн.</p></div>
+    <div><h4>Наше преимущество</h4><p style="font-size:14px">Малая группа одного уровня, один эфир вместо десяти, никаких допродаж внутри, полный онлайн. Каждый пункт критики — готовый пункт нашего оффера.</p></div>
+  </div>
+
+  <div class="comp">
+    <div><h3>Ещё одно обучение</h3><p style="font-size:14px">Обещание: знания и инструменты. Проиграло само себе.</p></div>
+    <div><h4>Наше преимущество</h4><p style="font-size:14px">Респонденты единогласны: информация обесценилась. «Любую тему за день можно исследовать через нейросеть». Мы продаём не информацию.</p></div>
+  </div>
+
+  <div class="thesis" style="margin-top:34px">
+    <div class="q">Позиционная формула: <b>эффект ретрита без выпадения из жизни, переведённый в деньги.</b></div>
+    <p>Слева забираем аудиторию у трансформационных практик, справа — у бизнес-сообществ. В середине нет никого: практики не доводят до результата, сообщества не дают сдвига состояния. Екатерина делает и то и другое — это её реальное конкурентное преимущество, и оно до сих пор не названо.</p>
+  </div>
+</section>
+
+<!-- ============ 6. ПРОДУКТ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">06</span>
+    <h2>Продукт</h2>
+    <span class="sec-sub">упаковка и формат</span>
+  </div>
+
+  <p>Конструкция ниже собрана из трёх источников: работ JTBD, прямых пожеланий респондентов по формату и ограничений самой Екатерины. Два респондента независимо друг от друга предложили двухуровневую структуру — это не совпадение, а очевидное следствие того, что аудитория расслаивается по готовности платить за глубину контакта.</p>
+
+  <h4>Рабочее название</h4>
+  <h2 style="font-size:38px;margin:10px 0 16px">Квантовый проход</h2>
+  <p>Термин принадлежит самой Екатерине и дословно совпадает с языком клиента. «Квантовый код» она переросла — это её слова. Новое название переносит акцент с описания метода на обещание результата: не код, который надо расшифровать, а проход, по которому надо пройти.</p>
+
+  <table>
+    <tr><th>Параметр</th><th>Решение</th><th>Из чего следует</th></tr>
+    <tr><td>Длительность</td><td>Сезон 2 месяца</td><td>Формат, который вдохновил Екатерину. За два месяца результат достижим, за три люди расползаются</td></tr>
+    <tr><td>Вход</td><td>Ежемесячно, поток идёт непрерывно</td><td>Запрос Екатерины на evergreen: продавать каждый месяц, а не два раза в год</td></tr>
+    <tr><td>Фокус</td><td>Одна цель на сезон. Бизнес-цель, измеримая в деньгах</td><td>Работа 3 в JTBD. Прямая рекомендация респондента: отбросить всё, оставив одну цель</td></tr>
+    <tr><td>Точка Б</td><td>Описывается конкретными событиями, а не состоянием</td><td>Методология Екатерины. Снимает главную претензию к мягким продуктам: «видение есть, результата нет»</td></tr>
+    <tr><td>Ритм встреч</td><td>Один эфир с Екатериной в две недели, 2–3 часа</td><td>Прямая рекомендация респондента. Раз в неделю — перегруз, раз в месяц — мало</td></tr>
+    <tr><td>Горизонталь</td><td>Малые группы по 4–6 человек между эфирами</td><td>Снимает риск «я отдаю, они берут», о котором Екатерина сказала прямо</td></tr>
+    <tr><td>Отчётность</td><td>Еженедельный короткий отчёт по своей цели</td><td>Механика внешнего обязательства — единственное, что работает на сегменте Б</td></tr>
+    <tr><td>Библиотека</td><td>Записанные продукты как бонус, доступ зависит от тарифа</td><td>Монетизирует 22 существующих продукта, не размывая позиционирование</td></tr>
+    <tr><td>Отбор</td><td>Есть. Действующее дело, доход от порога, создаёт ценность</td><td>Ключевая претензия к большим сообществам — разноуровневые участники</td></tr>
+  </table>
+
+  <h4 style="margin-top:38px">Тарифы</h4>
+
+  <div class="tier">
+    <div class="tier-head">
+      <span class="nm">Разбор · вход</span>
+      <span class="pr">30 000 – 50 000 ₽</span>
+    </div>
+    <div class="tier-body">
+      <p><b>Одна встреча 2–3 часа.</b> Человек приходит с ощущением застревания, уходит с названной точкой и одним следующим шагом.</p>
+      <p>Это прямой ответ на альтернативу «поехать на айваску». Респондент описал логику решения дословно: «Я взвешиваю и думаю — ладно, если уж с Катей не поможет, тогда поеду на ретрит по-взрослому. А так вот к тебе приду. Должен быть лёгкий вход: ничего не теряешь, деньги не такие великие, а узнать можешь многое».</p>
+      <p style="margin-bottom:0"><b>Двойная функция:</b> продукт продаётся сам по себе и одновременно работает отбором в основную программу. Продавать флагман после разбора не нужно — человек уже почувствовал поле.</p>
+    </div>
+  </div>
+
+  <div class="tier">
+    <div class="tier-head">
+      <span class="nm">Поле</span>
+      <span class="pr">150 000 ₽ / сезон</span>
+    </div>
+    <div class="tier-body">
+      <p>Эфиры с Екатериной, малая группа, отчётность, библиотека записей. <b>Екатерина отдаёт энергию и методологию, но не погружается в каждого лично.</b></p>
+      <p>Это ровно та модель, которую Екатерина назвала на встрече: «Первый тариф, где я ни в кого не погружаюсь, я просто выгружаю, даю энергию, ресурсы, говорю что делать». Такой формат не расходует её ресурс и позволяет держать поток каждый месяц.</p>
+      <p style="margin-bottom:0"><b>Кому:</b> преимущественно сегмент Б и часть A, которая заходит осторожно.</p>
+    </div>
+  </div>
+
+  <div class="tier lead">
+    <div class="tier-head">
+      <span class="nm">Проход</span>
+      <span class="pr">500 000 ₽ / сезон</span>
+    </div>
+    <div class="tier-body">
+      <p>Всё из тарифа «Поле», плюс <b>3–4 личные сессии с Екатериной</b> и персональный разбор точки Б.</p>
+      <p>Порог назван самой Екатериной: «За 500 тысяч я готова погружаться, за 100 — не готова». Это честная граница, и её нужно держать: погружение в человека — самый дорогой её ресурс.</p>
+      <p style="margin-bottom:0"><b>Кому:</b> сегмент A. Мест немного — 3–5 на сезон. Дефицит здесь не маркетинговый приём, а физическое ограничение.</p>
+    </div>
+  </div>
+
+  <div class="warn">
+    <h3>Тариф за 90–100 тысяч не открывать</h3>
+    <p>Соблазн будет: он кажется способом собрать больше людей. На деле он приводит в группу участников другого уровня, а это единственная претензия, которую целевой сегмент A высказывает к большим сообществам чаще всего. Один участник не того уровня обесценивает группу для всех остальных.</p>
+  </div>
+</section>
+
+<!-- ============ 7. СМЫСЛЫ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">07</span>
+    <h2>Смыслы</h2>
+    <span class="sec-sub">прогрев · офферы · сайт</span>
+  </div>
+
+  <h4>Большая идея коммуникации</h4>
+  <div class="thesis" style="margin-top:12px">
+    <div class="q">Ты не ленивый и не выгорел. Ты знаешь, что делать, и не делаешь — потому что <b>внутри тебя конфликт, которого ты не видишь.</b></div>
+    <p>Формулировка бьёт в сквозную боль всех восьми интервью и одновременно снимает главное возражение умного человека: «мне не нужна мотивация, я и так всё знаю». Она не спорит с его умом — она говорит, что ум здесь не при чём.</p>
+  </div>
+
+  <h4 style="margin-top:36px">Три запрещённых хода</h4>
+  <div class="grid3">
+    <div class="card"><h3>Не начинать с наследия</h3><p style="font-size:14px;margin:0">Тема наследия и миссии на входе отталкивает. Она раскрывается внутри продукта, когда человек уже получил первый результат.</p></div>
+    <div class="card"><h3>Не обещать процесс</h3><p style="font-size:14px;margin:0">«Расширим видение», «выстроим архитектуру» — это описание процесса. Клиент покупает событие: сдвиг, проход, деньги.</p></div>
+    <div class="card"><h3>Не говорить космическим языком</h3><p style="font-size:14px;margin:0">Сама Екатерина назвала это проблемой текущего сайта. Проверка: понял бы текст человек, который никогда не слышал слов «поле» и «энергия».</p></div>
+  </div>
+
+  <h4 style="margin-top:44px">Линия прогрева · шесть тактов</h4>
+  <p>Порядок неслучаен: сначала называем состояние, потом объясняем причину, потом разносим альтернативы, потом показываем механику, доказательство и вход. Каждый такт — одна смысловая съёмка, из которой нарезается неделя контента.</p>
+
+  <div class="beat">
+    <div class="beat-n">1</div>
+    <div class="beat-b">
+      <div class="fmt">YouTube · длинное видео</div>
+      <div class="ttl">Состояние, у которого нет названия</div>
+      <p>Всё построено, деньги идут, а внутри пусто. Не депрессия, не выгорание, не кризис. Человек впервые слышит описание того, в чём живёт полгода и о чём никому не говорил.</p>
+      <div class="hook">Ты не выгорел. Выгорание — это когда нет сил. А у тебя силы есть. Просто некуда.</div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat-n">2</div>
+    <div class="beat-b">
+      <div class="fmt">YouTube · Telegram</div>
+      <div class="ttl">Почему умные застревают глубже остальных</div>
+      <p>Болезнь интеллектуализации. Чем лучше человек всё понимает, тем надёжнее это понимание заменяет ему действие. Разрыв между «я понял» и «я являюсь».</p>
+      <div class="hook">Ты не потому не делаешь, что не знаешь как. Ты не делаешь, потому что уже всё понял — и мозгу этого достаточно.</div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat-n">3</div>
+    <div class="beat-b">
+      <div class="fmt">Рилс · карусель · Threads</div>
+      <div class="ttl">Почему айваска и випассана не решают</div>
+      <p>Самый острый и самый цепляющий такт. Разбор без обесценивания: эти опыты дают инсайт, но не переводят его в жизнь. Человек возвращается в ту же самую реальность.</p>
+      <div class="hook">После ретрита ты возвращаешься в ту же жизнь. Инсайт остался в горах, а решения принимать здесь.</div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat-n">4</div>
+    <div class="beat-b">
+      <div class="fmt">YouTube · эфир</div>
+      <div class="ttl">Что такое проход</div>
+      <p>Раскрытие метода. Не годы работы, а короткий путь. Почему одна точная фраза меняет больше, чем год терапии. И почему это работает не у всех и не всегда — честность здесь обязательна, аудитория чувствует натяжку мгновенно.</p>
+      <div class="hook">Иногда нужен год. А иногда — одна фраза, после которой всё собирается по-другому.</div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat-n">5</div>
+    <div class="beat-b">
+      <div class="fmt">Кейсы · сторис</div>
+      <div class="ttl">Как выглядит сдвиг со стороны</div>
+      <p>Истории конкретных людей: где были, что изменилось, за какой срок. Обязательно с цифрами, где они есть. Екатерина отметила особенность: человек после сдвига не помнит, что два месяца назад был в другом месте — это само по себе сильный сюжет.</p>
+      <div class="hook">Через два месяца он не помнил, что было до. «Я всегда здесь был», — говорит. А я помню, каким он пришёл.</div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat-n">6</div>
+    <div class="beat-b">
+      <div class="fmt">Эфир · продажа</div>
+      <div class="ttl">Одна цель на два месяца</div>
+      <p>Механика продукта как оффер. Почему одна цель, почему два месяца, почему отбор, почему отчёты. Здесь же — кому не подходит. Отсечка усиливает желание попасть сильнее любого дедлайна.</p>
+      <div class="hook">Мы возьмём одну твою цель. Всё остальное на два месяца отпускаем. Это и есть условие.</div>
+    </div>
+  </div>
+
+  <h4 style="margin-top:44px">Структура сайта</h4>
+  <p>Одна страница. Екатерина права: продукт не требует долгих объяснений, требует точного попадания. Задача каждого экрана — не рассказать, а вызвать узнавание.</p>
+
+  <div class="screen">
+    <div class="lbl">Экран 1 · Первый</div>
+    <div class="cnt">
+      <div class="h">«Ты знаешь, что делать. И не делаешь.»</div>
+      <p>Подзаголовок называет продукт и результат: два месяца, одна цель, измеримый сдвиг. Одна кнопка — оставить заявку. Никаких регалий в первом экране: они идут ниже.</p>
+    </div>
+  </div>
+
+  <div class="screen">
+    <div class="lbl">Экран 2 · Узнавание</div>
+    <div class="cnt">
+      <div class="h">Шесть состояний, в одном из которых ты сейчас</div>
+      <p>Паттерны из раздела 01 в виде коротких формулировок от первого лица. Человек должен ткнуть пальцем в своё. Это самый важный экран страницы — он делает то, что обычно делает диагностика.</p>
+    </div>
+  </div>
+
+  <div class="screen">
+    <div class="lbl">Экран 3 · Отстройка</div>
+    <div class="cnt">
+      <div class="h">Почему не сработало то, что ты уже пробовал</div>
+      <p>Ретриты, айваска, сообщества, обучения — по одному абзацу, без обесценивания. Каждый даёт часть, ни один не даёт целого. Экран закрывает возражение «я уже всё пробовал» до того, как оно возникнет.</p>
+    </div>
+  </div>
+
+  <div class="screen">
+    <div class="lbl">Экран 4 · Метод</div>
+    <div class="cnt">
+      <div class="h">Что такое проход</div>
+      <p>Три-четыре предложения на земном языке. Что происходит на эфирах, что человек делает между ними, как формулируется точка Б, почему одна цель. Без схем и без терминологии.</p>
+    </div>
+  </div>
+
+  <div class="screen">
+    <div class="lbl">Экран 5 · Кейсы</div>
+    <div class="cnt">
+      <div class="h">Что изменилось у тех, кто прошёл</div>
+      <p>Пять-семь историй. Формат: было — стало — срок. Цифры там, где они есть. Этот блок продаёт сильнее любого текста о методе.</p>
+    </div>
+  </div>
+
+  <div class="screen">
+    <div class="lbl">Экран 6 · Екатерина</div>
+    <div class="cnt">
+      <div class="h">Кто ведёт</div>
+      <p>Двенадцать лет в правлении банка, кредитный комитет, три тысячи компаний, MBA — и пятнадцать лет в работе с сознанием. Именно эта пара и есть отстройка: финансист, который понимает бизнес, и практик, который работает с состоянием. По отдельности таких много, вместе — почти нет.</p>
+    </div>
+  </div>
+
+  <div class="screen">
+    <div class="lbl">Экран 7 · Отбор</div>
+    <div class="cnt">
+      <div class="h">Кому сюда не надо</div>
+      <p>Прямым текстом. Нет действующего дела. Ищете терапию, а не рост. Не готовы отпустить всё остальное на два месяца. Отсечка работает на желание попасть — и одновременно бережёт уровень группы.</p>
+    </div>
+  </div>
+
+  <div class="screen">
+    <div class="lbl">Экран 8 · Тарифы</div>
+    <div class="cnt">
+      <div class="h">Два входа</div>
+      <p>«Поле» и «Проход» рядом, разница в одной строке — личные сессии. Количество мест указано. Дедлайн ближайшего сезона. Кнопка ведёт на анкету, а не на оплату: отбор — часть ценности.</p>
+    </div>
+  </div>
+
+  <div class="note">Респондент дал точное описание того, чего на сайте быть не должно: «Мне делали презу на 60 страниц, я должна говорящей головой говорить по презе. Я так не умею и так не работает». Тот же принцип применим к странице — максимум восемь экранов, ни одного лишнего.</div>
+</section>
+
+<!-- ============ 8. ЧТО ДАЛЬШЕ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">08</span>
+    <h2>Что решить до сборки</h2>
+    <span class="sec-sub">открытые вопросы</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Название</h3>
+      <p style="font-size:14.5px;margin:0">«Квантовый проход» — рабочая версия, построенная на пересечении термина Екатерины и языка клиента. Решение за ней: слово должно ощущаться как своё, иначе оно не будет звучать в эфирах.</p>
+    </div>
+    <div class="card">
+      <h3>Порог входа по доходу</h3>
+      <p style="font-size:14.5px;margin:0">Публиковать ли цифру на сайте. Плюс: отсекает и повышает статус группы. Минус: часть сегмента Б с потенциалом не подаст заявку. Компромисс — формулировать через дело, а не через сумму.</p>
+    </div>
+    <div class="card">
+      <h3>Цена «Поля»</h3>
+      <p style="font-size:14.5px;margin:0">150 тысяч за сезон — гипотеза. Первый поток покажет реальную готовность. Поднимать легче, чем опускать, поэтому стартовать имеет смысл здесь, а не ниже.</p>
+    </div>
+    <div class="card">
+      <h3>Кто ведёт малые группы</h3>
+      <p style="font-size:14.5px;margin:0">Горизонталь без ведущих рассыпается — это подтвердил респондент на примере собственной группы: пять встреч, и динамика просела. Нужны лидеры и их мотивация. На первом сезоне роль может закрыть сама Екатерина, дальше — нет.</p>
+    </div>
+    <div class="card">
+      <h3>Разбор: цена и объём</h3>
+      <p style="font-size:14.5px;margin:0">30 или 50 тысяч, одна встреча или две. От этого зависит, работает ли он как самостоятельный продукт или только как отбор.</p>
+    </div>
+    <div class="card">
+      <h3>Даты первого сезона</h3>
+      <p style="font-size:14.5px;margin:0">Ретрит в Египте 18–28 сентября выключает Екатерину из процесса на десять дней. Первый эфир до отъезда, второй после, старт — начало октября. Календарь строится вокруг этих трёх точек.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Источник: 8 глубинных интервью, 31 августа — 3 сентября 2026</span>
+  <span>Системный продюсер · Alex Kim · Soltrix</span>
+</footer>
+
+</div>
+</body>
+</html>
