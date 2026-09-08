@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>
+    html,body{margin:0;padding:0;background:#F9EFE3;color:#0A2F4F;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;}
+    *{box-sizing:border-box;}
+    a{color:#0A2F4F;text-decoration:none;}
+    a:hover{color:#C15C22;}
+    button{font-family:inherit;cursor:pointer;border:0;background:none;padding:0;color:inherit;-webkit-appearance:none;transition:transform 120ms;}
+    button:active{transform:scale(.97);}
+    button:disabled{cursor:default;}
+    button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #C15C22;outline-offset:2px;}
+    input{font-family:inherit;}
+    input::placeholder{color:rgba(10,47,79,.45);}
+    input[style*="color:#F9EFE3"]::placeholder,input[style*="color: rgb(249, 239, 227)"]::placeholder{color:rgba(249,239,227,.55);}
+    .noscroll::-webkit-scrollbar{display:none;}
+    .noscroll{scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+    [data-reveal]{opacity:0;transform:translateY(16px);transition:opacity 400ms ease-out,transform 400ms ease-out;}
+    [data-reveal].in{opacity:1;transform:none;}
+    @keyframes arrowDown{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(8px);opacity:1}}
+    @keyframes drawCheck{to{stroke-dashoffset:0}}
+    @keyframes popIn{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+    @keyframes waPulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.5);opacity:0}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes shimmer{0%{opacity:.45}50%{opacity:.9}100%{opacity:.45}}
+    input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:32px;background:transparent;margin:0;}
+    input[type=range]::-webkit-slider-runnable-track{height:2px;background:rgba(10,47,79,.25);}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#C15C22;margin-top:-13px;border:3px solid #F9EFE3;box-shadow:0 0 0 1px rgba(10,47,79,.25);}
+    input[type=range]::-moz-range-track{height:2px;background:rgba(10,47,79,.25);}
+    input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#C15C22;border:3px solid #F9EFE3;}
+  </style>
+</helmet>
+
+<div style="min-height:100vh;background:#F9EFE3;color:#0A2F4F;font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.4;">
+
+<!-- HEADER -->
+<sc-if value="{{ showChrome }}" hint-placeholder-val="{{ true }}">
+<header ref="{{ headerRef }}" style="position:fixed;top:0;left:0;right:0;z-index:40;background:#F9EFE3;border-bottom:1px solid #C15C22;transition:transform 300ms ease;">
+  <div style="max-width:1200px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 20px;">
+    <button onClick="{{ goHome }}" aria-label="SHIPA — на главную" style="display:flex;align-items:center;gap:10px;height:44px;">
+      <img src="brand/logo-navy.png" alt="SHIPA — банный комплекс" style="height:36px;width:auto;display:block;">
+    </button>
+    <sc-if value="{{ isWide }}" hint-placeholder-val="{{ false }}">
+      <nav style="display:flex;gap:28px;font-size:14px;font-weight:500;letter-spacing:.04em;">
+        <button onClick="{{ goHouses }}" style="height:44px;">Дома</button>
+        <button onClick="{{ goServices }}" style="height:44px;">Парение</button>
+        <button onClick="{{ goKitchen }}" style="height:44px;">Кухня</button>
+        <button onClick="{{ goReviews }}" style="height:44px;">Отзывы</button>
+        <button onClick="{{ goAbout }}" style="height:44px;">О нас</button>
+        <button onClick="{{ goContacts }}" style="height:44px;">Контакты</button>
+      </nav>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:4px;">
+      <sc-if value="{{ isWide }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ startBooking }}" style="height:44px;padding:0 22px;background:#C15C22;color:#F9EFE3;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.04em;margin-right:12px;">Забронировать</button>
+      </sc-if>
+      <a href="https://wa.me/77000000000" target="_blank" rel="noopener" aria-label="WhatsApp" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0A2F4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8.2 19.1L4 20z"/><path d="M9.5 9.2c.2 1.9 2.4 4.4 4.6 5.1l1.2-1.1-1.7-1-1 .6c-.7-.3-1.6-1.2-2-1.9l.6-1-1-1.7-1 1.1z"/></svg>
+      </a>
+      <button onClick="{{ openMenu }}" aria-label="Меню" style="width:44px;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;">
+        <span style="display:block;width:22px;height:1.5px;background:#0A2F4F;"></span>
+        <span style="display:block;width:22px;height:1.5px;background:#0A2F4F;"></span>
+      </button>
+    </div>
+  </div>
+</header>
+</sc-if>
+
+<!-- HOME -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main data-screen-label="Главная" style="padding-bottom:100px;">
+
+  <section style="position:relative;min-height:min(74svh,640px);overflow:hidden;background:#0A2F4F;">
+    <img src="img/h1_int.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,47,79,.25) 0%,rgba(10,47,79,.1) 35%,rgba(10,47,79,.55) 100%);"></div>
+    <div style="position:relative;min-height:min(74svh,640px);max-width:1200px;margin:0 auto;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;padding:84px 20px 28px;color:#F9EFE3;">
+      <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;opacity:.85;margin-bottom:12px;">Пространство для тела и души · Караганда</div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,8.5vw,64px);letter-spacing:.08em;line-height:1.02;margin:0 0 12px;max-width:760px;text-wrap:balance;">ВЫБЕРИ СВОЁ СОСТОЯНИЕ</h1>
+      <p style="margin:0 0 20px;font-size:16px;opacity:.92;max-width:520px;">Восемь домов с парными и чанами. Свой дом, своя терраса, никого рядом.</p>
+      <div style="display:flex;gap:8px 28px;flex-wrap:wrap;justify-content:center;border-top:1px solid rgba(249,239,227,.3);padding-top:14px;margin-bottom:20px;width:100%;max-width:640px;">
+        <sc-for list="{{ heroStats }}" as="st" hint-placeholder-count="4">
+          <div style="min-width:64px;">
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;line-height:1;">{{ st.n }}</div>
+            <div style="font-size:11px;letter-spacing:.06em;opacity:.8;margin-top:4px;">{{ st.t }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+        <button onClick="{{ startBooking }}" style="height:52px;padding:0 28px;flex:1 1 200px;max-width:320px;background:#C15C22;color:#F9EFE3;border-radius:999px;font-weight:600;font-size:15px;letter-spacing:.04em;">Забронировать</button>
+        <button onClick="{{ scrollToVideo }}" style="display:flex;align-items:center;gap:12px;height:52px;text-align:left;">
+          <span style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(249,239,227,.7);display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><svg width="14" height="14" viewBox="0 0 22 22" fill="#F9EFE3"><path d="M7 3l12 8-12 8z"/></svg></span>
+          <span style="line-height:1.25;"><span style="display:block;font-weight:600;font-size:14px;">Атмосфера</span><span style="display:block;font-size:12px;opacity:.75;">1,5 минуты, рассказывает мастер</span></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:12px 20px 0;">
+    <div style="font-size:13px;color:rgba(10,47,79,.7);text-align:center;">Ответим в WhatsApp за 15 минут. Цены и свободные дома — сразу, без звонков.</div>
+  </section>
+  <section style="max-width:1200px;margin:0 auto;padding:28px 20px 0;">
+    <div style="border:2px solid #C15C22;border-radius:20px;padding:16px 20px 20px;max-width:720px;margin:0 auto;">
+      <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C15C22;font-weight:600;margin-bottom:14px;text-align:center;">Найти свободный дом</div>
+      <div class="noscroll" style="display:flex;gap:6px;overflow-x:auto;margin:0 -20px;padding:0 20px 2px;scroll-snap-type:x proximity;">
+        <sc-for list="{{ quickDays }}" as="d" hint-placeholder-count="7">
+          <button onClick="{{ d.select }}" style="{{ d.style }}">
+            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;">{{ d.wd }}</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;line-height:1;">{{ d.day }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:6px;margin:14px 0 16px;">
+        <sc-for list="{{ quickSessions }}" as="s" hint-placeholder-count="3">
+          <button onClick="{{ s.select }}" style="{{ s.style }}">{{ s.label }}</button>
+        </sc-for>
+      </div>
+      <button onClick="{{ quickGo }}" style="width:100%;height:52px;background:#C15C22;color:#F9EFE3;border-radius:999px;font-weight:600;font-size:15px;letter-spacing:.04em;">Найти</button>
+    </div>
+  </section>
+
+  <section data-reveal style="max-width:1200px;margin:0 auto;padding:56px 20px 0;">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(28px,6.4vw,44px);letter-spacing:.02em;line-height:1.15;margin:0 auto 24px;max-width:760px;text-wrap:balance;text-align:center;">SHIPA — это тепло без лишнего: <span style="color:#C15C22;">свой дом</span>, натуральный материал, тёплый свет и сервис, согласованный заранее</h2>
+    <div class="noscroll" style="display:flex;gap:12px;overflow-x:auto;margin:0 -20px;padding:0 20px 4px;scroll-snap-type:x mandatory;">
+      <sc-for list="{{ aboutItems }}" as="a" hint-placeholder-count="4">
+        <div style="flex:0 0 66%;max-width:280px;scroll-snap-align:start;aspect-ratio:3/4;overflow:hidden;background:#3B2F2A;position:relative;border-radius:20px;">
+          <img src="{{ a.img }}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,47,79,.15) 0%,rgba(10,47,79,.75) 100%);"></div>
+          <div style="position:absolute;right:16px;top:14px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;color:#F9EFE3;">{{ a.n }}</div>
+          <div style="position:absolute;left:16px;right:16px;bottom:16px;color:#F9EFE3;">
+            <div style="font-weight:600;font-size:17px;">{{ a.title }}</div>
+            <div style="font-size:13px;opacity:.85;margin-top:4px;line-height:1.45;">{{ a.sub }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-reveal style="max-width:1200px;margin:0 auto;padding:56px 0 0;">
+    <div style="padding:0 20px;">
+      <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C15C22;font-weight:600;margin-bottom:12px;text-align:center;">Дома</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(32px,7vw,52px);letter-spacing:.08em;line-height:1.05;margin:0 0 10px;text-wrap:balance;text-align:center;">ВОСЕМЬ ДОМОВ — <span style="color:#C15C22;">ВОСЕМЬ СОСТОЯНИЙ</span></h2>
+      <p style="margin:0 0 24px;font-size:16px;color:rgba(10,47,79,.7);text-align:center;">Гость выбирает атмосферу, а не номер.</p>
+    </div>
+    <div class="noscroll" style="{{ housesRowStyle }}">
+      <sc-for list="{{ houses }}" as="h" hint-placeholder-count="8">
+        <button onClick="{{ h.open }}" style="{{ h.cardStyle }}">
+          <div style="aspect-ratio:4/5;overflow:hidden;background:#3B2F2A;border-radius:20px;position:relative;">
+            <div style="{{ h.bgStyle }}"></div>
+            <div style="position:absolute;left:14px;top:12px;font-size:11px;letter-spacing:.18em;color:#F9EFE3;font-weight:600;">{{ h.n }} / {{ h.tier }}</div>
+          </div>
+          <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;letter-spacing:.12em;margin-top:16px;line-height:1;">{{ h.name }}</div>
+          <div style="font-size:15px;color:rgba(10,47,79,.7);margin-top:6px;">{{ h.slogan }}</div>
+          <div style="font-size:13px;margin-top:12px;color:rgba(10,47,79,.85);">{{ h.facts }}</div>
+          <div style="font-weight:600;font-size:15px;margin-top:6px;">от {{ h.priceFrom }} / час</div>
+        </button>
+      </sc-for>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;padding:20px 20px 0;">
+      <button onClick="{{ goHouses }}" style="height:44px;font-weight:600;color:#C15C22;font-size:15px;margin-right:auto;letter-spacing:.02em;">Все дома →</button>
+      <button onClick="{{ goHousesVip }}" style="height:40px;padding:0 16px;border:1px solid rgba(10,47,79,.3);font-size:13px;font-weight:500;letter-spacing:.06em;">VIP</button>
+      <button onClick="{{ goHousesStd }}" style="height:40px;padding:0 16px;border:1px solid rgba(10,47,79,.3);font-size:13px;font-weight:500;letter-spacing:.06em;">STANDARD</button>
+    </div>
+  </section>
+
+  <section data-reveal style="background:#0A2F4F;color:#F9EFE3;margin-top:56px;padding:56px 20px 48px;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;opacity:.7;font-weight:600;margin-bottom:12px;text-align:center;">Комплектация</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(32px,7vw,52px);letter-spacing:.1em;margin:0 0 32px;line-height:1.05;text-align:center;">В КАЖДОМ ДОМЕ</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;">
+        <sc-for list="{{ features }}" as="f" hint-placeholder-count="6">
+          <div style="background:rgba(249,239,227,.08);border-radius:16px;padding:18px 16px;">
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;letter-spacing:.06em;line-height:1;">{{ f.name }}</div>
+            <div style="font-size:14px;opacity:.75;margin-top:6px;line-height:1.4;">{{ f.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin:24px 0 0;font-size:13px;opacity:.65;">В VIP-домах дополнительно: бассейн, зона барбекю, расширенная терраса.</p>
+    </div>
+  </section>
+
+  <section data-reveal style="padding:56px 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 20px 20px;">
+      <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C15C22;font-weight:600;margin-bottom:12px;text-align:center;">Парение</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(32px,7vw,52px);letter-spacing:.1em;margin:0;line-height:1.05;text-align:center;">ПАРЕНИЕ <span style="color:#C15C22;">С МАСТЕРОМ</span></h2>
+    </div>
+    <div style="max-width:1200px;margin:0 auto;position:relative;">
+      <div class="noscroll" ref="{{ progRowRef }}" style="display:flex;gap:16px;overflow-x:auto;padding:4px 20px 8px;scroll-snap-type:x mandatory;">
+        <sc-for list="{{ programs }}" as="p" hint-placeholder-count="5">
+          <div style="flex:0 0 78%;max-width:300px;scroll-snap-align:start;background:rgba(10,47,79,.06);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;">
+            <div style="aspect-ratio:4/3;overflow:hidden;background:#3B2F2A;"><image-slot id="{{ p.slot }}" src="{{ p.img }}" shape="rect" placeholder="{{ p.name }}"></image-slot></div>
+            <div style="padding:18px 18px 20px;display:flex;flex-direction:column;flex:1;">
+              <div style="font-weight:600;font-size:18px;line-height:1.25;">{{ p.name }}</div>
+              <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+                <span style="font-size:12px;padding:6px 12px;border-radius:999px;background:rgba(10,47,79,.08);color:#0A2F4F;">{{ p.who }}</span>
+                <span style="font-size:12px;padding:6px 12px;border-radius:999px;background:rgba(10,47,79,.08);color:#0A2F4F;">{{ p.dur }}</span>
+              </div>
+              <p style="margin:12px 0 0;font-size:14px;line-height:1.5;color:rgba(10,47,79,.75);flex:1;">{{ p.desc }}</p>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px;">
+                <div style="font-weight:600;">{{ p.priceText }}</div>
+                <button onClick="{{ goServices }}" style="height:44px;padding:0 20px;border-radius:999px;background:#C15C22;color:#F9EFE3;border-radius:999px;font-weight:600;font-size:14px;">Подробнее</button>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ isWide }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ progPrev }}" aria-label="Назад" style="position:absolute;left:-8px;top:40%;width:48px;height:48px;border-radius:50%;background:#C15C22;color:#F9EFE3;display:flex;align-items:center;justify-content:center;">←</button>
+        <button onClick="{{ progNext }}" aria-label="Вперёд" style="position:absolute;right:-8px;top:40%;width:48px;height:48px;border-radius:50%;background:#C15C22;color:#F9EFE3;display:flex;align-items:center;justify-content:center;">→</button>
+      </sc-if>
+    </div>
+  </section>
+
+  <section data-reveal id="video" ref="{{ videoRef }}" style="position:relative;background:#0A2F4F;color:#F9EFE3;margin-top:56px;padding:64px 0 64px;overflow:hidden;">
+    <img src="img/h7_int.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;filter:blur(2px);">
+    <div style="position:relative;max-width:1200px;margin:0 auto;padding:0 20px;text-align:center;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,6.5vw,48px);letter-spacing:.08em;line-height:1.05;margin:0;">АТМОСФЕРА БАННЫХ ДОМОВ <span style="color:#C15C22;">SHIPA</span></h2>
+      <p style="margin:14px auto 0;font-size:17px;opacity:.85;max-width:640px;line-height:1.5;">Ни спешки, ни посторонних. Лишь вы и пармастер, который проведёт через ритуалы тепла и заботы.</p>
+    </div>
+    <div style="position:relative;max-width:1200px;margin:0 auto;">
+      <div class="noscroll" ref="{{ atmRef }}" style="display:flex;gap:16px;overflow-x:auto;padding:36px 20px 8px;scroll-snap-type:x mandatory;align-items:center;scroll-padding:0 20px;">
+        <sc-for list="{{ atmosphere }}" as="v" hint-placeholder-count="4">
+          <div style="{{ v.style }}">
+            <div style="position:absolute;inset:0;"><image-slot id="{{ v.slot }}" src="{{ v.img }}" shape="rect" placeholder="{{ v.name }}"></image-slot></div>
+            <button aria-label="Смотреть" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(249,239,227,.9);display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 22 22" fill="#C15C22"><path d="M7 3l12 8-12 8z"/></svg></button>
+            <div style="position:absolute;left:14px;bottom:12px;right:14px;font-size:13px;font-weight:600;color:#F9EFE3;text-shadow:0 1px 6px rgba(0,0,0,.5);">{{ v.name }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ isWide }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ atmPrev }}" aria-label="Назад" style="position:absolute;left:8px;top:50%;width:52px;height:52px;border-radius:50%;background:rgba(249,239,227,.9);color:#0A2F4F;display:flex;align-items:center;justify-content:center;font-size:18px;">←</button>
+        <button onClick="{{ atmNext }}" aria-label="Вперёд" style="position:absolute;right:8px;top:50%;width:52px;height:52px;border-radius:50%;background:rgba(249,239,227,.9);color:#0A2F4F;display:flex;align-items:center;justify-content:center;font-size:18px;">→</button>
+      </sc-if>
+    </div>
+  </section>
+
+  <section data-reveal style="padding:64px 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 20px;text-align:center;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,6.5vw,48px);letter-spacing:.08em;line-height:1.05;margin:0;">КУХНЯ <span style="color:#C15C22;">И ЧАЙ</span></h2>
+      <p style="margin:14px auto 0;font-size:17px;line-height:1.5;max-width:560px;color:rgba(10,47,79,.75);">Восточный стол накрываем к вашему приезду: горячий бешбармак, шашлык на углях, баурсаки с мёдом и травяной чай из самовара.</p>
+    </div>
+    <div class="noscroll" style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:28px 20px 8px;">
+      <sc-for list="{{ dishes }}" as="d" hint-placeholder-count="6">
+        <div style="{{ d.style }}">
+          <div style="position:absolute;inset:0;"><image-slot id="{{ d.slot }}" src="{{ d.img }}" shape="rect" placeholder="{{ d.photo }}"></image-slot></div>
+          <button onClick="{{ goKitchen }}" style="position:absolute;left:0;right:0;bottom:0;padding:40px 16px 14px;text-align:left;color:#F9EFE3;background:linear-gradient(180deg,rgba(59,47,42,0) 0%,rgba(59,47,42,.9) 60%);">
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;letter-spacing:.04em;line-height:1;">{{ d.name }}</div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;gap:8px;"><span style="font-size:13px;opacity:.85;">{{ d.desc }}</span><span style="font-weight:600;font-size:14px;white-space:nowrap;">{{ d.priceText }}</span></div>
+          </button>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:flex;justify-content:center;gap:8px;padding:16px 20px 0;flex-wrap:wrap;">
+      <button onClick="{{ goKitchen }}" style="height:48px;padding:0 24px;border-radius:999px;background:#C15C22;color:#F9EFE3;font-weight:600;font-size:14px;">Смотреть всё меню</button>
+      <button onClick="{{ startBooking }}" style="height:48px;padding:0 24px;border-radius:999px;border:1px solid #0A2F4F;font-weight:600;font-size:14px;">Заказать стол к брони</button>
+    </div>
+  </section>
+
+  <section data-reveal style="max-width:1200px;margin:0 auto;padding:64px 0 0;">
+    <div style="padding:0 20px;text-align:center;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,6.5vw,48px);letter-spacing:.08em;line-height:1.05;margin:0;"><span style="color:#C15C22;">ВИДЕО-ОТЗЫВЫ</span> НАШИХ ГОСТЕЙ</h2>
+      <p style="margin:12px auto 0;font-size:16px;color:rgba(10,47,79,.7);max-width:520px;">Настоящие впечатления тех, кто уже побывал в SHIPA</p>
+    </div>
+    <div class="noscroll" style="display:flex;gap:16px;overflow-x:auto;padding:28px 20px 8px;scroll-snap-type:x mandatory;justify-content:safe center;">
+      <sc-for list="{{ videoReviews }}" as="v" hint-placeholder-count="3">
+        <div style="flex:0 0 200px;scroll-snap-align:center;">
+          <div style="position:relative;aspect-ratio:9/19;border-radius:28px;border:6px solid #3B2F2A;background:#3B2F2A;overflow:hidden;">
+            <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:44%;height:16px;background:#3B2F2A;border-radius:0 0 12px 12px;z-index:2;"></div>
+            <div style="position:absolute;inset:0;border-radius:22px;overflow:hidden;"><image-slot id="{{ v.slot }}" src="{{ v.img }}" shape="rect" placeholder="{{ v.name }}"></image-slot></div>
+            <button aria-label="Смотреть" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:rgba(249,239,227,.9);display:flex;align-items:center;justify-content:center;z-index:2;"><svg width="16" height="16" viewBox="0 0 22 22" fill="#C15C22"><path d="M7 3l12 8-12 8z"/></svg></button>
+          </div>
+          <div style="text-align:center;margin-top:10px;font-weight:600;font-size:14px;">{{ v.name }}</div>
+          <div style="text-align:center;font-size:12px;color:rgba(10,47,79,.6);">{{ v.house }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-reveal style="max-width:1200px;margin:0 auto;padding:56px 0 0;">
+    <div style="padding:0 20px;text-align:center;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,6.5vw,48px);letter-spacing:.08em;line-height:1.05;margin:0;">ОТЗЫВЫ НАШИХ ГОСТЕЙ <span style="color:#C15C22;">В 2ГИС</span></h2>
+      <div style="display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:8px 16px 8px 8px;border-radius:999px;background:rgba(10,47,79,.06);font-size:14px;">
+        <span style="width:36px;height:36px;border-radius:50%;background:#C15C22;color:#F9EFE3;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">4,9</span>
+        <span style="color:#C15C22;letter-spacing:.1em;">★★★★★</span>
+        <span style="color:rgba(10,47,79,.7);">128 оценок</span>
+      </div>
+    </div>
+    <div class="noscroll" style="display:flex;gap:16px;overflow-x:auto;padding:24px 20px 8px;scroll-snap-type:x mandatory;">
+      <sc-for list="{{ homeReviews }}" as="r" hint-placeholder-count="3">
+        <div style="flex:0 0 86%;max-width:520px;scroll-snap-align:center;background:rgba(10,47,79,.06);border-radius:20px;padding:24px;position:relative;display:flex;flex-direction:column;">
+          <div style="position:absolute;right:24px;top:22px;font-family:'Cormorant Garamond',serif;font-size:72px;line-height:.6;color:rgba(193,92,34,.35);font-weight:700;">”</div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <div style="font-weight:600;">{{ r.name }}</div>
+            <div style="color:#C15C22;font-size:13px;letter-spacing:.12em;">{{ r.stars }}</div>
+            <div style="font-size:12px;color:rgba(10,47,79,.6);">{{ r.date }}</div>
+          </div>
+          <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:rgba(10,47,79,.9);display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;">{{ r.text }}</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap;">
+            <a href="https://2gis.kz" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px 0 6px;border-radius:999px;background:#F9EFE3;font-size:12px;font-weight:600;letter-spacing:.06em;"><span style="width:28px;height:28px;border-radius:50%;background:#0A2F4F;color:#F9EFE3;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;">2Г</span>ССЫЛКА НА ОТЗЫВ</a>
+            <div style="font-size:12px;color:rgba(10,47,79,.6);letter-spacing:.06em;">{{ r.house }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:flex;justify-content:center;gap:8px;padding:12px 20px 0;flex-wrap:wrap;">
+      <button onClick="{{ goReviews }}" style="height:48px;padding:0 22px;border-radius:999px;border:1px solid #0A2F4F;font-weight:600;font-size:14px;">Все отзывы</button>
+      <a href="https://2gis.kz" target="_blank" rel="noopener" style="height:48px;padding:0 22px;border-radius:999px;background:#C15C22;color:#F9EFE3;display:flex;align-items:center;font-weight:600;font-size:14px;">Оставить отзыв</a>
+    </div>
+  </section>
+
+  <section data-reveal style="max-width:1200px;margin:0 auto;padding:64px 20px 0;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px 48px;">
+      <div style="max-width:360px;">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,6.5vw,48px);letter-spacing:.08em;line-height:1.05;margin:0;">НАМ ЧАСТО ЗАДАЮТ ЭТИ <span style="color:#C15C22;">ВОПРОСЫ</span></h2>
+        <p style="margin:18px 0 22px;font-size:16px;line-height:1.5;color:rgba(10,47,79,.75);">Не нашли интересующий вас вопрос — задайте его нам</p>
+        <a href="https://wa.me/77000000000?text={{ waAskText }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;height:52px;padding:0 26px;border-radius:999px;background:#C15C22;color:#F9EFE3;font-weight:600;font-size:14px;">Задать вопрос</a>
+      </div>
+      <div style="grid-column:span 2;display:flex;flex-direction:column;gap:10px;min-width:0;">
+        <sc-for list="{{ faq }}" as="q" hint-placeholder-count="6">
+          <div style="background:rgba(10,47,79,.06);border-radius:20px;">
+            <button onClick="{{ q.toggle }}" style="width:100%;min-height:68px;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;padding:16px 16px 16px 22px;font-size:16px;font-weight:600;">
+              <span>{{ q.q }}</span>
+              <span style="{{ q.iconStyle }}">+</span>
+            </button>
+            <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0;padding:0 22px 20px;font-size:15px;line-height:1.55;color:rgba(10,47,79,.85);">{{ q.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal style="max-width:1200px;margin:0 auto;padding:72px 20px 0;">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,6.5vw,48px);letter-spacing:.08em;line-height:1.05;margin:0;text-align:center;">НАШИ <span style="color:#C15C22;">КОНТАКТЫ</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:28px;align-items:stretch;">
+      <div style="background:rgba(10,47,79,.06);border-radius:20px;padding:28px 24px;">
+        <div style="font-weight:600;font-size:17px;">Адрес</div>
+        <div style="display:flex;gap:12px;margin-top:12px;font-size:15px;line-height:1.5;">
+          <svg width="20" height="20" viewBox="0 0 28 36" fill="#C15C22" style="flex:0 0 auto;margin-top:2px;"><path d="M14 0a14 14 0 0 0-14 14c0 10 14 22 14 22s14-12 14-22A14 14 0 0 0 14 0zm0 19a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/></svg>
+          <div>Караганда, Фёдоровское водохранилище, 1<br><span style="color:rgba(10,47,79,.65);">Ежедневно 10:00–08:00</span></div>
+        </div>
+        <div style="font-weight:600;font-size:17px;margin-top:24px;">Телефон</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap;">
+          <a href="tel:+77000000000" style="font-weight:600;font-size:17px;">+7 700 000 00 00</a>
+          <div style="display:flex;gap:6px;">
+            <a href="https://wa.me/77000000000" target="_blank" rel="noopener" aria-label="WhatsApp" style="width:44px;height:44px;border-radius:50%;background:#0A2F4F;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F9EFE3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8.2 19.1L4 20z"/><path d="M9.5 9.2c.2 1.9 2.4 4.4 4.6 5.1l1.2-1.1-1.7-1-1 .6c-.7-.3-1.6-1.2-2-1.9l.6-1-1-1.7-1 1.1z"/></svg></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" style="width:44px;height:44px;border-radius:50%;background:#0A2F4F;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F9EFE3" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#F9EFE3" stroke="none"/></svg></a>
+            <a href="https://t.me" target="_blank" rel="noopener" aria-label="Telegram" style="width:44px;height:44px;border-radius:50%;background:#0A2F4F;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F9EFE3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/><path d="M9 13l12-9"/></svg></a>
+          </div>
+        </div>
+        <div style="font-weight:600;font-size:17px;margin-top:24px;">Обратный звонок</div>
+        <p style="margin:6px 0 12px;font-size:14px;color:rgba(10,47,79,.7);line-height:1.5;">Поможем подобрать дом и забронируем его для вас</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <input value="{{ form.phone }}" onChange="{{ setPhone }}" placeholder="Ваш номер телефона" type="tel" inputMode="tel" autoComplete="tel" style="flex:1 1 180px;height:52px;border:0;border-radius:999px;padding:0 20px;font-size:15px;background:#F9EFE3;color:#0A2F4F;">
+          <button onClick="{{ sendCallInline }}" disabled="{{ phoneMissing }}" style="{{ contactCallStyle }}">{{ contactCallLabel }}</button>
+        </div>
+        <div style="font-size:12px;color:rgba(10,47,79,.6);margin-top:10px;">Нажимая «Отправить», вы даёте согласие на обработку персональных данных</div>
+      </div>
+      <div style="position:relative;border-radius:20px;overflow:hidden;min-height:320px;background:rgba(10,47,79,.06);">
+        <image-slot id="map-static" src="brand/map.png" shape="rect" placeholder="Карта: Караганда, Фёдоровское водохранилище"></image-slot>
+        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);pointer-events:none;"><svg width="36" height="46" viewBox="0 0 28 36" fill="#C15C22"><path d="M14 0a14 14 0 0 0-14 14c0 10 14 22 14 22s14-12 14-22A14 14 0 0 0 14 0zm0 19a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/></svg></div>
+        <div style="position:absolute;left:12px;bottom:12px;display:flex;gap:6px;">
+          <a href="https://2gis.kz" target="_blank" rel="noopener" style="height:40px;padding:0 14px;border-radius:999px;background:#F9EFE3;display:flex;align-items:center;font-size:13px;font-weight:600;">Открыть в 2ГИС</a>
+          <a href="https://yandex.kz/maps" target="_blank" rel="noopener" style="height:40px;padding:0 14px;border-radius:999px;background:#F9EFE3;display:flex;align-items:center;font-size:13px;font-weight:600;">Яндекс Карты</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="max-width:1200px;margin:56px auto 0;padding:0 20px;">
+    <div style="background:#0A2F4F;color:#F9EFE3;border-radius:20px;padding:28px 24px;display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+        <img src="brand/logo-cream.png" alt="SHIPA" style="height:44px;width:auto;display:block;">
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:999px;background:rgba(249,239,227,.1);">
+          <span style="width:32px;height:32px;border-radius:50%;background:#C15C22;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;">4,9</span>
+          <div style="line-height:1.25;"><div style="font-size:11px;font-weight:600;letter-spacing:.1em;">ХОРОШЕЕ МЕСТО</div><div style="font-size:11px;opacity:.7;">оценки гостей в 2ГИС</div></div>
+        </div>
+      </div>
+      <nav style="display:flex;flex-wrap:wrap;gap:8px 20px;font-size:15px;">
+        <button onClick="{{ goHouses }}" style="height:32px;color:#F9EFE3;">Дома</button>
+        <button onClick="{{ goServices }}" style="height:32px;color:#F9EFE3;">Парение</button>
+        <button onClick="{{ goKitchen }}" style="height:32px;color:#F9EFE3;">Кухня</button>
+        <button onClick="{{ goReviews }}" style="height:32px;color:#F9EFE3;">Отзывы</button>
+        <button onClick="{{ goAbout }}" style="height:32px;color:#F9EFE3;">О нас</button>
+        <button onClick="{{ goContacts }}" style="height:32px;color:#F9EFE3;">Контакты</button>
+      </nav>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;font-size:12px;">
+        <a href="#" style="color:#F9EFE3;opacity:.75;">Политика обработки персональных данных</a>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <span style="padding:8px 12px;border-radius:999px;background:rgba(249,239,227,.1);">© SHIPA, 2026</span>
+          <span style="padding:8px 10px;border-radius:999px;background:#F9EFE3;color:#0A2F4F;font-weight:600;letter-spacing:.1em;">РУС</span>
+          <span style="padding:8px 10px;border-radius:999px;border:1px solid rgba(249,239,227,.4);letter-spacing:.1em;">ҚАЗ</span>
+        </div>
+      </div>
+    </div>
+    <div style="height:20px;"></div>
+  </footer>
+</main>
+</sc-if>
+
+<!-- CATALOG -->
+<sc-if value="{{ isHouses }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Дома" style="padding:84px 0 100px;max-width:1200px;margin:0 auto;">
+  <div style="padding:0 20px;">
+    <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C15C22;font-weight:600;margin-bottom:12px;">Каталог</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:44px;letter-spacing:.1em;margin:0 0 20px;line-height:1;">ДОМА</h1>
+  </div>
+  <div class="noscroll" style="display:flex;gap:6px;overflow-x:auto;padding:0 20px 24px;">
+    <sc-for list="{{ catalogFilters }}" as="f" hint-placeholder-count="5">
+      <button onClick="{{ f.select }}" style="{{ f.style }}">{{ f.label }}</button>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:40px 24px;padding:0 20px;">
+    <sc-for list="{{ catalogHouses }}" as="h" hint-placeholder-count="8">
+      <div>
+        <button onClick="{{ h.open }}" style="width:100%;text-align:left;">
+          <div style="aspect-ratio:16/10;overflow:hidden;background:#3B2F2A;border-radius:20px;position:relative;">
+            <div style="{{ h.bgStyle }}"></div>
+            <div style="position:absolute;left:14px;top:12px;font-size:11px;letter-spacing:.18em;color:#F9EFE3;font-weight:600;">{{ h.n }} / {{ h.tier }}</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;gap:12px;">
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:32px;letter-spacing:.12em;line-height:1;">{{ h.name }}</div>
+            <div style="font-weight:600;font-size:15px;white-space:nowrap;">от {{ h.priceFrom }}/ч</div>
+          </div>
+          <div style="font-size:15px;color:rgba(10,47,79,.7);margin-top:6px;">{{ h.slogan }}</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(10,47,79,.2);">
+            <div><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;line-height:1;">{{ h.area }} м²</div><div style="font-size:11px;color:rgba(10,47,79,.6);margin-top:4px;letter-spacing:.04em;">площадь</div></div>
+            <div><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;line-height:1;">до {{ h.guests }}</div><div style="font-size:11px;color:rgba(10,47,79,.6);margin-top:4px;letter-spacing:.04em;">гостей</div></div>
+            <div><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;line-height:1;">от {{ h.min }} ч</div><div style="font-size:11px;color:rgba(10,47,79,.6);margin-top:4px;letter-spacing:.04em;">минимум</div></div>
+            <div><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;line-height:1;">{{ h.priceShort }}</div><div style="font-size:11px;color:rgba(10,47,79,.6);margin-top:4px;letter-spacing:.04em;">₸/час</div></div>
+          </div>
+        </button>
+        <div style="display:flex;gap:6px;margin-top:16px;">
+          <button onClick="{{ h.open }}" style="flex:1;height:48px;border:1px solid #0A2F4F;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.02em;">Подробнее</button>
+          <button onClick="{{ h.book }}" style="flex:1;height:48px;background:#C15C22;color:#F9EFE3;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.02em;">Забронировать</button>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</main>
+</sc-if>
+
+<!-- HOUSE -->
+<sc-if value="{{ isHouse }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Карточка дома" style="padding:61px 0 110px;">
+  <div style="position:relative;">
+    <div class="noscroll" onScroll="{{ onGalleryScroll }}" style="display:flex;overflow-x:auto;scroll-snap-type:x mandatory;background:#3B2F2A;">
+      <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="3">
+        <div style="flex:0 0 100%;aspect-ratio:4/3;max-height:72vh;scroll-snap-align:start;">
+          <div style="{{ g.style }}"></div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="position:absolute;right:16px;bottom:14px;color:#F9EFE3;font-size:13px;font-weight:500;letter-spacing:.08em;padding:6px 10px;background:rgba(10,47,79,.6);">{{ galleryCounter }}</div>
+    <button onClick="{{ goBack }}" aria-label="Назад" style="position:absolute;left:12px;top:12px;width:44px;height:44px;border-radius:50%;background:rgba(249,239,227,.92);display:flex;align-items:center;justify-content:center;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#0A2F4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l-6 6 6 6"/></svg>
+    </button>
+  </div>
+  <div style="max-width:720px;margin:0 auto;padding:28px 20px 0;">
+    <div style="font-size:11px;letter-spacing:.22em;color:#C15C22;font-weight:600;">{{ house.n }} / {{ house.tier }}</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:44px;letter-spacing:.12em;line-height:1;margin:10px 0 8px;">{{ house.name }}</h1>
+    <p style="margin:0;font-size:17px;color:rgba(10,47,79,.7);">{{ house.slogan }}</p>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:28px;border-top:1px solid #0A2F4F;border-bottom:1px solid rgba(10,47,79,.2);padding:18px 0;">
+      <div><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;line-height:1;">{{ house.area }} м²</div><div style="font-size:12px;color:rgba(10,47,79,.65);margin-top:6px;">Площадь</div></div>
+      <div><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;line-height:1;">до {{ house.guests }}</div><div style="font-size:12px;color:rgba(10,47,79,.65);margin-top:6px;">Гостей</div></div>
+      <div><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;line-height:1;">{{ house.min }} ч</div><div style="font-size:12px;color:rgba(10,47,79,.65);margin-top:6px;">Минимум</div></div>
+      <div><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;line-height:1;">{{ house.priceShort }}</div><div style="font-size:12px;color:rgba(10,47,79,.65);margin-top:6px;">₸/час, от</div></div>
+    </div>
+
+    <p style="margin:28px 0 0;font-size:17px;line-height:1.55;">{{ house.legend }}</p>
+
+    <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;letter-spacing:.1em;margin:40px 0 14px;">ЧТО ВНУТРИ</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px;border-top:1px solid rgba(10,47,79,.2);">
+      <sc-for list="{{ house.inside }}" as="i" hint-placeholder-count="6">
+        <div style="padding:12px 0;border-bottom:1px solid rgba(10,47,79,.15);font-size:16px;">{{ i.name }}</div>
+      </sc-for>
+    </div>
+
+    <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;letter-spacing:.1em;margin:40px 0 14px;">ЦЕНЫ</h3>
+    <div style="font-size:15px;border-top:1px solid #0A2F4F;">
+      <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr;padding:10px 0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(10,47,79,.7);font-weight:600;border-bottom:1px solid rgba(10,47,79,.2);"><div></div><div>Будни</div><div>Выходные</div></div>
+      <sc-for list="{{ house.priceRows }}" as="r" hint-placeholder-count="3">
+        <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr;padding:14px 0;border-bottom:1px solid rgba(10,47,79,.15);align-items:baseline;">
+          <div><div style="font-weight:500;">{{ r.label }}</div><div style="font-size:12px;color:rgba(10,47,79,.6);">{{ r.hours }}</div></div>
+          <div style="font-weight:600;">{{ r.wd }}</div>
+          <div style="font-weight:600;">{{ r.we }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin:12px 0 0;font-size:13px;color:rgba(10,47,79,.7);line-height:1.5;">Минимум {{ house.min }} часа. Свыше 10 гостей — +3 000 ₸ за человека. Дети до 7 лет — бесплатно.</p>
+
+    <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;letter-spacing:.1em;margin:40px 0 14px;">СВОБОДНО НА НЕДЕЛЮ</h3>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <sc-for list="{{ houseWeek }}" as="d" hint-placeholder-count="7">
+        <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;gap:6px;align-items:center;">
+          <div style="font-size:14px;"><span style="font-weight:600;">{{ d.wd }}</span> <span style="color:rgba(10,47,79,.6);">{{ d.day }}</span></div>
+          <sc-for list="{{ d.slots }}" as="s" hint-placeholder-count="3">
+            <button onClick="{{ s.book }}" disabled="{{ s.disabled }}" style="{{ s.style }}">
+              <span>{{ s.label }}</span>
+              <span style="font-size:11px;opacity:.75;">{{ s.sub }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+
+    <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;letter-spacing:.1em;margin:40px 0 14px;">РЕКОМЕНДУЕМ ПАРЕНИЕ</h3>
+    <button onClick="{{ goServices }}" style="width:100%;text-align:left;background:#0A2F4F;color:#F9EFE3;padding:22px 20px;border-radius:20px;">
+      <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.7;">Подходит по атмосфере</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;letter-spacing:.04em;margin-top:10px;line-height:1.1;">{{ house.program.name }}</div>
+      <div style="font-size:15px;opacity:.85;margin-top:8px;line-height:1.5;">{{ house.program.desc }}</div>
+      <div style="display:flex;justify-content:space-between;margin-top:16px;font-weight:600;padding-top:12px;border-top:1px solid rgba(249,239,227,.25);"><span>{{ house.program.dur }}</span><span>{{ house.program.priceText }}</span></div>
+    </button>
+  </div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;letter-spacing:.1em;margin:48px auto 14px;padding:0 20px;max-width:720px;">ДРУГИЕ ДОМА</h3>
+  <div class="noscroll" style="display:flex;gap:12px;overflow-x:auto;padding:0 20px 4px;scroll-snap-type:x mandatory;">
+    <sc-for list="{{ otherHouses }}" as="h" hint-placeholder-count="7">
+      <button onClick="{{ h.open }}" style="flex:0 0 46%;max-width:220px;scroll-snap-align:start;text-align:left;">
+        <div style="aspect-ratio:4/5;overflow:hidden;background:#3B2F2A;border-radius:20px;"><div style="{{ h.bgStyle }}"></div></div>
+        <div style="font-size:11px;letter-spacing:.18em;color:#C15C22;font-weight:600;margin-top:12px;">{{ h.n }} / {{ h.tier }}</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;letter-spacing:.1em;line-height:1;margin-top:6px;">{{ h.name }}</div>
+        <div style="font-size:14px;margin-top:6px;font-weight:600;">от {{ h.priceFrom }}/ч</div>
+      </button>
+    </sc-for>
+  </div>
+</main>
+</sc-if>
+
+<!-- SERVICES -->
+<sc-if value="{{ isServices }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Парение и услуги" style="padding:84px 0 100px;">
+  <div style="max-width:720px;margin:0 auto;padding:0 20px;">
+    <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C15C22;font-weight:600;margin-bottom:12px;">Парение</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:44px;letter-spacing:.1em;margin:0 0 10px;line-height:1;">ПАРЕНИЕ И УХОД</h1>
+    <p style="margin:0 0 24px;font-size:16px;color:rgba(10,47,79,.7);line-height:1.5;">Мастер приходит к вашему дому в назначенное время. Всё, что нужно, — уже в парной.</p>
+  </div>
+  <div style="aspect-ratio:4/3;max-height:70vh;overflow:hidden;border-radius:20px;margin:0 20px;"><image-slot id="services-master" src="img/h2_acc.png" shape="rect" placeholder="Мастер готовит веники"></image-slot></div>
+  <div style="max-width:720px;margin:0 auto;padding:0 20px;">
+    <div style="border-top:1px solid #0A2F4F;margin-top:32px;">
+      <sc-for list="{{ programs }}" as="p" hint-placeholder-count="5">
+        <div style="padding:22px 0;border-bottom:1px solid rgba(10,47,79,.2);">
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;">
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;letter-spacing:.04em;line-height:1.1;">{{ p.name }}</div>
+            <div style="font-weight:600;white-space:nowrap;">{{ p.priceText }}</div>
+          </div>
+          <div style="font-size:14px;color:rgba(10,47,79,.65);margin-top:6px;">{{ p.dur }} · {{ p.who }}</div>
+          <p style="margin:10px 0 0;font-size:15px;line-height:1.55;">{{ p.desc }}</p>
+          <button onClick="{{ p.addToBooking }}" style="margin-top:16px;height:44px;padding:0 18px;border:1px solid #0A2F4F;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.02em;">Добавить к брони</button>
+        </div>
+      </sc-for>
+    </div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;letter-spacing:.1em;margin:48px 0 18px;line-height:1;">НАШИ МАСТЕРА</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;">
+      <sc-for list="{{ masters }}" as="m" hint-placeholder-count="3">
+        <div>
+          <div style="aspect-ratio:4/5;overflow:hidden;border-radius:20px;"><image-slot id="{{ m.slot }}" src="{{ m.img }}" shape="rect" placeholder="{{ m.name }}"></image-slot></div>
+          <div style="font-weight:600;margin-top:10px;">{{ m.name }}</div>
+          <div style="font-size:14px;color:rgba(10,47,79,.7);margin-top:2px;">{{ m.spec }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<!-- KITCHEN -->
+<sc-if value="{{ isKitchen }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Кухня" style="padding:84px 20px 100px;max-width:720px;margin:0 auto;">
+  <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C15C22;font-weight:600;margin-bottom:12px;">Кухня</div>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:44px;letter-spacing:.1em;margin:0 0 10px;line-height:1;">КУХНЯ И ЧАЙ</h1>
+  <p style="margin:0 0 20px;font-size:16px;color:rgba(10,47,79,.7);line-height:1.5;">Стол накрываем к вашему приезду. Заказать можно при бронировании или на месте.</p>
+  <div class="noscroll" style="display:flex;gap:0;overflow-x:auto;margin:0 -20px;padding:0 20px;border-bottom:1px solid rgba(10,47,79,.2);">
+    <sc-for list="{{ kitchenTabs }}" as="t" hint-placeholder-count="4">
+      <button onClick="{{ t.select }}" style="{{ t.style }}">{{ t.label }}</button>
+    </sc-for>
+  </div>
+  <div style="display:flex;flex-direction:column;">
+    <sc-for list="{{ kitchenItems }}" as="k" hint-placeholder-count="4">
+      <div style="display:grid;grid-template-columns:88px 1fr auto;gap:16px;padding:16px 0;border-bottom:1px solid rgba(10,47,79,.15);align-items:center;">
+        <div style="width:88px;height:88px;overflow:hidden;"><image-slot id="{{ k.slot }}" src="{{ k.img }}" shape="rect" placeholder=" "></image-slot></div>
+        <div><div style="font-weight:600;">{{ k.name }}</div><div style="font-size:14px;color:rgba(10,47,79,.7);margin-top:4px;line-height:1.4;">{{ k.desc }}</div></div>
+        <div style="font-weight:600;white-space:nowrap;">{{ k.priceText }}</div>
+      </div>
+    </sc-for>
+  </div>
+</main>
+</sc-if>
+
+<!-- REVIEWS -->
+<sc-if value="{{ isReviews }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Отзывы" style="padding:84px 20px 100px;max-width:720px;margin:0 auto;">
+  <div style="display:flex;align-items:baseline;gap:16px;">
+    <div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:96px;line-height:.9;">4,9</div>
+    <div style="font-size:14px;color:rgba(10,47,79,.7);line-height:1.4;">128 отзывов · 2ГИС<br>обновлено сегодня</div>
+  </div>
+  <div class="noscroll" style="display:flex;gap:6px;overflow-x:auto;margin:24px -20px 8px;padding:0 20px;">
+    <sc-for list="{{ reviewFilters }}" as="f" hint-placeholder-count="5">
+      <button onClick="{{ f.select }}" style="{{ f.style }}">{{ f.label }}</button>
+    </sc-for>
+  </div>
+  <div style="border-top:1px solid #0A2F4F;margin-top:12px;">
+    <sc-for list="{{ filteredReviews }}" as="r" hint-placeholder-count="6">
+      <div style="padding:20px 0;border-bottom:1px solid rgba(10,47,79,.2);">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;">
+          <div style="font-weight:600;">{{ r.name }}</div>
+          <div style="font-size:13px;color:rgba(10,47,79,.6);">{{ r.date }}</div>
+        </div>
+        <div style="color:#C15C22;font-size:13px;letter-spacing:.12em;margin:6px 0 10px;">{{ r.stars }}</div>
+        <p style="margin:0;font-size:15px;line-height:1.55;">{{ r.text }}</p>
+        <div style="font-size:13px;color:rgba(10,47,79,.6);margin-top:10px;letter-spacing:.06em;">{{ r.house }}</div>
+      </div>
+    </sc-for>
+  </div>
+  <a href="https://2gis.kz" target="_blank" rel="noopener" style="margin-top:28px;height:48px;display:flex;align-items:center;justify-content:center;border:1px solid #0A2F4F;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.02em;">Оставить отзыв в 2ГИС</a>
+</main>
+</sc-if>
+
+<!-- ABOUT -->
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="О нас" style="padding:84px 20px 100px;max-width:720px;margin:0 auto;">
+  <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C15C22;font-weight:600;margin-bottom:12px;">О нас</div>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:44px;letter-spacing:.1em;margin:0 0 18px;line-height:1;">ТЕПЛО БЕЗ ЛИШНЕГО</h1>
+  <p style="margin:0 0 32px;font-size:17px;line-height:1.55;">SHIPA — пространство, где природные материалы и банная традиция возвращают внимание к себе. Восемь домов, один стандарт: приватность, чистота, тёплый свет и заранее согласованный сервис.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0 24px;border-top:1px solid #0A2F4F;">
+    <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+      <div style="padding:18px 0;border-bottom:1px solid rgba(10,47,79,.2);">
+        <div style="font-size:11px;letter-spacing:.2em;color:#C15C22;font-weight:600;">{{ p.n }} / {{ p.kind }}</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;letter-spacing:.04em;margin-top:8px;line-height:1;">{{ p.name }}</div>
+        <p style="margin:8px 0 0;font-size:15px;line-height:1.55;color:rgba(10,47,79,.85);">{{ p.desc }}</p>
+      </div>
+    </sc-for>
+  </div>
+  <div style="aspect-ratio:3/2;overflow:hidden;margin-top:36px;border-radius:20px;"><image-slot id="about-team" src="img/h5_acc.png" shape="rect" placeholder="Команда SHIPA"></image-slot></div>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;letter-spacing:.1em;margin:48px 0 8px;line-height:1;">ЧАСТЫЕ ВОПРОСЫ</h2>
+  <div style="border-top:1px solid #0A2F4F;">
+  <sc-for list="{{ faq }}" as="q" hint-placeholder-count="6">
+    <div style="border-bottom:1px solid rgba(10,47,79,.2);">
+      <button onClick="{{ q.toggle }}" style="width:100%;min-height:56px;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;padding:16px 0;font-size:16px;font-weight:500;">
+        <span>{{ q.q }}</span><span style="{{ q.iconStyle }}">+</span>
+      </button>
+      <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:0;padding:0 40px 18px 0;font-size:15px;line-height:1.55;color:rgba(10,47,79,.85);">{{ q.a }}</p>
+      </sc-if>
+    </div>
+  </sc-for>
+  </div>
+</main>
+</sc-if>
+
+<!-- CONTACTS -->
+<sc-if value="{{ isContacts }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Контакты" style="padding:84px 20px 100px;max-width:720px;margin:0 auto;">
+  <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C15C22;font-weight:600;margin-bottom:12px;">Контакты</div>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:44px;letter-spacing:.1em;margin:0 0 24px;line-height:1;">КАК НАС НАЙТИ</h1>
+  <div style="position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:20px;">
+    <image-slot id="map-contacts" src="brand/map.png" shape="rect" placeholder="Статичная карта с меткой"></image-slot>
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);pointer-events:none;"><svg width="28" height="36" viewBox="0 0 28 36" fill="#C15C22"><path d="M14 0a14 14 0 0 0-14 14c0 10 14 22 14 22s14-12 14-22A14 14 0 0 0 14 0zm0 19a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/></svg></div>
+  </div>
+  <a href="tel:+77000000000" style="display:block;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:40px;margin-top:28px;line-height:1;">+7 700 000 00 00</a>
+  <div style="display:flex;gap:24px;margin-top:12px;font-size:14px;letter-spacing:.04em;">
+    <a href="https://wa.me/77000000000" style="border-bottom:1px solid rgba(10,47,79,.5);padding-bottom:2px;">WhatsApp</a>
+    <a href="https://instagram.com" style="border-bottom:1px solid rgba(10,47,79,.5);padding-bottom:2px;">Instagram</a>
+  </div>
+  <div style="display:grid;grid-template-columns:100px 1fr;gap:0 16px;margin-top:32px;font-size:16px;line-height:1.5;border-top:1px solid #0A2F4F;">
+    <div style="color:rgba(10,47,79,.6);padding:12px 0;border-bottom:1px solid rgba(10,47,79,.15);">Адрес</div><div style="padding:12px 0;border-bottom:1px solid rgba(10,47,79,.15);">Караганда, Фёдоровское водохранилище, 1</div>
+    <div style="color:rgba(10,47,79,.6);padding:12px 0;border-bottom:1px solid rgba(10,47,79,.15);">Режим</div><div style="padding:12px 0;border-bottom:1px solid rgba(10,47,79,.15);">Ежедневно 10:00–08:00. Ночной сеанс — с 00:00.</div>
+    <div style="color:rgba(10,47,79,.6);padding:12px 0;border-bottom:1px solid rgba(10,47,79,.15);">Парковка</div><div style="padding:12px 0;border-bottom:1px solid rgba(10,47,79,.15);">У каждого дома, бесплатно.</div>
+    <div style="color:rgba(10,47,79,.6);padding:12px 0;border-bottom:1px solid rgba(10,47,79,.15);">Дорога</div><div style="padding:12px 0;border-bottom:1px solid rgba(10,47,79,.15);">15 минут от центра по трассе на Фёдоровку. Указатель SHIPA у поворота.</div>
+  </div>
+  <div style="display:flex;gap:6px;margin-top:28px;">
+    <a href="https://2gis.kz" target="_blank" rel="noopener" style="flex:1;height:48px;display:flex;align-items:center;justify-content:center;border:1px solid #0A2F4F;border-radius:999px;font-weight:600;font-size:14px;">Маршрут в 2ГИС</a>
+    <a href="https://yandex.kz/maps" target="_blank" rel="noopener" style="flex:1;height:48px;display:flex;align-items:center;justify-content:center;border:1px solid #0A2F4F;border-radius:999px;font-weight:600;font-size:14px;">Маршрут в Яндекс</a>
+  </div>
+</main>
+</sc-if>
+
+<!-- STICKY CTA -->
+<sc-if value="{{ showSticky }}" hint-placeholder-val="{{ true }}">
+<div style="position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 20px calc(12px + env(safe-area-inset-bottom));background:#F9EFE3;border-top:1px solid rgba(10,47,79,.15);">
+  <button onClick="{{ stickyAction }}" style="width:100%;max-width:560px;margin:0 auto;display:block;height:56px;background:#C15C22;color:#F9EFE3;border-radius:999px;font-weight:600;font-size:16px;letter-spacing:.04em;">{{ stickyLabel }}</button>
+</div>
+</sc-if>
+
+<!-- WHATSAPP FAB -->
+<sc-if value="{{ showWa }}" hint-placeholder-val="{{ true }}">
+<a href="https://wa.me/77000000000?text={{ waHelloText }}" target="_blank" rel="noopener" aria-label="Написать в WhatsApp" style="position:fixed;right:16px;bottom:calc(92px + env(safe-area-inset-bottom));z-index:31;width:56px;height:56px;border-radius:50%;background:#0A2F4F;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(10,47,79,.3);">
+  <span style="position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(10,47,79,.35);animation:waPulse 2.2s ease-out infinite;"></span>
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F9EFE3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8.2 19.1L4 20z"/><path d="M9.5 9.2c.2 1.9 2.4 4.4 4.6 5.1l1.2-1.1-1.7-1-1 .6c-.7-.3-1.6-1.2-2-1.9l.6-1-1-1.7-1 1.1z"/></svg>
+</a>
+</sc-if>
+
+<!-- COOKIE STRIP -->
+<sc-if value="{{ showCookie }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;left:0;right:88px;bottom:90px;z-index:29;display:flex;justify-content:center;padding:0 20px;pointer-events:none;">
+  <div style="pointer-events:auto;display:flex;align-items:center;gap:12px;background:#3B2F2A;color:#F9EFE3;font-size:13px;padding:8px 8px 8px 14px;max-width:560px;">
+    <span>Мы используем cookie для работы брони.</span>
+    <button onClick="{{ acceptCookie }}" style="height:32px;padding:0 12px;background:#F9EFE3;color:#3B2F2A;font-weight:600;font-size:13px;">Хорошо</button>
+  </div>
+</div>
+</sc-if>
+
+<!-- MENU -->
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeMenu }}" style="position:fixed;inset:0;z-index:50;background:rgba(10,47,79,.5);animation:fadeIn 200ms ease;"></div>
+<div data-screen-label="Меню" style="position:fixed;top:0;right:0;bottom:0;z-index:51;width:min(86vw,360px);background:#F9EFE3;padding:8px 20px 32px;display:flex;flex-direction:column;animation:fadeIn 220ms ease;overflow-y:auto;">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <img src="brand/logo-navy.png" alt="SHIPA" style="height:32px;width:auto;display:block;">
+    <button onClick="{{ closeMenu }}" aria-label="Закрыть" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 22 22" stroke="#0A2F4F" stroke-width="1.5" stroke-linecap="round"><path d="M4 4l14 14M18 4L4 18"/></svg></button>
+  </div>
+  <nav style="display:flex;flex-direction:column;margin-top:8px;border-top:1px solid #0A2F4F;">
+    <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="7">
+      <button onClick="{{ m.go }}" style="text-align:left;height:58px;border-bottom:1px solid rgba(10,47,79,.15);font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;letter-spacing:.08em;">{{ m.label }}</button>
+    </sc-for>
+  </nav>
+  <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px;padding-top:32px;">
+    <button onClick="{{ startBookingFromMenu }}" style="height:52px;background:#C15C22;color:#F9EFE3;border-radius:999px;font-weight:600;font-size:15px;letter-spacing:.04em;">Забронировать</button>
+    <button onClick="{{ openCallFromMenu }}" style="height:48px;border:1px solid #0A2F4F;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.02em;">Просто позвоните мне</button>
+    <a href="tel:+77000000000" style="text-align:center;margin-top:10px;font-weight:500;">+7 700 000 00 00</a>
+  </div>
+</div>
+</sc-if>
+
+<!-- QUICK CALL -->
+<sc-if value="{{ callOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeCall }}" style="position:fixed;inset:0;z-index:60;background:rgba(10,47,79,.5);animation:fadeIn 200ms ease;"></div>
+<div data-screen-label="Быстрая заявка" style="position:fixed;left:0;right:0;bottom:0;z-index:61;background:#F9EFE3;padding:16px 20px calc(24px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;animation:sheetUp 260ms ease-out;border-top:1px solid #C15C22;">
+  <div style="width:36px;height:2px;background:rgba(10,47,79,.25);margin:0 auto 20px;"></div>
+  <sc-if value="{{ callSent }}" hint-placeholder-val="{{ false }}">
+    <div style="text-align:center;padding:12px 0 8px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;letter-spacing:.08em;">ПЕРЕЗВОНИМ</div>
+      <p style="margin:8px 0 22px;font-size:15px;color:rgba(10,47,79,.75);">В течение 15 минут, с 10:00 до 23:00.</p>
+      <button onClick="{{ closeCall }}" style="height:48px;padding:0 24px;border:1px solid #0A2F4F;border-radius:999px;font-weight:600;font-size:14px;">Закрыть</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{ callNotSent }}" hint-placeholder-val="{{ true }}">
+    <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;letter-spacing:.06em;line-height:1;">ПРОСТО ПОЗВОНИТЕ МНЕ</div>
+    <p style="margin:8px 0 20px;font-size:15px;color:rgba(10,47,79,.75);">Подберём дом и время за вас.</p>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <input value="{{ form.name }}" onChange="{{ setName }}" placeholder="Имя" autoComplete="name" style="height:52px;border:1px solid rgba(10,47,79,.3);border-radius:12px;padding:0 14px;font-size:16px;background:#F9EFE3;color:#0A2F4F;">
+      <input value="{{ form.phone }}" onChange="{{ setPhone }}" placeholder="+7 ___ ___ __ __" type="tel" inputMode="tel" autoComplete="tel" style="height:52px;border:1px solid rgba(10,47,79,.3);border-radius:12px;padding:0 14px;font-size:16px;background:#F9EFE3;color:#0A2F4F;">
+    </div>
+    <button onClick="{{ sendCall }}" disabled="{{ callDisabled }}" style="{{ callBtnStyle }}">Позвоните мне</button>
+  </sc-if>
+</div>
+</sc-if>
+
+<!-- BOOKING -->
+<sc-if value="{{ bookingOpen }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Бронирование" style="position:fixed;inset:0;z-index:70;background:#F9EFE3;display:flex;flex-direction:column;animation:fadeIn 200ms ease;">
+  <div style="display:flex;align-items:center;gap:12px;padding:12px 12px 8px 20px;max-width:560px;width:100%;margin:0 auto;">
+    <img src="brand/mark-navy.png" alt="" style="height:28px;width:auto;display:block;margin-right:4px;">
+    <div style="flex:1;display:flex;gap:4px;">
+      <sc-for list="{{ stepSegs }}" as="s" hint-placeholder-count="4">
+        <div style="{{ s.style }}"></div>
+      </sc-for>
+    </div>
+    <button onClick="{{ closeBooking }}" aria-label="Закрыть" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 22 22" stroke="#0A2F4F" stroke-width="1.5" stroke-linecap="round"><path d="M4 4l14 14M18 4L4 18"/></svg></button>
+  </div>
+
+  <div style="flex:1;overflow-y:auto;padding:8px 20px 120px;">
+  <div style="max-width:560px;margin:0 auto;">
+
+    <sc-if value="{{ step1 }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="Шаг 1 — Когда">
+      <sc-if value="{{ bk.houseName }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:11px;letter-spacing:.2em;color:#C15C22;font-weight:600;margin-bottom:8px;">ДОМ {{ bk.houseName }}</div>
+      </sc-if>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;line-height:1.1;margin:0 0 6px;text-align:center;">Когда вы хотите приехать?</h2>
+      <p style="margin:0 0 20px;text-align:center;font-size:15px;color:rgba(10,47,79,.7);">Найдём свободные дома с ценой за весь сеанс</p>
+      <div style="border:2px solid #C15C22;border-radius:20px;padding:14px 14px 4px;">
+      <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(10,47,79,.6);font-weight:600;margin-bottom:8px;">Дата</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div style="font-weight:600;font-size:15px;">{{ weekTitle }}</div>
+        <div style="display:flex;gap:2px;">
+          <button onClick="{{ prevWeek }}" aria-label="Предыдущая неделя" style="{{ prevWeekStyle }}"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l-6 6 6 6"/></svg></button>
+          <button onClick="{{ nextWeek }}" aria-label="Следующая неделя" style="{{ nextWeekStyle }}"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px;">
+        <sc-for list="{{ wdHead }}" as="w" hint-placeholder-count="7">
+          <div style="text-align:center;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(10,47,79,.55);padding:4px 0;">{{ w.l }}</div>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;">
+        <sc-for list="{{ monthDays }}" as="d" hint-placeholder-count="35">
+          <button onClick="{{ d.select }}" disabled="{{ d.disabled }}" style="{{ d.style }}">{{ d.day }}</button>
+        </sc-for>
+      </div>
+      <div style="font-size:12px;color:rgba(10,47,79,.6);margin:8px 0 14px;">Бронь открыта на год вперёд. Зачёркнутые дни заняты полностью.</div>
+      <div style="border-top:1px solid rgba(10,47,79,.15);margin:0 -14px;"></div>
+      <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(10,47,79,.6);font-weight:600;margin:14px 0 8px;">Сеанс</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;">
+        <sc-for list="{{ sessionChips }}" as="s" hint-placeholder-count="3">
+          <button onClick="{{ s.select }}" style="{{ s.style }}">
+            <span style="font-weight:600;font-size:16px;">{{ s.label }}</span>
+            <span style="font-size:12px;opacity:.75;">{{ s.hours }}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="border-top:1px solid rgba(10,47,79,.15);margin:14px -14px 0;"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 10px;">
+        <div><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(10,47,79,.6);font-weight:600;">Гостей</div><div style="font-size:13px;color:rgba(10,47,79,.6);margin-top:4px;">Дети до 7 лет не считаются</div></div>
+        <div style="display:flex;align-items:center;">
+          <button onClick="{{ guestsMinus }}" aria-label="Меньше" style="width:48px;height:48px;border:1px solid rgba(10,47,79,.3);font-size:22px;">−</button>
+          <div style="width:52px;text-align:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;">{{ bk.guests }}</div>
+          <button onClick="{{ guestsPlus }}" aria-label="Больше" style="width:48px;height:48px;border:1px solid rgba(10,47,79,.3);font-size:22px;">+</button>
+        </div>
+      </div>
+      </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ step2 }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Шаг 2 — Какой дом">
+      <button onClick="{{ editSearch }}" style="width:100%;display:grid;grid-template-columns:1fr 1fr 1fr auto;border:2px solid #C15C22;border-radius:16px;overflow:hidden;background:#F9EFE3;text-align:left;margin-bottom:20px;">
+        <div style="padding:10px 12px;border-right:1px solid rgba(10,47,79,.15);"><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,47,79,.6);">Дата</div><div style="font-weight:600;font-size:14px;margin-top:2px;white-space:nowrap;">{{ searchDate }}</div></div>
+        <div style="padding:10px 12px;border-right:1px solid rgba(10,47,79,.15);"><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,47,79,.6);">Сеанс</div><div style="font-weight:600;font-size:14px;margin-top:2px;white-space:nowrap;">{{ searchSession }}</div></div>
+        <div style="padding:10px 12px;"><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,47,79,.6);">Гостей</div><div style="font-weight:600;font-size:14px;margin-top:2px;">{{ bk.guests }}</div></div>
+        <div style="display:flex;align-items:center;padding:0 12px;color:#C15C22;font-weight:600;font-size:13px;">Изменить</div>
+      </button>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;line-height:1.1;margin:0 0 6px;">{{ step2Title }}</h2>
+      <div style="font-size:15px;color:rgba(10,47,79,.7);margin-bottom:20px;">{{ step2Sub }}</div>
+
+      <sc-if value="{{ loadingSlots }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="height:112px;background:rgba(10,47,79,.08);animation:shimmer 1.2s ease-in-out infinite;"></div>
+          <div style="height:112px;background:rgba(10,47,79,.08);animation:shimmer 1.2s ease-in-out infinite .15s;"></div>
+          <div style="height:112px;background:rgba(10,47,79,.08);animation:shimmer 1.2s ease-in-out infinite .3s;"></div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ noneFree }}" hint-placeholder-val="{{ false }}">
+        <div style="border-top:1px solid #0A2F4F;padding-top:20px;">
+          <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;line-height:1.15;">На эту дату всё занято.</div>
+          <p style="margin:8px 0 16px;font-size:15px;color:rgba(10,47,79,.75);">Ближайшие свободные:</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <sc-for list="{{ nearestDates }}" as="d" hint-placeholder-count="2">
+              <button onClick="{{ d.select }}" style="height:44px;padding:0 18px;background:#0A2F4F;color:#F9EFE3;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.02em;">{{ d.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ singleFree }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ single.select }}" style="{{ single.style }}">
+          <div style="{{ single.imgStyle }}"></div>
+          <div style="font-size:11px;letter-spacing:.18em;color:#C15C22;font-weight:600;margin-top:16px;">{{ single.n }} / {{ single.tier }} · ЕДИНСТВЕННЫЙ СВОБОДНЫЙ</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:34px;letter-spacing:.12em;line-height:1;margin-top:8px;">{{ single.name }}</div>
+          <div style="font-size:14px;color:rgba(10,47,79,.75);margin-top:8px;">{{ single.facts }}</div>
+          <div style="font-weight:600;margin-top:10px;">{{ single.sessionPrice }} за {{ single.hoursText }}</div>
+        </button>
+      </sc-if>
+
+      <sc-if value="{{ listFree }}" hint-placeholder-val="{{ true }}">
+        <div class="noscroll" style="display:flex;gap:6px;overflow-x:auto;margin:0 -20px 16px;padding:0 20px;">
+          <sc-for list="{{ sortChips }}" as="c" hint-placeholder-count="4">
+            <button onClick="{{ c.select }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <sc-for list="{{ step2Houses }}" as="h" hint-placeholder-count="4">
+            <div style="{{ h.style }}">
+              <div style="display:flex;gap:14px;">
+                <button onClick="{{ h.select }}" disabled="{{ h.disabled }}" style="width:112px;height:128px;overflow:hidden;flex:0 0 auto;border-radius:14px;"><div style="{{ h.bgStyle }}"></div></button>
+                <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+                  <div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline;">
+                    <div style="font-size:11px;letter-spacing:.18em;color:#C15C22;font-weight:600;">{{ h.n }} / {{ h.tier }}</div>
+                    <div style="font-size:12px;font-weight:600;color:#0A2F4F;white-space:nowrap;">★ {{ h.rating }}</div>
+                  </div>
+                  <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;letter-spacing:.1em;line-height:1;margin-top:4px;">{{ h.name }}</div>
+                  <div style="font-size:13px;color:rgba(10,47,79,.7);margin-top:6px;line-height:1.4;">{{ h.facts }}</div>
+                  <div style="font-size:12px;color:{{ h.noteColor }};font-weight:600;margin-top:auto;padding-top:8px;">{{ h.note }}</div>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(10,47,79,.12);">
+                <div>
+                  <div style="font-size:12px;color:rgba(10,47,79,.6);">{{ h.priceLabel }}</div>
+                  <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;line-height:1;margin-top:2px;">{{ h.sessionPrice }}</div>
+                </div>
+                <button onClick="{{ h.select }}" disabled="{{ h.disabled }}" style="{{ h.btnStyle }}">{{ h.btnLabel }}</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ step3 }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Шаг 3 — Время и дополнительно">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;line-height:1.1;margin:0 0 24px;">Во сколько начнём?</h2>
+      <sc-if value="{{ isNight }}" hint-placeholder-val="{{ false }}">
+        <div style="border-top:1px solid #0A2F4F;border-bottom:1px solid rgba(10,47,79,.2);padding:16px 0;font-size:15px;line-height:1.5;">Ночной сеанс единый: с 00:00 до 06:00, 6 часов.</div>
+      </sc-if>
+      <sc-if value="{{ notNight }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;">
+          <div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:44px;line-height:1;">{{ timeRange }}</div>
+          <div style="font-size:14px;color:rgba(10,47,79,.65);">{{ sessionName }}</div>
+        </div>
+        <input type="range" min="{{ slider.min }}" max="{{ slider.max }}" step="0.5" value="{{ bk.start }}" onChange="{{ setStart }}" onInput="{{ setStart }}" style="margin-top:12px;">
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:rgba(10,47,79,.6);"><span>{{ slider.minLabel }}</span><span>{{ slider.maxLabel }}</span></div>
+        <div style="font-weight:600;margin:28px 0 10px;font-size:15px;">Длительность</div>
+        <div style="display:flex;gap:4px;">
+          <sc-for list="{{ durChips }}" as="c" hint-placeholder-count="3">
+            <button onClick="{{ c.select }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;letter-spacing:.08em;margin:36px 0 8px;">СДЕЛАТЬ ВЕЧЕР ПОЛНЕЕ</h3>
+      <div style="display:flex;flex-direction:column;border-top:1px solid #0A2F4F;">
+        <sc-for list="{{ extraRows }}" as="e" hint-placeholder-count="3">
+          <button onClick="{{ e.toggle }}" style="{{ e.style }}">
+            <div style="flex:1;text-align:left;">
+              <div style="font-weight:600;font-size:16px;">{{ e.name }}</div>
+              <div style="font-size:13px;color:rgba(10,47,79,.65);margin-top:2px;">{{ e.priceText }}</div>
+            </div>
+            <div style="{{ e.switchStyle }}"><div style="{{ e.knobStyle }}"></div></div>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="margin-top:32px;background:#0A2F4F;color:#F9EFE3;padding:20px;border-radius:20px;">
+        <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.7;">Итог</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;letter-spacing:.1em;margin-top:8px;line-height:1;">{{ bk.houseName }}</div>
+        <div style="font-size:15px;opacity:.9;margin-top:10px;line-height:1.5;">{{ summaryLine1 }}<br>{{ summaryLine2 }}</div>
+        <sc-if value="{{ hasExtras }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;opacity:.8;margin-top:6px;">{{ extrasLine }}</div></sc-if>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;padding-top:14px;border-top:1px solid rgba(249,239,227,.25);">
+          <span style="font-size:14px;opacity:.85;">К оплате</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:32px;line-height:1;">{{ totalText }}</span>
+        </div>
+      </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ step4 }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Шаг 4 — Контакты">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;line-height:1.1;margin:0 0 24px;">Как с вами связаться?</h2>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <input value="{{ form.name }}" onChange="{{ setName }}" placeholder="Имя" autoComplete="name" style="height:56px;border:1px solid rgba(10,47,79,.3);border-radius:12px;padding:0 16px;font-size:17px;background:#F9EFE3;color:#0A2F4F;">
+        <input value="{{ form.phone }}" onChange="{{ setPhone }}" placeholder="+7 ___ ___ __ __" type="tel" inputMode="tel" autoComplete="tel" style="height:56px;border:1px solid rgba(10,47,79,.3);border-radius:12px;padding:0 16px;font-size:17px;background:#F9EFE3;color:#0A2F4F;">
+      </div>
+      <button onClick="{{ toggleAgree }}" style="display:flex;align-items:center;gap:12px;margin-top:20px;min-height:44px;text-align:left;font-size:15px;">
+        <span style="{{ agreeBoxStyle }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#F9EFE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l3.5 3.5L12 4"/></svg></span>
+        <span>Согласен с <a href="#" style="border-bottom:1px solid rgba(10,47,79,.5);">правилами бронирования</a></span>
+      </button>
+      <p style="margin:20px 0 0;font-size:13px;line-height:1.55;color:rgba(10,47,79,.7);">Мы позвоним или напишем в WhatsApp в течение 15 минут, чтобы подтвердить. Предоплата — по договорённости.</p>
+      <sc-if value="{{ sendError }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:20px;border:1px solid #C15C22;padding:14px 16px;font-size:15px;line-height:1.5;">Не получилось отправить. Позвоните нам: <a href="tel:+77000000000" style="font-weight:600;color:#C15C22;">+7 700 000 00 00</a></div>
+      </sc-if>
+      <div style="margin-top:28px;border-top:1px solid #0A2F4F;padding-top:14px;font-size:15px;line-height:1.5;">
+        <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;letter-spacing:.1em;line-height:1;margin-bottom:8px;">{{ bk.houseName }}</div>
+        <div>{{ summaryLine1 }}</div>
+        <div style="color:rgba(10,47,79,.7);">{{ summaryLine2 }} · {{ totalText }}</div>
+      </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ stepDone }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Заявка принята" style="text-align:center;padding-top:48px;">
+        <svg width="96" height="96" viewBox="0 0 96 96" fill="none" style="animation:popIn 400ms ease-out;">
+          <circle cx="48" cy="48" r="46" stroke="#C15C22" stroke-width="1.5"/>
+          <path d="M28 49l14 14 26-30" stroke="#C15C22" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="70" stroke-dashoffset="70" style="animation:drawCheck 600ms ease-out 200ms forwards;"/>
+        </svg>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:38px;letter-spacing:.06em;margin:28px 0 12px;line-height:1;">Заявка принята</h2>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:rgba(10,47,79,.85);">Мы свяжемся с вами в течение 15 минут.<br>Дом {{ bk.houseName }}, {{ successWhen }}.</p>
+        <a href="{{ waLink }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;height:56px;margin-top:36px;background:#0A2F4F;color:#F9EFE3;border-radius:999px;font-weight:600;font-size:16px;letter-spacing:.04em;">Написать в WhatsApp</a>
+        <button onClick="{{ closeBooking }}" style="height:48px;margin-top:8px;font-weight:600;color:#C15C22;font-size:15px;">На главную</button>
+      </div>
+    </sc-if>
+
+  </div>
+  </div>
+
+  <sc-if value="{{ bookingCta }}" hint-placeholder-val="{{ true }}">
+  <div style="position:absolute;left:0;right:0;bottom:0;padding:10px 20px calc(12px + env(safe-area-inset-bottom));background:#F9EFE3;border-top:1px solid rgba(10,47,79,.15);">
+    <button onClick="{{ bookingNext }}" disabled="{{ bookingNextDisabled }}" style="{{ bookingCtaStyle }}">{{ bookingCtaLabel }}</button>
+  </div>
+  </sc-if>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;availabilityScenario&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;normal&quot;,&quot;one&quot;,&quot;none&quot;],&quot;default&quot;:&quot;normal&quot;,&quot;tsType&quot;:&quot;'normal'|'one'|'none'&quot;,&quot;section&quot;:&quot;Демо состояний брони&quot;},&quot;showCookieBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Демо состояний брони&quot;}}">
+const NAVY='#0A2F4F',CREAM='#F9EFE3',BRICK='#C15C22';
+const WD=['вс','пн','вт','ср','чт','пт','сб'];
+const WD_ACC=['воскресенье','понедельник','вторник','среду','четверг','пятницу','субботу'];
+const WD_NOM=['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
+const MON=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const fmt=n=>n.toLocaleString('ru-RU').replace(/\u00a0/g,' ')+' ₸';
+const hh=h=>{const m=h%1?'30':'00';return String(Math.floor(h)%24).padStart(2,'0')+':'+m;};
+const PRICES={VIP:{dayWd:30000,dayWe:40000,eveWd:38000,eveWe:45000,night:190000},STANDARD:{dayWd:17000,dayWe:25000,eveWd:23000,eveWe:30000,night:125000}};
+const SESSIONS=[{id:'day',label:'День',hours:'10–16',start:10,end:16},{id:'eve',label:'Вечер',hours:'16–24',start:16,end:24},{id:'night',label:'Ночь',hours:'00–08',start:0,end:8}];
+const HOUSES=[
+ {id:'dyhanie',n:'01',tier:'VIP',name:'ДЫХАНИЕ',slogan:'Вдохни глубже',area:120,guests:14,min:4,img:1,mat:'Светлый дуб, лён и матовый камень',art:'туманный хвойный лес',aroma:'эвкалипт и мята',ritual:'Парение здесь свежее и лёгкое, с травяным чаем после.',prog:1},
+ {id:'sila',n:'02',tier:'VIP',name:'СИЛА',slogan:'Верни свою энергию',area:110,guests:12,min:4,img:2,mat:'Тёмный дуб, сланец и чёрный металл',art:'скала',aroma:'кедр и можжевельник',ritual:'Хвойное парение и контрастное охлаждение в чане.',prog:2},
+ {id:'balans',n:'03',tier:'VIP',name:'БАЛАНС',slogan:'Найди своё равновесие',area:105,guests:12,min:4,img:3,mat:'Травертин, орех, лён и бронза',art:'круг',aroma:'лаванда и сандал',ritual:'Мягкое расслабляющее парение без спешки.',prog:3},
+ {id:'energiya',n:'04',tier:'STANDARD',name:'ЭНЕРГИЯ',slogan:'Заряди батарейки',area:80,guests:8,min:4,img:4,mat:'Тёплый дуб, графит и янтарное стекло',art:'горный закат',aroma:'цитрус и хвоя',ritual:'Бодрящее парение с контрастом.',prog:0},
+ {id:'svoboda',n:'05',tier:'STANDARD',name:'СВОБОДА',slogan:'Оставь город за дверью',area:85,guests:10,min:4,img:5,mat:'Светлое дерево, лён и керамика',art:'степь Сарыарки',aroma:'степные травы и можжевельник',ritual:'Травяное парение и чай на террасе.',prog:1},
+ {id:'lyogkost',n:'06',tier:'STANDARD',name:'ЛЁГКОСТЬ',slogan:'Будь здесь и сейчас',area:75,guests:8,min:4,img:6,mat:'Ясень, молочный текстиль и светлый камень',art:'облака',aroma:'белый чай и бергамот',ritual:'Деликатное мягкое парение.',prog:3},
+ {id:'stihiya',n:'07',tier:'STANDARD',name:'СТИХИЯ',slogan:'Почувствуй стихию',area:90,guests:10,min:4,img:7,mat:'Сланец, термодерево и тёмная керамика',art:'вода и скалы',aroma:'хвоя и древесные ноты',ritual:'Чередование жара и прохлады.',prog:2},
+ {id:'impuls',n:'08',tier:'STANDARD',name:'ИМПУЛЬС',slogan:'Переключись на отдых',area:80,guests:8,min:4,img:8,mat:'Графит, тёмное дерево и дымчатое стекло',art:'волна',aroma:'грейпфрут и имбирь',ritual:'Активное парение и тонизирующий чай.',prog:0},
+];
+const PROGRAMS=[
+ {name:'Классическое парение',dur:'1,5 часа',who:'для тех, кто впервые',price:25000,desc:'Прогрев, два захода с веником, отдых с чаем. Мастер ведёт по самочувствию.'},
+ {name:'Травяное парение',dur:'1,5 часа',who:'для спокойного вечера',price:28000,desc:'Настой степных трав, мягкий пар, медленный ритм. После — чай из тех же трав.'},
+ {name:'Хвойное парение с контрастом',dur:'2 часа',who:'для восстановления сил',price:32000,desc:'Кедровый и дубовый веник, три захода, охлаждение в чане между ними.'},
+ {name:'Мягкое расслабляющее',dur:'1,5 часа',who:'для пары',price:28000,desc:'Низкая температура, ароматы лаванды и сандала, без резких контрастов.'},
+ {name:'Массаж и уход',dur:'1 час',who:'после парения',price:20000,desc:'Массаж тёплым маслом, скраб на основе соли и мёда. В комнате отдыха.'},
+];
+const EXTRAS=[{id:'master',name:'Парение с мастером',price:25000,from:true},{id:'table',name:'Накрыть стол к приезду',price:40000,from:true},{id:'kit',name:'Набор для парения: шапка, веник, рукавица',price:8000,from:false}];
+const FEATURES=[{name:'Парная',desc:'дровяная печь, липа и кедр'},{name:'Чан',desc:'горячая вода на дровах'},{name:'Комната отдыха',desc:'стол, диваны, тишина'},{name:'Терраса',desc:'своя, закрытая от соседей'},{name:'Душ и санузел',desc:'в каждом доме'},{name:'Кухонная зона',desc:'можно заказать стол заранее'}];
+const REVIEWS=[
+ {name:'Айгерим',date:'2 сент.',stars:5,house:0,text:'Приехали вечером после работы, к нашему приезду уже накрыли стол. Парная прогрета, чан горячий. Никто не мешал — своя терраса, свой двор.'},
+ {name:'Дмитрий',date:'29 авг.',stars:5,house:1,text:'Брали СИЛУ на компанию из десяти. Мастер Ербол — отдельное спасибо, парение с контрастом в чане после — то что нужно.'},
+ {name:'Мадина и Тимур',date:'24 авг.',stars:5,house:2,text:'Ездили вдвоём. Тихо, тёплый свет, ничего лишнего. Взяли мягкое парение — вернёмся ещё.'},
+ {name:'Сергей',date:'17 авг.',stars:4,house:4,text:'Хороший дом, чистый, дрова уже сложены. Единственное — хотелось бы больше вешалок в раздевалке.'},
+ {name:'Алия',date:'10 авг.',stars:5,house:5,text:'Ответили в WhatsApp через пять минут, подтвердили без предоплаты. С детьми удобно: комната отдыха большая, чан неглубокий.'},
+ {name:'Руслан',date:'3 авг.',stars:5,house:6,text:'СТИХИЯ — самый атмосферный дом. Тёмный камень, вода, пар. Ночной сеанс на шесть часов — идеально на день рождения.'},
+];
+const FAQ=[
+ {q:'За сколько нужно бронировать?',a:'На будни — обычно за день. На вечер пятницы и субботы — за 3–5 дней. Свободные слоты видны на сайте сразу.'},
+ {q:'Что взять с собой?',a:'Ничего обязательного: полотенца, простыни, тапочки и чай — в доме. Веники, шапки и рукавицы можно добавить к брони.'},
+ {q:'Можно ли с детьми?',a:'Да. Дети до 7 лет — бесплатно и не считаются в вместимости. Чан неглубокий, в комнате отдыха есть место для игр.'},
+ {q:'Есть ли предоплата?',a:'По договорённости. Обычно подтверждаем бронь звонком без предоплаты; на праздничные даты можем попросить 30%.'},
+ {q:'Что если мы опоздали?',a:'Дом ждёт вас всё забронированное время. Начало не сдвигается, но если следующий слот свободен — предложим продлить.'},
+ {q:'Можно ли продлить на месте?',a:'Если следующий слот свободен — да, по тому же тарифу. Спросите администратора в WhatsApp.'},
+];
+const KITCHEN={
+ 'Чайная карта':[{name:'Степной сбор',desc:'чабрец, душица, зверобой, 0,8 л',price:4500},{name:'Иван-чай с облепихой',desc:'ферментированный, мёд отдельно, 0,8 л',price:4800},{name:'Пуэр шу 2018',desc:'заваривание проливом, 6 проливов',price:6500}],
+ 'Закуски':[{name:'Сет солений',desc:'огурцы, капуста, чеснок, черемша',price:6000},{name:'Казы и жая',desc:'домашние конские деликатесы, лук, хлеб',price:14000},{name:'Овощи с дымком',desc:'баклажан, перец, томаты, зелень',price:7500}],
+ 'Горячее':[{name:'Бешбармак',desc:'конина и баранина, тесто, сорпа, на 4–6',price:32000},{name:'Шашлык из баранины',desc:'корейка, 1 кг, лук и лаваш',price:24000},{name:'Судак на углях',desc:'целиком, лимон, травы',price:18000}],
+ 'Десерты':[{name:'Медовик',desc:'сметанный крем, на компанию',price:9000},{name:'Баурсаки с мёдом',desc:'горячие, 12 штук',price:3500},{name:'Сезонные фрукты',desc:'тарелка на 6 гостей',price:8000}],
+};
+const MASTERS=[{name:'Ербол',spec:'Хвойное и контрастное парение',slot:'master-1',img:'img/h2_art.png'},{name:'Наталья',spec:'Травяное и мягкое парение',slot:'master-2',img:'img/h6_art.png'},{name:'Асхат',spec:'Массаж и уход',slot:'master-3',img:'img/h4_art.png'}];
+const PILLARS=[{n:'01',kind:'СМЫСЛ',name:'Восстановление',desc:'Пар, вода и тишина помогают переключиться с городского ритма.'},{n:'02',kind:'ПОЗИЦИЯ',name:'Приватный отдых',desc:'Премиальный банный комплекс без показной роскоши.'},{n:'03',kind:'ОБЕЩАНИЕ',name:'Продуманная забота',desc:'Чистое тепло, приватность и сервис для семьи и близких.'},{n:'04',kind:'ХАРАКТЕР',name:'Спокойная уверенность',desc:'Тёплый, природный, современный. Говорит ясно и по существу.'}];
+const FULL_DAYS=[3,9];
+
+class Component extends DCLogic {
+  state={screen:'home',houseId:null,history:[],isWide:false,menuOpen:false,callOpen:false,callSent:false,
+    form:{name:'',phone:'',agree:false},faqOpen:-1,catalogFilter:'Все',kitchenTab:'Чайная карта',reviewFilter:-1,
+    galleryIdx:0,cookie:true,quick:{date:0,session:'eve'},bk:null,sendError:false,loadingSlots:false};
+  headerRef=React.createRef();
+  videoRef=React.createRef();
+  atmRef=React.createRef();
+  progRowRef=React.createRef();
+  today=new Date(2026,8,7);
+
+  componentDidMount(){
+    this.onResize=()=>{const w=window.innerWidth>=960;if(w!==this.state.isWide)this.setState({isWide:w});};
+    this.onResize();window.addEventListener('resize',this.onResize);
+    let last=0;this.onScroll=()=>{const y=window.scrollY;const el=this.headerRef.current;if(el){el.style.transform=(y>last&&y>80)?'translateY(-100%)':'translateY(0)';}last=y;};
+    window.addEventListener('scroll',this.onScroll,{passive:true});
+    try{const s=JSON.parse(localStorage.getItem('shipa_user')||'null');if(s)this.setState({form:{...this.state.form,name:s.name||'',phone:s.phone||''}});
+      if(localStorage.getItem('shipa_cookie'))this.setState({cookie:false});}catch(e){}
+    this.io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');this.io.unobserve(e.target);}}),{threshold:.08});
+    this.observeReveal();
+    this.mo=new MutationObserver(()=>this.observeReveal());
+    this.mo.observe(document.body,{childList:true,subtree:true});
+  }
+  componentWillUnmount(){window.removeEventListener('resize',this.onResize);window.removeEventListener('scroll',this.onScroll);this.io&&this.io.disconnect();this.mo&&this.mo.disconnect();}
+  componentDidUpdate(_,prev){
+    if(prev.screen!==this.state.screen||prev.houseId!==this.state.houseId){window.scrollTo(0,0);this.observeReveal();}
+    if(this.state.bk&&prev.bk&&prev.bk.step!==this.state.bk.step){const sc=document.querySelector('[data-screen-label="Бронирование"] > div:nth-child(2)');if(sc)sc.scrollTop=0;}
+  }
+  observeReveal(){if(this._rv)return;this._rv=requestAnimationFrame(()=>{this._rv=0;document.querySelectorAll('[data-reveal]:not(.in)').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in');else this.io.observe(el);});});}
+
+  go(screen,houseId=null){this.setState(s=>({screen,houseId,menuOpen:false,history:[...s.history,{screen:s.screen,houseId:s.houseId}].slice(-10),galleryIdx:0}));}
+  goBack(){this.setState(s=>{const h=s.history.slice();const p=h.pop()||{screen:'home',houseId:null};return {screen:p.screen,houseId:p.houseId,history:h};});}
+
+  dateAt(i){const d=new Date(this.today);d.setDate(d.getDate()+i);return d;}
+  isWeekend(i){const w=this.dateAt(i).getDay();return w===0||w===6;}
+  rate(h,sid,i){const p=PRICES[h.tier];if(sid==='night')return null;const we=this.isWeekend(i);return sid==='day'?(we?p.dayWe:p.dayWd):(we?p.eveWe:p.eveWd);}
+  fromPrice(h){return PRICES[h.tier].dayWd;}
+  // availability: 'free' | 'busy' | 'prep'
+  avail(hi,di,sid){
+    const sc=this.props.availabilityScenario||'normal';
+    if(sc==='none')return 'busy';
+    if(sc==='one')return hi===2?'free':'busy';
+    if(FULL_DAYS.includes(di))return 'busy';
+    const si=SESSIONS.findIndex(s=>s.id===sid);const v=(hi*7+di*3+si*5)%9;
+    if(v===0)return 'busy';if(v===1&&sid==='eve')return 'prep';return 'free';
+  }
+  sessionHours(h,sid,dur){return sid==='night'?6:(dur||h.min);}
+  sessionPrice(h,sid,di,dur){if(sid==='night')return PRICES[h.tier].night;return this.rate(h,sid,di)*this.sessionHours(h,sid,dur);}
+
+  openBooking(houseId,date,session,step=1){
+    if(step===2){this.setState({loadingSlots:true});setTimeout(()=>this.setState({loadingSlots:false}),700);}
+    this.setState({menuOpen:false,sendError:false,bk:{step,houseId:houseId||null,date:date??0,session:session||'eve',guests:6,week:0,start:null,dur:4,extras:[],fromHouse:!!houseId}});
+  }
+  closeBooking(){const done=this.state.bk&&this.state.bk.step===5;this.setState({bk:null});if(done)this.go('home');}
+  setBk(patch){this.setState(s=>({bk:{...s.bk,...patch}}));}
+
+  bookingCandidates(){
+    const {bk}=this.state;return HOUSES.map((h,hi)=>{const st=this.avail(hi,bk.date,bk.session);return {h,hi,st,fits:h.guests>=bk.guests};});
+  }
+  next(){
+    const {bk}=this.state;
+    if(bk.step===1){
+      if(bk.houseId){const h=HOUSES.find(x=>x.id===bk.houseId);this.setBk({step:3,start:SESSIONS.find(s=>s.id===bk.session).start+(bk.session==='eve'?2:0),dur:h.min});return;}
+      this.setState({loadingSlots:true});this.setBk({step:2});setTimeout(()=>this.setState({loadingSlots:false}),700);return;
+    }
+    if(bk.step===2){const h=HOUSES.find(x=>x.id===bk.houseId);this.setBk({step:3,start:SESSIONS.find(s=>s.id===bk.session).start+(bk.session==='eve'?2:0),dur:h.min});return;}
+    if(bk.step===3){this.setBk({step:4});return;}
+    if(bk.step===4){
+      const {form}=this.state;
+      if(form.phone.replace(/\D/g,'').endsWith('000')){this.setState({sendError:true});return;}
+      try{localStorage.setItem('shipa_user',JSON.stringify({name:form.name,phone:form.phone,lastHouse:bk.houseId}));}catch(e){}
+      this.setState({sendError:false});this.setBk({step:5});
+    }
+  }
+
+  chip(active,extra=''){return `height:44px;padding:0 16px;border-radius:999px;border:1px solid ${active?NAVY:'rgba(10,47,79,.3)'};background:${active?NAVY:'transparent'};color:${active?CREAM:NAVY};font-size:14px;font-weight:500;white-space:nowrap;letter-spacing:.02em;flex:0 0 auto;${extra}`;}
+  dayStyle(active,muted,w){return `flex:0 0 auto;width:${w||'56px'};height:64px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1px solid ${active?NAVY:'rgba(10,47,79,.25)'};background:${active?NAVY:'transparent'};color:${active?CREAM:NAVY};opacity:${muted&&!active?'.4':'1'};`;}
+
+  renderVals(){
+    const s=this.state,bk=s.bk;
+    const screen=s.screen;
+    const houseView=HOUSES.map((h,hi)=>({...h,src:`img/h${h.img}_int.png`,bgStyle:`width:100%;height:100%;background:#3B2F2A url(img/h${h.img}_int.png) center/cover no-repeat;`,facts:`до ${h.guests} гостей · парная · чан${h.tier==='VIP'?' · бассейн':''}`,priceFrom:fmt(this.fromPrice(h)),priceShort:(this.fromPrice(h)/1000)+' 000',
+      open:()=>this.go('house',h.id),book:()=>this.openBooking(h.id)}));
+    const wide=s.isWide;
+    const housesRowStyle=wide?'display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:0 20px;':'display:flex;gap:12px;overflow-x:auto;padding:0 20px 4px;scroll-snap-type:x mandatory;';
+    const houses=houseView.map(h=>({...h,cardStyle:wide?'text-align:left;':'flex:0 0 82%;max-width:360px;scroll-snap-align:center;text-align:left;'}));
+    // quick widget
+    const quickDays=Array.from({length:7},(_,i)=>{const d=this.dateAt(i);const act=s.quick.date===i;return {wd:i===0?'сегодня':WD[d.getDay()],day:d.getDate(),style:this.dayStyle(act,FULL_DAYS.includes(i),i===0?'72px':'56px'),select:()=>this.setState({quick:{...s.quick,date:i}})};});
+    const quickSessions=SESSIONS.map(x=>({label:x.label,style:this.chip(s.quick.session===x.id,'flex:1;'),select:()=>this.setState({quick:{...s.quick,session:x.id}})}));
+    const faq=FAQ.map((q,i)=>({...q,open:s.faqOpen===i,toggle:()=>this.setState({faqOpen:s.faqOpen===i?-1:i}),iconStyle:`width:36px;height:36px;border-radius:50%;background:${BRICK};color:${CREAM};display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:400;line-height:1;flex:0 0 auto;transition:transform 200ms;transform:rotate(${s.faqOpen===i?45:0}deg);`}));
+    const reviews=REVIEWS.map(r=>({...r,stars:'★'.repeat(r.stars)+'☆'.repeat(5-r.stars),house:HOUSES[r.house].n+' / '+HOUSES[r.house].name}));
+    const PROG_IMG=['img/h1_acc.png','img/h5_art.png','img/h2_int.png','img/h3_art.png','img/h6_acc.png'];
+    const programs=PROGRAMS.map((p,i)=>({...p,slot:'prog-'+i,img:PROG_IMG[i],priceText:fmt(p.price),addToBooking:()=>this.openBooking(null)}));
+    const progScroll=dir=>{const el=this.progRowRef.current;if(el)el.scrollBy({left:dir*(el.clientWidth*0.8),behavior:'smooth'});};
+    // catalog
+    const filters=['Все','VIP','Standard','до 8 гостей','до 14 гостей'];
+    const catalogHouses=houseView.filter(h=>{const f=s.catalogFilter;if(f==='VIP')return h.tier==='VIP';if(f==='Standard')return h.tier==='STANDARD';if(f==='до 8 гостей')return h.guests<=8;if(f==='до 14 гостей')return h.guests>8;return true;});
+    // house
+    const hIdx=HOUSES.findIndex(x=>x.id===s.houseId);const hRaw=HOUSES[hIdx]||HOUSES[0];
+    const p=PRICES[hRaw.tier];const prog=PROGRAMS[hRaw.prog];
+    const house={...hRaw,priceShort:(this.fromPrice(hRaw)/1000)+' 000',legend:`${hRaw.mat}. Картина — ${hRaw.art}. Аромат — ${hRaw.aroma}. ${hRaw.ritual}`,
+      inside:['парная','чан','комната отдыха','терраса','душ и санузел','кухонная зона',...(hRaw.tier==='VIP'?['бассейн','зона барбекю']:[])].map(n=>({name:n})),
+      priceRows:[{label:'День',hours:'10–16',wd:fmt(p.dayWd)+'/ч',we:fmt(p.dayWe)+'/ч'},{label:'Вечер',hours:'16–24',wd:fmt(p.eveWd)+'/ч',we:fmt(p.eveWe)+'/ч'},{label:'Ночь',hours:'00–08',wd:fmt(p.night)+' за 6 ч',we:fmt(p.night)+' за 6 ч'}],
+      program:{...prog,priceText:fmt(prog.price)}};
+    const gallery=[`img/h${hRaw.img}_int.png`,`img/h${hRaw.img}_art.png`,`img/h${hRaw.img}_acc.png`].map(src=>({src,style:`width:100%;height:100%;background:#3B2F2A url(${src}) center/cover no-repeat;`}));
+    const houseWeek=Array.from({length:7},(_,i)=>{const d=this.dateAt(i);return {wd:i===0?'сег.':WD[d.getDay()],day:d.getDate(),slots:SESSIONS.map(se=>{const st=this.avail(hIdx<0?0:hIdx,i,se.id);const free=st==='free';return {label:se.label,sub:st==='busy'?'занят':st==='prep'?'с 17:30':se.hours,disabled:st==='busy',
+        style:`height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:13px;font-weight:500;border:1px solid ${free?NAVY:'rgba(10,47,79,.12)'};background:${free?'transparent':'rgba(10,47,79,.06)'};color:${st==='busy'?'rgba(10,47,79,.4)':NAVY};`,
+        book:()=>this.openBooking(hRaw.id,i,se.id)};})};});
+    const otherHouses=houseView.filter(h=>h.id!==hRaw.id);
+    // kitchen
+    const kitchenTabs=Object.keys(KITCHEN).map(t=>({label:t,style:`height:48px;padding:0 14px;font-size:14px;font-weight:${s.kitchenTab===t?600:500};white-space:nowrap;border-bottom:2px solid ${s.kitchenTab===t?BRICK:'transparent'};margin-bottom:-1px;color:${s.kitchenTab===t?NAVY:'rgba(10,47,79,.6)'};`,select:()=>this.setState({kitchenTab:t})}));
+    const kitchenItems=(KITCHEN[s.kitchenTab]||[]).map((k,i)=>({...k,priceText:fmt(k.price),slot:'dish-'+s.kitchenTab.length+'-'+i,img:['img/h4_acc.png','img/h8_acc.png','img/h7_acc.png'][i%3]}));
+    // reviews
+    const reviewFilters=[{label:'Все',v:-1},...HOUSES.map((h,i)=>({label:h.name,v:i}))].map(f=>({label:f.label,style:this.chip(s.reviewFilter===f.v),select:()=>this.setState({reviewFilter:f.v})}));
+    const filteredReviews=reviews.filter(r=>s.reviewFilter<0||REVIEWS[reviews.indexOf(r)].house===s.reviewFilter);
+    // menu
+    const menuItems=[['Дома','houses'],['Парение и услуги','services'],['Кухня','kitchen'],['Отзывы','reviews'],['О нас','about'],['Контакты','contacts']].map(([label,sc])=>({label,go:()=>this.go(sc)}));
+    // sticky
+    const inHouse=screen==='house';
+    const stickyLabel=inHouse?`Забронировать ${hRaw.name} · от ${fmt(this.fromPrice(hRaw))}/ч`:'Забронировать';
+    // booking
+    let B={};
+    if(bk){
+      const sel=SESSIONS.find(x=>x.id===bk.session);
+      const hSel=HOUSES.find(x=>x.id===bk.houseId);
+      const d=this.dateAt(bk.date);
+      const stepSegs=[1,2,3,4].map(i=>({style:`flex:1;height:2px;background:${i<=Math.min(bk.step,4)?BRICK:'rgba(10,47,79,.15)'};`}));
+      const mo=bk.month||0;const first=new Date(this.today.getFullYear(),this.today.getMonth()+mo,1);
+      const lead=(first.getDay()+6)%7;const dim=new Date(first.getFullYear(),first.getMonth()+1,0).getDate();
+      const dayOff=dd=>Math.round((dd-this.today)/86400000);
+      const monthDays=[...Array.from({length:lead},()=>({day:'',disabled:true,style:'height:44px;'})),...Array.from({length:dim},(_,k)=>{const dd=new Date(first.getFullYear(),first.getMonth(),k+1);const i=dayOff(dd);const past=i<0;const act=bk.date===i;const full=FULL_DAYS.includes(i);const tdy=i===0;
+        return {day:k+1,disabled:past,select:()=>this.setBk({date:i}),style:`height:44px;border-radius:999px;font-size:15px;font-weight:${act||tdy?600:400};background:${act?NAVY:'transparent'};color:${act?CREAM:past?'rgba(10,47,79,.25)':full?'rgba(10,47,79,.4)':NAVY};text-decoration:${full&&!act?'line-through':'none'};box-shadow:${tdy&&!act?`inset 0 0 0 1px ${BRICK}`:'none'};`};})];
+      const wdHead=['пн','вт','ср','чт','пт','сб','вс'].map(l=>({l}));
+      const sessionChips=SESSIONS.map(x=>({label:x.label,hours:x.hours,style:`height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:1px solid ${bk.session===x.id?NAVY:'rgba(10,47,79,.3)'};background:${bk.session===x.id?NAVY:'transparent'};color:${bk.session===x.id?CREAM:NAVY};`,select:()=>this.setBk({session:x.id})}));
+      const cands=this.bookingCandidates();
+      const free=cands.filter(c=>c.st!=='busy'&&c.fits);
+      const sorted=[...cands.filter(c=>c.st==='free'&&c.fits),...cands.filter(c=>c.st==='prep'&&c.fits),...cands.filter(c=>!c.fits)];
+      const sortId=bk.sort||'fit';
+      let ordered=sorted;
+      if(sortId==='price')ordered=[...sorted].sort((a,b)=>(a.fits&&a.st!=='busy'?0:1)-(b.fits&&b.st!=='busy'?0:1)||this.sessionPrice(a.h,bk.session,bk.date,a.h.min)-this.sessionPrice(b.h,bk.session,bk.date,b.h.min));
+      if(sortId==='vip')ordered=sorted.filter(c=>c.h.tier==='VIP');
+      if(sortId==='std')ordered=sorted.filter(c=>c.h.tier==='STANDARD');
+      const sortChips=[['fit','Подходящие'],['price','Сначала дешевле'],['vip','VIP'],['std','Standard']].map(([id,label])=>({label,style:this.chip(sortId===id,'height:40px;font-size:13px;'),select:()=>this.setBk({sort:id})}));
+      const RATING=['4,9','4,9','5,0','4,8','4,9','4,8','5,0','4,7'];
+      const step2Houses=ordered.map(c=>{const dis=!c.fits||c.st==='busy';const act=bk.houseId===c.h.id;const hi=HOUSES.indexOf(c.h);return {...c.h,img:c.h.img,src:`img/h${c.h.img}_int.png`,bgStyle:`width:100%;height:100%;background:#3B2F2A url(img/h${c.h.img}_int.png) center/cover no-repeat;`,rating:RATING[hi],facts:`${c.h.area} м² · до ${c.h.guests} гостей · парная · чан${c.h.tier==='VIP'?' · бассейн':''}`,
+        sessionPrice:fmt(this.sessionPrice(c.h,bk.session,bk.date,c.h.min)),priceLabel:bk.session==='night'?'за ночь, 6 часов':`за ${c.h.min} часа, всё включено`,
+        note:!c.fits?`Только до ${c.h.guests} гостей`:c.st==='prep'?'Свободен с 17:30':c.st==='busy'?'Занят на эту дату':'Свободен на эту дату',noteColor:c.st==='prep'?BRICK:!c.fits||c.st==='busy'?'rgba(10,47,79,.5)':'#2F6B3A',disabled:dis,
+        style:`text-align:left;padding:14px;border-radius:20px;border:${act?`2px solid ${BRICK}`:'1px solid rgba(10,47,79,.2)'};background:${act?'rgba(193,92,34,.05)':'rgba(10,47,79,.04)'};opacity:${dis?'.5':'1'};`,
+        btnLabel:act?'Выбрано':dis?'Недоступно':'Выбрать',btnStyle:`height:44px;padding:0 20px;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.02em;background:${act?NAVY:dis?'transparent':BRICK};color:${dis&&!act?'rgba(10,47,79,.5)':CREAM};border:${dis&&!act?'1px solid rgba(10,47,79,.25)':'0'};`,
+        select:()=>!dis&&this.setBk({houseId:c.h.id})};});
+      const noneFree=!s.loadingSlots&&free.length===0;const singleFree=!s.loadingSlots&&free.length===1;const listFree=!s.loadingSlots&&free.length>1;
+      const nearestDates=[];for(let i=0;i<14&&nearestDates.length<2;i++){if(i===bk.date)continue;if(HOUSES.some((h,hi)=>this.avail(hi,i,bk.session)!=='busy'&&h.guests>=bk.guests)){const dd=this.dateAt(i);nearestDates.push({label:`${WD_NOM[dd.getDay()]}, ${dd.getDate()} ${MON[dd.getMonth()]}`,select:()=>this.setBk({date:i})});}}
+      const sg=free[0]?free[0].h:HOUSES[0];
+      const single={...sg,imgStyle:`aspect-ratio:16/10;border-radius:16px;background:#3B2F2A url(img/h${sg.img}_int.png) center/cover no-repeat;`,facts:`${sg.area} м² · до ${sg.guests} гостей`,sessionPrice:fmt(this.sessionPrice(sg,bk.session,bk.date,sg.min)),hoursText:bk.session==='night'?'6 ч':`${sg.min} ч`,style:`width:100%;text-align:left;border:1px solid ${bk.houseId===sg.id?BRICK:'rgba(10,47,79,.2)'};padding:12px;`,select:()=>this.setBk({houseId:sg.id})};
+      const isNight=bk.session==='night';
+      const dur=isNight?6:bk.dur;const start=isNight?0:(bk.start??sel.start);const end=start+dur;
+      const slider={min:sel.start,max:Math.max(sel.start,sel.end-dur),minLabel:hh(sel.start),maxLabel:hh(Math.max(sel.start,sel.end-dur))};
+      const durChips=[4,5,6].map(v=>({label:v+' ч',style:this.chip(bk.dur===v,'flex:1;'),select:()=>this.setBk({dur:v,start:Math.min(bk.start??sel.start,sel.end-v)})}));
+      const extraRows=EXTRAS.map(e=>{const on=bk.extras.includes(e.id);return {...e,priceText:(e.from?'от ':'')+fmt(e.price),toggle:()=>this.setBk({extras:on?bk.extras.filter(x=>x!==e.id):[...bk.extras,e.id]}),
+        style:'display:flex;align-items:center;gap:14px;width:100%;padding:16px 0;border-bottom:1px solid rgba(10,47,79,.15);',
+        switchStyle:`width:48px;height:28px;border-radius:14px;flex:0 0 auto;background:${on?NAVY:'rgba(10,47,79,.2)'};position:relative;transition:background 200ms;`,
+        knobStyle:`position:absolute;top:3px;left:${on?23:3}px;width:22px;height:22px;border-radius:50%;background:${CREAM};transition:left 200ms;`};});
+      const hh0=hSel||HOUSES[0];
+      const base=isNight?PRICES[hh0.tier].night:this.rate(hh0,bk.session,bk.date)*dur;
+      const extraSum=bk.extras.reduce((a,id)=>a+EXTRAS.find(e=>e.id===id).price,0);
+      const over=Math.max(0,bk.guests-10)*3000;
+      const total=base+extraSum+over;
+      const whenText=`${WD_NOM[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}, ${hh(start)}–${hh(end)}`;
+      const canNext=bk.step===1?true:bk.step===2?!!bk.houseId:bk.step===3?true:bk.step===4?(s.form.name.trim().length>1&&s.form.phone.replace(/\D/g,'').length>=10&&s.form.agree):false;
+      const ctaLabel=bk.step===1?(bk.houseId?'Продолжить':'Показать свободные дома'):bk.step===2?(hSel?`Выбрать ${hSel.name}`:'Выберите дом'):bk.step===3?'Продолжить':'Отправить заявку';
+      const MON_NOM=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+      B={stepSegs,weekTitle:`${MON_NOM[first.getMonth()]} ${first.getFullYear()}`,monthDays,wdHead,prevWeek:()=>mo>0&&this.setBk({month:mo-1}),nextWeek:()=>mo<11&&this.setBk({month:mo+1}),
+        prevWeekStyle:`width:44px;height:44px;border-radius:50%;border:1px solid rgba(10,47,79,.25);display:flex;align-items:center;justify-content:center;opacity:${mo===0?'.3':'1'};`,nextWeekStyle:`width:44px;height:44px;border-radius:50%;border:1px solid rgba(10,47,79,.25);display:flex;align-items:center;justify-content:center;opacity:${mo===11?'.3':'1'};`,
+        sessionChips,guestsMinus:()=>this.setBk({guests:Math.max(1,bk.guests-1)}),guestsPlus:()=>this.setBk({guests:Math.min(20,bk.guests+1)}),
+        step1:bk.step===1,step2:bk.step===2,step3:bk.step===3,step4:bk.step===4,stepDone:bk.step===5,
+        step2Title:`Свободно на ${WD_ACC[d.getDay()]}, ${sel.label.toLowerCase()}, ${bk.guests} гостей`,step2Sub:`${d.getDate()} ${MON[d.getMonth()]} · ${sel.hours} · ${free.length} ${free.length===1?'дом':free.length<5&&free.length>0?'дома':'домов'}`,
+        loadingSlots:s.loadingSlots,noneFree,singleFree,listFree,nearestDates,single,step2Houses,sortChips,
+        editSearch:()=>this.setBk({step:1,houseId:bk.fromHouse?bk.houseId:null}),searchDate:`${d.getDate()} ${MON[d.getMonth()].slice(0,3)}, ${WD[d.getDay()]}`,searchSession:`${sel.label} ${sel.hours}`,
+        isNight,notNight:!isNight,timeRange:`${hh(start)}–${hh(end)}`,sessionName:sel.label+' · '+sel.hours,slider,setStart:e=>this.setBk({start:parseFloat(e.target.value)}),durChips,extraRows,
+        summaryLine1:whenText,summaryLine2:`${bk.guests} гостей · ${dur} ч · ${isNight?'ночной сеанс':fmt(this.rate(hh0,bk.session,bk.date))+'/ч'}${over?' · +'+fmt(over)+' за гостей свыше 10':''}`,
+        hasExtras:bk.extras.length>0,extrasLine:'Дополнительно: '+bk.extras.map(id=>EXTRAS.find(e=>e.id===id).name.split(':')[0].toLowerCase()).join(', '),totalText:fmt(total),
+        agreeBoxStyle:`width:24px;height:24px;flex:0 0 auto;border:1px solid ${s.form.agree?NAVY:'rgba(10,47,79,.4)'};background:${s.form.agree?NAVY:'transparent'};display:flex;align-items:center;justify-content:center;`,
+        toggleAgree:()=>this.setState({form:{...s.form,agree:!s.form.agree}}),sendError:s.sendError,
+        successWhen:whenText,waLink:'https://wa.me/77000000000?text='+encodeURIComponent(`Здравствуйте! Заявка: дом ${hh0.name}, ${whenText}, ${bk.guests} гостей.`),
+        bookingCta:bk.step<5,bookingNext:()=>this.next(),bookingNextDisabled:!canNext,bookingCtaLabel:ctaLabel,
+        bookingCtaStyle:`width:100%;max-width:520px;margin:0 auto;display:block;height:56px;background:${canNext?BRICK:'rgba(10,47,79,.15)'};color:${canNext?CREAM:'rgba(10,47,79,.45)'};font-weight:600;font-size:16px;letter-spacing:.04em;`,
+        bk:{...bk,houseName:hSel?hSel.name:''}};
+    } else B={bk:{houseName:'',guests:6,start:10},step1:false,step2:false,step3:false,step4:false,stepDone:false,bookingCta:false,slider:{}};
+
+    const callOk=s.form.name.trim().length>1&&s.form.phone.replace(/\D/g,'').length>=10;
+    return {
+      isWide:wide,showChrome:!bk,isHome:screen==='home',isHouses:screen==='houses',isHouse:screen==='house',isServices:screen==='services',isKitchen:screen==='kitchen',isReviews:screen==='reviews',isAbout:screen==='about',isContacts:screen==='contacts',
+      headerRef:this.headerRef,goHome:()=>this.go('home'),goHouses:()=>{this.setState({catalogFilter:'Все'});this.go('houses');},goHousesVip:()=>{this.setState({catalogFilter:'VIP'});this.go('houses');},goHousesStd:()=>{this.setState({catalogFilter:'Standard'});this.go('houses');},
+      goServices:()=>this.go('services'),goKitchen:()=>this.go('kitchen'),goReviews:()=>this.go('reviews'),goAbout:()=>this.go('about'),goContacts:()=>this.go('contacts'),goBack:()=>this.goBack(),
+      openMenu:()=>this.setState({menuOpen:true}),closeMenu:()=>this.setState({menuOpen:false}),menuOpen:s.menuOpen,menuItems,
+      startBooking:()=>this.openBooking(null),startBookingFromMenu:()=>this.openBooking(null),
+      openCall:()=>this.setState({callOpen:true,callSent:false}),openCallFromMenu:()=>this.setState({callOpen:true,callSent:false,menuOpen:false}),closeCall:()=>this.setState({callOpen:false}),callOpen:s.callOpen,callSent:s.callSent,callNotSent:!s.callSent,
+      sendCall:()=>{try{localStorage.setItem('shipa_user',JSON.stringify({name:s.form.name,phone:s.form.phone}));}catch(e){}this.setState({callSent:true});},callDisabled:!callOk,
+      callBtnStyle:`width:100%;height:52px;margin-top:12px;background:${callOk?BRICK:'rgba(10,47,79,.15)'};color:${callOk?CREAM:'rgba(10,47,79,.45)'};font-weight:600;font-size:15px;letter-spacing:.04em;`,
+      form:s.form,setName:e=>this.setState({form:{...s.form,name:e.target.value}}),setPhone:e=>{let v=e.target.value.replace(/[^\d+]/g,'');if(v&&!v.startsWith('+'))v='+'+v;this.setState({form:{...s.form,phone:v}});},
+      quickDays,quickSessions,quickGo:()=>this.openBooking(null,s.quick.date,s.quick.session,2),
+      videoReviews:[{slot:'vr-1',name:'Айгерим',house:'01 / ДЫХАНИЕ',img:'img/h1_int.png'},{slot:'vr-2',name:'Дмитрий',house:'02 / СИЛА',img:'img/h2_int.png'},{slot:'vr-3',name:'Руслан',house:'07 / СТИХИЯ',img:'img/h7_int.png'},{slot:'vr-4',name:'Мадина и Тимур',house:'03 / БАЛАНС',img:'img/h3_int.png'}],
+      waAskText:encodeURIComponent('Здравствуйте! У меня вопрос про SHIPA.'),waHelloText:encodeURIComponent('Здравствуйте! Хочу забронировать дом в SHIPA.'),showWa:!bk&&!s.menuOpen&&!s.callOpen,
+      phoneMissing:s.form.phone.replace(/\D/g,'').length<10,contactCallLabel:s.inlineSent?'Отправлено':'Отправить',
+      contactCallStyle:`flex:0 0 auto;height:52px;padding:0 24px;border-radius:999px;background:${s.inlineSent?'#0A2F4F':(s.form.phone.replace(/\D/g,'').length>=10?BRICK:'rgba(10,47,79,.2)')};color:${CREAM};font-weight:600;font-size:14px;`,
+      heroStats:[{n:'8',t:'домов'},{n:'до 14',t:'гостей'},{n:'17 000 ₸',t:'от, за час'},{n:'15 мин',t:'от центра'}],
+      aboutItems:[{n:'01',img:'img/h5_int.png',title:'Свой дом',sub:'Парная, чан и терраса только для вашей компании. Соседей не видно и не слышно.'},{n:'02',img:'img/h3_acc.png',title:'Материал',sub:'Дуб, лён, камень и керамика. Ничего искусственного на ощупь.'},{n:'03',img:'img/h6_int.png',title:'Тёплый свет',sub:'2700–3000 K во всех домах. Глаза отдыхают вместе с телом.'},{n:'04',img:'img/h1_acc.png',title:'Сервис заранее',sub:'Стол, мастер и веники согласованы при брони. По приезду — только отдых.'}],
+      progRowRef:this.progRowRef,progPrev:()=>progScroll(-1),progNext:()=>progScroll(1),
+      videoRef:this.videoRef,scrollToVideo:()=>{const el=this.videoRef.current;if(el)window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-60,behavior:'smooth'});},
+      sendCallInline:()=>{if(s.form.phone.replace(/\D/g,'').length<10)return;try{localStorage.setItem('shipa_user',JSON.stringify({name:s.form.name,phone:s.form.phone}));}catch(e){}this.setState({inlineSent:true});},
+      inlineCallLabel:s.inlineSent?'Перезвоним в течение 15 минут':'Позвоните мне',
+      inlineCallStyle:`height:52px;margin-top:4px;background:${s.inlineSent?'transparent':callOk?BRICK:'rgba(249,239,227,.15)'};border:${s.inlineSent?'1px solid rgba(249,239,227,.5)':'0'};color:${callOk||s.inlineSent?CREAM:'rgba(249,239,227,.5)'};font-weight:600;font-size:15px;letter-spacing:.04em;`,
+      houses,housesRowStyle,features:FEATURES,homePrograms:programs.slice(0,3),programs,masters:MASTERS,
+      dishes:[['Бешбармак','конина, баранина, сорпа',32000,'Фото: бешбармак на большом блюде'],['Шашлык из баранины','корейка на углях, 1 кг',24000,'Фото: шашлык на углях'],['Казы и жая','конские деликатесы',14000,'Фото: нарезка казы'],['Баурсаки с мёдом','горячие, 12 штук',3500,'Фото: баурсаки и мёд'],['Степной сбор','чабрец, душица, самовар',4500,'Фото: чай из самовара'],['Судак на углях','целиком, лимон, травы',18000,'Фото: рыба на углях']].map((d,i)=>({name:d[0],desc:d[1],priceText:fmt(d[2]),photo:d[3],slot:'dish-'+i,img:['img/h4_acc.png','img/h8_acc.png','img/h7_acc.png','img/h1_acc.png','img/h6_acc.png','img/h3_acc.png'][i],style:`position:relative;flex:0 0 ${i===0?'78%':'62%'};max-width:${i===0?'400px':'300px'};aspect-ratio:${i===0?'4/5':'3/4'};overflow:hidden;scroll-snap-align:start;border-radius:20px;background:rgba(10,47,79,.08);`})),
+      atmosphere:[{slot:'atm-1',name:'Парение с мастером',img:'img/h2_int.png'},{slot:'atm-2',name:'Чан на дровах',img:'img/h7_int.png'},{slot:'atm-3',name:'Терраса вечером',img:'img/h4_int.png'},{slot:'atm-4',name:'Скраб и травы',img:'img/h3_acc.png'},{slot:'atm-5',name:'Чай после парной',img:'img/h1_acc.png'}].map((v,i)=>({...v,style:`position:relative;flex:0 0 ${i===0?'260px':'220px'};aspect-ratio:9/16;max-height:${i===0?'520px':'440px'};border-radius:20px;overflow:hidden;background:#3B2F2A;scroll-snap-align:center;`})),
+      atmRef:this.atmRef,atmPrev:()=>this.atmRef.current&&this.atmRef.current.scrollBy({left:-300,behavior:'smooth'}),atmNext:()=>this.atmRef.current&&this.atmRef.current.scrollBy({left:300,behavior:'smooth'}),
+      homeReviews:reviews.slice(0,3),reviews,faq,pillars:PILLARS,
+      catalogFilters:filters.map(f=>({label:f,style:this.chip(s.catalogFilter===f),select:()=>this.setState({catalogFilter:f})})),catalogHouses,
+      house,gallery,galleryCounter:`${s.galleryIdx+1} / ${gallery.length}`,onGalleryScroll:e=>{const el=e.currentTarget;const i=Math.round(el.scrollLeft/el.clientWidth);if(i!==s.galleryIdx)this.setState({galleryIdx:i});},houseWeek,otherHouses,
+      kitchenTabs,kitchenItems,reviewFilters,filteredReviews,
+      showSticky:!bk&&!s.menuOpen&&!s.callOpen,stickyLabel,stickyAction:()=>this.openBooking(inHouse?hRaw.id:null),
+      showCookie:(this.props.showCookieBar??true)&&s.cookie&&!bk,acceptCookie:()=>{try{localStorage.setItem('shipa_cookie','1');}catch(e){}this.setState({cookie:false});},
+      bookingOpen:!!bk,closeBooking:()=>this.closeBooking(),
+      ...B
+    };
+  }
+}
+</script>
+</body>
+</html>
