@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дэвид Дейда — Путь настоящего мужчины · Конспект</title>
+<style>
+:root{
+  --author:#D4A64A; --author-soft:rgba(212,166,74,.12);
+  --deep:#4DB6AC;   --deep-soft:rgba(77,182,172,.12);
+  --coach:#F07B5B;  --coach-soft:rgba(240,123,91,.12);
+  --alert:#E5484D;  --alert-soft:rgba(229,72,77,.12);
+  --act:#7DBF6A;    --act-soft:rgba(125,191,106,.12);
+  --fem:#E8899B; --masc:#5B9BE8;
+  --serif: ui-serif, Georgia, "Times New Roman", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --col:740px; --wide:1120px; --toc:250px;
+  --r:6px;
+}
+[data-theme="dark"]{
+  --bg:#101418; --surface:#171D23; --surface2:#1E262E; --text:#E7E2D9; --muted:#9AA3AD; --line:#2A343E; --line-strong:#3B4854;
+}
+[data-theme="light"]{
+  --bg:#F7F5F0; --surface:#FFFFFF; --surface2:#EFEBE3; --text:#1B2128; --muted:#5B6672; --line:#DDD6CB; --line-strong:#C4BBAE;
+  --author-soft:rgba(180,130,30,.12); --deep-soft:rgba(30,140,130,.12); --coach-soft:rgba(220,90,60,.12); --alert-soft:rgba(200,40,50,.1); --act-soft:rgba(70,150,60,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0}
+p{margin:0 0 1em}
+ul,ol{padding-left:1.3em}
+li{margin:.3em 0}
+strong{font-weight:650}
+.muted{color:var(--muted)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--deep);outline-offset:3px}
+
+/* progress */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--masc),var(--fem));z-index:50}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:13.5px}
+.bar .sp{flex:1}
+.bar button{padding:6px 10px;border:1px solid var(--line-strong);border-radius:99px;background:var(--surface);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.bar button[aria-pressed="true"]{border-color:var(--deep);color:var(--deep)}
+.bar svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#tocBtn{display:none}
+
+/* layout */
+.wrap{display:grid;grid-template-columns:var(--toc) minmax(0,1fr);gap:40px;max-width:1440px;margin:0 auto;padding:0 24px}
+nav.toc{position:sticky;top:60px;align-self:start;max-height:calc(100vh - 70px);overflow:auto;padding:28px 0 40px;font-size:13.5px}
+nav.toc ol{list-style:none;padding:0;margin:0}
+nav.toc li a{display:block;padding:5px 10px 5px 14px;border-left:2px solid var(--line);color:var(--muted);text-decoration:none;line-height:1.35}
+nav.toc li a.active{border-left-color:var(--author);color:var(--text)}
+nav.toc li a:hover{color:var(--text)}
+nav.toc .grp{margin:14px 0 4px 14px;font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+main{min-width:0;padding-bottom:120px}
+.col{max-width:var(--col)}
+.wide{max-width:var(--wide)}
+section.blk{padding:72px 0 36px;border-top:1px solid var(--line)}
+section.blk:first-of-type{border-top:0}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:end;margin-bottom:36px}
+.sec-head .n{font-family:var(--serif);font-size:72px;line-height:.8;color:var(--line-strong);font-weight:600}
+.sec-head h2{font-size:clamp(30px,4vw,44px)}
+.sec-head .sub{color:var(--muted);font-size:15px;margin-top:8px;font-family:var(--sans)}
+
+/* hero */
+.hero{padding:56px 0 40px}
+.hero .kicker{color:var(--muted);font-size:14px;margin-bottom:18px}
+.hero h1{font-size:clamp(38px,6vw,76px);letter-spacing:-.01em;max-width:900px}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--author)}
+.hero .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:36px;max-width:var(--wide)}
+.hero .meta div{border-top:1px solid var(--line-strong);padding-top:10px;font-size:14px}
+.hero .meta b{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-bottom:4px}
+.heroart{margin:40px 0 0;max-width:var(--wide)}
+.heroart svg{width:100%;height:auto;display:block}
+
+/* voices */
+.voice{border-left:3px solid;padding:16px 22px;margin:22px 0;border-radius:0 var(--r) var(--r) 0;position:relative}
+.voice .tag{display:inline-block;font-size:11.5px;letter-spacing:.03em;padding:2px 8px;border-radius:99px;margin-bottom:10px;font-family:var(--sans)}
+.v-author{border-color:var(--author);background:var(--author-soft)} .v-author .tag{background:var(--author);color:#141414}
+.v-deep{border-color:var(--deep);background:var(--deep-soft)} .v-deep .tag{background:var(--deep);color:#0b1a18}
+.v-coach{border-color:var(--coach);background:var(--coach-soft)} .v-coach .tag{background:var(--coach);color:#1e0d08}
+.v-alert{border-color:var(--alert);background:var(--alert-soft)} .v-alert .tag{background:var(--alert);color:#fff}
+.v-act{border-color:var(--act);background:var(--act-soft)} .v-act .tag{background:var(--act);color:#0d1a0b}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:13px;color:var(--muted);margin:18px 0 0}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.legend .la::before{background:var(--author)} .legend .ld::before{background:var(--deep)} .legend .lc::before{background:var(--coach)} .legend .lx::before{background:var(--alert)} .legend .lt::before{background:var(--act)}
+
+/* core statement */
+.core{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.3;padding:36px 0 36px 32px;border-left:4px solid var(--author);max-width:900px}
+.core small{display:block;font-family:var(--sans);font-size:14px;color:var(--muted);margin-top:16px;line-height:1.5}
+
+/* tldr */
+.tldr{counter-reset:t;list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.tldr li{counter-increment:t;display:grid;grid-template-columns:52px 1fr;gap:14px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.tldr li::before{content:counter(t,decimal-leading-zero);font-family:var(--serif);font-size:34px;line-height:1;color:var(--author);font-weight:600}
+.tldr b{display:block;margin-bottom:4px}
+
+/* figures */
+figure{margin:28px 0;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:12px;line-height:1.45}
+figure.wide{max-width:var(--wide)}
+.svgt{font-family:var(--sans);fill:var(--text)}
+.svgm{font-family:var(--sans);fill:var(--muted)}
+.svgl{stroke:var(--line-strong);fill:none}
+.node{cursor:pointer}
+.node:hover rect,.node:hover circle,.node:hover ellipse{stroke-width:2.5}
+.node.on rect,.node.on circle{stroke:var(--author);stroke-width:2.5}
+.nodeinfo{margin-top:14px;padding:14px 16px;border:1px dashed var(--line-strong);border-radius:var(--r);font-size:15px;min-height:56px;color:var(--muted)}
+.nodeinfo.on{color:var(--text);border-style:solid;border-color:var(--author)}
+
+/* stat cards */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:24px 0;max-width:var(--wide)}
+.stat{padding:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.stat .v{font-family:var(--serif);font-size:44px;line-height:1;font-weight:600;color:var(--author)}
+.stat .l{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4}
+
+/* chapters */
+.part{margin:56px 0 24px;max-width:var(--wide)}
+.part-h{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:baseline;padding:18px 0;border-bottom:2px solid var(--author)}
+.part-h .pn{font-family:var(--serif);font-size:15px;color:var(--author)}
+.part-h h3{font-size:28px}
+.part-h .pd{grid-column:2;color:var(--muted);font-size:15px}
+details.ch{border-bottom:1px solid var(--line);max-width:var(--col)}
+details.ch summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:54px 1fr 24px;gap:12px;align-items:start;padding:18px 0}
+details.ch summary::-webkit-details-marker{display:none}
+details.ch summary .num{font-family:var(--serif);font-size:30px;line-height:1;color:var(--line-strong);font-weight:600;padding-top:2px}
+details.ch[open] summary .num{color:var(--author)}
+details.ch summary h4{font-size:19px;font-family:var(--sans);font-weight:650;line-height:1.3}
+details.ch summary .th{font-size:15px;color:var(--muted);margin-top:6px;line-height:1.5}
+details.ch summary .ar{width:24px;height:24px;stroke:var(--muted);fill:none;stroke-width:1.8;transition:transform .2s;margin-top:4px}
+details.ch[open] summary .ar{transform:rotate(180deg)}
+.chb{padding:0 0 24px 66px;font-size:16.5px}
+.chb .lbl{font-size:12px;color:var(--muted);letter-spacing:.03em;margin:16px 0 4px;font-family:var(--sans)}
+.chb .lbl:first-child{margin-top:0}
+.chb .ex{border-left:2px solid var(--author);padding-left:14px;color:var(--text)}
+.chb .mech{background:var(--surface2);padding:10px 14px;border-radius:var(--r)}
+body.brief .chb{display:none}
+body.brief details.ch summary .th{display:block}
+.bl{display:inline-block;padding:2px 8px;border:1px solid var(--line-strong);border-radius:99px;font-size:12px;color:var(--muted);margin:2px 4px 2px 0}
+
+/* two-col compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;max-width:var(--wide)}
+.cmp>div{padding:20px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+.cmp h4{font-family:var(--sans);font-size:15px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.cmp .m h4{color:var(--masc)} .cmp .f h4{color:var(--fem)}
+.cmp ul{margin:0;padding-left:1.1em;font-size:15.5px}
+
+/* flow */
+.flow{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;margin:24px 0;max-width:var(--wide);align-items:stretch}
+.flow .st{position:relative;padding:16px 26px 16px 18px;background:var(--surface);border:1px solid var(--line);border-right:0;font-size:14.5px}
+.flow .st:first-child{border-radius:var(--r) 0 0 var(--r)}
+.flow .st:last-child{border-right:1px solid var(--line);border-radius:0 var(--r) var(--r) 0}
+.flow .st b{display:block;font-family:var(--serif);font-size:20px;color:var(--author);margin-bottom:6px}
+.flow .st::after{content:"";position:absolute;right:-9px;top:50%;width:16px;height:16px;background:var(--surface);border-right:1px solid var(--line);border-top:1px solid var(--line);transform:translateY(-50%) rotate(45deg);z-index:1}
+.flow .st:last-child::after{display:none}
+
+/* tabs */
+.tabs{margin:24px 0;max-width:var(--wide)}
+.tabs [role=tablist]{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.tabs [role=tab]{padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--muted);font-size:15px}
+.tabs [role=tab][aria-selected=true]{color:var(--text);border-bottom-color:var(--author)}
+.tabs [role=tabpanel]{padding:20px 0}
+.tabs [role=tabpanel][hidden]{display:none}
+
+/* flashcards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;max-width:var(--wide)}
+.card{perspective:1000px;min-height:170px}
+.card .in{position:relative;width:100%;height:100%;min-height:170px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+.card.f .in{transform:rotateY(180deg)}
+.card .fc,.card .bk{position:absolute;inset:0;padding:18px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface);backface-visibility:hidden;display:flex;flex-direction:column}
+.card .fc{justify-content:center;align-items:center;text-align:center;font-family:var(--serif);font-size:21px}
+.card .fc small{display:block;font-family:var(--sans);font-size:12px;color:var(--muted);margin-top:8px;font-weight:400}
+.card .bk{transform:rotateY(180deg);font-size:14px;line-height:1.5;justify-content:center;border-color:var(--author)}
+
+/* quotes */
+.quotes{display:grid;gap:14px;max-width:var(--wide)}
+.q{padding:22px 26px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);font-family:var(--serif);font-size:21px;line-height:1.35;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end}
+.q cite{font-family:var(--sans);font-style:normal;font-size:12.5px;color:var(--muted);white-space:nowrap}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,32px);line-height:1.3;padding:40px 0;margin:36px 0;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);max-width:900px}
+.pull small{display:block;font-family:var(--sans);font-size:13px;color:var(--muted);margin-top:12px}
+
+/* self check */
+.sq{margin:14px 0;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.sq button{color:var(--deep);font-size:14px;padding:6px 0;text-decoration:underline}
+.sq .a{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line-strong);font-size:15px}
+.sq.on .a{display:block}
+
+/* checklist */
+.chk{list-style:none;padding:0;margin:0}
+.chk li{display:grid;grid-template-columns:24px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+.chk input{width:20px;height:20px;margin:3px 0 0;accent-color:var(--act)}
+.chk li.done{color:var(--muted);text-decoration:line-through}
+.chk .h{display:block;font-size:12.5px;color:var(--muted);text-decoration:none;margin-top:3px}
+.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:var(--wide);margin:24px 0}
+.hz>div{padding:20px;border-top:3px solid var(--coach);background:var(--surface);border-radius:0 0 var(--r) var(--r);font-size:15.5px}
+.hz b.t{display:block;font-family:var(--serif);font-size:22px;margin-bottom:10px}
+.hz .m{display:block;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line-strong);font-size:13.5px;color:var(--muted)}
+
+/* bars */
+.bars{display:grid;gap:10px;margin:20px 0}
+.bars .b{display:grid;grid-template-columns:200px 1fr 50px;gap:12px;align-items:center;font-size:14px}
+.bars .t{height:14px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.bars .t i{display:block;height:100%;background:var(--author)}
+
+.qs{counter-reset:q;list-style:none;padding:0}
+.qs li{counter-increment:q;padding:16px 0 16px 56px;position:relative;border-bottom:1px solid var(--line);font-size:17px}
+.qs li::before{content:counter(q);position:absolute;left:0;top:10px;font-family:var(--serif);font-size:32px;color:var(--line-strong);font-weight:600}
+
+table{border-collapse:collapse;width:100%;font-size:15px;margin:16px 0}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:13px}
+
+.rev{animation:none}
+.foot{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+
+@media (max-width:1100px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  nav.toc{position:fixed;top:47px;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);max-height:0;overflow:hidden;padding:0 20px;z-index:39;transition:max-height .3s}
+  nav.toc.open{max-height:70vh;overflow:auto;padding:16px 20px}
+  #tocBtn{display:inline-flex}
+}
+@media (max-width:720px){
+  body{font-size:16.5px}
+  .sec-head{grid-template-columns:1fr}
+  .sec-head .n{font-size:48px}
+  .chb{padding-left:0}
+  details.ch summary{grid-template-columns:40px 1fr 20px}
+  details.ch summary .num{font-size:22px}
+  .cmp,.hz{grid-template-columns:1fr}
+  .flow{grid-auto-flow:row;grid-auto-columns:auto}
+  .flow .st{border-right:1px solid var(--line);border-bottom:0;padding:14px 18px}
+  .flow .st:first-child{border-radius:var(--r) var(--r) 0 0}
+  .flow .st:last-child{border-bottom:1px solid var(--line);border-radius:0 0 var(--r) var(--r)}
+  .flow .st::after{right:auto;left:24px;top:auto;bottom:-9px;transform:rotate(135deg);border-right:1px solid var(--line);border-top:1px solid var(--line)}
+  .bars .b{grid-template-columns:1fr;gap:4px}
+  .q{grid-template-columns:1fr;font-size:19px}
+  .bar{font-size:12.5px;gap:6px;padding:8px 10px}
+  .bar .txt{display:none}
+  figure{padding:14px}
+}
+@media print{
+  body{background:#fff;color:#111;font-size:11.5pt}
+  .bar,#progress,nav.toc,.noprint{display:none!important}
+  .wrap{display:block;padding:0}
+  section.blk{break-before:page;padding-top:24px}
+  section.blk:first-of-type,.hero{break-before:auto}
+  details.ch{break-inside:avoid}
+  .chb{display:block!important}
+  .card .bk{position:static;transform:none;margin-top:6px} .card .fc{position:static}
+  .sq .a{display:block!important}
+  figure,.stat,.tldr li,.q{break-inside:avoid;border-color:#bbb}
+  a{text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div class="bar" role="toolbar" aria-label="Панель управления конспектом">
+  <button id="tocBtn" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Оглавление</span></button>
+  <span class="sp"></span>
+  <button id="depthBtn" aria-pressed="false" title="Показать только тезисы"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h6"/></svg><span class="txt">Только тезисы</span></button>
+  <button id="reviewBtn" aria-pressed="false" title="Режим повторения: свернуть всё"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg><span class="txt">Повторение</span></button>
+  <button id="openAll" title="Раскрыть все блоки"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg><span class="txt">Раскрыть всё</span></button>
+  <button id="themeBtn" aria-pressed="false" title="Переключить тему"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="txt">Тема</span></button>
+  <button onclick="window.print()" title="Печать / PDF"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg><span class="txt">Печать</span></button>
+</div>
+
+<div class="wrap">
+<nav class="toc" id="toc" aria-label="Оглавление">
+  <ol>
+    <li><a href="#top">Шапка</a></li>
+    <li><a href="#core">Ядро</a></li>
+    <li><a href="#tldr">TL;DR — 7 тезисов</a></li>
+    <li><a href="#map">Карта смыслов</a></li>
+    <li><a href="#notes">Развёрнутый конспект</a></li>
+    <li class="grp">части книги</li>
+    <li><a href="#p1">I · Мужчина</a></li>
+    <li><a href="#p2">II · Женщина</a></li>
+    <li><a href="#p3">III · Полярные энергии</a></li>
+    <li><a href="#p4">IV · Чего желают женщины</a></li>
+    <li><a href="#p5">V · Грани мужской души</a></li>
+    <li><a href="#p6">VI · Женские тайны</a></li>
+    <li><a href="#p7">VII · Телесные практики</a></li>
+    <li><a href="#p8">VIII · Когда полюса сходятся</a></li>
+    <li class="grp">разбор</li>
+    <li><a href="#models">Модели и фреймворки</a></li>
+    <li><a href="#gloss">Глоссарий</a></li>
+    <li><a href="#quotes">Ключевые цитаты</a></li>
+    <li><a href="#deep">Слой углубления</a></li>
+    <li><a href="#coach">Слой коуча</a></li>
+    <li><a href="#open">Открытые вопросы</a></li>
+    <li><a href="#reflect">Вопросы для рефлексии</a></li>
+    <li><a href="#links">Связи</a></li>
+  </ol>
+</nav>
+
+<main>
+<!-- ============ 1. ШАПКА ============ -->
+<header class="hero" id="top">
+  <div class="kicker">Конспект · книга · серия «Современные мастера»</div>
+  <h1>Путь настоящего мужчины <em>The Way of the Superior Man</em></h1>
+  <div class="meta">
+    <div><b>Автор</b>Дэвид Дейда (David Deida)</div>
+    <div><b>Тип источника</b>Книга, 51 глава в 8 частях. Оригинал 1997, русское издание «София», Киев, 2004, пер. Т. Матросов</div>
+    <div><b>Объём оригинала</b>≈31 500 слов · ≈2,5–3 часа чтения</div>
+    <div><b>Время на конспект</b>Первый проход ≈ 90 мин · режим «только тезисы» ≈ 20 мин · повторение ≈ 15 мин</div>
+    <div><b>Ссылки на источник</b>Номер главы (гл. N). В fb2 нет пагинации</div>
+  </div>
+  <div class="heroart" aria-hidden="true">
+    <svg viewBox="0 0 1120 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gm" x1="0" x2="1"><stop offset="0" stop-color="#5B9BE8"/><stop offset="1" stop-color="#E8899B"/></linearGradient>
+      </defs>
+      <g fill="none" stroke="url(#gm)" stroke-width="1.2" opacity=".55">
+        <path d="M220 150 C 380 40, 740 40, 900 150"/>
+        <path d="M220 150 C 380 80, 740 80, 900 150"/>
+        <path d="M220 150 C 380 120, 740 120, 900 150"/>
+        <path d="M220 150 C 380 180, 740 180, 900 150"/>
+        <path d="M220 150 C 380 220, 740 220, 900 150"/>
+        <path d="M220 150 C 380 260, 740 260, 900 150"/>
+        <path d="M220 150 C 380 -10, 740 -10, 900 150"/>
+        <path d="M220 150 C 380 310, 740 310, 900 150"/>
+      </g>
+      <circle cx="220" cy="150" r="44" fill="#5B9BE8" opacity=".95"/>
+      <circle cx="900" cy="150" r="44" fill="#E8899B" opacity=".95"/>
+      <text x="220" y="156" text-anchor="middle" font-family="system-ui" font-size="15" fill="#0b1220" font-weight="600">миссия</text>
+      <text x="900" y="156" text-anchor="middle" font-family="system-ui" font-size="15" fill="#2a0c12" font-weight="600">любовь</text>
+      <text x="220" y="228" text-anchor="middle" class="svgm" font-size="13">мужественный полюс · свобода · смерть эго</text>
+      <text x="900" y="228" text-anchor="middle" class="svgm" font-size="13">женственный полюс · энергия · наполнение</text>
+      <text x="560" y="152" text-anchor="middle" class="svgt" font-size="14" font-weight="600">страсть живёт в разнице потенциалов</text>
+      <text x="560" y="172" text-anchor="middle" class="svgm" font-size="12">сблизить полюса = деполяризация = дружба без эроса</text>
+    </svg>
+  </div>
+  <div class="legend">
+    <span class="la">Слова автора (конспект)</span>
+    <span class="ld">Углубление — комментарий Claude</span>
+    <span class="lc">Коучинг — приземление на Alex</span>
+    <span class="lx">Точка внимания</span>
+    <span class="lt">Действие / протокол</span>
+  </div>
+</header>
+
+<!-- ============ 2. ЯДРО ============ -->
+<section class="blk" id="core">
+  <div class="sec-head"><div class="n">02</div><div><h2>Ядро в одном предложении</h2></div></div>
+  <div class="core">Мужчина живёт из своей миссии и из вечности, а не из отношений; женщина и мир бесконечно проверяют его на это — и раскрываются только тому, кого их испытания не сбивают с курса.
+    <small>Всё остальное в книге — следствия: полярность как источник страсти, «жизнь на грани возможного», нескончаемые проверки, отказ выполнять буквальные указания, тело без хронических зажимов и сохранение сексуальной энергии как топлива для дара, который мужчина несёт миру.</small>
+  </div>
+</section>
+
+<!-- ============ 3. TL;DR ============ -->
+<section class="blk" id="tldr">
+  <div class="sec-head"><div class="n">03</div><div><h2>TL;DR — семь тезисов</h2><div class="sub">Каждый самодостаточен. Читать сверху вниз — читать книгу в миниатюре.</div></div></div>
+  <ol class="tldr col" style="max-width:var(--wide)">
+    <li><div><b>Ничего не изменится «потом». Час в день на главное — сегодня.</b>Миф «однажды я отдохну / она поймёт / деньги наладятся» — главный вор мужской жизни. Женщина тоже не изменится. Живи открыто сейчас или не живи вовсе (гл. 1).</div></li>
+    <li><div><b>Миссия превыше отношений — и именно это делает отношения живыми.</b>Мужественная сущность питается предназначением и свободой; женственная — любовью и наполнением. Мужчина, поставивший отношения выше миссии, теряет доверие женщины (гл. 7, 13, 32, 47).</div></li>
+    <li><div><b>Страсть рождается разницей полюсов.</b>Мужское и женское — два полюса, как у магнита. Равенство в кабинете и в постели — не одно и то же. Сближение полюсов (деполяризация) убивает эрос и оставляет дружбу (введение, гл. 22, 24, 50).</div></li>
+    <li><div><b>Женщина испытывает мужчину — всегда, и это не прекратится.</b>Её упрёки, провокации, «неплохо» в ответ на миллион — проверка, устоит ли он. Она не желает победить; она желает убедиться, что победить невозможно (гл. 15, 30, 33, 38).</div></li>
+    <li><div><b>Слова женщины — погода, а не инструкция.</b>Она говорит то, что чувствует сейчас, о состоянии связи между вами, а не о фактах. Не анализируй, не выполняй буквально — верни поток любви, и «проблема» растворится (гл. 16, 19, 20, 31).</div></li>
+    <li><div><b>Живи на грани возможного: не в комфорте и не в бездне.</b>Страх у края — компас, друг и проводник. Большинство либо занижают планку, либо сгорают. Один шаг за горизонт каждый день, во всех делах (гл. 4, 8).</div></li>
+    <li><div><b>Тело без зажимов и сохранённая сексуальная энергия — топливо мужского дара.</b>Дыхание в низ живота, мышцы тазового дна, «обращённая эякуляция» — не техники ради секса, а способ не сливать энергию, которую ждут женщина и мир (гл. 41, 44–46).</div></li>
+  </ol>
+</section>
+<!-- ============ 4. КАРТА СМЫСЛОВ ============ -->
+<section class="blk" id="map">
+  <div class="sec-head"><div class="n">04</div><div><h2>Карта смыслов</h2><div class="sub">Радиальная схема: ядро → восемь частей книги → опорные идеи каждой. Клик по части раскрывает её тезис.</div></div></div>
+  <figure class="wide">
+    <svg viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg" id="mindmap">
+      <g class="svgl" stroke-width="1.2">
+        <line x1="560" y1="320" x2="200" y2="120"/><line x1="560" y1="320" x2="560" y2="90"/><line x1="560" y1="320" x2="920" y2="120"/>
+        <line x1="560" y1="320" x2="150" y2="320"/><line x1="560" y1="320" x2="970" y2="320"/>
+        <line x1="560" y1="320" x2="200" y2="520"/><line x1="560" y1="320" x2="560" y2="560"/><line x1="560" y1="320" x2="920" y2="520"/>
+      </g>
+      <circle cx="560" cy="320" r="86" fill="var(--author)" opacity=".95"/>
+      <text x="560" y="310" text-anchor="middle" font-family="system-ui" font-size="15" font-weight="700" fill="#141414">МИССИЯ</text>
+      <text x="560" y="330" text-anchor="middle" font-family="system-ui" font-size="12" fill="#141414">+ открытое сердце</text>
+      <text x="560" y="348" text-anchor="middle" font-family="system-ui" font-size="12" fill="#141414">+ живое тело</text>
+      <g class="node" data-info="Часть I · Мужчина (гл. 1–15). Не жди перемен «потом», живи открытым сердцем, освободись от отцовского взгляда, знай грань возможного и стой на ней, смотри в вечность, держи свои взгляды, миссия превыше всего, слушай советы друга, проходи жизненные циклы, семья не оправдание, женщина покоя не даст."><rect x="90" y="80" width="220" height="80" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="200" y="112" text-anchor="middle" class="svgt" font-size="15" font-weight="600">I · Мужчина</text><text x="200" y="134" text-anchor="middle" class="svgm" font-size="12">миссия · грань · вечность · отец</text></g>
+      <g class="node" data-info="Часть II · Женщина (гл. 16–22). Женщины не лгут — они говорят чувствами; их меняет одобрение, а не вызов; не терпи её мрак — иди сквозь него любовью; не анализируй; не подводи к штурвалу; решай сам."><rect x="450" y="40" width="220" height="80" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="560" y="72" text-anchor="middle" class="svgt" font-size="15" font-weight="600">II · Женщина</text><text x="560" y="94" text-anchor="middle" class="svgm" font-size="12">чувства вместо фактов · не анализируй</text></g>
+      <g class="node" data-info="Часть III · Полярные энергии (гл. 23–28). Влечение к противоположному естественно и целительно; 80/10/10; не ищи «всё в одной»; желание разнообразия неизбежно; энергия юности; «температура» женской энергетики и баланс нервной системы."><rect x="810" y="80" width="220" height="80" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="920" y="112" text-anchor="middle" class="svgt" font-size="15" font-weight="600">III · Полярные энергии</text><text x="920" y="134" text-anchor="middle" class="svgm" font-size="12">притяжение · 80/10/10 · температура</text></g>
+      <g class="node" data-info="Часть IV · Чего желают женщины (гл. 29–34). Выбирай тех, кто выбирает тебя; никогда не делай буквально то, что велят; её жалобы — сигнал о сходе с курса; маяк мужской судьбы; безупречное прошлое не в счёт; ответственность за курс лежит на мужчине."><rect x="30" y="280" width="240" height="80" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="150" y="312" text-anchor="middle" class="svgt" font-size="15" font-weight="600">IV · Чего желают женщины</text><text x="150" y="334" text-anchor="middle" class="svgm" font-size="12">проверки · жалобы как сигнал · курс</text></g>
+      <g class="node" data-info="Часть V · Грани мужской души (гл. 35–38). Экстаз мужчины — освобождение, женщины — любовь; подавленная страсть уходит в агрессию и контроль; духовный воин способен убить и умереть; её энергия — его осознанность."><rect x="850" y="280" width="240" height="80" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="970" y="312" text-anchor="middle" class="svgt" font-size="15" font-weight="600">V · Грани мужской души</text><text x="970" y="334" text-anchor="middle" class="svgm" font-size="12">свобода · смерть эго · воин</text></g>
+      <g class="node" data-info="Часть VI · Женские тайны (гл. 39–43). Мир заполнен женской энергией; магия зрелости; управляй сексуальной энергией дыханием — во благо миру; охлаждение к подруге — знак схода с пути; женщина как зеркало и мираж — сквозь видимость к истоку."><rect x="90" y="480" width="220" height="80" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="200" y="512" text-anchor="middle" class="svgt" font-size="15" font-weight="600">VI · Женские тайны</text><text x="200" y="534" text-anchor="middle" class="svgm" font-size="12">энергия повсюду · зеркало · мираж</text></g>
+      <g class="node" data-info="Часть VII · Телесные практики (гл. 44–46). Обращённая эякуляция; дыхание, растворяющее зажимы передней части тела; орбита тела — энергия вниз по передней стороне на вдохе, вверх по позвоночнику на выдохе; тазовое дно; главное — любовь."><rect x="450" y="520" width="220" height="80" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="560" y="552" text-anchor="middle" class="svgt" font-size="15" font-weight="600">VII · Телесные практики</text><text x="560" y="574" text-anchor="middle" class="svgm" font-size="12">дыхание · тазовое дно · орбита</text></g>
+      <g class="node" data-info="Часть VIII · Когда полюса сходятся (гл. 47–51). У женщин всё не так; ответственность сторон: он — за её открытость, она — за его эрекцию тела и духа; чёткость позиции вместо деспотизма и уступчивости; уединение для него, карнавал для неё; исчезновение в Едином."><rect x="810" y="480" width="220" height="80" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="920" y="512" text-anchor="middle" class="svgt" font-size="15" font-weight="600">VIII · Полюса сходятся</text><text x="920" y="534" text-anchor="middle" class="svgm" font-size="12">ответственность · уединение · Единое</text></g>
+    </svg>
+    <div class="nodeinfo" id="mapinfo">Нажмите на часть, чтобы увидеть её опорные идеи.</div>
+    <figcaption>Структура книги не линейна: 51 короткая глава-принцип, сгруппированная в 8 тематических частей. Все спицы сходятся в одном ядре — миссия, из которой мужчина входит и в женщину, и в мир.</figcaption>
+  </figure>
+  <div class="stats">
+    <div class="stat"><div class="v">51</div><div class="l">коротких глав-принципов; каждая открывается тезисом-манифестом и развёрткой</div></div>
+    <div class="stat"><div class="v">80%</div><div class="l">пар — «обычная комбинация»: мужественный он + женственная она (гл. 24)</div></div>
+    <div class="stat"><div class="v">90%</div><div class="l">людей явно предпочитают один полюс — овладевать или покоряться (введение)</div></div>
+    <div class="stat"><div class="v">10–20 мин</div><div class="l">абсолютного внимания дают женщине больше, чем часы «присутствия телом» (гл. 7)</div></div>
+    <div class="stat"><div class="v">1 час</div><div class="l">в день на главное дело жизни — минимум, невзирая на загрузку (гл. 1)</div></div>
+    <div class="stat"><div class="v">90 из 100</div><div class="l">побуждений сменить партнёршу мотивированы слабостью мужчины, а не исчерпанием связи (гл. 42)</div></div>
+  </div>
+</section>
+
+<!-- ============ 5. РАЗВЁРНУТЫЙ КОНСПЕКТ ============ -->
+<section class="blk" id="notes">
+  <div class="sec-head"><div class="n">05</div><div><h2>Развёрнутый конспект</h2><div class="sub">Позиция автора в его логике и его языке. Каждая глава: тезис → развёртка → пример → механика (как это работает по автору) → где применимо. Мой комментарий здесь отсутствует — он в слоях углубления и коуча.</div></div></div>
+
+  <div class="voice v-author"><span class="tag">Автор · Введение</span>
+    <p><strong>Исходная диагностика.</strong> Общество прошло две стадии: (1) жёсткие роли — мачо и покорная жена, он давит силой и деньгами, она манипулирует чувствами и сексом; (2) стадия выравнивания — мужчины стали чутче, женщины независимее, «внутренняя целостность» достигнута. Побочный эффект второй стадии — растущая неудовлетворённость в интимной сфере: сравнялись доходы — угасла чувственность. Бизнес-леди жалуются, что мужчины «тряпки»; чуткие мужчины — что в женщинах не осталось женственности. Автор задаёт вопрос: есть ли третья ступень?</p>
+    <p><strong>Ответ — полярность.</strong> Все силы природы порождены взаимодействием полюсов; влечение — тоже. Для любви полярность не нужна, для эротической страсти — необходима. Пол не определяет полюс: у каждого есть сексуальная сущность — мужественная, женственная или сбалансированная. По наблюдению автора, ≈90% людей явно тянет к одному из двух полюсов, ≈10% — сбалансированы, и для них книга не прозвучит.</p>
+    <p><strong>Кому адресовано.</strong> Прежде всего гетеросексуальным мужчинам с мужественной сущностью и их женственным партнёршам; остальным — со сдвигом акцентов. Мужественная сущность питается миссией и свободой; женственная — потоком любви. Отсюда бокс против мелодрамы, миссия против домашнего очага. Подавление своей сущности «во имя равенства» — источник страданий: женственные, живущие по-мужски, болеют; мужественные, живущие по-женски, теряют смысл. Отрицая сущность, человек отрицает саму любовь, потому что любовь — это открытость, а оторванный от корня человек не способен открыться.</p>
+    <p><strong>Позиция автора по равенству.</strong> Социальное, экономическое, политическое равенство полов принимается как исходная точка, не обсуждается. Из этой точки автор идёт дальше — в раскрытие творческих сил полярности. Финальная формула: ни мачо с мозгом с грецкий орех, ни бесхребетный «симпатяга», а сердце плюс несгибаемый стержень.</p>
+  </div>
+
+  <!-- ===== ЧАСТЬ I ===== -->
+  <div class="part" id="p1">
+    <div class="part-h"><div class="pn">Часть I</div><h3>Мужчина</h3><div class="pd">Главы 1–15. Внутренняя архитектура мужчины: миссия, грань, вечность, отец, друзья, циклы, семья, испытания.</div></div>
+
+    <details class="ch" open><summary><div class="num">1</div><div><h4>Не надейтесь, что это когда-нибудь кончится</h4><div class="th">Миф «однажды всё изменится» не сбудется. Начни главное сегодня, час в день. Женщина тоже не изменится — люби её и в том, что раздражает.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Мужчина склонен ждать «чудесного дня»: отдохну, когда закончу; она поймёт и перестанет; буду делать своё, когда обстоятельства позволят. Этот день не наступает. Творчество и Настоящее зовут постоянно, среди текущих дел. Отсрочки маскируют один факт — нехватку организованности для реализации дара. Финансы и семейные обстоятельства никогда не останавливают того, кто решил.</p>
+        <p>Второй миф — «моя женщина станет другой». Не станет; прими как аксиому, что такой она останется навсегда. Если невыносимо — уходи, не оглядываясь. Если раздражают отдельные привычки — не жди, что откажется. Женщина меняет поведение ради пылкого влюблённого, но никогда — ради нравоучителя.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">Упражнение с пропуском: «пусть она больше никогда не ______». Вместо требования — обнять со всей нежностью и заверить, что любишь её даже когда она … (вставить заполненное). Можно даже шутя бить посуду с криками — но не пытаться отучить.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Ожидание — упущенный момент. Открыто живущий человек ничего не ожидает: ни денег, ни облегчения, ни той единственной. Возможен неприятный результат часа в день: выяснится, что «любимое дело» не по душе или не по силам — и это тоже ясность, разоблачающая фантазию.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">миссия</span><span class="bl">отношения</span><span class="bl">прокрастинация</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">2</div><div><h4>Живите с открытым сердцем, даже если это раненое сердце</h4><div class="th">Истинный мужчина предпочтёт раненое сердце закрытому. Даже в боли он сохраняет силу любви и творческий дар.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Рана мгновенно возводит крепость самозащиты: сжимается грудь и солнечное сплетение, взгляд уходит, дыхание мельчает. С этого момента мужчина — узник. Задача — оставаться открытым в самой ране.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">Ты оказался бессилен в постели и услышал, как она язвит об этом подругам. Отследи тело: дыхание, взгляд, обруч на груди.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Протокол: расслабь пресс, «отпусти» солнечное сплетение, дыши так, будто выдох поднимается сквозь затвердевшие мышцы из глубины живота, смотри собеседнику в глаза, не теряй его присутствия. Только когда обруч лопнет и дыхание выровняется, разум способен адекватно реагировать. Зажатое тело не улавливает тонкие сигналы и не берёт ситуацию под контроль — ещё один шанс дара упущен.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">переговоры</span><span class="bl">конфликт</span><span class="bl">тело</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">3</div><div><h4>Живите так, будто отца нет рядом</h4><div class="th">Любить отца и при этом осознанно не оправдывать его ожиданий — условие свободы.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Вспомни облегчение в пустой квартире после отъезда родителей: не нужно идти указанным путём и терпеть осуждение за отказ. Годы уступок, попыток взять его планку, доказательств, бунта — всё это сидит в подсознании как указующий перст.</p>
+        <div class="lbl">Практика</div>
+        <p class="ex">Не реже раза в три дня открыто делай то, чего не делал или делал тайком от отцовского взгляда. Наблюдай за страхом, разочарованием, неуверенностью, которые поднимаются, — только так стираются внутренние директивы.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">автономия</span><span class="bl">решения</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">4</div><div><h4>Знайте предел своих возможностей и не пытайтесь себя обмануть</h4><div class="th">У каждого есть грань. Настоящий мужчина осознаёт страх у этой грани и не скрывает его ни от себя, ни от друзей.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Два способа обмануть себя: изображать «море по колено» или опасливо занижать планку, боясь высоты, которую мог бы взять. Высота не важна — важно, чтобы она была твоей. Тест: решил зарабатывать больше — ощущаешь ли необъяснимый страх, сковывающий волю? Да — ты у своей грани. Нет — что мешает жить богаче? Возможно, боишься признаться, что боишься.</p>
+        <p>Друзья всё равно чувствуют схороненное смятение; человек, водящий за нос себя, теряет доверие. Возможен страх успеха: удобно там, где есть, а лучшая работа разрушит вялое спокойствие. Большинство знают свой потенциал и намеренно занижают: работа не тяжела, жизнь безопасна — и мертва, потому что огонь рождается только у грани.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">Эксперимент честности — проговорить вслух: «Я мог бы зарабатывать много больше, но ленив». «Мои дарования принесли бы пользу миру, но боюсь остаться без гроша». «Столько лет на карьеру, страшно начать с нуля, хотя работа не по душе». «Можно зарабатывать творчески, но всё свободное время я смотрю телевизор».</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Уважай предел и уважай свой выбор — стоять на грани или отойти. Открыто признающий страх вызывает больше доверия, чем скрывающий. Со страхом не воюют (война бесплодна и бесконечна) и не загоняют вглубь — с ним живут, общаются, дружат.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">деньги</span><span class="bl">риск</span><span class="bl">честность</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">5</div><div><h4>Со взглядом в вечность</h4><div class="th">Вечность — дом мужчины. Поиск истоков бытия — его удел; всё остальное вторично.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Работа, семья, богатство, творчество, наслаждения пусты, если не связаны с глубиной духа. Вопрос дня: какую часть провёл в заботах о преходящем, а какую — в поиске истоков? Можно ли на миг прикоснуться к Непостижимому, что делает мысль осознанной? Позволь восприятию вернуться к источнику — и вернись к делам заново родившимся: люби, зарабатывай кучу денег, общайся, не теряя истока.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Большинство увязли в делах, жизнь уходит как песок, человек катится перекати-полем от одного «неотложного» к другому. Корни даёт только осознание сокровенной основы. Укоренившийся воспринимает любую «нешуточную заботу» с юмором. Инструменты: книги, люди, размышление, наблюдение, медитация, молитва. Даже за футболом и уборкой — не отрываться от вечности.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">медитация</span><span class="bl">смысл</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">6</div><div><h4>Не отказывайтесь от своих взглядов в угоду женщине</h4><div class="th">Выслушай женщину — и поступи по собственному выбору. Уступишь вопреки своему видению — проиграете оба: она перестанет верить тебе, ты — себе.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Следуя её указаниям при ощущении, что твоё понимание вернее, ты говоришь себе: «Я не доверяю собственной мудрости». Эта запись подтачивает силы. Женщина, настоявшая на своём, органически не способна доверять сомневающемуся в себе. Фальшивая улыбка не скроет разлада: любовь останется, доверие уйдёт надолго, а действия перестанут рождаться из сердца.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Внутренняя формула решения: «Мудрость сердца ведёт меня. Ошибусь — урок, мудрость обогатится. Неудача укрепит». Совет спрашивать можно и нужно, но решать — самому, с полнотой ответственности, чтобы некому было адресовать упрёк. Отдав решение женщине, ты либо обвинишь её при ошибке, либо ослабнешь при её правоте, лишившись урока. Мнение можно скорректировать по её словам и языку тела — окончательный выбор всегда твой.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">решения</span><span class="bl">доверие</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">7</div><div><h4>Миссия превыше всего</h4><div class="th">Если «или/или» — миссия важнее отношений. Иначе мужчина не исполнит предназначение и обманет женщину, которая ждёт увидеть в нём мужчину.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Многие мужчины отдавали приоритет отношениям, не подозревая, что это противоестественно их природе. Пока миссия не узнана и курс не взят, бессмысленность преследует повсюду — включая отношения. Женщине, уводящей от предназначения: заверь в любви, твёрдо скажи, что от главного не откажешься; полчаса, час, четверть суток — безраздельно ей, потом — назад к делу.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">10–20 минут абсолютного внимания удовлетворяют женщину больше, чем часы «с телом», когда душа далеко. Будь с ней только когда действительно желаешь этого больше всего на свете; она чувствует «необязательность» присутствия — в таких встречах нет смысла.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">приоритеты</span><span class="bl">время с семьёй</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">8</div><div><h4>Шаг за горизонт</h4><div class="th">Ни шаркающей походкой по пути комфорта, ни сломя голову в бездну. Один шаг за грань. Каждый день. Во всех делах.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Зная грань — иди дальше. Немногие способны: большинство либо обходят, либо лезут на вершины не по силам, где победа равна поражению. Оба случая игнорируют естественное состояние у края — страх. Избегая страха, бесстрашия не достичь.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Страх — ярчайшее проявление души, указатель пути, друг, помощник, проводник. Задача — остаться с ним на пределе, позволив трансформации свершиться: не дать оттащить в безопасность и не дать столкнуть в бездну. «Страх страха» даёт либо жизнь вполовину, либо «загнанную лошадь». Задержись в пугающем Настоящем — и ты готов встретить Неизведанное; страх, приковавший к земле, улетучивается.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">рост</span><span class="bl">риск</span><span class="bl">ежедневная практика</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">9</div><div><h4>С любовью — к женщине и миру</h4><div class="th">Как мужчина «входит» в женщину, так он входит и в мир: не для удовольствия и власти, а празднуя любовь и открытость.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Основа действий мужчины — раскрытие себя, освобождение, безграничная любовь. Большинство довольствуются суррогатами: «свобода» купить машину, «любовь» с максимумом красоток, «раскрытие дара» у телевизора с пивом. Даже при лучших вариантах остаётся ощущение «недостаточно»: не хватает шага за незримое ограничение. Женщина расцветает в лучах любви мужчины; так же — мир. Оба требуют искренности, отваги, готовности действовать. Истинный мужчина отдаёт всё, не ожидая возмещения.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Женщина и мир не сдаются, пока не видят соответствия истинному «я». Они непредсказуемы: отвергают раз за разом, вдруг раскрываются, в следующий миг — снова стена. Их бастионы не падут от эрегированного члена — нужен эрегированный дух. Два честных пути: полное отречение (отшельник) или проломить сопротивление любовью-мечом, плавясь на кресте наслаждения и боли. Застенчивый или похотливый подход отвергнут; а если примут — высосут до пустой оболочки, как росянка жучка. Итог: либо отшельник, либо пленник женщины и мира — пока не освобождён несокрушимый дух.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">рынок</span><span class="bl">продажи</span><span class="bl">интим</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">10</div><div><h4>Советы друга</h4><div class="th">Способность выслушивать критику другого мужчины (особенно отца) — мера способности принимать мужскую энергию.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Практика</div>
+        <p>Не реже раза в неделю чётко рассказывай лучшему другу о планах и опасениях; он отвечает, как видит ситуацию и твоё положение в ней.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">«Меня тянет к Денис, но боюсь ранить жену». Настоящий друг: «Я слышу о ней полгода. Вся энергия уходит в фантазии. Либо сегодня спишь с ней, либо больше не вспоминаешь». Ответ: «Ясно вижу, что не стану испытывать брак ради неё. Перестаю думать, обращаю силы на другое. Спасибо».</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Друг переводит от пустых рассказов к действию, выбивающему из колеи. Нужна готовность к «душевному стриптизу». Настоящие друзья разглядят безотчётный страх и намеренно раздуют его до панического ужаса, чтобы не дать свернуть. «Поплакаться в жилетку» — путь к бесконечным сложностям с мужчинами, особенно с отцом: отцовство — энергия путеводной звезды. Выбирай в друзья тех, кто смотрит в глаза своим страхам: они выложат всё начистоту, встряхнут и заставят взять высоту.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">мужской круг</span><span class="bl">обратная связь</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">11</div><div><h4>Обрети цель</h4><div class="th">Без цели мужчина — дрейфующая скорлупа: его формируют события, а не он их. Отсюда и половое бессилие, и механический секс.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Целенаправленность — магистраль судьбы. Всё, от манеры питаться до способа зарабатывать, ориентируется на предназначение: сначала узнать, потом организовать жизнь, убирая препятствия и окольные дороги. Без этого служба — способ поесть и отдохнуть, семья — миг за мигом в никуда.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Должно быть наоборот: каждая секунда работы и близости наполнена силой и ясностью из сердца, бьющегося во имя цели. Истинному мужчине не нужно заполнять пустоту работой или подругой — он уже полон; секс и работа для него — шанс разделить с миром дар любви.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">стратегия</span><span class="bl">энергия</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">12</div><div><h4>Жизненные циклы</h4><div class="th">Мужчина отдаёт себя миссии и без сожаления оставляет её по завершении, умеет переждать бесплодный период до следующей «сверхзадачи».</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Модель: концентрические окружности</div>
+        <p>Жизнь — система концентрических окружностей; от периферии к центру человек движется к ядру — основному предназначению. Внешние окружности унаследованы (отец пожарник — и ты о том же; или наоборот, назло). Даже на пути к медитации и Богу предстоит пересечь окружности учёбы, сексуальных игр, марихуаны, женитьбы, карьеры — пока не исчерпаешь их. Каждая завершается пустотой, усталостью, бессмысленностью — это признаки духовного роста, а не повод для разочарования.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">Годы продвигал проект, год-два до окупаемости, навыки гарантируют триумф — и утром интереса нет. Вопрос: страх провала / успеха / лень — или исчерпана карма? Спроси близких: если хором говорят «сил тебе не занимать» — соберись и доведи. Если нет — окружность пройдена.</p>
+        <div class="lbl">Пять признаков завершения цикла</div>
+        <ol>
+          <li>Внезапное глубокое безразличие к тому, что двигало.</li>
+          <li>Безразличие без малейшего раскаяния.</li>
+          <li>Нет представления, что дальше — и при этом ни страха, ни тревоги; будто сбросил ношу.</li>
+          <li>Мысль о прощании с делом прибавляет жизнерадостности.</li>
+          <li>Дело кажется примитивным, как коллекционирование фантиков.</li>
+        </ol>
+        <div class="lbl">Механика перехода</div>
+        <p class="mech">Завершать безупречно: без «хвостов», не ломая планов других — иначе новый кармический узел. Затем — ждать знака. Без деструкции: не телевизор, не стрелялки, не пиво. Знак приходит слабым и неясным; детальной инструкции может не быть — действуй на ощупь, «холодно-горячо», туда, где знак сильнее. Пример брокера: опостылела биржа → «работать с людьми» → соединить тех, кто знает «как», с теми, кто знает «что» → фальстарты → десяток предпринимателей просят помощи → магнат предлагает место → и однажды утром цикл начинается заново. До самого центра.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">выход из проекта</span><span class="bl">карьерный переход</span><span class="bl">пауза</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">13</div><div><h4>Семья — не оправдание</h4><div class="th">Мужчина, отклоняющийся от цели «по семейным обстоятельствам», слабеет, теряет доверие женщины и перестаёт быть для неё воплощением мужского — даже посвящая себя дому и детям.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Нянчиться и смахивать пыль можно сколько угодно — но считать это главной задачей значит вредить себе и близким. Самоумаление не останется незамеченным: жена возьмёт больше ответственности, чем потянет, дети станут испытывать дисциплинарные способности именно потому, что их не хватит даже на организацию собственной жизни. Дом превратится в место, где каждого тянет проверить твои нервы на прочность.</p>
+        <p>Доминанта женственности — пульсация любви; мужественности — миссия и свобода. Пути к вершине духа от двух полюсов разнятся кардинально. Для женственной женщины отношения и связь с детьми — приоритет; у мужественного отца связь с детьми — часть предназначения, а не оно само. Для некоторых мужчин семья действительно цель — тогда вопрос снят; но большинство, не реализуя иного предназначения, увядают.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Дети — губка: впитывают эмоциональный тон отца — ясный и звучный или дребезжащий от раздвоенности. Пять минут с внимательным родителем в гармонии с собой полезнее часов с оторванным от истока. Важно не сколько часов, а как. Практический ход: межсемейный детский сад или няня — вместо отказа от цели ради «положенного» времени. Дети сегодня — осознанный выбор, значит, ты готов отдать им безграничную любовь; самая животворная — та, что рождается из внутреннего истока. При верных приоритетах противоречия между долгом и предназначением нет.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">отцовство</span><span class="bl">распределение ролей</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">14</div><div><h4>Заботы, заботы, заботы</h4><div class="th">Нельзя увязать в мелочах, теряя связь с глубиной Настоящего. Жизнь — это и есть Настоящее; безраздельное пребывание в нём — свобода.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Способность с головой уходить в дело — и сила, и слабость мужчины: забыв о предназначении в потоке задач, он становится автоматом для штамповки денег. Количество забот не влияет на удовлетворённость. Земные дела — «механика» телесного бытия, не имеющая отношения к истоку.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">Тест смерти: за тобой пришли прямо сейчас, во время чтения. Что почувствуешь? Откроются тайны бытия, растворишься в любви — или так поглощён чтением, что не заметишь взмаха косы? Тест показывает полноту существования: реализовал ли дар, добрался ли до истоков, выразил ли чувства близким.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Мужчины зациклены на завершении начатого — как ослы на мельнице, круг за кругом до последнего издыхания. Скинь хомут. Инструменты возврата: чаще представлять смерть за плечами, размышлять о тайне бытия, вспоминать пережитое откровение, смотреть в звёздное небо. То, что больше всего занимает тебя, — и есть твоя жизнь.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">операционка</span><span class="bl">приоритизация</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">15</div><div><h4>Любящая женщина покоя не даст</h4><div class="th">Женщина испытывает способность мужчины сохранять спокойствие — укорами, провокациями, сомнением в цели. Это не кончится никогда, пока ей нужны его сила, любовь, искренность.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Глубочайшее эротическое переживание женщины — увидеть в мужчине Шиву: невозмутимого, любящего, всеобъемлющего, которого ни земная красавица, ни небесная апсара не собьют с пути. Чем больше он походит на Шиву, тем яростнее она испытывает.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">«Дорогая, я заработал миллион!» — «Неплохо». — «Неплохо?!» — «Ты не забыл купить молоко?» Она говорит: миллион, миллиард или пять центов — это не должно лишать тебя свободы. Успешное прохождение: «Вот миллион, а вот молоко. Видишь, я ничего не забыл» — с любовью глядя в глаза. Она расслабляется и празднует — минут десять-двенадцать. Потом всё заново.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Живущий по предназначению счастлив и не нуждается ни в прянике, ни в кнуте, ни в «мамочке». Сильная женщина не поощряет детское тщеславие — гонку за «игрушками» (машины, дома, деньги). Её сокровенное желание — ощутить силу из сердцевины, независимую от её реакций и от банковского счёта. Агрессия у женщины предваряет наслаждение; азарт критика расплавляется в жаре любви, едва она чувствует, что не поколебала ни счастья, ни юмора. Не поможет ни смена спутницы, ни психотерапия, ни деньги, ни искусство секса. Чем сильнее любит — тем яростнее атаки. Цель освобождение? Лучшего пути не найти.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">большие победы</span><span class="bl">устойчивость</span><span class="bl">дом</span></p>
+      </div>
+    </details>
+  </div>
+  <!-- ===== ЧАСТЬ II ===== -->
+  <div class="part" id="p2">
+    <div class="part-h"><div class="pn">Часть II</div><h3>Женщина</h3><div class="pd">Главы 16–22. Как устроена женственная речь, настроение, реакция на вызов и одобрение — и что с этим делает мужчина.</div></div>
+
+    <details class="ch"><summary><div class="num">16</div><div><h4>Женщины не лгут</h4><div class="th">Мужчина говорит, что думает; женщина — что чувствует. Её слова — отражение сиюминутной волны, а не выводы из опыта.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Держать слово — удел мужественных по сути. «Я тебя ненавижу», «на этот курорт больше ни ногой», «никогда не любила шоколад» — не заключения, а отражение настроения. Слушая, представляй шум прибоя: звуки речи — отражение текущего состояния. Её речь — музыкальное произведение, а не техническая инструкция. Сообщая о намерении, женщина говорит о чувствах, которые будет переживать, делая это; в следующий момент чувства изменятся — до действия не дойдёт.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">«В кино?» — «Не люблю кинематограф». Нежно обними и повтори — второй ответ поразит. Она говорила о вас двоих в эту минуту, не о кинотеатре. Усядешься к телевизору — обидится: с её точки зрения, она не отказывалась. Год мечтала о Питсбурге; ты купил дом — «зачем мне твой Питсбург?». Отношения ухудшились в момент, который ты прозевал, — и это сообщено в типичной женской форме.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Женская логика не знает мужской антиномии «не правдиво — значит ложно»; правда относительна по сравнению с силой чувства в момент. Не верь словам, пока есть сомнение, что она чувствует твою любовь; даже тогда её слова — выражение ответной любви независимо от темы. Не подстраивай расписание под планы, не продиктованные любовью. При этом женщина чувствительна к непроявленному — научись отличать глубокую интуицию от капризов. Принимая решение, опирайся на своё видение; ответственность за него — твоя, в какую бы сторону ни скакнула стрелка её барометра.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">коммуникация</span><span class="bl">планирование</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">17</div><div><h4>Одобрение, поддержка, приятие</h4><div class="th">Мужчина совершенствуется, отвечая на вызов. Женщина раскрывается, отзываясь на одобрение. Желаешь изменить подругу — хвали.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>«Что, сдрейфил?», «солдат, не будь куском дерьма» — кнут безотказно работает на мужчин, и мы автоматически применяем его к тем, кого любим. На женщину он действует только через её мужскую составляющую; женственность увядает. Ей нужны не вызов, а поддержка; не порицание, а одобрение.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">«Обожаю изящные формы твоего тела» побуждает к зарядке; «надеюсь, ты не наберёшь ни грамма» ведёт к конфетам с горя. «Твоя улыбка ослепительна» вместо «перестань хмуриться». Скажи, как она привлекательна в леотарде, — она начнёт бегать по утрам, чтобы снова в него уместиться.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Хвалить именно те качества, которые нуждаются в доработке. Попрёк — отвержение, глубокая рана. Одобрение — бальзам; хвалить каждый день и по многу раз.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">обратная связь</span><span class="bl">воспитание</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">18</div><div><h4>Не доводите женщину своим терпением</h4><div class="th">Стервозной женщину делает ложное смирение мужчины и его бесконечные уступки. Не терпи — действуй.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Люди живут парами, чтобы через служение друг другу открывать сердце миру. Величайший дар мужчины — раскрыть её сердце: мужская любовь как удар молнии рассеивает тьму быстрее, чем годы её медитаций. Женская душа — пики открытости в лучах любви и низины яростных проверок. Цикл нескончаем; овладей искусством серфингиста.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">Не жди, пока настроение пойдёт под уклон, — пусти любовь в атаку: защекочи до изнеможения, разденься и станцуй дикий танец, пропой арию, мычи, кудахтай, поцелуй страстно, как никогда.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Если продолжает погружаться в мрак — оставь её: сделано всё возможное, вы не подходите друг другу. Но цикл её души не изменит никакая другая женщина — как смена дня и ночи. Не терпеть, а действовать, принимая любое расположение духа: не нотации, не анализ, не поиск причин — участие, смех, танец, проникновение сквозь закрытость.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">дом</span><span class="bl">инициатива</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">19</div><div><h4>Не анализируй это</h4><div class="th">Женское настроение — погода. Причин много и они не образуют цепочки. Нет проблемы — есть напряжение любви или его отсутствие.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Мужчина ищет причину и следствие: заглох двигатель — ищем причину; испортилось настроение — «команда продула», банка пива, отремонтировано. Ту же схему он применяет к подруге: «Что случилось? Почему плачешь? Кто обидел?» — и ей становится хуже.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">90% женских проблем проистекают из ощущения, что её не любят. Не выспрашивай как психотерапевт — обними. Женщина — не карбюратор, который нужно отладить, а цветок, нуждающийся в солнце и влаге любви. Посмотри в глаза, коснись с нежностью — раскроется; потом можно обсудить, что осталось, если от «проблемы» вообще что-то останется. Спроси её саму, что помогает больше — расспросы или поцелуи.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">конфликт</span><span class="bl">эмоции</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">20</div><div><h4>Простой факт, который так сложно уразуметь мужчинам</h4><div class="th">Заставить женщину анализировать свои эмоции — как убедить океан пересчитать волны. Она растворяет проблемы в потоке любви, а не решает аналитикой.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Схема «зафиксировать следствие → найти причину → устранить» — путь мужчины (босс злоупотребляет сверхурочными → входишь в кабинет и высказываешь → легче). Перенос в личную жизнь: «что мне для тебя сделать в обмен?» — ошибка: отвечать значит задавать курс отношениям, а на капитанском мостике ей неуютно.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">День рождения. «Исполню любое желание, перечисляй» — перечисления не будет. Идеальное: «Полчаса на сборы. Куда — не скажу. С работой улажено. Это будет лучший день рождения в твоей жизни».</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Одно из глубочайших желаний женщины — оставить планирование и сдаться потоку, зная, что мужчина позаботится об остальном. Она — океан, движется во все стороны сразу; он — корабль, прокладывающий курс. Подводя её к штурвалу, заставляешь стать мужчиной. Расспрашивая о проблемах — огораживаешь кусок океана железной стеной, превращая в болото. Высшее служение: быть так открытым и целостным в присутствии, чтобы она полностью расслабилась; пусть в её душе штормы и тайфуны — дай ей хоть на час сойти с ума от любви. Тогда она коснётся своего истока и отдаст тебе сердце.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">инициатива</span><span class="bl">подарки</span><span class="bl">роли</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">21</div><div><h4>Грозе навстречу</h4><div class="th">Мужчины отступают перед женской истерикой. Истинный мужчина идёт в эпицентр бури с негасимой любовью.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>«Поговорю, когда снова станешь разумным существом» — и дверь закрывается. Но её сокровенное желание в этот час — чтобы мужчина остался: любящий, ясный, не боящийся шквала. Тогда она верит и расслабляется, войдя в центр циклона. Любители «ярлычков и полочек» нанимают домработниц для дома и психотерапевтов для жён; мастер не укладывает женскую душу в прокрустово ложе и не сбегает при первом раскате.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Оседлать волну как серфингист, распрямить плечи как тореадор перед быком. Гром оглушает, бык поднимает на рога, океан поглощает — женщина в истерике может ранить. Путь к мастерству лежит через страх: не выбирай ручного ослика вместо тура, заводь вместо океана, забитую женщину вместо тигрицы. Учись радоваться гневу, гнетущему молчанию, рыданиям; найди способ донести любовь сквозь шквал и войти с ней в неподвижный центр. Мастер для женщины — мастер и для мира.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">кризис</span><span class="bl">присутствие</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">22</div><div><h4>Кому решать?</h4><div class="th">Женщине не свойственно принимать решения рядом с мужчиной; иначе она акцентирует мужественность и теряет способность доверять и отдаваться.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>«Заранее согласен с любым твоим решением» — худшее, что можно сказать. Вы не друзья, берегущие автономию друг друга, а участники игры мужского и женского эроса. Дай ей опереться на твою мужественность — умение анализировать и принимать ответственное решение. Женская интуиция часто выбирает лучший вариант, но важно сохранить дуальность энергий: сближение полюсов → ослабление притяжения → конфликтность → разрыв.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">«Какие туфли?» — не «любые», а «вот эти, белые». Из противоречия выберет чёрные — но ощутит рядом мужчину и расслабится. Бизнес-леди перед важным финансовым шагом: примени к её ситуации аналитику; иначе — деполяризация: она мужеподобна, ты в промежуточном положении, полюс женственности пуст; доминантой станет дружба.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Оставляя женщину без мужской опоры перед выбором, лишаешься доверия: она опирается на собственную мужественность и утрачивает способность отдаваться. Даже если доверяешь её интуиции больше, чем она сама, — чётко объясни, почему поступил бы так; парадокс: она станет доверять и тебе, и своей интуиции.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">решения</span><span class="bl">семейные финансы</span></p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== ЧАСТЬ III ===== -->
+  <div class="part" id="p3">
+    <div class="part-h"><div class="pn">Часть III</div><h3>Полярные энергии</h3><div class="pd">Главы 23–28. Природа влечения, комплементарность, распределение ролей, желание разнообразия, юность, «температура».</div></div>
+
+    <details class="ch"><summary><div class="num">23</div><div><h4>Неодолимое притяжение</h4><div class="th">Мужественных тянет к женственному. Если это вызывает стыд — сексуальность травмирована.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>80% мужчин — «самцы до мозга костей»; женская энергия заставляет забыть о документах и оживляет тело. Действует не только женщина, но всё женственное: расслабляющая музыка, пышная природа, свежее пиво. Дуальность — природа вещей (электричество, магнетизм, пол). Стыдиться природного — быть не в ладах с собой; считать унизительным для женщины быть объектом интереса — то же.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Влечение к женщине и стремление к освобождению — две стороны одной медали: свобода есть единство, образуемое слиянием полярностей. Все желания — аспекты импульса поделиться даром любви. Различай тяготение и занятие сексом: первое не предполагает выбора (ты плывёшь в потоке энергии, кто её носитель — вторично, как тёплый бриз); второе — выбор конкретной женщины, которой открываешь сердце. Не отвергай благословения — прими, изгони стыд и страх.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">внимание</span><span class="bl">стыд</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">24</div><div><h4>Целительная противоположность</h4><div class="th">Принцип комплементарности: мужественное сопрягается с женственным. Получаешь весь «комплект» — экстаз и хаос в одном флаконе — и это целительнее, чем спокойная уравновешенная спутница.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Женщины, потрясающие до основания души, отличались странностями: эротизм и лёгкая «чокнутость», великолепное тело и «лживость». Рассудительные, с кем приятно обсудить курс валют, продолжают это и в постели. «Почему она не может вести себя нормально?» — «нормально» значит «как мы»; с таким вторым собой ты не уживёшься: вещи будут на местах, слова совпадут с действиями, но недостанет ощущения жизни.</p>
+        <div class="lbl">Цифры</div>
+        <p class="ex">10% пар — сбалансированные; 10% — женственный он с мужественной она; 80% — обычная комбинация. Осознанная деполяризация — основная причина расставаний. Спроси себя: не она ли стояла за неудачным прошлым опытом?</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Большинство мужчин глохнут и слепнут к досаждающей части спектра подруги: отмахиваются от жалоб, «всегдашняя доза» секса и фальшивого тепла. Да, эти создания безответственны, капризны, не держат слова — но чувствуют тонкие токи, о которых мужчина не подозревает; их тела подконтрольны сердцу. Храмовые танцовщицы Индии: вид тела, движущегося в ритме, вызывает у зрителей слёзы и откровения — сексуальность и духовность едины. Дар мужчины — приятие и света, и тьмы женской души.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">выбор партнёра</span><span class="bl">приятие</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">25</div><div><h4>Сразу всё — худший выбор</h4><div class="th">Бизнес — сфера мужественности, дружба — нейтральности, интим требует полярности. Искать всё в одной женщине — лебедь, рак и щука.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Партнёр по бизнесу ценится за осведомлённость и ответственность; друг — за честность и уважение свободы; спутница — за сердечность, сексуальность, любовь к детям. Требовать всего — получать фрустрацию: секс, когда ты настроен на финансы; звонок в офис среди ночи. Жена то счетовод, то друг, то домработница, а напоследок любовница — внутренняя правда, сведшая вместе, исчезает без чёткого приоритета ролей. В иных культурах гарем собирал все «специальности»; сегодня полигамия запрещена, а мечты о наложницах остаются.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Многогранность даёт крен в утилитарность: фамильярность, стандартный набор чмоканий, дружный храп. Мужественность нуждается в волнах женской энергии, особенно в упадке сил; частичные источники — природа, рыбалка, массаж, журнал «для мужчин», — но редко кто удовлетворяется без настоящей женщины. Если выбор пал на страсть — не заставляй жрицу любви следить за газовым счётчиком: следи за бытом и уровнем жизни сам, оставив ей роль хранительницы очага целительной женственности. Иначе — любовница на стороне или пиво, а она уйдёт в карьеру; отношения деградируют до надёжного партнёрства. «Возможно, именно это тебя и устраивает?»</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">роли в паре</span><span class="bl">быт</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">26</div><div><h4>Единственной и неповторимой мужчине недостаточно</h4><div class="th">Желание разнообразия неизбежно даже при безупречном сексе. Реализация — чаще путь из преходящего рая в пекло семейной жизни.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Такова природа мужественных — но это не оправдание измены, как передачи не виноваты в диванном овоще. Сила притяжения чужой постели зависит от наследственности, воспитания, примера родителей, духовного уровня. Три расклада: наслаждение любой ценой; «послушный мальчик — мамочка» (делай, что нравится ей); стремление к свободе и открытости — готовых рецептов нет, двигайся к полноте жизни своей и всех, с кем связан.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Не путай самодисциплину с подавлением. Подавление — война и захоронение в подвале подсознания, откуда желания восстанут в самый непредвиденный момент. Самодисциплина — приоритет высших желаний над низшими по велению ума и сердца. Прежде чем мечтать о многих, проверь, на что годишься с одной: если нет открытости и душевного проникновения — повлияет ли количество актов на качество жизни?</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">верность</span><span class="bl">дисциплина</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">27</div><div><h4>Энергия юности</h4><div class="th">Юная девушка излучает особую энергию — ей не ведомы заботы, акцентирующие мужественность. Ответственность мужчины — не «смыть» этот дар своей зрелой эротической волной.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Подвозишь семнадцатилетнюю няню: кожа, глаза, улыбка, запах волос — сидишь потом в машине, блаженно улыбаясь. Мужчина омолаживается от такой энергии. С годами женщина берёт больше «мужских» забот, аромат свежести притупляется. Недостаток Запада — сведение дара юности к сексуальности, тогда как на сердце эта энергия действует сильнее, чем на гениталии.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Близость пробудила желание — естественно. Но зрелая эротическая волна способна «смыть» её способность открывать мужские сердца. Лучше не дать волне покинуть тело — так поступают мастера тантры: пусть циркулирует от пальцев ног до макушки, тренируя умение сдерживаться. Позволь аромату юности омыть расслабленное тело — и понеси эту энергию тем, кого любишь.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">границы</span><span class="bl">энергия</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">28</div><div><h4>Температура женской души</h4><div class="th">Есть женщины горячие и холодные. Какая энергетика подходит — зависит от твоего периода жизни, здоровья, нагрузки. Осознав перекос, выравнивай баланс без разрушения семьи.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Автор приводит внешние ориентиры (смуглые, брюнетки, рыжие — горячие; светлокожие блондинки — холодные; по регионам — свои примеры), тут же оговариваясь: не все блондинки холодны, не все темнокожие горячи; внутренний индикатор мужчины определяет температуру энергетики вне зависимости от цвета волос. Речь о глубоком телесном запросе, а не о канонах красоты. Аналогия с едой: если тянет на холодный борщ — не идёшь в мексиканский ресторан.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">Спокойный кабинетный работник женат на «тигрице» — годы восторга. Работа меняется: весь день споры — дома нужен покой, а его терзает дикая кошка. Секретарша с тихой речью предлагает массаж шеи: «угораздило же меня жениться». Не угораздило — это был предел мечтаний; изменились обстоятельства. Не повод расторгать отношения и не причина предлагать руку секретарше — обстоятельства снова изменятся.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Выравнивать баланс не постельными способами: исключить острое, кепка на солнце, прогулки у воды; массаж от женщины с нужной энергетикой без ущерба семье; само присутствие человека нужной «температуры». Оптимальный вариант — выложить всё жене: возможно, ей ничего не стоит сменить типаж. Не путай нужды тела с потребностью в любви: первые легко удовлетворить без интима; вторая требует постоянных усилий духа.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">нервная система</span><span class="bl">баланс</span></p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== ЧАСТЬ IV ===== -->
+  <div class="part" id="p4">
+    <div class="part-h"><div class="pn">Часть IV</div><h3>Чего желают женщины</h3><div class="pd">Главы 29–34. Взаимность, проверки, жалобы как сигнал, маяк судьбы, отсутствие прошлого, ответственность за курс.</div></div>
+
+    <details class="ch"><summary><div class="num">29</div><div><h4>Выбирайте тех, кто выбирает вас</h4><div class="th">Он страстно желает обладать, она — избавиться: отношения обречены и искажают полюса обоих. Не разжёг пламя — оставь любой ценой.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Спроси друзей — и своих, и её: шансы равны нулю или она дразнит, провоцируя сломить сопротивление? Если друзья сочувственно качают головой — прекрати домогаться. Она ищет мужественного: миссия, целенаправленность, свобода. Мужчина, чья женственность выражена ярче, чем у избранницы, усиливает в ней мужественность: ему важнее отношения — она уйдёт в карьеру, экстрим и дистанцию.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Если ты женственен, а она мужественна — всё в порядке. В обычном раскладе — лучше расстаться: у обоих появится шанс. Не иди против внутренней сути — сквозь боль ищи её полной реализации.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">выбор</span><span class="bl">расставание</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">30</div><div><h4>Никогда не делай, что они велят</h4><div class="th">Чёткое указание женщины — скорее проверка: помчишься ли исполнять, жертвуя тем, что считаешь правильным. Доверие получают те, кто поступает по внутренней правде.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Пример</div>
+        <p class="ex">Пара практикует тантру; в загородном парке, на грани кульминации, он просит сбавить темп — она ускоряет: «дай почувствовать обжигающую струю». Он уступает. После — разочарование на её лице: «Почему не удержался?» — «Ты же просила!» — «Просила, чтобы почувствовать, какой ты сильный, что не сделаешь этого, даже если прошу».</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Именно твёрдость духа «заводит» — только тогда она может расслабиться в женственности и доверии. Ей нужны осознанность, целостность, любовь без сомнений и преданность миссии — и она никогда не скажет об этом прямо; она попытается сбить с пути и, потерпев поражение, почувствует глубокое удовлетворение. Если женщина тебе подходит — война ведётся ради сладости поражения; при неверном выборе — до полного уничтожения; эти кампании не спутать. Миф: богиня насылает испытания герою; дрогнувший испепелён, недрогнувшего она одаряет любовью и рожает ему полубогов.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">просьбы</span><span class="bl">твёрдость</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">31</div><div><h4>Её слова и ваши действия</h4><div class="th">Жалобы женщины — сигнал, что мужчина свернул с магистрали. Выполняя претензии буквально, он съезжает на обочину; вернувшись к предназначению — гасит их сами собой.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Пример</div>
+        <p class="ex">«Как ты можешь сидеть перед телевизором, когда полгода не платили за дом?» — «Наклёвывается заказ». — «А гараж?» — «Сегодня вечером». Звон посуды, слёзы: «Я так больше не могу!» — «В чём дело?» — «В оплате за дом». — «Да мы новый купим!» — «А гараж?» — рыдания, дверь спальни.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Основная ошибка: думать, что жена говорит о том, о чём говорит. Жалоба на заработок — не про деньги, а про растерянную осознанность, сердечность, целостность: бесстрашного и полного любви даже без гроша «пилить» не будут. Гараж — про обещание, которое не выполняется: следуешь ли ты своему слову, а значит — своей цели? Ещё неделя — и она начнёт наращивать «бицепсы», станет жёсткой, издёрганной чуждыми заботами; женственность увянет, а твоя потребность в ней вырастет — вместе с вероятностью измены. Претензии — не список дел, а сигналы о трещине, сквозь которую уходит полнота. «Посмотри, как у сына с уроками» — оба знают, что с уроками порядок; речь о том, лежишь ли ты от усталости или разленился. Признаки, что она заняла штурвал ценой здоровья: мешки под глазами, жёсткие черточки у рта, усталый взгляд. Мужчина знает, где обманывает себя; женщина чувствует дезертирство — два маяка.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">упрёки</span><span class="bl">обещания</span><span class="bl">деньги</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">32</div><div><h4>Негасимый маяк мужской судьбы</h4><div class="th">Женщины, ставшие для мужчины «всем», перестают его любить. Мудрые знают: их мужчины преданы миссии и при необходимости принесут ей в жертву личную жизнь — именно это делает любовь сильной.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Пример</div>
+        <p class="ex">Взнузданный конь у крыльца, «не уезжай» сквозь слёзы, «ты знаешь, это невозможно; ничто не погасит нашу любовь». Она стоит, гордая его непреклонностью. Скажи он «остаюсь, полно других военных» — где-то её обрадует, но в глубине души возникнет разочарование.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Ей неуютно быть звездой первой величины в его жизни. Потеряй дар, цель, сердечный импульс — обстоятельства завертят как флюгер, и первый «генерал в юбке» найдёт применение в хозяйстве. Жизнь, полную правды, легко подменить жизнью, полной обязательств: заботливый отец, неплохой профессионал, хороший друг — но не настоящий отец, профессионал, друг. Дезертирство считывают все: дети не ставят авторитет ни во что, коллеги обходят по службе, друзья не делятся секретами. Ей может не нравиться, как он реализует дар, но именно за это она будет любить — ровно столько, сколько он идёт на свет маяка (плюс немного, чтобы дать опомниться).</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">приоритеты</span><span class="bl">авторитет</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">33</div><div><h4>Безупречное прошлое — не в счёт</h4><div class="th">Женщина откликается на текущий момент, почти не учитывая прошлое. Не доказывай незначительность промаха — восстанови поток любви в настоящем.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Пример</div>
+        <p class="ex">Забыл о визите друзей после сверхурочных. «Где тебя носило!» — «Единственный раз за всю жизнь!» — «Они ехали с другого конца города!» Она не слышит: аргументы касаются прошлой безупречности, а оплошность совершена сейчас.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Между мужчинами «послужной список» уравновешивает промах. Для женщин прошлого практически не существует — одно неверное слово губит часы нежности. Выход: не заострять на промахе, а «задвинуть» его в прошлое, которого для неё нет: прими счастливый вид, рассмеши экстравагантной выходкой, набросься с ласками — восстанови поток любви в настоящем, и воды прошлого поглотят промах, как до того поглотили безукоризненные годы.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">ошибки</span><span class="bl">восстановление</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">34</div><div><h4>Слагаемые счастья</h4><div class="th">Ответственность за финансовую, эмоциональную, сексуальную, духовную стороны совместной жизни — на мужчине. Не «пахать как вол», а твёрдой рукой вести курс на освобождение.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Женщины, которым нужно быть в курсе всего — от починки телевизора до места жительства, — тяжёлый случай: говорит мужественность. Женственная предпочтёт отдать бразды; ей противопоказано напряжение власти и ответственности (мужчинам — крайне полезно). Чем она расслабленнее, тем больше излучает целительной энергии. Освобождай от решений — но не помыкай и не умалчивай о финансовых проблемах: она всё прочтёт в глазах и жестах, возьмёт часть ответственности, станет сильнее — с морщинами у глаз и резкой походкой.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Дело не в количестве денег — можно раздать имущество и благословлять прохожих на перекрёстке; главное, чтобы действия шли из незамутнённой глубины духа. Женская душа безмолвно спрашивает: куда ведут отношения, для чего мы живём, как сохранить полноту в потоке дел? Если ответ туманен — она встанет к штурвалу. Возможно, ей сейчас нужно поднабрать мужественности — проверка по последствиям: счастливее — да; измождённее — нет. Ответственность ≠ занятость и ≠ сумма заработка (он может быть меньше её); составляющие её счастья — осознанность, мудрость, бесповоротность курса на воплощение дара.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">лидерство в паре</span><span class="bl">финансовая прозрачность</span></p>
+      </div>
+    </details>
+  </div>
+  <!-- ===== ЧАСТЬ V ===== -->
+  <div class="part" id="p5">
+    <div class="part-h"><div class="pn">Часть V</div><h3>Грани мужской души</h3><div class="pd">Главы 35–38. Свобода и смерть эго, страсть, воин, формула «её энергия — его осознанность».</div></div>
+
+    <details class="ch"><summary><div class="num">35</div><div><h4>Вечный поиск свободы</h4><div class="th">Экстаз мужчины — безграничное освобождение; экстаз женщины — пульсация любви. Ему нужна встреча со смертью, ей — избранник, наполняющий душу.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Мужской оргазм: напряжение растёт — дамба прорвана — покой, подобный смерти, нирваническая пустота. Это же мужчина ищет в спорте (гол — гибель одной команды и воскрешение другой), в войне, шахматах, боевиках — жертвование собой во имя свободы, преодоление страха смерти. Французское petite mort, английское kill в спорте и финансах.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Враг освобождения духа — стремление к безопасности и комфорту; это война с эго. Свобода — свобода от коренного разделения «я и мир — не одно». Большинство боятся лишиться стрессов: нет стрессов — нет мыслей, нет «я», нет враждебного окружения — игра окончена. Женщина не ищет пустоты и не выносит её (отсюда шкатулочки и забитые ящички); отсутствие близости заменяет тортиками, болтовнёй, мелодрамами — жаждет наполниться, а не опустошиться. Любовь и свобода — два полюса; но и через смерть эго, и через отдачу всем сердцем достигается основа бытия, где полюса сходятся.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">мотивация</span><span class="bl">спорт</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">36</div><div><h4>Свобода страсти</h4><div class="th">Подавляя желания, мужчина подрывает жизненные силы: невыраженная страсть уходит в агрессию и жажду власти, секс теряет связь с сердцем.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Когда ты в последний раз по-настоящему овладевал своей женщиной — со всей силой и дикостью любви? Если щёлкаешь пультом в поисках стрельбы и потрошения — давненько. Невыраженная страсть разлагает психику; мужчина строит отношения на запугивании и мелочном контроле. Гол, депеша в осаждённую крепость, озарение через диалектику — формы покорения той Женщины, которая есть Мир.</p>
+        <div class="lbl">Точка различения</div>
+        <p class="ex">Покорение без сердечности — насилие. Сознание обоих полов переполнено фантазиями о преодолении сопротивления; если в них нет любви и самоиронии — не воплощай: окажешься в психушке или на скамье подсудимых. Цель — не садизм и мазохизм, не ломать волю. Мужчина овладевает телом, чтобы раскрыть сердце; она отдаётся, лишь чувствуя любовь.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Не способный свободно проявить страсть мужчина не может сбросить стрессы и погрузиться в пустоту основы бытия — и опустошает себя иначе: эякуляцией, телевизором, изнеможением на работе. Практика: в постели полностью забыть о себе, проникнуть так глубоко, чтобы стать ею — дышать её дыханием, чувствовать её чувствами. Дай проявиться всему естеству, включая пугающие стороны; затем позволь её энергии перенести тебя туда, куда не достичь в одиночку. Это тренировка духовного мужества для встречи со смертью эго: нельзя войти в источник, цепляясь за себя; не отпускающий себя даже в акте — не отпустит и эго.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">интим</span><span class="bl">агрессия</span><span class="bl">контроль</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">37</div><div><h4>Духовный воин</h4><div class="th">Смерть отсекает всё ложное. Мужчина, избегающий встречи с ней, не удостоится внимания настоящей женщины.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Пример</div>
+        <p class="ex">Таракан на спинке кровати в кульминации; мужчина с визгом под одеяло: «Убей его!» Шум в прихожей: «Сходи, дорогая, посмотри, а я тапочки найду».</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Никто не желает превратить тебя в убийцу, но убить ты должен быть способен — таракана или маньяка. В каждом дремлет воин, не страшащийся умереть или лишить жизни по Воле Божьей; цивилизация подавляет это как «тёмное», отсюда излишне скромные женщины и тошнотворно вежливые мужчины. В тихоне таится богиня гнева; в уступчивом — любовник, который не станет слушать «завтра на работу», а отнесёт её на ложе. Стесняющийся проявить волю и пыл к женщине так же «стесняется» впустить огонь в распланированную жизнь; его девиз — комфорт, безопасность, уют. Чтобы доверять, женщине необходимо знать: он не боится ни умереть, ни нести смерть, если необходимо. Прикосновение смерти вселяет мужество и открывает сердце; мы перестаём трястись над оболочками и покидаем узилище «я». Настоящее — источник жизни и зев смерти; кто овладеет им, того примет Вечность.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">границы</span><span class="bl">защита</span><span class="bl">BJJ</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">38</div><div><h4>Её энергия — его осознанность</h4><div class="th">Формула счастливой совместной жизни. Женские энергии бывают разрушительны; только ясный ум и любящее сердце мужчины выстоят и преобразуют их в созидание.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Ипостаси подруги: амазонка, мать, рабыня секса, ведьма, богиня, дикая кошка, наставник, демоница, девственница, стерва — и чаще всего ты видишь ту, которую менее всего желаешь. «Аллергия» на крики? Она будет орать так, что заложит уши — пока не научишься трансформировать гнев во взрыв страсти. Хлопнуть дверью и пересидеть в баре: «разбирайся сама» — если бы могла сама, не жила бы с тобой. Ей нужна твоя осознанность не меньше, чем тебе — её женственность.</p>
+        <div class="lbl">Секрет</div>
+        <p class="ex">Не защищайся словами — отвечай телом: подойди вплотную, с понимающей улыбкой глядя в глаза, сожми в объятиях так, чтобы ощутила силу всеприемлющей любви. Не приказывай замолчать — поцелуй; крики стихнут, раздадутся стоны. Раскрой сведённое яростью тело своим телом — раскроются сердца.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Обратный случай: она отдаётся эросу, а ты не можешь расслабиться — страх потерять «я»; она будет провоцировать снова и снова: либо умереть и воскреснуть, либо потерять её. Почувствовала, что вопросы о заработке действуют на нервы? Доконает ими — принеси больше денег или определись с целью, и тема закроется. Не выдерживающий женскую разрушительную энергию не примет и вызов мира. Женщина — тренажёр управления энергиями, которыми и мир встречает любые попытки улучшить положение. Все слабости перед ней как на ладони: где слукавил, где остановился на полдороге, где сдался без боя — и она расчищает путь истинному мужчине бесконечными проверками на способность любить.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">конфликт</span><span class="bl">тело вместо слов</span></p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== ЧАСТЬ VI ===== -->
+  <div class="part" id="p6">
+    <div class="part-h"><div class="pn">Часть VI</div><h3>Женские тайны</h3><div class="pd">Главы 39–43. Энергия повсюду, зрелость, управление сексуальной энергией, охлаждение как диагноз, сквозь мираж к истоку.</div></div>
+
+    <details class="ch"><summary><div class="num">39</div><div><h4>То, что повсюду вокруг нас</h4><div class="th">Мир заполнен женской энергией. Дефицит её — знак, что мужчина сам не допускает её в сердце.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>«Нет хороших женщин», «жизнь повернулась спиной» — фразы недополучивших женской энергии с детства. Замкнутый круг: они ищут энергию у женщин, те шарахаются от взгляда изголодавшегося волка, жажда усиливается. Но сама жизнь — женская энергия.</p>
+        <div class="lbl">Практика</div>
+        <p class="ex">В одиночестве и усталости представь, что мир — женщина: формы ландшафта — изгибы тела, свет — улыбка, сам миг Настоящего — воплощённая женственность. Расслабься — потечёт целительный поток; уйдёт жёсткость взгляда и нервозность жестов, ты станешь привлекательнее.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Женщины повсюду — работа, транспорт, вечеринки. Не показывай особого восприятия, но пусть их сексуальность станет источником обновления, а вспышки гнева — освобождающим ударом дзэн-мастера. Счастливые — блеск тысяч солнц; не в духе — прекрасны как штормящий океан. Расслабь тело, слушай сердцем, впитывай каждую эмоцию.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">восстановление</span><span class="bl">одиночество</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">40</div><div><h4>Магия зрелости</h4><div class="th">Каждый возраст женщины ценен: от ослепительного сияния юности до глубоких тихих вод. Не в ладах с мужественностью — падок на внешний блеск и слеп к глубинной женственности.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Юные тела сильнее пропитаны эросом — силой жизни; с годами мощность излучения падает, остаётся глубинная красота женственности, которая и есть секрет притягательности в любом возрасте. Разница между «развязной бабёнкой», действующей на всех как виагра, и женщиной, от чьего присутствия учащённо бьётся сердце: первая ярка и поверхностна, вторая сияет мягким светом из глубины, который с годами проступает отчётливее.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Культ молодости — болезнь общества; женщины, гонясь за лоском, теряют контакт с сердцевиной. Автор не призывает отворачиваться от эротизма юных — но не пропусти ту, чей взгляд пробуждает сознание. Такие женщины магичны: читают знаки судьбы как букварь, управляют событиями. Обычно им не семнадцать, а вдвое больше; «два в одной» — редкость. Зрелые не снисходительны к слабостям — поэтому многие выбирают молодость; но для духовного роста мудрее советчика, чем зрелость спутницы, нет.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">долгий брак</span><span class="bl">внимание</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">41</div><div><h4>Во благо миру</h4><div class="th">Управляй сексуальной энергией — и она исцелит, а не истощит. Вожделение превращается в служение миссии.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>В присутствии привлекательной женщины энергия большинства идёт либо в голову (фантазии), либо в гениталии. Но тело не состоит только из головы и гениталий — проведи волну по всем органам и конечностям. Деторождение — лишь биологический аспект созидательной энергии; мир ждёт большего. Женщины — музы; но большинство «слетают» с высот: голову заполняют постельные сцены, или топливо выбрасывается эякуляцией. Подруги не в состоянии вдохновлять с такой частотой — и мужчина смотрит на других, а в худшем случае — в алкоголь и наркотики.</p>
+        <div class="lbl">Практика</div>
+        <p class="ex">При волне возбуждения позволь энергии охватить всё тело, управляй дыханием: вдох — энергия заполняет сердце; выдох — вступаешь в мир душой и телом, покоряя его любовью, словно женщину. Так реализуется дар — а не чередованием напряжения и разрядки.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">творчество</span><span class="bl">энергия</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">42</div><div><h4>Шанс духовно вырасти</h4><div class="th">Если спутница больше не привлекает — оправдания нет: мужчина сошёл с пути, мужественность оставила его, потому она и стала издёрганной. Смена женщины даст тот же результат.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Или обет безбрачия, или бескомпромиссное взаимодействие с миром и женщиной. При втором — без колебаний занять полюс мужественности. Раздражительна и истерит по пустякам? Её тело и душа истосковались по властному вторжению мужской любви. Неудовлетворённость просачивается во все сферы: ни карьера, ни хобби не воодушевляют. Многие меняют работу и женщину — ненадолго легче, потом снова «или-или», а новое во сто крат хуже.</p>
+        <div class="lbl">Диагностика</div>
+        <p class="ex">Очередной круг истоптанной дорожки или нехоженые края по зову предназначения? Вглядись в лицо женщины: постаревшее и усталое — первое; сияет — второе. Способен ли прямо сейчас обнять её так, чтобы ослабела от истомы?</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Истинный мужчина принимает ответственность за всё, понимая, что ни над чем в конечном счёте не властен. Да, два магнита за годы разрядили полюса — естественно. Но женщина — не мебель, которую не благодарят за верную службу; она — шанс обрести свободу. В 90 случаях из 100 побуждение сменить партнёра — слабость мужчины, неспособность посвятить себя высшей цели. Не относись к ней как к винтику домашнего механизма — сердце закроется, цветок увянет. Вызов: осветить факелом любви уставший мир и истомлённую женщину.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">кризис брака</span><span class="bl">диагностика курса</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">43</div><div><h4>Сквозь видимость — к истоку</h4><div class="th">Покорение мира и женщины — не конечная цель. Они — рябь на поверхности бездонных вод. Сверхзадача — свобода духа и самопознание.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Женщины привлекают, исцеляют, вдохновляют — но никогда не удовлетворят до «поискам конец». Ты возжелал прелестную особу, судьба улыбнулась — и откуда лёгкое неотвязное разочарование? Оно не растворяется в количестве актов, а усиливается. Мираж в пустыне: путник прыгает — и плюхается в раскалённый песок. Женщина в конечном счёте видимость; мир — тоже. Прекрати хотеть: глубокий сон после оргазма, тихий день рыбалки, улыбка младенца — где были желания? Ты расслабился — и счастье посетило, тихое и глубокое. Мы уже есть то, чего ищем.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Избегай другой крайности — не подавляй желания; осознай, как глубоко они пустили корни, и загляни в источник, их питающий. Источник влечения — стремление к Единству: тело и дух, мысль и действие; жажда слияния до потери «я». В близости не пытайся получить — отдай ей всё, и себя в придачу, чтобы нельзя было распознать, кто есть кто. Мужчину привлекает не женщина, а отражение собственного эго со страхами и чаяниями; она — зеркало, которое улыбается и грозит. Игра на всю жизнь — или, при верном подходе, путь к освобождению. Не «втыкайся» в неё сознанием (телом можно), не «западай» на формы — проникай взглядом духа сквозь мираж, что с начала времён делит единое сознание на мириады «я».</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">желания</span><span class="bl">удовлетворённость</span></p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== ЧАСТЬ VII ===== -->
+  <div class="part" id="p7">
+    <div class="part-h"><div class="pn">Часть VII</div><h3>Телесные практики</h3><div class="pd">Главы 44–46. Единственная «техническая» часть книги: эякуляция, дыхание, орбита тела.</div></div>
+
+    <details class="ch"><summary><div class="num">44</div><div><h4>Обращённая эякуляция</h4><div class="th">Мужчина, не властный над эякуляцией, не удовлетворит женщину глубоко. Если ей ничего не стоит лишить его драгоценной субстанции — миру проще простого затереть его в угол.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Смысл не понять, не испытав хоть раз могущества и полноты сознания, возникающих вследствие удержания. Зачем мужчины эякулируют: конец тяжёлого дня, нервы как струна, не остыть — ванна, разрядка, сон младенца. Иной случай: работа на пути к цели, каждый контакт удесятеряет силы — и тогда становится очевидно, что эякуляция ослабляет: не хватает мужества на рисковые шаги, тянет на диван, нет энергии на назревший разговор — большая её часть слита в пароксизме самоудовлетворения, следствии неверного курса.</p>
+        <p>Женщина способна к многократным оргазмам; её гениталии «прямее» соединены с сердцем. На что годен мужчина после эякуляции: нет тяги, дрёма, сон — а рядом распалённая как печь подруга, жаждущая ещё. Она будет рада твоему расслаблению, но в глубине души ощутит разочарование. Многие женщины не подозревают, чего лишаются, побуждая мужчину исторгнуть семя, — не встречали того, кто с нерастраченным пылом проникает до истоков женской души.</p>
+        <div class="lbl">Особый случай</div>
+        <p class="ex">Изранённое женское сердце добивается эякуляции, чтобы поскорее всё кончилось и обессиливший мужчина не проник в тайники души. Это благословение: мир считает тебя достойным противником. Не веди душеспасительных бесед, не анализируй детские травмы — ты не пастор и не психотерапевт, ты любовник. Не спеши, напор не поможет; соедини тела — её закрепощённое и твоё горячее без излишнего напряжения. Увидев, что ты не эякулируешь, — растает. Но проверки продолжатся: коварный язычок, стон, движение бёдер — и ты лишишься и субстанции, и её доверия; она победила и проиграла.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">«Властен» — значит сам решает, эякулировать или нет, а не делает вид в необратимый момент. Пока партнёр не властен, женщине не познать сексуального, эмоционального, духовного удовлетворения; и мир недополучит твоего дара. Цикл: слияние в экстазе → погружение в источник → возвращение обновлённым — умирание эго и воскрешение духа снова и снова.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">энергия</span><span class="bl">воля</span><span class="bl">интим</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">45</div><div><h4>Дыхание</h4><div class="th">Ключ к овладению миром и женщиной — тело без хронических зажимов, особенно в передней части. Достигается дыханием и переносом внимания с нужд эго на служение миру.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Разнервничался — каменеет пресс; обида — ком в горле; испуг — расслабляется солнечное сплетение, тошнота снизу живота; тревога о будущем — морщины на лбу; опасность — желваки и кулаки. Много раз на дню. Встреча с миром происходит в передней части тела; исход зависит от её состояния. Люди, которые «как цари среди простолюдинов», не делают ничего особенного — их тела освобождены от комков напряжения; голос негромок, но все стихают; грудь не впалая, походка легка, голова ясна, не забита выживанием эго. Цепенеющий от страха вынужден устраивать цирк с собой в роли клоуна, чтобы на него обратили внимание.</p>
+        <div class="lbl">Практика</div>
+        <p class="ex">Проверь дыхание сейчас: приподнимается ли от вдоха область гениталий? Живот как кузнечные мехи? Низ живота — аккумулятор энергии жизни; без дыхания туда нет подзарядки — отсюда сомнения и слабость. Вдох носом в низ живота; выдох; следующий вдох заполняет весь живот; далее «столб» растёт — солнечное сплетение, грудь, шея, голова. Несколько раз в день, особенно в закрепощённые зоны: комок у пупка — продышать до растворения. Образ: тело — сморщенный продолговатый шарик; с каждым вдохом складки расправляются, он готов взмыть.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Причина блоков — зацикленность на «я»: энергия, гоняемая эго вокруг мелочных нужд, заплетается в узлы в каналах. Лечение — отдать себя другим: не накапливать, а раздавать; страхи, злость, обида — это дар, которым ты не одарил мир. Продвинутая практика: рядом скованный человек — прочувствуй его зажатость как свою, дыши сквозь неё; помощь без физического контакта, он не узнает, откуда. Можно с толпой в транспорте, или вдыхать стрессы человечества и растворять их на выдохе как соль в волне. Финальный образ: мир, вплотную подступающий к телу, — нагая женщина; дыхания сливаются, тают комки обид, исчезают границы.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">стресс</span><span class="bl">присутствие</span><span class="bl">публичность</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">46</div><div><h4>Орбита тела</h4><div class="th">Два пути эякулировать: «прямо» — через пенис, и «вспять» — проводя энергию вверх по спине до головы, откуда «нектар» стекает, питая тело. Нужно знать, как дышать, чего желать, что ощущать — и иметь открытое сердце.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Важно не сколько держишься, а раскрылись ли сердца — не эякулируй до этого момента. Первый опыт большинства — подростковая мастурбация, задавшая режим «стимуляция → фантазии → напряжение → сброс» без теплоты и участия в переживаниях партнёра; годы выучки переносятся в постель с женщиной, и партнёр становится удобным средством самоудовлетворения. Способ избавиться: делать всё как в подростковом возрасте, но наоборот.</p>
+        <div class="lbl">Инверсия подросткового паттерна</div>
+        <p class="ex">Вместо напряжения мышц при стимуляции — расслабление (включая лицо). Кульминация близка, дыхание учащается — стоп: медленно и глубоко. Смягчить пресс, раскрыть грудь, ощутить сердце. Вместо сосредоточения на своих ощущениях — выйти за границы «я» в возлюбленную. Поверхностное дыхание копит энергию в голове (фантазии) или гениталиях (зуд разрядки) — с этим мужчина обычно и ложится в постель.</p>
+        <div class="lbl">Протокол</div>
+        <ol>
+          <li><strong>Дыхание вне постели.</strong> Глубоко, нечасто, мощно — на работе, в транспорте. Вдох: энергия стекает по передней части тела до промежности. Выдох: поднимается по позвоночнику к голове.</li>
+          <li><strong>Тазовое дно.</strong> Мышцы гениталий, ануса, промежности: сначала сжимать (как при сдерживании мочеиспускания), затем вбирать внутрь (мошонка слегка приближается к телу). 15–20 движений подряд, 3–4 раза в день.</li>
+          <li><strong>Управление энергией.</strong> Сначала воображение — поток на выдохе заполняет позвоночник как ртуть термометр; со временем ощущается напрямую. Когда энергия достигает головы — оргазм, с которым не сравнится генитальная вспышка.</li>
+          <li><strong>В акте.</strong> Не в последний момент: подтягивать вверх сжатые мышцы тазового дна и заводить энергию на выдохе в позвоночник (у некоторых — на вдохе, экспериментируй). Сохраняя эрекцию, оттянуть или избежать эякуляции. Экстренно: сжать кулаки, стиснуть зубы, закатить глаза.</li>
+          <li><strong>Мастерство.</strong> Поток по замкнутой орбите вызывает такое же движение в теле партнёра; оргазм, усиленный единением, — божественный экстаз. Энергия может выйти выше макушки и распуститься цветком — отдельная тема.</li>
+        </ol>
+        <div class="lbl">Пять советов автора</div>
+        <ol>
+          <li>Не прокручивай порно в голове, не загоняй фантазии в подсознание — осуществляй всем телом; чувствуй тело, дыхание, мысль, партнёра.</li>
+          <li>Расслабь живот, мягкость и открытость в сердце, дыши глубоко и нечасто.</li>
+          <li>Выйди за пределы «я», погрузись в партнёра, забудь, кто есть кто; секс — путь за пределы ограничений, включая сами ощущения.</li>
+          <li>Вдох — вниз по передней части; выдох — вверх по позвоночнику до головы (ощущение орошения тёплой влагой). Фантазии или напряжение в гениталиях — признак блока на орбите: найди и продыши.</li>
+          <li>Для предотвращения эякуляции — выдыхай и одновременно вбирай тазовое дно; излишек уходит в позвоночник.</li>
+        </ol>
+        <p><strong>Главное, по автору: не будет любви — ничто не поможет.</strong> Секс — практика раскрытия сердца и полной отдачи, подобная медитации или молитве.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">дыхание</span><span class="bl">тазовое дно</span><span class="bl">интим</span></p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== ЧАСТЬ VIII ===== -->
+  <div class="part" id="p8">
+    <div class="part-h"><div class="pn">Часть VIII</div><h3>Когда полюса сходятся</h3><div class="pd">Главы 47–51. Различие устройств, вклад и ответственность сторон, чёткость позиции, восстановление, Единое.</div></div>
+
+    <details class="ch"><summary><div class="num">47</div><div><h4>У женщин всё совсем не так</h4><div class="th">Трудности с карьерой — пустяк для женщины с гармоничной личной жизнью и провал для мужчины при любой семье. Женственность питается душевностью; мужественность — целью.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Изберут её в президенты, увесят орденами — безразлично, если в интимной жизни разлад. Мужчина живёт под девизом «труба зовёт». Суровая правда для женщин: они заменимы — потеряв подругу, мужчина найдёт другую, потому что всегда в пути; его притягивают женщины, больше вдохновляющие на долг. У неё не так: взгляд прикован к избраннику, невидимые нити от сердца к сердцу ощущаются каждое мгновение. Ты для неё незаменим.</p>
+        <div class="lbl">Пример</div>
+        <p class="ex">Женщина говорит «хватит, живу своей жизнью», уходит в карьеру, штурмует вершины, пишет монументальные полотна — и остаётся с пустым сердцем и увядшей женственностью (если не является бойцом по сути). Рецепт вырастить «генерала в юбке»: «Почему твоя жизнь вращается вокруг отношений? Найди цель, как я». Изменится — к худшему.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Помогай подруге оставаться женственной — иначе музой ей не стать. Не страдай, что не вовлекаешься в отношения так глубоко, как она: удастся — потеряет интерес и станет искать целенаправленного. Спутница с неущемлённой женственностью видит тебя насквозь — и даёт интуитивную мудрость, магию, энергию эроса, восстановление сил. Позволь ей остаться женщиной — иначе истинным мужчиной не быть.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">карьера жены</span><span class="bl">роли</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">48</div><div><h4>Ответственность сторон</h4><div class="th">Мужчина вносит осознанность и направление; женщина — живую энергию чувств. Он отвечает за глубину её открытости, она — за его эрекцию, телесную и духовную.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Полная ответственность за свою жизнь — полдела; следующий шаг — ответственность за жизнь тех, кто рядом. Женщине почти невозможно унять бурю, которую сама подняла: ходит мрачнее тучи час, два. Мужской дар — мощное любовное вторжение, не оставляющее следа от тоски, возможно, сквозь отчаянное сопротивление. Не выяснять «как, что, почему», не успокаивать — овладевать. Если буря затягивается — что-то не так: утрачен пыл или сбился курс. Мужчина «знает» и за себя, и за неё: возможно, ей нужно медитировать, сменить работу, съездить на Багамы, станцевать чечётку — ты знаешь, она нет. Не «плакательная жилетка» — это для тех, с кем не делишь кров. Если при верном курсе она упорно не открывается — расстаньтесь: на что отношения, если не ведут к празднованию жизни?</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">Вклад женщины: голова мужчины перевешивает сердце, целеустремлённость заставляет забыть тело — проекты сменяют проекты, Настоящее ускользает. Женщина возвращает в тело, в здесь-и-сейчас, подводит к источнику обновления; в её присутствии дух эрегирован не менее известного органа. Кратчайший путь к свободе: оставайся с женщиной, миг за мигом, не теряя полноты присутствия, не бродя среди мыслей, не заполняя время деятельностью — и очертания разделённости растворятся.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">роли</span><span class="bl">присутствие</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">49</div><div><h4>Неразрывная связь</h4><div class="th">«Или по-моему, или уходи» — деспот. «Заранее согласен» — ещё хуже. Мужчина: «Или вместе — к свободе духа, или в разные стороны; на меньшее не соглашусь».</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Чёткость позиции, даже отдающая деспотизмом, характеризует мужчину больше, чем бесхребетное соглашательство. Определись: живёшь ли ты свою жизнь, подчинена ли она высшей цели, достойна ли цель называться высшей. Если этого не сделаешь ты — придётся ей, а это противоестественно для неё: она обзаведётся резкостью, властностью, ультиматумами — чтобы ты почувствовал, какой оборот принимают дела.</p>
+        <div class="lbl">Механика</div>
+        <p class="mech">«Война» с женщиной — не худший вариант: мужественность проснётся. Хуже — уступить: она у штурвала и впередсмотрящий, ты — юнга на побегушках или с цветочками на берегу. Не перекладывай ответственность на её плечи: станут мускулистыми — перестанут вдохновлять. Ищи, где свернул: молитва, медитация, психотерапия, откровенный разговор с друзьями, пещера, паломничество — любые средства.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">позиция</span><span class="bl">границы</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">50</div><div><h4>Как вернуть радость жизни</h4><div class="th">Потерявшему путеводную звезду мужчине нужны уединение и совет друга; женщине, потерявшей смысл, — компания подруг, танцы и смех. Он организует и то и другое.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>За годы супруги становятся похожи: она учится рубить с плеча, он становится чувствительным и отчасти истеричным — деполяризация. Нужно развести по полюсам, и методы различны. Ей — отпустить тормоза: петь, танцевать, смеяться, дни с подругами и телефон за полночь. Уныние, гинекологические симптомы, вялость в сексе — знак, что пора отпускать на «шабаш». (Это же — совет мужчинам, желающим акцентировать противоположный полюс.)</p>
+        <div class="lbl">Три сурових метода для мужчины</div>
+        <ol>
+          <li><strong>Уединение.</strong> Не ящик пива и телевизор. Исключить газеты, радио, ТВ; ограничить сладкое и телефон; служебные дела к минимуму; не кино, не гости, не пить, не курить, никакого секса. Через время станет неуютно — это не следствие ограничений, а причина всех привычек: дискомфорт внутри, и ты его заедал, закуривал, зачитывал за едой, заглушал карьерой. Дай неудовлетворённости проявиться, повернись к ней лицом, прочувствуй до корней — за ней исток. Мы близимся к смерти с рождения; смысл появления — жертва, исчезновение «я» в потоке любви.</li>
+          <li><strong>Вызов страхам.</strong> Боишься высоты — в альпинисты. Не любишь толпу — становись оратором. Нет усидчивости для книги — пообещай другу сто баксов за каждый пропущенный месяц; забудешь на год — гони штуку.</li>
+          <li><strong>Вопрошание.</strong> Объединяет первые два и глубже. В лес с самым необходимым; как можно дольше не спать, меньше есть; ум занять мантрой, тело — ритуалом; ждать. Не тая боли, разочарования, беспричинного страха — оставаться в Настоящем, пока преходящее не пройдёт и не проступит смысл. Мягкая форма: десять минут в день в тишине — телефон выключен, шторы прикрыты, не ёрзая. Просто быть.</li>
+        </ol>
+        <div class="lbl">Механика</div>
+        <p class="mech">Обязательно найти честных друзей, которые скажут в глаза и ждут того же; собираться чаще — прыгать в прорубь, вести беседы или напиться и горланить гимны в небо. Быть щедрым душой — на меньшее, чем полнота любви, никто не согласен.</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">выгорание</span><span class="bl">ретрит</span><span class="bl">мужской круг</span></p>
+      </div>
+    </details>
+
+    <details class="ch"><summary><div class="num">51</div><div><h4>Исчезая в Едином</h4><div class="th">От оргазма — к экстазу, от экстаза — к окончательному освобождению.</div></div><svg class="ar" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="chb">
+        <div class="lbl">Развёртка</div>
+        <p>Мир, подобно женщине, ждёт того, кто покорит его бескомпромиссной любовью и поведёт к свободе. Каждый миг истинного мужчины — смерть и воскрешение в слиянии с миром. Он принимает всё на пути — страхи, помрачения, ограниченность эго — не с презрением и не как врагов, а с той же мудростью и любовью, что и всё остальное. Тогда мир принимает его; границы исчезают; Единое сознание обретает себя. «Вперёд!»</p>
+        <div class="lbl">Применимо</div>
+        <p><span class="bl">финальная рамка</span></p>
+      </div>
+    </details>
+  </div>
+</section>
+<!-- ============ 6. МОДЕЛИ И ФРЕЙМВОРКИ ============ -->
+<section class="blk" id="models">
+  <div class="sec-head"><div class="n">06</div><div><h2>Модели и фреймворки</h2><div class="sub">Каждая схема автора — отрисована и объяснена. Схемы не упрощают: там, где у автора нюанс, есть легенда.</div></div></div>
+
+  <h3 style="font-size:24px;margin:8px 0 6px">6.1 Полярность как источник страсти</h3>
+  <p class="col">Центральная модель (введение, гл. 22, 24, 50). Два полюса — мужественная и женственная сексуальная сущность — создают напряжение, в котором живёт эрос. Пол ≠ полюс. Три состояния пары и что происходит при сближении.</p>
+  <figure class="wide">
+    <svg viewBox="0 0 1120 360" xmlns="http://www.w3.org/2000/svg">
+      <!-- state A: polarized -->
+      <g>
+        <text x="180" y="30" text-anchor="middle" class="svgt" font-size="15" font-weight="600">Поляризованная пара</text>
+        <circle cx="90" cy="130" r="34" fill="var(--masc)"/><circle cx="270" cy="130" r="34" fill="var(--fem)"/>
+        <g fill="none" stroke="var(--author)" stroke-width="1.6"><path d="M124 130 C 160 80, 200 80, 236 130"/><path d="M124 130 C 160 180, 200 180, 236 130"/><path d="M124 130 L 236 130"/></g>
+        <text x="180" y="200" text-anchor="middle" class="svgm" font-size="12">большая разница потенциалов</text>
+        <text x="180" y="222" text-anchor="middle" class="svgt" font-size="13" font-weight="600">страсть · доверие · энергия</text>
+        <text x="180" y="248" text-anchor="middle" class="svgm" font-size="12">он: миссия, решения, осознанность</text>
+        <text x="180" y="266" text-anchor="middle" class="svgm" font-size="12">она: энергия, чувства, наполнение</text>
+      </g>
+      <!-- state B: depolarized -->
+      <g>
+        <text x="560" y="30" text-anchor="middle" class="svgt" font-size="15" font-weight="600">Деполяризация</text>
+        <circle cx="520" cy="130" r="34" fill="var(--masc)" opacity=".55"/><circle cx="600" cy="130" r="34" fill="var(--fem)" opacity=".55"/>
+        <text x="560" y="200" text-anchor="middle" class="svgm" font-size="12">полюса сблизились — поле слабое</text>
+        <text x="560" y="222" text-anchor="middle" class="svgt" font-size="13" font-weight="600">дружба без эроса → конфликтность → разрыв</text>
+        <text x="560" y="248" text-anchor="middle" class="svgm" font-size="12">она берёт решения и рубит с плеча</text>
+        <text x="560" y="266" text-anchor="middle" class="svgm" font-size="12">он становится мягким, чувствительным</text>
+      </g>
+      <!-- state C: inverted -->
+      <g>
+        <text x="940" y="30" text-anchor="middle" class="svgt" font-size="15" font-weight="600">Инверсия полюсов</text>
+        <circle cx="850" cy="130" r="34" fill="var(--fem)"/><circle cx="1030" cy="130" r="34" fill="var(--masc)"/>
+        <text x="850" y="135" text-anchor="middle" font-size="12" fill="#2a0c12" font-family="system-ui">он</text><text x="1030" y="135" text-anchor="middle" font-size="12" fill="#0b1220" font-family="system-ui">она</text>
+        <g fill="none" stroke="var(--author)" stroke-width="1.6"><path d="M884 130 C 920 80, 960 80, 996 130"/><path d="M884 130 C 920 180, 960 180, 996 130"/></g>
+        <text x="940" y="200" text-anchor="middle" class="svgm" font-size="12">10% пар — стабильно и нормально</text>
+        <text x="940" y="222" text-anchor="middle" class="svgt" font-size="13" font-weight="600">книга читается со сдвигом местоимений</text>
+        <text x="940" y="248" text-anchor="middle" class="svgm" font-size="12">но если инверсия — следствие его схода с курса,</text>
+        <text x="940" y="266" text-anchor="middle" class="svgm" font-size="12">она «наращивает бицепсы» ценой здоровья</text>
+      </g>
+      <line x1="370" y1="60" x2="370" y2="290" class="svgl" stroke-dasharray="4 4"/><line x1="750" y1="60" x2="750" y2="290" class="svgl" stroke-dasharray="4 4"/>
+      <text x="560" y="330" text-anchor="middle" class="svgm" font-size="12.5">Полярность нужна для эроса, не для любви. Сбалансированным (≈10%) полярность второстепенна — книга к ним не обращена.</text>
+    </svg>
+    <figcaption>Автор различает три исхода. Важно: «инверсия» сама по себе не патология (женственный мужчина с мужественной женщиной — 10% пар и им хорошо). Патология — деполяризация как следствие его схода с миссии.</figcaption>
+  </figure>
+
+  <h3 style="font-size:24px;margin:36px 0 6px">6.2 Распределение сексуальных сущностей</h3>
+  <p class="col">Оценка автора по его наблюдениям (введение, гл. 23–24). Не статистика — практическая карта, кому книга адресована.</p>
+  <figure class="wide">
+    <div class="bars">
+      <div class="b"><span>Обычная комбинация пар: мужественный он + женственная она</span><div class="t"><i style="width:80%"></i></div><span>80%</span></div>
+      <div class="b"><span>Инверсия: женственный он + мужественная она</span><div class="t"><i style="width:10%;background:var(--fem)"></i></div><span>10%</span></div>
+      <div class="b"><span>Сбалансированные пары</span><div class="t"><i style="width:10%;background:var(--muted)"></i></div><span>10%</span></div>
+      <div class="b"><span>Люди, явно предпочитающие один полюс (овладевать или покоряться)</span><div class="t"><i style="width:90%"></i></div><span>90%</span></div>
+      <div class="b"><span>Мужчины — «самцы до мозга костей»</span><div class="t"><i style="width:80%;background:var(--masc)"></i></div><span>80%</span></div>
+    </div>
+    <figcaption>Автор подчёркивает: полюс не определяется полом и ориентацией. Гей-пары и лесбийские пары наглядно показывают, что полярность — свойство сущности, а не тела.</figcaption>
+  </figure>
+
+  <h3 style="font-size:24px;margin:36px 0 6px">6.3 Грань возможного: три положения</h3>
+  <p class="col">Главы 4 и 8. Спектр с двумя провалами и одной узкой зоной роста. Страх — маркер того, что ты у грани.</p>
+  <figure class="wide">
+    <svg viewBox="0 0 1120 250" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="edge" x1="0" x2="1"><stop offset="0" stop-color="var(--muted)" stop-opacity=".3"/><stop offset=".5" stop-color="var(--author)"/><stop offset="1" stop-color="var(--alert)" stop-opacity=".6"/></linearGradient></defs>
+      <rect x="60" y="100" width="1000" height="18" rx="9" fill="url(#edge)"/>
+      <rect x="470" y="86" width="180" height="46" rx="6" fill="none" stroke="var(--author)" stroke-width="2"/>
+      <text x="200" y="70" text-anchor="middle" class="svgt" font-size="15" font-weight="600">Комфорт</text>
+      <text x="200" y="160" text-anchor="middle" class="svgm" font-size="12.5">планка занижена намеренно</text>
+      <text x="200" y="178" text-anchor="middle" class="svgm" font-size="12.5">работа не тяжела, жизнь безопасна</text>
+      <text x="200" y="196" text-anchor="middle" class="svgm" font-size="12.5">— и мертва: нет огня</text>
+      <text x="560" y="70" text-anchor="middle" class="svgt" font-size="15" font-weight="600">Грань — один шаг за горизонт</text>
+      <text x="560" y="160" text-anchor="middle" class="svgm" font-size="12.5">здесь есть страх — и это указатель</text>
+      <text x="560" y="178" text-anchor="middle" class="svgm" font-size="12.5">остаться, не отступая и не прыгая</text>
+      <text x="560" y="196" text-anchor="middle" class="svgt" font-size="12.5" font-weight="600">каждый день · во всех делах</text>
+      <text x="920" y="70" text-anchor="middle" class="svgt" font-size="15" font-weight="600">Бездна</text>
+      <text x="920" y="160" text-anchor="middle" class="svgm" font-size="12.5">вершины не по силам</text>
+      <text x="920" y="178" text-anchor="middle" class="svgm" font-size="12.5">победа ценой, равной поражению</text>
+      <text x="920" y="196" text-anchor="middle" class="svgm" font-size="12.5">«загнанная лошадь»</text>
+      <text x="560" y="235" text-anchor="middle" class="svgm" font-size="12.5">Оба провала — «страх страха». Честность о своей планке важнее её высоты: открыто признающий страх вызывает больше доверия.</text>
+    </svg>
+    <figcaption>Автор просит уважать и предел, и выбор — стоять на грани или отойти. Единственное, что он не принимает, — самообман о том, где ты находишься.</figcaption>
+  </figure>
+
+  <h3 style="font-size:24px;margin:36px 0 6px">6.4 Концентрические окружности миссии и цикл перехода</h3>
+  <p class="col">Глава 12. Жизнь — окружности от периферии к центру; каждая — временная цель, исчерпание которой ощущается как пустота. Клик по кольцу — пояснение.</p>
+  <figure class="wide">
+    <svg viewBox="0 0 1120 420" xmlns="http://www.w3.org/2000/svg" id="rings">
+      <g class="node" data-info="Внешние окружности — унаследованные цели: «отец был пожарником — и я туда же» или назло ему. За редким исключением поверхностны. Их всё равно нужно пройти и исчерпать, а не перепрыгнуть."><circle cx="300" cy="210" r="190" fill="none" stroke="var(--line-strong)" stroke-width="18" opacity=".6"/><text x="300" y="40" text-anchor="middle" class="svgm" font-size="12">унаследованное</text></g>
+      <g class="node" data-info="Средние окружности: учёба, сексуальные игры, женитьба, карьера, проекты. Каждая даёт радость завершения меньше и короче, чем ожидалось — по автору, это нормально: они лишь подготовка к главному."><circle cx="300" cy="210" r="140" fill="none" stroke="var(--author)" stroke-width="18" opacity=".45"/><text x="300" y="90" text-anchor="middle" class="svgm" font-size="12">учёба · брак · карьера · проекты</text></g>
+      <g class="node" data-info="Ближе к центру — всё большее воссоединение с истоком; в итоге способность ни на секунду не терять связь. Но сначала должны быть отработаны текущие цели и пристрастия."><circle cx="300" cy="210" r="90" fill="none" stroke="var(--author)" stroke-width="18" opacity=".75"/><text x="300" y="140" text-anchor="middle" class="svgm" font-size="12">всё ближе к истоку</text></g>
+      <g class="node" data-info="Ядро — основное предназначение. Достигнув центра и выполнив миссию, мужчина, по автору, растворяется в божественной любви, которой изначально и является."><circle cx="300" cy="210" r="40" fill="var(--author)"/><text x="300" y="215" text-anchor="middle" font-size="12" font-weight="700" fill="#141414" font-family="system-ui">ядро</text></g>
+      <!-- cycle -->
+      <g class="svgl" stroke-width="1.4"><path d="M620 90 H 1040" marker-end="url(#ah)"/><path d="M1040 110 V 330" marker-end="url(#ah)"/><path d="M1040 350 H 640" marker-end="url(#ah)"/><path d="M620 330 V 110" marker-end="url(#ah)"/></g>
+      <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="var(--line-strong)"/></marker></defs>
+      <rect x="560" y="60" width="130" height="60" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="625" y="85" text-anchor="middle" class="svgt" font-size="12.5" font-weight="600">Самоотдача</text><text x="625" y="103" text-anchor="middle" class="svgm" font-size="11">полное посвящение делу</text>
+      <rect x="980" y="60" width="130" height="60" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="1045" y="85" text-anchor="middle" class="svgt" font-size="12.5" font-weight="600">5 признаков</text><text x="1045" y="103" text-anchor="middle" class="svgm" font-size="11">безразличие без вины</text>
+      <rect x="980" y="320" width="130" height="60" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="1045" y="345" text-anchor="middle" class="svgt" font-size="12.5" font-weight="600">Безупречный выход</text><text x="1045" y="363" text-anchor="middle" class="svgm" font-size="11">без «хвостов» и узлов</text>
+      <rect x="560" y="320" width="130" height="60" rx="6" fill="var(--surface2)" stroke="var(--line-strong)"/><text x="625" y="345" text-anchor="middle" class="svgt" font-size="12.5" font-weight="600">Ожидание знака</text><text x="625" y="363" text-anchor="middle" class="svgm" font-size="11">без деструкции</text>
+      <text x="830" y="205" text-anchor="middle" class="svgt" font-size="13" font-weight="600">→ действие «холодно-горячо» →</text>
+      <text x="830" y="226" text-anchor="middle" class="svgm" font-size="12">знак усиливается — идти туда</text>
+      <text x="830" y="400" text-anchor="middle" class="svgm" font-size="12">Проверка перед выходом: страх / лень / исчерпание? Спроси близких. Если хором «сил хватает» — доведи до конца.</text>
+    </svg>
+    <div class="nodeinfo" id="ringsinfo">Нажмите на кольцо.</div>
+    <figcaption>Ключевая тонкость: чувство пустоты после завершения — не сбой, а признак роста. И ещё одна: выходить нужно безупречно, иначе «новый кармический узел» вернётся.</figcaption>
+  </figure>
+
+  <h3 style="font-size:24px;margin:36px 0 6px">6.5 Петля испытания</h3>
+  <p class="col">Главы 15, 30, 31, 33, 38. Самая повторяемая модель книги. Женщина проверяет; исход зависит от одного — устоял или нет.</p>
+  <figure class="wide">
+    <svg viewBox="0 0 1120 330" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="ah2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="var(--author)"/></marker></defs>
+      <rect x="40" y="120" width="190" height="90" rx="8" fill="var(--surface2)" stroke="var(--line-strong)"/>
+      <text x="135" y="152" text-anchor="middle" class="svgt" font-size="14" font-weight="600">Испытание</text>
+      <text x="135" y="172" text-anchor="middle" class="svgm" font-size="11.5">упрёк · «неплохо» · провокация</text>
+      <text x="135" y="190" text-anchor="middle" class="svgm" font-size="11.5">указание · истерика · молчание</text>
+      <path d="M232 165 H 300" stroke="var(--author)" stroke-width="1.6" fill="none" marker-end="url(#ah2)"/>
+      <path d="M305 165 L 380 60 M305 165 L 380 270" stroke="var(--line-strong)" stroke-width="1.4" fill="none"/>
+      <rect x="380" y="20" width="230" height="80" rx="8" fill="var(--act-soft)" stroke="var(--act)"/>
+      <text x="495" y="48" text-anchor="middle" class="svgt" font-size="13.5" font-weight="600">Устоял</text>
+      <text x="495" y="68" text-anchor="middle" class="svgm" font-size="11.5">счастье и юмор не поколеблены,</text>
+      <text x="495" y="86" text-anchor="middle" class="svgm" font-size="11.5">курс не изменён, любовь — телом</text>
+      <rect x="380" y="230" width="230" height="80" rx="8" fill="var(--alert-soft)" stroke="var(--alert)"/>
+      <text x="495" y="258" text-anchor="middle" class="svgt" font-size="13.5" font-weight="600">Сбит с курса</text>
+      <text x="495" y="278" text-anchor="middle" class="svgm" font-size="11.5">оправдывается прошлым, выполняет</text>
+      <text x="495" y="296" text-anchor="middle" class="svgm" font-size="11.5">буквально, хлопает дверью, обижен</text>
+      <path d="M612 60 H 690" stroke="var(--act)" stroke-width="1.6" fill="none" marker-end="url(#ah2)"/>
+      <path d="M612 270 H 690" stroke="var(--alert)" stroke-width="1.6" fill="none" marker-end="url(#ah2)"/>
+      <rect x="695" y="20" width="260" height="80" rx="8" fill="var(--surface2)" stroke="var(--act)"/>
+      <text x="825" y="48" text-anchor="middle" class="svgt" font-size="13.5" font-weight="600">Доверие · расслабление</text>
+      <text x="825" y="68" text-anchor="middle" class="svgm" font-size="11.5">агрессия переходит в наслаждение,</text>
+      <text x="825" y="86" text-anchor="middle" class="svgm" font-size="11.5">она отдаётся женственности</text>
+      <rect x="695" y="230" width="260" height="80" rx="8" fill="var(--surface2)" stroke="var(--alert)"/>
+      <text x="825" y="258" text-anchor="middle" class="svgt" font-size="13.5" font-weight="600">Потеря доверия</text>
+      <text x="825" y="278" text-anchor="middle" class="svgm" font-size="11.5">она «наращивает бицепсы»,</text>
+      <text x="825" y="296" text-anchor="middle" class="svgm" font-size="11.5">встаёт к штурвалу, увядает</text>
+      <path d="M955 60 C 1060 60, 1060 165, 1040 165 C 700 165, 300 165, 135 118" stroke="var(--author)" stroke-width="1.4" fill="none" stroke-dasharray="5 4" marker-end="url(#ah2)"/>
+      <text x="1000" y="175" text-anchor="middle" class="svgm" font-size="11.5">≈10–12 минут</text>
+      <text x="1000" y="191" text-anchor="middle" class="svgm" font-size="11.5">и всё заново</text>
+    </svg>
+    <figcaption>Автор настаивает: петля не размыкается никогда — ни сменой спутницы, ни психотерапией, ни деньгами. Чем сильнее любит, тем яростнее проверяет; проверка — форма любви и способ пробудить в мужчине Шиву.</figcaption>
+  </figure>
+
+  <h3 style="font-size:24px;margin:36px 0 6px">6.6 Мужское и женское: два устройства</h3>
+  <p class="col">Сводное сопоставление по всей книге. Это идеальные полюса по автору, не описание конкретных людей: у каждого есть оба начала, вопрос — какое доминирует.</p>
+  <div class="cmp">
+    <div class="m"><h4>Мужественная сущность</h4><ul>
+      <li>Питается миссией и свободой; без цели — «дрейфующая скорлупа»</li>
+      <li>Экстаз — освобождение, опустошение, «маленькая смерть»</li>
+      <li>Растёт от вызова: «что, сдрейфил?»</li>
+      <li>Говорит то, что думает; держит слово; «послужной список» уравновешивает промах</li>
+      <li>Решает: анализ → выбор → ответственность; «знает» и за себя, и за неё</li>
+      <li>При потере пути нужны уединение, вопрошание, честный друг</li>
+      <li>Заменим для мира и для неё — потому что «всегда в пути»</li>
+      <li>Вклад в пару: осознанность, направление, курс</li>
+      <li>Ответственность: за глубину её открытости</li>
+    </ul></div>
+    <div class="f"><h4>Женственная сущность</h4><ul>
+      <li>Питается любовью и отношениями; трудности карьеры — пустяк при гармонии дома</li>
+      <li>Экстаз — пульсация любви, наполнение; пустоту не выносит</li>
+      <li>Раскрывается от одобрения: «твоя улыбка ослепительна»</li>
+      <li>Говорит то, что чувствует сейчас; слова — погода; прошлого «не существует»</li>
+      <li>Растворяет проблемы в потоке любви, не анализирует; ей неуютно у штурвала</li>
+      <li>При потере смысла нужны подруги, танцы, смех, «шабаш»</li>
+      <li>Незаменим для неё её мужчина — нити от сердца к сердцу ежесекундно</li>
+      <li>Вклад в пару: энергия, чувства, возврат в тело и в Настоящее</li>
+      <li>Ответственность: за его эрекцию — телесную и духовную</li>
+    </ul></div>
+  </div>
+
+  <h3 style="font-size:24px;margin:36px 0 6px">6.7 Орбита тела</h3>
+  <p class="col">Глава 46 (опирается на гл. 44–45). Единственная пошаговая телесная модель книги: вниз по передней части на вдохе, вверх по позвоночнику на выдохе, замок тазового дна.</p>
+  <figure class="wide">
+    <svg viewBox="0 0 1120 400" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="ah3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="var(--author)"/></marker></defs>
+      <!-- body silhouette -->
+      <g fill="none" stroke="var(--line-strong)" stroke-width="1.6">
+        <circle cx="330" cy="60" r="28"/>
+        <path d="M330 88 V 320"/>
+        <path d="M300 110 C 270 130, 265 260, 290 300 M360 110 C 390 130, 395 260, 370 300"/>
+        <path d="M290 300 C 300 330, 360 330, 370 300"/>
+      </g>
+      <!-- front-down arrow -->
+      <path d="M285 100 C 250 160, 250 240, 300 305" stroke="var(--author)" stroke-width="2.4" fill="none" marker-end="url(#ah3)"/>
+      <!-- back-up arrow -->
+      <path d="M365 305 C 415 240, 415 160, 375 90" stroke="var(--author)" stroke-width="2.4" fill="none" marker-end="url(#ah3)" stroke-dasharray="7 4"/>
+      <text x="190" y="200" text-anchor="end" class="svgt" font-size="13.5" font-weight="600">Вдох</text>
+      <text x="190" y="218" text-anchor="end" class="svgm" font-size="12">энергия стекает по передней</text>
+      <text x="190" y="234" text-anchor="end" class="svgm" font-size="12">части тела до промежности</text>
+      <text x="470" y="200" class="svgt" font-size="13.5" font-weight="600">Выдох</text>
+      <text x="470" y="218" class="svgm" font-size="12">поднимается по позвоночнику</text>
+      <text x="470" y="234" class="svgm" font-size="12">к голове — «нектар» стекает вниз</text>
+      <circle cx="330" cy="315" r="9" fill="var(--author)"/>
+      <text x="330" y="350" text-anchor="middle" class="svgt" font-size="12.5" font-weight="600">замок тазового дна</text>
+      <text x="330" y="367" text-anchor="middle" class="svgm" font-size="11.5">сжать → вобрать · 15–20 × 3–4 раза в день</text>
+      <circle cx="330" cy="150" r="9" fill="none" stroke="var(--fem)" stroke-width="2"/>
+      <text x="330" y="180" text-anchor="middle" class="svgm" font-size="11.5">сердце: мягко, открыто</text>
+      <!-- right: sequence -->
+      <g font-family="system-ui">
+        <text x="700" y="60" class="svgt" font-size="15" font-weight="600">Подростковый паттерн</text>
+        <text x="700" y="84" class="svgm" font-size="12.5">стимуляция → фантазии → напряжение → сброс</text>
+        <text x="700" y="102" class="svgm" font-size="12.5">мышцы напряжены · дыхание частое · внимание на себе</text>
+        <line x1="700" y1="122" x2="1080" y2="122" class="svgl" stroke-dasharray="4 4"/>
+        <text x="700" y="156" class="svgt" font-size="15" font-weight="600">Инверсия (по автору)</text>
+        <text x="700" y="182" class="svgm" font-size="12.5">мышцы (в т.ч. лица) — расслабить</text>
+        <text x="700" y="202" class="svgm" font-size="12.5">дыхание — медленно и глубоко, пресс мягкий</text>
+        <text x="700" y="222" class="svgm" font-size="12.5">внимание — в партнёра, «забыть кто есть кто»</text>
+        <text x="700" y="242" class="svgm" font-size="12.5">энергия — на орбиту, не в голову и не в гениталии</text>
+        <text x="700" y="262" class="svgm" font-size="12.5">эякуляция — только по решению, не до раскрытия сердец</text>
+        <line x1="700" y1="284" x2="1080" y2="284" class="svgl" stroke-dasharray="4 4"/>
+        <text x="700" y="316" class="svgt" font-size="13.5" font-weight="600">Ограничитель автора</text>
+        <text x="700" y="338" class="svgm" font-size="12.5">«Не будет любви — ничто не поможет.»</text>
+        <text x="700" y="356" class="svgm" font-size="12.5">Техника подчинена раскрытию сердца.</text>
+      </g>
+    </svg>
+    <figcaption>У некоторых людей подъём по позвоночнику лучше идёт на вдохе — автор прямо предлагает экспериментировать. Признак блока: навязчивые фантазии или напряжение в гениталиях — найти место и «продышать».</figcaption>
+  </figure>
+
+  <h3 style="font-size:24px;margin:36px 0 6px">6.8 Три способа вернуть радость жизни (мужской)</h3>
+  <div class="flow">
+    <div class="st"><b>Уединение</b>Отсечь всё, чем заглушается внутренний дискомфорт: экраны, сладкое, звонки, гости, алкоголь, секс. Дать неудовлетворённости проявиться и пройти к истоку сквозь неё.</div>
+    <div class="st"><b>Вызов страху</b>Действие, прямо противоположное страху: высота → альпинизм, толпа → ораторство. Внешний штраф за пропуск (100$ другу за месяц).</div>
+    <div class="st"><b>Вопрошание</b>Объединяет оба и глубже: лес, минимум еды и сна, мантра, ритуал, ожидание ответа в Настоящем. Мягкая форма — 10 минут тишины ежедневно.</div>
+  </div>
+  <p class="col muted" style="font-size:14.5px">Плюс обязательный контур — честные друзья, которые говорят в глаза и ждут того же. Для женщины путь обратный: не уединение, а карнавал.</p>
+
+  <h3 style="font-size:24px;margin:36px 0 6px">6.9 Три позиции мужчины в паре</h3>
+  <figure class="wide">
+    <svg viewBox="0 0 1120 170" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="30" width="340" height="110" rx="8" fill="var(--alert-soft)" stroke="var(--alert)"/>
+      <text x="190" y="62" text-anchor="middle" class="svgt" font-size="14.5" font-weight="600">Деспот</text>
+      <text x="190" y="88" text-anchor="middle" class="svgm" font-size="12.5">«Или по-моему, или иди откуда пришла»</text>
+      <text x="190" y="110" text-anchor="middle" class="svgm" font-size="12">чёткость есть, любви нет</text>
+      <rect x="390" y="30" width="340" height="110" rx="8" fill="var(--alert-soft)" stroke="var(--alert)"/>
+      <text x="560" y="62" text-anchor="middle" class="svgt" font-size="14.5" font-weight="600">Соглашатель</text>
+      <text x="560" y="88" text-anchor="middle" class="svgm" font-size="12.5">«Заранее согласен со всем, дорогая»</text>
+      <text x="560" y="110" text-anchor="middle" class="svgm" font-size="12">по автору — ещё дальше от мужского</text>
+      <rect x="760" y="30" width="340" height="110" rx="8" fill="var(--act-soft)" stroke="var(--act)"/>
+      <text x="930" y="62" text-anchor="middle" class="svgt" font-size="14.5" font-weight="600">Истинный мужчина</text>
+      <text x="930" y="88" text-anchor="middle" class="svgm" font-size="12.5">«Или вместе — к свободе духа,</text>
+      <text x="930" y="106" text-anchor="middle" class="svgm" font-size="12.5">или в разные стороны; на меньшее не соглашусь»</text>
+    </svg>
+    <figcaption>Гл. 49. Автор прямо говорит, что деспот ближе к мужскому, чем соглашатель: «война» с женщиной хотя бы будит мужественность, уступка — крах.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 7. ГЛОССАРИЙ ============ -->
+<section class="blk" id="gloss">
+  <div class="sec-head"><div class="n">07</div><div><h2>Глоссарий</h2><div class="sub">Термины автора — человеческим языком. Карточки переворачиваются по клику: сначала вспомни сам.</div></div></div>
+  <div class="cards" id="cards">
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Сексуальная сущность<small>sexual essence</small></div><div class="bk">Глубинный полюс человека — мужественный, женственный или сбалансированный. Не равен полу и ориентации. Определяется тем, что трогает до основания души: миссия и свобода или любовь и наполнение.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Полярность<small>polarity</small></div><div class="bk">Разница потенциалов между мужественным и женственным полюсом. Источник эротической страсти (для любви не нужна). Аналогия автора — магнит и батарея.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Деполяризация<small>depolarization</small></div><div class="bk">Сближение полюсов в паре: он мягчеет, она берёт решения. Страсть уходит, остаётся дружба, растёт конфликтность. По автору — главная причина расставаний.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Миссия<small>purpose / mission</small></div><div class="bk">Основное предназначение мужчины, ядро концентрических окружностей. Выше отношений. Без неё мужчина — дрейфующий корабль; с ней — источник силы даже в постели.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Грань возможного<small>the edge</small></div><div class="bk">Предел, у которого появляется страх. Место роста: не отступать в комфорт и не прыгать в бездну. «Один шаг за горизонт каждый день».</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Испытание<small>testing</small></div><div class="bk">Постоянная проверка женщиной, устоит ли мужчина: упрёки, провокации, «неплохо» в ответ на миллион, буквальные указания. Не кончается никогда; форма любви.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Шива<small>образ</small></div><div class="bk">Мужчина-бог: невозмутимый, любвеобильный, всеобъемлющий, которого не сбить с пути. Идеал, к которому женщина «проявляет» мужчину проверками.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Настоящее<small>the present</small></div><div class="bk">Глубина текущего момента; «жизнь — это и есть Настоящее». Источник жизни и зев смерти одновременно. Женщина возвращает в него мужчину.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Обращённая эякуляция<small>reversed ejaculation</small></div><div class="bk">Проведение сексуальной энергии вверх по позвоночнику к голове вместо выброса. Сохраняет «топливо» для дара; по автору, женщина чувствует разницу.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Орбита тела<small>bodily circuit</small></div><div class="bk">Вдох — энергия вниз по передней части до промежности; выдох — вверх по позвоночнику до головы. Плюс замок тазового дна. Практика вне и внутри постели.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Вопрошание<small>questing</small></div><div class="bk">Древняя практика задавания главного вопроса: уединение, минимум сна и еды, мантра, ритуал, ожидание ответа. Мягкая форма — 10 минут тишины в день.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Исчерпанная карма<small>жизненный цикл</small></div><div class="bk">Внезапное безразличие к делу без вины и страха — знак завершения окружности. Выходить безупречно, без «хвостов», затем ждать знака и идти «холодно-горячо».</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Температура<small>женской энергетики</small></div><div class="bk">Горячая или холодная энергетика женщины и её соответствие текущему состоянию нервной системы мужчины. Меняется с обстоятельствами; выравнивается не только постелью.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Женщина = мир<small>ключевая аналогия</small></div><div class="bk">Как мужчина входит в женщину — так входит в мир. Оба испытывают, не сдаются на похоть и робость, раскрываются искренности и отваге. Мастер для женщины — мастер для мира.</div></div></div>
+    <div class="card" tabindex="0"><div class="in"><div class="fc">Самодисциплина vs подавление<small>гл. 26</small></div><div class="bk">Подавление — война с желанием и захоронение в подсознании. Самодисциплина — приоритет высших желаний над низшими по велению ума и сердца.</div></div></div>
+  </div>
+</section>
+
+<!-- ============ 8. ЦИТАТЫ ============ -->
+<section class="blk" id="quotes">
+  <div class="sec-head"><div class="n">08</div><div><h2>Ключевые цитаты</h2><div class="sub">Короткие дословные фрагменты в русском переводе, с указанием главы. Для развёрнутой мысли — к соответствующей главе конспекта.</div></div></div>
+  <div class="quotes">
+    <div class="q">«Каждый момент ожидания — упущенный момент.»<cite>гл. 1</cite></div>
+    <div class="q">«Мужчина говорит то, что думает. Женщина — что чувствует.»<cite>гл. 16</cite></div>
+    <div class="q">«…для этого нужен ваш эрегированный дух.»<cite>гл. 9</cite></div>
+    <div class="q">«Миссия должна быть выполнена» — так звучит цель вашей жизни.<cite>гл. 7</cite></div>
+    <div class="q">«Истинный мужчина не скрывает страх и не скрывается от страха.»<cite>гл. 4</cite></div>
+    <div class="q">«Женщина — не карбюратор, который следует отладить.»<cite>гл. 19</cite></div>
+    <div class="q">«Вы не пастор, не психотерапевт — вы любовник.»<cite>гл. 44</cite></div>
+    <div class="q">«Её энергия — его осознанность.»<cite>гл. 38, заголовок</cite></div>
+    <div class="q">«Не будет любви — ничто не поможет.»<cite>гл. 46</cite></div>
+    <div class="q">«Ваша цель — освобождение? Тогда лучшего пути не стоит и искать.»<cite>гл. 15</cite></div>
+  </div>
+</section>
+<!-- ============ 9. СЛОЙ УГЛУБЛЕНИЯ ============ -->
+<section class="blk" id="deep">
+  <div class="sec-head"><div class="n">09</div><div><h2>Слой углубления</h2><div class="sub">Комментарий Claude, а не слова автора. Задача — добавить объём: механика, родословная, резонанс, расширение внутри системы автора, зоны опережающего знания.</div></div></div>
+
+  <div class="tabs" id="deeptabs">
+    <div role="tablist">
+      <button role="tab" aria-selected="true" aria-controls="dt1">Механика</button>
+      <button role="tab" aria-selected="false" aria-controls="dt2">Родословная идеи</button>
+      <button role="tab" aria-selected="false" aria-controls="dt3">Резонанс</button>
+      <button role="tab" aria-selected="false" aria-controls="dt4">Расширение</button>
+      <button role="tab" aria-selected="false" aria-controls="dt5">Терра инкогнита</button>
+    </div>
+
+    <div role="tabpanel" id="dt1">
+      <div class="voice v-deep"><span class="tag">Углубление · механика</span>
+        <p><strong>Испытание как проверка регуляции.</strong> Один из возможных механизмов «петли испытания» (гл. 15, 30, 38) — то, что в семейной системной терапии Мюррей Боуэн называл дифференциацией «я»: способностью оставаться в контакте с сильными эмоциями другого, не сливаясь с ними и не дистанцируясь. «Неплохо» в ответ на миллион — тест именно этой способности. Автор описывает то же явление изнутри пары и на своём языке: «сохранить счастье и чувство юмора».</p>
+        <p><strong>Тело как первый канал.</strong> Совет «отвечать телом, а не словами» (гл. 38) и «расслабить пресс, смотреть в глаза» (гл. 2) согласуется с тем, что известно о со-регуляции: тон голоса, дыхание, мимика и прикосновение читаются партнёром быстрее, чем аргументы. Медленное диафрагмальное дыхание с длинным выдохом — рабочий инструмент повышения вагусного тонуса и вариабельности сердечного ритма (HRV); практика гл. 45 «продышать комок у пупка» ложится сюда напрямую.</p>
+        <p><strong>Грань и страх.</strong> Кривая Йеркса–Додсона — известное описание того, почему «комфорт» и «бездна» одинаково снижают результат, а середина даёт пик. Автор добавляет к ней измерение, которого в лабораторной кривой нет: страх у грани — не помеха, а компас. Это ближе к ACT (Хейс): готовность быть с дискомфортом ради ценности, вместо избегания.</p>
+        <p><strong>Одобрение вместо вызова (гл. 17).</strong> Гипотеза: то, что автор описывает как различие женственной и мужественной реакции, в терминах поведения выглядит как разница в чувствительности к угрозе отвержения. Готтман наблюдал в парах близкий феномен: критика запускает защиту, а «поворот навстречу» — открытость. Автор формулирует это как пол-специфичное правило; наблюдения Готтмана касаются обоих партнёров.</p>
+        <p><strong>Сохранение семени.</strong> Возможные механизмы описанного автором эффекта «ясность и сила» — управление возбуждением через дыхание и мышечный контроль (тренировка тазового дна известна в урологии), перенос внимания с генитальных ощущений на партнёра, и субъективный эффект отложенного вознаграждения. Что именно даёт вклад — вопрос для собственного наблюдения.</p>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="dt2" hidden>
+      <div class="voice v-deep"><span class="tag">Углубление · родословная</span>
+        <p><strong>Прямой учитель.</strong> Дейда — ученик Ади Да (Da Free John), американского духовного учителя; от него — язык «отдачи себя», «тела как канала», «свободы через растворение эго» и тема сакральной сексуальности. Многие ходы гл. 43 и 51 («женщина — зеркало», «исчезновение в Едином») — недвойственная (адвайтическая) традиция, изложенная для западного мужчины.</p>
+        <p><strong>Шива и Шакти.</strong> Пара «его осознанность — её энергия» (гл. 38) — прямая калька тантрической формулы кашмирского шиваизма: Шива — сознание, Шакти — сила. Автор называет образ по имени в гл. 15. Отсюда и храмовые танцовщицы (гл. 24, 27) как пример «сексуальность = духовность».</p>
+        <p><strong>Даосская сексуальная алхимия.</strong> «Орбита тела» (гл. 46) — это малый небесный круг (микрокосмическая орбита) даосской внутренней алхимии: энергия по переднему (жэнь-май) и заднему (ду-май) каналам. Популяризатор на Западе — Мантак Чиа; идея сохранения семени и «обращения цзин в ци» — классика даосских трактатов о спальне.</p>
+        <p><strong>Мифопоэтическое мужское движение.</strong> Книга (1997) вырастает из волны Роберта Блая («Железный Джон», 1990) и Мура–Жиллетта («Король, Воин, Маг, Любовник», 1990): мужские круги, честная обратная связь друга (гл. 10), «воин» (гл. 37), отделение от отца (гл. 3). Дейда добавляет к этому сексуальную полярность и недвойственность.</p>
+        <p><strong>Юнг.</strong> «В каждом есть оба начала» и «сущность ≠ пол» — родственно анимусу/аниме, но Дейда, в отличие от Юнга, не ставит целью интеграцию противоположностей в одном человеке; напротив — рекомендует акцентировать доминанту ради полярности в паре.</p>
+        <p><strong>Стоики и «memento mori».</strong> «Тест смерти» (гл. 14) и «духовный воин» (гл. 37) — линия от Марка Аврелия и самурайского «Хагакурэ» к современной практике памятования о смерти.</p>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="dt3" hidden>
+      <div class="voice v-deep"><span class="tag">Углубление · резонанс</span>
+        <p><strong>Готтман (исследования пар).</strong> Совпадения: «не анализируй, обними» ↔ значимость попыток восстановления (repair attempts) и физиологического успокоения; «хвалить то, что нуждается в доработке» ↔ соотношение позитивных и негативных взаимодействий; «не хлопай дверью» ↔ отстранение (stonewalling) как один из предикторов разрыва. Расхождение: у Готтмана готовность «принимать влияние» партнёрши — предиктор устойчивости брака, у Дейды (гл. 6, 30) — риск деполяризации. Разница в основаниях: Готтман измеряет стабильность союза, Дейда — интенсивность полярности и эроса. Оба могут быть правы о разном.</p>
+        <p><strong>Теория привязанности.</strong> «Женщина испытывает, чтобы убедиться, что победить невозможно» — с позиции привязанности читается как протестное поведение с целью проверить надёжность фигуры. Сью Джонсон (EFT) описывает похожий цикл «преследование — отстранение» и тот же выход: оставаться, а не уходить (гл. 21).</p>
+        <p><strong>Теория самодетерминации (Деси и Райан).</strong> «Живи так, будто отца нет рядом» и «поступай по внутренней правде» — автономная мотивация против контролируемой. Автор приходит к тому же выводу из другой двери.</p>
+        <p><strong>Виктор Франкл.</strong> «Без миссии — бессмысленность, которая пропитывает и отношения» (гл. 7, 11) — экзистенциальный вакуум и смысл как первичная мотивация. Франкл говорил о людях, Дейда — о мужественной сущности.</p>
+        <p><strong>Аврелий и Эпиктет.</strong> «Миллион и молоко — вещи одного порядка» (гл. 15) — стоическая невозмутимость по отношению к внешним благам.</p>
+        <p><strong>Амалбаев.</strong> Формула «ценность = компетенции × энергия» и энергия как первичный ресурс перекликаются с гл. 41 и 44: сексуальная энергия как топливо дара. У Дейды энергия сохраняется телом, у Амалбаева — управляется состоянием; оба ставят её выше техники.</p>
+        <p><strong>Зеланд.</strong> «Женщина и мир — мираж и зеркало» (гл. 43) резонирует с трансерфинговой идеей мира-зеркала и «важности», которая создаёт сопротивление: чем сильнее желание — тем дальше. Дейда: расслабься, перестань гнаться — и счастье посетит само.</p>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="dt4" hidden>
+      <div class="voice v-deep"><span class="tag">Углубление · расширение внутри системы автора</span>
+        <p><strong>Метрика для «Шивы».</strong> Автор описывает исход испытания качественно. Внутри его логики можно измерять: HRV в утро после крупного домашнего «теста», время восстановления после упрёка (минуты до возвращения юмора), число дней подряд без «войны за территорию». Это не оценка автора — это инструмент, чтобы видеть свою динамику.</p>
+        <p><strong>Проверка «сигнала» из гл. 12.</strong> Пять признаков завершения цикла легко превратить в чек-лист с порогом: 4 из 5 три недели подряд — сигнал, 2 из 5 — скорее усталость. Это защищает и от преждевременного выхода, и от «загнанной лошади».</p>
+        <p><strong>Хвала как система.</strong> Гл. 17 даёт принцип; расширение — ритм: одно конкретное одобрение в день до 21:00, привязанное к тому качеству, которое желаешь усилить. У самого автора: «каждый день и по многу раз».</p>
+        <p><strong>Мужской круг с протоколом.</strong> Гл. 10 и 50 описывают, кто нужен; можно добавить формат: еженедельно, 20 минут на человека, «план — опасение — обратная связь без смягчения», запрет на «плакаться в жилетку» как у автора.</p>
+        <p><strong>Уединение в графике.</strong> Гл. 50 предполагает выпадение из жизни; мягкая версия — 24 часа раз в месяц без экранов, сахара и секса, с десятиминутным «вопрошанием» утром и вечером. Форма меняется, содержание автора сохраняется.</p>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="dt5" hidden>
+      <div class="voice v-deep"><span class="tag">Углубление · зоны опережающего знания</span>
+        <p>Здесь автор идёт впереди того, что академия описала. Это не слабые места — это то, что стоит отследить на собственном опыте.</p>
+        <ul>
+          <li><strong>Эффект сохранения семени на ясность, волю и деловую энергию (гл. 41, 44, 46).</strong> Многовековая практика даосов и тантриков, единичные современные наблюдения. Отследить самому: 4 недели практики, ежедневная оценка энергии, решительности, качества сна.</li>
+          <li><strong>Женщина как точный детектор схода мужчины с курса (гл. 31, 34, 42).</strong> «Вглядись в её лицо». Тезис проверяем в дневнике: недели, когда ты в миссии, и недели дрейфа — как выглядит и звучит она.</li>
+          <li><strong>«Температура» энергетики и её выравнивание (гл. 28).</strong> Автор здесь работает как практик, а не как исследователь: даёт внешние ориентиры и сам их оговаривает. Ядро идеи — состояние нервной системы мужчины меняет то, какой партнёр ему нужен, — заслуживает наблюдения; ориентиры по цвету волос и происхождению — культурно-конкретная рамка автора, а не механизм.</li>
+          <li><strong>Дыхание за другого (гл. 45).</strong> Практика «дышать сквозь зажатость соседа». Проверяемо косвенно — через собственное состояние и реакцию окружающих.</li>
+          <li><strong>Полярность как вещь, которую можно намеренно восстановить (гл. 50).</strong> «Он — в уединение, она — на карнавал». Эксперимент на пару месяцев с фиксацией: частота близости, конфликты, её самочувствие.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="voice v-alert"><span class="tag">Точка внимания</span>
+    <p><strong>Гл. 50, «вопрошание»:</strong> максимально долго не спать и минимально есть. Для тех, кто уже практикует интервальное голодание и тяжёлые тренировки, сочетание депривации сна, голода и физических нагрузок — зона, где нужен запас: не в неделю с соревнованиями и не при признаках перетренированности. Одно предупреждение по этому пункту; метод уединения в целом не затронут.</p>
+    <p><strong>Гл. 46, тазовое дно:</strong> «сжимать и вбирать» 3–4 раза в день — при появлении тянущих болей в промежности или трудностей с мочеиспусканием уменьшить объём: гипертонус тазового дна бывает от избытка так же, как слабость — от недостатка.</p>
+  </div>
+</section>
+
+<!-- ============ 10. СЛОЙ КОУЧА ============ -->
+<section class="blk" id="coach">
+  <div class="sec-head"><div class="n">10</div><div><h2>Слой коуча — приземление на Alex</h2><div class="sub">Комментарий Claude. Сильные стороны, слепые зоны, три горизонта, протокол.</div></div></div>
+
+  <div class="voice v-coach"><span class="tag">Коуч · что ты уже делаешь и, возможно, недооцениваешь</span>
+    <ul>
+      <li><strong>Грань возможного — твой рабочий режим.</strong> Цель х60 и $3M чистыми — это не «комфорт» и не «бездна», это осознанно выбранная планка. BJJ — ежедневная тренировка «остаться у края со страхом, не отступая и не прыгая» (гл. 8). Ты уже знаешь телом то, что автор описывает словами.</li>
+      <li><strong>Выход из Plix — пройденная окружность.</strong> По гл. 12 ты сделал то, что автор считает редким: закрыл цикл и назвал его закрытым. Стоит проверить одно — были ли «хвосты», незакрытые ожидания партнёров или команды. Если да — узел вернётся.</li>
+      <li><strong>Тело как основа решений.</strong> Твой фильтр «решения должны быть естественны для тела, HRV, гормоны» — это гл. 45 без мистики. Автор бы сказал: ты уже смотришь в нужное место.</li>
+      <li><strong>Разделение «жёсткость в бизнесе — мягкость дома».</strong> Автор одобрил бы жёсткость, но перепроверил бы «мягкость»: у него мягкость — не уступчивость, а способность идти в эпицентр бури, не сдавая курс (гл. 21, 38).</li>
+    </ul>
+  </div>
+
+  <div class="voice v-coach"><span class="tag">Коуч · где материал бьёт по слепой зоне</span>
+    <ul>
+      <li><strong>«Мягкость и включённость в семье» может незаметно превращаться в соглашательство.</strong> Гл. 6, 22, 30, 49: «заранее согласен» автор считает худшим, что можно сказать. Проверка: за последний месяц — сколько решений дома ты принял сам с объяснением «почему», и сколько — «как ты скажешь».</li>
+      <li><strong>Агентство как «мир, который постоянно тебя испытывает» — и ты выполняешь указания буквально.</strong> Заказчик в модели «время за деньги» — это гл. 31 в бизнесе: правки, «сделай как я сказал», «неплохо» в ответ на результат. Пока ты выполняешь претензии дословно, ты у штурвала клиента, а не у своего. Переход к продуктизированной выручке — это по сути «занять полюс»: продукт задаёт курс, клиент выбирает — идти или нет (гл. 49).</li>
+      <li><strong>Тест «миллион и молоко».</strong> Когда придёт крупная победа — первый большой контракт, экзит, рекордный месяц — как ты войдёшь домой? Ожидание праздника от жены — по автору, это «мамочка» вместо спутницы (гл. 15). Пройти тест — значит, что счастье не зависит от её реакции.</li>
+      <li><strong>Честный мужской круг.</strong> Гл. 10: не реже раза в неделю — план, опасение, жёсткая обратная связь. Продюсер, окружённый клиентами и командой, часто остаётся без того, кто скажет «ты полгода рассказываешь про эту нишу — либо сегодня, либо забудь». Кто сейчас этот человек? Если ответ «никто» — это самая дешёвая и самая доходная дыра.</li>
+      <li><strong>Дети как индикатор.</strong> Гл. 13: дети испытывают дисциплину отца именно там, где ему не хватает её для собственной жизни. Если Данил или Давид «выкидывают фортели» в периоды, когда ты в дрейфе, — это данные.</li>
+      <li><strong>Энергия и разрядка.</strong> Ты биохакер: гл. 41, 44, 46 — это управляемый эксперимент, а не догма. Не принимать на веру и не отвергать — измерить.</li>
+    </ul>
+  </div>
+
+  <div class="hz">
+    <div><b class="t">48 часов</b>
+      <p>Одно микро-действие: записать миссию одним предложением в формате «Миссия должна быть выполнена: …» (гл. 7, 11) и заблокировать в календаре час на неё <em>завтра и послезавтра</em>, до всех клиентских слотов (гл. 1).</p>
+      <span class="m">Критерий выполнения: предложение существует в письменном виде; два часовых слота стоят в календаре и прошли; в конце каждого дня — ответ «да/нет» на вопрос автора: мог ли я прожить день плодотворнее.</span>
+    </div>
+    <div><b class="t">30 дней</b>
+      <p>Протокол «Шива»: (1) час в день на миссию; (2) дыхание в низ живота 3×/день по 3 минуты, HRV утром; (3) еженедельный созвон с одним мужчиной по формату гл. 10; (4) журнал испытаний: каждый домашний «тест» — устоял/сбит, время возврата юмора; (5) одно конкретное одобрение Ольге в день.</p>
+      <span class="m">Метрики: доля дней с часом на миссию ≥ 80%; средний HRV за 4-ю неделю vs 1-я; ≥ 4 созвона; доля «устоял» в журнале; её ответ на вопрос «как тебе этот месяц» — в свободной форме, дословно.</span>
+    </div>
+    <div><b class="t">Стратегия × 60</b>
+      <p>Архитектурный вывод из книги: х60 недостижим из отношений «время за деньги», потому что в этой модели курс задаёт клиент, а ты — юнга на побегушках (гл. 49). Продукт с equity-апсайдом — это твой полюс: ты формулируешь, мир выбирает. Каждый крупный контракт агентства проверять по гл. 12: это окружность, которую нужно пройти, или «хвост», который держит?</p>
+      <span class="m">Проверка курса раз в квартал по гл. 42: «лицо жены сияет или устало» + «энергия на рисковые шаги есть или тянет на диван».</span>
+    </div>
+  </div>
+
+  <div class="voice v-act"><span class="tag">Протокол внедрения · чек-лист (отметки сохраняются в этом браузере)</span>
+    <ul class="chk" id="chk">
+      <li><input type="checkbox" id="c1"><label for="c1">Миссия записана одним предложением<span class="h">гл. 7, 11 · 48 часов</span></label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">Час на миссию стоит в календаре на 7 дней вперёд, до клиентских слотов<span class="h">гл. 1</span></label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">Назван один человек для еженедельной жёсткой обратной связи; первый созвон проведён<span class="h">гл. 10</span></label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">Дыхание в низ живота 3×/день — 7 дней подряд<span class="h">гл. 45</span></label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">Журнал испытаний заведён; записаны первые 5 эпизодов<span class="h">гл. 15, 33, 38</span></label></li>
+      <li><input type="checkbox" id="c6"><label for="c6">Одно конкретное одобрение Ольге в день — 14 дней подряд<span class="h">гл. 17</span></label></li>
+      <li><input type="checkbox" id="c7"><label for="c7">Проведена ревизия Plix на «хвосты»: список открытых ожиданий — пуст или закрыт<span class="h">гл. 12</span></label></li>
+      <li><input type="checkbox" id="c8"><label for="c8">Пять признаков завершения цикла применены к текущему агентскому формату — письменный ответ<span class="h">гл. 12</span></label></li>
+      <li><input type="checkbox" id="c9"><label for="c9">24 часа мягкого уединения проведены (без экранов, сахара, секса; 2×10 мин вопрошания)<span class="h">гл. 50</span></label></li>
+      <li><input type="checkbox" id="c10"><label for="c10">Эксперимент по гл. 46 запущен на 4 недели с ежедневной оценкой энергии, сна, решительности<span class="h">гл. 44–46</span></label></li>
+      <li><input type="checkbox" id="c11"><label for="c11">Три раза в неделю — открытое действие «будто отца нет рядом»<span class="h">гл. 3</span></label></li>
+      <li><input type="checkbox" id="c12"><label for="c12">Квартальный чек курса: лицо жены / энергия на риск — записан результат<span class="h">гл. 42</span></label></li>
+    </ul>
+    <p class="noprint" style="margin-top:12px;font-size:13px"><button id="chkReset" style="text-decoration:underline;color:var(--muted)">Сбросить отметки</button></p>
+  </div>
+
+  <div class="pull">Неудобный вопрос: если завтра агентство исчезнет вместе с клиентами — останется ли у тебя миссия, за которую Ольга будет любить тебя «даже без гроша в кармане» (гл. 31), или останется только список обязательств?<small>Ответ «я найду новых клиентов» — это ответ юнги. Ответ мужчины начинается с «Миссия должна быть выполнена: …».</small></div>
+
+  <div class="voice v-coach"><span class="tag">Коуч · самопроверка понимания</span>
+    <div class="sq"><div><strong>Жена говорит: «Ты слишком много работаешь, детей не видишь». Что делает мужчина по автору?</strong></div><button>Показать ответ</button><div class="a">Не выполняет буквально и не оправдывается прошлым. Читает как сигнал (гл. 31): сбился ли я с курса — работаю из миссии или из страха/дрейфа? Если из миссии — возвращает поток любви телом, 10–20 минут абсолютного внимания (гл. 7), объясняет позицию (гл. 22). Если из дрейфа — меняет курс, не количество часов.</div></div>
+    <div class="sq"><div><strong>Ты закрыл рекордный месяц. Она отвечает: «Неплохо. Мусор вынес?». Правильный ход?</strong></div><button>Показать ответ</button><div class="a">Вынести мусор с любовью и без обиды: «Вот рекорд, а вот мусор — ничего не забыл». Счастье не зависит от её реакции и от суммы (гл. 15). Обида или требование праздника — провал теста.</div></div>
+    <div class="sq"><div><strong>Пять признаков говорят, что агентский формат исчерпан. Что делать первым?</strong></div><button>Показать ответ</button><div class="a">Сначала спросить близких и друга: страх / лень / исчерпание? Если исчерпание — безупречно закрыть без «хвостов» и не ломая планов других, затем ждать знака без деструкции и действовать «холодно-горячо» (гл. 12). Не прыгать в новое до закрытия старого.</div></div>
+  </div>
+</section>
+
+<!-- ============ 11. ОТКРЫТЫЕ ВОПРОСЫ ============ -->
+<section class="blk" id="open">
+  <div class="sec-head"><div class="n">11</div><div><h2>Открытые вопросы</h2><div class="sub">Что автор раскрыл пунктиром, где внутри системы есть напряжения, куда идти дальше к тому же учителю.</div></div></div>
+  <div class="col">
+    <ol class="qs">
+      <li><strong>Как узнать миссию?</strong> Книга подробно описывает, что делать, когда миссия есть, и как распознать исчерпание цикла, но процесс нахождения дан пунктиром: «ждать знака», «холодно-горячо», «вопрошание». Развёртка — в других работах автора и в практике.</li>
+      <li><strong>Напряжение «миссия превыше всего» ↔ «оставайся с женщиной миг за мигом — кратчайший путь к свободе» (гл. 7 vs 48).</strong> Автор держит оба тезиса; связка — присутствие: миссия даёт стержень, из которого возможно полное присутствие с ней. Как это распределяется по часам реального дня — не описано.</li>
+      <li><strong>Женщина как источник инсайта.</strong> Гл. 16 говорит «не слушай слова», гл. 16 же — «её интуиция бесценна, научись отличать». Критерий различения капризов и интуиции автор не даёт.</li>
+      <li><strong>Гл. 28 и внешние маркеры «температуры».</strong> Автор сам оговаривает ненадёжность признаков по внешности и происхождению. Что остаётся, если убрать ориентиры, — «внутренний индикатор мужчины». Как его калибровать — открыто.</li>
+      <li><strong>Мужественная женщина.</strong> Книга почти всегда говорит о женственной партнёрше; для 10% инверсных пар — «сместить местоимения». Как выглядит испытание, одобрение и штурвал в такой паре — не разобрано.</li>
+      <li><strong>Дети и полярность.</strong> Гл. 13 сильна, но о том, как отец с миссией строит контакт с сыновьями (не «сколько», а «как»), — только принцип эмоционального тона.</li>
+      <li><strong>«Обращённая эякуляция» и деторождение.</strong> Автор упоминает, что мир ждёт большего, чем потомство, — но не проговаривает, как практика сочетается с планированием семьи.</li>
+      <li><strong>Позиция автора по равенству и её приём.</strong> Автор явно закрепляет социальное равенство как исходную точку и работает только в интимной сфере. Как эта граница удерживается в паре, где оба — предприниматели, — вопрос для практики.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 12. РЕФЛЕКСИЯ ============ -->
+<section class="blk" id="reflect">
+  <div class="sec-head"><div class="n">12</div><div><h2>Вопросы для рефлексии</h2><div class="sub">Быстрых ответов нет. Возвращаться через месяц.</div></div></div>
+  <div class="col">
+    <ol class="qs">
+      <li>Если применить «тест смерти» (гл. 14) к сегодняшнему дню — на чём именно меня застанет коса: на миссии, на правках клиента или на ленте?</li>
+      <li>Какое из моих «потом» (после запуска, после найма, после х3) — миф из гл. 1, и что я на самом деле прикрываю этим «потом»?</li>
+      <li>В каких решениях дома за последний месяц я сказал «как ты скажешь» — и что я при этом сообщил себе о доверии к своей мудрости (гл. 6)?</li>
+      <li>Кто из моих клиентов — «женщина, которая тебя не выбирает» (гл. 29), и сколько энергии уходит на то, чтобы её завоевать?</li>
+      <li>Что я делаю, когда жена «не в духе»: выхожу «пересидеть в бар» (в телефон, в работу), анализирую — или иду в эпицентр (гл. 21)?</li>
+      <li>Что бы я делал на грани возможного прямо сейчас, если бы страх был компасом, а не сигналом «стоп» (гл. 8)?</li>
+      <li>Мои сыновья впитывают мой эмоциональный тон: он ясный и звучный или дребезжит от раздвоенности между агентством и тем, что я считаю миссией (гл. 13)?</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 13. СВЯЗИ ============ -->
+<section class="blk" id="links">
+  <div class="sec-head"><div class="n">13</div><div><h2>Связи</h2><div class="sub">С чем в проекте перекликается, что читать и смотреть дальше.</div></div></div>
+  <div class="col">
+    <table>
+      <tr><th>Источник в проекте</th><th>Где перекликается</th></tr>
+      <tr><td>Амалбаев, «духовный материализм»</td><td>Энергия как первичный ресурс ↔ гл. 41, 44 (сексуальная энергия как топливо дара). Точка перегиба развития ↔ гл. 12 (исчерпание цикла). Материальные компетенции × энергия ↔ «эрегированный дух», без которого мир не сдаётся (гл. 9).</td></tr>
+      <tr><td>Зеланд, Трансерфинг</td><td>Мир как зеркало ↔ гл. 43. Важность порождает сопротивление ↔ «прекрати хотеть». Выбор реальности вниманием ↔ «то, что больше всего занимает тебя, и есть твоя жизнь» (гл. 14).</td></tr>
+      <tr><td>Твоя рамка «время → рычаг»</td><td>Гл. 49 (позиция vs соглашательство), гл. 31 (буквальное выполнение претензий — обочина), гл. 25 (не пытаться быть всем для клиента: партнёр, друг, исполнитель).</td></tr>
+    </table>
+    <h3 style="font-size:22px;margin:28px 0 10px">Читать и смотреть дальше</h3>
+    <ul>
+      <li><strong>Дейда, «Intimate Communion» и «Blue Truth»</strong> — развёртка полярности и духовной сексуальности, к которым автор отсылает в тексте.</li>
+      <li><strong>Ади Да</strong> — источник недвойственного языка автора; для понимания, откуда растёт «исчезновение в Едином».</li>
+      <li><strong>Мантак Чиа, «Даосские секреты любви»</strong> — техническая база «орбиты тела» и сохранения семени.</li>
+      <li><strong>Роберт Блай, «Железный Джон»; Мур и Жиллетт, «Король, Воин, Маг, Любовник»</strong> — мужское движение, из которого выросла книга; мужские круги и архетип воина.</li>
+      <li><strong>Мюррей Боуэн / Дэвид Шнарх, «Passionate Marriage»</strong> — дифференциация «я» как механизм устойчивости в «испытаниях»; Шнарх прямо связывает дифференциацию с эротикой в долгом браке.</li>
+      <li><strong>Джон Готтман, «Семь принципов»; Сью Джонсон, «Обними меня крепче»</strong> — эмпирический контур: где Дейда совпадает с наблюдениями пар и где расходится в основаниях.</li>
+      <li><strong>Эстер Перель, «Размножение в неволе»</strong> — та же проблема «близость убивает желание» с другой стороны: дистанция, тайна, автономия как условия эроса.</li>
+    </ul>
+  </div>
+  <div class="foot">Конспект подготовлен по русскому изданию 2004 г. (fb2, кодировка cp1251). Слова автора и комментарий разделены цветом и меткой. Документ автономен: без внешних зависимостей, работает офлайн, печатается с раскрытыми блоками.</div>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+  var d=document,b=d.body;
+  // theme
+  var th=d.getElementById('themeBtn');
+  function setT(t){d.documentElement.setAttribute('data-theme',t);th.setAttribute('aria-pressed',t==='light');try{localStorage.setItem('deida_theme',t)}catch(e){}}
+  try{var st=localStorage.getItem('deida_theme');if(st)setT(st)}catch(e){}
+  th.addEventListener('click',function(){setT(d.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')});
+  // toc mobile
+  var tb=d.getElementById('tocBtn'),toc=d.getElementById('toc');
+  tb.addEventListener('click',function(){var o=toc.classList.toggle('open');tb.setAttribute('aria-expanded',o)});
+  toc.addEventListener('click',function(e){if(e.target.tagName==='A'){toc.classList.remove('open');tb.setAttribute('aria-expanded',false)}});
+  // progress
+  var pr=d.getElementById('progress');
+  function prog(){var h=d.documentElement,s=h.scrollTop||b.scrollTop,m=h.scrollHeight-h.clientHeight;pr.style.width=(m?s/m*100:0)+'%'}
+  addEventListener('scroll',prog,{passive:true});prog();
+  // scrollspy
+  var links=[].slice.call(toc.querySelectorAll('a')),tgts=links.map(function(a){return d.getElementById(a.getAttribute('href').slice(1))}).filter(Boolean);
+  if('IntersectionObserver' in window){
+    var cur=null;
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){cur=en.target.id;links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+cur)})}})},{rootMargin:'-20% 0px -70% 0px'});
+    tgts.forEach(function(t){io.observe(t)});
+  }
+  // depth / review / open all
+  var chs=[].slice.call(d.querySelectorAll('details.ch'));
+  var db=d.getElementById('depthBtn');
+  db.addEventListener('click',function(){var on=b.classList.toggle('brief');db.setAttribute('aria-pressed',on)});
+  var rb=d.getElementById('reviewBtn');
+  rb.addEventListener('click',function(){var on=rb.getAttribute('aria-pressed')!=='true';rb.setAttribute('aria-pressed',on);chs.forEach(function(c){c.open=!on});d.querySelectorAll('.sq').forEach(function(s){s.classList.remove('on')});d.querySelectorAll('.card').forEach(function(c){c.classList.remove('f')});if(on)d.getElementById('notes').scrollIntoView()});
+  d.getElementById('openAll').addEventListener('click',function(){chs.forEach(function(c){c.open=true});rb.setAttribute('aria-pressed',false)});
+  addEventListener('beforeprint',function(){chs.forEach(function(c){c.open=true})});
+  // tabs
+  d.querySelectorAll('.tabs').forEach(function(t){
+    var tabs=[].slice.call(t.querySelectorAll('[role=tab]'));
+    tabs.forEach(function(tab){tab.addEventListener('click',function(){tabs.forEach(function(x){x.setAttribute('aria-selected',x===tab);d.getElementById(x.getAttribute('aria-controls')).hidden=x!==tab})})});
+  });
+  // flashcards
+  d.querySelectorAll('.card').forEach(function(c){function f(){c.classList.toggle('f')}c.addEventListener('click',f);c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}})});
+  // self-check
+  d.querySelectorAll('.sq button').forEach(function(bt){bt.addEventListener('click',function(){var p=bt.closest('.sq'),on=p.classList.toggle('on');bt.textContent=on?'Скрыть ответ':'Показать ответ'})});
+  // svg nodes
+  function wire(svgId,infoId){var s=d.getElementById(svgId),inf=d.getElementById(infoId);if(!s)return;s.querySelectorAll('.node').forEach(function(n){n.setAttribute('tabindex','0');function go(){s.querySelectorAll('.node').forEach(function(x){x.classList.remove('on')});n.classList.add('on');inf.textContent=n.getAttribute('data-info');inf.classList.add('on')}n.addEventListener('click',go);n.addEventListener('keydown',function(e){if(e.key==='Enter'){go()}})})}
+  wire('mindmap','mapinfo');wire('rings','ringsinfo');
+  // checklist persistence
+  var key='deida_chk',state={};
+  try{state=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+  d.querySelectorAll('#chk input').forEach(function(i){i.checked=!!state[i.id];i.closest('li').classList.toggle('done',i.checked);i.addEventListener('change',function(){state[i.id]=i.checked;i.closest('li').classList.toggle('done',i.checked);try{localStorage.setItem(key,JSON.stringify(state))}catch(e){}})});
+  d.getElementById('chkReset').addEventListener('click',function(){state={};try{localStorage.removeItem(key)}catch(e){}d.querySelectorAll('#chk input').forEach(function(i){i.checked=false;i.closest('li').classList.remove('done')})});
+  // reveal on scroll
+  if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var els=d.querySelectorAll('figure,.stat,.tldr li,.q,.hz>div,.voice');
+    els.forEach(function(e){e.style.opacity='0';e.style.transform='translateY(10px)';e.style.transition='opacity .5s ease,transform .5s ease'});
+    var ro=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='none';ro.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e){ro.observe(e)});setTimeout(function(){els.forEach(function(e){e.style.opacity='1';e.style.transform='none'})},2500);
+    addEventListener('beforeprint',function(){els.forEach(function(e){e.style.opacity='1';e.style.transform='none'})});
+  }
+})();
+</script>
+</body>
+</html>
