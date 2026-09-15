@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viva Cell — архитектурная карта и путь лаборанта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F7F8; --paper:#FFFFFF; --ink:#16232B; --muted:#5B6B75; --line:#D9E1E5;
+    --teal:#0E8C82; --teal-dark:#0A665F; --teal-soft:#E1F2EF;
+    --red:#C8443A; --red-soft:#FBE7E5; --amber:#C98A14; --amber-soft:#FBF0D9; --green:#358F58; --green-soft:#E2F2E7;
+    --blue-soft:#E4EEF6; --blue:#2F6AA0;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.55}
+  a{color:var(--teal-dark)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  header.top{background:var(--paper);border-bottom:1px solid var(--line)}
+  header.top .wrap{display:flex;justify-content:space-between;align-items:flex-end;padding-top:36px;padding-bottom:28px;gap:24px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .dot{width:14px;height:14px;border-radius:50%;background:var(--teal);box-shadow:8px -8px 0 -3px var(--teal),14px 2px 0 -5px var(--teal)}
+  .brand b{font-size:22px;font-weight:700;letter-spacing:-.01em}
+  .brand span{color:var(--muted);font-size:14px}
+  .meta{color:var(--muted);font-size:14px;line-height:1.5;text-align:right}
+  .meta b{color:var(--ink);font-weight:600}
+  h1{font-size:40px;line-height:1.12;letter-spacing:-.02em;font-weight:700;margin:26px 0 12px;max-width:900px}
+  .lead{font-size:19px;color:var(--muted);max-width:820px;margin:0 0 28px}
+  nav.toc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:0 0 40px;display:flex;flex-wrap:wrap;gap:6px 22px;font-size:15px}
+  nav.toc a{text-decoration:none;color:var(--ink);border-bottom:1px solid transparent}
+  nav.toc a:hover{border-color:var(--teal)}
+  nav.toc a b{color:var(--teal);font-weight:600;margin-right:6px}
+  section{margin:0 0 56px}
+  h2{font-size:28px;letter-spacing:-.015em;margin:0 0 6px;font-weight:700;scroll-margin-top:24px}
+  h2 + .sub{color:var(--muted);font-size:16px;margin:0 0 22px;max-width:780px}
+  h3{font-size:19px;margin:28px 0 10px;font-weight:600}
+  p{margin:0 0 14px;max-width:780px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 24px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media (max-width:900px){.grid2,.grid3{grid-template-columns:1fr}}
+  .key{border-left:4px solid var(--teal);background:var(--teal-soft);padding:14px 18px;border-radius:0 10px 10px 0;margin:18px 0;max-width:820px}
+  .key b{display:block;margin-bottom:4px}
+  .warn{border-left:4px solid var(--amber);background:var(--amber-soft)}
+  .danger{border-left:4px solid var(--red);background:var(--red-soft)}
+  table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:15px}
+  th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+  th{background:#EEF3F5;font-weight:600;color:var(--ink)}
+  tr:last-child td{border-bottom:none}
+  td.n{color:var(--muted);white-space:nowrap}
+  .tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:13px;font-weight:600;white-space:nowrap}
+  .t-teal{background:var(--teal-soft);color:var(--teal-dark)}
+  .t-green{background:var(--green-soft);color:var(--green)}
+  .t-amber{background:var(--amber-soft);color:#8A5E0B}
+  .t-red{background:var(--red-soft);color:var(--red)}
+  .t-blue{background:var(--blue-soft);color:var(--blue)}
+  .t-grey{background:#EEF1F3;color:var(--muted)}
+  ul{margin:0 0 14px;padding-left:22px;max-width:780px}
+  li{margin:0 0 6px}
+  figure{margin:0 0 22px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px}
+  figure svg{width:100%;height:auto;display:block}
+  figcaption{color:var(--muted);font-size:14px;margin-top:10px}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--muted);margin-top:10px}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+  /* user flow */
+  .flow{position:relative}
+  .flow-head{display:grid;grid-template-columns:64px 1.25fr 1.25fr 1.1fr;gap:14px;padding:0 18px 10px;font-size:14px;color:var(--muted);font-weight:600}
+  .step{display:grid;grid-template-columns:64px 1.25fr 1.25fr 1.1fr;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:12px;position:relative}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center}
+  .step.outside .num{background:var(--blue)}
+  .step.exist .num{background:var(--green)}
+  .step h4{margin:0 0 6px;font-size:17px;font-weight:600}
+  .step .where{font-size:13px;color:var(--muted);margin-bottom:8px}
+  .step p{font-size:15px;margin:0 0 6px;max-width:none}
+  .step ul{font-size:15px;margin:0;padding-left:18px}
+  .step .ctrl{background:#F7FAFB;border-radius:8px;padding:12px 14px;font-size:14px}
+  .step .ctrl b{display:block;margin-bottom:4px;font-size:14px}
+  .flag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:13px;font-weight:600;margin:2px 4px 2px 0}
+  .f-red{background:var(--red-soft);color:var(--red)}
+  .f-amber{background:var(--amber-soft);color:#8A5E0B}
+  .f-teal{background:var(--teal-soft);color:var(--teal-dark)}
+  .phase{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border-bottom:none}
+  .phase .badge{height:36px;width:36px;border-radius:8px;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .phase .badge.next{background:#C5D2D9}
+  .phase h4{margin:2px 0 4px;font-size:17px}
+  .phase .kv{color:var(--muted);font-size:14px;margin-bottom:6px}
+  .divider{border:none;border-top:1px solid var(--line);margin:0 0 56px}
+  footer{color:var(--muted);font-size:14px;padding:24px 0 48px;border-top:1px solid var(--line)}
+  @media (max-width:820px){
+    h1{font-size:30px}
+    .flow-head{display:none}
+    .step{grid-template-columns:1fr}
+    .step .num{margin-bottom:4px}
+    .meta{text-align:left}
+  }
+  @media print{
+    body{background:#fff}
+    nav.toc{display:none}
+    .step,.card,figure,table{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span><div><b>Viva Cell</b><br><span>by Allergoprobe · AI-модуль контроля работы лаборанта</span></div></div>
+    <div class="meta">Версия 1.0 · 15 сентября 2026<br>Подготовил: <b>Alex Kim, Soltrix</b> — проектный менеджер<br>Источники: интервью с лаборантами и директором клиники, техотчёт Марата Казгожина (11.09.2026), концепт станции, сценарий курса лаборантов</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Умный лабораторный стол Viva Cell: что автоматизируем, как это устроено и какой путь проходит каждая пробирка</h1>
+  <p class="lead">Документ для всех участников проекта — директора, заведующей лабораторией, лаборантов, разработчиков и менеджеров. Здесь одним языком описано, что делает система, из каких частей она состоит и что происходит с образцом на каждом шаге от забора крови до результата.</p>
+
+  <nav class="toc">
+    <a href="#s1"><b>1</b>Суть проекта</a>
+    <a href="#s2"><b>2</b>Что автоматизируем</a>
+    <a href="#s3"><b>3</b>Архитектурная карта</a>
+    <a href="#s4"><b>4</b>Путь пробирки и лаборанта</a>
+    <a href="#s5"><b>5</b>Как работает контроль</a>
+    <a href="#s6"><b>6</b>Этапы реализации</a>
+    <a href="#s7"><b>7</b>Открытые вопросы и риски</a>
+    <a href="#s8"><b>8</b>Решения от руководства</a>
+  </nav>
+
+  <!-- 1 -->
+  <section id="s1">
+    <h2>1. Суть проекта простыми словами</h2>
+    <p class="sub">Зачем мы это делаем и что получит клиника.</p>
+
+    <div class="grid2">
+      <div class="card">
+        <h3 style="margin-top:0">Проблема сегодня</h3>
+        <p>Весь путь анализа держится на внимательности человека. Пробирку подписывают ручкой, номера стёкол пишут вручную, время инкубации отслеживают по памяти, срочные пробирки отделяют «на глаз». Каждая из этих точек — место для ошибки. А ошибка здесь — это чужой результат у пациента, потерянные реактивы, повторный забор крови у ребёнка.</p>
+        <p style="margin:0">Директор клиники сформулировала главное: <b>самое важное — не перепутать пациента и не ошибиться в аллергенах.</b> Всё остальное — вторично.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Что мы строим</h3>
+        <p>Рабочую станцию, которая ведёт лаборанта по протоколу шаг за шагом и сама следит за ключевыми точками: сканирует штрих-код и показывает, кто пациент и какие у него аллергены; подсказывает, в какую ячейку термостата поставить образец и когда его достать; включает таймеры на инкубацию, сушку и окраску; а AI-камера над столом видит, что и в каком порядке делает лаборант, и подсвечивает отклонения.</p>
+        <p style="margin:0">Все данные уходят в существующую платформу Аллергопроба — туда же, куда сейчас попадают результаты анализа стёкол.</p>
+      </div>
+    </div>
+
+    <div class="key">
+      <b>Принцип, который определяет всё остальное</b>
+      На первых этапах система <b>подсказывает и ведёт журнал, но не принимает решений за лаборанта</b> и не блокирует выдачу результата. Это не только про удобство: как только AI-камера начинает влиять на результат анализа, она превращается в медицинское изделие с долгой регистрацией. Поэтому модуль контроля процесса мы отделяем от модуля подсчёта результата (который уже существует и будет регистрироваться отдельно).
+    </div>
+
+    <h3>Что получает клиника</h3>
+    <div class="grid3">
+      <div class="card"><b>Меньше ошибок</b><br><span style="color:var(--muted)">Идентификация по штрих-коду вместо ручной подписи, контроль порядка шагов и срочности, таймеры вместо памяти.</span></div>
+      <div class="card"><b>Единый стандарт во всех городах</b><br><span style="color:var(--muted)">Один и тот же протокол на экране в Астане, Алматы и любом новом филиале. Аудиторский след по каждому образцу.</span></div>
+      <div class="card"><b>Быстрое обучение</b><br><span style="color:var(--muted)">Новый лаборант проходит видеокурс, а на рабочем месте станция ведёт его по шагам — ввод в работу в 2–3 раза быстрее.</span></div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section id="s2">
+    <h2>2. Что именно автоматизируем и каким образом</h2>
+    <p class="sub">По каждому участку: как это делается сейчас, что изменится и какой компонент за это отвечает.</p>
+
+    <table>
+      <thead><tr><th style="width:22%">Участок</th><th style="width:26%">Сейчас</th><th style="width:32%">Станет</th><th>Чем обеспечивается</th></tr></thead>
+      <tbody>
+        <tr><td><b>Идентификация пациента</b></td><td>ФИО и дата рождения пишутся ручкой на пробирке; сверка глазами</td><td>Штрих-код с ФИО печатается при регистрации в точке забора; на станции пробирку сканируют, на экране появляется пациент, аллергены и тариф</td><td><span class="tag t-teal">Сканер штрих-кодов</span> <span class="tag t-teal">Принтер этикеток в точке забора</span> <span class="tag t-green">Платформа Аллергопроба</span></td></tr>
+        <tr><td><b>Срочность (ЦИТО)</b></td><td>Лаборанты вручную отделяют срочные пробирки</td><td>Система по тарифу сама относит образец к красной, жёлтой или зелёной группе и показывает, куда его положить. Если положили не туда — сигнал</td><td><span class="tag t-teal">Экран протокола</span> <span class="tag t-amber">AI-камера</span></td></tr>
+        <tr><td><b>Какие препараты готовить</b></td><td>Лаборант держит в голове, какие аллергены у пациента, сколько стёкол и контролей нужно</td><td>После сканирования экран показывает список препаратов, количество стёкол и номера, которые нужно нанести на стёкла</td><td><span class="tag t-teal">Экран протокола</span> <span class="tag t-green">Платформа</span></td></tr>
+        <tr><td><b>Инкубация в термостате</b></td><td>Время засекают по памяти или на телефоне; полки не привязаны к пациентам</td><td>Станция назначает ячейку, запускает таймер на 1,5 часа и сигналит, когда пора доставать. Термостат под контролем электроники</td><td><span class="tag t-teal">Термостат в составе станции</span> <span class="tag t-teal">Таймеры</span></td></tr>
+        <tr><td><b>Сушка и окраска мазков</b></td><td>5–7 минут «на глаз»</td><td>Таймер на каждую партию: не раньше и не позже</td><td><span class="tag t-teal">Таймеры</span> <span class="tag t-amber">AI-камера фиксирует начало/конец</span></td></tr>
+        <tr><td><b>Правильность действий</b></td><td>Никто не видит, что происходит на столе; ошибки всплывают после подсчёта</td><td>Камера над столом распознаёт текущее действие, порядок шагов, угол пипетки, положение рук. Отклонение — подсказка на экране и запись в журнал</td><td><span class="tag t-amber">AI-камера</span> <span class="tag t-teal">Экран протокола</span></td></tr>
+        <tr><td><b>Нумерация стёкол</b></td><td>Лаборант сам придумывает номер и пишет на стекле</td><td>Номер выдаёт система и показывает на экране; лаборант переписывает его на стекло (сканер писать не будет — так решили лаборанты)</td><td><span class="tag t-teal">Экран протокола</span></td></tr>
+        <tr><td><b>Анализ стёкол и результат</b></td><td colspan="2">Уже работает: сканер стёкол / микроскоп и AI-расчёт показателей РСАЛ в платформе. Станция добавляет к результату полный журнал того, как образец был обработан</td><td><span class="tag t-green">Сканер стёкол</span> <span class="tag t-green">AI-анализ Аллергопроба</span></td></tr>
+        <tr><td><b>Контроль качества</b></td><td>Фото мазков в чат заведующей вручную каждый день</td><td>Журнал по каждому образцу: кто, когда, какие шаги, какие отклонения. Заведующая видит проблемные случаи, а не всю ленту</td><td><span class="tag t-green">Платформа</span> <span class="tag t-amber">Журнал событий</span></td></tr>
+      </tbody>
+    </table>
+    <div class="legend"><span><i style="background:var(--green-soft)"></i>уже есть</span><span><i style="background:var(--teal-soft)"></i>делаем в составе станции</span><span><i style="background:var(--amber-soft)"></i>новая AI-разработка (предмет первого этапа)</span></div>
+  </section>
+
+  <!-- 3 -->
+  <section id="s3">
+    <h2>3. Архитектурная карта</h2>
+    <p class="sub">Из каких блоков состоит система и как они связаны. Всё, что касается видео и распознавания, считается прямо на станции; в платформу уходят только события — шаг, время, код ошибки, результат.</p>
+
+    <figure>
+      <svg viewBox="0 0 1140 730" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, system-ui, sans-serif">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5B6B75"/></marker>
+          <marker id="arrT" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0E8C82"/></marker>
+        </defs>
+
+        <!-- Zone 1: точка забора -->
+        <rect x="20" y="30" width="270" height="150" rx="12" fill="#E4EEF6" stroke="#B9CDE0"/>
+        <text x="36" y="56" font-size="15" font-weight="600" fill="#2F6AA0">Точка забора крови</text>
+        <rect x="36" y="72" width="238" height="42" rx="8" fill="#fff" stroke="#B9CDE0"/>
+        <text x="48" y="90" font-size="12.5" fill="#16232B">Регистрация пациента</text>
+        <text x="48" y="106" font-size="11" fill="#5B6B75">ФИО, дата рождения, аллергены, тариф</text>
+        <rect x="36" y="122" width="238" height="42" rx="8" fill="#fff" stroke="#B9CDE0"/>
+        <text x="48" y="140" font-size="12.5" fill="#16232B">Принтер этикеток</text>
+        <text x="48" y="156" font-size="11" fill="#5B6B75">штрих-код + ФИО на пробирку</text>
+
+        <!-- Zone 2: курьер -->
+        <rect x="330" y="30" width="200" height="150" rx="12" fill="#EEF1F3" stroke="#D9E1E5"/>
+        <text x="346" y="56" font-size="15" font-weight="600" fill="#5B6B75">Курьер</text>
+        <text x="346" y="82" font-size="11.5" fill="#5B6B75">Термосумка, штатив,</text>
+        <text x="346" y="98" font-size="11.5" fill="#5B6B75">хладагенты по краям</text>
+        <text x="346" y="124" font-size="11.5" fill="#5B6B75">До 2 ч в дороге, до 3 ч</text>
+        <text x="346" y="140" font-size="11.5" fill="#5B6B75">суммарно при комнатной</text>
+        <text x="346" y="156" font-size="11.5" fill="#5B6B75">температуре</text>
+
+        <path d="M290 105 L330 105" stroke="#5B6B75" stroke-width="1.5" marker-end="url(#arr)"/>
+        <path d="M530 105 L560 105 L560 220" stroke="#5B6B75" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+        <!-- registration data to platform, routed above -->
+        <path d="M155 30 L155 14 L950 14 L950 220" stroke="#5B6B75" stroke-width="1.5" fill="none" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+        <text x="600" y="10" font-size="11" fill="#5B6B75">регистрация и штрих-код сразу попадают в платформу</text>
+
+        <!-- Zone 3: станция -->
+        <rect x="20" y="220" width="740" height="360" rx="14" fill="#E1F2EF" stroke="#9FD4CB"/>
+        <text x="36" y="248" font-size="17" font-weight="700" fill="#0A665F">Станция Viva Cell — рабочее место лаборанта</text>
+        <text x="36" y="266" font-size="12" fill="#0A665F">Всё вычисляется локально. Видео с лицами не хранится.</text>
+
+        <!-- Датчики -->
+        <rect x="36" y="282" width="220" height="118" rx="10" fill="#fff" stroke="#9FD4CB"/>
+        <text x="48" y="304" font-size="13" font-weight="600">Датчики</text>
+        <text x="48" y="324" font-size="11.5">• Сканер штрих-кодов</text>
+        <text x="48" y="342" font-size="11.5">• AI-камера сверху</text>
+        <text x="48" y="360" font-size="11.5">• Боковая камера (угол пипетки)</text>
+        <text x="48" y="378" font-size="11.5">• Свет без теней</text>
+
+        <!-- Распознавание -->
+        <rect x="272" y="282" width="228" height="118" rx="10" fill="#FBF0D9" stroke="#E7C98A"/>
+        <text x="284" y="304" font-size="13" font-weight="600">Модуль распознавания (AI)</text>
+        <text x="284" y="324" font-size="11.5">• Руки в перчатках (21 точка)</text>
+        <text x="284" y="342" font-size="11.5">• Маркер на пипетке — угол</text>
+        <text x="284" y="360" font-size="11.5">• Текущее действие лаборанта</text>
+        <text x="284" y="378" font-size="11.5">• Новая разработка — этап 1</text>
+
+        <!-- Логика -->
+        <rect x="516" y="282" width="230" height="118" rx="10" fill="#fff" stroke="#9FD4CB"/>
+        <text x="528" y="304" font-size="13" font-weight="600">Логика протокола РСАЛ</text>
+        <text x="528" y="324" font-size="11.5">• Схема шагов (что за чем)</text>
+        <text x="528" y="342" font-size="11.5">• Правила: угол, порядок, пропуски</text>
+        <text x="528" y="360" font-size="11.5">• Таймеры: 1,5 ч / 5–7 мин</text>
+        <text x="528" y="378" font-size="11.5">• Срочность: красный/жёлтый/зелёный</text>
+
+        <path d="M256 341 L272 341" stroke="#0E8C82" stroke-width="1.5" marker-end="url(#arrT)"/>
+        <path d="M500 341 L516 341" stroke="#0E8C82" stroke-width="1.5" marker-end="url(#arrT)"/>
+        <text x="288" y="416" font-size="11" fill="#0A665F">Штрих-код идёт в логику напрямую, минуя камеру — так надёжнее и дешевле</text>
+
+        <!-- Экран -->
+        <rect x="36" y="440" width="350" height="122" rx="10" fill="#fff" stroke="#9FD4CB"/>
+        <text x="48" y="462" font-size="13" font-weight="600">Экран лаборанта и подсказки</text>
+        <text x="48" y="482" font-size="11.5">• Пациент, аллергены, срочность после сканирования</text>
+        <text x="48" y="500" font-size="11.5">• Шаг N из 7 — что делать сейчас</text>
+        <text x="48" y="518" font-size="11.5">• Подсказка при отклонении: экран, звук, подсветка</text>
+        <text x="48" y="536" font-size="11.5">• Номера стёкол, ячейка термостата, таймеры</text>
+
+        <!-- Оборудование -->
+        <rect x="402" y="440" width="342" height="122" rx="10" fill="#fff" stroke="#9FD4CB"/>
+        <text x="414" y="462" font-size="13" font-weight="600">Оборудование в составе стола</text>
+        <text x="414" y="482" font-size="11.5">• Термостат с контролем температуры и ячейками</text>
+        <text x="414" y="500" font-size="11.5">• Три лотка срочности (красный / жёлтый / зелёный)</text>
+        <text x="414" y="518" font-size="11.5">• Органайзер реагентов, ящик, антимикробная поверхность</text>
+        <text x="414" y="536" font-size="11.5">• Встроенный сканер стёкол (существующий)</text>
+
+        <path d="M630 400 L630 440" stroke="#0E8C82" stroke-width="1.5" marker-end="url(#arrT)"/>
+        <path d="M600 400 L600 424 L211 424 L211 440" stroke="#0E8C82" stroke-width="1.5" fill="none" marker-end="url(#arrT)"/>
+
+        <!-- Zone 4: платформа -->
+        <rect x="800" y="220" width="320" height="200" rx="14" fill="#E2F2E7" stroke="#A9D6B8"/>
+        <text x="816" y="248" font-size="17" font-weight="700" fill="#2B7346">Платформа Аллергопроба</text>
+        <text x="816" y="266" font-size="12" fill="#2B7346">Уже существует · данные хранятся в РК</text>
+        <rect x="816" y="282" width="288" height="38" rx="8" fill="#fff" stroke="#A9D6B8"/>
+        <text x="828" y="301" font-size="11.5">Карточка пациента, заявка,</text>
+        <text x="828" y="314" font-size="11.5">тариф, сроки выдачи</text>
+        <rect x="816" y="328" width="288" height="38" rx="8" fill="#fff" stroke="#A9D6B8"/>
+        <text x="828" y="347" font-size="11.5">Журнал обработки образца</text>
+        <text x="828" y="360" font-size="11.5">(события со станции)</text>
+        <rect x="816" y="374" width="288" height="38" rx="8" fill="#fff" stroke="#A9D6B8"/>
+        <text x="828" y="393" font-size="11.5">AI-анализ стёкол и расчёт</text>
+        <text x="828" y="406" font-size="11.5">показателей РСАЛ</text>
+
+        <path d="M760 347 L800 347" stroke="#5B6B75" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="764" y="341" font-size="10" fill="#5B6B75">события</text>
+        <path d="M800 301 L760 301" stroke="#5B6B75" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="764" y="295" font-size="10" fill="#5B6B75">пациент</text>
+
+        <!-- Zone 5: люди -->
+        <rect x="800" y="450" width="150" height="112" rx="12" fill="#fff" stroke="#D9E1E5"/>
+        <text x="816" y="474" font-size="14" font-weight="600">Врач и пациент</text>
+        <text x="816" y="496" font-size="11.5" fill="#5B6B75">Результат в приложении,</text>
+        <text x="816" y="512" font-size="11.5" fill="#5B6B75">бланк для врача.</text>
+        <text x="816" y="534" font-size="11.5" fill="#5B6B75">ЦИТО — в день</text>
+        <text x="816" y="550" font-size="11.5" fill="#5B6B75">поступления</text>
+        <rect x="970" y="450" width="150" height="112" rx="12" fill="#fff" stroke="#D9E1E5"/>
+        <text x="986" y="474" font-size="14" font-weight="600">Заведующая</text>
+        <text x="986" y="496" font-size="11.5" fill="#5B6B75">Отклонения и спорные</text>
+        <text x="986" y="512" font-size="11.5" fill="#5B6B75">случаи, аудиторский</text>
+        <text x="986" y="528" font-size="11.5" fill="#5B6B75">след, сравнение</text>
+        <text x="986" y="544" font-size="11.5" fill="#5B6B75">по городам</text>
+        <path d="M875 420 L875 450" stroke="#5B6B75" stroke-width="1.5" marker-end="url(#arr)"/>
+        <path d="M1045 420 L1045 450" stroke="#5B6B75" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- Legend -->
+        <rect x="20" y="608" width="1100" height="112" rx="12" fill="#fff" stroke="#D9E1E5"/>
+        <text x="36" y="634" font-size="13" font-weight="600">Граница ответственности</text>
+        <rect x="36" y="648" width="14" height="14" rx="3" fill="#FBF0D9" stroke="#E7C98A"/><text x="56" y="660" font-size="12">Новая AI-разработка (контроль процесса) — подсказывает и ведёт журнал, на результат анализа не влияет</text>
+        <rect x="36" y="672" width="14" height="14" rx="3" fill="#E2F2E7" stroke="#A9D6B8"/><text x="56" y="684" font-size="12">Модуль анализа стёкол — уже существует, регистрируется отдельно как медизделие</text>
+        <text x="36" y="700" font-size="12" fill="#5B6B75">Пунктир — данные регистрации. Сплошные стрелки — поток внутри станции и события в платформу.</text>
+      </svg>
+      <figcaption>Рис. 1. Архитектура: точка забора → курьер → станция Viva Cell → платформа Аллергопроба → врач, пациент, заведующая. Модули внутри станции заменяемы: позже можно добавить камеру глубины или электронную пипетку, не переписывая логику протокола.</figcaption>
+    </figure>
+
+    <div class="grid2">
+      <div class="card">
+        <h3 style="margin-top:0">Почему не «одна умная нейросеть»</h3>
+        <p style="margin:0">Система собрана из понятных модулей: датчики → распознавание рук и инструмента → правила протокола → подсказка. Так она может объяснить, что именно не так («пипетка наклонена на 25°», «пробирка положена в зелёный лоток вместо красного»), а не выдать абстрактную оценку. И каждый модуль можно улучшать отдельно.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Что уходит в платформу, а что остаётся на столе</h3>
+        <p style="margin:0">На станции: видео, распознавание, расчёты. В платформу: события — «шаг 3 начат в 10:42», «инкубация завершена», «отклонение: угол пипетки», ID образца. Видео с руками хранится только в специально разрешённых обучающих сессиях, лица не снимаются. Это важно и для доверия лаборантов, и для закона о персональных данных.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section id="s4">
+    <h2>4. Путь пробирки и лаборанта: от забора крови до результата</h2>
+    <p class="sub">Тринадцать шагов, восстановленных из интервью с лаборантами и директором клиники. Для каждого шага — что делает человек, что делает станция и что контролируется. Синие номера — вне лаборатории, бирюзовые — на станции, зелёные — уже работающие части.</p>
+
+    <div class="flow">
+      <div class="flow-head"><div></div><div>Что делает человек</div><div>Что делает станция и платформа</div><div>Что контролируется</div></div>
+
+      <div class="step outside">
+        <div class="num">1</div>
+        <div><h4>Регистрация и штрих-код</h4><div class="where">Точка забора · администратор</div><p>Администратор регистрирует пациента: ФИО и дата рождения полностью, аллергены, тариф (срочность). Печатает этикетку и клеит на пробирку.</p></div>
+        <div><ul><li>Платформа создаёт заявку и уникальный штрих-код, связанный с пациентом</li><li>Этикетка: штрих-код + ФИО (для сверки глазами)</li><li>Лаборатория заранее видит список пациентов на день и какие препараты понадобятся</li></ul></div>
+        <div class="ctrl"><b>Контроль</b>Штрих-код — основной идентификатор, ФИО — для сверки. <span class="flag f-red">Красный флаг:</span> ФИО на пробирке не совпадает с данными по коду — стоп, звонок администратору.</div>
+      </div>
+
+      <div class="step outside">
+        <div class="num">2</div>
+        <div><h4>Забор крови</h4><div class="where">Точка забора · медсестра</div><p>Пациент натощак, ребёнок спокоен. После наполнения — 8 плавных переворотов пробирки, затем вертикально в штатив, без солнца.</p></div>
+        <div><ul><li>Станция здесь не участвует</li><li>Стандарт закреплён в курсе лаборантов (урок 1)</li></ul></div>
+        <div class="ctrl"><b>Контроль</b>Только человек. <span class="flag f-amber">Риск:</span> сгустки, пена, гемолиз при заборе — выявятся при приёмке.</div>
+      </div>
+
+      <div class="step outside">
+        <div class="num">3</div>
+        <div><h4>Транспортировка</h4><div class="where">Курьер</div><p>Пробирки стоят в штативе на дне термосумки, хладагенты по краям (зимой один, летом два, для дальних городов — гелевые). Не касаются пробирок.</p></div>
+        <div><ul><li>Платформа знает время забора и может считать лимит: до 2 ч у курьера, до 3 ч суммарно при комнатной температуре</li><li>Возможное развитие: отметка выезда/приезда курьера в приложении</li></ul></div>
+        <div class="ctrl"><b>Контроль</b>При приёмке лаборант проверяет сумку по чек-листу. <span class="flag f-red">Красный флаг:</span> замороженная кровь, тёплый хладагент, пробирки лежали — брак или особый контроль.</div>
+      </div>
+
+      <div class="step">
+        <div class="num">4</div>
+        <div><h4>Приёмка и сканирование</h4><div class="where">Лаборатория · станция</div><p>Лаборант расставляет штативы, берёт каждую пробирку, сканирует штрих-код, смотрит кровь на просвет (сгусток, розовый оттенок), сверяет ФИО на экране и на пробирке.</p></div>
+        <div><ul><li>На экране появляется панель: номер по порядку, штрих-код, ФИО пациента, аллергены (1 или 2 и более), тариф и срочность</li><li>Система сверяет количество принятых пробирок с заявкой на день</li><li>Фиксирует время приёмки — от него считаются сроки выдачи</li></ul></div>
+        <div class="ctrl"><b>Контроль</b><span class="flag f-red">Красный флаг:</span> пробирки нет в заявке или пробирка из заявки не пришла — «найдите пробирку такого-то пациента». <span class="flag f-amber">Брак:</span> гемолиз, сгусток — фиксируется в системе, кровь остаётся в холодильнике до решения.</div>
+      </div>
+
+      <div class="step">
+        <div class="num">5</div>
+        <div><h4>Сортировка по срочности</h4><div class="where">Станция · три лотка</div><p>Лаборант кладёт пробирку в лоток, который подсветила система: красный — срочные (ЦИТО), жёлтый — средние, зелёный — по обычному сроку. Курьеры приходят в разное время, срочные обрабатываются первыми.</p></div>
+        <div><ul><li>Система определяет группу по тарифу и подсвечивает нужный лоток на экране</li><li>Нумерация идёт сквозная, но срочные помечены и стоят первыми в очереди</li><li>Возможное развитие: лента-распределитель, которая сама раскладывает пробирки после сканера (как в больших лабораториях)</li></ul></div>
+        <div class="ctrl"><b>Контроль</b><span class="flag f-teal">AI-камера:</span> видит, в какой лоток положена пробирка. Красную положили в зелёный — звуковой сигнал и запись «срочный образец не в очереди». Лаборант подтверждает кнопкой, что партия разложена.</div>
+      </div>
+
+      <div class="step">
+        <div class="num">6</div>
+        <div><h4>Подготовка препаратов</h4><div class="where">Станция · рабочая зона</div><p>Заранее готовые растворы аллергенов (с физраствором) стоят в эппендорфах. На каждого пациента: один контроль без препарата + по одному опыту на каждый аллерген. Лаборант добавляет кровь и перемешивает.</p></div>
+        <div><ul><li>Экран показывает для сканированной пробирки: какие препараты, сколько эппендорфов, сколько стёкол (1 препарат — 1 стекло с контролем и опытом; 2 препарата — на одном стекле два опыта и т. д.)</li><li>Система выдаёт номера, которые пойдут на стёкла</li><li>Подсветка нужной позиции в органайзере</li></ul></div>
+        <div class="ctrl"><b>Контроль</b><span class="flag f-teal">AI-камера:</span> порядок действий, нужный реагент (по штрих-коду на флаконе), угол пипетки, заполнение нужной лунки. <span class="flag f-amber">Не видит камера:</span> объём реагента — только с электронной пипеткой или весами.</div>
+      </div>
+
+      <div class="step">
+        <div class="num">7</div>
+        <div><h4>Инкубация 1,5 часа</h4><div class="where">Термостат в составе станции</div><p>Лаборант ставит партию эппендорфов в ячейку, которую указала система, и нажимает «поставил». Через 1,5 часа по сигналу достаёт.</p></div>
+        <div><ul><li>Система назначает ячейку и полку, запоминает «на полке 1 стоит пациент такой-то с такими аллергенами»</li><li>Запускает таймер на 90 минут для этой партии, следит за температурой</li><li>По истечении — звук и подсказка «достаньте полку 1». Партии идут с разным темпом, поэтому таймеров может быть несколько</li></ul></div>
+        <div class="ctrl"><b>Контроль</b>Не раньше и не позже: слишком короткая или затянутая инкубация — <span class="flag f-red">отклонение в журнал</span>. Пока идёт инкубация, лаборант подписывает стёкла номерами с экрана.</div>
+      </div>
+
+      <div class="step">
+        <div class="num">8</div>
+        <div><h4>Стёкла и мазки</h4><div class="where">Станция · рабочая зона</div><p>Стёкла заранее вымыты санитаркой, прошли сухожар и подписаны. Лаборант делает тонкий равномерный мазок: контроль и опыт на одном стекле. Лаборанты делят пациентов между собой.</p></div>
+        <div><ul><li>Экран: какой номер на каком стекле, сколько мазков по пациенту</li><li>Фиксирует, кто из лаборантов взял какого пациента</li></ul></div>
+        <div class="ctrl"><b>Контроль</b><span class="flag f-teal">AI-камера:</span> порядок шагов, не пропущен ли пациент. Техника мазка — закрытая методика, камера её не оценивает. <span class="flag f-amber">Брак мазка:</span> толстый, рваный, с мусором — переделка обязательна, кровь хранится до 48 часов.</div>
+      </div>
+
+      <div class="step">
+        <div class="num">9</div>
+        <div><h4>Сушка мазков 5–7 минут</h4><div class="where">Термостат</div><p>Мазки чуть подсыхают при комнатной температуре, затем партия ставится в термостат на фиксацию.</p></div>
+        <div><ul><li>Таймер на партию, сигнал по окончании</li></ul></div>
+        <div class="ctrl"><b>Контроль</b>Время сушки в журнале. <span class="flag f-red">Красный флаг:</span> мазок поставлен в термостат сразу, ещё жидкий — рисунок сместится.</div>
+      </div>
+
+      <div class="step">
+        <div class="num">10</div>
+        <div><h4>Окраска 5–7 минут и сушка</h4><div class="where">Станция · ёмкость для окраски</div><p>Стёкла ставятся в ёмкость с краской, через 5–7 минут вынимаются и досушиваются на тарелочках до полного высыхания, без капель.</p></div>
+        <div><ul><li>Таймер на партию: среднее время, чтобы не вытащили раньше и не передержали</li><li>Подсказка «партия 2 готова к сканированию»</li></ul></div>
+        <div class="ctrl"><b>Контроль</b>Время окраски в журнале. <span class="flag f-amber">Брак:</span> смылся, отслоился, пятна — переделка, даже для срочных.</div>
+      </div>
+
+      <div class="step exist">
+        <div class="num">11</div>
+        <div><h4>Сканирование стёкол</h4><div class="where">Сканер стёкол / микроскоп (уже есть)</div><p>Лаборант устанавливает стекло в сканер. Просмотр поля — слева направо, сверху вниз, единый стандарт во всех городах.</p></div>
+        <div><ul><li>Автозагрузка стекла, автофокус, контроль качества изображения, до 40x/100x</li><li>Изображение уходит в платформу под ID образца, без ФИО</li><li>Встраиваем в стол — модель и интерфейс нужно уточнить</li></ul></div>
+        <div class="ctrl"><b>Контроль</b>Стекло привязано к пациенту по номеру из системы. <span class="flag f-red">Красный флаг:</span> номер стекла не соответствует ожидаемому образцу.</div>
+      </div>
+
+      <div class="step exist">
+        <div class="num">12</div>
+        <div><h4>AI-анализ и подсчёт РСАЛ</h4><div class="where">Платформа Аллергопроба (уже есть)</div><p>Лаборант проверяет результат подсчёта по закрытой методике; спорный случай — фото и звонок заведующей, результат не выдаётся до согласования.</p></div>
+        <div><ul><li>AI рассчитывает показатели по изображению стекла, сравнивает контроль и опыт</li><li>К результату прикрепляется журнал обработки: все шаги, времена, отклонения</li></ul></div>
+        <div class="ctrl"><b>Контроль</b>Это отдельное медизделие с собственной регистрацией. Модуль контроля процесса на результат не влияет — только предоставляет журнал для аудита.</div>
+      </div>
+
+      <div class="step exist">
+        <div class="num">13</div>
+        <div><h4>Выдача результата и контроль качества</h4><div class="where">Платформа · врач · заведующая</div><p>Заведующая просматривает отклонения и спорные случаи. Результат уходит в приложение пациенту и бланком врачу. ЦИТО — в день поступления.</p></div>
+        <div><ul><li>Сроки выдачи проставлены при регистрации, система отслеживает дедлайны</li><li>Отчёты по лаборантам и городам: где чаще ошибки, где дольше шаги</li><li>Данные пилота накапливаются для досье регистрации</li></ul></div>
+        <div class="ctrl"><b>Контроль</b>Семь условий выдачи (курс, урок 10): кровь принята, зарегистрирована, проверена на брак, мазок сделан и подсчитан, сверен с заведующей, бланк сформирован. Журнал станции закрывает первые пять автоматически.</div>
+      </div>
+    </div>
+
+    <div class="key">
+      <b>Два момента, которые лаборанты и директор назвали главными</b>
+      Первое — идентификация пациента: штрих-код на всех этапах, ФИО только для сверки. Второе — не перепутать аллергены: список препаратов и номера стёкол всегда приходят с экрана, а не из памяти. Всё, что делает камера, — надстройка над этими двумя вещами.
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section id="s5">
+    <h2>5. Как работает контроль: что система видит, а что нет</h2>
+    <p class="sub">Честная картина возможностей. Концепт станции обещает больше, чем камера может проверить в одиночку — часть задач решается сканером, таймерами и датчиками.</p>
+
+    <table>
+      <thead><tr><th style="width:30%">Что контролируем</th><th style="width:16%">Камерой</th><th>Как именно</th></tr></thead>
+      <tbody>
+        <tr><td>Правильный пациент, образец и реагент</td><td><span class="tag t-green">Да, но не камерой</span></td><td>Сканер штрих-кодов — надёжнее и дешевле. Камера здесь не нужна.</td></tr>
+        <tr><td>Порядок шагов, пропуск, повтор</td><td><span class="tag t-green">Да</span></td><td>Распознавание текущего действия плюс явная схема протокола («после шага 2 идёт шаг 3»).</td></tr>
+        <tr><td>Срочный образец положен не в тот лоток</td><td><span class="tag t-green">Да</span></td><td>Камера видит рабочую зону сверху; лотки цветные и в фиксированных местах.</td></tr>
+        <tr><td>Угол пипетки (допуск ≈ 10–20° от вертикали)</td><td><span class="tag t-green">Да</span></td><td>Маркер-«флажок» на пипетке или боковая камера. Точность ±3–5° достижима.</td></tr>
+        <tr><td>Положение рук и хват</td><td><span class="tag t-amber">После дообучения</span></td><td>Готовые трекеры не видят руки в медицинских перчатках. Нужно дообучить открытую модель на 1–3 тыс. наших кадров.</td></tr>
+        <tr><td>Заполнение нужной лунки/эппендорфа</td><td><span class="tag t-green">Да</span></td><td>Факт и порядок видно сверху. Подсветка следующей позиции снижает ошибки.</td></tr>
+        <tr><td>Время инкубации, сушки, окраски</td><td><span class="tag t-green">Да</span></td><td>Таймеры в интерфейсе; камера фиксирует начало и конец.</td></tr>
+        <tr><td>Объём реагента</td><td><span class="tag t-red">Нет</span></td><td>Шкала механической пипетки — 5–8 пикселей и закрыта рукой. Нужна электронная пипетка с интерфейсом (≈ $0,8–1,2 тыс.) или весы. В первый этап не входит.</td></tr>
+        <tr><td>Качество мазка, гемолиз</td><td><span class="tag t-grey">Не в этом модуле</span></td><td>Качество мазка оценивается по изображению со сканера стёкол (существующий AI-анализ). Гемолиз — глазами лаборанта при приёмке; возможное развитие — фото пробирки на просвет.</td></tr>
+        <tr><td>Техника подсчёта</td><td><span class="tag t-grey">Не контролируем</span></td><td>Закрытая методика, передаётся заведующей лично. В систему не закладываем.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Как выглядит подсказка для лаборанта</h3>
+    <div class="grid3">
+      <div class="card" style="border-top:4px solid var(--green)"><b>Правильно</b><p style="margin:6px 0 0;color:var(--muted)">Шаг отмечается выполненным, экран переходит к следующему. Ничего не мигает и не отвлекает.</p></div>
+      <div class="card" style="border-top:4px solid var(--amber)"><b>Небольшое отклонение</b><p style="margin:6px 0 0;color:var(--muted)">Мягкая подсказка на экране: «Скорректируйте угол пипетки». Запись в журнал, работа не прерывается.</p></div>
+      <div class="card" style="border-top:4px solid var(--red)"><b>Ошибка</b><p style="margin:6px 0 0;color:var(--muted)">Звук и красная подсказка: «Срочный образец в зелёном лотке», «Пропущен шаг 4». Лаборант исправляет и подтверждает. Красный флаг уходит заведующей.</p></div>
+    </div>
+    <p style="margin-top:16px">Ключевое требование лаборантов: подсказки должны быть редкими и точными. Если система «пикает» без повода, её выключат. Поэтому в критерии приёмки заложено: не больше одной ложной подсказки за 5 минут работы. Лаборант может отключить напоминания на экране — камера при этом продолжает вести журнал.</p>
+  </section>
+
+  <!-- 6 -->
+  <section id="s6">
+    <h2>6. Этапы реализации</h2>
+    <p class="sub">Оценка главного разработчика (Марат Казгожин). Каждый следующий этап начинается только после того, как предыдущий подтвердил свои критерии. Сроки — инженерная оценка, не обязательство.</p>
+
+    <div class="card">
+      <div class="phase">
+        <div class="badge">1</div>
+        <div><h4>Проверка идеи (PoC) — сейчас</h4><div class="kv">6–8 недель · 3 разработчика · оборудование ≈ $1 тыс. (4K-камера, свет, штанга, имеющийся ПК, сканер штрих-кодов)</div>
+        <p style="margin:0">Один участок — пипетирование реагента и сквозной контроль порядка 7 шагов на макете стола. Ответ на один вопрос: может ли камера надёжно распознавать действия лаборанта в перчатках и ловить типовые ошибки. Критерии успеха: руки находятся в ≥ 95% кадров, ловим ≥ 80% намеренных ошибок, не больше 1 ложной подсказки за 5 минут, задержка до 200 мс.</p></div>
+      </div>
+      <div class="phase">
+        <div class="badge next">2</div>
+        <div><h4>MVP стола</h4><div class="kv">3–4 месяца · 4–5 человек (+ инженер по железу) · ≈ $5–6 тыс. на стол</div>
+        <p style="margin:0">Весь протокол РСАЛ, камера глубины, профессиональный свет, встроенный сканер стёкол, связка с платформой Аллергопроба, термостат с таймерами и лотки срочности.</p></div>
+      </div>
+      <div class="phase">
+        <div class="badge next">3</div>
+        <div><h4>Пилот в своей лаборатории</h4><div class="kv">4–6 месяцев · 5–7 человек + QA, юрист · 3–5 столов, ≈ $25–30 тыс.</div>
+        <p style="margin:0">Работа в реальной лаборатории. Сбор ошибок, замер эффекта, накопление данных для регистрации. Результат AI не уходит врачу, а сравнивается с ручным подсчётом — так пилот в РК безопасен с точки зрения регуляторики.</p></div>
+      </div>
+      <div class="phase">
+        <div class="badge next">4</div>
+        <div><h4>Серийная станция</h4><div class="kv">6–12+ месяцев + регистрация · 6–10 человек · $10–20 тыс. на стол</div>
+        <p style="margin:0">Корпус на заказ (единый завод: термостат, сканер, всё встроено — как обозначила директор), промышленный вычислитель, регистрация, продажи в другие лаборатории и города.</p></div>
+      </div>
+    </div>
+
+    <h3>Что запускаем параллельно прямо сейчас</h3>
+    <div class="grid2">
+      <div class="card"><b>Интервью с экспертом по протоколу РСАЛ</b><p style="margin:6px 0 0;color:var(--muted)">Шаги, допуски, список типичных ошибок. Основа для схемы протокола в системе. Список вопросов готовим заранее; действующий СОП лаборатории — берём как основу.</p></div>
+      <div class="card"><b>Пробная съёмка в лаборатории</b><p style="margin:6px 0 0;color:var(--muted)">10–20 роликов сверху и сбоку, в синих и белых перчатках. Нужны 3–5 лаборантов на 2–4 часа и согласие на съёмку рук.</p></div>
+      <div class="card"><b>Роль AI-камеры: подсказки или влияние на результат</b><p style="margin:6px 0 0;color:var(--muted)">Решение руководства. Рекомендация — только подсказки и журнал на первых этапах. От этого зависит путь регистрации.</p></div>
+      <div class="card"><b>Консультация юриста по регистрации</b><p style="margin:6px 0 0;color:var(--muted)">Класс медизделия для AI-анализа стёкол, формат пилота в РК, требования к хранению данных. Национальная регистрация в РК/РФ принимается до 31.12.2027, дальше — только по правилам ЕАЭС.</p></div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section id="s7">
+    <h2>7. Открытые вопросы и риски</h2>
+    <p class="sub">То, что нужно решить или проверить до того, как считать план окончательным.</p>
+
+    <table>
+      <thead><tr><th style="width:36%">Вопрос или риск</th><th style="width:14%">Вес</th><th>Что делаем</th></tr></thead>
+      <tbody>
+        <tr><td><b>Описание процесса неточное.</b> Разработчик ещё не видел процесс вживую; интервью дало общую картину, но не пошаговый протокол с допусками</td><td><span class="tag t-red">Высокий</span></td><td>Интервью с экспертом и съёмка в первую неделю. Получить письменный СОП лаборатории. Этот документ обновить после интервью.</td></tr>
+        <tr><td><b>Регистрация AI-модуля как медизделия класса 3</b></td><td><span class="tag t-red">Высокий</span></td><td>Юрист до пилота. Камеру отделяем от подсчёта документально и технически. Данные пилота — в досье.</td></tr>
+        <tr><td><b>Трекинг рук в перчатках нестабилен даже после дообучения</b></td><td><span class="tag t-amber">Средний</span></td><td>Вторая наклонная камера, контрастный фон стола, камера глубины на этапе MVP. Кадры с низкой уверенностью не используем.</td></tr>
+        <tr><td><b>Слишком много ложных подсказок — лаборанты отключат систему</b></td><td><span class="tag t-amber">Средний</span></td><td>Порог ложных срабатываний в критериях приёмки. Возможность отключить напоминания на экране при сохранении журнала.</td></tr>
+        <tr><td><b>Сколько камер и где.</b> Лаборанты предложили вторую камеру для лотков сортировки; директор — не раздувать станцию («иначе продаём кабинет, а не стол»)</td><td><span class="tag t-amber">Средний</span></td><td>Лотки размещаем в зоне обзора верхней камеры. Одна камера сверху + одна боковая — проверяем на пробной съёмке.</td></tr>
+        <tr><td><b>Печать этикеток в точках забора.</b> Нужны недорогие принтеры и процесс у администраторов во всех городах</td><td><span class="tag t-amber">Средний</span></td><td>Подобрать принтер и формат этикетки (штрих-код + ФИО). Внедряется независимо от камеры — можно раньше.</td></tr>
+        <tr><td><b>Объём реагента нельзя проверить камерой</b></td><td><span class="tag t-grey">Известно</span></td><td>Запросы вендорам электронных пипеток. В PoC не обещаем.</td></tr>
+        <tr><td><b>Термостат и сканер стёкол как часть стола</b> — модели и интерфейсы для встраивания</td><td><span class="tag t-grey">Уточнить</span></td><td>Уточнить модель существующего сканера. Термостат для MVP — готовый с датчиком температуры, ячейки логические (на экране), для серии — встроенный.</td></tr>
+        <tr><td><b>Идея ленты-распределителя пробирок</b> (как в больших лабораториях)</td><td><span class="tag t-grey">Позже</span></td><td>Не в первых этапах. Сначала — программа и то, что зависит от нас; железо — когда будет полусобранный аппарат.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 8 -->
+  <section id="s8">
+    <h2>8. Что нужно решить руководству</h2>
+    <p class="sub">Пять решений, без которых первый этап не стартует.</p>
+    <div class="card">
+      <div class="phase"><div class="badge">1</div><div><h4>Одобрить проверку идеи на 6–8 недель</h4><div class="kv">3 разработчика и бюджет на оборудование ≈ $1 тыс.</div></div></div>
+      <div class="phase"><div class="badge">2</div><div><h4>Выделить эксперта и лаборантов</h4><div class="kv">Интервью с экспертом по РСАЛ в первую неделю; 3–5 лаборантов на съёмки и испытания; согласие на съёмку рук; письменный СОП.</div></div></div>
+      <div class="phase"><div class="badge">3</div><div><h4>Подтвердить роль AI-камеры</h4><div class="kv">На первых этапах — только подсказки и журнал, без влияния на результат анализа.</div></div></div>
+      <div class="phase"><div class="badge">4</div><div><h4>Согласовать консультацию юриста</h4><div class="kv">Класс медизделия для AI-анализа стёкол и формат пилота в РК.</div></div></div>
+      <div class="phase"><div class="badge">5</div><div><h4>Разрешить запросы вендорам пипеток и подбор принтеров этикеток</h4><div class="kv">INTEGRA, Sartorius, Gilson — интерфейс для контроля объёма. Принтеры этикеток — для точек забора.</div></div></div>
+    </div>
+  </section>
+
+  <footer>
+    Документ подготовлен по материалам: интервью с лаборантами и директором клиники (транскрибация), технический отчёт «Дорожная карта Viva Cell» (Марат Казгожин, 11.09.2026), концепт станции Viva Cell by Allergoprobe, сценарий курса лаборантов v1.0. Шаги пути и допуски будут уточнены после интервью с экспертом по протоколу РСАЛ.
+  </footer>
+</main>
+</body>
+</html>
