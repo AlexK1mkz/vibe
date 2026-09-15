@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Итоги эфира и инструкция к разборам · Материя</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,500;0,700;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#101A2E; --slate:#2C3A52; --ink:#1B2333; --muted:#6B7488;
+    --stone:#EDEAE3; --card:#FFFFFF; --rule:#D8D4CB;
+    --brass:#B8873B; --brass-soft:#FBF3E4;
+    --teal:#2F6F6A; --teal-soft:#EAF3F2;
+    --red:#A0522D; --red-soft:#FBEFEA;
+    --violet:#7A6A93; --violet-soft:#F4F1F8;
+    --display:'Spectral',Georgia,serif;
+    --body:'IBM Plex Sans',-apple-system,Segoe UI,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);background:var(--stone);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;padding:56px 32px 100px}
+  .wrap{max-width:1100px;margin:0 auto}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  h1{font-family:var(--display);font-weight:300;font-size:clamp(34px,4.6vw,58px);line-height:1.05;letter-spacing:-.02em;color:var(--night);max-width:20ch}
+  h1 em{font-style:italic;font-weight:500}
+  .lede{margin-top:20px;max-width:66ch;font-size:16.5px;color:var(--slate)}
+  h2{font-family:var(--display);font-weight:500;font-size:30px;color:var(--night);letter-spacing:-.01em;line-height:1.15}
+  h3{font-weight:600;font-size:16.5px;color:var(--night);margin-bottom:8px}
+  h4{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:12px}
+  section{margin-top:64px}
+  .sec-head{display:flex;align-items:baseline;gap:20px;padding-bottom:14px;border-bottom:2px solid var(--night);margin-bottom:28px;flex-wrap:wrap}
+  .sec-num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--brass);letter-spacing:.1em}
+  .sec-sub{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  p{margin-bottom:13px;max-width:78ch}
+  .card{background:var(--card);border:1px solid var(--rule);padding:22px 24px;margin-bottom:14px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:20px 0}
+  .fact{background:var(--card);border:1px solid var(--rule);padding:16px 18px}
+  .fact .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .fact .v{font-family:var(--display);font-size:22px;color:var(--night);font-weight:500;line-height:1.2}
+  .fact .v small{font-size:13px;color:var(--muted);font-family:var(--body);display:block;margin-top:3px}
+
+  .thesis{background:var(--night);color:#EDEFF3;padding:36px 42px;margin:28px 0}
+  .thesis .q{font-family:var(--display);font-size:clamp(21px,2.8vw,32px);font-weight:300;line-height:1.3;color:#fff;max-width:26ch}
+  .thesis .q b{font-weight:500;color:var(--brass);font-style:italic}
+  .thesis p{color:#AFB7C6;margin-top:16px;font-size:14.5px;max-width:66ch}
+
+  .quote{border-left:3px solid var(--brass);padding:4px 0 4px 18px;margin:12px 0;font-family:var(--display);font-style:italic;font-size:15.5px;color:var(--ink);max-width:72ch}
+  .quote .who{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:7px}
+
+  ul{list-style:none}
+  li{position:relative;padding-left:15px;margin-bottom:7px;font-size:14.5px;color:var(--slate)}
+  li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;background:var(--brass);opacity:.6}
+  li b{color:var(--ink);font-weight:600}
+
+  .plus{border-left:4px solid var(--teal);background:var(--card);border-top:1px solid var(--rule);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:18px 22px;margin-bottom:12px}
+  .plus h3{color:var(--teal)}
+  .minus{border-left:4px solid var(--red);background:var(--card);border-top:1px solid var(--rule);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:18px 22px;margin-bottom:12px}
+  .minus h3{color:var(--red)}
+  .plus p,.minus p{font-size:14.5px;margin-bottom:8px}
+
+  /* Скрипт разбора */
+  .step{display:grid;grid-template-columns:80px 1fr;background:var(--card);border:1px solid var(--rule);margin-bottom:12px}
+  .step .t{background:var(--night);color:#fff;padding:16px 10px;text-align:center;font-family:var(--mono)}
+  .step .t .min{font-size:18px;font-weight:600;color:var(--brass)}
+  .step .t .lbl{font-size:9.5px;color:#AFB7C6;margin-top:5px;letter-spacing:.06em;line-height:1.3}
+  .step.close .t{background:var(--brass)}
+  .step.close .t .min{color:#fff}
+  .step .b{padding:18px 22px}
+  .step .b .goal{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);margin-bottom:8px}
+  .step .b p{font-size:14.5px;margin-bottom:8px}
+  .say{background:var(--brass-soft);border-left:3px solid var(--brass);padding:10px 14px;font-family:var(--display);font-style:italic;font-size:15px;color:var(--night);margin:10px 0 4px;max-width:74ch}
+  .say .lbl{display:block;font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);margin-bottom:5px}
+  .dont{background:var(--red-soft);border-left:3px solid var(--red);padding:10px 14px;font-size:13.5px;color:#6B3620;margin-top:8px;max-width:74ch}
+  .dont b{color:var(--red)}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--card)}
+  th{background:var(--night);color:#fff;text-align:left;padding:10px 13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+  td{padding:10px 13px;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--slate)}
+  td:first-child{font-weight:600;color:var(--ink)}
+  tr:last-child td{border-bottom:none}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;white-space:nowrap}
+  .tag.a{background:var(--brass);color:#fff}
+  .tag.b{background:var(--violet);color:#fff}
+  .tag.n{background:#D8D4CB;color:var(--slate)}
+  .tag.hot{background:var(--teal);color:#fff}
+
+  /* Триггеры */
+  .trig{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--card);border:1px solid var(--rule);margin-bottom:10px}
+  .trig>div{padding:16px 20px}
+  .trig>div:first-child{border-right:1px solid var(--rule)}
+  .trig .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .trig .ph{font-family:var(--display);font-style:italic;font-size:15.5px;color:var(--night)}
+  .trig .re{font-size:14px;color:var(--slate)}
+  .trig .re b{color:var(--ink)}
+
+  /* Возражения */
+  .obj{background:var(--card);border:1px solid var(--rule);margin-bottom:10px;padding:16px 20px}
+  .obj .o{font-family:var(--display);font-style:italic;font-size:16px;color:var(--night);margin-bottom:8px}
+  .obj .o::before{content:'— ';color:var(--red)}
+  .obj .r{font-size:14.5px;color:var(--slate);padding-left:18px;border-left:2px solid var(--brass)}
+
+  .note{border-left:3px solid var(--rule);padding-left:16px;font-size:13.5px;color:var(--muted);font-style:italic;margin:14px 0;max-width:74ch}
+  .warn{background:var(--red-soft);border-left:4px solid var(--red);padding:18px 22px;margin:16px 0}
+  .warn h3{color:#8C3D1F}
+  .warn p{font-size:14px;color:#6B3620;margin-bottom:7px}
+
+  footer{margin-top:72px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  @media (max-width:860px){.grid2,.grid3,.facts,.trig{grid-template-columns:1fr}.trig>div:first-child{border-right:none;border-bottom:1px solid var(--rule)}.step{grid-template-columns:1fr}.step .t{display:flex;gap:12px;align-items:baseline;justify-content:flex-start;padding:12px 18px}}
+  @media (max-width:560px){body{padding:30px 16px 60px}.thesis{padding:24px 20px}.sec-sub{margin-left:0}}
+  @media print{body{background:#fff;padding:0}section,.step,.trig,.obj{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Разбор эфира 12.09 · инструкция к разборам 14–17.09 · 15 сентября 2026</div>
+  <h1>Эфир сработал. Теперь главное — <em>не продать не тем</em></h1>
+  <p class="lede">Сорок три заявки за один эфир без рекламы и без цены — это сильный результат, и он говорит, что тема денег в поле есть. Но сама Екатерина написала: не все целевые, часть из найма. Ответы в Zoom это подтвердили. Значит, следующие четыре дня — не про продажу, а про сортировку: понять, кто здесь A, и продать только им.</p>
+</header>
+
+<div class="facts">
+  <div class="fact"><div class="k">Заявок</div><div class="v">43<small>без цены и без рекламы</small></div></div>
+  <div class="fact"><div class="k">Назначено разборов</div><div class="v">16<small>вместо обещанных 10</small></div></div>
+  <div class="fact"><div class="k">Окно</div><div class="v">4 дня<small>до ретрита 18.09</small></div></div>
+  <div class="fact"><div class="k">Цель на выходе</div><div class="v">3–5 предоплат<small>+ 10 записей для сайта</small></div></div>
+</div>
+
+<!-- ============ 1. ВЫВОДЫ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2>Что показал эфир</h2>
+    <span class="sec-sub">7 выводов</span>
+  </div>
+
+  <div class="plus">
+    <h3>Личная история сработала как доверие</h3>
+    <p>Банк, кредитный портфель на миллиард долларов, йога-центр семь лет, недвижимость в 27, рекорд 5 миллионов, и рядом — хлеб с маслом на работе за 300 долларов. Это лучший блок эфира. Она впервые публично показала «материю», и аудитория, которая считала её «жрицей», увидела финансиста. Этот блок нужно нарезать на рилсы и поставить первым экраном сайта.</p>
+  </div>
+
+  <div class="plus">
+    <h3>Три уровня прозвучали чисто и запомнились</h3>
+    <p>Глюки мышления → энергия → действие и фокус. Она добавила две формулировки, которых не было в плане и которые сильнее плана: <b>«знать и быть — разные вещи»</b> и <b>«если ты такой умный, почему ты такой бедный»</b>. Вторую стоит использовать осторожно, но она бьёт точно в сегмент A.</p>
+  </div>
+
+  <div class="plus">
+    <h3>Мостик сделан правильно</h3>
+    <p>Без цены, без давления, с настоящим дедлайном — Египет 18-го. Она назвала разбор «точка роста» — это лучше, чем «мини-разбор», и это стоит оставить как название формата. И она сказала ключевое: <b>«я выберу, я возьму не всех»</b>. Отбор заявлен публично — теперь отказывать легко.</p>
+  </div>
+
+  <div class="plus">
+    <h3>Предфрейм на платность заложен</h3>
+    <p>Она сказала: «бесплатные советы мне неинтересны, за качественную обратную связь я плачу». Это её собственная позиция, и она снимает половину возражений «дорого» на разборах ещё до того, как они возникнут. На разборе можно к ней вернуться.</p>
+  </div>
+
+  <div class="minus">
+    <h3>Аудитория в Zoom — сегмент Б, а не A</h3>
+    <p>Все, кто задавал вопросы вслух: Наталья из Денвера — коуч после сертификата, работает бесплатно, «в деньгах не нуждаюсь». Лея — «хочу проявляться в соцсетях». Светлана — «много делаю, денег мало». Владимир — «где мои большие деньги». Ни одного предпринимателя с доходом от 300 тысяч, который сказал бы «упёрся». Это не провал эфира — это структура её тёплой базы. Но это значит, что среди 43 заявок целевых, скорее всего, 8–12, и разборы должны это подтвердить.</p>
+  </div>
+
+  <div class="minus">
+    <h3>Название продукта разошлось</h3>
+    <p>На синке — «Материя». На эфире — «Квантовый код в этот раз будет про деньги». Плюс «сообщество предпринимателей, архитекторов игры». Три названия за неделю. До второго эфира 29-го нужно одно, и оно должно стоять на сайте, в анкете и в её речи одинаково.</p>
+  </div>
+
+  <div class="minus">
+    <h3>Публично сказано «не продающие консультации»</h3>
+    <p>Дословно: «это бесплатно, это не продающие консультации, это процесс моей надсмотренности». Это правильная позиция для доверия, но она связывает руки на разборе. Продажа теперь может быть только по разрешению: <b>«хочешь, расскажу про группу?»</b> — и только тем, кому она сама сказала «тебе туда надо». Скрипт ниже построен на этом.</p>
+  </div>
+</section>
+
+<div class="thesis">
+  <div class="q">Из 43 заявок группу заполнят 4–6 человек. Задача разборов — <b>найти этих шестерых</b>, не потратив три дня на остальных.</div>
+  <p>Шестнадцать встреч по 20 минут — это больше пяти часов чистого разговора на отдыхе перед ретритом. Если половина из них с сегментом Б, Екатерина приедет на Египет выжатой, а сайт получит материал не о тех людях. Поэтому первые две минуты каждого разбора — квалификация, и если человек не проходит, разбор сокращается до десяти минут.</p>
+</div>
+
+<!-- ============ 2. СКРИПТ РАЗБОРА ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2>Структура разбора</h2>
+    <span class="sec-sub">20 минут · 5 шагов</span>
+  </div>
+
+  <div class="step">
+    <div class="t"><div class="min">2</div><div class="lbl">квалификация</div></div>
+    <div class="b">
+      <div class="goal">Задача · подтвердить анкету и понять сегмент за две минуты</div>
+      <p>Три вопроса подряд, без обсуждения. Ответы дают сегмент. Она уже видела анкету — здесь проверка, что в анкете правда.</p>
+      <div class="say"><span class="lbl">Три вопроса</span>Чем занимаешься и как к тебе приходят деньги?<br>Сколько в среднем за последние три месяца чистыми?<br>Какой был максимум за месяц за всю жизнь — и когда?</div>
+      <p>Третий вопрос — главный. Он показывает потолок человека и его «качели». Кто говорил «максимум 500, два года назад» при текущих 200 — это A с откатом. Кто говорит «максимум 80» — не сюда.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="t"><div class="min">5</div><div class="lbl">где застрял</div></div>
+    <div class="b">
+      <div class="goal">Задача · найти уровень: мышление, энергия или действие</div>
+      <p>Два вопроса, и она слушает не ответ, а то, как человек говорит. Здесь её сила — она видит глюк со стороны.</p>
+      <div class="say"><span class="lbl">Два вопроса</span>Что ты делал последние три месяца, чтобы доход вырос? Что из этого сработало, а что нет?<br>Если бы я сейчас сказала «делай вот это одно» — что бы ты, скорее всего, не сделал и почему?</div>
+      <p>Второй вопрос вскрывает сопротивление напрямую. Человек сам называет то, чего избегает. Это и есть материал для прохода.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="t"><div class="min">6</div><div class="lbl">проход</div></div>
+    <div class="b">
+      <div class="goal">Задача · дать одну фразу, которая пересобирает</div>
+      <p>Одно наблюдение и одно действие. Не разбор всего бизнеса — она сама так сказала на эфире. Формула: «Я вижу, что у тебя вот здесь. Если бы я была тобой, я бы сделала одно — вот это».</p>
+      <p><b>Здесь же — тест на реакцию.</b> Сразу после прохода — пауза и вопрос.</p>
+      <div class="say"><span class="lbl">После прохода</span>Что откликнулось? Что из этого ты реально сделаешь на этой неделе?</div>
+      <p>Кто отвечает конкретно и с датой — готов. Кто говорит «да, надо подумать, интересно» — нет.</p>
+    </div>
+  </div>
+
+  <div class="step close">
+    <div class="t"><div class="min">5</div><div class="lbl">мостик</div></div>
+    <div class="b">
+      <div class="goal">Только для тех, кто прошёл квалификацию и отреагировал на проход</div>
+      <p>Она обещала, что разбор не продающий. Значит, переход — через разрешение и через её оценку, а не через оффер. Сначала она называет, подходит человек или нет. Потом спрашивает, рассказывать ли.</p>
+      <div class="say"><span class="lbl">Скрипт мостика · если подходит</span>Смотри, я тебе честно скажу. То, что мы сейчас нашли, — это один проход. А то, что тебя держит на этом уровне, оно не про одну фразу, оно про три месяца, чтобы не слиться. Я в октябре запускаю группу ровно про это — деньги, для таких, как ты. Тебе туда надо. Хочешь, расскажу, как устроено — две минуты?</div>
+      <p>Если «да» — формат в трёх предложениях: три месяца, двенадцать встреч, одна цель, ежедневный отчёт три минуты, группа до десяти человек одного уровня. И цена. <b>Цену называть — обязательно.</b> Это решенческое интервью: без цены она не узнает, за сколько покупают.</p>
+      <div class="say"><span class="lbl">Цена · тестовая формулировка</span>Два входа. Триста тысяч — группа целиком. Пятьсот — плюс три личные сессии со мной и карта силы на год. Что ближе?</div>
+      <div class="dont"><b>Не делать:</b> называть 150 первым. Если 150 прозвучит первым, 300 никто не купит. Если человек говорит «дорого» — спросить «за сколько бы зашёл?» и записать. Тариф 150 решается после шестнадцати разборов, а не на первом.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="t"><div class="min">2</div><div class="lbl">фиксация</div></div>
+    <div class="b">
+      <div class="goal">Задача · закрыть на действие, а не на «подумаю»</div>
+      <p>Если «да» — предоплата фиксирует место: сумма любая, но до отъезда. Если «подумаю» — договориться о дате ответа, не позже 27-го, когда она вернётся. Если «нет» — спасибо, второй эфир 29-го, там будет подробно.</p>
+      <div class="say"><span class="lbl">Фиксация</span>Мест мало, я беру сама. Если ты в это заходишь — до восемнадцатого предоплату, любую, и место твоё. Если нужно подумать — до какого числа скажешь?</div>
+    </div>
+  </div>
+
+  <div class="warn">
+    <h3>Если человек не прошёл квалификацию</h3>
+    <p>Разбор укорачивается до десяти минут: контекст, одно наблюдение, одно действие — и всё. Без мостика. Прощание с искренним «делай вот это, напиши мне через месяц, что получилось». Это не отказ, это касание, после которого человек придёт на второй эфир или купит запись. Она уже так сделала с Натальей на эфире: «сейчас не цель деньги, цель — мастерство». Это правильный ответ.</p>
+    <p style="margin-bottom:0">Если из первых пяти разборов четыре — сегмент Б, оставшиеся одиннадцать пересмотреть по анкетам и часть перевести в голосовые. Пять часов на отдыхе не должны уйти на тех, кто не купит.</p>
+  </div>
+</section>
+
+<!-- ============ 3. КАК ОПРЕДЕЛЯТЬ СЕГМЕНТ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2>Как определять сегмент на разборе</h2>
+    <span class="sec-sub">по тому, что говорит человек</span>
+  </div>
+
+  <table>
+    <tr><th>Признак</th><th>Сегмент A · в группу</th><th>Сегмент Б · запись, второй эфир</th><th>Не ЦА · вежливо закрыть</th></tr>
+    <tr><td>Как приходят деньги</td><td>Своё дело, продажи повторяются, есть клиенты</td><td>Практика есть, но доход нестабильный, «когда как»</td><td>Найм, партнёр, «ищу своё», «пока бесплатно»</td></tr>
+    <tr><td>Доход и максимум</td><td>Сейчас 300+, максимум был выше или близко</td><td>Сейчас 100–300, максимум был 300–500 разово</td><td>Меньше 100 или «не нуждаюсь в деньгах»</td></tr>
+    <tr><td>Как описывает застревание</td><td>Конкретно: «выручка та же два года», «упал с 800 до 300»</td><td>Абстрактно: «много делаю, денег мало», «не понимаю, где»</td><td>Через смысл: «хочу научить людей любить», «проявляться»</td></tr>
+    <tr><td>Реакция на проход</td><td>«Да, это оно» + называет, что сделает и когда</td><td>«Интересно, надо подумать» или задаёт уточняющие</td><td>Спорит или переводит на своё</td></tr>
+    <tr><td>Что просит</td><td>«Скажи, что убрать», «где я не вижу»</td><td>«Подскажи, что делать», «с чего начать»</td><td>«Дай совет», «где мои деньги»</td></tr>
+    <tr><td>Сам спрашивает про группу</td><td>Да, и про формат, и про цену</td><td>Спрашивает «а что там будет»</td><td>Не спрашивает</td></tr>
+  </table>
+
+  <div class="note">Правило простое: если человек сам не спросил про группу и не спросил цену — она не ошиблась, отнеся его к Б. Сегмент A на этом этапе задаёт вопросы про условия сам. Она это уже видела на кастдевах.</div>
+</section>
+
+<!-- ============ 4. ТРИГГЕРЫ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <h2>Триггеры: что слышать и как отвечать</h2>
+    <span class="sec-sub">фразы клиента → ход Екатерины</span>
+  </div>
+
+  <p>Триггер — это фраза, после которой человек либо готов, либо закрывается. Ниже — те, что звучали в кастдевах и на эфире, и что с ними делать. Левая колонка — что говорит человек, правая — что говорит она.</p>
+
+  <h4 style="margin-top:22px">Сигналы готовности</h4>
+
+  <div class="trig">
+    <div><div class="l">Слышит</div><div class="ph">«Я всё знаю, что делать. И не делаю.»</div></div>
+    <div><div class="l">Отвечает</div><div class="re"><b>Самый горячий сигнал.</b> «Вот. Если бы знание работало — ты бы уже сделал. Значит, дело не в знании. Это ровно то, с чем группа». Не объяснять дальше. Пауза.</div></div>
+  </div>
+  <div class="trig">
+    <div><div class="l">Слышит</div><div class="ph">«У меня было восемьсот. Потом упало. Не понимаю, почему.»</div></div>
+    <div><div class="l">Отвечает</div><div class="re"><b>Качели — сегмент A.</b> «Восемьсот у тебя уже есть в теле. Ты это делал. Вопрос не как заработать, а почему ты сам себя оттуда выкинул». Дальше — про энергию и ёмкость.</div></div>
+  </div>
+  <div class="trig">
+    <div><div class="l">Слышит</div><div class="ph">«Мне нужен кто-то со стороны, кто скажет.»</div></div>
+    <div><div class="l">Отвечает</div><div class="re"><b>Готов платить за обратную связь.</b> Вернуть её же фразу с эфира: «За бесплатные советы я не держусь. За честную обратную связь я сама плачу. Это про то же».</div></div>
+  </div>
+  <div class="trig">
+    <div><div class="l">Слышит</div><div class="ph">«А сколько это стоит?» — сам, раньше мостика</div></div>
+    <div><div class="l">Отвечает</div><div class="re"><b>Купит.</b> Не отмахиваться «потом расскажу». Назвать сразу: «Триста и пятьсот. Расскажу разницу?» Человек, который спросил цену сам, уже решил.</div></div>
+  </div>
+  <div class="trig">
+    <div><div class="l">Слышит</div><div class="ph">«Я уже был в нечто / в мастермайнде / у наставника, не сработало.»</div></div>
+    <div><div class="l">Отвечает</div><div class="re"><b>Ступень 4 по Ханту — выбирает мастера.</b> Не спорить с их опытом. «Что там не сработало?» — и слушать. Обычно: разноуровневые люди, перегруз, допродажи. Каждое — пункт её отстройки.</div></div>
+  </div>
+
+  <h4 style="margin-top:30px">Сигналы «не сейчас» и «не сюда»</h4>
+
+  <div class="trig">
+    <div><div class="l">Слышит</div><div class="ph">«У меня всё есть, деньги не главное.»</div></div>
+    <div><div class="l">Отвечает</div><div class="re"><b>Не ЦА.</b> Это Наталья. Ответ уже был: «У тебя сейчас цель — мастерство, не деньги. Иди делай сто сессий». Разбор закрывается на десятой минуте.</div></div>
+  </div>
+  <div class="trig">
+    <div><div class="l">Слышит</div><div class="ph">«Я хочу проявляться, снимать, писать.»</div></div>
+    <div><div class="l">Отвечает</div><div class="re"><b>Сегмент Б, тема второго сезона.</b> «Это следующий сезон, он будет в январе. Сейчас про деньги. Если доход не растёт — есть смысл сначала сюда». Если доход ниже 300 — просто второй эфир.</div></div>
+  </div>
+  <div class="trig">
+    <div><div class="l">Слышит</div><div class="ph">«Мне надо подумать / посоветоваться с мужем.»</div></div>
+    <div><div class="l">Отвечает</div><div class="re"><b>Неопределённо.</b> «Что именно? Формат, цена или сомнение, что сработает?» Ответ покажет настоящее возражение. Дальше — дата: «до какого числа скажешь?»</div></div>
+  </div>
+  <div class="trig">
+    <div><div class="l">Слышит</div><div class="ph">«Я верю, что у меня всё получится, я уже решила.»</div></div>
+    <div><div class="l">Отвечает</div><div class="re"><b>Неадекватная цель — она сама это описала на эфире.</b> Не ломать веру. «Хорошо. Через месяц напиши, что получилось». Это тот случай, когда человек должен обжечься сам.</div></div>
+  </div>
+</section>
+
+<!-- ============ 5. ВОЗРАЖЕНИЯ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">05</span>
+    <h2>Возражения на цену</h2>
+    <span class="sec-sub">после мостика</span>
+  </div>
+
+  <div class="obj">
+    <div class="o">Дорого.</div>
+    <div class="r">«За сколько бы зашёл?» — и записать цифру. Это не торг, это данные для решения по тарифам 17-го. Потом: «Ты идёшь на миллион в месяц. Триста — это билет. Он окупается первым месяцем на новом уровне». И её кейс: шестнадцать человек за 300 в прошлой группе, все сделали миллион, одна зашла в кредит и закрыла его с первых продаж.</div>
+  </div>
+  <div class="obj">
+    <div class="o">Нет времени на двенадцать встреч.</div>
+    <div class="r">«Встреча раз в две недели, два часа. Отчёт — три минуты в день. Это меньше, чем ты тратишь на то, что не работает». Если предприниматель реально в перелётах — это A, и для него есть VIP с личными сессиями, которые подстраиваются под график.</div>
+  </div>
+  <div class="obj">
+    <div class="o">Я сам справлюсь, мне всё понятно после разбора.</div>
+    <div class="r">«Хорошо. А почему за два года не справился?» Спокойно, без укола. Потом её фраза с эфира: «Если бы ты мог разобраться — уже бы разобрался. Сто процентов». И отпустить: «Напиши через месяц, что получилось». Часть вернётся к второму эфиру.</div>
+  </div>
+  <div class="obj">
+    <div class="o">А результат гарантирован?</div>
+    <div class="r">«Если ты ходишь на встречи, пишешь отчёты и делаешь то, что решил — да, ты выйдешь на миллион. Если платишь и ложишься — нет. Я не беру тех, кто ложится, поэтому и отбор». Это её собственная формулировка с синка, она честная и работает.</div>
+  </div>
+  <div class="obj">
+    <div class="o">Что конкретно будет на встречах? Какая методология?</div>
+    <div class="r">Здесь важно не уйти в объяснение поля и кодов. Три предложения: «Шесть встреч — работа с энергией и глюками, ты выходишь другим. Шесть встреч — разбор каждого: одна цель, что сделал, что скорректировать. Между ними — отчёты и группа, чтобы не слиться». Если спрашивает глубже — «это опыт, его не объяснить, моя аудитория это знает. Первую встречу почувствуешь».</div>
+  </div>
+</section>
+
+<!-- ============ 6. ЧТО ЗАПИСАТЬ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">06</span>
+    <h2>Что фиксировать после каждого разбора</h2>
+    <span class="sec-sub">5 строк · 2 минуты</span>
+  </div>
+
+  <p>Из шестнадцати таких карточек собирается сайт, второй эфир и решение по тарифам. Заполнять сразу после звонка, пока помнит формулировки.</p>
+
+  <table>
+    <tr><th>Поле</th><th>Что писать</th><th>Зачем</th></tr>
+    <tr><td>Сегмент</td><td>A / Б / не ЦА</td><td>Пропорция среди заявок — база для рекламы</td></tr>
+    <tr><td>Уровень застревания</td><td>Мышление / энергия / действие — одно слово</td><td>Какой из трёх блоков ставить первым на сайте</td></tr>
+    <tr><td>Фраза человека</td><td>Дословно, как он описал свою ситуацию</td><td>Язык для экрана «три состояния» и для рилсов</td></tr>
+    <tr><td>Реакция на цену</td><td>Купил за / готов за / отказ и почему</td><td>Решение 150 или 300 — по цифрам, не по ощущению</td></tr>
+    <tr><td>Что зацепило</td><td>Фраза Екатерины, после которой человек изменился в лице</td><td>Это заголовки. Ничего сильнее не будет</td></tr>
+  </table>
+
+  <div class="grid2" style="margin-top:20px">
+    <div class="card">
+      <h3>Приоритет на четыре дня</h3>
+      <ul>
+        <li><b>Сначала</b> те, кто в анкете указал 300+ и «проходил программы» — короткий путь к предоплате</li>
+        <li><b>Потом</b> те, кто 300+ и «узнал недавно» — материал про холодного клиента</li>
+        <li><b>Голосовым</b> все, у кого 100–300 и живой ответ на «что мешает»</li>
+        <li><b>Не звонить</b> тем, кто в найме или «ищу своё» — вежливый ответ и второй эфир</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Три решения к 17 сентября</h3>
+      <ul>
+        <li><b>Название.</b> «Материя» или «Квантовый код». Одно. На эфире прозвучало второе — если оставляем его, «Материя» уходит в название сезона</li>
+        <li><b>Тарифы.</b> Два или три — по колонке «реакция на цену», а не по ощущению</li>
+        <li><b>Сколько мест.</b> Если за четыре дня три предоплаты — группа на десять реальна. Если ноль — второй эфир перестраивается</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">Записи разборов с сегментом A — мне в тот же день. Из них собираю сайт за время Египта. Разборы с Б и не ЦА можно не присылать: они не про продукт, они про то, кого не брать.</div>
+</section>
+
+<footer>
+  <span>По эфиру 12.09 и переписке 13.09</span>
+  <span>Системный продюсер · Alex Kim · Soltrix</span>
+</footer>
+
+</div>
+</body>
+</html>
