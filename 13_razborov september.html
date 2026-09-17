@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Итоги 13 разборов · Материя</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,500;0,700;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#101A2E; --slate:#2C3A52; --ink:#1B2333; --muted:#6B7488;
+    --stone:#EDEAE3; --card:#FFFFFF; --rule:#D8D4CB;
+    --brass:#B8873B; --brass-soft:#FBF3E4;
+    --teal:#2F6F6A; --teal-soft:#EAF3F2;
+    --red:#A0522D; --red-soft:#FBEFEA;
+    --violet:#7A6A93; --violet-soft:#F4F1F8;
+    --display:'Spectral',Georgia,serif;
+    --body:'IBM Plex Sans',-apple-system,Segoe UI,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);background:var(--stone);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;padding:56px 32px 100px}
+  .wrap{max-width:1140px;margin:0 auto}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  h1{font-family:var(--display);font-weight:300;font-size:clamp(34px,4.6vw,58px);line-height:1.05;letter-spacing:-.02em;color:var(--night);max-width:20ch}
+  h1 em{font-style:italic;font-weight:500}
+  .lede{margin-top:20px;max-width:68ch;font-size:16.5px;color:var(--slate)}
+  h2{font-family:var(--display);font-weight:500;font-size:30px;color:var(--night);letter-spacing:-.01em;line-height:1.15}
+  h3{font-weight:600;font-size:16.5px;color:var(--night);margin-bottom:8px}
+  h4{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:12px}
+  section{margin-top:64px}
+  .sec-head{display:flex;align-items:baseline;gap:20px;padding-bottom:14px;border-bottom:2px solid var(--night);margin-bottom:28px;flex-wrap:wrap}
+  .sec-num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--brass);letter-spacing:.1em}
+  .sec-sub{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  p{margin-bottom:13px;max-width:80ch}
+  .card{background:var(--card);border:1px solid var(--rule);padding:22px 24px;margin-bottom:14px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+  .facts{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin:20px 0}
+  .fact{background:var(--card);border:1px solid var(--rule);padding:16px 16px}
+  .fact .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .fact .v{font-family:var(--display);font-size:26px;color:var(--night);font-weight:500;line-height:1.1}
+  .fact .v small{font-size:12.5px;color:var(--muted);font-family:var(--body);display:block;margin-top:4px;line-height:1.3}
+  .fact.bad .v{color:var(--red)}
+
+  .thesis{background:var(--night);color:#EDEFF3;padding:36px 42px;margin:28px 0}
+  .thesis .q{font-family:var(--display);font-size:clamp(21px,2.8vw,32px);font-weight:300;line-height:1.3;color:#fff;max-width:26ch}
+  .thesis .q b{font-weight:500;color:var(--brass);font-style:italic}
+  .thesis p{color:#AFB7C6;margin-top:16px;font-size:14.5px;max-width:68ch}
+
+  .quote{border-left:3px solid var(--brass);padding:4px 0 4px 18px;margin:12px 0;font-family:var(--display);font-style:italic;font-size:15.5px;color:var(--ink);max-width:72ch}
+  .quote .who{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:7px}
+
+  ul{list-style:none}
+  li{position:relative;padding-left:15px;margin-bottom:7px;font-size:14.5px;color:var(--slate)}
+  li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;background:var(--brass);opacity:.6}
+  li b{color:var(--ink);font-weight:600}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;background:var(--card)}
+  th{background:var(--night);color:#fff;text-align:left;padding:10px 12px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+  td{padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--slate)}
+  td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  .tag{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:2px;white-space:nowrap}
+  .tag.a{background:var(--brass);color:#fff}
+  .tag.ap{background:var(--teal);color:#fff}
+  .tag.b{background:var(--violet);color:#fff}
+  .tag.n{background:#D8D4CB;color:var(--slate)}
+  .no{color:var(--red);font-weight:600}
+
+  .finding{background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--red);padding:20px 24px;margin-bottom:12px}
+  .finding h3{color:#8C3D1F}
+  .finding p{font-size:14.5px;margin-bottom:8px}
+  .finding.ok{border-left-color:var(--teal)}
+  .finding.ok h3{color:var(--teal)}
+
+  .corr{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--card);border:1px solid var(--rule);margin-bottom:10px}
+  .corr>div{padding:16px 20px}
+  .corr>div:first-child{border-right:1px solid var(--rule);background:#FAFAF8}
+  .corr .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .corr .t{font-weight:600;color:var(--night);font-size:15px}
+  .corr .d{font-size:14px;color:var(--slate)}
+
+  .step{display:grid;grid-template-columns:60px 1fr;background:var(--card);border:1px solid var(--rule);margin-bottom:10px}
+  .step .n{background:var(--night);color:var(--brass);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:16px;font-weight:600}
+  .step .b{padding:16px 20px}
+  .step .b .ttl{font-weight:600;font-size:15.5px;color:var(--night);margin-bottom:5px}
+  .step .b .when{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);margin-bottom:8px}
+  .step .b p{font-size:14px;margin-bottom:6px}
+  .say{background:var(--brass-soft);border-left:3px solid var(--brass);padding:10px 14px;font-family:var(--display);font-style:italic;font-size:14.5px;color:var(--night);margin:8px 0 4px;max-width:74ch}
+  .say .lbl{display:block;font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);margin-bottom:5px}
+
+  .warn{background:var(--red-soft);border-left:4px solid var(--red);padding:18px 22px;margin:16px 0}
+  .warn h3{color:#8C3D1F}
+  .warn p{font-size:14px;color:#6B3620;margin-bottom:7px}
+  .note{border-left:3px solid var(--rule);padding-left:16px;font-size:13.5px;color:var(--muted);font-style:italic;margin:14px 0;max-width:74ch}
+
+  footer{margin-top:72px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  @media (max-width:900px){.grid2,.grid3,.corr{grid-template-columns:1fr}.facts{grid-template-columns:1fr 1fr}.corr>div:first-child{border-right:none;border-bottom:1px solid var(--rule)}table{font-size:12.5px}}
+  @media (max-width:560px){body{padding:30px 16px 60px}.thesis{padding:24px 20px}.sec-sub{margin-left:0}.facts{grid-template-columns:1fr}}
+  @media print{body{background:#fff;padding:0}section,.finding,.step{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Отчёт по разборам 14–16 сентября · 17 сентября 2026</div>
+  <h1>Тринадцать разборов: <em>ценность отдана, продажи не было</em></h1>
+  <p class="lede">Екатерина провела тринадцать встреч за три дня. Каждый человек ушёл с проходом, несколько — в слезах благодарности. Ни на одной встрече не прозвучало предложение продукта, и ни один человек не заплатил. Ниже — почему так вышло, что это говорит о продукте и аудитории, и что делать до 10 октября.</p>
+</header>
+
+<div class="facts">
+  <div class="fact"><div class="k">Разборов</div><div class="v">13<small>из 16 назначенных</small></div></div>
+  <div class="fact"><div class="k">Целевых · сегмент A</div><div class="v">1<small>Маша, 300–500 тыс.</small></div></div>
+  <div class="fact"><div class="k">Сегмент Б</div><div class="v">4<small>100–250 тыс., нестабильно</small></div></div>
+  <div class="fact"><div class="k">Не ЦА</div><div class="v">7<small>ноль дохода или за счёт мужа</small></div></div>
+  <div class="fact bad"><div class="k">Предложений продукта</div><div class="v">0<small>около 6 часов чистого времени</small></div></div>
+</div>
+
+<div class="thesis">
+  <div class="q">Анкета собрала <b>не тех</b>, а разборы <b>не продавали</b>. Обе вещи исправимы — но только если назвать их вслух до 29 сентября.</div>
+  <p>Ни одна из тринадцати встреч не была бесполезной для проекта: они дали язык аудитории, пять типовых проходов Екатерины и один живой пример того, как выглядит выстроенная система на 4 миллиона в месяц. Но как продажи первого потока они не сработали, и это нужно признать раньше, чем она вернётся из Египта.</p>
+</div>
+
+<!-- ============ 1. КТО ПРИШЁЛ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2>Кто пришёл на разборы</h2>
+    <span class="sec-sub">13 человек · по порядку встреч</span>
+  </div>
+
+  <table>
+    <tr><th>Кто</th><th>Чем занимается</th><th>Доход</th><th>Сегмент</th><th>Главный запрос</th><th>Проход Екатерины</th><th>Оффер</th></tr>
+    <tr><td>Светлана, Иркутск</td><td>Коуч, клуб за 500 ₽, распаковки 3 500 ₽</td><td>«денег вообще нет»</td><td><span class="tag n">не ЦА</span></td><td>Как продавать, «я не могу зарабатывать»</td><td>Разрешение получать. Клуб 5 000, сессия 30 000</td><td class="no">нет</td></tr>
+    <tr><td>Анастасия</td><td>Астролог, книга талантов за 33 000 ₽, продажа одна</td><td>содержит муж</td><td><span class="tag n">не ЦА</span></td><td>Как продвигать, боится, что идею украдут</td><td>Продать 5 альбомов за месяц через партнёров</td><td class="no">нет</td></tr>
+    <tr><td>Ксения, Воронеж</td><td>Риелтор 8 лет, ведёт «Лилу»</td><td>100–250 тыс.</td><td><span class="tag b">Б</span></td><td>Устала от Воронежа, тянет в духовность</td><td>Переезд на Бали, недвижимость там</td><td class="no">нет</td></tr>
+    <tr><td>Рафаэль, Кыргызстан</td><td>Целитель, 2 000 ₽/час</td><td>низкий</td><td><span class="tag n">не ЦА</span></td><td>«Партнёр в вашем лице» — хочет, чтобы продвигали</td><td>«Ты сам дракон». Методолог</td><td class="no">нет</td></tr>
+    <tr><td>Маша, Вьетнам</td><td>Академия натуропатии, чек 200 000 ₽, есть продюсер</td><td>300–500 тыс. стабильно</td><td><span class="tag a">A</span></td><td>Пересобрать проект под себя, накопить капитал</td><td>Роль звезды, 80 % на аудиторию, правила капитала</td><td class="no">нет · 60 мин · предложила донат</td></tr>
+    <tr><td>Лера, Владивосток</td><td>Ментор, группа 4 чел. × 15 000 ₽/мес</td><td>~60 тыс., долги 3 года</td><td><span class="tag b">Б</span></td><td>Нет энергии, отношения, «нет людей»</td><td>Жёстко: «ты не прошла игру». Решение и переезд</td><td class="no">нет · 45 мин</td></tr>
+    <tr><td>Надежда</td><td>Художница, танцевальная терапия</td><td>содержит муж</td><td><span class="tag n">не ЦА</span></td><td>Как проявляться, страшно</td><td>Фокус на картины, сайт, 10 коллабораций</td><td class="no">нет</td></tr>
+    <tr><td>Вероника</td><td>Сексопатолог + поставка лекарств</td><td>50 тыс. – 1 млн, качели</td><td><span class="tag n">не ЦА</span></td><td>Стабильность, долги от бывшего мужа</td><td>«Ты просто не хочешь работать». 90 рилсов</td><td class="no">нет</td></tr>
+    <tr><td>Елена, Барселона</td><td>Туризм 15 лет, книга, игра, ретриты</td><td>было ~1 млн, упало</td><td><span class="tag b">Б</span></td><td>Ретриты не набираются, «не умею продавать себя»</td><td>Воронка через игру, агрегаторы для туризма</td><td class="no">нет</td></tr>
+    <tr><td>Ангелина, Израиль</td><td>Ченнелинг, консалтинг, школа, ретриты</td><td>~4 млн ₽/мес</td><td><span class="tag ap">A+</span></td><td>«Куда направить энергию дальше»</td><td>Международное поле, формат Тони Роббинса</td><td class="no">нет · не клиент</td></tr>
+    <tr><td>Александра, Хабаровск</td><td>Педагог английского, детские группы</td><td>100–150 тыс. + 250 аренда</td><td><span class="tag b">Б</span></td><td>Упёрлась в потолок часов, «помощники все глупые»</td><td>Помощница через хантера, тишина</td><td class="no">нет</td></tr>
+    <tr><td>Елена, Рязань</td><td>«IT-инвестиции», реферальная сеть</td><td>меньше 100 тыс.</td><td><span class="tag n">не ЦА</span></td><td>«Делаю всё, результата нет»</td><td>Расфокус, убрать лишнее</td><td class="no">нет</td></tr>
+    <tr><td>Елена, 4 детей</td><td>Терапия души, 4 500 ₽/сессия, 50 сессий за донат</td><td>меньше 80 тыс.</td><td><span class="tag n">не ЦА</span></td><td>Нет клиентов, рассрочка за обучение</td><td>Контент регулярно, микрофон, студия</td><td class="no">нет</td></tr>
+  </table>
+
+  <div class="note">Семь из тринадцати не должны были попасть на разбор по её собственным критериям: доход ниже 100 тысяч, живут за счёт мужа или ищут, чем заниматься. Она сама сказала это на эфире: «Если у вас вопрос, я не знаю, чем мне заниматься, — это вам не поможет». И взяла их.</div>
+</section>
+
+<!-- ============ 2. ГЛАВНЫЕ ВЫВОДЫ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2>Что пошло не так</h2>
+    <span class="sec-sub">четыре вывода</span>
+  </div>
+
+  <div class="finding">
+    <h3>1 · Отбор по анкете не сработал, потому что отбирала не анкета</h3>
+    <p>Екатерина выбирала тех, кто ей интересен, а не тех, кто проходит фильтр. Дословно на первом же разборе: «Я тебя сначала не выбрала, потом думаю — нет, кого-то я забыла, вернулась, нашла». Светлана с клубом за 500 рублей заняла двадцать минут. Рафаэль, который пришёл «сесть на хвост дракона», занял двадцать пять.</p>
+    <p style="margin-bottom:0">Это не претензия к ней — так устроен её дар: она видит человека и хочет помочь. Но именно поэтому фильтр должен работать до неё. Ассистент сортирует по доходу и роду занятий, ей приходят только те, кто прошёл. Иначе повторится.</p>
+  </div>
+
+  <div class="finding">
+    <h3>2 · Ни одного предложения — даже единственному целевому</h3>
+    <p>Маша — 300–500 тысяч стабильно, чек своего продукта 200 тысяч, уже проходила её мастер-группу, есть продюсер, собирается пересобирать бизнес. Идеальный участник первого потока. Екатерина проработала с ней час, дала структуру ролей, правила капитала, стратегию продвижения. В конце Маша сама предложила донат. Про группу не прозвучало ни слова.</p>
+    <p style="margin-bottom:0">Причина понятна: на эфире она публично сказала «это не продающие консультации», и держала слово буквально. Но обещание было — не давить. Оно не запрещало сказать: «Тебе туда надо. Хочешь, расскажу?» Скрипт мостика был в инструкции, и он ни разу не был использован.</p>
+  </div>
+
+  <div class="finding">
+    <h3>3 · Разборы длились в два-три раза дольше плана</h3>
+    <p>Маша — 60 минут. Лера — 45. Ангелина — 40. Обещанные 15–20 минут выдержаны только там, где человек оказался откровенно не тем. В сумме — около шести часов на отдыхе перед ретритом, и это те самые шесть часов, которые не были потрачены на контент, на кейсы и на подготовку второго эфира.</p>
+  </div>
+
+  <div class="finding">
+    <h3>4 · Она снова пересобирает продукт</h3>
+    <p>Ангелине, последней, она сказала: «Я думала одно, теперь я смотрю на людей, и у меня другие мысли, но мне нужно ещё пересобрать». Это третья пересборка за месяц — «Квантовый проход», потом «Материя», теперь снова неизвестно что. До старта 23 дня, второй эфир через 12.</p>
+    <p style="margin-bottom:0"><b>Это главный риск проекта прямо сейчас.</b> Не отсутствие продаж — их можно сделать за две недели. А то, что к 29 сентября может не быть продукта, который она готова назвать вслух и назвать цену.</p>
+  </div>
+
+  <div class="finding ok">
+    <h3>Что сработало безусловно</h3>
+    <p>Её дар подтверждён тринадцать раз подряд. «Ты мне разрешила». «Ты меня благословила». «Рыдала час после твоего эфира». «Мне прям дошло — это мой урок честности». Каждый человек ушёл сдвинутым, включая тех, кто пришёл настроенным скептически. Проблема проекта не в продукте и не в мастере — проблема в том, что между даром и деньгами нет моста, и она сама его не строит.</p>
+  </div>
+</section>
+
+<!-- ============ 3. КОРРЕЛЯЦИИ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2>Что показали разборы об аудитории</h2>
+    <span class="sec-sub">корреляции</span>
+  </div>
+
+  <div class="corr">
+    <div><div class="l">Наблюдение</div><div class="t">Доход определяет тип запроса — жёстко</div></div>
+    <div><div class="l">Что это значит</div><div class="d">До 100 тысяч: «разреши мне», «где клиенты», «как продавать себя». 100–300: «упёрлась в потолок часов», «нет энергии», «не то место». 300 и выше: «как управлять потоком», «какая моя роль», «куда дальше». Три разных продукта под три разных вопроса. Сегментация из исследования подтвердилась дословно.</div></div>
+  </div>
+
+  <div class="corr">
+    <div><div class="l">Наблюдение</div><div class="t">Тёплая база — это сегмент Б и ниже</div></div>
+    <div><div class="l">Что это значит</div><div class="d">Из тринадцати — двенадцать знали её давно или пришли по рекомендации своих. Единственная с доходом 300+ (Маша) — её бывшая ученица. Единственная выше (Ангелина) — коллега, не клиент. Сегмент A в её базе есть в единичных экземплярах. Первый поток из десяти человек тёплой базой не набирается — это надо принять до эфира 29-го.</div></div>
+  </div>
+
+  <div class="corr">
+    <div><div class="l">Наблюдение</div><div class="t">У неё пять типовых проходов, и они повторяются</div></div>
+    <div><div class="l">Что это значит</div><div class="d"><b>Разрешение получать</b> (Светлана, Надежда, Елена-4). <b>Сменить место</b> (Ксения, Лера). <b>Выбрать одно и повторять</b> (Анастасия, Елена-Рязань, Вероника). <b>Делегировать и выйти в роль звезды</b> (Маша, Александра). <b>Проявляться регулярно</b> (почти всем). Это готовая карта контента: пять серий, пять лид-магнитов, пять модулей внутри продукта.</div></div>
+  </div>
+
+  <div class="corr">
+    <div><div class="l">Наблюдение</div><div class="t">Она даёт «90 рилсов» как проход — и сама не может их снять</div></div>
+    <div><div class="l">Что это значит</div><div class="d">Веронике, Елене-4, Надежде она прописала регулярный контент. На синке 11-го она сказала о себе: «Я не могу себя заставить. Делаю неделю, меня корёжит». Это не противоречие — это самый честный контент, который у неё есть. «Я знаю, что делать, и не делаю» — от первого лица.</div></div>
+  </div>
+
+  <div class="corr">
+    <div><div class="l">Наблюдение</div><div class="t">Ангелина — живая модель того, куда идёт Екатерина</div></div>
+    <div><div class="l">Что это значит</div><div class="d">Четыре миллиона в месяц. Дешёвый → средний → дорогой → очень дорогой. «Никто не может ко мне прийти без курса». Клиенты приводят клиентов. Команда — только помощница. Это ровно та архитектура, которую мы описали в стратегии, и она работает у человека того же профиля. Ангелина — не клиент, но это референс, который стоит показать Екатерине, чтобы снять сомнения в модели.</div></div>
+  </div>
+
+  <div class="corr">
+    <div><div class="l">Наблюдение</div><div class="t">Бесплатный разбор ценят ровно как бесплатный</div></div>
+    <div><div class="l">Что это значит</div><div class="d">Единственная, кто предложил деньги, — Маша. Остальные благодарили и уходили. Её собственная фраза с эфира: «За качественную обратную связь я плачу, бесплатные советы мне неинтересны». Она это знает и всё равно раздала тринадцать бесплатно. Разбор должен стоить денег — это и фильтр, и продукт, и уважение к её времени.</div></div>
+  </div>
+</section>
+
+<!-- ============ 4. ПРОДУКТ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <h2>Что это значит для продукта</h2>
+    <span class="sec-sub">не пересобирать, а зафиксировать</span>
+  </div>
+
+  <div class="warn">
+    <h3>Продукт не менять до первого потока</h3>
+    <p>Разборы не показали ничего, что противоречило бы «Материи». Наоборот: три уровня застревания, откат после подъёма, расфокус, нехватка энергии — всё прозвучало из уст людей. Пересборка сейчас — это не ответ на данные, это способ не выходить в продажу. Продукт фиксируется в текущем виде: три месяца, деньги, 12 встреч, отчёты, отбор от 300 тысяч. Всё остальное — во второй сезон.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Тариф 150 — окончательно нет</h3>
+      <p style="font-size:14px;margin:0">Разборы это доказали. Те, у кого меньше 100 тысяч, не заплатят и 150 — у них нет этих денег и они не готовы действовать. Те, у кого 300+, за 150 не купят, потому что это выглядит дёшево для их уровня. Тариф 150 существует для несуществующего покупателя.</p>
+    </div>
+    <div class="card">
+      <h3>Разбор становится платным продуктом</h3>
+      <p style="font-size:14px;margin:0">«Точка роста» — 30 000 ₽, 30 минут, один проход, письменное резюме от ассистента. Ценность подтверждена тринадцатью встречами. Это одновременно вход для сегмента Б и отбор для A: кто заплатил 30, тот серьёзен.</p>
+    </div>
+    <div class="card">
+      <h3>Пять проходов — структура сезона</h3>
+      <p style="font-size:14px;margin:0">Разрешение, место, фокус, делегирование, проявленность. Шесть энергетических встреч и шесть разборов ложатся на эти пять тем плюс стартовая стратсессия. Ей не надо придумывать программу — она её уже провела тринадцать раз.</p>
+    </div>
+    <div class="card">
+      <h3>Для сегмента Б — не группа, а записи</h3>
+      <p style="font-size:14px;margin:0">Ксения, Александра, Елена из Барселоны — живые, благодарные, с деньгами до 250 тысяч. Им нужно не три месяца с Екатериной, а один сильный записанный продукт под их вопрос и подписка на поле. Это второй контур, он собирается после 10 октября.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. ПРОДАЖИ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">05</span>
+    <h2>Продажи до 10 октября</h2>
+    <span class="sec-sub">что делать сейчас</span>
+  </div>
+
+  <div class="step">
+    <div class="n">1</div>
+    <div class="b">
+      <div class="when">До 27 сентября · из Египта, одним сообщением</div>
+      <div class="ttl">Вернуться к Маше с прямым предложением</div>
+      <p>Единственный целевой контакт. Она тёплая, она уже платила, она сама предложила донат. Одно голосовое от Екатерины закрывает то, что не было сказано на разборе.</p>
+      <div class="say"><span class="lbl">Голосовое</span>Маша, я после нашего разговора думала про тебя. Ты сейчас ровно в той точке, ради которой я собираю группу в октябре. Три месяца, деньги, одна цель — твоя пересборка под себя. Мест мало, и я бы тебя туда взяла. Триста тысяч группа, пятьсот — с моими личными сессиями. Скажи, если это твоё, я расскажу подробнее, когда вернусь.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="n">2</div>
+    <div class="b">
+      <div class="when">До 27 сентября · голосовые</div>
+      <div class="ttl">Трём из сегмента Б — не группу, а продукт под их вопрос</div>
+      <p>Ксения, Александра, Елена из Барселоны. Им не надо продавать «Материю» — они её не купят и правильно сделают. Им нужно сказать: «В октябре у меня будет запись ровно про твою тему, я тебе напишу». Это удерживает контакт и даёт первые продажи второго контура.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="n">3</div>
+    <div class="b">
+      <div class="when">29 сентября · второй эфир</div>
+      <div class="ttl">Эфир с ценой, отсечкой и анкетой на предоплату</div>
+      <p>Первый эфир собрал 43 заявки без цены — и это дало 13 разборов не с теми. Второй должен собрать заявки от тех, кто увидел цену и всё равно пришёл. Формат, тарифы 300 и 500, места, дата закрытия, «кому не надо» — всё вслух. Анкета ведёт не на разбор, а на предоплату.</p>
+      <p style="margin-bottom:0">На эфире — три истории с разборов, без имён: Маша, Ксения, Александра. Не как кейсы, а как «вот с чем приходят люди и вот что я вижу». Это демонстрация того, что получат в группе.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="n">4</div>
+    <div class="b">
+      <div class="when">29 сентября – 8 октября</div>
+      <div class="ttl">Искать сегмент A не в базе, а через людей</div>
+      <p>Десятка в «Нечто», Артём и его круги, Ангелина и её клиенты, знакомые из банковского прошлого. Каждому — личное сообщение: «Собираю группу предпринимателей от 300 тысяч, три месяца, деньги. Если есть кто-то твой — приведи, я возьму». Это единственный канал, где сегмент A есть прямо сейчас. Реклама даст его только в ноябре.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="n">5</div>
+    <div class="b">
+      <div class="when">С 29 сентября</div>
+      <div class="ttl">Все новые разборы — только платные и только после фильтра</div>
+      <p>«Точка роста» за 30 000. Ассистент проверяет анкету: доход от 300, своё дело. Не прошёл — голосовое с одной мыслью и ссылка на второй эфир. Прошёл и заплатил — 30 минут с Екатериной, в конце — предложение группы по разрешению. Ни одного бесплатного разбора больше.</p>
+    </div>
+  </div>
+
+  <div class="warn">
+    <h3>Реалистичный план на первый поток</h3>
+    <p>Из тёплой базы — 2–3 человека, если Маша и ещё один-два с эфира 29-го. Через людей — 2–4, если она напишет десяти знакомым в ближайшие пять дней. Итого 4–7 человек к 10 октября. Это не десять, но это живой первый поток, который даст кейсы для февраля. Если она согласится на это число сейчас — старт будет. Если будет ждать десяти — не будет ни десяти, ни пяти.</p>
+  </div>
+</section>
+
+<!-- ============ 6. МАРКЕТИНГ ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">06</span>
+    <h2>Маркетинг</h2>
+    <span class="sec-sub">что дали разборы для контента</span>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <h3>Пять серий контента</h3>
+      <p style="font-size:14px;margin:0">По одной на каждый типовой проход. «Ты не разрешаешь себе получать». «Ты не в том месте». «Ты делаешь всё и поэтому ничего». «Ты звезда, а работаешь как техник». «Ты знаешь, что делать, и не делаешь» — последняя от первого лица, про её 90 рилсов.</p>
+    </div>
+    <div class="card">
+      <h3>Тринадцать историй без имён</h3>
+      <p style="font-size:14px;margin:0">Каждый разбор — сюжет для поста или рилса. «Пришла риелтор из Воронежа, устала. Я спросила: ты была на Бали?». Формат «пришёл — увидела — сказала» работает лучше любой теории и показывает её дар в действии.</p>
+    </div>
+    <div class="card">
+      <h3>Язык аудитории собран</h3>
+      <p style="font-size:14px;margin:0">«Расту в осознанности, застряла в материи». «Все говорят, ты стоишь дороже, а денег нет». «Помощники все глупые». «Я умею продавать всё, кроме себя». Это заголовки для сайта и хуки для рилсов — не придуманные, а услышанные.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h3>Что не делать в маркетинге до 10 октября</h3>
+    <ul>
+      <li><b>Не запускать рекламу на тёплую тему.</b> Реклама приведёт ещё сто Светлан. Рекламу — в ноябре, на холодных предпринимателей, с порогом дохода в первом экране.</li>
+      <li><b>Не делать сайт-витрину записей.</b> Она хотела — десятка отговорила — и правильно. До старта флагмана одна ссылка.</li>
+      <li><b>Не снимать «духовный» контент.</b> Все три дня она говорила про деньги, роли, делегирование, капитал — и это было её самое сильное. Держать этот регистр до конца запуска.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 7. РАЗГОВОР ============ -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">07</span>
+    <h2>Разговор с Екатериной</h2>
+    <span class="sec-sub">три вопроса · до 27 сентября</span>
+  </div>
+
+  <p>Это не для документа, это для голосового. Три вещи, которые нужно сказать ей прямо, пока она в Египте и есть время подумать.</p>
+
+  <div class="card">
+    <h3>Первое — про Машу</h3>
+    <p style="font-size:14.5px;margin:0">«Ты провела час с человеком, который идеально подходит в группу, уже платил тебе и сам предложил деньги. И не предложила группу. Я понимаю почему — ты обещала не продавать. Но ты можешь ей написать сейчас, и это будет не продажа, а честность: тебе туда надо. Напиши?»</p>
+  </div>
+  <div class="card">
+    <h3>Второе — про пересборку</h3>
+    <p style="font-size:14.5px;margin:0">«Ты сказала Ангелине, что у тебя другие мысли и надо пересобрать. Что именно изменилось после тринадцати разговоров? Потому что я услышал в них подтверждение, а не опровержение. Если есть что-то конкретное — давай назовём. Если это ощущение, что ещё не готово — это то самое "знаю и не делаю", про которое ты говоришь всем».</p>
+  </div>
+  <div class="card">
+    <h3>Третье — про число</h3>
+    <p style="font-size:14.5px;margin:0">«Десяти человек из твоей базы нет. Есть один, и ещё два-три после эфира 29-го. Остальных надо привести через людей — десятку, Артёма, Ангелину. Готова ли ты стартовать с пятью? Потому что пять с кейсами в феврале дадут пятнадцать. А ноль в октябре не даст ничего».</p>
+  </div>
+</section>
+
+<footer>
+  <span>13 разборов · 14–16 сентября 2026</span>
+  <span>Системный продюсер · Alex Kim · Soltrix</span>
+</footer>
+
+</div>
+</body>
+</html>
