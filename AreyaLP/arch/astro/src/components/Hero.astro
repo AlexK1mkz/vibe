@@ -1,0 +1,122 @@
+---
+import { SITE } from '../data/site';
+---
+
+<section id="top" class="hero container">
+  <div class="hero__grid">
+    <div class="hero__top">
+      <p class="kicker kicker--gold3 hero__kicker">Образовательная экосистема Екатерины Ареи</p>
+      <h1 class="hero__h1">Архитекторы<br />будущего</h1>
+      <p class="hero__sub">Три месяца работы над&nbsp;следующим уровнем дохода</p>
+    </div>
+
+    <div class="hero__photo">
+      <div class="hero__arch">
+        <img src="/photos/hero.jpg" alt="Екатерина Арея" width="1200" height="1500" fetchpriority="high" />
+      </div>
+      <div class="hero__badge">
+        <p class="hero__badge-name">Екатерина Арея</p>
+        <p class="hero__badge-role">финансист, который работает с&nbsp;сознанием</p>
+      </div>
+    </div>
+
+    <div class="hero__bottom">
+      <p class="hero__lead">
+        Больший доход требует не&nbsp;больше усилий, а&nbsp;другой конфигурации: тебя и&nbsp;твоего дела.
+        Перестраиваем её вместе с&nbsp;Екатериной, в&nbsp;окружении экспертов и&nbsp;предпринимателей, которые
+        воплощают задуманное.
+      </p>
+      <div class="hero__facts">
+        <span>{SITE.seasonLabel}</span><span class="hero__sep"></span><span>{SITE.seasonDates}</span>
+      </div>
+      <a href="#tariffs" class="btn btn--primary hero__cta">Выбрать формат участия</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { padding-top: 48px; padding-bottom: 32px; display: flex; align-items: center; }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 20px;
+    align-items: center;
+    width: 100%;
+  }
+  .hero__top { grid-column: 1 / span 6; align-self: end; }
+  .hero__kicker { margin-bottom: 24px; animation: rise .6s ease both; }
+  .hero__h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(52px, 6vw, 88px);
+    line-height: 1;
+    letter-spacing: -.01em;
+    color: var(--brown);
+    animation: rise .6s .08s ease both;
+  }
+  .hero__sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(24px, 2.2vw, 32px);
+    line-height: 1.25;
+    color: var(--taupe);
+    margin-top: 20px;
+    text-wrap: balance;
+    animation: rise .6s .16s ease both;
+  }
+  .hero__photo { grid-column: 8 / span 5; grid-row: 1 / span 2; position: relative; animation: fadeIn .7s ease both; }
+  .hero__arch {
+    height: clamp(520px, min(70vh, 640px), 640px);
+    overflow: hidden;
+    border-radius: 999px 999px 24px 24px;
+    background: var(--cream);
+  }
+  .hero__arch img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+  .hero__badge {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    background: var(--bg);
+    padding: 14px 18px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+  }
+  .hero__badge-name { font-family: var(--font-serif); font-size: 22px; color: var(--brown); line-height: 1.1; }
+  .hero__badge-role { font-size: 14px; color: var(--taupe); margin-top: 4px; }
+  .hero__bottom { grid-column: 1 / span 6; align-self: start; }
+  .hero__lead {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 540px;
+    color: var(--ink-2);
+    text-wrap: pretty;
+    animation: rise .6s .24s ease both;
+  }
+  .hero__facts {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 28px;
+    font-size: 15px;
+    color: var(--ink);
+    font-weight: 500;
+    animation: rise .6s .32s ease both;
+  }
+  .hero__sep { width: 1px; height: 16px; background: var(--line-4); }
+  .hero__cta { height: 56px; margin-top: 20px; padding: 0 32px; font-size: 16px; animation: rise .6s .4s ease both; }
+
+  @media (max-width: 900px) {
+    .hero { min-height: 0; padding: 32px 20px 24px; }
+    .hero__grid { row-gap: 24px; }
+    .hero__top, .hero__photo, .hero__bottom { grid-column: 1 / -1; }
+    .hero__photo { grid-row: auto; }
+    .hero__arch { height: auto; aspect-ratio: 4 / 5; max-height: 56vh; }
+    .hero__h1 { font-size: 46px; }
+    .hero__sub { font-size: 22px; }
+    .hero__lead { font-size: 16px; }
+    .hero__facts { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .hero__sep { display: none; }
+    .hero__cta { width: 100%; }
+  }
+</style>

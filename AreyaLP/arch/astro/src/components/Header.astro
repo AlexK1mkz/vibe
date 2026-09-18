@@ -1,0 +1,90 @@
+---
+import { SITE, NAV } from '../data/site';
+---
+
+<header class="hdr">
+  <div class="container hdr__in">
+    <a href="#top" class="hdr__brand">{SITE.brand}</a>
+    <nav class="hdr__nav mob-hide">
+      {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
+    </nav>
+    <div class="hdr__right">
+      <a href="#tariffs" class="btn btn--primary hdr__cta mob-hide">Участвовать</a>
+      <button class="hdr__burger mob-only" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h18"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hdr__menu" hidden>
+    {NAV.map((n) => <a href={n.href} data-menu-close>{n.label}</a>)}
+  </div>
+</header>
+
+<style>
+  .hdr {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(251, 249, 244, .86);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .hdr__in {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .hdr__brand {
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: .18em;
+    font-size: 12px;
+    color: var(--brown);
+  }
+  .hdr__nav { display: flex; gap: 36px; font-size: 15px; font-weight: 500; }
+  .hdr__nav a { text-decoration: none; }
+  .hdr__right { display: flex; align-items: center; gap: 12px; }
+  .hdr__cta { height: 44px; padding: 0 22px; font-size: 14px; }
+  .hdr__burger {
+    background: none;
+    border: 1px solid var(--line-3);
+    border-radius: var(--radius-pill);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--brown);
+  }
+  .hdr__menu {
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+    padding: 16px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hdr__menu[hidden] { display: none; }
+  .hdr__menu a {
+    text-decoration: none;
+    padding: 12px 0;
+    font-size: 18px;
+    font-family: var(--font-serif);
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('mobile-menu');
+  if (toggle && menu) {
+    const set = (open: boolean) => {
+      menu.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+    toggle.addEventListener('click', () => set(menu.hidden));
+    menu.querySelectorAll('[data-menu-close]').forEach((a) => a.addEventListener('click', () => set(false)));
+  }
+</script>

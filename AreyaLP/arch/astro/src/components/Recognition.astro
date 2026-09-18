@@ -1,0 +1,48 @@
+---
+const cards = [
+  {
+    n: '01',
+    t: '«Всё есть, а радости нет»',
+    p: 'Бизнес работает, опыт есть. А то, что раньше зажигало, — больше нет. И понятно: следующий уровень — не про „работать ещё больше“.',
+  },
+  {
+    n: '02',
+    t: '«Знаю, читала, проходила — и стою на месте»',
+    p: 'Читаешь, слушаешь, чувствуешь глубоко. Смотришь на чужие результаты — и злишься на себя. Знаний хватает. Не хватает среды и ритма.',
+  },
+  {
+    n: '03',
+    t: '«Сам всё сделаю» — и не делаешь',
+    p: 'В одиночку почти никто не меняется: начал, споткнулся, бросил. Нужен не ещё один курс. Нужно поле, в котором нельзя не вырасти.',
+  },
+];
+---
+
+<section class="sec container rec">
+  <h2 class="h2 rv rec__h2">Ты знаешь, что делать.<br />И не делаешь.</h2>
+  <div class="stack rec__grid">
+    {cards.map((c, i) => (
+      <div class="rv rec__card" style={i ? `transition-delay:.${i}s` : undefined}>
+        <span class="rec__n">{c.n}</span>
+        <h3 class="rec__t">{c.t}</h3>
+        <p class="rec__p">{c.p}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .rec__h2 { max-width: 720px; }
+  .rec__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 40px; }
+  .rec__card {
+    background: var(--cream);
+    padding: 32px;
+    border-radius: var(--radius-card);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .rec__n { font-family: var(--font-serif); font-size: 14px; letter-spacing: .2em; color: var(--gold); }
+  .rec__t { font-family: var(--font-serif); font-weight: 500; font-size: 28px; line-height: 1.15; color: var(--brown); }
+  .rec__p { font-size: 15px; line-height: 1.65; color: var(--ink-2); }
+</style>

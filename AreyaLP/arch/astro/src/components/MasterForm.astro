@@ -1,0 +1,207 @@
+---
+import { MASTER_FORM_FIELDS } from '../data/masterForm';
+import { SITE } from '../data/site';
+const total = MASTER_FORM_FIELDS.length;
+---
+
+<div class="mf" id="master-form" hidden data-master-form>
+  <div class="mf__backdrop" data-form-close></div>
+  <div class="mf__sheet" role="dialog" aria-modal="true" aria-labelledby="mf-title">
+    <button type="button" class="mf__x" aria-label="Закрыть" data-form-close>×</button>
+
+    <!-- Успех -->
+    <div class="mf__done" data-form-done hidden>
+      <p class="kicker mf__kicker">Анкета отправлена</p>
+      <h3 class="mf__done-h">Спасибо. Екатерина свяжется лично в течение 2 дней.</h3>
+      <a href={SITE.links.telegram} target="_blank" rel="noopener" class="btn btn--primary mf__done-btn">Telegram-канал Екатерины</a>
+    </div>
+
+    <!-- Шаги -->
+    <form class="mf__form" data-form-steps novalidate>
+      <p class="kicker mf__kicker">Анкета на Master</p>
+      <h3 class="mf__title" id="mf-title" data-step-title></h3>
+      <div class="mf__counter"><span>Шаг <b data-step-num>1</b> из {total}</span></div>
+      <div class="mf__bar"><div class="mf__bar-fill" data-step-bar style={`width:${100 / total}%`}></div></div>
+
+      <div class="mf__fields">
+        {MASTER_FORM_FIELDS.map((f, i) => (
+          <div class="mf__step" data-step={i} hidden={i !== 0}>
+            {f.type === 'text' && <input type="text" name={f.k} placeholder={f.ph} class="mf__input" autocomplete="off" />}
+            {f.type === 'area' && <textarea name={f.k} placeholder={f.ph} rows="4" class="mf__area"></textarea>}
+            {f.type === 'choice' && (
+              <div class="mf__choices">
+                {f.opts!.map((o) => (
+                  <label class="mf__choice">
+                    <input type="radio" name={f.k} value={o} />
+                    <span>{o}</span>
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div class="mf__nav">
+        <button type="button" class="mf__prev" data-step-prev>Назад</button>
+        <button type="button" class="btn btn--primary mf__next" data-step-next>Далее</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .mf { position: fixed; inset: 0; z-index: 100; display: flex; align-items: flex-end; justify-content: center; }
+  .mf[hidden] { display: none; }
+  .mf__backdrop { position: absolute; inset: 0; background: rgba(36, 36, 36, .6); backdrop-filter: blur(6px); }
+  .mf__sheet {
+    position: relative;
+    background: var(--bg);
+    width: 100%;
+    max-width: 640px;
+    max-height: 92vh;
+    overflow: auto;
+    border-radius: 28px 28px 0 0;
+    padding: 32px clamp(24px, 5vw, 48px) 40px;
+  }
+  .mf__x {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line-3);
+    background: transparent;
+    color: var(--brown);
+    font-size: 22px;
+    cursor: pointer;
+  }
+  .mf__kicker { letter-spacing: .2em; }
+  .mf__title { font-family: var(--font-serif); font-weight: 500; font-size: 32px; line-height: 1.1; color: var(--brown); margin-top: 12px; }
+  .mf__counter { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; font-size: 12px; color: var(--muted); }
+  .mf__counter b { font-weight: 500; }
+  .mf__bar { height: 2px; background: var(--line); margin-top: 10px; border-radius: 2px; overflow: hidden; }
+  .mf__bar-fill { height: 100%; background: var(--gold); transition: width .4s ease; }
+  .mf__fields { margin-top: 32px; min-height: 140px; }
+  .mf__step[hidden] { display: none; }
+  .mf__input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--line-4);
+    background: transparent;
+    padding: 14px 0;
+    font-size: 20px;
+    color: var(--ink);
+    font-family: var(--font-serif);
+  }
+  .mf__area {
+    width: 100%;
+    border: 1px solid var(--line-4);
+    background: transparent;
+    padding: 16px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+    border-radius: 16px;
+    resize: vertical;
+  }
+  .mf__choices { display: flex; flex-direction: column; gap: 10px; }
+  .mf__choice {
+    display: block;
+    cursor: pointer;
+    padding: 16px 20px;
+    border-radius: 14px;
+    font-size: 15px;
+    border: 1px solid var(--line-3);
+    background: transparent;
+    color: var(--ink);
+    transition: all .2s;
+  }
+  .mf__choice input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .mf__choice:has(input:checked) { border-color: var(--gold); background: var(--cream); }
+  .mf__choice:has(input:focus-visible) { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .mf__nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 32px; }
+  .mf__prev {
+    border: 1px solid var(--line-4);
+    background: transparent;
+    color: var(--brown);
+    padding: 14px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+  }
+  .mf__prev[disabled] { opacity: .35; cursor: default; }
+  .mf__next { padding: 14px 28px; font-size: 14px; }
+  .mf__next:hover { background: var(--gold); filter: none; }
+  .mf__done { padding: 40px 0 24px; }
+  .mf__done-h { font-family: var(--font-serif); font-weight: 500; font-size: 40px; line-height: 1.1; color: var(--brown); margin-top: 16px; }
+  .mf__done-btn { margin-top: 32px; padding: 16px 28px; font-size: 15px; }
+</style>
+
+<script>
+  import { MASTER_FORM_FIELDS } from '../data/masterForm';
+
+  const root = document.querySelector<HTMLElement>('[data-master-form]');
+  if (root) {
+    const form = root.querySelector<HTMLFormElement>('[data-form-steps]')!;
+    const done = root.querySelector<HTMLElement>('[data-form-done]')!;
+    const steps = Array.from(root.querySelectorAll<HTMLElement>('[data-step]'));
+    const title = root.querySelector<HTMLElement>('[data-step-title]')!;
+    const num = root.querySelector<HTMLElement>('[data-step-num]')!;
+    const bar = root.querySelector<HTMLElement>('[data-step-bar]')!;
+    const prev = root.querySelector<HTMLButtonElement>('[data-step-prev]')!;
+    const next = root.querySelector<HTMLButtonElement>('[data-step-next]')!;
+    const total = MASTER_FORM_FIELDS.length;
+    let step = 0;
+
+    const render = () => {
+      steps.forEach((s, i) => (s.hidden = i !== step));
+      title.textContent = MASTER_FORM_FIELDS[step].t;
+      num.textContent = String(step + 1);
+      bar.style.width = `${((step + 1) / total) * 100}%`;
+      prev.disabled = step === 0;
+      next.textContent = step === total - 1 ? 'Отправить анкету' : 'Далее';
+      steps[step].querySelector<HTMLElement>('input:not([type=radio]),textarea')?.focus();
+    };
+
+    const open = () => {
+      step = 0;
+      form.reset();
+      form.hidden = false;
+      done.hidden = true;
+      root.hidden = false;
+      document.body.style.overflow = 'hidden';
+      render();
+    };
+    const close = () => {
+      root.hidden = true;
+      document.body.style.overflow = '';
+    };
+
+    /**
+     * Отправка анкеты. Сейчас — только показ экрана «Спасибо».
+     * Подключите свой бэкенд здесь (fetch на API, Telegram-бот, CRM, Google Sheets и т.д.).
+     */
+    const submit = async (data: Record<string, string>) => {
+      console.info('[master-form] answers', data);
+      // await fetch('/api/master', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      form.hidden = true;
+      done.hidden = false;
+    };
+
+    document.querySelectorAll('[data-open-form]').forEach((b) => b.addEventListener('click', open));
+    root.querySelectorAll('[data-form-close]').forEach((b) => b.addEventListener('click', close));
+    window.addEventListener('keydown', (e) => e.key === 'Escape' && !root.hidden && close());
+
+    prev.addEventListener('click', () => { if (step > 0) { step--; render(); } });
+    next.addEventListener('click', () => {
+      if (step < total - 1) { step++; render(); return; }
+      const data: Record<string, string> = {};
+      new FormData(form).forEach((v, k) => (data[k] = String(v)));
+      submit(data);
+    });
+    form.addEventListener('submit', (e) => { e.preventDefault(); next.click(); });
+  }
+</script>

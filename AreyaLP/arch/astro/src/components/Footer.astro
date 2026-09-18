@@ -1,0 +1,40 @@
+---
+import { SITE } from '../data/site';
+const links = [
+  { href: SITE.links.telegram, label: 'Telegram-канал', ext: true },
+  { href: SITE.links.instagram, label: 'Instagram', ext: true },
+  { href: SITE.links.youtube, label: 'YouTube', ext: true },
+  { href: SITE.links.care, label: 'Служба заботы', ext: true },
+  { href: SITE.links.offer, label: 'Оферта', ext: false },
+  { href: SITE.links.privacy, label: 'Политика конфиденциальности', ext: false },
+];
+---
+
+<footer class="container ftr">
+  <div class="ftr__in">
+    <span class="ftr__brand">{SITE.brand}</span>
+    <nav class="ftr__nav">
+      {links.map((l) => (
+        <a href={l.href} target={l.ext ? '_blank' : undefined} rel={l.ext ? 'noopener' : undefined}>{l.label}</a>
+      ))}
+    </nav>
+  </div>
+  <p class="ftr__copy">© Екатерина Арея, {SITE.year}</p>
+</footer>
+
+<style>
+  .ftr { padding-top: 48px; padding-bottom: 32px; }
+  .ftr__in {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
+  }
+  .ftr__brand { font-weight: 700; letter-spacing: .18em; font-size: 12px; color: var(--brown); }
+  .ftr__nav { display: flex; flex-wrap: wrap; gap: 24px; font-size: 13px; }
+  .ftr__nav a { text-decoration: none; }
+  .ftr__copy { font-size: 12px; color: var(--muted); margin-top: 20px; }
+</style>

@@ -1,0 +1,128 @@
+---
+import { REVIEWS } from '../data/reviews';
+const reviews = REVIEWS.map((r, i) => ({
+  ...r,
+  src: `/photos/avatars/avatar_${String(i + 1).padStart(2, '0')}.jpg`,
+}));
+---
+
+<section id="results" class="sec res">
+  <div class="container res__head">
+    <div class="rv">
+      <p class="kicker res__kicker">Результаты</p>
+      <h2 class="h2 res__h2">Что меняется в жизни и доходе тех, кто прошёл путь с Екатериной</h2>
+    </div>
+    <div class="res__arrows">
+      <button type="button" class="res__arrow" aria-label="Назад" data-carousel-prev>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"></path></svg>
+      </button>
+      <button type="button" class="res__arrow" aria-label="Вперёд" data-carousel-next>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="res__track scr" data-carousel>
+    {reviews.map((r) => (
+      <article class="res__card">
+        <div class="res__who">
+          <div class="res__ava"><img src={r.src} alt={`Фото: ${r.name}`} loading="lazy" decoding="async" width="120" height="120" /></div>
+          <div class="res__meta">
+            <p class="res__name">{r.name}</p>
+            <p class="res__niche" title={r.niche}>{r.niche}</p>
+          </div>
+        </div>
+        <div class="res__ba">
+          <div><p class="res__lbl">Было</p><p class="res__val">{r.before}</p></div>
+          <div><p class="res__lbl res__lbl--gold">Стало</p><p class="res__val res__val--b">{r.after}</p></div>
+        </div>
+        <p class="res__quote">«{r.quote}»</p>
+        <a href={r.url} target="_blank" rel="noopener" class="res__link">
+          Открыть отзыв
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"></path></svg>
+        </a>
+      </article>
+    ))}
+  </div>
+  <p class="container res__hint">Смахни, чтобы читать дальше →</p>
+</section>
+
+<style>
+  .res { overflow: hidden; }
+  .res__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+  .res__kicker { letter-spacing: .2em; margin-bottom: 24px; }
+  .res__h2 { font-size: clamp(36px, 4.2vw, 56px); max-width: 760px; text-wrap: balance; }
+  .res__arrows { display: flex; gap: 10px; }
+  .res__arrow {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line-4);
+    background: transparent;
+    cursor: pointer;
+    color: var(--brown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s;
+  }
+  .res__arrow:hover { background: var(--cream); border-color: var(--gold); }
+  .res__track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 40px max(24px, calc((100vw - 1240px) / 2 + 24px)) 8px;
+    scrollbar-width: none;
+  }
+  .res__card {
+    flex: none;
+    width: min(340px, 85vw);
+    scroll-snap-align: start;
+    background: var(--bg-white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .res__who { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .res__ava { width: 60px; height: 60px; border-radius: var(--radius-pill); background: var(--cream); overflow: hidden; flex: none; }
+  .res__ava img { width: 100%; height: 100%; object-fit: cover; }
+  .res__meta { min-width: 0; }
+  .res__name { font-weight: 600; font-size: 15px; }
+  .res__niche { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .res__ba {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+  }
+  .res__lbl { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .res__lbl--gold { color: var(--gold); }
+  .res__val { font-size: 14px; margin-top: 6px; line-height: 1.4; }
+  .res__val--b { font-weight: 600; }
+  .res__quote { font-family: var(--font-serif); font-style: italic; font-size: 19px; line-height: 1.35; color: var(--brown); flex: 1; }
+  .res__link {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brown);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color .3s;
+  }
+  .res__link:hover { color: var(--gold); }
+  .res__hint { margin-top: 16px; font-size: 13px; color: var(--muted); }
+</style>
+
+<script>
+  const track = document.querySelector<HTMLElement>('[data-carousel]');
+  const step = 340;
+  document.querySelector('[data-carousel-prev]')?.addEventListener('click', () => track?.scrollBy({ left: -step, behavior: 'smooth' }));
+  document.querySelector('[data-carousel-next]')?.addEventListener('click', () => track?.scrollBy({ left: step, behavior: 'smooth' }));
+</script>

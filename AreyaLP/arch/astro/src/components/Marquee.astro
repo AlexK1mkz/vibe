@@ -1,0 +1,29 @@
+---
+import { MARQUEE_PHOTOS } from '../data/season';
+const track = [...MARQUEE_PHOTOS, ...MARQUEE_PHOTOS];
+---
+
+<section class="mq" aria-label="Фотографии с мероприятий">
+  <div class="mq__track">
+    {track.map((src, i) => (
+      <div class="mq__item" aria-hidden={i >= MARQUEE_PHOTOS.length ? 'true' : undefined}>
+        <img src={src} alt="" loading="lazy" decoding="async" />
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .mq { padding: 16px 0 0; overflow: hidden; }
+  .mq__track { display: flex; gap: 16px; width: max-content; animation: marquee 60s linear infinite; }
+  .mq__item {
+    flex: none;
+    width: 280px;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--cream);
+  }
+  .mq__item img { width: 100%; height: 100%; object-fit: cover; }
+  @media (prefers-reduced-motion: reduce) { .mq__track { animation: none; } }
+</style>

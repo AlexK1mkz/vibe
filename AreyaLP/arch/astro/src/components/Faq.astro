@@ -1,0 +1,57 @@
+---
+import { FAQ } from '../data/faq';
+---
+
+<section id="faq" class="sec container">
+  <div class="stack faq">
+    <h2 class="h2 rv">Вопросы</h2>
+    <div class="rv faq__list">
+      {FAQ.map((f) => (
+        <details class="faq__item">
+          <summary class="faq__q">
+            <span>{f.q}</span>
+            <span class="faq__chev" aria-hidden="true">+</span>
+          </summary>
+          <p class="faq__a">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: 48px; }
+  .faq__list { border-top: 1px solid var(--line); }
+  .faq__item { border-bottom: 1px solid var(--line); }
+  .faq__q {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 0;
+    font-family: var(--font-serif);
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--brown);
+    transition: color .3s;
+  }
+  .faq__item[open] .faq__q { color: var(--gold); }
+  .faq__chev {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line-4);
+    border-radius: var(--radius-pill);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .3s;
+    font-family: var(--font-sans);
+    font-size: 18px;
+    color: var(--gold);
+  }
+  .faq__item[open] .faq__chev { transform: rotate(45deg); }
+  .faq__a { font-size: 15px; line-height: 1.65; color: var(--ink-2); padding: 0 56px 20px 0; }
+</style>
