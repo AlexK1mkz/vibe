@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // Локальные копии React вместо CDN unpkg.com — сайт не зависит от внешних серверов.
+  window.__resources = {
+    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "vendor/react.production.min.js",
+    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "vendor/react-dom.production.min.js"
+  };
+</script>
+<script src="calc.js"></script>
+<script src="report-texts.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Диагностика потенциала — Syucai Training Institute</title>
+  <meta name="description" content="Цель личности — это развитие своего потенциала. Узнай за 2 минуты, что мешает тебе раскрыться. Бесплатно.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;800&display=swap">
+  <link rel="stylesheet" href="_ds/modernist-72380169-e0fb-4c08-a13b-c3c5950a47b3/styles.css">
+  <script src="_ds/modernist-72380169-e0fb-4c08-a13b-c3c5950a47b3/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); text-wrap: pretty; }
+    a { color: var(--color-accent-700); } a:hover { color: var(--color-accent); }
+    button, input, select { font-family: inherit; }
+    button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @media (max-width: 720px) { .d-hero-photo { order: -1; max-height: 60vh; } }
+    @media print { .no-print { display: none !important; } body { background: #fff; } }
+  </style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column">
+  <nav class="nav no-print" style="padding-inline:max(20px, calc((100% - 1100px) / 2 + 20px))">
+    <a href="index.html" class="nav-brand" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><img src="assets/logo.png" alt="Zhanat" style="width:32px;height:32px;object-fit:contain;display:block"><span style="font-size:13px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500">Syucai Training Institute</span></a>
+    <sc-if value="{{ inTest }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;gap:20px">
+        <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-700);font-feature-settings:'tnum' 1">Шаг {{ step }} из 13</span>
+        <button type="button" class="btn btn-ghost" onClick="{{ restart }}" style="min-height:36px;padding:0 10px;font-size:13px">Сбросить</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ inReport }}" hint-placeholder-val="{{ false }}">
+      <button type="button" class="btn btn-ghost" onClick="{{ restart }}">Пройти заново</button>
+    </sc-if>
+  </nav>
+  <sc-if value="{{ inTest }}" hint-placeholder-val="{{ false }}">
+    <div style="height:2px;background:var(--color-neutral-300)"><div style="height:2px;background:var(--color-accent);width:{{ progress }};transition:width .3s"></div></div>
+  </sc-if>
+
+  <!-- ЛЕНДИНГ -->
+  <sc-if value="{{ inLanding }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Лендинг" style="max-width:1100px;width:100%;margin:0 auto;padding:56px 20px 72px;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px 64px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(34px,4.6vw,60px);line-height:1.04;letter-spacing:-0.015em;text-transform:uppercase;margin-left:-0.04em">Цель личности — это развитие своего потенциала</h1>
+        <p style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(20px,2.4vw,28px);line-height:1.2;color:var(--color-accent-700)">Узнай, на что ты способен</p>
+        <div style="border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);padding:20px 0;display:flex;flex-direction:column;gap:8px">
+          <p style="margin:0;font-weight:800;font-family:var(--font-heading);font-size:20px;line-height:1.25">Что мешает тебе раскрыть свой потенциал?</p>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:var(--color-neutral-700);font-style:italic">(субъективная реальность, страхи, убеждения, мораль, эгоизм, ожидания, жизнь в прошлом)</p>
+        </div>
+        <p style="margin:0;font-size:18px;line-height:1.5;font-weight:500;max-width:48ch">Узнай за 2 минуты свой истинный потенциал и получи бесплатную диагностику</p>
+        <button type="button" class="btn btn-primary" onClick="{{ toPrep }}" style="min-height:56px;padding:0 24px;font-size:17px;justify-content:space-between;gap:24px;text-align:left;white-space:nowrap;align-self:flex-start;min-width:min(100%,320px)"><span>Пройти диагностику</span><span aria-hidden="true">→</span></button>
+        <p style="margin:0;font-size:13px;letter-spacing:0.04em;color:var(--color-neutral-700)">30 000 выпускников · авторское право в 181 стране · Syucai Training Institute, Дубай</p>
+      </div>
+      <figure class="d-hero-photo" style="margin:0;align-self:stretch;min-height:360px;max-height:760px;border-left:2px solid var(--color-divider);overflow:hidden">
+        <img src="assets/zhanat-vertical.webp" alt="Жанат Кожамжаров" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block">
+      </figure>
+    </section>
+
+    <section data-screen-label="Для кого" style="max-width:1100px;width:100%;margin:0 auto;padding:0 20px 72px;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px 64px">
+      <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(26px,3.2vw,40px);line-height:1.1;letter-spacing:-0.015em">Для кого</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;border-top:2px solid var(--color-divider)">
+        <li style="padding:14px 0;border-bottom:1px solid var(--color-divider);font-size:16px;line-height:1.5">Финансы стоят на месте</li>
+        <li style="padding:14px 0;border-bottom:1px solid var(--color-divider);font-size:16px;line-height:1.5">Результат не растёт, хотя работы становится больше</li>
+        <li style="padding:14px 0;border-bottom:1px solid var(--color-divider);font-size:16px;line-height:1.5">Решения принимаются на эмоциях</li>
+        <li style="padding:14px 0;border-bottom:1px solid var(--color-divider);font-size:16px;line-height:1.5">Одни и те же ошибки в делах и отношениях повторяются</li>
+        <li style="padding:14px 0;border-bottom:1px solid var(--color-divider);font-size:16px;line-height:1.5">Много идей, мало завершённого — планы не доходят до результата</li>
+        <li style="padding:14px 0;border-bottom:1px solid var(--color-divider);font-size:16px;line-height:1.5">Непонятно, что своё: чужие цели, чужая ниша</li>
+        <li style="padding:14px 0;border-bottom:2px solid var(--color-divider);font-size:16px;line-height:1.5">Нет энергии к вечеру</li>
+      </ul>
+    </section>
+
+    <section data-screen-label="Об авторе" style="max-width:1100px;width:100%;margin:0 auto;padding:0 20px 96px;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px 64px;align-items:center">
+      <figure style="margin:0;aspect-ratio:1;overflow:hidden"><img src="assets/zhanat-square.jpg" alt="Жанат Кожамжаров" style="width:100%;height:100%;object-fit:cover;display:block"></figure>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700)">Об авторе</span>
+        <p style="margin:0;font-size:16px;line-height:1.65"><strong>Жанат Кожамжаров</strong> — автор методологии «Психология науки Сюцай» и основатель Syucai Training Institute (Дубай). Авторское право на методологию зарегистрировано в 181 стране. Обучение прошли более 30 000 человек. Филиалы института — в Астане (МФЦА), Москве, Кыргызстане, Узбекистане. Ведёт школы лично.</p>
+        <button type="button" class="btn btn-primary" onClick="{{ toPrep }}" style="min-height:52px;padding:0 24px;font-size:16px;justify-content:space-between;gap:24px;text-align:left;white-space:nowrap;align-self:flex-start;min-width:min(100%,300px)"><span>Пройти диагностику</span><span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ПОДГОТОВКА -->
+  <sc-if value="{{ inPrep }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Подготовка" style="max-width:720px;width:100%;margin:0 auto;padding:72px 20px 96px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px;flex:1">
+      <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(30px,4.6vw,48px);line-height:1.08;letter-spacing:-0.015em">Диагностика займёт 2 минуты</h1>
+      <p style="margin:0;font-size:17px;line-height:1.6;max-width:52ch">Понадобится имя латиницей, как в паспорте, и дата рождения. Результат появится на экране сразу.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;border-top:2px solid var(--color-divider);padding-top:24px">
+        <button type="button" class="btn btn-primary" onClick="{{ start }}" style="min-height:52px;padding:0 24px;font-size:16px;justify-content:flex-start;text-align:left;white-space:nowrap;min-width:min(100%,300px)">Начать диагностику</button>
+        <button type="button" class="btn btn-ghost" onClick="{{ toLanding }}" style="min-height:52px">Назад</button>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ТЕСТ -->
+  <sc-if value="{{ inTest }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Тест" style="max-width:720px;width:100%;margin:0 auto;padding:48px 20px 96px;box-sizing:border-box;display:flex;flex-direction:column;gap:32px;flex:1">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700)">{{ stepKicker }}</span>
+        <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(26px,4vw,40px);line-height:1.1;letter-spacing:-0.015em">{{ stepTitle }}</h2>
+        <p style="margin:0;font-size:15px;line-height:1.5;color:var(--color-neutral-700)">{{ stepHint }}</p>
+      </div>
+
+      <sc-if value="{{ isName }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <input class="input" value="{{ name }}" onChange="{{ onName }}" onKeyDown="{{ onEnter }}" placeholder="ANNA" autoFocus="{{ true }}" lang="en" autoComplete="off" autoCapitalize="characters" style="font-size:28px;min-height:64px;padding:12px 16px;font-weight:500;text-transform:uppercase;letter-spacing:0.04em">
+          <span style="font-size:14px;color:var(--color-neutral-700)">Проверьте, правильно ли написано.</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isDate }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <input class="input" value="{{ date }}" onChange="{{ onDate }}" onKeyDown="{{ onEnter }}" inputMode="numeric" placeholder="05.12.1988" autoFocus="{{ true }}" style="font-family:ui-monospace,monospace;font-size:40px;min-height:76px;padding:12px 16px;letter-spacing:0.06em">
+          <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-700)">день . месяц . год</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isScale }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);border:2px solid var(--color-divider)">
+            <sc-for list="{{ scaleOpts }}" as="o" hint-placeholder-count="10">
+              <button type="button" onClick="{{ o.on }}" style="min-height:64px;border:0;border-right:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);background:{{ o.bg }};color:{{ o.fg }};font-size:22px;font-weight:800;font-family:var(--font-heading);cursor:pointer">{{ o.v }}</button>
+            </sc-for>
+          </div>
+          <span style="font-size:13px;color:var(--color-neutral-700)">10 — всё отлично, 1 — совсем плохо</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isIncome }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-divider)">
+          <sc-for list="{{ incomeOpts }}" as="o" hint-placeholder-count="6">
+            <button type="button" onClick="{{ o.on }}" style="display:flex;align-items:center;gap:14px;min-height:56px;padding:0 4px;border:0;border-bottom:1px solid var(--color-divider);background:{{ o.bg }};color:var(--color-text);font-size:17px;text-align:left;cursor:pointer"><span style="width:14px;height:14px;border:2px solid var(--color-text);background:{{ o.dot }};flex:none"></span>{{ o.t }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <label style="display:block"><span style="display:block;font-size:12px;margin-bottom:5px;color:var(--color-neutral-700)">Телефон</span><input class="input" value="{{ phone }}" onChange="{{ onPhone }}" inputMode="tel" placeholder="+7 700 000 00 00" style="font-size:18px;min-height:52px"></label>
+          <label style="display:block"><span style="display:block;font-size:12px;margin-bottom:5px;color:var(--color-neutral-700)">Почта</span><input class="input" value="{{ email }}" onChange="{{ onEmail }}" inputMode="email" placeholder="you@example.com" style="font-size:18px;min-height:52px"></label>
+          <label style="display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.5;cursor:pointer"><input type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}" style="width:18px;height:18px;margin:3px 0 0;accent-color:var(--color-accent);flex:none"><span>Я согласен на обработку персональных данных. <a href="#">Политика</a></span></label>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:0;font-size:14px;color:var(--color-accent-700);border-left:2px solid var(--color-accent);padding-left:12px">{{ error }}</p>
+      </sc-if>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;border-top:2px solid var(--color-divider);padding-top:24px;margin-top:auto">
+        <button type="button" class="btn btn-secondary" onClick="{{ back }}" style="min-height:48px;padding:0 20px">Назад</button>
+        <button type="button" class="btn btn-primary" onClick="{{ next }}" style="min-height:48px;padding:0 24px;justify-content:flex-start;text-align:left;white-space:nowrap;flex:1;max-width:320px">{{ nextLabel }}</button>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- РАСЧЁТ -->
+  <sc-if value="{{ inCalc }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Расчёт" style="max-width:720px;width:100%;margin:0 auto;padding:96px 20px;box-sizing:border-box;display:flex;flex-direction:column;flex:1">
+      <sc-for list="{{ calcLines }}" as="l" hint-placeholder-count="5">
+        <div style="display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:2px solid var(--color-divider);font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,3vw,28px);opacity:{{ l.op }};transition:opacity .4s"><span style="width:12px;height:12px;flex:none;background:{{ l.mark }}"></span><span>{{ l.t }}</span></div>
+      </sc-for>
+    </section>
+  </sc-if>
+
+  <!-- ОТЧЁТ -->
+  <sc-if value="{{ inReport }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Отчёт" style="max-width:860px;width:100%;margin:0 auto;padding:56px 20px 0;box-sizing:border-box;display:flex;flex-direction:column;gap:56px">
+
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(36px,6vw,72px);line-height:1.02;letter-spacing:-0.02em;margin-left:-0.05em">{{ latin }}, ваш код</h1>
+        <p style="margin:0;font-size:15px;color:var(--color-neutral-700)">{{ latin }} · {{ date }} · {{ ageText }}</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));border-top:2px solid var(--color-divider);border-left:2px solid var(--color-divider)">
+          <sc-for list="{{ passport }}" as="p" hint-placeholder-count="4">
+            <div style="padding:20px 16px 16px;border-right:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);display:flex;flex-direction:column;gap:8px">
+              <span style="font-family:var(--font-heading);font-weight:800;font-size:56px;line-height:1;color:var(--color-accent);margin-left:-0.04em">{{ p.v }}</span>
+              <span style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-700)">{{ p.l }}</span>
+              <span style="font-size:14px;font-weight:500">{{ p.t }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- 1 Стратегия личности -->
+      <article style="border-top:2px solid var(--color-divider);padding-top:24px;display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700)">01</span>
+          <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-0.015em">Стратегия личности: {{ person }} — {{ personType }}</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px 48px">
+          <div style="display:grid;grid-template-columns:minmax(120px,auto) 1fr;gap:10px 16px;font-size:15px;line-height:1.5;border-top:1px solid var(--color-divider);padding-top:12px;align-content:start">
+            <span style="color:var(--color-neutral-700)">Стратегия (я хочу)</span><span>{{ pStrategy }}</span>
+            <span style="color:var(--color-neutral-700)">Реализация личности</span><span>{{ pRealization }}</span>
+            <span style="color:var(--color-neutral-700)">Мышление</span><span>{{ pThinking }}</span>
+            <span style="color:var(--color-neutral-700)">Мораль (несогласие)</span><span>{{ pMorality }}</span>
+            <span style="color:var(--color-neutral-700)">Плюсы</span><ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:2px"><sc-for list="{{ pPlus }}" as="x" hint-placeholder-count="4"><li>{{ x }}</li></sc-for></ul>
+            <span style="color:var(--color-neutral-700)">Минусы</span><ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:2px"><sc-for list="{{ pMinus }}" as="x" hint-placeholder-count="4"><li>{{ x }}</li></sc-for></ul>
+            <span style="color:var(--color-neutral-700)">Деление</span><span>{{ pDivision }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;font-size:16px;line-height:1.6">
+            <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-700)">Описание</span>
+            <sc-for list="{{ pDescription }}" as="p" hint-placeholder-count="3"><p style="margin:0">{{ p }}</p></sc-for>
+            <p style="margin:0;font-style:italic;color:var(--color-neutral-800);border-top:1px solid var(--color-divider);padding-top:12px">{{ pDivisionNote }}</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 Миссия -->
+      <article style="border-top:2px solid var(--color-divider);padding-top:24px;display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700)">02</span>
+          <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-0.015em">Миссия {{ mission }} — {{ missionName }}</h2>
+          <span class="tag tag-accent" style="align-self:flex-start;margin-top:4px">{{ missionStatus }}</span>
+          <p style="margin:8px 0 0;font-size:15px;line-height:1.55;font-style:italic;color:var(--color-neutral-800)">{{ mIntro }}</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px 48px">
+          <div style="display:flex;flex-direction:column;gap:14px;font-size:16px;line-height:1.6">
+            <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-700)">{{ mFull }}</span>
+            <sc-for list="{{ mDescription }}" as="p" hint-placeholder-count="2"><p style="margin:0">{{ p }}</p></sc-for>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(100px,auto) 1fr;gap:10px 16px;font-size:15px;line-height:1.5;border-top:1px solid var(--color-divider);padding-top:12px;align-content:start">
+            <span style="color:var(--color-neutral-700)">Слова</span><span>{{ mWords }}</span>
+            <span style="color:var(--color-neutral-700)">Поведение</span><span>{{ mBehavior }}</span>
+            <span style="color:var(--color-neutral-700)">Мораль</span><span>{{ mMorality }}</span>
+            <span style="color:var(--color-neutral-700)">Качества</span><ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:2px"><sc-for list="{{ mQualities }}" as="x" hint-placeholder-count="4"><li>{{ x }}</li></sc-for></ul>
+          </div>
+        </div>
+        <p style="margin:0;font-size:15px;line-height:1.55;font-style:italic;color:var(--color-neutral-800);border-top:1px solid var(--color-divider);padding-top:12px">{{ mOutro }}</p>
+      </article>
+
+      <!-- 3 Портфолио -->
+      <article style="border-top:2px solid var(--color-divider);padding-top:24px;display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700)">03</span>
+          <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-0.015em">Портфолио компетенций</h2>
+          <p style="margin:8px 0 0;font-size:15px;line-height:1.55;font-style:italic;color:var(--color-neutral-800)">{{ pfIntro }}</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px 48px">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--color-text);border-left:2px solid var(--color-text);max-width:360px">
+              <sc-for list="{{ cells }}" as="c" hint-placeholder-count="9">
+                <div style="aspect-ratio:1;border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:{{ c.bg }};color:{{ c.fg }};display:flex;flex-direction:column;justify-content:space-between;padding:10px">
+                  <span style="font-family:var(--font-heading);font-weight:800;font-size:clamp(28px,5vw,40px);line-height:1">{{ c.k }}</span>
+                  <span style="font-size:13px;font-weight:500;font-feature-settings:'tnum' 1">{{ c.sub }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <p style="margin:0;font-size:13px;color:var(--color-neutral-700);line-height:1.5">Заполненные ячейки — компетенции, которые у вас есть. Пустые — которых нет.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:20px;font-size:15px;line-height:1.55">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-700)">Компетенции, которые у вас есть</span>
+              <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;border-top:1px solid var(--color-divider)">
+                <sc-for list="{{ present }}" as="c" hint-placeholder-count="4"><li style="padding:10px 0;border-bottom:1px solid var(--color-divider)"><strong>{{ c.k }} — {{ c.title }}.</strong> {{ c.text }}</li></sc-for>
+              </ul>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-700)">Компетенций, которых нет</span>
+              <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;border-top:1px solid var(--color-divider)">
+                <sc-for list="{{ missing }}" as="c" hint-placeholder-count="4"><li style="padding:10px 0;border-bottom:1px solid var(--color-divider);color:var(--color-accent-700)">{{ c.k }} — {{ c.title }}</li></sc-for>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.55;border-top:1px solid var(--color-divider);padding-top:12px">
+          <p style="margin:0;font-weight:500">{{ pfSell }}</p>
+          <p style="margin:0;font-style:italic;color:var(--color-neutral-800)">{{ pfSti }}</p>
+          <p style="margin:0;font-style:italic;color:var(--color-neutral-800)">{{ pfRecommendation }}</p>
+        </div>
+      </article>
+
+      <!-- 4 Личный год -->
+      <article style="border-top:2px solid var(--color-divider);padding-top:24px;display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700)">04 · {{ year }}</span>
+          <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-0.015em">Личный год {{ py }} — {{ pyName }}</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px 48px;font-size:16px;line-height:1.6">
+          <div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--color-divider);padding-top:12px"><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-700)">Рекомендации</span><p style="margin:0">{{ pyRec }}</p></div>
+          <div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--color-divider);padding-top:12px"><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-700)">Если не использовать энергию года</span><p style="margin:0">{{ pyNotUsed }}</p></div>
+        </div>
+      </article>
+
+      <!-- 5 Энергия имени -->
+      <article style="border-top:2px solid var(--color-divider);padding-top:24px;display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700)">05</span>
+          <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-0.015em">Энергия имени {{ nameNumber }} — {{ nameTitle }}</h2>
+          <span style="font-size:13px;color:var(--color-neutral-700);font-family:ui-monospace,monospace">Для записи {{ latin }} · сумма {{ nameSum }}</span>
+          <p style="margin:8px 0 0;font-size:15px;line-height:1.55;font-style:italic;color:var(--color-neutral-800)">{{ nIntro }} {{ nAddition }}</p>
+        </div>
+        <p style="margin:0;font-size:16px;line-height:1.6;border-top:1px solid var(--color-divider);padding-top:12px">{{ nDescription }}</p>
+      </article>
+
+      <!-- 6 Девять сфер -->
+      <article style="border-top:2px solid var(--color-divider);padding-top:24px;display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700)">06</span>
+          <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-0.015em">Девять сфер жизни</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px 48px;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="position:relative;width:100%;max-width:440px">
+            <sc-for list="{{ sectors }}" as="s" hint-placeholder-count="9">
+              <span style="position:absolute;left:{{ s.lxPct }};top:{{ s.lyPct }};transform:translate(-50%,-50%);font-family:var(--font-heading);font-weight:800;font-size:15px;color:{{ s.fill }};font-feature-settings:'tnum' 1">{{ s.v }}</span>
+            </sc-for>
+            <svg viewBox="0 0 440 440" style="width:100%;display:block" role="img" aria-label="Колесо девяти сфер жизни">
+              <circle cx="220" cy="220" r="160" fill="none" stroke="var(--color-neutral-300)" stroke-width="1"></circle>
+              <circle cx="220" cy="220" r="96" fill="none" stroke="var(--color-neutral-300)" stroke-width="1" stroke-dasharray="3 4"></circle>
+              <sc-for list="{{ sectors }}" as="s" hint-placeholder-count="9">
+                <path d="{{ s.d }}" fill="{{ s.fill }}" stroke="var(--color-bg)" stroke-width="2"></path>
+              </sc-for>
+              <sc-for list="{{ sectors }}" as="s" hint-placeholder-count="9">
+                <line x1="220" y1="220" x2="{{ s.ex }}" y2="{{ s.ey }}" stroke="var(--color-bg)" stroke-width="2"></line>
+              </sc-for>
+            </svg>
+            </div>
+            <p style="margin:0;font-size:15px;font-weight:500;line-height:1.5">{{ wheelNote }}</p>
+          </div>
+          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;border-top:1px solid var(--color-divider)">
+            <sc-for list="{{ sectors }}" as="s" hint-placeholder-count="9">
+              <li style="display:grid;grid-template-columns:20px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--color-divider);font-size:15px">
+                <span style="width:14px;height:14px;background:{{ s.fill }}"></span>
+                <span>{{ s.n }}. {{ s.t }}</span>
+                <span style="font-family:var(--font-heading);font-weight:800;color:{{ s.fill }};font-feature-settings:'tnum' 1">{{ s.v }}</span>
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 7 С чего начать -->
+      <article style="border-top:2px solid var(--color-divider);padding-top:24px;display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700)">07</span>
+          <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-0.015em">С чего начать</h2>
+        </div>
+        <div style="display:flex;flex-direction:column;border-top:1px solid var(--color-divider)">
+          <div style="display:grid;grid-template-columns:minmax(32px,48px) 1fr;gap:8px 16px;padding:20px 0;border-bottom:1px solid var(--color-divider)">
+            <span style="font-family:var(--font-heading);font-weight:800;font-size:22px;color:var(--color-accent);line-height:1.2">1</span>
+            <h3 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:22px;line-height:1.2">{{ sGoal }}</h3>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(32px,48px) 1fr;gap:8px 16px;padding:20px 0;border-bottom:1px solid var(--color-divider)">
+            <span style="font-family:var(--font-heading);font-weight:800;font-size:22px;color:var(--color-accent);line-height:1.2">2</span>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <h3 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:22px;line-height:1.2">Дисциплина тела</h3>
+              <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.55"><sc-for list="{{ sBody }}" as="x" hint-placeholder-count="6"><li>{{ x }}</li></sc-for></ol>
+              <p style="margin:0;font-size:15px;line-height:1.55;font-style:italic;color:var(--color-neutral-800)">{{ sBodyOutro }}</p>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(32px,48px) 1fr;gap:8px 16px;padding:20px 0;border-bottom:1px solid var(--color-divider)">
+            <span style="font-family:var(--font-heading);font-weight:800;font-size:22px;color:var(--color-accent);line-height:1.2">3</span>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <h3 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:22px;line-height:1.2">Наработка компетенций</h3>
+              <p style="margin:0;font-size:15px;line-height:1.55">{{ sCompetencies }}</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin:0;font-size:16px;line-height:1.55;font-weight:500">Это твой первый слой. Сохрани результат — он станет точкой отсчёта.</p>
+        <div class="no-print" style="display:flex;gap:12px;flex-wrap:wrap">
+          <button type="button" class="btn btn-secondary" onClick="{{ savePdf }}" style="min-height:44px;padding:0 16px">Сохранить в PDF</button>
+          <button type="button" class="btn btn-secondary" onClick="{{ sendEmail }}" style="min-height:44px;padding:0 16px">{{ emailLabel }}</button>
+        </div>
+      </article>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="no-print" data-screen-label="CTA" style="max-width:860px;width:100%;margin:56px auto 0;padding:0 20px 96px;box-sizing:border-box;display:flex;flex-direction:column;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:14px;font-size:17px;line-height:1.6;border-top:2px solid var(--color-divider);padding-top:32px;max-width:60ch">
+        <p style="margin:0">Диагностика показала, где ты сейчас. Это уже ценно — большинство людей не знают даже этого.</p>
+        <p style="margin:0">Дальше есть два пути. Можно оставить результат как интересный факт о себе. А можно превратить его в рост — по уровням, в своём темпе, с поддержкой.</p>
+        <p style="margin:0">Для второго пути есть Zhanat Power — закрытое сообщество, где личные качества развивают системно, а не от случая к случаю.</p>
+      </div>
+      <div style="background:var(--color-accent);color:var(--color-bg);padding:40px 28px;display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(34px,5vw,56px);line-height:1.02;letter-spacing:-0.015em;margin-left:-0.05em">Что внутри Zhanat Power</h2>
+          <p style="margin:0;font-size:17px;line-height:1.5;font-weight:500">Закрытое сообщество для развития личных качеств и поиска призвания</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:8px">
+          <div style="background:var(--color-bg);color:var(--color-text);padding:18px 16px;font-family:var(--font-heading);font-weight:800;font-size:19px;line-height:1.15">Записи эфиров</div>
+          <div style="background:var(--color-accent-100);color:var(--color-accent-900);padding:18px 16px;font-family:var(--font-heading);font-weight:800;font-size:19px;line-height:1.15">Уроки по уровням</div>
+          <div style="background:var(--color-accent-200);color:var(--color-accent-900);padding:18px 16px;font-family:var(--font-heading);font-weight:800;font-size:19px;line-height:1.15">Закрытое сообщество</div>
+          <div style="background:var(--color-accent-100);color:var(--color-accent-900);padding:18px 16px;font-family:var(--font-heading);font-weight:800;font-size:19px;line-height:1.15">Поддержка тренеров</div>
+          <div style="background:var(--color-bg);color:var(--color-text);padding:18px 16px;font-family:var(--font-heading);font-weight:800;font-size:19px;line-height:1.15">Партнёрская программа</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));border-top:2px solid var(--color-divider);border-left:2px solid var(--color-divider)">
+          <sc-for list="{{ plans }}" as="p" hint-placeholder-count="3">
+            <button type="button" onClick="{{ p.on }}" style="text-align:left;padding:18px 16px;border:0;border-right:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);background:{{ p.bg }};color:{{ p.fg }};display:flex;flex-direction:column;gap:6px;cursor:pointer;min-height:112px">
+              <span style="display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%"><span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase">{{ p.t }}</span><sc-if value="{{ p.hasSave }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;font-weight:800;padding:3px 7px;background:var(--color-accent);color:var(--color-bg)">{{ p.save }}</span></sc-if></span>
+              <sc-if value="{{ p.hasSave }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;text-decoration:line-through;opacity:.7">${{ p.was }}</span></sc-if>
+              <span style="font-family:var(--font-heading);font-weight:800;font-size:34px;line-height:1">${{ p.price }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:stretch">
+          <a href="{{ appUrl }}" class="btn btn-primary" style="min-height:64px;padding:0 28px;font-size:19px;justify-content:flex-start;text-align:left;white-space:nowrap;text-decoration:none;justify-content:space-between"><span>Войти в Zhanat Power</span><span>${{ planPrice }}</span></a>
+          <span style="font-size:13px;color:var(--color-neutral-700)">Попробуй месяц. Если не твоё — отмена в один клик, без вопросов. Автопродление — только с твоего согласия.</span>
+        </div>
+      </div>
+
+      <sc-if value="{{ showConsult }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Личный разбор" style="border-top:2px solid var(--color-divider);padding-top:24px;display:flex;flex-direction:column;gap:16px">
+          <h3 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(24px,3vw,32px);line-height:1.1">Личный разбор с мастером</h3>
+          <p style="margin:0;font-size:16px;line-height:1.6;max-width:60ch">Если нужен быстрый результат — есть короткий путь. Мастер лично разбирает твою диагностику и показывает, какие компетенции докрутить в первую очередь. Один разговор экономит месяцы самостоятельного поиска.</p>
+          <div style="display:flex;gap:2px;flex-wrap:wrap">
+            <button type="button" onClick="{{ openPerson }}" style="min-height:52px;padding:0 20px;font-size:16px;font-weight:800;border:0;cursor:pointer;background:{{ personBg }};color:{{ personFg }}">Разбор личности — 100 USD</button>
+            <button type="button" onClick="{{ openBusiness }}" style="min-height:52px;padding:0 20px;font-size:16px;font-weight:800;border:0;cursor:pointer;background:{{ businessBg }};color:{{ businessFg }}">Разбор бизнеса — 300 USD</button>
+          </div>
+          <sc-if value="{{ consultOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="border:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:16px;animation:rise .3s ease-out">
+              <sc-if value="{{ consultSent }}" hint-placeholder-val="{{ false }}">
+                <h4 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:22px;line-height:1.15">Заявка принята.</h4>
+                <p style="margin:0;font-size:15px;line-height:1.5">{{ slotSummary }}. После оплаты мастер напишет тебе в WhatsApp для подтверждения времени.</p>
+              </sc-if>
+              <sc-if value="{{ consultNotSent }}" hint-placeholder-val="{{ true }}">
+                <h4 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:22px;line-height:1.15">Разбор {{ consultKind }}</h4>
+                <p style="margin:0;font-size:15px;line-height:1.5;color:var(--color-neutral-700)">Когда тебе удобно созвониться?</p>
+                <label style="display:block;max-width:320px"><span style="display:block;font-size:12px;margin-bottom:5px;color:var(--color-neutral-700)">Дата</span><input class="input" type="date" value="{{ slotDate }}" min="{{ minDate }}" onChange="{{ onSlotDate }}" style="min-height:48px;font-size:16px"></label>
+                <div style="display:flex;flex-direction:column;gap:5px"><span style="font-size:12px;color:var(--color-neutral-700)">Время</span>
+                  <div style="display:flex;gap:2px;flex-wrap:wrap">
+                    <sc-for list="{{ slotOpts }}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{ o.on }}" style="min-height:44px;padding:0 16px;font-size:15px;font-weight:500;border:0;cursor:pointer;background:{{ o.bg }};color:{{ o.fg }}">{{ o.t }}</button></sc-for>
+                  </div>
+                </div>
+                <sc-if value="{{ slotError }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:14px;color:var(--color-accent-700);border-left:2px solid var(--color-accent);padding-left:12px">Выберите дату и время</p></sc-if>
+                <button type="button" onClick="{{ sendConsult }}" style="min-height:48px;padding:0 24px;font-size:16px;font-weight:800;border:0;cursor:pointer;background:var(--color-text);color:var(--color-bg);align-self:flex-start">Оплатить ${{ consultPrice }}</button>
+                <p style="margin:0;font-size:13px;line-height:1.5;color:var(--color-neutral-700)">После оплаты мастер напишет тебе в WhatsApp для подтверждения времени</p>
+              </sc-if>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </section>
+  </sc-if>
+
+  <footer class="no-print" style="margin-top:auto;border-top:2px solid var(--color-divider);padding:20px max(20px, calc((100% - 1100px) / 2 + 20px));font-size:13px;color:var(--color-neutral-700);display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between">
+    <span>Syucai Training Institute · Дубай</span>
+    <a href="index.html">zhanatpower.com</a>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;demoCase&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;1&quot;,&quot;7&quot;,&quot;10&quot;],&quot;default&quot;:&quot;none&quot;,&quot;tsType&quot;:&quot;'none' | '1' | '7' | '10'&quot;,&quot;section&quot;:&quot;Превью отчёта (кейсы из test-cases.md)&quot;}}">
+class Component extends DCLogic {
+  state = { phase: 'landing', step: 1, name: '', date: '', aspects: {}, income: null, phone: '', email: '', consent: false, error: '', calcIdx: 0, res: null, plan: 'half', consult: null, consultSent: false, slotDate: '', slotTime: '', slotError: false };
+  KEY = 'sti_diag_v2';
+  CALC = ['Считаем число личности', 'Определяем миссию', 'Собираем портфолио', 'Считаем личный год', 'Готовим разбор'];
+  DEMOS = {
+    '1': { name: 'ANNA', date: '18.07.1989', income: '3k-10k', aspects: { status: 5, relations: 5, planning: 7, goals: 8, image: 3, comfort: 9, energy: 6, finance: 4, safety: 10 } },
+    '7': { name: 'RINAT', date: '06.08.1980', income: '10k-30k', aspects: { status: 8, relations: 7, planning: 6, goals: 9, image: 8, comfort: 6, energy: 5, finance: 7, safety: 6 } },
+    '10': { name: 'ASKHAT', date: '05.12.1988', income: '<1k', aspects: { status: 4, relations: 6, planning: 5, goals: 7, image: 6, comfort: 5, energy: 3, finance: 4, safety: 7 } }
+  };
+  async componentDidMount() {
+    const C = window.STI_CALC, T = window.STI_TEXTS;
+    this.C = C; this.T = T;
+    let saved = null; try { saved = JSON.parse(localStorage.getItem(this.KEY) || 'null'); } catch (e) {}
+    const st = { ready: true };
+    if (saved) { Object.assign(st, saved); if (saved.phase === 'report' && !saved.res) st.phase = 'landing'; if (saved.phase === 'calc') st.phase = 'test'; }
+    this.applyDemo(st);
+    if (/[?&]start=1/.test(location.search) && st.phase !== 'report') { st.phase = 'test'; st.step = st.step || 1; }
+    this.setState(st);
+  }
+  componentDidUpdate(prev) {
+    if (prev.demoCase !== this.props.demoCase && this.C) { const st = {}; this.applyDemo(st); if (!Object.keys(st).length) st.phase = 'landing'; this.setState(st); }
+  }
+  applyDemo(st) {
+    const d = this.DEMOS[this.props.demoCase]; if (!d) return;
+    const res = this.C.calc({ birth: this.C.parseDate(d.date), latin: d.name, aspects: d.aspects, income: d.income });
+    Object.assign(st, { phase: 'report', name: d.name, date: d.date, income: d.income, aspects: d.aspects, res, phone: '+7 700 000 00 00', email: 'demo@example.com', consult: null, consultSent: false });
+  }
+  save(patch) { this.setState(patch, () => { const { ready, ...rest } = this.state; try { localStorage.setItem(this.KEY, JSON.stringify(rest)); } catch (e) {} }); }
+  set(k) { return e => { let v = e && e.target ? (e.target.type === 'checkbox' ? e.target.checked : e.target.value) : e; if (k === 'name') v = v.replace(/[^A-Za-z]/g, '').toUpperCase().slice(0, 30); if (k === 'date') v = this.C.mask(v); this.save({ [k]: v, error: '' }); }; }
+  validate() {
+    const C = this.C, s = this.state;
+    if (s.step === 1) { const l = C.cleanName(s.name); if (l.length < 2 || l.length > 30) return 'Только латинские буквы, от 2 до 30'; }
+    if (s.step === 2) { const b = C.parseDate(s.date); if (!b) return 'Такой даты не существует'; const a = C.age(b); if (a < 14) return 'Диагностика доступна с 14 лет'; if (a > 99) return 'Такой даты не существует'; }
+    if (s.step >= 3 && s.step <= 11) { if (!s.aspects[C.ASPECTS[s.step - 3].k]) return 'Оцените от 1 до 10'; }
+    if (s.step === 12 && !s.income) return 'Выберите вариант';
+    if (s.step === 13) { if (!/^\+?[\d\s()\-]{10,18}$/.test(s.phone)) return 'Введите телефон'; if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email)) return 'Проверьте адрес почты'; if (!s.consent) return 'Чтобы получить отчёт, нужно согласие на обработку данных.'; }
+    return '';
+  }
+  next = () => {
+    const err = this.validate(); if (err) return this.setState({ error: err });
+    if (this.state.step < 13) return this.save({ step: this.state.step + 1, error: '' });
+    this.runCalc();
+  };
+  runCalc() {
+    const C = this.C, s = this.state;
+    const res = C.calc({ birth: C.parseDate(s.date), latin: s.name, aspects: s.aspects, income: s.income });
+    this.save({ phase: 'calc', calcIdx: 0, res });
+    let i = 0;
+    const tick = () => { i++; if (i > this.CALC.length) { this.save({ phase: 'report' }); window.scrollTo(0, 0); return; } this.setState({ calcIdx: i }); setTimeout(tick, 600); };
+    setTimeout(tick, 600);
+  }
+  go(phase) { return () => { this.save({ phase, error: '' }); window.scrollTo(0, 0); }; }
+  renderVals() {
+    const s = this.state, C = this.C, T = this.T, step = s.step, phase = s.phase;
+    const o = { inLanding: phase === 'landing', inPrep: phase === 'prep', inTest: phase === 'test', inCalc: phase === 'calc', inReport: phase === 'report' && !!s.res && !!T,
+      step, progress: Math.round(step / 13 * 100) + '%', name: s.name, latin: s.name, date: s.date, phone: s.phone, email: s.email, consent: s.consent, error: s.error, hasError: !!s.error,
+      isName: step === 1, isDate: step === 2, isScale: step >= 3 && step <= 11, isIncome: step === 12, isContact: step === 13,
+      nextLabel: step === 13 ? 'Получить результат' : 'Далее',
+      toPrep: () => { this.save({ phase: 'test', step: 1, error: '' }); window.scrollTo(0, 0); }, toLanding: this.go('landing'), start: () => { this.save({ phase: 'test', step: 1, error: '' }); window.scrollTo(0, 0); }, next: this.next,
+      back: () => step > 1 ? this.save({ step: step - 1, error: '' }) : (location.href = 'index.html'),
+      onName: this.set('name'), onDate: this.set('date'), onPhone: this.set('phone'), onEmail: this.set('email'), onConsent: this.set('consent'), onSlotDate: e => this.save({ slotDate: e.target.value, slotError: false }),
+      onEnter: e => { if (e.key === 'Enter') this.next(); },
+      restart: () => { try { localStorage.removeItem(this.KEY); } catch (e) {} this.setState({ phase: 'landing', step: 1, name: '', date: '', aspects: {}, income: null, phone: '', email: '', consent: false, res: null, consult: null, consultSent: false, slotDate: '', slotTime: '', slotError: false, error: '' }); window.scrollTo(0, 0); },
+      savePdf: () => window.print(),
+      sendEmail: () => this.save({ emailSent: true }), emailLabel: s.emailSent ? 'Отправлено на ' + s.email : 'Получить на почту',
+      calcLines: this.CALC.map((t, i) => ({ t, op: i < s.calcIdx ? 1 : i === s.calcIdx ? 0.9 : 0.25, mark: i < s.calcIdx ? 'var(--color-accent)' : 'var(--color-neutral-300)' }))
+    };
+    if (!C) return o;
+    if (o.isName) { o.stepKicker = 'Шаг 1 · Имя'; o.stepTitle = 'Как вас зовут?'; o.stepHint = 'Напишите имя так, как оно указано в паспорте — латиницей.'; }
+    if (o.isDate) { o.stepKicker = 'Шаг 2 · Дата'; o.stepTitle = 'Дата рождения'; o.stepHint = 'Например, 05.12.1988'; }
+    if (o.isScale) { const a = C.ASPECTS[step - 3]; o.stepKicker = `Шаг ${step} · Сфера ${step - 2} из 9`; o.stepTitle = a.t; o.stepHint = a.sub ? `${a.sub}. Оцените от 1 до 10, где 10 — всё отлично, 1 — совсем плохо` : 'Оцените от 1 до 10, где 10 — всё отлично, 1 — совсем плохо';
+      o.scaleOpts = Array.from({ length: 10 }, (_, i) => { const v = i + 1, sel = s.aspects[a.k] === v; return { v, bg: sel ? 'var(--color-accent)' : 'var(--color-bg)', fg: sel ? 'var(--color-bg)' : 'var(--color-text)', on: () => { this.save({ aspects: { ...s.aspects, [a.k]: v }, error: '' }); setTimeout(() => this.save({ step: step + 1 }), 220); } }; }); }
+    if (o.isIncome) { o.stepKicker = 'Шаг 12 · Доход'; o.stepTitle = 'Доход чистыми в месяц'; o.stepHint = 'После расходов. Нужно для точной рекомендации, никому не показывается.';
+      o.incomeOpts = C.INCOME.map(([k, t]) => { const sel = s.income === k; return { t, bg: sel ? 'var(--color-accent-100)' : 'transparent', dot: sel ? 'var(--color-accent)' : 'transparent', on: () => this.save({ income: k, error: '' }) }; }); }
+    if (o.isContact) { o.stepKicker = 'Шаг 13 · Контакты'; o.stepTitle = 'Куда отправить отчёт'; o.stepHint = 'Результат появится на экране сразу. Копия придёт на почту.'; }
+    const r = s.res; if (!r || !T) return o;
+    const P = T.personality.types[r.person], M = T.mission.types[r.mission], Y = T.year[r.py], N = T.name.types[r.nameNumber], K = T.portfolio.competencies;
+    const GREEN = 'oklch(0.55 0.15 150)', RED = 'var(--color-accent)';
+    Object.assign(o, {
+      ageText: `${r.age} ${plural(r.age, 'год', 'года', 'лет')}`,
+      passport: [{ v: r.person, l: 'Личность', t: P.type }, { v: r.mission, l: 'Миссия', t: M.name }, { v: r.py, l: 'Год ' + r.year, t: Y.name.split('.')[0] }, { v: r.nameNumber, l: 'Имя', t: N.name }],
+      person: r.person, personType: P.type, pStrategy: P.strategy, pRealization: P.realization, pThinking: P.thinking, pMorality: P.morality, pPlus: P.plus, pMinus: P.minus, pDivision: P.division, pDescription: P.description, pDivisionNote: T.personality.division_note,
+      mission: r.mission, missionName: M.name, mFull: M.full, missionStatus: r.missionActive ? 'Действует с 33 лет' : `Вступит в силу в 33 года — через ${r.missionIn} ${plural(r.missionIn, 'год', 'года', 'лет')}`, mIntro: T.mission.intro, mOutro: T.mission.outro, mDescription: M.description, mWords: M.words, mBehavior: M.behavior, mMorality: M.morality, mQualities: M.qualities,
+      pfIntro: T.portfolio.intro, pfSell: T.portfolio.sell, pfSti: T.portfolio.sti, pfRecommendation: T.portfolio.recommendation,
+      cells: C.GRID.flat().map(k => { const n = r.matrix[k]; return { k, sub: n ? `×${n}` : '', bg: n ? (n >= 3 ? 'var(--color-accent)' : 'var(--color-accent-200)') : 'var(--color-bg)', fg: n >= 3 ? 'var(--color-bg)' : n ? 'var(--color-text)' : 'var(--color-neutral-400)' }; }),
+      present: r.present.map(c => ({ k: c.k, title: K[c.k].title, text: K[c.k].levels[c.level - 1] })),
+      missing: r.missing.map(k => ({ k, title: K[k].title })),
+      year: r.year, py: r.py, pyName: Y.name, pyRec: Y.rec, pyNotUsed: Y.notUsed,
+      nameNumber: r.nameNumber, nameTitle: N.name, nameSum: r.nameSum, nIntro: T.name.intro, nAddition: T.name.addition, nDescription: N.description,
+      wheelNote: T.wheel.note,
+      sGoal: T.start.goal, sBody: T.start.body, sBodyOutro: T.start.bodyOutro, sCompetencies: T.start.competencies, reportFooter: T.footer,
+      plans: PLANS.map(([k, t, price, was]) => ({ t, price, was, hasSave: !!was, save: was ? `−$${was - price}` : '', bg: s.plan === k ? 'var(--color-text)' : 'transparent', fg: s.plan === k ? 'var(--color-bg)' : 'var(--color-text)', on: () => this.save({ plan: k }) })),
+      planPrice: (PLANS.find(p => p[0] === s.plan) || PLANS[1])[2],
+      appUrl: `https://zhanatpower.com/customer/register?src=diag&p=${r.person}&m=${r.mission}&py=${r.py}&plan=${s.plan}`,
+      showConsult: r.showConsult, consultOpen: !!s.consult, consultSent: s.consultSent, consultNotSent: !s.consultSent, consultKind: s.consult === 'business' ? 'бизнеса' : 'личности', consultPrice: s.consult === 'business' ? 300 : 100,
+      personBg: s.consult === 'business' ? 'var(--color-neutral-200)' : 'var(--color-text)', personFg: s.consult === 'business' ? 'var(--color-neutral-700)' : 'var(--color-bg)',
+      businessBg: s.consult === 'business' ? 'var(--color-text)' : 'var(--color-neutral-200)', businessFg: s.consult === 'business' ? 'var(--color-bg)' : 'var(--color-neutral-700)',
+      openPerson: () => this.save({ consult: 'person', consultSent: false }), openBusiness: () => this.save({ consult: 'business', consultSent: false }),
+      slotDate: s.slotDate, minDate: tomorrow(), slotError: s.slotError,
+      slotOpts: ['10:00–13:00', '13:00–17:00', '17:00–20:00'].map(t => ({ t, bg: s.slotTime === t ? 'var(--color-text)' : 'var(--color-neutral-200)', fg: s.slotTime === t ? 'var(--color-bg)' : 'var(--color-text)', on: () => this.save({ slotTime: t, slotError: false }) })),
+      slotSummary: `${fmtDate(s.slotDate)}, ${s.slotTime}`,
+      sendConsult: () => (s.slotDate && s.slotTime) ? this.save({ consultSent: true }) : this.setState({ slotError: true })
+    });
+    const CX = 220, R = 160, N9 = 9;
+    o.sectors = r.wheel.map((w, i) => {
+      const a0 = -Math.PI / 2 + i * 2 * Math.PI / N9, a1 = a0 + 2 * Math.PI / N9, rr = R * w.v / 10;
+      const p = (a, rad) => [CX + Math.cos(a) * rad, CX + Math.sin(a) * rad];
+      const [x0, y0] = p(a0, rr), [x1, y1] = p(a1, rr), [ex, ey] = p(a0, R), [lx, ly] = p((a0 + a1) / 2, R + 22);
+      const f = n => n.toFixed(1);
+      return { n: i + 1, t: w.t, v: w.v, fill: w.red ? RED : GREEN, d: `M${CX},${CX} L${f(x0)},${f(y0)} A${f(rr)},${f(rr)} 0 0 1 ${f(x1)},${f(y1)} Z`, ex: f(ex), ey: f(ey), lxPct: (lx / 440 * 100).toFixed(2) + '%', lyPct: (ly / 440 * 100).toFixed(2) + '%' };
+    });
+    return o;
+  }
+}
+const PLANS = [['month', 'Месяц', 24, null], ['half', 'Полгода', 132, 144], ['year', 'Год', 252, 288]];
+function tomorrow() { const d = new Date(); d.setDate(d.getDate() + 1); return d.toISOString().slice(0, 10); }
+function fmtDate(iso) { if (!iso) return ''; const [y, m, d] = iso.split('-'); return `${d}.${m}.${y}`; }
+function plural(n, a, b, c) { const m = n % 10, h = n % 100; if (m === 1 && h !== 11) return a; if (m >= 2 && m <= 4 && (h < 12 || h > 14)) return b; return c; }
+</script>
+</body>
+</html>

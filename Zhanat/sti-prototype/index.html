@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // Локальные копии React вместо CDN unpkg.com — сайт не зависит от внешних серверов.
+  window.__resources = {
+    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "vendor/react.production.min.js",
+    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "vendor/react-dom.production.min.js"
+  };
+</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Диагностика потенциала — Syucai Training Institute</title>
+  <meta name="description" content="Цель личности — это развитие своего потенциала. Узнай за 2 минуты, что мешает тебе раскрыться. Бесплатно.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;800&display=swap">
+  <link rel="stylesheet" href="_ds/modernist-72380169-e0fb-4c08-a13b-c3c5950a47b3/styles.css">
+  <script src="_ds/modernist-72380169-e0fb-4c08-a13b-c3c5950a47b3/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: #0a0a0a; color: #f1ece4; font-family: var(--font-body); text-wrap: pretty; }
+    a { color: #e8925a; } a:hover { color: #f3ad7f; }
+    html { scroll-behavior: smooth; }
+    @media (max-width: 760px) { .m-hero { grid-template-columns: 1fr !important; } .m-hero-photo { min-height: 60vh !important; max-height: 70vh; } .m-nav-meta { display: none !important; } .m-two { grid-template-columns: 1fr !important; } }
+  </style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#0a0a0a;color:#f1ece4">
+  <nav style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:28px max(24px, calc((100% - 1240px) / 2 + 24px));font-size:12px;letter-spacing:0.12em;text-transform:uppercase;line-height:1.5">
+    <a href="#" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#f1ece4;font-family:var(--font-heading);font-weight:800;font-size:18px;letter-spacing:0.08em;line-height:1;text-transform:uppercase"><img src="assets/logo.png" alt="" style="width:30px;height:30px;object-fit:contain">Syucai Training Institute</a>
+    <div class="m-nav-meta" style="display:flex;gap:clamp(24px,5vw,80px);color:#f1ece4">
+      <span>Методология<br>Жаната Кожамжарова</span>
+      <span>Диагностика<br>2 минуты · бесплатно</span>
+      <span>Syucai Training Institute<br>Дубай</span>
+    </div>
+  </nav>
+
+  <section class="m-hero" data-screen-label="Hero" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:min(92vh,900px)">
+    <figure class="m-hero-photo" style="margin:0;min-height:520px;position:relative;overflow:hidden;background:#0a0a0a">
+      <img src="assets/zhanat-vertical.webp" alt="Жанат Кожамжаров" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:contrast(1.05) brightness(.9)">
+      <div style="position:absolute;inset:0;background:linear-gradient(to right, transparent 55%, #0a0a0a 100%), linear-gradient(to top, #0a0a0a 0%, transparent 30%)"></div>
+    </figure>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:32px;padding:64px 32px">
+      <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(32px,3.8vw,56px);line-height:1.04;letter-spacing:-0.01em;text-transform:uppercase;color:#e8925a;max-width:18ch">Цель личности — раскрыть свой потенциал</h1>
+      <p style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(18px,1.8vw,24px);letter-spacing:0.06em;text-transform:uppercase;color:#f1ece4">Узнай, в чём твоя сила</p>
+      <p style="margin:0;font-size:15px;line-height:1.7;color:#a49d95;max-width:44ch;font-weight:500">Диагностика покажет твои сильные зоны, что проседает и куда двигаться дальше.</p>
+      <a href="diagnostika.html?start=1" style="display:flex;align-items:center;justify-content:center;width:min(100%,420px);min-height:76px;background:#e8925a;color:#0a0a0a;text-decoration:none;font-family:var(--font-heading);font-weight:800;font-size:17px;letter-spacing:0.1em;text-transform:uppercase;border-radius:6px" style-hover="background:#f3ad7f">Пройти диагностику</a>
+      <div style="display:flex;gap:clamp(24px,4vw,56px);justify-content:center;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:center;min-width:96px"><span style="font-family:var(--font-heading);font-weight:800;font-size:36px;line-height:1;color:#9c7a55">30 000</span><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#7f7871;line-height:1.5;white-space:nowrap">Выпускников</span></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:center;min-width:96px"><span style="font-family:var(--font-heading);font-weight:800;font-size:36px;line-height:1;color:#9c7a55">181</span><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#7f7871;line-height:1.5;white-space:nowrap">Страна</span></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:center;min-width:96px"><span style="font-family:var(--font-heading);font-weight:800;font-size:36px;line-height:1;color:#9c7a55">2 мин</span><span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#7f7871;line-height:1.5;white-space:nowrap">Результат на экране</span></div>
+      </div>
+      <p style="margin:-16px 0 0;font-size:12px;line-height:1.5;color:#7f7871">Авторская методика, защищена авторским правом</p>
+    </div>
+  </section>
+
+  <section class="m-two" data-screen-label="Для кого" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px 32px;padding:120px max(24px, calc((100% - 1240px) / 2 + 24px)) 96px">
+    <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(36px,4.6vw,64px);line-height:1;text-transform:uppercase;color:#e8925a;letter-spacing:-0.01em;max-width:12ch">Для кого</h2>
+    <div style="display:flex;flex-direction:column;gap:40px;text-align:center;align-items:center;font-family:var(--font-heading);font-weight:800;text-transform:uppercase;font-size:clamp(15px,1.4vw,19px);line-height:1.5;letter-spacing:0.02em">
+      <p style="margin:0;max-width:40ch;color:#f1ece4">Финансы стоят на месте</p>
+      <p style="margin:0;max-width:40ch;color:#a49d95">Результат не растёт, хотя работы становится больше</p>
+      <p style="margin:0;max-width:40ch;color:#f1ece4">Решения принимаются на эмоциях</p>
+      <p style="margin:0;max-width:40ch;color:#a49d95">Одни и те же ошибки в делах и отношениях повторяются</p>
+      <p style="margin:0;max-width:40ch;color:#f1ece4">Много идей, мало завершённого — планы не доходят до результата</p>
+      <p style="margin:0;max-width:40ch;color:#a49d95">Непонятно, что своё: чужие цели, чужая ниша</p>
+      <p style="margin:0;max-width:40ch;color:#f1ece4">Нет энергии к вечеру</p>
+    </div>
+  </section>
+
+  <div style="height:1px;background:#2a2622;margin:0 max(24px, calc((100% - 1240px) / 2 + 24px))"></div>
+
+  <section class="m-two" data-screen-label="Автор" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px 64px;align-items:center;padding:96px max(24px, calc((100% - 1240px) / 2 + 24px)) 120px">
+    <figure style="margin:0;aspect-ratio:1;overflow:hidden;position:relative">
+      <img src="assets/zhanat-square.jpg" alt="Жанат Кожамжаров" style="width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.05) brightness(.92)">
+      <div style="position:absolute;inset:0;background:linear-gradient(to top, #0a0a0a 0%, transparent 35%)"></div>
+    </figure>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <span style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#9c7a55;font-weight:500">Об авторе</span>
+      <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(32px,3.6vw,52px);line-height:1;text-transform:uppercase;color:#e8925a;letter-spacing:-0.01em">Жанат Кожамжаров</h2>
+      <p style="margin:0;font-size:16px;line-height:1.7;color:#a49d95;max-width:46ch">Автор методологии «Психология науки Сюцай» и основатель Syucai Training Institute (Дубай). Авторское право на методологию зарегистрировано в 181 стране. Обучение прошли более 30 000 человек. Филиалы института — в Астане (МФЦА), Москве, Кыргызстане, Узбекистане. Ведёт школы лично.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="CTA" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:32px;padding:96px 24px 120px;border-top:1px solid #2a2622">
+    <h2 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(30px,4vw,56px);line-height:1;text-transform:uppercase;color:#e8925a;max-width:20ch">Цель личности — раскрыть свой потенциал</h2>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#a49d95;font-weight:500;max-width:40ch">Пройди диагностику за 2 минуты — результат сразу на экране.</p>
+    <a href="diagnostika.html?start=1" style="display:flex;align-items:center;justify-content:center;width:min(100%,420px);min-height:76px;background:#e8925a;color:#0a0a0a;text-decoration:none;font-family:var(--font-heading);font-weight:800;font-size:17px;letter-spacing:0.1em;text-transform:uppercase;border-radius:6px" style-hover="background:#f3ad7f">Пройти диагностику</a>
+  </section>
+
+  <footer style="margin-top:auto;padding:24px max(24px, calc((100% - 1240px) / 2 + 24px));font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7f7871;display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #2a2622">
+    <span>Syucai Training Institute · Дубай</span>
+    <a href="diagnostika.html" style="color:#a49d95;text-decoration:none">Диагностика</a>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>

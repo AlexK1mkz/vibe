@@ -1,0 +1,10 @@
+# служебное
+.thumbnail
+.DS_Store
+Thumbs.db
+node_modules/
+*.zip
+
+# исходники и внутренние материалы — не публиковать
+uploads/
+docs-internal/
