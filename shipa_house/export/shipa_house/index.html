@@ -846,12 +846,7 @@
 <sc-if value="{{ bookingOpen }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="Бронирование" style="position:fixed;inset:0;z-index:70;background:#F9EFE3;display:flex;flex-direction:column;animation:fadeIn 200ms ease;">
   <div style="display:flex;align-items:center;gap:12px;padding:12px 12px 8px 20px;max-width:560px;width:100%;margin:0 auto;">
-    <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
-      <button onClick="{{ bookingBack }}" aria-label="Назад" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(10,47,79,.25);background:#F9EFE3;display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#0A2F4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l-6 6 6 6"/></svg></button>
-    </sc-if>
-    <sc-if value="{{ noBack }}" hint-placeholder-val="{{ true }}">
-      <img src="brand/mark-navy.png" alt="" style="height:28px;width:auto;display:block;margin-right:4px;">
-    </sc-if>
+    <img src="brand/mark-navy.png" alt="" style="height:28px;width:auto;display:block;margin-right:4px;">
     <div style="flex:1;display:flex;gap:4px;">
       <sc-for list="{{ stepSegs }}" as="s" hint-placeholder-count="4">
         <div style="{{ s.style }}"></div>
@@ -973,7 +968,6 @@
 
     <sc-if value="{{ step3 }}" hint-placeholder-val="{{ false }}">
       <div data-screen-label="Шаг 3 — Время и дополнительно">
-      <button onClick="{{ bookingBack }}" style="display:inline-flex;align-items:center;gap:6px;height:36px;margin:0 0 6px -6px;padding:0 6px;font-size:14px;font-weight:500;color:rgba(10,47,79,.7);"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l-6 6 6 6"/></svg>{{ backLabel }}</button>
       <div style="font-size:11px;letter-spacing:.2em;color:#C15C22;font-weight:600;margin-bottom:8px;">ДОМ {{ bk.houseName }} · {{ searchDate }}</div>
       <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;line-height:1.1;margin:0 0 16px;">Во сколько начнём?</h2>
       <sc-if value="{{ hasBusy }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:rgba(10,47,79,.7);margin-bottom:12px;">Занято в этот день: {{ busyText }}. Нужно 3 часа до следующей брони.</div></sc-if>
@@ -1040,7 +1034,6 @@
 
     <sc-if value="{{ step4 }}" hint-placeholder-val="{{ false }}">
       <div data-screen-label="Шаг 4 — Контакты">
-      <button onClick="{{ bookingBack }}" style="display:inline-flex;align-items:center;gap:6px;height:36px;margin:0 0 6px -6px;padding:0 6px;font-size:14px;font-weight:500;color:rgba(10,47,79,.7);"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l-6 6 6 6"/></svg>{{ backLabel }}</button>
       <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;line-height:1.1;margin:0 0 24px;">Как с вами связаться?</h2>
       <div style="display:flex;flex-direction:column;gap:8px;">
         <input value="{{ form.name }}" onChange="{{ setName }}" placeholder="Имя" autoComplete="name" style="height:56px;border:1px solid rgba(10,47,79,.3);border-radius:12px;padding:0 16px;font-size:17px;background:#F9EFE3;color:#0A2F4F;">
@@ -1224,10 +1217,6 @@ class Component extends DCLogic {
   }
   closeBooking(){const done=this.state.bk&&this.state.bk.step===5;this.setState({bk:null,savedBk:null});if(done)this.go('home');}
   setBk(patch){this.setState(s=>({bk:{...s.bk,...patch}}));}
-  back(){const {bk}=this.state;if(!bk)return;
-    if(bk.step===4){this.setBk({step:3});return;}
-    if(bk.step===3){if(bk.fromHouse){this.closeBooking();return;}this.setBk({step:2});return;}
-    if(bk.step===2){this.setBk({step:1,houseId:bk.fromHouse?bk.houseId:null});return;}}
   next(){
     const {bk}=this.state;
     const toStep3=()=>{const hi=HOUSES.findIndex(x=>x.id===bk.houseId);this.setBk({step:3,start:this.firstFreeStart(hi,bk.date),dur:MIN_H});};
@@ -1366,12 +1355,10 @@ class Component extends DCLogic {
         agreeBoxStyle:`width:24px;height:24px;flex:0 0 auto;border-radius:6px;border:1px solid ${s.form.agree?BRICK:'rgba(10,47,79,.4)'};background:${s.form.agree?BRICK:'transparent'};display:flex;align-items:center;justify-content:center;`,
         toggleAgree:()=>this.setState({form:{...s.form,agree:!s.form.agree}}),sendError:s.sendError,
         successWhen:whenText,waLink:'https://wa.me/77000000000?text='+encodeURIComponent(`Здравствуйте! Заявка в Шипа: дом ${hh0.name}, ${whenText}, ${bk.guests} гостей.`),
-        canBack:bk.step>=2&&bk.step<=4,noBack:!(bk.step>=2&&bk.step<=4),bookingBack:()=>this.back(),
-        backLabel:bk.step===4?'К времени и услугам':bk.step===3?(bk.fromHouse?'К дому':'К выбору дома'):'К дате',
         bookingCta:bk.step<5,bookingNext:()=>this.next(),bookingNextDisabled:!canNext,bookingCtaLabel:ctaLabel,
         bookingCtaStyle:`width:100%;max-width:520px;margin:0 auto;display:block;height:56px;border-radius:999px;background:${canNext?BRICK:'rgba(10,47,79,.15)'};color:${canNext?CREAM:'rgba(10,47,79,.45)'};font-weight:600;font-size:16px;letter-spacing:.04em;`,
         bk:{...bk,dur,houseName:hSel?hSel.name:''}};
-    } else B={bk:{houseName:'',guests:6,dur:3},step1:false,step2:false,step3:false,step4:false,stepDone:false,bookingCta:false,durMore:false,durCustom:false,durHint:'',canBack:false,noBack:true,backLabel:''};
+    } else B={bk:{houseName:'',guests:6,dur:3},step1:false,step2:false,step3:false,step4:false,stepDone:false,bookingCta:false,durMore:false,durCustom:false,durHint:''};
 
     const callOk=s.form.name.trim().length>1&&s.form.phone.replace(/\D/g,'').length>=10;
     return {
