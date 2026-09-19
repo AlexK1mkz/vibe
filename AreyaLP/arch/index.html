@@ -35,7 +35,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
 @media(max-width:900px){.tar-grid{grid-template-rows:none !important}.tar-card{padding:24px !important;display:flex !important;flex-direction:column;gap:32px;grid-row:auto !important}.tar-name{font-size:42px !important}.tar-price{font-size:38px !important}.tar-card:not(.tar-show){display:none !important}}
 @media(max-width:900px){.about{row-gap:24px !important}.ab-head,.ab-photo,.ab-body{grid-column:1 / -1 !important}.ab-photo{grid-row:auto !important;min-height:0 !important;height:min(60vh,480px);align-self:auto !important}.about h2{font-size:35px !important}.ab-cols{gap:24px !important}.ab-cols p{font-size:15px}.ab-col1{padding-right:24px !important}.ab-stats{grid-template-columns:1fr !important}.ab-stat{flex-direction:row !important;align-items:baseline;gap:20px !important;border-right:none !important;border-bottom:1px solid #E9E2D3;padding:20px 0 !important}.ab-stat:last-child{border-bottom:none}.ab-stat p:first-child{font-size:40px !important;min-width:80px}}
 @media(max-width:900px){.sec{padding-top:72px !important}.sec.mani-wrap{padding-top:0 !important}section[data-screen-label="Манифест"]{margin-top:72px !important}section[data-screen-label="Финальный CTA"]{margin-top:72px !important}}
-@media(max-width:900px){.mob-hide{display:none !important}.stack{grid-template-columns:1fr !important}.mob-nav{display:flex !important}}
+@media(max-width:900px){.mob-hide{display:none !important}.stack{grid-template-columns:1fr !important}}
 @media(min-width:901px){.mob-only{display:none !important}}
 </style>
 </helmet>
@@ -114,7 +114,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
     <div class="rv" style="background:#F4EFE6;padding:32px;border-radius:24px;display:flex;flex-direction:column;gap:16px">
       <span style="font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.2em;color:#B08A4A">01</span>
       <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px;line-height:1.15;color:#3B2A1E">«Всё есть, а радости нет»</h3>
-      <p style="font-size:15px;line-height:1.65;color:#4A4038">Бизнес работает, опыт есть. А то, что раньше зажигало, — больше нет. И понятно: следующий уровень — не про „работать ещё больше“.</p>
+      <p style="font-size:15px;line-height:1.65;color:#4A4038">Бизнес работает, опыт есть. А то, что раньше зажигало, — больше нет. И понятно: следующий уровень — не про «работать ещё больше».</p>
     </div>
     <div class="rv" style="background:#F4EFE6;padding:32px;border-radius:24px;display:flex;flex-direction:column;gap:16px;transition-delay:.1s">
       <span style="font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.2em;color:#B08A4A">02</span>
@@ -134,7 +134,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
   <div class="stack mani" style="max-width:1240px;margin:0 auto;padding:96px 24px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:40px;align-items:center">
     <div class="rv mani-head" style="grid-column:1 / span 6">
       <p style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#C9A063;font-weight:600;margin-bottom:24px">Почему я создала экосистему</p>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,4.6vw,68px);line-height:1.08;letter-spacing:-.01em;color:#F5EEE2;text-wrap:balance">Я не&nbsp;верю в&nbsp;развитие<br class="mob-hide">ради развития.</h2>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,4.6vw,68px);line-height:1.08;letter-spacing:-.01em;color:#F5EEE2;text-wrap:balance">Я не&nbsp;верю в&nbsp;развитие <br class="mob-hide">ради развития.</h2>
       <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,1.7vw,26px);line-height:1.45;color:#D9CDBC;margin-top:28px;max-width:30em;text-wrap:balance">Можно годами проходить программы и&nbsp;расширять сознание&nbsp;— и&nbsp;жить той&nbsp;же жизнью.</p>
     </div>
     <div class="rv mani-photo" style="grid-column:8 / span 5;grid-row:1 / span 2;aspect-ratio:4/5;overflow:hidden;border-radius:24px;background:#4A3628"><img src="photos/manifesto.jpg" alt="Екатерина Арея" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block"></div>
@@ -272,7 +272,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
   <div class="about" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:24px;align-items:start">
     <div class="rv ab-head" style="grid-column:7 / span 6">
       <p style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#A87C3A;font-weight:600;margin-bottom:20px">Екатерина Арея</p>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,4.2vw,60px);line-height:1.08;letter-spacing:-.02em;color:#3B2A1E;text-wrap:balance">Финансист, который<br class="mob-hide">работает с&nbsp;сознанием</h2>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,4.2vw,60px);line-height:1.08;letter-spacing:-.02em;color:#3B2A1E;text-wrap:balance">Финансист, который <br class="mob-hide">работает с&nbsp;сознанием</h2>
       <p style="font-size:16px;color:#6B5A48;margin-top:12px">Автор метода Architecture of&nbsp;Life</p>
     </div>
     <div class="rv ab-photo" style="position:relative;grid-column:1 / span 5;grid-row:1 / span 2;align-self:stretch;min-height:520px;overflow:hidden;border-radius:24px 24px 200px 24px;background:#F4EFE6"><img src="photos/about.jpg" alt="Екатерина Арея" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block;position:absolute;inset:0"></div>
