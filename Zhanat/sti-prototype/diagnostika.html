@@ -23,7 +23,7 @@
     @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
     @media (max-width: 720px) { .d-hero-photo { order: -1; max-height: 60vh; } }
     @media print { .no-print { display: none !important; } body { background: #fff; } }
-    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(calc(-100% / 3)); } }
     .d-marquee:hover { animation-play-state: paused; }
   </style>
 </helmet>
@@ -528,23 +528,37 @@
 
     <!-- Карусель сообщества -->
     <section class="no-print" data-screen-label="Карусель" style="margin:56px 0 0;border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);padding:16px 0;overflow:hidden">
-      <div class="grayscale d-marquee" style="display:flex;gap:8px;width:max-content;animation:marquee 48s linear infinite">
-        <img src="assets/community-8.png" alt="Школа STI, Стамбул" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-2.png" alt="Школа STI, Ташкент — аудитория" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-5.png" alt="Школа STI, Ташкент" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-1.png" alt="Ретрит STI" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-7.png" alt="Школа STI, Монголия" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-4.png" alt="Выпускники STI" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-3.png" alt="Первый поток STI в Ташкенте" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-6.png" alt="Эфир сообщества" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-8.png" alt="" aria-hidden="true" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-2.png" alt="" aria-hidden="true" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-5.png" alt="" aria-hidden="true" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-1.png" alt="" aria-hidden="true" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-7.png" alt="" aria-hidden="true" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-4.png" alt="" aria-hidden="true" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-3.png" alt="" aria-hidden="true" style="height:240px;width:auto;display:block;flex:none">
-        <img src="assets/community-6.png" alt="" aria-hidden="true" style="height:240px;width:auto;display:block;flex:none">
+      <div class="grayscale d-marquee" style="display:flex;width:max-content;animation:marquee 40s linear infinite;will-change:transform">
+        <div style="display:flex;gap:8px;flex:none;padding-right:8px">
+          <img src="assets/community-8.png" alt="Школа STI, Стамбул" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-2.png" alt="Школа STI, Ташкент — аудитория" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-5.png" alt="Школа STI, Ташкент" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-1.png" alt="Ретрит STI" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-7.png" alt="Школа STI, Монголия" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-4.png" alt="Выпускники STI" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-3.png" alt="Первый поток STI в Ташкенте" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-6.png" alt="Эфир сообщества" style="height:240px;width:auto;display:block;flex:none">
+        </div>
+        <div style="display:flex;gap:8px;flex:none;padding-right:8px" aria-hidden="true">
+          <img src="assets/community-8.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-2.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-5.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-1.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-7.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-4.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-3.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-6.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+        </div>
+        <div style="display:flex;gap:8px;flex:none;padding-right:8px" aria-hidden="true">
+          <img src="assets/community-8.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-2.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-5.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-1.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-7.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-4.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-3.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+          <img src="assets/community-6.png" alt="" style="height:240px;width:auto;display:block;flex:none">
+        </div>
       </div>
       <div style="max-width:860px;margin:12px auto 0;padding:0 20px;box-sizing:border-box;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--color-neutral-700)">
         <span>Школы STI: Стамбул, Ташкент, Монголия · сообщество Zhanat Power</span>
