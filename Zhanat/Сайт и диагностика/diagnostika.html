@@ -30,7 +30,7 @@
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
   <nav class="nav no-print" style="padding-inline:max(20px, calc((100% - 1100px) / 2 + 20px))">
-    <a href="Главная v2.dc.html" class="nav-brand" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><img src="assets/logo.png" alt="Zhanat" style="width:32px;height:32px;object-fit:contain;display:block"><span style="font-size:13px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500">Syucai Training Institute</span></a>
+    <a href="index.html" class="nav-brand" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><img src="assets/logo.png" alt="Zhanat" style="width:32px;height:32px;object-fit:contain;display:block"><span style="font-size:13px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500">Syucai Training Institute</span></a>
     <sc-if value="{{ inTest }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex;align-items:center;gap:20px">
         <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-700);font-feature-settings:'tnum' 1">Шаг {{ step }} из 13</span>
@@ -597,7 +597,7 @@
     <span>Syucai Training Institute · Дубай</span>
     <div style="display:flex;gap:20px">
       <a href="https://www.instagram.com/zhanat.online2/" target="_blank" rel="noopener">Instagram</a>
-      <a href="Главная v2.dc.html">zhanatpower.com</a>
+      <a href="index.html">zhanatpower.com</a>
     </div>
   </footer>
 </div>
@@ -666,7 +666,7 @@ class Component extends DCLogic {
       isName: step === 1, isDate: step === 2, isScale: step >= 3 && step <= 11, isIncome: step === 12, isContact: step === 13,
       nextLabel: step === 13 ? 'Получить результат' : 'Далее',
       toPrep: () => { this.save({ phase: 'test', step: 1, error: '' }); window.scrollTo(0, 0); }, toLanding: this.go('landing'), start: () => { this.save({ phase: 'test', step: 1, error: '' }); window.scrollTo(0, 0); }, next: this.next,
-      back: () => step > 1 ? this.save({ step: step - 1, error: '' }) : (location.href = 'Главная v2.dc.html'),
+      back: () => step > 1 ? this.save({ step: step - 1, error: '' }) : (location.href = 'index.html'),
       nameTranslit: !!s.nameTranslit && !!s.name, nameNoTranslit: !(s.nameTranslit && s.name),
       dial: s.dial || '+7', phoneLocal: s.phoneLocal || '', dialOpts: DIALS.map(([v, t]) => ({ v, t })),
       onDial: e => this.save({ dial: e.target.value, phone: e.target.value + ' ' + (s.phoneLocal || ''), error: '' }),
