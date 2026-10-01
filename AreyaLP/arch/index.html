@@ -278,7 +278,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
       <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px;color:#3B2A1E;text-wrap:balance">Не понимаешь, какой формат твой?</h3>
       <p style="font-size:16px;line-height:1.6;color:#4A4038;margin-top:10px;max-width:36em;text-wrap:pretty">Сессия «Лучшее решение»: 60&nbsp;минут с&nbsp;Екатериной один на&nbsp;один. 25&nbsp;000&nbsp;₽&nbsp;— и&nbsp;они засчитываются в&nbsp;стоимость Master.</p>
     </div>
-    <a href="{{ careUrl }}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;min-height:52px;border:1px solid #B08A4A;color:#3B2A1E;padding:14px 28px;font-size:15px;font-weight:600;border-radius:999px;white-space:nowrap;transition:background .2s;justify-self:start" style-hover="background:#F4EFE6">Записаться</a>
+    <a href="{{ careUrl }}" onClick="{{ openConsult }}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;min-height:52px;border:1px solid #B08A4A;color:#3B2A1E;padding:14px 28px;font-size:15px;font-weight:600;border-radius:999px;white-space:nowrap;transition:background .2s;justify-self:start" style-hover="background:#F4EFE6">Записаться</a>
   </div>
 </section>
 
@@ -368,7 +368,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
     <div style="background:#FBF9F4;width:100%;max-width:720px;max-height:92vh;border-radius:28px;padding:56px 24px 24px;position:relative;display:flex;flex-direction:column">
       <button onClick="{{ closePay }}" aria-label="Закрыть" style="position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:999px;border:1px solid #D9CFBB;background:transparent;color:#3B2A1E;font-size:22px;cursor:pointer">×</button>
       <div ref="{{ payRef }}" style="overflow:auto;max-height:80vh;min-height:240px"></div>
-      <p style="font-size:13px;color:#8A7B68;margin-top:12px;text-align:center">Если форма не загрузилась — <a href="{{ communityUrl }}" target="_blank" rel="noopener" style="color:#A87C3A">открыть оплату в новом окне</a></p>
+      <p style="font-size:13px;color:#8A7B68;margin-top:12px;text-align:center">Если форма не загрузилась — <a href="{{ payFallbackUrl }}" target="_blank" rel="noopener" style="color:#A87C3A">открыть в новом окне</a></p>
     </div>
   </div>
 </sc-if>
@@ -421,7 +421,8 @@ class Component extends DCLogic {
   state = { tab:'m', menuOpen:false, formOpen:false, formDone:false, step:0, answers:{}, lightbox:null };
   carouselRef = React.createRef();
   payRef = React.createRef();
-  mountPay(){ const box=this.payRef.current; if(!box||box.dataset.ready) return; box.dataset.ready='1'; const id='cdb59940a9e833499b3c3b97925e5e93f0f8f29d'; const sc=document.createElement('script'); sc.id=id; sc.src='https://online-withkate.ru/pl/lite/widget/script?id=1663238'; sc.onload=()=>{ const fn=window['startWidget'+id]; if(typeof fn==='function'){ try{fn();}catch(_){} } }; box.appendChild(sc); }
+  widgets = { pay:{hash:'cdb59940a9e833499b3c3b97925e5e93f0f8f29d',id:'1663238'}, consult:{hash:'d3e766b4c3b207d789b9c6036d65afb5f8a75247',id:'1663347'} };
+  mountPay(){ const box=this.payRef.current; const w=this.widgets[this.state.payKind||'pay']; if(!box||box.dataset.ready===w.id) return; box.dataset.ready=w.id; box.innerHTML=''; const id=w.hash; const sc=document.createElement('script'); sc.id=id; sc.src='https://online-withkate.ru/pl/lite/widget/script?id='+w.id; sc.onload=()=>{ const fn=window['startWidget'+id]; if(typeof fn==='function'){ try{fn();}catch(_){} } }; box.appendChild(sc); }
   fields = [
     {k:'name',t:'Имя и фамилия',type:'text',ph:'Как к тебе обращаться'},
     {k:'contact',t:'Telegram или телефон',type:'text',ph:'@username или +7…'},
@@ -458,7 +459,7 @@ class Component extends DCLogic {
     const f=this.fields[s.step]; const val=s.answers[f.k]||'';
     const choices=(f.opts||[]).map(o=>({label:o,pick:()=>this.setState({answers:{...s.answers,[f.k]:o}}),border:val===o?'#B08A4A':'#D9CFBB',bg:val===o?'#F4EFE6':'transparent'}));
     return {
-      openPay:e=>{ e.preventDefault(); this.setState({payOpen:true}); }, closePay:()=>this.setState({payOpen:false}), openMaster:e=>{ e.preventDefault(); this.setState({masterOpen:true}); }, closeMaster:()=>this.setState({masterOpen:false}), masterOpen:!!s.masterOpen, payOpen:!!s.payOpen, payRef:this.payRef,
+      openPay:e=>{ e.preventDefault(); this.setState({payOpen:true,payKind:'pay'}); }, openConsult:e=>{ e.preventDefault(); this.setState({payOpen:true,payKind:'consult'}); }, payFallbackUrl:(s.payKind==='consult')?(p.careUrl??'https://t.me/masha_kir0'):(p.communityUrl??'https://online-withkate.ru/'), closePay:()=>this.setState({payOpen:false}), openMaster:e=>{ e.preventDefault(); this.setState({masterOpen:true}); }, closeMaster:()=>this.setState({masterOpen:false}), masterOpen:!!s.masterOpen, payOpen:!!s.payOpen, payRef:this.payRef,
       hdrClass:s.hdrHide?'hdr-hide':'', menuOpen:s.menuOpen, toggleMenu:()=>this.setState({menuOpen:!s.menuOpen}), closeMenu:()=>this.setState({menuOpen:false}),
       marquee, reviews, carouselRef:this.carouselRef,
       prevReview:()=>this.scrollCarousel(-1), nextReview:()=>this.scrollCarousel(1),
