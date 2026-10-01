@@ -248,7 +248,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
         <div><p style="font-size:16px;font-weight:400;color:#D9CDBC;line-height:1.55;text-wrap:pretty">Глубокая работа в&nbsp;группе</p></div>
         <div><p style="font-size:16px;font-weight:400;color:#D9CDBC;line-height:1.55;text-wrap:pretty">Всё из&nbsp;Community</p></div>
       </div></div>
-      <div style="align-self:end"><button onClick="{{ openForm }}" style="width:100%;height:56px;border:none;cursor:pointer;background:#B08A4A;color:#3B2A1E;padding:0 28px;font-size:15px;font-weight:700;border-radius:999px;font-family:'Manrope',sans-serif;transition:filter .2s" style-hover="filter:brightness(.92)">Заполнить анкету на&nbsp;Master</button><p style="font-size:14px;line-height:1.5;color:#D9CDBC;margin:16px auto 0;text-align:center;max-width:440px;text-wrap:pretty">Решение об&nbsp;участии&nbsp;— в&nbsp;течение 2&nbsp;дней после анкеты. Оплачивать до&nbsp;отбора не&nbsp;нужно.</p></div>
+      <div style="align-self:end"><a href="{{ masterUrl }}" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;justify-content:center;width:100%;height:56px;background:#B08A4A;color:#3B2A1E;padding:0 28px;font-size:15px;font-weight:700;border-radius:999px;transition:filter .2s" style-hover="filter:brightness(.92)">Заполнить анкету на&nbsp;Master</a><p style="font-size:14px;line-height:1.5;color:#D9CDBC;margin:16px auto 0;text-align:center;max-width:440px;text-wrap:pretty">Решение об&nbsp;участии&nbsp;— в&nbsp;течение 2&nbsp;дней после анкеты. Оплачивать до&nbsp;отбора не&nbsp;нужно.</p></div>
     </article>
 
     <article class="rv tar-card tar-c {{ tarCClass }}" style="background:#F4EFE6;color:#3B2A1E;border-radius:28px;padding:48px;display:grid;grid-template-rows:subgrid;grid-row:span 8;row-gap:32px;align-content:start">
@@ -268,7 +268,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
         <div><p style="font-size:16px;font-weight:400;color:#4A4038;line-height:1.55;text-wrap:pretty">Поддержка buddy</p></div>
         <div><p style="font-size:16px;font-weight:600;color:#242424;line-height:1.55;text-wrap:pretty"><span style="font-weight:600;color:#242424">Бонус.</span><span style="color:#4A4038"> Лучший результат сезона получает следующий сезон в&nbsp;подарок</span></p></div>
       </div></div>
-      <div style="align-self:end"><a href="{{ communityUrl }}" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;justify-content:center;height:56px;background:#3B2A1E;color:#F4EFE6;padding:0 28px;font-size:15px;font-weight:600;border-radius:999px;transition:filter .2s" style-hover="filter:brightness(.92)">Оплатить участие&nbsp;— 50&nbsp;000&nbsp;₽</a></div>
+      <div style="align-self:end"><a href="{{ communityUrl }}" onClick="{{ openPay }}" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;justify-content:center;height:56px;background:#3B2A1E;color:#F4EFE6;padding:0 28px;font-size:15px;font-weight:600;border-radius:999px;transition:filter .2s" style-hover="filter:brightness(.92)">Оплатить участие&nbsp;— 50&nbsp;000&nbsp;₽</a></div>
     </article>
     </div>
 
@@ -338,8 +338,8 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
       <p style="font-size:18px;line-height:1.6;color:#F5EEE2;text-wrap:pretty">А&nbsp;могут стать точкой перехода на&nbsp;следующий финансовый уровень.</p>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:40px">
-      <button onClick="{{ openForm }}" style="border:none;background:#B08A4A;color:#3B2A1E;padding:18px 30px;font-size:15px;font-weight:700;border-radius:999px;cursor:pointer;font-family:'Manrope',sans-serif;transition:filter .2s" style-hover="filter:brightness(.92)">Заполнить анкету на&nbsp;Master</button>
-      <a href="{{ communityUrl }}" target="_blank" rel="noopener" style="text-decoration:none;border:1px solid #B08A4A;color:#F4EFE6;padding:18px 30px;font-size:15px;font-weight:600;border-radius:999px;transition:background .3s" style-hover="background:#4A3628">Оплатить Community</a>
+      <a href="{{ masterUrl }}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;background:#B08A4A;color:#3B2A1E;padding:18px 30px;font-size:15px;font-weight:700;border-radius:999px;transition:filter .2s" style-hover="filter:brightness(.92)">Заполнить анкету на&nbsp;Master</a>
+      <a href="{{ communityUrl }}" onClick="{{ openPay }}" target="_blank" rel="noopener" style="text-decoration:none;border:1px solid #B08A4A;color:#F4EFE6;padding:18px 30px;font-size:15px;font-weight:600;border-radius:999px;transition:background .3s" style-hover="background:#4A3628">Оплатить Community</a>
     </div>
     <p style="font-size:14px;color:#D9CFBB;margin-top:28px">Остались вопросы? <a href="{{ careUrl }}" target="_blank" rel="noopener" style="color:#B08A4A;text-decoration:underline;text-underline-offset:4px">Напиши в службу заботы в Telegram</a></p>
   </div>
@@ -353,6 +353,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
       <a href="{{ telegramUrl }}" target="_blank" rel="noopener" style="text-decoration:none">Telegram-канал</a>
       <a href="{{ instagramUrl }}" target="_blank" rel="noopener" style="text-decoration:none">Instagram</a>
       <a href="{{ youtubeUrl }}" target="_blank" rel="noopener" style="text-decoration:none">YouTube</a>
+      <a href="{{ vkUrl }}" target="_blank" rel="noopener" style="text-decoration:none">VK Видео</a>
       <a href="{{ careUrl }}" target="_blank" rel="noopener" style="text-decoration:none">Служба заботы</a>
       <a href="#" style="text-decoration:none">Оферта</a>
       <a href="#" style="text-decoration:none">Политика конфиденциальности</a>
@@ -360,6 +361,17 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
   </div>
   <p style="font-size:12px;color:#8A7B68;margin-top:20px">© Екатерина Арея, 2026</p>
 </footer>
+
+<!-- PAY MODAL -->
+<sc-if value="{{ payOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:100;background:rgba(36,36,36,.6);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px">
+    <div style="background:#FBF9F4;width:100%;max-width:720px;max-height:92vh;border-radius:28px;padding:56px 24px 24px;position:relative;display:flex;flex-direction:column">
+      <button onClick="{{ closePay }}" aria-label="Закрыть" style="position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:999px;border:1px solid #D9CFBB;background:transparent;color:#3B2A1E;font-size:22px;cursor:pointer">×</button>
+      <div ref="{{ payRef }}" style="overflow:auto;max-height:80vh;min-height:240px"></div>
+      <p style="font-size:13px;color:#8A7B68;margin-top:12px;text-align:center">Если форма не загрузилась — <a href="{{ communityUrl }}" target="_blank" rel="noopener" style="color:#A87C3A">открыть оплату в новом окне</a></p>
+    </div>
+  </div>
+</sc-if>
 
 <!-- MASTER FORM MODAL -->
 <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ false }}">
@@ -404,10 +416,12 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#B08A4A !impor
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;communityUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;},&quot;careUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://t.me/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;},&quot;telegramUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://t.me/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;},&quot;instagramUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://instagram.com/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;},&quot;youtubeUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://youtube.com/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;communityUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://online-withkate.ru/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;},&quot;careUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://t.me/masha_kir0&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;},&quot;telegramUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://t.me/ekaterina_evolution&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;},&quot;instagramUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://www.instagram.com/ekaterina.areya/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;},&quot;youtubeUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://www.youtube.com/@%D0%95%D0%BA%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%BD%D0%B0%D0%90%D1%80%D0%B5%D1%8F&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;},&quot;masterUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://online-withkate.ru/master_anketa&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;},&quot;vkUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://vkvideo.ru/@ekaterina_areya&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ссылки&quot;}}">
 class Component extends DCLogic {
   state = { tab:'m', menuOpen:false, formOpen:false, formDone:false, step:0, answers:{}, lightbox:null };
   carouselRef = React.createRef();
+  payRef = React.createRef();
+  mountPay(){ const box=this.payRef.current; if(!box||box.dataset.ready) return; box.dataset.ready='1'; const id='cdb59940a9e833499b3c3b97925e5e93f0f8f29d'; const sc=document.createElement('script'); sc.id=id; sc.src='https://online-withkate.ru/pl/lite/widget/script?id=1663238'; sc.onload=()=>{ const fn=window['startWidget'+id]; if(typeof fn==='function'){ try{fn();}catch(_){} } }; box.appendChild(sc); }
   fields = [
     {k:'name',t:'Имя и фамилия',type:'text',ph:'Как к тебе обращаться'},
     {k:'contact',t:'Telegram или телефон',type:'text',ph:'@username или +7…'},
@@ -424,14 +438,14 @@ class Component extends DCLogic {
     this.observe();
     this.mo = new MutationObserver(()=>this.observe());
     this.mo.observe(document.body,{childList:true,subtree:true});
-    this.onKey = e=>{ if(e.key==='Escape') this.setState({formOpen:false}); };
+    this.onKey = e=>{ if(e.key==='Escape') this.setState({formOpen:false,payOpen:false,masterOpen:false}); };
     this.lastY = 0;
     this.onScroll = e=>{ const t=e.target; const y = (t===document||t===window) ? (window.scrollY||document.documentElement.scrollTop) : (t.scrollTop||0); const hide = y>this.lastY+4 && y>120 && !this.state.menuOpen; const show = y<this.lastY-4 || y<=120; if(hide && !this.state.hdrHide) this.setState({hdrHide:true}); else if(show && this.state.hdrHide) this.setState({hdrHide:false}); this.lastY=y; };
     window.addEventListener('scroll',this.onScroll,{passive:true});
     document.addEventListener('scroll',this.onScroll,{passive:true,capture:true});
     window.addEventListener('keydown',this.onKey);
   }
-  componentDidUpdate(){ this.observe(); }
+  componentDidUpdate(){ this.observe(); if(this.state.payOpen) this.mountPay(); }
   componentWillUnmount(){ this.io && this.io.disconnect(); this.mo && this.mo.disconnect(); window.removeEventListener('keydown',this.onKey); window.removeEventListener('scroll',this.onScroll); document.removeEventListener('scroll',this.onScroll,{capture:true}); }
   observe(){ document.querySelectorAll('.rv:not(.in)').forEach(el=>this.io.observe(el)); }
   scrollCarousel(d){ const el=this.carouselRef.current; if(el) el.scrollBy({left:d*340,behavior:'smooth'}); }
@@ -444,6 +458,7 @@ class Component extends DCLogic {
     const f=this.fields[s.step]; const val=s.answers[f.k]||'';
     const choices=(f.opts||[]).map(o=>({label:o,pick:()=>this.setState({answers:{...s.answers,[f.k]:o}}),border:val===o?'#B08A4A':'#D9CFBB',bg:val===o?'#F4EFE6':'transparent'}));
     return {
+      openPay:e=>{ e.preventDefault(); this.setState({payOpen:true}); }, closePay:()=>this.setState({payOpen:false}), openMaster:e=>{ e.preventDefault(); this.setState({masterOpen:true}); }, closeMaster:()=>this.setState({masterOpen:false}), masterOpen:!!s.masterOpen, payOpen:!!s.payOpen, payRef:this.payRef,
       hdrClass:s.hdrHide?'hdr-hide':'', menuOpen:s.menuOpen, toggleMenu:()=>this.setState({menuOpen:!s.menuOpen}), closeMenu:()=>this.setState({menuOpen:false}),
       marquee, reviews, carouselRef:this.carouselRef,
       prevReview:()=>this.scrollCarousel(-1), nextReview:()=>this.scrollCarousel(1),
@@ -460,7 +475,7 @@ class Component extends DCLogic {
         {q:'Как проходит отбор в Master?',ps:['Сначала ты заполняешь анкету: рассказываешь о своей текущей точке, проекте, доходе и цели на сезон. Решение об участии — в течение 2 дней после заполнения анкеты.']},
         {q:'Можно ли перейти из Community в Master?',ps:['Да, если в Master останутся свободные места и ты соответствуешь критериям входа. В этом случае стоимость Community будет учтена, и нужно будет доплатить разницу между тарифами.']},
         {q:'Как оплатить? Есть ли рассрочка?',ps:['Community — 50 000 ₽ за 3 месяца. Оплата картой непосредственно на сайте.','Master — 300 000 ₽ за 3 месяца. Оплата после одобрения анкеты. Стоимость можно разделить на 2 платежа.','Если выбираешь Master, сначала заполни анкету — оплачивать участие до прохождения отбора не нужно.']}],
-      communityUrl:p.communityUrl??'#', careUrl:p.careUrl??'https://t.me/', telegramUrl:p.telegramUrl??'https://t.me/', instagramUrl:p.instagramUrl??'https://instagram.com/', youtubeUrl:p.youtubeUrl??'https://youtube.com/',
+      communityUrl:p.communityUrl??'https://online-withkate.ru/', masterUrl:p.masterUrl??'https://online-withkate.ru/master_anketa', careUrl:p.careUrl??'https://t.me/masha_kir0', telegramUrl:p.telegramUrl??'https://t.me/ekaterina_evolution', instagramUrl:p.instagramUrl??'https://www.instagram.com/ekaterina.areya/', youtubeUrl:p.youtubeUrl??'https://www.youtube.com/@%D0%95%D0%BA%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%BD%D0%B0%D0%90%D1%80%D0%B5%D1%8F', vkUrl:p.vkUrl??'https://vkvideo.ru/@ekaterina_areya',
       
       formOpen:s.formOpen, formDone:s.formDone, formActive:!s.formDone,
       openForm:()=>this.setState({formOpen:true,formDone:false,step:0}), closeForm:()=>this.setState({formOpen:false}),
