@@ -63,9 +63,13 @@
       body{font-size:16px}
       .d-only{display:none !important}
       .m-only{display:block !important}
-      .r-hero{grid-template-columns:1fr !important;padding:88px 20px 48px !important;min-height:0 !important}
-      .r-sec{padding:96px 20px !important}
-      .r-grid,.r-2,.r-3{grid-template-columns:1fr !important;gap:40px !important}
+      .r-hero{grid-template-columns:1fr !important;padding:88px 20px 40px !important;min-height:0 !important}
+      .r-sec{padding:56px 20px !important}
+      .r-sec [style*="margin-top:64px"],.r-sec [style*="margin-top:96px"],.r-sec [style*="margin-top:80px"]{margin-top:32px !important}
+      .r-sec [style*="margin-bottom:64px"],.r-sec [style*="margin-bottom:96px"],.r-sec [style*="margin-bottom:80px"]{margin-bottom:28px !important}
+      .r-sec [style*="margin:64px 0"],.r-sec [style*="margin:96px 0"]{margin:32px 0 !important}
+      .r-sec [style*="padding-top:64px"],.r-sec [style*="padding-top:96px"]{padding-top:32px !important}
+      .r-grid,.r-2,.r-3{grid-template-columns:1fr !important;gap:24px !important}
       .r-stack{flex-direction:column !important;align-items:stretch !important}
       .r-h1{font-size:44px !important}
       .r-h2{font-size:34px !important}
@@ -74,15 +78,15 @@
       .r-q{font-size:30px !important}
       .r-full{width:100% !important;max-width:none !important}
       .r-first{order:-1}
-      .r-pb{padding-bottom:140px !important}
+      .r-pb{padding-bottom:112px !important}
       .r-tight{gap:16px !important}
       .r-ratio{aspect-ratio:4/5 !important;max-width:none !important}
       .r-map{height:320px !important}
-      .r-pause{min-height:50vh !important;padding:64px 20px !important}
+      .r-pause{min-height:0 !important;padding:40px 20px !important}
       .r-scroll{display:flex !important;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px !important;margin:0 -20px;padding:0 20px 8px;scrollbar-width:none;transform:none !important}
       .r-scroll>*{min-width:86%;scroll-snap-align:start}
       .r-wrap{flex-wrap:wrap}
-      .r-mb{margin-bottom:40px !important}
+      .r-mb{margin-bottom:24px !important}
       .eb-marq img{height:220px}
       .r-dots{display:flex !important}
     }
@@ -404,7 +408,7 @@
         <h2 id="h-schedule" class="r-h2" style="margin:0 0 24px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:56px;line-height:1.1">{{ t.scheduleH2 }}</h2>
         <p style="margin:0 0 8px;color:#6B5A4C;max-width:400px">{{ t.scheduleSub }}</p>
         <p style="margin:0 0 32px;font-size:14px;color:#8A7563">{{ t.scheduleTz }}</p>
-        <a href="{{ icsHref }}" download="pustaya-chasha-astana.ics" class="eb-ghost" style="display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 28px;border-radius:999px;border:1.5px solid #1A1410;color:#1A1410;font-weight:600;font-size:14px;transition:all .2s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>{{ t.addCal }}</a>
+        <button type="button" onClick="{{ addToCal }}" class="eb-ghost" style="cursor:pointer;background:transparent;font-family:inherit;display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 28px;border-radius:999px;border:1.5px solid #1A1410;color:#1A1410;font-weight:600;font-size:14px;transition:all .2s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>{{ t.addCal }}</button>
         <p style="margin:32px 0 0;font-size:14px;color:#8A7563">{{ t.scheduleNote }}</p>
       </div>
       <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;position:relative">
@@ -507,7 +511,7 @@
           <p style="margin:0;font-size:14px;color:#8A7563">{{ t.requestNo }} {{ submitId }}</p>
           <div class="r-stack" style="display:flex;gap:12px;flex-wrap:wrap">
             <a href="{{ waHref }}" target="_blank" rel="noopener" onClick="{{ trackContact }}" class="eb-cta" style="display:inline-flex;align-items:center;justify-content:center;height:56px;padding:0 32px;border-radius:999px;background:#FF764C;color:#1A1410;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;transition:background .2s">{{ t.waNow }}</a>
-            <a href="{{ icsHref }}" download="pustaya-chasha-astana.ics" style="display:inline-flex;align-items:center;justify-content:center;height:56px;padding:0 28px;border-radius:999px;border:1.5px solid #CAA893;color:#F4ECE2;font-weight:600;font-size:14px">{{ t.addCal }}</a>
+            <button type="button" onClick="{{ addToCal }}" style="cursor:pointer;background:transparent;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;height:56px;padding:0 28px;border-radius:999px;border:1.5px solid #CAA893;color:#F4ECE2;font-weight:600;font-size:14px">{{ t.addCal }}</button>
           </div>
         </div>
       </sc-if>
@@ -885,8 +889,28 @@ class Component extends DCLogic {
   yt(id) { const o = (typeof location !== 'undefined' && /^https?:/.test(location.origin)) ? '&origin=' + encodeURIComponent(location.origin) : ''; return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1${o}`; }
   ics() {
     const t = this.t(), C = this.CFG;
-    const s = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Empty Bowl Astana//RU', 'BEGIN:VEVENT', 'UID:eb-astana-2026@emptybowl', `DTSTART:${C.icsStart}`, `DTEND:${C.icsEnd}`, `SUMMARY:${t.icsTitle}`, `LOCATION:Alanda, ${t.hotelAddr}, Астана`, `GEO:${C.coords.lat};${C.coords.lng}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    const s = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Empty Bowl Astana//RU', 'BEGIN:VEVENT', 'UID:eb-astana-2026@emptybowl', `DTSTAMP:${C.icsStart}`, `DTSTART:${C.icsStart}`, `DTEND:${C.icsEnd}`, `SUMMARY:${t.icsTitle}`, `LOCATION:Alanda, ${t.hotelAddr}, Астана`, `GEO:${C.coords.lat};${C.coords.lng}`, `URL:${typeof location !== 'undefined' ? location.href.split('#')[0] : ''}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
     return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(s);
+  }
+  googleCal() {
+    const t = this.t(), C = this.CFG;
+    const p = new URLSearchParams({ action: 'TEMPLATE', text: t.icsTitle, dates: `${C.icsStart}/${C.icsEnd}`, location: `Alanda, ${t.hotelAddr}, Астана`, details: typeof location !== 'undefined' ? location.href.split('#')[0] : '' });
+    return 'https://calendar.google.com/calendar/render?' + p.toString();
+  }
+  addToCal() {
+    // iPhone / iPad / Mac: открываем .ics — система сразу предлагает добавить событие в Календарь.
+    // Остальные: открываем Google Календарь с заполненным событием.
+    const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
+    const apple = /iPhone|iPad|iPod|Macintosh/.test(ua);
+    if (apple) {
+      const blob = new Blob([decodeURIComponent(this.ics().split(',')[1])], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'pustaya-chasha-astana.ics'; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+    } else {
+      window.open(this.googleCal(), '_blank', 'noopener');
+    }
+    try { this.track('AddToCalendar'); } catch (e) {}
   }
   goBook(city, returning) {
     this.setState(s => ({ form: { ...s.form, city, returning: returning == null ? s.form.returning : returning }, status: s.status === 'success' ? 'idle' : s.status }), () => {
@@ -962,7 +986,7 @@ class Component extends DCLogic {
       reviewTrackStyle: `display:flex;gap:32px;transition:transform .5s ease;transform:translateX(calc(${-S.reviewIdx} * (100% + 32px) / 3))`,
       prevReview: () => this.setState(s => ({ reviewIdx: Math.max(0, s.reviewIdx - 1) })), nextReview: () => this.setState(s => ({ reviewIdx: Math.min(C.reviews.length - 3, s.reviewIdx + 1) })),
       schedule: t.schedule.map(d => ({ day: d[0], weekday: d[1], time: d[2], note: d[3] })),
-      icsHref: this.ics(),
+      icsHref: this.ics(), addToCal: () => this.addToCal(),
       priceReturningFmt: this.fmt(C.priceReturning), priceNewFmt: this.fmt(C.priceNew), depositFmt: this.fmt(C.deposit),
       bookReturning: () => this.goBook('Астана', 'Да'), bookNew: () => this.goBook('Астана', 'Нет'),
       faq: t.faq.map((q, i) => ({ q, a: t.faqA, open: S.faqOpen === i, panelId: 'faq-' + i, chevStyle: chev(S.faqOpen === i), onToggle: () => this.setState(s => ({ faqOpen: s.faqOpen === i ? -1 : i })) })),
