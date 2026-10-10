@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Услуга в Астане — цена от … ₸ | Центр Свободы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>
+    html,body{margin:0;background:#F5F2EC;color:#1E2422;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}
+    a{color:#1F3B36;text-decoration:none}a:hover{color:#4E8C7E}h1,h2,h3{margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;color:#1F3B36;text-wrap:pretty}p{margin:0;text-wrap:pretty}
+  </style>
+</helmet>
+<dc-import name="Header" service="{{ s.name }}" hint-size="100%,72px"></dc-import>
+
+<section data-screen-label="Hero услуги" style="max-width:1240px;margin:0 auto;padding:36px 20px 56px">
+  <nav style="font-size:13px;color:#5C6663;display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px"><a href="index.dc.html" style="color:#5C6663">Главная</a><span>/</span><a href="uslugi.dc.html" style="color:#5C6663">Услуги</a><span>/</span><span style="color:#1F3B36">{{ s.name }}</span></nav>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start">
+      <h1 style="font-size:clamp(36px,4.6vw,62px);line-height:1.03;letter-spacing:-.01em">{{ s.h1 }}</h1>
+      <p style="font-size:17.5px;line-height:1.55;color:#5C6663;max-width:580px">{{ s.lead }}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:13px;font-weight:500">
+        <span style="padding:9px 14px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1)">⏱ {{ s.duration }}</span>
+        <span style="padding:9px 14px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1)">{{ s.specialist }}</span>
+        <span style="padding:9px 14px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1)"><span style="color:#C9A66B">★</span> 5,0 в 2ГИС</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:#1F3B36">{{ price }}</span>
+        <a href="#zapis" style="height:56px;padding:0 30px;border-radius:999px;background:#4E8C7E;color:#fff;display:inline-flex;align-items:center;font-size:15px;font-weight:600" style-hover="background:#3F7A6D;color:#fff">Записаться</a>
+        <a href="{{ wa }}" style="height:56px;padding:0 24px;border-radius:999px;border:1px solid rgba(31,59,54,.22);display:inline-flex;align-items:center;font-size:15px;font-weight:600" style-hover="border-color:#4E8C7E">WhatsApp</a>
+      </div>
+    </div>
+    <div style="aspect-ratio:5/4;border-radius:36px;overflow:hidden"><image-slot id="{{ heroSlot }}" src="{{ heroPhoto }}" shape="rounded" radius="36" placeholder="Фото услуги"></image-slot></div>
+  </div>
+</section>
+
+<section data-screen-label="Что это" style="background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px">
+    <h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05">Что это</h2>
+    <div style="grid-column:span 2;display:flex;flex-direction:column;gap:18px;font-size:16.5px;line-height:1.65;color:#1E2422;max-width:760px">
+      <sc-for list="{{ s.what }}" as="t" hint-placeholder-count="3"><p>{{ t }}</p></sc-for>
+      <div style="margin-top:10px;padding:24px;border-radius:20px;background:#F5F2EC;display:flex;flex-direction:column;gap:10px">
+        <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#4E8C7E;font-weight:600">Что входит</span>
+        <sc-for list="{{ s.includes }}" as="i" hint-placeholder-count="4"><span style="font-size:15px;display:flex;gap:10px"><span style="color:#C9A66B">—</span>{{ i }}</span></sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<sc-if value="{{ hasCompare }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Сравнение" style="max-width:1240px;margin:0 auto;padding:80px 20px 0">
+    <h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05;margin-bottom:28px">Обычный чекап и Чекап в Центре Свободы</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+      <div style="background:#fff;border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:12px;border:1px solid rgba(31,59,54,.08)"><span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#5C6663">Обычный чекап</span><sc-for list="{{ cmpUsual }}" as="t" hint-placeholder-count="4"><span style="font-size:15.5px;color:#5C6663;display:flex;gap:10px"><span>✕</span>{{ t }}</span></sc-for></div>
+      <div style="background:#1F3B36;color:#fff;border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#C9A66B">В Центре Свободы</span><sc-for list="{{ cmpOurs }}" as="t" hint-placeholder-count="4"><span style="font-size:15.5px;display:flex;gap:10px"><span style="color:#C9A66B">✓</span>{{ t }}</span></sc-for></div>
+    </div>
+    <p style="margin-top:16px;font-size:14.5px;color:#5C6663">Экономия денег, нервов и времени — и один понятный план вместо стопки бумаг.</p>
+  </section>
+</sc-if>
+
+<section data-screen-label="Кому подходит" style="max-width:1240px;margin:0 auto;padding:80px 20px">
+  <h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05;margin-bottom:28px">Кому подходит</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
+    <sc-for list="{{ s.forWhom }}" as="f" hint-placeholder-count="4">
+      <div style="background:#fff;border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:8px;border:1px solid rgba(31,59,54,.08)"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#1F3B36;line-height:1.1">{{ f.t }}</span><span style="font-size:14.5px;color:#5C6663;line-height:1.5">{{ f.d }}</span></div>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="Как проходит" style="background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:80px 20px">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:32px"><h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05">Как проходит сеанс</h2><span style="font-size:14px;color:#5C6663">{{ s.duration }}</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px">
+      <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+        <div style="padding:26px;border-radius:24px;background:#F5F2EC;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:500;color:#C9A66B;line-height:1">{{ st.n }}</span><span style="font-size:19px;font-weight:600;color:#1F3B36">{{ st.t }}</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">{{ st.d }}</p></div>
+      </sc-for>
+    </div>
+    <p style="margin-top:20px;font-size:15px;line-height:1.6;color:#5C6663;max-width:720px"><strong style="color:#1F3B36">Что взять с собой.</strong> {{ s.bring }}</p>
+  </div>
+</section>
+
+<sc-if value="{{ hasKinds }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Виды" style="background:#16211F;color:#fff">
+    <div style="max-width:1240px;margin:0 auto;padding:88px 20px">
+      <h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05;color:#fff;margin-bottom:32px">{{ kindsTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+        <sc-for list="{{ kinds }}" as="k" hint-placeholder-count="6">
+          <div style="border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:12px">
+            <div style="aspect-ratio:16/9;border-radius:16px;overflow:hidden"><image-slot id="{{ k.slot }}" src="{{ k.photo }}" shape="rounded" radius="16" placeholder="Фото"></image-slot></div>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1.1">{{ k.t }}</span><span style="font-size:14.5px;color:#C7CCC8;line-height:1.5">{{ k.d }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<section data-screen-label="Отзывы" style="max-width:1240px;margin:0 auto;padding:80px 20px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:28px"><h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05">Что говорят гости</h2><a href="otzyvy.dc.html" style="font-size:14px;font-weight:600;color:#4E8C7E">Все отзывы →</a></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+    <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+      <div style="background:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px;border:1px solid rgba(31,59,54,.08)"><span style="font-family:'Cormorant Garamond',serif;font-size:44px;line-height:.6;color:#C9A66B">“</span><p style="font-size:15.5px;line-height:1.6">{{ r.text }}</p><span style="margin-top:auto;font-size:13.5px;color:#5C6663"><strong style="color:#1F3B36">{{ r.name }}</strong> · {{ r.src }} · индивидуальный опыт</span></div>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="Цены и ограничения" style="background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-size:clamp(30px,3.2vw,42px);line-height:1.05">Цены</h2>
+      <div style="display:flex;flex-direction:column;border-top:1px solid rgba(31,59,54,.12)">
+        <sc-for list="{{ priceRows }}" as="pr" hint-placeholder-count="2"><div style="display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid rgba(31,59,54,.12);font-size:15.5px"><span>{{ pr.t }}</span><span style="font-weight:600;white-space:nowrap">{{ pr.p }}</span></div></sc-for>
+      </div>
+      <p style="font-size:13.5px;color:#5C6663;line-height:1.5">Цены ориентировочные, уточняйте при записи. Абонементы и программы — на странице <a href="programmy.dc.html" style="color:#4E8C7E;font-weight:600">Программы</a>.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-size:clamp(30px,3.2vw,42px);line-height:1.05">Ограничения</h2>
+      <p style="font-size:15.5px;line-height:1.6;color:#1E2422">{{ s.limits }}</p>
+      <p style="font-size:13.5px;color:#5C6663;line-height:1.5">Услуги центра не являются медицинскими и не заменяют консультацию врача. Результаты индивидуальны.</p>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="FAQ" style="max-width:1240px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px">
+  <h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05">Вопросы об услуге</h2>
+  <div style="display:flex;flex-direction:column;grid-column:span 2">
+    <sc-for list="{{ faq }}" as="f" hint-placeholder-count="5">
+      <div style="border-top:1px solid rgba(31,59,54,.12)">
+        <button onClick="{{ f.toggle }}" style="width:100%;text-align:left;background:transparent;border:0;padding:20px 0;display:flex;justify-content:space-between;gap:20px;align-items:center;cursor:pointer;font-size:17px;font-weight:600;color:#1F3B36;font-family:inherit"><span>{{ f.q }}</span><span style="font-size:22px;color:#4E8C7E;font-weight:400;flex-shrink:0">{{ f.sign }}</span></button>
+        <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><p style="padding:0 40px 20px 0;font-size:15px;line-height:1.6;color:#5C6663">{{ f.a }}</p></sc-if>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="Связанные" style="background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:80px 20px">
+    <h2 style="font-size:clamp(30px,3.2vw,42px);line-height:1.05;margin-bottom:28px">С этим сочетают</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+      <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+        <a href="{{ r.href }}" style="background:#F5F2EC;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:8px" style-hover="color:#1F3B36;background:#EDE9E0"><span style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;color:#1F3B36;line-height:1.1">{{ r.name }}</span><span style="font-size:14px;color:#5C6663">{{ r.short }}</span><span style="margin-top:8px;font-size:14px;font-weight:600;color:#4E8C7E">{{ r.price }} →</span></a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Форма" style="max-width:1240px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:14px"><h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05">Запишитесь — подберём время</h2><p style="font-size:15.5px;line-height:1.6;color:#5C6663">Ежедневно 10:00–20:00, ночные сеансы 22:00–08:00. Отдельный коттедж: ул. Танбалытас, 5. В Instagram напишите кодовое слово «{{ s.code }}».</p></div>
+  <dc-import name="LeadForm" service="{{ s.name }}" hint-size="100%,460px"></dc-import>
+</section>
+
+<dc-import name="Footer" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null, open: 0 };
+  componentDidMount() { import('./data.js').then(d => { const s = d.bySlug(d.q('s')); const _t = s.name + ' в Астане — цена ' + d.fmt(s.price) + ' | Центр Свободы'; this.setState({ d }); setTimeout(() => { document.title = _t; }, 800); }); }
+  renderVals() {
+    const { d, open } = this.state;
+    if (!d) return {};
+    const s = d.bySlug(d.q('s'));
+    const priceRows = [{ t: s.name + ' · ' + s.unit, p: d.fmt(s.price) }];
+    if (s.priceNight) priceRows.push({ t: 'Ночной сеанс 22:00–08:00', p: d.fmt(s.priceNight) });
+    if (s.slug === 'checkup-brt') priceRows.push({ t: 'Программа «Перезагрузка за 1 день»', p: d.fmt(d.PROGRAMS[0].price) });
+    if (s.slug === 'psiholog') priceRows.push({ t: 'Личное сопровождение Жулдыз Жандалеевой · пакет', p: d.fmt(150000) });
+    return {
+      s, price: d.fmt(s.price), wa: d.SITE.wa(s.name), heroSlot: 'svc-' + s.slug, heroPhoto: s.photo.includes('.') ? 'photos/' + s.photo : 'photos/' + s.photo + '.png',
+      hasCompare: !!s.compare, cmpUsual: s.compare ? s.compare.usual : [], cmpOurs: s.compare ? s.compare.ours : [],
+      hasKinds: !!s.kinds, kinds: (s.kinds || []).map((k, i) => ({ ...k, slot: 'kind-' + s.slug + '-' + i, photo: ['photos/p1.png','photos/mirrors.jpg','photos/mirrors.jpg','photos/p4.png','photos/p7.png','photos/p1.png'][i % 6] })), kindsTitle: s.slug === 'vivaton' ? 'Форматы и цены' : 'Виды зеркал и форматы',
+      steps: s.steps.map((st, i) => ({ ...st, n: '0' + (i + 1) })),
+      reviews: s.reviews.map(id => d.REVIEWS.find(r => r.id === id)),
+      priceRows,
+      faq: s.faq.map((f, i) => ({ ...f, open: open === i, sign: open === i ? '−' : '+', toggle: () => this.setState({ open: open === i ? -1 : i }) })),
+      related: s.related.map(sl => { const r = d.bySlug(sl); return { name: r.name, short: r.short, price: d.fmt(r.price), href: d.svcHref(sl) }; }),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Блог о восстановлении, сне и стрессе | Центр Свободы, Астана</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>html,body{margin:0;background:#F5F2EC;color:#1E2422;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#1F3B36;text-decoration:none}a:hover{color:#4E8C7E}h1,h2,h3{margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;color:#1F3B36;text-wrap:pretty}p{margin:0;text-wrap:pretty}</style>
+</helmet>
+<dc-import name="Header" hint-size="100%,72px"></dc-import>
+<section data-screen-label="Блог" style="max-width:1240px;margin:0 auto;padding:40px 20px 88px">
+  <nav style="font-size:13px;color:#5C6663;display:flex;gap:8px;margin-bottom:28px"><a href="index.dc.html" style="color:#5C6663">Главная</a><span>/</span><span style="color:#1F3B36">Блог</span></nav>
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:40px">
+    <h1 style="font-size:clamp(38px,4.6vw,64px);line-height:1.02">Блог</h1>
+    <p style="font-size:16px;color:#5C6663;max-width:460px;line-height:1.55">О сне, стрессе, теле и восстановлении — без мистики и без медицинских обещаний.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px">
+    <sc-for list="{{ articles }}" as="a" hint-placeholder-count="6">
+      <a href="{{ a.href }}" style="background:#fff;border-radius:28px;padding:16px 16px 26px;display:flex;flex-direction:column;gap:14px;border:1px solid rgba(31,59,54,.08);transition:transform .25s" style-hover="transform:translateY(-3px);color:#1F3B36">
+        <div style="aspect-ratio:16/10;border-radius:20px;overflow:hidden"><image-slot id="{{ a.slot }}" src="{{ a.photo }}" shape="rounded" radius="20" placeholder="Обложка статьи"></image-slot></div>
+        <div style="padding:0 10px;display:flex;flex-direction:column;gap:10px">
+          <span style="display:flex;gap:10px;font-size:12.5px;color:#5C6663"><span style="color:#4E8C7E;font-weight:600">{{ a.tag }}</span><span>{{ a.date }}</span><span>· {{ a.read }}</span></span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;line-height:1.1;color:#1F3B36">{{ a.title }}</span>
+          <span style="font-size:14.5px;color:#5C6663;line-height:1.55">{{ a.lead }}</span>
+        </div>
+      </a>
+    </sc-for>
+  </div>
+</section>
+<dc-import name="Footer" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null };
+  componentDidMount() { import('./data.js').then(d => this.setState({ d })); }
+  renderVals() { const d = this.state.d; if (!d) return {}; return { articles: d.ARTICLES.map(a => ({ ...a, href: 'statya.dc.html?a=' + a.slug, slot: 'art-' + a.slug, photo: a.photo.includes('.') ? 'photos/' + a.photo : 'photos/' + a.photo + '.png' })) }; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Команда центра восстановления в Астане | Центр Свободы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>html,body{margin:0;background:#F5F2EC;color:#1E2422;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#1F3B36;text-decoration:none}a:hover{color:#4E8C7E}h1,h2,h3{margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;color:#1F3B36;text-wrap:pretty}p{margin:0;text-wrap:pretty}</style>
+</helmet>
+<dc-import name="Header" hint-size="100%,72px"></dc-import>
+<section data-screen-label="Команда" style="max-width:1240px;margin:0 auto;padding:40px 20px 88px">
+  <nav style="font-size:13px;color:#5C6663;display:flex;gap:8px;margin-bottom:28px"><a href="index.dc.html" style="color:#5C6663">Главная</a><span>/</span><span style="color:#1F3B36">Команда</span></nav>
+  <div style="display:flex;flex-direction:column;gap:18px;max-width:760px;margin-bottom:44px">
+    <h1 style="font-size:clamp(38px,4.6vw,64px);line-height:1.02">Специалисты центра</h1>
+    <p style="font-size:17px;color:#5C6663;line-height:1.55">Психологи, телесные терапевты, нутрициолог и игропрактик. Небольшая команда, которая знает каждого гостя по имени.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+    <sc-for list="{{ team }}" as="m" hint-placeholder-count="7">
+      <div style="background:#fff;border-radius:28px;padding:16px 16px 26px;display:flex;flex-direction:column;gap:14px;border:1px solid rgba(31,59,54,.08)">
+        <div style="aspect-ratio:4/4.4;border-radius:20px;overflow:hidden;background:#F5F2EC"><image-slot id="{{ m.slot }}" src="{{ m.photo }}" shape="rounded" radius="20" placeholder="Портрет в интерьере центра"></image-slot></div>
+        <div style="padding:0 10px;display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#4E8C7E;font-weight:600">{{ m.role }}</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;color:#1F3B36;line-height:1.1">{{ m.name }}</span>
+          <p style="font-size:14.5px;color:#5C6663;line-height:1.55">{{ m.bio }}</p>
+          <sc-if value="{{ m.hasLink }}" hint-placeholder-val="{{ true }}"><a href="{{ m.href }}" style="font-size:14px;font-weight:600;color:#4E8C7E;margin-top:4px">{{ m.linkText }} →</a></sc-if>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+<section style="background:#fff"><div style="max-width:1240px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:14px"><h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05">К кому записаться?</h2><p style="font-size:15.5px;color:#5C6663;line-height:1.6">Напишите, что беспокоит — администратор подберёт специалиста и формат.</p></div>
+  <dc-import name="LeadForm" service="Консультация специалиста" title="Подобрать специалиста" hint-size="100%,460px"></dc-import>
+</div></section>
+<dc-import name="Footer" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null };
+  componentDidMount() { import('./data.js').then(d => this.setState({ d })); }
+  renderVals() {
+    const d = this.state.d; if (!d) return {};
+    return { team: d.TEAM.map(m => ({ ...m, slot: 'team-' + m.id, photo: 'photos/' + ({zhuldyz:'p6',kanat:'p2','aigul-askar':'p3','aigul-abenova':'p2',anzhelika:'p5',anel:'p6',yulia:'p4'}[m.id]) + '.png', hasLink: !!m.s, href: m.s ? d.svcHref(m.s) : '#', linkText: m.s ? d.bySlug(m.s).name : '' })) };
+  }
+}
+</script>
+</body>
+</html>

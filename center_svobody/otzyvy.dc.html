@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Отзывы о Центре Свободы в Астане — 5,0 в 2ГИС</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>html,body{margin:0;background:#F5F2EC;color:#1E2422;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#1F3B36;text-decoration:none}a:hover{color:#4E8C7E}h1,h2,h3{margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;color:#1F3B36;text-wrap:pretty}p{margin:0;text-wrap:pretty}</style>
+</helmet>
+<dc-import name="Header" hint-size="100%,72px"></dc-import>
+<section data-screen-label="Отзывы" style="max-width:1240px;margin:0 auto;padding:40px 20px 88px">
+  <nav style="font-size:13px;color:#5C6663;display:flex;gap:8px;margin-bottom:28px"><a href="index.dc.html" style="color:#5C6663">Главная</a><span>/</span><span style="color:#1F3B36">Отзывы</span></nav>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;align-items:end;margin-bottom:44px">
+    <div style="display:flex;flex-direction:column;gap:18px"><h1 style="font-size:clamp(38px,4.6vw,64px);line-height:1.02">Отзывы гостей</h1><p style="font-size:17px;color:#5C6663;line-height:1.55">Публикуем с именами, как на 2ГИС. Каждый отзыв — индивидуальный опыт, результаты у всех разные.</p></div>
+    <a href="https://2gis.kz/astana/firm/70000001089454684" target="_blank" rel="noopener" style="background:#fff;border-radius:24px;padding:24px 28px;display:flex;align-items:center;gap:20px;border:1px solid rgba(31,59,54,.08);justify-self:start" style-hover="color:#1F3B36">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:600;color:#1F3B36;line-height:1">5,0</span>
+      <span style="display:flex;flex-direction:column;gap:4px"><span style="color:#C9A66B;font-size:18px;letter-spacing:2px">★★★★★</span><span style="font-size:14px;color:#5C6663">58 оценок · 42 подтверждённых отзыва</span><span style="font-size:13px;font-weight:600;color:#4E8C7E">Открыть в 2ГИС →</span></span>
+    </a>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px">
+    <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="6">
+      <div style="background:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px;border:1px solid rgba(31,59,54,.08)">
+        <span style="display:flex;justify-content:space-between;align-items:center"><span style="color:#C9A66B;font-size:14px;letter-spacing:2px">★★★★★</span><a href="{{ r.href }}" style="font-size:12px;font-weight:600;color:#4E8C7E;padding:5px 10px;border-radius:999px;background:#E6F0ED">{{ r.svc }}</a></span>
+        <p style="font-size:16px;line-height:1.6">{{ r.text }}</p>
+        <span style="margin-top:auto;font-size:13.5px;color:#5C6663"><strong style="color:#1F3B36">{{ r.name }}</strong> · {{ r.src }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+<section data-screen-label="Видео-отзывы" style="background:#16211F;color:#fff"><div style="max-width:1240px;margin:0 auto;padding:80px 20px">
+  <h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05;color:#fff;margin-bottom:32px">Видео-отзывы</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
+    <sc-for list="{{ videos }}" as="v" hint-placeholder-count="3">
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="aspect-ratio:9/14;border-radius:24px;overflow:hidden;position:relative"><image-slot id="{{ v.slot }}" src="{{ v.photo }}" shape="rounded" radius="24" placeholder="Кадр из Reels"></image-slot><span style="position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;color:#1F3B36;font-size:22px;pointer-events:none">▶</span></div><span style="font-size:16px;font-weight:600">{{ v.name }}</span></div>
+    </sc-for>
+  </div>
+</div></section>
+<section data-screen-label="Гости" style="max-width:1240px;margin:0 auto;padding:80px 20px">
+  <h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05;margin-bottom:12px">Гости и коллаборации</h2>
+  <p style="font-size:15.5px;color:#5C6663;line-height:1.6;max-width:640px;margin-bottom:28px">Подкасты, реалити и партнёрские проекты, в которых участвовал центр.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px">
+    <span style="padding:12px 20px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1);font-size:14.5px;font-weight:500">Рустем Жугунусов</span><span style="padding:12px 20px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1);font-size:14.5px;font-weight:500">Меруерт Жунусбек · подкаст</span><span style="padding:12px 20px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1);font-size:14.5px;font-weight:500">Илона Тен · реалити «90 дней»</span><span style="padding:12px 20px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1);font-size:14.5px;font-weight:500">Самал Исабаева</span><span style="padding:12px 20px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1);font-size:14.5px;font-weight:500">Be Woman</span><span style="padding:12px 20px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1);font-size:14.5px;font-weight:500">Подкаст Lucky Turtle</span><span style="padding:12px 20px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1);font-size:14.5px;font-weight:500">IQ Club Spouses</span><span style="padding:12px 20px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1);font-size:14.5px;font-weight:500">StartУМ</span>
+  </div>
+</section>
+<dc-import name="Footer" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null };
+  componentDidMount() { import('./data.js').then(d => this.setState({ d })); }
+  renderVals() {
+    const d = this.state.d; if (!d) return {};
+    return { reviews: d.REVIEWS.map(r => ({ ...r, svc: d.bySlug(r.s).name, href: d.svcHref(r.s) })), videos: d.VIDEO_REVIEWS.map((n, i) => ({ name: n, slot: 'video-' + i, photo: 'photos/' + ['p4','p3','p6'][i] + '.png' })) };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Контакты и как доехать — Центр Свободы, ул. Танбалытас, 5, Астана</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>html,body{margin:0;background:#F5F2EC;color:#1E2422;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#1F3B36;text-decoration:none}a:hover{color:#4E8C7E}h1,h2,h3{margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;color:#1F3B36;text-wrap:pretty}p{margin:0;text-wrap:pretty}</style>
+</helmet>
+<dc-import name="Header" hint-size="100%,72px"></dc-import>
+<section data-screen-label="Контакты" style="max-width:1240px;margin:0 auto;padding:40px 20px 80px">
+  <nav style="font-size:13px;color:#5C6663;display:flex;gap:8px;margin-bottom:28px"><a href="index.dc.html" style="color:#5C6663">Главная</a><span>/</span><span style="color:#1F3B36">Контакты</span></nav>
+  <h1 style="font-size:clamp(38px,4.6vw,64px);line-height:1.02;margin-bottom:40px">Контакты и как доехать</h1>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+        <div style="background:#fff;border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:6px;border:1px solid rgba(31,59,54,.08)"><span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C6663">Телефон / WhatsApp</span><a href="tel:+77052281372" style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600">+7 705 228 13 72</a><a href="{{ wa }}" style="font-size:14px;font-weight:600;color:#4E8C7E">Написать в WhatsApp →</a></div>
+        <div style="background:#fff;border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:6px;border:1px solid rgba(31,59,54,.08)"><span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C6663">График</span><span style="font-size:16px;line-height:1.5">Ежедневно 10:00–20:00<br>по записи</span><span style="font-size:14px;color:#4E8C7E;font-weight:600">Ночные сеансы 22:00–08:00</span></div>
+        <div style="background:#fff;border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:6px;border:1px solid rgba(31,59,54,.08);grid-column:1/-1"><span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C6663">Адрес</span><span style="font-size:17px;line-height:1.5">г. Астана, ул. Танбалытас, 5<br>мкр Караоткель-2, район Нура</span><span style="font-size:14px;color:#5C6663;line-height:1.5">Отдельный двухэтажный коттедж. Бесплатная парковка у дома. Удобно с обоих берегов: 15 минут от Левого, 20 — от Правого.</span><a href="https://2gis.kz/astana/firm/70000001089454684" target="_blank" rel="noopener" style="font-size:14px;font-weight:600;color:#4E8C7E">Открыть в 2ГИС →</a></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;font-size:14px;font-weight:600"><a href="https://instagram.com/center_svobody" style="padding:12px 18px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1)">Instagram @center_svobody</a><a href="#" style="padding:12px 18px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1)">YouTube-подкаст</a><a href="https://2gis.kz/astana/firm/70000001089454684" target="_blank" rel="noopener" style="padding:12px 18px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1)">2ГИС · ★ 5,0</a></div>
+    </div>
+    <dc-import name="LeadForm" service="Чекап БРТ" hint-size="100%,460px"></dc-import>
+  </div>
+</section>
+<section data-screen-label="Карта" style="background:#fff"><div style="max-width:1240px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px">
+  <div style="grid-column:span 2;aspect-ratio:16/8;border-radius:28px;overflow:hidden;background:#E6F0ED;min-height:320px"><iframe src="https://widgets.2gis.com/widget?type=firmsonmap&amp;options=%7B%22pos%22%3A%7B%22lat%22%3A51.1282%2C%22lon%22%3A71.3886%2C%22zoom%22%3A15%7D%2C%22opt%22%3A%7B%22city%22%3A%22astana%22%7D%2C%22org%22%3A%2270000001089454684%22%7D" title="Центр Свободы на карте 2ГИС" style="width:100%;height:100%;border:0;display:block" loading="lazy"></iframe></div>
+  <div style="aspect-ratio:9/12;border-radius:28px;overflow:hidden;position:relative;min-height:320px"><image-slot id="howto-video" src="photos/house.jpg" shape="rounded" radius="28" placeholder="Видео «как доехать» (Reels)"></image-slot><span style="position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;color:#1F3B36;font-size:22px;pointer-events:none">▶</span></div>
+</div></section>
+<dc-import name="Footer" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() { return { wa: 'https://wa.me/77052281372?text=' + encodeURIComponent('Здравствуйте! Подскажите, как к вам доехать') }; }
+}
+</script>
+</body>
+</html>

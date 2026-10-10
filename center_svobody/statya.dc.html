@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Статья | Блог Центра Свободы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>html,body{margin:0;background:#F5F2EC;color:#1E2422;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#1F3B36;text-decoration:none}a:hover{color:#4E8C7E}h1,h2,h3{margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;color:#1F3B36;text-wrap:pretty}p{margin:0;text-wrap:pretty}</style>
+</helmet>
+<dc-import name="Header" service="{{ svc.name }}" hint-size="100%,72px"></dc-import>
+<article data-screen-label="Статья" style="max-width:1240px;margin:0 auto;padding:40px 20px 88px">
+  <nav style="font-size:13px;color:#5C6663;display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px"><a href="index.dc.html" style="color:#5C6663">Главная</a><span>/</span><a href="blog.dc.html" style="color:#5C6663">Блог</a><span>/</span><span style="color:#1F3B36">{{ a.tag }}</span></nav>
+  <div style="max-width:800px;display:flex;flex-direction:column;gap:18px;margin-bottom:36px">
+    <span style="display:flex;gap:10px;font-size:13px;color:#5C6663"><span style="color:#4E8C7E;font-weight:600">{{ a.tag }}</span><span>{{ a.date }}</span><span>· {{ a.read }} чтения</span></span>
+    <h1 style="font-size:clamp(36px,4.4vw,58px);line-height:1.04">{{ a.title }}</h1>
+    <p style="font-size:19px;line-height:1.55;color:#5C6663">{{ a.lead }}</p>
+  </div>
+  <div style="aspect-ratio:16/7;border-radius:32px;overflow:hidden;margin-bottom:48px;min-height:240px"><image-slot id="{{ coverSlot }}" src="{{ coverPhoto }}" shape="rounded" radius="32" placeholder="Обложка статьи"></image-slot></div>
+  <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+    <div style="flex:1 1 560px;max-width:760px;display:flex;flex-direction:column;gap:18px;font-size:17px;line-height:1.7;color:#1E2422">
+      <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="10">
+        <sc-if value="{{ b.isH }}" hint-placeholder-val="{{ false }}"><h2 style="font-size:clamp(28px,3vw,36px);line-height:1.1;margin-top:18px">{{ b.text }}</h2></sc-if>
+        <sc-if value="{{ b.isP }}" hint-placeholder-val="{{ true }}"><p>{{ b.text }}</p></sc-if>
+        <sc-if value="{{ b.isQ }}" hint-placeholder-val="{{ false }}"><p style="font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;color:#1F3B36;border-left:2px solid #C9A66B;padding-left:22px;line-height:1.35">{{ b.text }}</p></sc-if>
+        <sc-if value="{{ b.isL }}" hint-placeholder-val="{{ false }}"><ul style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px"><sc-for list="{{ b.items }}" as="li" hint-placeholder-count="4"><li>{{ li }}</li></sc-for></ul></sc-if>
+      </sc-for>
+      <p style="margin-top:20px;padding:20px 24px;border-radius:18px;background:#fff;font-size:13.5px;line-height:1.55;color:#5C6663">Материал носит информационный характер. Услуги центра не являются медицинскими и не заменяют консультацию врача. Результаты индивидуальны.</p>
+    </div>
+    <aside style="flex:1 1 260px;position:sticky;top:96px;display:flex;flex-direction:column;gap:14px">
+      <a href="{{ svc.href }}" style="background:#1F3B36;color:#fff;border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:10px" style-hover="color:#fff;background:#24463F"><span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#C9A66B">По теме статьи</span><span style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;line-height:1.05">{{ svc.name }}</span><span style="font-size:14px;color:#C7CCC8">{{ svc.short }}</span><span style="font-size:16px;font-weight:600;margin-top:6px">{{ svc.price }} →</span></a>
+      <a href="{{ wa }}" style="height:54px;border-radius:999px;background:#4E8C7E;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-weight:600" style-hover="background:#3F7A6D;color:#fff">Записаться в WhatsApp</a>
+      <div style="background:#fff;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px;border:1px solid rgba(31,59,54,.08)"><span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C6663">Читать ещё</span><sc-for list="{{ more }}" as="m" hint-placeholder-count="3"><a href="{{ m.href }}" style="font-size:14.5px;font-weight:600;line-height:1.35;color:#1F3B36;padding-top:10px;border-top:1px solid rgba(31,59,54,.1)">{{ m.title }}</a></sc-for></div>
+    </aside>
+  </div>
+</article>
+<dc-import name="Footer" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null };
+  componentDidMount() { import('./data.js').then(d => { const a = d.ARTICLES.find(x => x.slug === d.q('a')) || d.ARTICLES[0]; const _t = a.title + ' | Блог Центра Свободы'; this.setState({ d }); setTimeout(() => { document.title = _t; }, 800); }); }
+  renderVals() {
+    const d = this.state.d; if (!d) return {};
+    const a = d.ARTICLES.find(x => x.slug === d.q('a')) || d.ARTICLES[0];
+    const s = d.bySlug(a.s);
+    return {
+      a, coverSlot: 'art-' + a.slug, coverPhoto: a.photo.includes('.') ? 'photos/' + a.photo : 'photos/' + a.photo + '.png',
+      blocks: a.body.map(([k, v]) => ({ isH: k === 'h2', isP: k === 'p', isQ: k === 'quote', isL: k === 'list', text: k === 'list' ? '' : v, items: k === 'list' ? v : [] })),
+      svc: { name: s.name, short: s.short, price: d.fmt(s.price), href: d.svcHref(s.slug) }, wa: d.SITE.wa(s.name),
+      more: d.ARTICLES.filter(x => x.slug !== a.slug).slice(0, 3).map(x => ({ title: x.title, href: 'statya.dc.html?a=' + x.slug })),
+    };
+  }
+}
+</script>
+</body>
+</html>

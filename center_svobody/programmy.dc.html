@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Программы и абонементы центра восстановления в Астане | Центр Свободы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>html,body{margin:0;background:#F5F2EC;color:#1E2422;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#1F3B36;text-decoration:none}a:hover{color:#4E8C7E}h1,h2,h3{margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;color:#1F3B36;text-wrap:pretty}p{margin:0;text-wrap:pretty}</style>
+</helmet>
+<dc-import name="Header" service="программу восстановления" hint-size="100%,72px"></dc-import>
+<section data-screen-label="Программы" style="max-width:1240px;margin:0 auto;padding:40px 20px 80px">
+  <nav style="font-size:13px;color:#5C6663;display:flex;gap:8px;margin-bottom:28px"><a href="index.dc.html" style="color:#5C6663">Главная</a><span>/</span><span style="color:#1F3B36">Программы</span></nav>
+  <div style="display:flex;flex-direction:column;gap:18px;max-width:760px;margin-bottom:44px">
+    <h1 style="font-size:clamp(38px,4.6vw,64px);line-height:1.02">Программы и абонементы</h1>
+    <p style="font-size:17px;color:#5C6663;line-height:1.55">Отдельные сеансы — хороший старт. Программы собирают их в путь: диагностика, зеркала, терапия и сопровождение в одном плане и дешевле, чем по отдельности.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;align-items:stretch">
+    <sc-for list="{{ programs }}" as="p" hint-placeholder-count="3">
+      <div style="border-radius:32px;padding:34px;display:flex;flex-direction:column;gap:16px;background: {{ p.bg }};color: {{ p.fg }};border:1px solid rgba(31,59,54,.08)">
+        <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#C9A66B;font-weight:600">{{ p.tag }}</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;line-height:1.05">{{ p.name }}</span>
+        <p style="font-size:15px;line-height:1.55;opacity:.82">{{ p.d }}</p>
+        <div style="display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid rgba(128,128,128,.25)">
+          <sc-for list="{{ p.items }}" as="i" hint-placeholder-count="4"><span style="font-size:14.5px;display:flex;gap:10px"><span style="color:#C9A66B">✓</span>{{ i }}</span></sc-for>
+        </div>
+        <span style="margin-top:auto;font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;padding-top:10px">{{ p.price }}</span>
+        <a href="{{ p.wa }}" style="height:54px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;background: {{ p.btnBg }};color: {{ p.btnFg }}">Записаться в WhatsApp</a>
+      </div>
+    </sc-for>
+  </div>
+</section>
+<section data-screen-label="Абонементы" style="background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px">
+    <div style="display:flex;flex-direction:column;gap:14px"><h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05">Абонементы и сертификаты</h2><p style="font-size:15.5px;color:#5C6663;line-height:1.6">Абонемент — для тех, кто ходит регулярно: зеркала, «Дианел», телесная работа. Подарочный сертификат — на любую услугу или сумму.</p></div>
+    <div style="grid-column:span 2;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+      <div style="border-radius:24px;padding:26px;background:#F5F2EC;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#5C6663">10 сеансов в зеркалах</span><span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#1F3B36">от 130 000 ₸</span><span style="font-size:13.5px;color:#5C6663">вместо 150 000 ₸ по отдельности</span></div>
+      <div style="border-radius:24px;padding:26px;background:#F5F2EC;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#5C6663">Курс «Дианел» · 10 сеансов</span><span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#1F3B36">от 120 000 ₸</span><span style="font-size:13.5px;color:#5C6663">сканирование в подарок</span></div>
+      <div style="border-radius:24px;padding:26px;background:#F5F2EC;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#5C6663">Годовой абонемент</span><span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#1F3B36">от 500 000 ₸</span><span style="font-size:13.5px;color:#5C6663">все практики центра, приоритетная запись</span></div>
+      <div style="border-radius:24px;padding:26px;background:#1F3B36;color:#fff;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#C9A66B">Подарочный сертификат</span><span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600">любая сумма</span><span style="font-size:13.5px;color:#C7CCC8">красивый конверт, действует 6 месяцев</span></div>
+    </div>
+  </div>
+</section>
+<section data-screen-label="Нейронаушники" style="max-width:1240px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center">
+  <div style="aspect-ratio:4/3;border-radius:32px;overflow:hidden"><image-slot id="neuro" src="photos/p4.png" shape="rounded" radius="32" placeholder="Фото нейронаушников"></image-slot></div>
+  <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
+    <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#4E8C7E;font-weight:600">Авторская разработка</span>
+    <h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05">Нейронаушники Каната Нурумбекова</h2>
+    <p style="font-size:16px;line-height:1.6;color:#5C6663">Аудио-медитации для быстрого глубокого расслабления. Используем в зеркалах и на выездных ретритах. Гости говорят: «мозг отключается мгновенно».</p>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:#1F3B36">{{ neuroPrice }}</span>
+  </div>
+</section>
+<section style="max-width:1240px;margin:0 auto;padding:0 20px 88px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:14px"><h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05">Не знаете, какую программу выбрать?</h2><p style="font-size:15.5px;color:#5C6663;line-height:1.6">Оставьте заявку — администратор подберёт под запрос и бюджет. Или начните с диагностики «Лотос-Оникс».</p></div>
+  <dc-import name="LeadForm" service="Программа восстановления" title="Подобрать программу" hint-size="100%,460px"></dc-import>
+</section>
+<dc-import name="Footer" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null };
+  componentDidMount() { import('./data.js').then(d => this.setState({ d })); }
+  renderVals() {
+    const d = this.state.d; if (!d) return {};
+    return { neuroPrice: d.fmt(d.EXTRA_SERVICES[0].price), programs: d.PROGRAMS.map(p => ({ ...p, price: d.fmt(p.price), wa: d.SITE.wa('программу «' + p.name + '»'), bg: p.featured ? '#1F3B36' : '#fff', fg: p.featured ? '#fff' : '#1E2422', btnBg: p.featured ? '#C9A66B' : '#4E8C7E', btnFg: p.featured ? '#16211F' : '#fff' })) };
+  }
+}
+</script>
+</body>
+</html>

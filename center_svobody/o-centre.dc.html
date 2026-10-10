@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>О центре и история — Центр Свободы, Астана</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>html,body{margin:0;background:#F5F2EC;color:#1E2422;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#1F3B36;text-decoration:none}a:hover{color:#4E8C7E}h1,h2,h3{margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;color:#1F3B36;text-wrap:pretty}p{margin:0;text-wrap:pretty}</style>
+</helmet>
+<dc-import name="Header" hint-size="100%,72px"></dc-import>
+<section data-screen-label="О центре" style="max-width:1240px;margin:0 auto;padding:40px 20px 80px">
+  <nav style="font-size:13px;color:#5C6663;display:flex;gap:8px;margin-bottom:28px"><a href="index.dc.html" style="color:#5C6663">Главная</a><span>/</span><span style="color:#1F3B36">О центре</span></nav>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <h1 style="font-size:clamp(38px,4.6vw,64px);line-height:1.02">Пространство, где можно выдохнуть</h1>
+      <p style="font-size:17px;line-height:1.6;color:#5C6663">Центр Свободы — центр восстановления и волновой диагностики в отдельном коттедже в Астане. За один визит здесь можно проверить состояние организма, снять накопленный стресс и восстановить сон и энергию. Подход — через три уровня: тело, психика, энергия.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px">
+        <div style="padding:18px;border-radius:18px;background:#fff;border:1px solid rgba(31,59,54,.08)"><span style="display:block;font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:#1F3B36;line-height:1">2024</span><span style="font-size:13px;color:#5C6663">открылись в мае</span></div>
+        <div style="padding:18px;border-radius:18px;background:#fff;border:1px solid rgba(31,59,54,.08)"><span style="display:block;font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:#1F3B36;line-height:1">5,0</span><span style="font-size:13px;color:#5C6663">рейтинг в 2ГИС</span></div>
+        <div style="padding:18px;border-radius:18px;background:#fff;border:1px solid rgba(31,59,54,.08)"><span style="display:block;font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:#1F3B36;line-height:1">7</span><span style="font-size:13px;color:#5C6663">специалистов</span></div>
+      </div>
+    </div>
+    <div style="aspect-ratio:4/5;border-radius:36px;overflow:hidden"><image-slot id="about-house" src="photos/house.jpg" shape="rounded" radius="36" placeholder="Экстерьер коттеджа"></image-slot></div>
+  </div>
+</section>
+<section data-screen-label="История" style="background:#fff"><div style="max-width:1240px;margin:0 auto;padding:88px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:center">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="aspect-ratio:3/4;border-radius:28px;overflow:hidden;margin-top:40px"><image-slot id="about-zhuldyz" src="photos/p6.png" shape="rounded" radius="28" placeholder="Жулдыз"></image-slot></div><div style="aspect-ratio:3/4;border-radius:28px;overflow:hidden"><image-slot id="about-kanat" src="photos/p2.png" shape="rounded" radius="28" placeholder="Канат"></image-slot></div></div>
+  <div style="display:flex;flex-direction:column;gap:20px;font-size:16.5px;line-height:1.65">
+    <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#4E8C7E;font-weight:600">История основания</span>
+    <h2 style="font-size:clamp(32px,3.8vw,52px);line-height:1.04">Всё началось с сына</h2>
+    <p>После рождения сына семья Жулдыз и Каната столкнулась с серьёзным вызовом здоровью ребёнка. Это было время поиска: врачи, методы, разные города.</p>
+    <p>На этом пути они встретили зеркала Козырева и волновые методы — и впервые почувствовали, как много значит тихое место, где о тебе заботятся и никуда не торопят. Не вместо врачей, а рядом с ними: как пространство, где семья может восстановить силы.</p>
+    <p>В мае 2024 года открылся Центр Свободы. Жулдыз — психолог с 15-летним стажем и телесно-ориентированный психотерапевт. Канат — телесный терапевт и автор нейронаушников. Вместе они собрали в одном коттедже то, что раньше приходилось искать по разным адресам.</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;color:#1F3B36;border-left:2px solid #C9A66B;padding-left:20px">«Мы делали центр для своей семьи. Поэтому здесь чай с нашим мёдом, а не кофе из автомата».</p>
+  </div>
+</div></section>
+<section data-screen-label="Ценности" style="max-width:1240px;margin:0 auto;padding:88px 20px">
+  <h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05;margin-bottom:32px">Как у нас устроено</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+    <div style="background:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(31,59,54,.08)"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#1F3B36">Всё в одном месте</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Зеркала Козырева, биорезонанс, VR, телесные практики и психологи — единственный такой центр в Казахстане.</p></div>
+    <div style="background:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(31,59,54,.08)"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#1F3B36">Отдельный коттедж</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Два этажа, тишина, парковка у дома. Конфиденциально: вы не пересекаетесь с другими гостями.</p></div>
+    <div style="background:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(31,59,54,.08)"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#1F3B36">Ночные сеансы</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">С 22:00 до 08:00 можно спать в зеркале. Формат, которого нет у других.</p></div>
+    <div style="background:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(31,59,54,.08)"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#1F3B36">Без медицинских обещаний</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Мы говорим о ресурсе, сне и спокойствии. Не лечим и не ставим диагнозов — и честно об этом пишем.</p></div>
+    <div style="background:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(31,59,54,.08)"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#1F3B36">Забота в деталях</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Чай с собственным мёдом, сухофрукты без сахара, мягкий свет, пледы. Об этом пишут в каждом втором отзыве.</p></div>
+    <div style="background:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(31,59,54,.08)"><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#1F3B36">Социальная миссия</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Годовой благотворительный проект с фондом Bi-Жұлдызай для родителей особенных детей и участие в забеге Run for Autism.</p></div>
+  </div>
+</section>
+<section data-screen-label="Пространство" style="background:#fff"><div style="max-width:1240px;margin:0 auto;padding:80px 20px">
+  <h2 style="font-size:clamp(32px,3.6vw,46px);line-height:1.05;margin-bottom:32px">Пространство</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));grid-auto-rows:220px;gap:12px">
+    <div style="grid-column:span 2;grid-row:span 2;border-radius:24px;overflow:hidden"><image-slot id="about-space-1" src="photos/mirrors.jpg" shape="rounded" radius="24" placeholder="Зал с зеркалом"></image-slot></div>
+    <div style="border-radius:24px;overflow:hidden"><image-slot id="about-space-2" src="photos/p7.png" shape="rounded" radius="24" placeholder="Комната с матрасами"></image-slot></div>
+    <div style="border-radius:24px;overflow:hidden"><image-slot id="about-space-3" src="photos/p6.png" shape="rounded" radius="24" placeholder="Чайная зона"></image-slot></div>
+    <div style="border-radius:24px;overflow:hidden"><image-slot id="about-space-4" src="photos/p2.png" shape="rounded" radius="24" placeholder="Кабинет терапии"></image-slot></div>
+    <div style="border-radius:24px;overflow:hidden"><image-slot id="about-space-5" src="photos/p4.png" shape="rounded" radius="24" placeholder="Аппараты БРТ / Дианел"></image-slot></div>
+  </div>
+  <div style="margin-top:40px;display:flex;flex-wrap:wrap;gap:12px"><a href="komanda.dc.html" style="height:54px;padding:0 28px;border-radius:999px;background:#4E8C7E;color:#fff;display:inline-flex;align-items:center;font-size:15px;font-weight:600" style-hover="background:#3F7A6D;color:#fff">Познакомиться с командой</a><a href="kontakty.dc.html" style="height:54px;padding:0 24px;border-radius:999px;border:1px solid rgba(31,59,54,.22);display:inline-flex;align-items:center;font-size:15px;font-weight:600">Как доехать</a></div>
+</div></section>
+<dc-import name="Footer" hint-size="100%,420px"></dc-import>
+</x-dc>
+</body>
+</html>

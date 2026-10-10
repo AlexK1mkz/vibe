@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>input,select{font-family:inherit}input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid #4E8C7E;outline-offset:2px}</style>
+</helmet>
+<div id="zapis" style="background:#fff;border-radius:28px;padding:36px;font-family:'Manrope',sans-serif;color:#1E2422;box-shadow:0 30px 60px -40px rgba(31,59,54,.3)">
+  <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:22px">
+      <span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#4E8C7E;font-weight:600">Запись</span>
+      <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:32px;line-height:1.1;color:#1F3B36">{{ title }}</h3>
+      <p style="margin:0;font-size:14.5px;color:#5C6663;line-height:1.5">Перезвоним или напишем в WhatsApp в течение часа в рабочее время.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#5C6663">Имя<input value="{{ name }}" onChange="{{ setName }}" placeholder="Как к вам обращаться" style="height:52px;border:1px solid rgba(31,59,54,.18);border-radius:14px;padding:0 16px;font-size:15px;background:#F5F2EC;color:#1E2422"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#5C6663">Телефон<input value="{{ phone }}" onChange="{{ setPhone }}" placeholder="+7 ___ ___ __ __" inputMode="tel" style="height:52px;border:1px solid rgba(31,59,54,.18);border-radius:14px;padding:0 16px;font-size:15px;background:#F5F2EC;color:#1E2422"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#5C6663">Услуга<input value="{{ service }}" readOnly style="height:52px;border:1px solid rgba(31,59,54,.18);border-radius:14px;padding:0 16px;font-size:15px;background:#F5F2EC;color:#1E2422"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#5C6663">Удобное время<select value="{{ time }}" onChange="{{ setTime }}" style="height:52px;border:1px solid rgba(31,59,54,.18);border-radius:14px;padding:0 12px;font-size:15px;background:#F5F2EC;color:#1E2422"><option>Днём 10:00–14:00</option><option>Вечером 14:00–20:00</option><option>Ночной сеанс 22:00–08:00</option><option>Любое</option></select></label>
+    </div>
+    <label style="display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:12.5px;color:#5C6663;line-height:1.5;cursor:pointer"><input type="checkbox" checked="{{ agree }}" onChange="{{ toggleAgree }}" style="margin-top:3px;accent-color:#4E8C7E;width:16px;height:16px">Согласен(а) на обработку персональных данных</label>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px">
+      <button onClick="{{ submit }}" style="height:54px;padding:0 30px;border:0;border-radius:999px;background:#4E8C7E;color:#fff;font-size:15px;font-weight:600;cursor:pointer" style-hover="background:#3F7A6D">{{ cta }}</button>
+      <a href="{{ wa }}" style="height:54px;padding:0 24px;border-radius:999px;border:1px solid rgba(31,59,54,.2);display:inline-flex;align-items:center;font-size:15px;font-weight:600;color:#1F3B36" style-hover="border-color:#4E8C7E">Написать в WhatsApp</a>
+      <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#B5472F">Заполните имя, телефон и согласие</span></sc-if>
+    </div>
+  </sc-if>
+  <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start;padding:12px 0">
+      <span style="width:56px;height:56px;border-radius:50%;background:#E6F0ED;display:grid;place-items:center;color:#4E8C7E;font-size:26px">✓</span>
+      <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:34px;line-height:1.1;color:#1F3B36">Спасибо, {{ name }}</h3>
+      <p style="margin:0;font-size:15px;color:#5C6663;line-height:1.55;max-width:520px">Заявка на «{{ service }}» принята. Чтобы согласовать время сразу, продолжите в WhatsApp — мы уже видим вашу заявку.</p>
+      <a href="{{ wa }}" style="height:54px;padding:0 30px;border-radius:999px;background:#1F3B36;color:#fff;display:inline-flex;align-items:center;font-size:15px;font-weight:600" style-hover="background:#4E8C7E;color:#fff">Продолжить в WhatsApp</a>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:720,&quot;height&quot;:440},&quot;service&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Чекап БРТ&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;cta&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Отправить заявку&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { name: '', phone: '', time: 'Днём 10:00–14:00', agree: true, sent: false, error: false };
+  renderVals() {
+    const service = this.props.service || 'Чекап БРТ';
+    const { name, phone, time, agree, sent, error } = this.state;
+    return {
+      title: this.props.title || 'Записаться на ' + service, cta: this.props.cta || 'Отправить заявку',
+      service, name, phone, time, agree, sent, notSent: !sent, error,
+      wa: 'https://wa.me/77052281372?text=' + encodeURIComponent('Здравствуйте! Желаю записаться на ' + service + (name ? '. Меня зовут ' + name : '') + '. Удобное время: ' + time),
+      setName: e => this.setState({ name: e.target.value }), setPhone: e => this.setState({ phone: e.target.value }),
+      setTime: e => this.setState({ time: e.target.value }), toggleAgree: () => this.setState(s => ({ agree: !s.agree })),
+      submit: () => { if (!name.trim() || phone.replace(/\D/g, '').length < 10 || !agree) return this.setState({ error: true }); this.setState({ sent: true, error: false }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

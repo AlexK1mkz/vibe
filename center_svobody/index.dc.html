@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Центр Свободы — центр восстановления в Астане: чекап, зеркала Козырева, VR</title>
+  <meta name="description" content="Чекап организма за 3 часа, сеансы в зеркалах Козырева днём и ночью, VR-программа и телесная терапия. Отдельный коттедж, ул. Танбалытас, 5. ★5,0 в 2ГИС.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>
+    html,body{margin:0;background:#F5F2EC;color:#1E2422;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}
+    a{color:#1F3B36;text-decoration:none}a:hover{color:#4E8C7E}h1,h2,h3{margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;color:#1F3B36;text-wrap:pretty}p{margin:0;text-wrap:pretty}
+    @keyframes spin{to{transform:rotate(360deg)}}@keyframes breathe{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.06);opacity:.9}}
+  </style>
+</helmet>
+<dc-import name="Header" service="Чекап БРТ" hint-size="100%,72px"></dc-import>
+
+<section data-screen-label="Hero" style="max-width:1240px;margin:0 auto;padding:56px 20px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:26px;align-items:flex-start">
+    <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#4E8C7E;font-weight:600">Центр восстановления и волновой диагностики</span>
+    <h1 style="font-size:clamp(40px,5.2vw,72px);line-height:1.02;letter-spacing:-.01em">Центр восстановления в Астане: сон, энергия и спокойствие — за один визит</h1>
+    <p style="font-size:18px;line-height:1.55;color:#5C6663;max-width:560px">Чекап организма за 3 часа, зеркала Козырева, VR-программа и телесная терапия — в отдельном коттедже, где можно выдохнуть.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a href="#zapis" style="height:56px;padding:0 30px;border-radius:999px;background:#4E8C7E;color:#fff;display:inline-flex;align-items:center;font-size:15px;font-weight:600" style-hover="background:#3F7A6D;color:#fff">Записаться на Чекап</a>
+      <a href="{{ wa }}" style="height:56px;padding:0 26px;border-radius:999px;border:1px solid rgba(31,59,54,.22);display:inline-flex;align-items:center;font-size:15px;font-weight:600" style-hover="border-color:#4E8C7E">Написать в WhatsApp</a>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:13px;font-weight:500">
+      <span style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1)"><span style="color:#C9A66B">★</span> 5,0 · 58 оценок в 2ГИС</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1)">Ежедневно 10–20 · Ночные сеансы</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1)">Конфиденциально</span>
+    </div>
+  </div>
+  <div style="position:relative;aspect-ratio:4/4.6;min-height:380px">
+    <div style="position:absolute;inset:0;border-radius:36px;overflow:hidden"><image-slot id="hero-interior" src="photos/mirrors.jpg" shape="rounded" radius="36" placeholder="Фото: интерьер коттеджа или зеркало Козырева, тёплый свет"></image-slot></div>
+    <span style="position:absolute;left:-30px;bottom:-30px;width:220px;height:220px;border-radius:50%;border:1px solid rgba(78,140,126,.35);pointer-events:none;animation:breathe 6s ease-in-out infinite"></span>
+    <span style="position:absolute;left:0;bottom:0;width:160px;height:160px;border-radius:50%;border:1px solid rgba(201,166,107,.45);pointer-events:none;animation:breathe 6s ease-in-out infinite 1.5s"></span>
+    <div style="position:absolute;right:20px;bottom:20px;background:#fff;border-radius:18px;padding:14px 18px;display:flex;flex-direction:column;gap:2px;box-shadow:0 20px 40px -20px rgba(31,59,54,.4)"><span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C6663">Ночной сеанс в зеркалах</span><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#1F3B36">22:00 — 08:00</span></div>
+  </div>
+</section>
+
+<section data-screen-label="Боли" style="max-width:1240px;margin:0 auto;padding:64px 20px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:32px">
+    <h2 style="font-size:clamp(32px,3.6vw,48px);line-height:1.05">Узнаёте себя?</h2>
+    <p style="font-size:15px;color:#5C6663;max-width:380px;line-height:1.5">Каждая карточка ведёт к услуге, с которой чаще всего начинают в этой ситуации.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+    <sc-for list="{{ pains }}" as="p" hint-placeholder-count="6">
+      <a href="{{ p.href }}" style="background:#fff;border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:10px;min-height:170px;border:1px solid rgba(31,59,54,.08);transition:transform .25s" style-hover="transform:translateY(-3px);color:#1F3B36">
+        <span style="width:34px;height:34px;border-radius:50%;background:#E6F0ED;display:grid;place-items:center;color:#4E8C7E;font-size:16px">{{ p.n }}</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1.1;color:#1F3B36">{{ p.t }}</span>
+        <span style="font-size:14px;color:#5C6663;line-height:1.5">{{ p.d }}</span>
+        <span style="margin-top:auto;font-size:13px;font-weight:600;color:#4E8C7E">{{ p.link }} →</span>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="Подход" style="background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#4E8C7E;font-weight:600">Подход</span>
+      <h2 style="font-size:clamp(34px,3.8vw,52px);line-height:1.02">Тело · Психика · Энергия</h2>
+      <p style="font-size:16px;line-height:1.6;color:#5C6663">Усталость, тревога и плохой сон редко живут на одном уровне. Поэтому мы смотрим на все три сразу и собираем программу под человека, а не под симптом.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;padding:28px;border-radius:24px;background:#F5F2EC"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#1F3B36">Тело</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Зажимы, напряжение, усталость, которую не снимает сон.</p><div style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500;margin-top:6px"><a href="usluga.dc.html?s=checkup-brt">Чекап БРТ →</a><a href="usluga.dc.html?s=telesnaya-terapiya">Телесная терапия →</a><a href="usluga.dc.html?s=vivaton">Виватон и массаж →</a></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px;padding:28px;border-radius:24px;background:#F5F2EC"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#1F3B36">Психика</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Тревога, страхи, мысли по кругу, «живу на автомате».</p><div style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500;margin-top:6px"><a href="usluga.dc.html?s=psiholog">Психолог →</a><a href="usluga.dc.html?s=vr-terapiya">VR-программа →</a><a href="usluga.dc.html?s=diagnostika-lotos-oniks">Диагностика «Лотос-Оникс» →</a></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px;padding:28px;border-radius:24px;background:#F5F2EC"><span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#1F3B36">Энергия</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Сон, ресурс, восстановление после перелётов и перегрузок.</p><div style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500;margin-top:6px"><a href="usluga.dc.html?s=zerkala-kozyreva">Зеркала Козырева →</a><a href="usluga.dc.html?s=dianel">Аппарат «Дианел» →</a><a href="programmy.dc.html">Нейронаушники →</a></div></div>
+  </div>
+</section>
+
+<section data-screen-label="Чекап" style="max-width:1240px;margin:0 auto;padding:88px 20px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+      <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#4E8C7E;font-weight:600">Главный оффер</span>
+      <h2 style="font-size:clamp(34px,4vw,56px);line-height:1.02">Чекап БРТ: вся картина организма за один визит</h2>
+      <p style="font-size:16px;line-height:1.6;color:#5C6663">До 1000+ параметров на аппарате биорезонансной оценки, наглядный отчёт, рекомендации по питанию и 45 дней сопровождения. 3–3,5 часа — и у вас понятный план.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;font-size:14.5px;line-height:1.5;color:#1E2422">
+        <span>— Сеанс коррекции на аппарате</span><span>— Развёрнутое заключение</span><span>— Рекомендации по питанию</span><span>— 45 дней сопровождения</span><span>— Программа дальнейших сеансов</span><span>— Чай с мёдом и тишина</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:6px">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:#1F3B36">{{ checkupPrice }}</span>
+        <a href="usluga.dc.html?s=checkup-brt" style="height:54px;padding:0 28px;border-radius:999px;background:#4E8C7E;color:#fff;display:inline-flex;align-items:center;font-size:15px;font-weight:600" style-hover="background:#3F7A6D;color:#fff">Подробнее о Чекапе</a>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+      <div style="background:#fff;border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:14px;border:1px solid rgba(31,59,54,.08)">
+        <span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#5C6663">Обычный чекап</span>
+        <span style="font-size:14.5px;line-height:1.6;color:#5C6663">Недели хождения по врачам<br>Десятки направлений и анализов<br>Очереди, натощак, бумажки<br>Картина так и не складывается</span>
+      </div>
+      <div style="background:#1F3B36;color:#fff;border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:14px">
+        <span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#C9A66B">В Центре Свободы</span>
+        <span style="font-size:14.5px;line-height:1.6">Один визит, 3–3,5 часа<br>1000+ параметров в одном отчёте<br>Чай, тишина, отдельный коттедж<br>Понятный план и сопровождение</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Услуги" style="max-width:1240px;margin:0 auto;padding:0 20px 88px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:32px">
+    <h2 style="font-size:clamp(32px,3.6vw,48px);line-height:1.05">Услуги центра</h2>
+    <a href="uslugi.dc.html" style="font-size:14px;font-weight:600;color:#4E8C7E">Весь каталог →</a>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px">
+    <sc-for list="{{ services }}" as="s" hint-placeholder-count="8">
+      <a href="{{ s.href }}" style="background:#fff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(31,59,54,.08);min-height:200px;transition:transform .25s" style-hover="transform:translateY(-3px);color:#1F3B36">
+        <span style="width:40px;height:40px;border-radius:50%;border:1.5px solid #4E8C7E;display:grid;place-items:center;color:#4E8C7E;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600">{{ s.n }}</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;line-height:1.1;color:#1F3B36">{{ s.name }}</span>
+        <span style="font-size:14px;color:#5C6663;line-height:1.5">{{ s.short }}</span>
+        <span style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:14px"><span style="font-weight:600;color:#1F3B36">{{ s.price }}</span><span style="color:#4E8C7E;font-weight:600">Подробнее →</span></span>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="Первый визит" style="background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:80px 20px">
+    <h2 style="font-size:clamp(32px,3.6vw,48px);line-height:1.05;margin-bottom:36px">Как проходит первый визит</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px">
+      <div style="padding:26px;border-radius:24px;background:#F5F2EC;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:500;color:#C9A66B;line-height:1">01</span><span style="font-size:20px;font-weight:600;color:#1F3B36">Заявка</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Напишите в WhatsApp или оставьте телефон. Подберём время, в том числе ночной сеанс.</p></div>
+      <div style="padding:26px;border-radius:24px;background:#F5F2EC;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:500;color:#C9A66B;line-height:1">02</span><span style="font-size:20px;font-weight:600;color:#1F3B36">Чай и знакомство</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Приезжаете в коттедж. Чай с нашим мёдом, сухофрукты без сахара и короткий разговор о запросе.</p></div>
+      <div style="padding:26px;border-radius:24px;background:#F5F2EC;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:500;color:#C9A66B;line-height:1">03</span><span style="font-size:20px;font-weight:600;color:#1F3B36">Диагностика</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Чекап БРТ или «Лотос-Оникс» — смотрим, где копится напряжение и теряется энергия.</p></div>
+      <div style="padding:26px;border-radius:24px;background:#F5F2EC;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:500;color:#C9A66B;line-height:1">04</span><span style="font-size:20px;font-weight:600;color:#1F3B36">Персональный план</span><p style="font-size:14.5px;color:#5C6663;line-height:1.55">Какие зеркала, сколько сеансов, нужна ли терапия. Без лишнего.</p></div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Зеркала" style="background:#16211F;color:#fff;position:relative;overflow:hidden">
+  <span style="position:absolute;left:50%;top:50%;width:900px;height:900px;margin:-450px 0 0 -450px;border-radius:50%;background:radial-gradient(circle,rgba(78,140,126,.28),transparent 60%);pointer-events:none"></span>
+  <div style="max-width:1240px;margin:0 auto;padding:96px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:center;position:relative">
+    <div style="position:relative;aspect-ratio:1;max-width:520px;width:100%;justify-self:center">
+      <span style="position:absolute;inset:0;border-radius:50%;border:1px solid rgba(201,166,107,.35);animation:spin 60s linear infinite;border-right-color:transparent"></span>
+      <span style="position:absolute;inset:8%;border-radius:50%;border:1px solid rgba(201,166,107,.25);animation:spin 90s linear infinite reverse;border-left-color:transparent"></span>
+      <div style="position:absolute;inset:16%;border-radius:50%;overflow:hidden"><image-slot id="home-mirror" src="photos/mirrors.jpg" shape="circle" placeholder="Фото зеркала Козырева"></image-slot></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start">
+      <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#C9A66B;font-weight:600">Флагман центра</span>
+      <h2 style="font-size:clamp(36px,4.2vw,60px);line-height:1.02;color:#fff">Зеркала Козырева — днём и ночью</h2>
+      <p style="font-size:16.5px;line-height:1.6;color:#C7CCC8;max-width:540px">Час тишины на матрасе под пледом, космическая музыка в нейронаушниках, приглушённый свет. Гости отмечают глубокий сон, ясность и восстановление после перелётов. Единственный центр в Казахстане, где зеркала, биорезонанс и телесные практики — в одном месте.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;width:100%;max-width:540px">
+        <div style="border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px"><span style="display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#A9B0AC">Дневной сеанс</span><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600">{{ mirrorDay }}</span></div>
+        <div style="border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px"><span style="display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#A9B0AC">Ночной 22–08</span><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600">{{ mirrorNight }}</span></div>
+        <div style="border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px"><span style="display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#A9B0AC">Дети до 12</span><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600">бесплатно</span></div>
+      </div>
+      <a href="usluga.dc.html?s=zerkala-kozyreva" style="height:54px;padding:0 28px;border-radius:999px;background:#C9A66B;color:#16211F;display:inline-flex;align-items:center;font-size:15px;font-weight:700" style-hover="background:#D9B97E;color:#16211F">О зеркалах и сеансах</a>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="История" style="max-width:1240px;margin:0 auto;padding:88px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+    <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#4E8C7E;font-weight:600">История основателей</span>
+    <h2 style="font-size:clamp(32px,3.8vw,52px);line-height:1.04">Центр начался с семейной истории</h2>
+    <p style="font-size:16px;line-height:1.65;color:#5C6663">После рождения сына семья Жулдыз и Каната столкнулась с серьёзным вызовом здоровью ребёнка. В поисках поддержки они пришли к зеркалам Козырева и волновым методам — и увидели, как важно иметь тихое место, где о тебе заботятся. В мае 2024 года открылся Центр Свободы: чтобы этот путь был доступен другим.</p>
+    <a href="o-centre.dc.html" style="font-size:14.5px;font-weight:600;color:#4E8C7E">Читать о центре →</a>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div style="aspect-ratio:3/4;border-radius:28px;overflow:hidden;margin-top:40px"><image-slot id="home-zhuldyz" src="photos/p6.png" shape="rounded" radius="28" placeholder="Фото Жулдыз"></image-slot></div>
+    <div style="aspect-ratio:3/4;border-radius:28px;overflow:hidden"><image-slot id="home-kanat" src="photos/p2.png" shape="rounded" radius="28" placeholder="Фото Каната"></image-slot></div>
+  </div>
+</section>
+
+<section data-screen-label="Команда" style="background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:80px 20px">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:32px"><h2 style="font-size:clamp(32px,3.6vw,48px);line-height:1.05">Специалисты</h2><a href="komanda.dc.html" style="font-size:14px;font-weight:600;color:#4E8C7E">Вся команда →</a></div>
+    <div style="display:flex;gap:14px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory">
+      <sc-for list="{{ team }}" as="m" hint-placeholder-count="5">
+        <a href="{{ m.href }}" style="flex:0 0 250px;scroll-snap-align:start;display:flex;flex-direction:column;gap:10px" style-hover="color:#1F3B36">
+          <div style="aspect-ratio:4/5;border-radius:24px;overflow:hidden;background:#F5F2EC"><image-slot id="{{ m.slot }}" src="{{ m.photo }}" shape="rounded" radius="24" placeholder="Портрет"></image-slot></div>
+          <span style="font-size:17px;font-weight:600;color:#1F3B36;line-height:1.2">{{ m.name }}</span>
+          <span style="font-size:13.5px;color:#5C6663">{{ m.role }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Отзывы" style="max-width:1240px;margin:0 auto;padding:88px 20px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:32px">
+    <h2 style="font-size:clamp(32px,3.6vw,48px);line-height:1.05">Что говорят гости</h2>
+    <a href="otzyvy.dc.html" style="display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;background:#fff;border:1px solid rgba(31,59,54,.1);font-size:14px;font-weight:600"><span style="color:#C9A66B">★★★★★</span> 5,0 · 42 отзыва в 2ГИС →</a>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px">
+    <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+      <div style="background:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:16px;border:1px solid rgba(31,59,54,.08)">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:44px;line-height:.6;color:#C9A66B">“</span>
+        <p style="font-size:16px;line-height:1.6;color:#1E2422">{{ r.text }}</p>
+        <span style="margin-top:auto;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:600;color:#1F3B36">{{ r.name }}</span><span style="font-size:12.5px;color:#5C6663">{{ r.src }} · индивидуальный опыт</span></span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="Программы" style="background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:80px 20px">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:32px"><h2 style="font-size:clamp(32px,3.6vw,48px);line-height:1.05">Программы и абонементы</h2><a href="programmy.dc.html" style="font-size:14px;font-weight:600;color:#4E8C7E">Все программы →</a></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+      <sc-for list="{{ programs }}" as="p" hint-placeholder-count="3">
+        <div style="border-radius:28px;padding:30px;display:flex;flex-direction:column;gap:14px;background: {{ p.bg }};color: {{ p.fg }};border:1px solid rgba(31,59,54,.08)">
+          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#C9A66B;font-weight:600">{{ p.tag }}</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;line-height:1.05">{{ p.name }}</span>
+          <p style="font-size:14.5px;line-height:1.55;opacity:.8">{{ p.d }}</p>
+          <span style="margin-top:auto;font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600">{{ p.price }}</span>
+          <a href="programmy.dc.html" style="height:50px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:14.5px;font-weight:600;background: {{ p.btnBg }};color: {{ p.btnFg }}">Подробнее</a>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Квиз" style="max-width:1240px;margin:0 auto;padding:88px 20px">
+  <dc-import name="Quiz" hint-size="100%,420px"></dc-import>
+</section>
+
+<section data-screen-label="Пространство" style="max-width:1240px;margin:0 auto;padding:0 20px 88px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:32px"><h2 style="font-size:clamp(32px,3.6vw,48px);line-height:1.05">Пространство</h2><p style="font-size:15px;color:#5C6663;max-width:420px;line-height:1.5">Отдельный двухэтажный коттедж в Караоткеле: комнаты с матрасами, чайная зона, тишина. Удобно с обоих берегов.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));grid-auto-rows:220px;gap:12px">
+    <div style="grid-column:span 2;grid-row:span 2;border-radius:24px;overflow:hidden"><image-slot id="space-1" src="photos/house.jpg" shape="rounded" radius="24" placeholder="Экстерьер коттеджа"></image-slot></div>
+    <div style="border-radius:24px;overflow:hidden"><image-slot id="space-2" src="photos/p7.png" shape="rounded" radius="24" placeholder="Комната с матрасами"></image-slot></div>
+    <div style="border-radius:24px;overflow:hidden"><image-slot id="space-3" src="photos/p6.png" shape="rounded" radius="24" placeholder="Чайная зона"></image-slot></div>
+    <div style="border-radius:24px;overflow:hidden"><image-slot id="space-4" src="photos/p5.png" shape="rounded" radius="24" placeholder="Мёд и сухофрукты"></image-slot></div>
+    <div style="border-radius:24px;overflow:hidden"><image-slot id="space-5" src="photos/p4.png" shape="rounded" radius="24" placeholder="VR-шлем, нейронаушники"></image-slot></div>
+  </div>
+</section>
+
+<section data-screen-label="FAQ" style="background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px">
+    <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start"><h2 style="font-size:clamp(32px,3.6vw,48px);line-height:1.05">Вопросы и ответы</h2><p style="font-size:15px;color:#5C6663;line-height:1.5">Если не нашли ответ — напишите в WhatsApp, отвечаем быстро.</p><a href="faq.dc.html" style="font-size:14px;font-weight:600;color:#4E8C7E">Все вопросы →</a></div>
+    <div style="display:flex;flex-direction:column;grid-column:span 2">
+      <sc-for list="{{ faq }}" as="f" hint-placeholder-count="8">
+        <div style="border-top:1px solid rgba(31,59,54,.12)">
+          <button onClick="{{ f.toggle }}" style="width:100%;text-align:left;background:transparent;border:0;padding:20px 0;display:flex;justify-content:space-between;gap:20px;align-items:center;cursor:pointer;font-size:17px;font-weight:600;color:#1F3B36"><span>{{ f.q }}</span><span style="font-size:22px;color:#4E8C7E;font-weight:400;flex-shrink:0">{{ f.sign }}</span></button>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><p style="padding:0 40px 20px 0;font-size:15px;line-height:1.6;color:#5C6663">{{ f.a }}</p></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Контакты" style="max-width:1240px;margin:0 auto;padding:88px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;align-items:start">
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <h2 style="font-size:clamp(32px,3.6vw,48px);line-height:1.05">Как нас найти</h2>
+    <div style="display:flex;flex-direction:column;gap:14px;font-size:15.5px;line-height:1.55">
+      <span><span style="display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C6663">Адрес</span>г. Астана, ул. Танбалытас, 5, мкр Караоткель-2, район Нура. Отдельный коттедж, 2 этажа, парковка у дома. <a href="https://2gis.kz/astana/firm/70000001089454684" target="_blank" rel="noopener" style="color:#4E8C7E;font-weight:600">Открыть в 2ГИС →</a></span>
+      <span><span style="display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C6663">График</span>Ежедневно 10:00–20:00 по записи. Ночные сеансы 22:00–08:00.</span>
+      <a href="tel:+77052281372" style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600">+7 705 228 13 72</a>
+    </div>
+    <div style="aspect-ratio:16/10;border-radius:24px;overflow:hidden;position:relative;background:#E6F0ED">
+      <iframe src="https://widgets.2gis.com/widget?type=firmsonmap&amp;options=%7B%22pos%22%3A%7B%22lat%22%3A51.1282%2C%22lon%22%3A71.3886%2C%22zoom%22%3A15%7D%2C%22opt%22%3A%7B%22city%22%3A%22astana%22%7D%2C%22org%22%3A%2270000001089454684%22%7D" title="Центр Свободы на карте 2ГИС" style="width:100%;height:100%;border:0;display:block" loading="lazy"></iframe>
+    </div>
+  </div>
+  <dc-import name="LeadForm" service="Чекап БРТ" hint-size="100%,460px"></dc-import>
+</section>
+
+<dc-import name="Footer" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null, open: 0 };
+  componentDidMount() { import('./data.js').then(d => this.setState({ d })); }
+  renderVals() {
+    const { d, open } = this.state;
+    if (!d) return {};
+    const link = { 'checkup-brt': 'Чекап БРТ', 'zerkala-kozyreva': 'Зеркала Козырева', 'psiholog': 'Психолог', 'telesnaya-terapiya': 'Телесная терапия', 'vr-terapiya': 'VR-программа' };
+    const z = d.bySlug('zerkala-kozyreva');
+    return {
+      wa: d.SITE.wa('Чекап БРТ'),
+      pains: d.PAINS.map((p, i) => ({ ...p, n: '0' + (i + 1), href: d.svcHref(p.s), link: link[p.s] })),
+      checkupPrice: d.fmt(d.bySlug('checkup-brt').price),
+      services: d.SERVICES.map((s, i) => ({ n: '0' + (i + 1), name: s.name, short: s.short, price: d.fmt(s.price), href: d.svcHref(s.slug) })),
+      mirrorDay: d.fmt(z.price), mirrorNight: d.fmt(z.priceNight),
+      team: d.TEAM.slice(0, 5).map(m => ({ name: m.name, role: m.role, href: 'komanda.dc.html', slot: 'team-' + m.id, photo: 'photos/' + ({zhuldyz:'p6',kanat:'p2','aigul-askar':'p3','aigul-abenova':'p2',anzhelika:'p5'}[m.id]) + '.png' })),
+      reviews: d.REVIEWS.slice(0, 3),
+      programs: d.PROGRAMS.map(p => ({ ...p, price: d.fmt(p.price), bg: p.featured ? '#1F3B36' : '#F5F2EC', fg: p.featured ? '#fff' : '#1E2422', btnBg: p.featured ? '#C9A66B' : '#4E8C7E', btnFg: p.featured ? '#16211F' : '#fff' })),
+      faq: d.FAQ.map((f, i) => ({ ...f, open: open === i, sign: open === i ? '−' : '+', toggle: () => this.setState({ open: open === i ? -1 : i }) })),
+    };
+  }
+}
+</script>
+</body>
+</html>
