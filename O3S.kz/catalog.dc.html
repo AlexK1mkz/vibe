@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Озоновые стерилизаторы O3S — каталог и цены в Казахстане | o3s.kz</title>
+  <meta name="description" content="8 моделей от 16 до 250 литров. Цикл 30–70 мин при 40 °C, без расходников. Купить от 1 290 000 ₸ или аренда от 45 000 ₸/мес.">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>
+    body{margin:0;background:#F6F9FA;color:#0B1F2A;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+    a{color:#2E5BFF;text-decoration:none}a:hover{color:#12B5C9}
+    *{box-sizing:border-box}input,select,button,textarea{font-family:inherit}
+    @media(max-width:1100px){[data-desk]{display:none!important}}
+    @media(min-width:1101px){[data-mob]{display:none!important}}
+  </style>
+</helmet>
+<dc-import name="header" active="Каталог" hint-size="100%,72px"></dc-import>
+<main style="padding-bottom:72px">
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(32px,5vw,64px) clamp(16px,4vw,40px) 0">
+    <nav style="font-size:13px;color:#5C7380;margin-bottom:20px;display:flex;gap:8px"><a href="index.dc.html" style="color:#5C7380">Главная</a><span>›</span><span>Стерилизаторы</span></nav>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:32px;align-items:end">
+      <div>
+        <h1 style="font-family:Onest,sans-serif;font-weight:800;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-.03em;margin:0 0 16px;text-wrap:balance">Озоновые стерилизаторы O3S</h1>
+        <p style="font-size:17px;color:#3D5461;margin:0;max-width:560px;text-wrap:pretty">Восемь моделей от 16 до 250 литров. Число в названии — объём камеры. Все работают при 40–45 °C от обычной розетки, без пара и расходников.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px);justify-self:start">
+        <div><div style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:28px">16–250 <span style="font-size:16px;color:#12B5C9">л</span></div><div style="font-size:13px;color:#5C7380">объём камеры</div></div>
+        <div><div style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:28px">30–70 <span style="font-size:16px;color:#12B5C9">мин</span></div><div style="font-size:13px;color:#5C7380">цикл</div></div>
+        <div><div style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:28px">2 <span style="font-size:16px;color:#12B5C9">года</span></div><div style="font-size:13px;color:#5C7380">гарантия</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:36px clamp(16px,4vw,40px) 0">
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:14px 0;border-top:1px solid #DCE4E8;border-bottom:1px solid #DCE4E8">
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="6">
+          <button onClick="{{ f.click }}" style="border:1px solid {{ f.border }};background:{{ f.bg }};color:{{ f.fg }};border-radius:999px;padding:9px 16px;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap" style-hover="border-color:#12B5C9">{{ f.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#5C7380">Сортировать
+        <select value="{{ sort }}" onChange="{{ setSort }}" style="border:1px solid #D5DEE2;border-radius:999px;padding:8px 14px;font-size:14px;background:#fff;outline:none"><option value="vol">по объёму</option><option value="price">по цене</option><option value="cycle">по времени цикла</option></select>
+      </div>
+    </div>
+    <div style="font-size:14px;color:#5C7380;padding:16px 0 4px">{{ countLabel }}</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:20px">
+      <sc-for list="{{ list }}" as="m" hint-placeholder-count="8">
+        <article style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:14px;transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-4px);box-shadow:0 20px 40px -24px #0B1F2A55">
+          <div style="position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#EEF4F6">
+            <image-slot id="{{ m.slotId }}" src="{{ m.img }}" shape="rect" placeholder="{{ m.placeholder }}"></image-slot>
+            <div style="position:absolute;top:10px;left:10px;display:flex;gap:6px;pointer-events:none">
+              <sc-if value="{{ m.hit }}" hint-placeholder-val="{{ false }}"><span style="background:#12B5C9;color:#fff;font-size:12px;font-weight:600;border-radius:999px;padding:5px 10px">Хит для стоматологии</span></sc-if>
+              <span style="background:{{ m.stockBg }};color:{{ m.stockFg }};font-size:12px;font-weight:600;border-radius:999px;padding:5px 10px">{{ m.stockLabel }}</span>
+            </div>
+          </div>
+          <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:20px;margin:0">{{ m.name }} <span style="color:#5C7380;font-weight:500;font-size:15px">{{ m.tag }}</span></h2>
+          <div style="display:flex;gap:16px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#3D5461"><span>{{ m.volLabel }}</span><span>{{ m.cycleLabel }}</span><span>{{ m.weight }}</span></div>
+          <p style="margin:0;font-size:14px;color:#5C7380;line-height:1.45">{{ m.use }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ m.uses }}" as="u" hint-placeholder-count="3"><span style="background:#F0F4F6;border-radius:999px;padding:4px 10px;font-size:12px;color:#3D5461">{{ u }}</span></sc-for>
+          </div>
+          <div style="margin-top:auto;padding-top:12px;border-top:1px solid #EEF2F4;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px">
+            <div><div style="font-family:Onest,sans-serif;font-weight:700;font-size:18px">{{ m.priceLabel }}</div><div style="font-size:12px;color:#5C7380">{{ m.rentLabel }}</div></div>
+            <div style="display:flex;gap:8px">
+              <a href="{{ m.href }}" style="border:1px solid #D5DEE2;color:#0B1F2A;border-radius:999px;padding:9px 14px;font-size:13px;font-weight:600" style-hover="border-color:#12B5C9;color:#12B5C9">Подробнее</a>
+              <a href="{{ m.wa }}" target="_blank" style="background:#0B1F2A;color:#fff;border-radius:999px;padding:9px 14px;font-size:13px;font-weight:600" style-hover="background:#12B5C9;color:#fff">Цена в WhatsApp</a>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px) 0">
+    <div style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;overflow:hidden">
+      <table data-desk style="width:100%;border-collapse:collapse;font-size:14px">
+        <thead><tr style="background:#F6F9FA"><th style="text-align:left;padding:14px 18px;font-size:12px;color:#5C7380;text-transform:uppercase;letter-spacing:.06em">Модель</th><th style="text-align:left;padding:14px 18px;font-size:12px;color:#5C7380;text-transform:uppercase;letter-spacing:.06em">Объём</th><th style="text-align:left;padding:14px 18px;font-size:12px;color:#5C7380;text-transform:uppercase;letter-spacing:.06em">Цикл</th><th style="text-align:left;padding:14px 18px;font-size:12px;color:#5C7380;text-transform:uppercase;letter-spacing:.06em">Камера Ш×Г×В</th><th style="text-align:left;padding:14px 18px;font-size:12px;color:#5C7380;text-transform:uppercase;letter-spacing:.06em">Вес</th><th style="text-align:left;padding:14px 18px;font-size:12px;color:#5C7380;text-transform:uppercase;letter-spacing:.06em">Покупка</th><th style="text-align:left;padding:14px 18px;font-size:12px;color:#5C7380;text-transform:uppercase;letter-spacing:.06em">Аренда / мес</th></tr></thead>
+        <tbody>
+          <sc-for list="{{ all }}" as="m" hint-placeholder-count="8">
+            <tr style="border-top:1px solid #EEF2F4" style-hover="background:#F6F9FA"><td style="padding:14px 18px;font-weight:600"><a href="{{ m.href }}" style="color:#0B1F2A">{{ m.name }}</a></td><td style="padding:14px 18px;font-family:'JetBrains Mono',monospace">{{ m.volLabel }}</td><td style="padding:14px 18px;font-family:'JetBrains Mono',monospace">{{ m.cycleLabel }}</td><td style="padding:14px 18px;font-family:'JetBrains Mono',monospace;color:#3D5461">{{ m.size }}</td><td style="padding:14px 18px;font-family:'JetBrains Mono',monospace;color:#3D5461">{{ m.weight }}</td><td style="padding:14px 18px;font-weight:600">{{ m.priceLabel }}</td><td style="padding:14px 18px;color:#0A7F8E;font-weight:600">{{ m.rentShort }}</td></tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <div data-mob style="padding:16px;display:grid;gap:10px">
+        <sc-for list="{{ all }}" as="m" hint-placeholder-count="8">
+          <div style="display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #EEF2F4;font-size:14px"><div><b>{{ m.name }}</b><div style="color:#5C7380;font-size:12px;font-family:'JetBrains Mono',monospace">{{ m.volLabel }} · {{ m.cycleLabel }} · {{ m.weight }}</div></div><div style="text-align:right"><div style="font-weight:600">{{ m.priceLabel }}</div><div style="color:#0A7F8E;font-size:12px">{{ m.rentShort }}</div></div></div>
+        </sc-for>
+      </div>
+    </div>
+    <p style="font-size:13px;color:#5C7380;margin:12px 0 0">Цены ориентировочные, точную стоимость с доставкой и установкой считаем по заявке. Таблица выгружается из единого списка моделей — цены меняются в одном месте.</p>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px;align-items:start">
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#0A7F8E;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Общее для линейки</div>
+      <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(26px,3vw,36px);letter-spacing:-.02em;margin:0 0 14px;line-height:1.1">Одна технология, разный объём</h2>
+      <p style="color:#3D5461;margin:0;text-wrap:pretty">Генератор озона, деструктор и электроника одинаковы во всех моделях. Выбирайте только по объёму инструмента за смену: 16 л — один кабинет, 85 л — операционный блок, 250 л — ЦСО.</p>
+    </div>
+    <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:1px;background:#E1E8EB;border:1px solid #E1E8EB;border-radius:20px;overflow:hidden">
+      <sc-for list="{{ specs }}" as="s" hint-placeholder-count="8">
+        <div style="background:#fff;padding:18px 20px"><dt style="font-size:12px;color:#5C7380;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">{{ s.k }}</dt><dd style="margin:0;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:16px">{{ s.v }}</dd></div>
+      </sc-for>
+    </dl>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px) 0">
+    <div style="background:#0B1F2A;color:#fff;border-radius:24px;padding:clamp(28px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px;align-items:center;position:relative;overflow:hidden">
+      <div style="position:absolute;right:-8%;top:-40%;width:45%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#12B5C966,transparent 65%);filter:blur(40px);pointer-events:none"></div>
+      <div style="position:relative"><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(24px,2.6vw,32px);margin:0 0 10px;letter-spacing:-.02em">Не уверены, какой объём нужен?</h2><p style="color:#A9BCC6;margin:0">Назовите число кабинетов и приёмов в день — подберём модель и посчитаем аренду и покупку рядом.</p></div>
+      <div style="position:relative;display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end">
+        <a href="rent.dc.html" style="border:2px solid #12B5C9;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600" style-hover="background:#12B5C9;color:#fff">Калькулятор аренды</a>
+        <a href="https://wa.me/77710010744?text=Здравствуйте!%20Помогите%20подобрать%20стерилизатор%20O3S" target="_blank" style="background:#25D366;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600" style-hover="background:#1EBE5A;color:#fff">Подобрать в WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="form" style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:24px;align-items:start">
+    <dc-import name="lead-form" heading="Получить расчёт" hint-size="100%,640px"></dc-import>
+    <div style="display:grid;gap:16px">
+      <div style="background:#E3F7F9;border:1px solid #B9E9EF;border-radius:20px;padding:clamp(24px,3vw,32px)"><h3 style="font-family:Onest,sans-serif;font-size:20px;margin:0 0 8px">Что получите в ответ</h3><ul style="margin:0;padding:0;list-style:none;display:grid;gap:8px;color:#3D5461;font-size:15px"><li>· КП с ценой, доставкой и установкой в ваш город</li><li>· Сравнение покупки и аренды на 12 / 24 / 36 месяцев</li><li>· Счёт на юрлицо в день обращения</li></ul></div>
+      <div style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;padding:clamp(24px,3vw,32px);display:grid;gap:12px;font-size:15px"><div><div style="font-size:12px;color:#5C7380;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Телефон</div><a href="tel:+77710010744" style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:#0B1F2A">+7 771 001 07 44</a></div><div><div style="font-size:12px;color:#5C7380;font-weight:600;text-transform:uppercase;letter-spacing:.06em">График</div>Пн–Пт 9:00–18:00, Сб 10:00–14:00</div></div>
+    </div>
+  </section>
+</main>
+<dc-import name="footer" hint-size="100%,420px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { data: null, filter: 'Все', sort: 'vol' };
+  async componentDidMount() { this.setState({ data: await import('./o3s-data.js') }); }
+  renderVals() {
+    const d = this.state.data, s = this.state;
+    const fmt = d ? d.fmt : (x) => x;
+    const FILTERS = ['Все', 'Стоматология', 'Хирургия', 'Эндоскопия', 'Косметология', 'Лаборатории', 'Озонаторы и аксессуары'];
+    const match = (m) => s.filter === 'Все' ? true : s.filter === 'Озонаторы и аксессуары' ? m.vol === null : s.filter === 'Лаборатории' ? /лаборатор|ЦСО/i.test(m.use) : new RegExp(s.filter.slice(0, 6), 'i').test(m.use);
+    const dec = (m) => ({
+      ...m, slotId: 'cat-' + m.id, img: m.img, placeholder: 'Фото ' + m.name, href: m.id === 'o3s-16' ? 'o3s-16.dc.html' : 'o3s-16.dc.html#' + m.id,
+      volLabel: m.vol ? m.vol + ' л' : '—', cycleLabel: m.cycle ? m.cycle + ' мин' : '—',
+      priceLabel: 'от ' + fmt(m.price), rentLabel: typeof m.rent === 'number' ? 'или аренда от ' + fmt(m.rent) + '/мес' : (m.rent ? 'аренда по запросу' : 'покупка'),
+      rentShort: typeof m.rent === 'number' ? fmt(m.rent) : (m.rent || '—'),
+      stockLabel: m.stock ? 'В наличии' : 'Под заказ', stockBg: m.stock ? '#fff' : '#F0F4F6', stockFg: m.stock ? '#0A7F8E' : '#5C7380',
+      wa: d ? d.CONTACT.wa(m.name) : '#',
+    });
+    const all = (d ? d.MODELS : []).map(dec);
+    const key = { vol: (m) => m.vol ?? 9999, price: (m) => m.price, cycle: (m) => m.cycle ?? 9999 }[s.sort];
+    const list = all.filter(match).sort((a, b) => key(a) - key(b));
+    const n = list.length, word = n === 1 ? 'модель' : n < 5 ? 'модели' : 'моделей';
+    return {
+      all, list, sort: s.sort, countLabel: d ? `${n} ${word}` : '',
+      filters: FILTERS.map(f => ({ label: f, click: () => this.setState({ filter: f }), bg: f === s.filter ? '#0B1F2A' : '#fff', fg: f === s.filter ? '#fff' : '#0B1F2A', border: f === s.filter ? '#0B1F2A' : '#D5DEE2' })),
+      setSort: (e) => this.setState({ sort: e.target.value }),
+      specs: (d ? d.COMMON_SPECS : []).map(([k, v]) => ({ k, v })),
+    };
+  }
+}
+</script>
+</body>
+</html>

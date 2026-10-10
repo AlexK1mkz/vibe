@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;padding:clamp(24px,3vw,40px);font-family:Inter,system-ui,sans-serif;color:#0B1F2A">
+  <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;margin:0 0 8px">{{ heading }}</h2>
+  <p style="color:#5C7380;margin:0 0 24px;font-size:15px">Перезвоним в течение 15 минут в рабочее время.</p>
+  <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+  <form onSubmit="{{ onSubmit }}" style="display:grid;gap:14px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Имя<input required placeholder="Как к вам обращаться" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit" style-focus="border-color:#12B5C9"></label>
+      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Телефон<input required type="tel" placeholder="+7 ___ ___ __ __" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit" style-focus="border-color:#12B5C9"></label>
+    </div>
+    <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Клиника / организация<input placeholder="Название" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit" style-focus="border-color:#12B5C9"></label>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Город<select style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit"><option>Астана</option><option>Алматы</option><option>Другой</option></select></label>
+      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Интерес<select value="{{ interest }}" onChange="{{ setInterest }}" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit"><option>Покупка</option><option>Аренда</option><option>Консультация</option></select></label>
+    </div>
+    <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Модель<select value="{{ model }}" onChange="{{ setModel }}" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit"><option>Не выбрана</option><option>O3S-16</option><option>O3S-36</option><option>O3S-40</option><option>O3S-85</option><option>O3S-140</option><option>O3S-250</option><option>O3S-P</option></select></label>
+    <sc-if value="{{ showDaily }}" hint-placeholder-val="{{ false }}">
+      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Сколько стерилизаций в день<input type="number" min="1" placeholder="например, 8" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit" style-focus="border-color:#12B5C9"></label>
+    </sc-if>
+    <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#5C7380"><input required type="checkbox" style="margin-top:3px;accent-color:#12B5C9">Согласен на обработку персональных данных согласно <a href="#" style="color:#2E5BFF;text-decoration:none">политике конфиденциальности</a></label>
+    <button type="submit" style="border:0;background:#12B5C9;color:#fff;border-radius:999px;padding:16px 28px;font-weight:600;font-size:16px;cursor:pointer;justify-self:start;font-family:inherit" style-hover="background:#0FA3B5">{{ button }}</button>
+  </form>
+  </sc-if>
+  <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#E3F7F9;border-radius:16px;padding:28px;display:grid;gap:12px;justify-items:start">
+      <div style="width:48px;height:48px;border-radius:50%;background:#12B5C9;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px">✓</div>
+      <h3 style="font-family:Onest,sans-serif;font-size:22px;margin:0">Спасибо, заявка принята</h3>
+      <p style="margin:0;color:#3D5461">Чтобы не ждать звонка, продолжите в WhatsApp — так контакт будет с обеих сторон.</p>
+      <a href="{{ wa }}" target="_blank" style="background:#25D366;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600;text-decoration:none" style-hover="background:#1EBE5A">Продолжить в WhatsApp</a>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:600,&quot;height&quot;:640},&quot;heading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Получить расчёт&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;button&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Отправить заявку&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;model&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Не выбрана&quot;,&quot;O3S-16&quot;,&quot;O3S-36&quot;,&quot;O3S-40&quot;,&quot;O3S-85&quot;,&quot;O3S-140&quot;,&quot;O3S-250&quot;,&quot;O3S-P&quot;],&quot;default&quot;:&quot;Не выбрана&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;interest&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Покупка&quot;,&quot;Аренда&quot;,&quot;Консультация&quot;],&quot;default&quot;:&quot;Покупка&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showDaily&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { sent: false, model: null, interest: null };
+  renderVals() {
+    const model = this.state.model ?? this.props.model ?? 'Не выбрана';
+    const interest = this.state.interest ?? this.props.interest ?? 'Покупка';
+    return {
+      heading: this.props.heading ?? 'Получить расчёт', button: this.props.button ?? 'Отправить заявку',
+      showDaily: this.props.showDaily ?? false,
+      model, interest, sent: this.state.sent, notSent: !this.state.sent,
+      wa: 'https://wa.me/77710010744?text=' + encodeURIComponent('Здравствуйте! Интересует стерилизатор ' + (model === 'Не выбрана' ? 'O3S' : model) + (interest === 'Аренда' ? ' в аренду' : '')),
+      setModel: (e) => this.setState({ model: e.target.value }), setInterest: (e) => this.setState({ interest: e.target.value }),
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+    };
+  }
+}
+</script>
+</body>
+</html>
