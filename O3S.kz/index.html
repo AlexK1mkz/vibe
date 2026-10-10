@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Озоновые стерилизаторы O3S — купить или арендовать в Казахстане | o3s.kz</title>
+  <meta name="description" content="Стерилизация за 30 мин при 40 °C без расходников. Производство и сервис в Казахстане. Аренда от 45 000 ₸/мес. Доставка по Астане и Алматы.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>
+    body{margin:0;background:#F6F9FA;color:#0B1F2A;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+    a{color:#2E5BFF;text-decoration:none}a:hover{color:#12B5C9}
+    *{box-sizing:border-box}
+    input,select,button,textarea{font-family:inherit}
+    @keyframes o3float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    @keyframes o3spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+    @keyframes o3pulse{0%,100%{opacity:.5}50%{opacity:1}}
+    @media(max-width:1100px){[data-desk]{display:none!important}}
+    @media(min-width:1101px){[data-mob]{display:none!important}}
+  </style>
+</helmet>
+
+<header style="position:sticky;top:0;z-index:50;background:rgba(246,249,250,.88);backdrop-filter:blur(14px);border-bottom:1px solid #E1E8EB">
+  <div style="max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px);height:72px;display:flex;align-items:center;gap:24px">
+    <a href="./" style="display:flex;align-items:center;gap:10px;color:#0B1F2A">
+      <span style="display:flex;gap:3px"><i style="width:8px;height:8px;border-radius:50%;background:#12B5C9"></i><i style="width:8px;height:8px;border-radius:50%;background:#12B5C9;opacity:.7"></i><i style="width:8px;height:8px;border-radius:50%;background:#12B5C9;opacity:.4"></i></span>
+      <span style="font-family:Onest,sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em">O<sub style="font-size:14px;vertical-align:-4px">3</sub>S</span>
+    </a>
+    <nav data-desk style="display:flex;gap:28px;margin-left:16px">
+      <a href="catalog.dc.html" style="color:#0B1F2A;font-weight:500;font-size:15px" style-hover="color:#12B5C9">Каталог</a>
+      <a href="rent.dc.html" style="color:#0B1F2A;font-weight:500;font-size:15px" style-hover="color:#12B5C9">Аренда</a>
+      <a href="dental.dc.html" style="color:#0B1F2A;font-weight:500;font-size:15px" style-hover="color:#12B5C9">Стоматологиям</a>
+      <a href="#tech" style="color:#0B1F2A;font-weight:500;font-size:15px" style-hover="color:#12B5C9">Технология</a>
+      <a href="#about" style="color:#0B1F2A;font-weight:500;font-size:15px" style-hover="color:#12B5C9">О компании</a>
+      <a href="contacts.dc.html" style="color:#0B1F2A;font-weight:500;font-size:15px" style-hover="color:#12B5C9">Контакты</a>
+    </nav>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:14px">
+      <div style="display:flex;border:1px solid #D5DEE2;border-radius:999px;padding:3px;font-size:12px;font-weight:600">
+        <button onClick="{{ setRu }}" style="border:0;border-radius:999px;padding:4px 10px;cursor:pointer;background:{{ ruBg }};color:{{ ruFg }}">RU</button>
+        <button onClick="{{ setKz }}" style="border:0;border-radius:999px;padding:4px 10px;cursor:pointer;background:{{ kzBg }};color:{{ kzFg }}">KZ</button>
+      </div>
+      <a data-desk href="tel:+77710010744" style="color:#0B1F2A;font-weight:600;font-size:15px;font-family:'JetBrains Mono',monospace;white-space:nowrap">+7 771 001 07 44</a>
+      <a data-desk href="{{ waHome }}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;border-radius:999px;padding:10px 18px;font-weight:600;font-size:14px" style-hover="background:#1EBE5A;color:#fff">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+        WhatsApp</a>
+      <button data-mob onClick="{{ toggleMenu }}" aria-label="Меню" style="border:0;background:none;padding:8px;cursor:pointer;display:flex;flex-direction:column;gap:5px"><i style="width:22px;height:2px;background:#0B1F2A"></i><i style="width:22px;height:2px;background:#0B1F2A"></i><i style="width:14px;height:2px;background:#0B1F2A"></i></button>
+    </div>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav data-mob style="display:flex;flex-direction:column;border-top:1px solid #E1E8EB;background:#fff;padding:8px 16px 16px">
+      <a href="catalog.dc.html" style="color:#0B1F2A;font-weight:600;font-size:17px;padding:12px 0;border-bottom:1px solid #EEF2F4">Каталог</a>
+      <a href="rent.dc.html" style="color:#0B1F2A;font-weight:600;font-size:17px;padding:12px 0;border-bottom:1px solid #EEF2F4">Аренда</a>
+      <a href="dental.dc.html" style="color:#0B1F2A;font-weight:600;font-size:17px;padding:12px 0;border-bottom:1px solid #EEF2F4">Стоматологиям</a>
+      <a href="#tech" style="color:#0B1F2A;font-weight:600;font-size:17px;padding:12px 0;border-bottom:1px solid #EEF2F4">Технология</a>
+      <a href="#about" style="color:#0B1F2A;font-weight:600;font-size:17px;padding:12px 0;border-bottom:1px solid #EEF2F4">О компании</a>
+      <a href="contacts.dc.html" style="color:#0B1F2A;font-weight:600;font-size:17px;padding:12px 0">Контакты</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main style="padding-bottom:72px">
+  <!-- HERO -->
+  <section style="position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background-image:linear-gradient(#0B1F2A0a 1px,transparent 1px),linear-gradient(90deg,#0B1F2A0a 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 70% 40%,#000 30%,transparent 75%);pointer-events:none"></div>
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(40px,7vw,96px) clamp(16px,4vw,40px) clamp(40px,6vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:48px;align-items:center;position:relative">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:#E3F7F9;color:#0A7F8E;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;margin-bottom:24px"><i style="width:6px;height:6px;border-radius:50%;background:#12B5C9"></i>Производство и сервис в Казахстане</div>
+        <h1 style="font-family:Onest,sans-serif;font-weight:800;font-size:clamp(34px,4.6vw,60px);line-height:1.05;letter-spacing:-.03em;margin:0 0 20px;text-wrap:balance">Озоновые стерилизаторы для клиник Казахстана</h1>
+        <p style="font-size:clamp(16px,1.4vw,19px);color:#3D5461;margin:0 0 32px;max-width:540px;text-wrap:pretty">Стерилизация инструмента за 30 минут при 40 °C. Без пара, без химии, без расходников. Производство и сервис — в Казахстане.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <button onClick="{{ openForm }}" style="border:0;background:#12B5C9;color:#fff;border-radius:999px;padding:16px 28px;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 10px 30px -10px #12B5C9aa" style-hover="background:#0FA3B5">Получить расчёт</button>
+          <a href="{{ waHome }}" target="_blank" style="display:inline-flex;align-items:center;gap:10px;border:2px solid #25D366;color:#128C4A;border-radius:999px;padding:14px 26px;font-size:16px;font-weight:600" style-hover="background:#25D366;color:#fff">Написать в WhatsApp</a>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);margin-top:44px;padding-top:28px;border-top:1px solid #DCE4E8">
+          <div><div style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:32px;letter-spacing:-.02em">30 <span style="font-size:18px;color:#12B5C9">мин</span></div><div style="font-size:13px;color:#5C7380">полный цикл</div></div>
+          <div><div style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:32px;letter-spacing:-.02em">100 <span style="font-size:18px;color:#12B5C9">Вт</span></div><div style="font-size:13px;color:#5C7380">потребление</div></div>
+          <div><div style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:32px;letter-spacing:-.02em">0 <span style="font-size:18px;color:#12B5C9">₸</span></div><div style="font-size:13px;color:#5C7380">расходники на цикл</div></div>
+        </div>
+      </div>
+      <div style="position:relative;min-height:380px;display:flex;align-items:center;justify-content:center">
+        <div style="position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#12B5C955,transparent 65%);filter:blur(30px)"></div>
+        {{ molecule }}
+        <div style="position:relative;width:min(100%,520px);aspect-ratio:4/3;background:#fff;border-radius:20px;box-shadow:0 30px 60px -30px #0B1F2A40;overflow:hidden">
+          <image-slot id="hero-o3s16" src="img/orion/category-sterilizator-ozonovyy-orion.jpg" shape="rect" placeholder="Фото O3S-16 — 3/4 вид, светлый фон" fit="cover"></image-slot>
+          <div style="position:absolute;left:16px;bottom:14px;background:#0B1F2A;color:#fff;border-radius:999px;padding:6px 12px;font-size:12px;font-family:'JetBrains Mono',monospace;pointer-events:none">O3S-16 · 16 л · Dental</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section style="border-top:1px solid #DCE4E8;border-bottom:1px solid #DCE4E8;background:#fff">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+      <div style="padding:22px 0;display:flex;gap:12px;align-items:center;font-weight:600;font-size:15px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12B5C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V8l8-5 8 5v12M9 20v-6h6v6"/></svg>Собственное производство</div>
+      <div style="padding:22px 0;display:flex;gap:12px;align-items:center;font-weight:600;font-size:15px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12B5C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Гарантия 2 года</div>
+      <div style="padding:22px 0;display:flex;gap:12px;align-items:center;font-weight:600;font-size:15px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12B5C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Сервис в Астане и Алматы</div>
+      <div style="padding:22px 0;display:flex;gap:12px;align-items:center;font-weight:600;font-size:15px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12B5C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Аренда от 45 000 ₸ / мес</div>
+    </div>
+  </section>
+
+  <!-- CATALOG PREVIEW -->
+  <section id="catalog" style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:36px">
+      <div><div style="font-size:13px;font-weight:600;color:#0A7F8E;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Каталог</div><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.02em;margin:0;line-height:1.1">Модельный ряд O3S</h2></div>
+      <a href="catalog.dc.html" style="font-weight:600;display:inline-flex;align-items:center;gap:6px">Весь каталог <span>→</span></a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:20px">
+      <sc-for list="{{ preview }}" as="m" hint-placeholder-count="6">
+        <article style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:14px;transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-4px);box-shadow:0 20px 40px -24px #0B1F2A55">
+          <div style="position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#EEF4F6">
+            <image-slot id="{{ m.slotId }}" src="{{ m.img }}" shape="rect" placeholder="{{ m.placeholder }}"></image-slot>
+            <sc-if value="{{ m.hit }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:10px;left:10px;background:#12B5C9;color:#fff;font-size:12px;font-weight:600;border-radius:999px;padding:5px 10px;pointer-events:none">Хит для стоматологии</span></sc-if>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+            <h3 style="font-family:Onest,sans-serif;font-weight:700;font-size:20px;margin:0">{{ m.name }} <span style="color:#5C7380;font-weight:500;font-size:15px">{{ m.tag }}</span></h3>
+          </div>
+          <div style="display:flex;gap:16px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#3D5461"><span>{{ m.volLabel }}</span><span>{{ m.cycleLabel }}</span></div>
+          <p style="margin:0;font-size:14px;color:#5C7380;line-height:1.45">{{ m.use }}</p>
+          <div style="margin-top:auto;padding-top:10px;border-top:1px solid #EEF2F4;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px">
+            <div><div style="font-family:Onest,sans-serif;font-weight:700;font-size:18px">{{ m.priceLabel }}</div><div style="font-size:12px;color:#5C7380">{{ m.rentLabel }}</div></div>
+            <div style="display:flex;gap:8px">
+              <a href="{{ m.href }}" style="border:1px solid #D5DEE2;color:#0B1F2A;border-radius:999px;padding:9px 14px;font-size:13px;font-weight:600" style-hover="border-color:#12B5C9;color:#12B5C9">Подробнее</a>
+              <button onClick="{{ m.rentClick }}" style="border:0;background:#0B1F2A;color:#fff;border-radius:999px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer" style-hover="background:#12B5C9">В аренду</button>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- WHY OZONE -->
+  <section id="tech" style="background:#fff;border-top:1px solid #DCE4E8;border-bottom:1px solid #DCE4E8">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px)">
+      <div style="max-width:620px;margin-bottom:44px"><div style="font-size:13px;font-weight:600;color:#0A7F8E;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Почему озон</div><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.02em;margin:0 0 14px;line-height:1.1">Холодная стерилизация, которая бережёт инструмент и бюджет</h2></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:1px;background:#E1E8EB;border:1px solid #E1E8EB;border-radius:20px;overflow:hidden">
+        <sc-for list="{{ why }}" as="w" hint-placeholder-count="8">
+          <div style="background:#fff;padding:28px 24px;display:flex;flex-direction:column;gap:14px" style-hover="background:#F6F9FA">
+            <div style="width:44px;height:44px;border-radius:12px;background:#E3F7F9;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A7F8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="{{ w.path }}"></path></svg></div>
+            <div><h3 style="font-family:Onest,sans-serif;font-weight:700;font-size:17px;margin:0 0 6px">{{ w.t }}</h3><p style="margin:0;font-size:14px;color:#5C7380;line-height:1.45">{{ w.d }}</p></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- DENTAL DARK -->
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px)">
+    <div style="position:relative;overflow:hidden;background:#0B1F2A;color:#fff;border-radius:24px;padding:clamp(32px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px;align-items:center">
+      <div style="position:absolute;right:-10%;top:-30%;width:50%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#12B5C966,transparent 65%);filter:blur(40px);pointer-events:none"></div>
+      <div style="position:relative">
+        <div style="font-size:13px;font-weight:600;color:#12B5C9;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px">Для стоматологий</div>
+        <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,42px);letter-spacing:-.02em;margin:0 0 18px;line-height:1.1;text-wrap:balance">Стерилизатор, который окупается за 14 месяцев</h2>
+        <p style="color:#A9BCC6;margin:0 0 28px;max-width:480px;text-wrap:pretty">O3S-16 рассчитан на кабинет с 1–3 креслами. Сравнение с автоклавом — по расходникам, электричеству и сроку службы наконечников. [уточнить]</p>
+        <a href="dental.dc.html" style="display:inline-flex;align-items:center;gap:8px;background:#12B5C9;color:#fff;border-radius:999px;padding:14px 26px;font-weight:600" style-hover="background:#0FA3B5;color:#fff">Решение для стоматологии →</a>
+      </div>
+      <ul style="position:relative;list-style:none;margin:0;padding:0;display:grid;gap:12px">
+        <li style="display:flex;gap:14px;align-items:flex-start;background:#13293680;border:1px solid #1E3A49;border-radius:14px;padding:16px 18px"><span style="flex:none;width:22px;height:22px;border-radius:50%;background:#12B5C9;color:#0B1F2A;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">✓</span><div><b style="display:block;font-weight:600">Очередь в автоклав в часы пик</b><span style="color:#A9BCC6;font-size:14px">Цикл 30 минут, аппарат стоит прямо в кабинете</span></div></li>
+        <li style="display:flex;gap:14px;align-items:flex-start;background:#13293680;border:1px solid #1E3A49;border-radius:14px;padding:16px 18px"><span style="flex:none;width:22px;height:22px;border-radius:50%;background:#12B5C9;color:#0B1F2A;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">✓</span><div><b style="display:block;font-weight:600">Порча наконечников</b><span style="color:#A9BCC6;font-size:14px">40 °C вместо 134 °C — подшипники и оптика служат дольше</span></div></li>
+        <li style="display:flex;gap:14px;align-items:flex-start;background:#13293680;border:1px solid #1E3A49;border-radius:14px;padding:16px 18px"><span style="flex:none;width:22px;height:22px;border-radius:50%;background:#12B5C9;color:#0B1F2A;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">✓</span><div><b style="display:block;font-weight:600">Расходники каждый месяц</b><span style="color:#A9BCC6;font-size:14px">Ни пакетов, ни дистиллята, ни фильтров</span></div></li>
+        <li style="display:flex;gap:14px;align-items:flex-start;background:#13293680;border:1px solid #1E3A49;border-radius:14px;padding:16px 18px"><span style="flex:none;width:22px;height:22px;border-radius:50%;background:#12B5C9;color:#0B1F2A;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">✓</span><div><b style="display:block;font-weight:600">Проверки СЭС</b><span style="color:#A9BCC6;font-size:14px">Химические индикаторы и журнал циклов в комплекте</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BUY OR RENT -->
+  <section style="max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px) clamp(56px,7vw,96px)">
+    <div style="max-width:620px;margin-bottom:36px"><div style="font-size:13px;font-weight:600;color:#0A7F8E;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Условия</div><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.02em;margin:0;line-height:1.1">Купить или арендовать</h2></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px">
+      <div style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:18px">
+        <h3 style="font-family:Onest,sans-serif;font-weight:700;font-size:24px;margin:0">Покупка</h3>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:600">от 1 290 000 ₸</div>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:10px;color:#3D5461;font-size:15px"><li>· Аппарат в собственность, гарантия 2 года</li><li>· Доставка и установка по Астане и Алматы</li><li>· Обучение персонала и первый год ТО</li><li>· Счёт на юрлицо, работа по госзакупкам</li></ul>
+        <button onClick="{{ openBuy }}" style="margin-top:auto;align-self:flex-start;border:0;background:#0B1F2A;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600;font-size:15px;cursor:pointer" style-hover="background:#12B5C9">Получить расчёт</button>
+      </div>
+      <div style="background:#E3F7F9;border:1px solid #B9E9EF;border-radius:20px;padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:18px">
+        <h3 style="font-family:Onest,sans-serif;font-weight:700;font-size:24px;margin:0">Аренда</h3>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:600">от 45 000 ₸ <span style="font-size:16px;color:#0A7F8E">/ мес</span></div>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:10px;color:#3D5461;font-size:15px"><li>· Гарантийный взнос ≈ 600 000 ₸, возвращается</li><li>· Сервис, ТО и замена за 48 часов включены</li><li>· Платёж привязан к количеству циклов</li><li>· Можно выкупить в любой момент</li></ul>
+        <a href="rent.dc.html" style="margin-top:auto;align-self:flex-start;background:#12B5C9;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600;font-size:15px" style-hover="background:#0FA3B5;color:#fff">Условия аренды →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CYCLE -->
+  <section style="background:#fff;border-top:1px solid #DCE4E8;border-bottom:1px solid #DCE4E8">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px)">
+      <div style="max-width:620px;margin-bottom:44px"><div style="font-size:13px;font-weight:600;color:#0A7F8E;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Технология</div><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.02em;margin:0;line-height:1.1">Как работает цикл</h2></div>
+      <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:20px;counter-reset:s">
+        <li style="position:relative;padding-top:20px"><div style="height:2px;background:linear-gradient(90deg,#12B5C9,#12B5C933);margin-bottom:22px"></div><div style="font-family:'JetBrains Mono',monospace;color:#12B5C9;font-weight:600;margin-bottom:8px">01</div><h3 style="font-family:Onest,sans-serif;font-size:19px;font-weight:700;margin:0 0 8px">Загрузка в камеру</h3><p style="margin:0;color:#5C7380;font-size:14px">Инструмент в лотках, без упаковки в пакеты. Крышка закрывается герметично.</p></li>
+        <li style="position:relative;padding-top:20px"><div style="height:2px;background:linear-gradient(90deg,#12B5C9,#12B5C933);margin-bottom:22px"></div><div style="font-family:'JetBrains Mono',monospace;color:#12B5C9;font-weight:600;margin-bottom:8px">02</div><h3 style="font-family:Onest,sans-serif;font-size:19px;font-weight:700;margin:0 0 8px">Генерация озона</h3><p style="margin:0;color:#5C7380;font-size:14px">Генератор получает O₃ из воздуха кабинета. Баллоны и кислород не нужны.</p></li>
+        <li style="position:relative;padding-top:20px"><div style="height:2px;background:linear-gradient(90deg,#12B5C9,#12B5C933);margin-bottom:22px"></div><div style="font-family:'JetBrains Mono',monospace;color:#12B5C9;font-weight:600;margin-bottom:8px">03</div><h3 style="font-family:Onest,sans-serif;font-size:19px;font-weight:700;margin:0 0 8px">Экспозиция</h3><p style="margin:0;color:#5C7380;font-size:14px">Выдержка при 40–45 °C и заданной концентрации. Таймер и датчики контролируют режим.</p></li>
+        <li style="position:relative;padding-top:20px"><div style="height:2px;background:linear-gradient(90deg,#12B5C9,#12B5C933);margin-bottom:22px"></div><div style="font-family:'JetBrains Mono',monospace;color:#12B5C9;font-weight:600;margin-bottom:8px">04</div><h3 style="font-family:Onest,sans-serif;font-size:19px;font-weight:700;margin:0 0 8px">O₃ → O₂, готово</h3><p style="margin:0;color:#5C7380;font-size:14px">Каталитический деструктор разлагает озон в кислород. Инструмент сразу в работу.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- COMPARE TABLE -->
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:36px">
+      <div style="max-width:620px"><div style="font-size:13px;font-weight:600;color:#0A7F8E;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Сравнение</div><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.02em;margin:0;line-height:1.1">Озон vs автоклав vs сухожар</h2></div>
+    </div>
+    <div data-desk style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;overflow:hidden">
+      <table style="width:100%;border-collapse:collapse;font-size:15px">
+        <thead><tr style="background:#F6F9FA"><th style="text-align:left;padding:16px 20px;font-weight:600;color:#5C7380;font-size:13px;text-transform:uppercase;letter-spacing:.06em">Параметр</th><th style="text-align:left;padding:16px 20px;font-weight:700;color:#0A7F8E;background:#E3F7F9">O3S озон</th><th style="text-align:left;padding:16px 20px;font-weight:600">Автоклав</th><th style="text-align:left;padding:16px 20px;font-weight:600">Сухожар</th></tr></thead>
+        <tbody>
+          <sc-for list="{{ compare }}" as="r" hint-placeholder-count="6">
+            <tr style="border-top:1px solid #EEF2F4"><td style="padding:16px 20px;font-weight:600">{{ r.p }}</td><td style="padding:16px 20px;background:#E3F7F966;font-family:'JetBrains Mono',monospace;font-weight:600;color:#0A7F8E">{{ r.o }}</td><td style="padding:16px 20px;color:#3D5461">{{ r.a }}</td><td style="padding:16px 20px;color:#3D5461">{{ r.s }}</td></tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+    <div data-mob style="display:grid;gap:12px">
+      <sc-for list="{{ compare }}" as="r" hint-placeholder-count="6">
+        <div style="background:#fff;border:1px solid #E1E8EB;border-radius:16px;padding:16px">
+          <div style="font-weight:600;margin-bottom:10px">{{ r.p }}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:13px">
+            <div style="background:#E3F7F9;border-radius:10px;padding:10px"><div style="color:#0A7F8E;font-size:11px;font-weight:600;margin-bottom:4px">O3S</div><div style="font-family:'JetBrains Mono',monospace;font-weight:600">{{ r.o }}</div></div>
+            <div style="background:#F6F9FA;border-radius:10px;padding:10px"><div style="color:#5C7380;font-size:11px;font-weight:600;margin-bottom:4px">Автоклав</div>{{ r.a }}</div>
+            <div style="background:#F6F9FA;border-radius:10px;padding:10px"><div style="color:#5C7380;font-size:11px;font-weight:600;margin-bottom:4px">Сухожар</div>{{ r.s }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- SPHERES -->
+  <section style="background:#fff;border-top:1px solid #DCE4E8;border-bottom:1px solid #DCE4E8">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,4vw,40px)">
+      <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;margin:0 0 28px;line-height:1.1">Сферы применения</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <sc-for list="{{ spheres }}" as="s" hint-placeholder-count="7">
+          <span style="border:1px solid #D5DEE2;border-radius:999px;padding:12px 20px;font-weight:500;font-size:15px;background:#F6F9FA" style-hover="border-color:#12B5C9;color:#0A7F8E">{{ s }}</span>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTION + DOCS -->
+  <section id="about" style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:48px;align-items:start">
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#0A7F8E;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Производство</div>
+      <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.02em;margin:0 0 16px;line-height:1.1">Мы производим в Казахстане</h2>
+      <p style="color:#3D5461;margin:0 0 28px;text-wrap:pretty">Собираем стерилизаторы в Астане: корпус, генератор озона и электроника — на собственной площадке. Запчасти и инженер всегда рядом, а не за границей. [уточнить историю и цифры]</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px">
+        <div><div style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:28px">2019</div><div style="font-size:13px;color:#5C7380">год основания</div></div>
+        <div><div style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:28px">120+</div><div style="font-size:13px;color:#5C7380">аппаратов в клиниках</div></div>
+        <div><div style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:28px">48 ч</div><div style="font-size:13px;color:#5C7380">замена при поломке</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="aspect-ratio:4/3;border-radius:16px;overflow:hidden"><image-slot id="prod-1" src="img/orion/img-3.jpg" shape="rect" placeholder="Фото цеха"></image-slot></div>
+        <div style="aspect-ratio:4/3;border-radius:16px;overflow:hidden"><image-slot id="prod-2" src="img/orion/category-ozonator-portativnyy-orion-si.jpg" shape="rect" placeholder="Сборка аппарата"></image-slot></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#0A7F8E;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Документы</div>
+      <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.02em;margin:0 0 16px;line-height:1.1">Сертификаты и регистрация</h2>
+      <p style="color:#3D5461;margin:0 0 28px">Показываем только реальные документы. Сканы заменят превью после получения. [уточнить]</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+        <div style="aspect-ratio:3/4;border-radius:12px;overflow:hidden;border:1px solid #E1E8EB"><image-slot id="doc-1" shape="rect" placeholder="РУ РК"></image-slot></div>
+        <div style="aspect-ratio:3/4;border-radius:12px;overflow:hidden;border:1px solid #E1E8EB"><image-slot id="doc-2" shape="rect" placeholder="Сертификат ЕАЭС"></image-slot></div>
+        <div style="aspect-ratio:3/4;border-radius:12px;overflow:hidden;border:1px solid #E1E8EB"><image-slot id="doc-3" shape="rect" placeholder="Декларация"></image-slot></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS + ARTICLES -->
+  <section style="max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px) clamp(56px,7vw,96px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:24px"><div><div style="font-size:13px;font-weight:600;color:#0A7F8E;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Партнёры</div><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;margin:0;line-height:1.1">Клиники, которые работают на озоновой технологии</h2></div></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px;margin-bottom:clamp(40px,5vw,64px)">
+      <div style="background:#fff;border:1px solid #E1E8EB;border-radius:16px;padding:18px;display:grid;gap:10px;align-content:center;justify-items:center;text-align:center"><img src="img/orion/partner-tsito-priorova.jpg" alt="ЦИТО им. Н.Н. Приорова" style="height:56px;object-fit:contain"><span style="font-size:12px;color:#5C7380">ЦИТО им. Н.Н. Приорова</span></div>
+      <div style="background:#fff;border:1px solid #E1E8EB;border-radius:16px;padding:18px;display:grid;gap:10px;align-content:center;justify-items:center;text-align:center"><img src="img/orion/partner-dgkb-im-g-n-speranskogo.png" alt="ДГКБ им. Г. Н. Сперанского" style="height:56px;object-fit:contain"><span style="font-size:12px;color:#5C7380">ДГКБ им. Г. Н. Сперанского</span></div>
+      <div style="background:#fff;border:1px solid #E1E8EB;border-radius:16px;padding:18px;display:grid;gap:10px;align-content:center;justify-items:center;text-align:center"><span style="font-family:Onest,sans-serif;font-weight:700;font-size:18px;color:#0B1F2A">УИТО</span><span style="font-size:12px;color:#5C7380">УИТО им. Чаклина</span></div>
+      <div style="background:#fff;border:1px solid #E1E8EB;border-radius:16px;padding:18px;display:grid;gap:10px;align-content:center;justify-items:center;text-align:center"><span style="font-family:Onest,sans-serif;font-weight:700;font-size:18px;color:#0B1F2A">НМИЦ ГБ</span><span style="font-size:12px;color:#5C7380">НМИЦ глазных болезней им. Гельмгольца</span></div>
+      <div style="background:#fff;border:1px solid #E1E8EB;border-radius:16px;padding:18px;display:grid;gap:10px;align-content:center;justify-items:center;text-align:center"><span style="font-family:Onest,sans-serif;font-weight:700;font-size:18px;color:#0B1F2A">Сеченовский</span><span style="font-size:12px;color:#5C7380">Медицинская академия им. Сеченова</span></div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:24px"><div><div style="font-size:13px;font-weight:600;color:#0A7F8E;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Статьи</div><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;margin:0;line-height:1.1">Озон в медицине: исследования и практика</h2></div></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px">
+      <a href="#" style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;overflow:hidden;display:grid;color:#0B1F2A" style-hover="border-color:#12B5C9"><img src="img/orion/article-ozonovaya-sterilizatsiya-v-borbe-s-ismp-.png" alt="" style="width:100%;aspect-ratio:16/9;object-fit:cover"><div style="padding:18px 20px 22px;display:grid;gap:8px"><span style="font-size:12px;color:#5C7380">12 марта 2025</span><b style="font-family:Onest,sans-serif;font-size:17px;line-height:1.3">Озоновая стерилизация в борьбе с ИСМП: решения для медицинских учреждений</b></div></a>
+      <a href="#" style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;overflow:hidden;display:grid;color:#0B1F2A" style-hover="border-color:#12B5C9"><img src="img/orion/article-primenenie-ozonoterapii-v-urologii-mirov.png" alt="" style="width:100%;aspect-ratio:16/9;object-fit:cover"><div style="padding:18px 20px 22px;display:grid;gap:8px"><span style="font-size:12px;color:#5C7380">10 апреля 2025</span><b style="font-family:Onest,sans-serif;font-size:17px;line-height:1.3">Применение озонотерапии в урологии: мировой опыт и перспективы</b></div></a>
+      <a href="#" style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;overflow:hidden;display:grid;color:#0B1F2A" style-hover="border-color:#12B5C9"><img src="img/orion/article-ozonoterapiya-v-proktologii-sovremennye-.jpg" alt="" style="width:100%;aspect-ratio:16/9;object-fit:cover"><div style="padding:18px 20px 22px;display:grid;gap:8px"><span style="font-size:12px;color:#5C7380">14 апреля 2025</span><b style="font-family:Onest,sans-serif;font-size:17px;line-height:1.3">Озонотерапия в проктологии: подходы и доказательная база</b></div></a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:#fff;border-top:1px solid #DCE4E8;border-bottom:1px solid #DCE4E8">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px">
+      <div><div style="font-size:13px;font-weight:600;color:#0A7F8E;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">FAQ</div><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.02em;margin:0 0 16px;line-height:1.1">Частые вопросы</h2><p style="color:#3D5461;margin:0">Не нашли ответ — <a href="{{ waHome }}" target="_blank">напишите в WhatsApp</a>, ответим в рабочее время за 15 минут.</p></div>
+      <div style="grid-column:span 2;display:grid;gap:0;border-top:1px solid #E1E8EB">
+        <sc-for list="{{ faq }}" as="f" hint-placeholder-count="8">
+          <div style="border-bottom:1px solid #E1E8EB">
+            <button onClick="{{ f.toggle }}" style="width:100%;text-align:left;border:0;background:none;padding:20px 0;display:flex;justify-content:space-between;gap:16px;align-items:center;cursor:pointer;font-size:17px;font-weight:600;color:#0B1F2A">{{ f.q }}<span style="flex:none;width:28px;height:28px;border-radius:50%;border:1px solid #D5DEE2;display:flex;align-items:center;justify-content:center;font-weight:400;color:#12B5C9">{{ f.sign }}</span></button>
+            <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 48px 22px 0;color:#3D5461;font-size:15px;line-height:1.6">{{ f.a }}</p></sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEAD MAGNET -->
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px) 0">
+    <div style="background:#0B1F2A;color:#fff;border-radius:24px;padding:clamp(28px,4vw,48px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;position:relative;overflow:hidden">
+      <div style="position:absolute;left:-5%;bottom:-60%;width:40%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#12B5C955,transparent 65%);filter:blur(40px);pointer-events:none"></div>
+      <div style="position:relative;max-width:520px"><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(22px,2.4vw,30px);margin:0 0 8px;letter-spacing:-.02em">Скачайте каталог O3S с ценами и сравнением методов</h2><p style="color:#A9BCC6;margin:0;font-size:15px">PDF придёт в WhatsApp сразу после отправки номера.</p></div>
+      <form onSubmit="{{ onLead }}" style="position:relative;display:flex;flex-wrap:wrap;gap:10px">
+        <input type="tel" required placeholder="+7 ___ ___ __ __" style="flex:1;min-width:200px;border:1px solid #2A4555;background:#132936;color:#fff;border-radius:999px;padding:14px 20px;font-size:15px;outline:none">
+        <button type="submit" style="border:0;background:#12B5C9;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600;cursor:pointer" style-hover="background:#0FA3B5">Скачать PDF</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FORM + MAP -->
+  <section id="form" style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:24px">
+    <div style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;padding:clamp(24px,3vw,40px)">
+      <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;margin:0 0 8px">Получить расчёт</h2>
+      <p style="color:#5C7380;margin:0 0 24px;font-size:15px">Перезвоним в течение 15 минут в рабочее время.</p>
+      <sc-if value="{{ notSentInline }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ onSubmitInline }}" style="display:grid;gap:14px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Имя<input required placeholder="Как к вам обращаться" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA" style-focus="border-color:#12B5C9"></label>
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Телефон<input required type="tel" placeholder="+7 ___ ___ __ __" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA" style-focus="border-color:#12B5C9"></label>
+        </div>
+        <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Клиника / организация<input placeholder="Название" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA" style-focus="border-color:#12B5C9"></label>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Город<select style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA"><option>Астана</option><option>Алматы</option><option>Другой</option></select></label>
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Интерес<select value="{{ interest }}" onChange="{{ setInterest }}" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA"><option>Покупка</option><option>Аренда</option><option>Консультация</option></select></label>
+        </div>
+        <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Модель<select value="{{ model }}" onChange="{{ setModel }}" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA"><option>Не выбрана</option><option>O3S-16</option><option>O3S-36</option><option>O3S-40</option><option>O3S-85</option><option>O3S-140</option><option>O3S-250</option><option>O3S-P</option></select></label>
+        <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#5C7380"><input required type="checkbox" style="margin-top:3px;accent-color:#12B5C9">Согласен на обработку персональных данных согласно <a href="#">политике конфиденциальности</a></label>
+        <button type="submit" style="border:0;background:#12B5C9;color:#fff;border-radius:999px;padding:16px 28px;font-weight:600;font-size:16px;cursor:pointer;justify-self:start" style-hover="background:#0FA3B5">Отправить заявку</button>
+      </form>
+      </sc-if>
+      <sc-if value="{{ sentInline }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#E3F7F9;border-radius:16px;padding:28px;display:grid;gap:12px;justify-items:start">
+          <div style="width:48px;height:48px;border-radius:50%;background:#12B5C9;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px">✓</div>
+          <h3 style="font-family:Onest,sans-serif;font-size:22px;margin:0">Спасибо, заявка принята</h3>
+          <p style="margin:0;color:#3D5461">Чтобы не ждать звонка, продолжите в WhatsApp — так контакт будет с обеих сторон.</p>
+          <a href="{{ waModel }}" target="_blank" style="background:#25D366;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600" style-hover="background:#1EBE5A;color:#fff">Продолжить в WhatsApp</a>
+        </div>
+      </sc-if>
+    </div>
+    <div style="display:grid;gap:16px">
+      <div style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;padding:clamp(24px,3vw,32px);display:grid;gap:14px;font-size:15px">
+        <div><div style="font-size:12px;color:#5C7380;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Телефон</div><a href="tel:+77710010744" style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:#0B1F2A">+7 771 001 07 44</a></div>
+        <div><div style="font-size:12px;color:#5C7380;font-weight:600;text-transform:uppercase;letter-spacing:.06em">E-mail</div><a href="mailto:info@o3s.kz">info@o3s.kz</a></div>
+        <div><div style="font-size:12px;color:#5C7380;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Производство</div>г. Астана, ул. Танбалытас, 5</div>
+        <div><div style="font-size:12px;color:#5C7380;font-weight:600;text-transform:uppercase;letter-spacing:.06em">График</div>Пн–Пт 9:00–18:00, Сб 10:00–14:00</div>
+      </div>
+      <div style="flex:1;min-height:240px;border-radius:20px;overflow:hidden;border:1px solid #E1E8EB;position:relative;background:#E8EFF2">
+        <iframe title="Карта 2ГИС" src="https://widgets.2gis.com/widget?type=firmsonmap&options=%7B%22pos%22%3A%7B%22lat%22%3A51.148069%2C%22lon%22%3A71.408117%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22astana%22%7D%2C%22org%22%3A%2270000001089454684%22%7D" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="background:#0B1F2A;color:#A9BCC6;padding:clamp(40px,5vw,64px) 0 110px">
+  <div style="max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:32px">
+    <div style="display:grid;gap:12px;align-content:start"><span style="font-family:Onest,sans-serif;font-weight:800;font-size:26px;color:#fff">O<sub style="font-size:14px;vertical-align:-4px">3</sub>S</span><p style="margin:0;font-size:14px">Озоновые стерилизаторы для клиник Казахстана. Производство в Астане.</p><p style="margin:0;font-size:13px">ТОО «O3S Kazakhstan», БИН 000000000000 [уточнить]</p></div>
+    <div style="display:grid;gap:10px;align-content:start;font-size:15px"><b style="color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:.06em">Разделы</b><a href="catalog.dc.html" style="color:#A9BCC6" style-hover="color:#fff">Каталог</a><a href="rent.dc.html" style="color:#A9BCC6" style-hover="color:#fff">Аренда</a><a href="dental.dc.html" style="color:#A9BCC6" style-hover="color:#fff">Для стоматологий</a><a href="#tech" style="color:#A9BCC6" style-hover="color:#fff">Технология</a><a href="contacts.dc.html" style="color:#A9BCC6" style-hover="color:#fff">Контакты</a></div>
+    <div style="display:grid;gap:10px;align-content:start;font-size:15px"><b style="color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:.06em">Контакты</b><a href="tel:+77710010744" style="color:#fff;font-family:'JetBrains Mono',monospace">+7 771 001 07 44</a><a href="mailto:info@o3s.kz" style="color:#A9BCC6" style-hover="color:#fff">info@o3s.kz</a><span>г. Астана [уточнить адрес]</span><span>Пн–Пт 9:00–18:00, Сб 10:00–14:00</span></div>
+    <div style="display:grid;gap:10px;align-content:start;font-size:15px"><b style="color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:.06em">Документы</b><a href="#" style="color:#A9BCC6" style-hover="color:#fff">Политика конфиденциальности</a><a href="#" style="color:#A9BCC6" style-hover="color:#fff">Сертификаты</a></div>
+  </div>
+  <div style="max-width:1240px;margin:32px auto 0;padding:24px clamp(16px,4vw,40px) 0;border-top:1px solid #1E3A49;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px"><span>Медицинское изделие. Перед применением ознакомьтесь с инструкцией.</span><span>© 2026 O3S.kz</span></div>
+</footer>
+
+<!-- FLOATING WA (desktop) -->
+<a data-desk href="{{ waHome }}" target="_blank" aria-label="WhatsApp" style="position:fixed;right:28px;bottom:28px;z-index:60;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -10px #25D366aa" style-hover="transform:scale(1.06);color:#fff"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg></a>
+
+<!-- MOBILE STICKY BAR -->
+<div data-mob style="position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid #E1E8EB;padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px">
+  <a href="tel:+77710010744" style="display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid #D5DEE2;color:#0B1F2A;border-radius:999px;padding:12px;font-weight:600;font-size:14px;min-height:46px">Позвонить</a>
+  <a href="{{ waHome }}" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:6px;background:#25D366;color:#fff;border-radius:999px;padding:12px;font-weight:600;font-size:14px;min-height:46px">WhatsApp</a>
+  <button onClick="{{ openForm }}" style="border:0;background:#12B5C9;color:#fff;border-radius:999px;padding:12px;font-weight:600;font-size:14px;cursor:pointer;min-height:46px">Расчёт</button>
+</div>
+
+<!-- MODAL -->
+<sc-if value="{{ modal }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeForm }}" style="position:fixed;inset:0;z-index:100;background:#0B1F2A99;backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:0">
+    <div onClick="{{ stop }}" style="background:#fff;width:min(100%,560px);max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:28px clamp(20px,3vw,36px) 36px;box-shadow:0 -20px 60px -20px #0B1F2A66">
+      <div style="display:flex;justify-content:space-between;align-items:start;gap:16px;margin-bottom:20px">
+        <div><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:24px;letter-spacing:-.02em;margin:0 0 4px">{{ modalTitle }}</h2><p style="color:#5C7380;margin:0;font-size:14px">Перезвоним за 15 минут в рабочее время</p></div>
+        <button onClick="{{ closeForm }}" aria-label="Закрыть" style="border:0;background:#F0F4F6;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px">×</button>
+      </div>
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ onSubmit }}" style="display:grid;gap:12px">
+        <input required placeholder="Имя" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA" style-focus="border-color:#12B5C9">
+        <input required type="tel" placeholder="+7 ___ ___ __ __" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA" style-focus="border-color:#12B5C9">
+        <input placeholder="Клиника / организация" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA" style-focus="border-color:#12B5C9">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <select style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA"><option>Астана</option><option>Алматы</option><option>Другой город</option></select>
+          <select value="{{ interest }}" onChange="{{ setInterest }}" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA"><option>Покупка</option><option>Аренда</option><option>Консультация</option></select>
+        </div>
+        <select value="{{ model }}" onChange="{{ setModel }}" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA"><option>Не выбрана</option><option>O3S-16</option><option>O3S-36</option><option>O3S-40</option><option>O3S-85</option><option>O3S-140</option><option>O3S-250</option><option>O3S-P</option></select>
+        <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#5C7380"><input required type="checkbox" style="margin-top:3px;accent-color:#12B5C9">Согласен на обработку персональных данных</label>
+        <button type="submit" style="border:0;background:#12B5C9;color:#fff;border-radius:999px;padding:16px;font-weight:600;font-size:16px;cursor:pointer" style-hover="background:#0FA3B5">Отправить</button>
+      </form>
+      </sc-if>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;gap:12px;justify-items:start">
+          <div style="width:48px;height:48px;border-radius:50%;background:#12B5C9;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px">✓</div>
+          <h3 style="font-family:Onest,sans-serif;font-size:22px;margin:0">Спасибо, заявка принята</h3>
+          <p style="margin:0;color:#3D5461">Продолжите в WhatsApp, чтобы менеджер сразу увидел ваш запрос.</p>
+          <a href="{{ waModel }}" target="_blank" style="background:#25D366;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600" style-hover="background:#1EBE5A;color:#fff">Продолжить в WhatsApp</a>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showPrices&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Контент&quot;}}">
+class Component extends DCLogic {
+  state = { data: null, modal: false, sent: false, sentInline: false, model: 'Не выбрана', interest: 'Покупка', faqOpen: 0, lang: 'RU', menuOpen: false };
+  async componentDidMount() {
+    const data = await import('./o3s-data.js');
+    this.setState({ data });
+  }
+  renderVals() {
+    const s = this.state, d = s.data;
+    const wa = d ? d.CONTACT.wa : (m) => 'https://wa.me/77710010744';
+    const ICON = {
+      thermometer: 'M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z',
+      'droplet-off': 'M18.7 15a6.3 6.3 0 0 0-.4-3.1c-1-2.7-4.2-5.4-6.3-9-.4.7-.9 1.4-1.4 2.1M8.5 7.7C6.9 9.8 5 12 5 15a7 7 0 0 0 11.7 5.2M2 2l20 20',
+      'package-x': 'M21 10V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l1.5-.9M3.3 7l8.7 5 8.7-5M12 22V12m5 5 4 4m0-4-4 4',
+      zap: 'M4 14a1 1 0 0 1-.8-1.6l8-10a1 1 0 0 1 1.8.8L11.6 9H20a1 1 0 0 1 .8 1.6l-8 10a1 1 0 0 1-1.8-.8L12.4 14Z',
+      eye: 'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z',
+      wind: 'M12.8 19.6A2 2 0 1 0 14 16H2M17.5 8a2.5 2.5 0 1 1 2 4H2M9.8 4.4A2 2 0 1 1 11 8H2',
+      move: 'M12 2v20M2 12h20m-8-8-4-4-4 4M20 8l4 4-4 4m-4 8-4 4-4-4M4 8l-4 4 4 4',
+      leaf: 'M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Zm-9 2c0-3 3-7 9-9',
+    };
+    const models = d ? d.MODELS : [];
+    const fmt = d ? d.fmt : (x) => x;
+    const preview = models.slice(0, 6).map(m => ({
+      ...m, slotId: 'cat-' + m.id, img: m.img, placeholder: 'Фото ' + m.name, href: m.id === 'o3s-16' ? 'o3s-16.dc.html' : 'catalog.dc.html',
+      volLabel: m.vol ? m.vol + ' л' : '—', cycleLabel: m.cycle ? m.cycle + ' мин' : '—',
+      priceLabel: (this.props.showPrices ?? true) ? 'от ' + fmt(m.price) : 'Цена по запросу', rentLabel: typeof m.rent === 'number' ? 'или аренда от ' + fmt(m.rent) + '/мес' : 'аренда по запросу',
+      rentClick: () => this.setState({ modal: true, sent: false, model: m.name, interest: 'Аренда' }),
+    }));
+    const why = (d ? d.WHY : []).map(w => ({ ...w, path: ICON[w.i] }));
+    const compare = (d ? d.COMPARE : []).map(r => ({ p: r[0], o: r[1], a: r[2], s: r[3] }));
+    const faq = (d ? d.FAQ : []).map((f, i) => ({ ...f, open: s.faqOpen === i, sign: s.faqOpen === i ? '−' : '+', toggle: () => this.setState({ faqOpen: s.faqOpen === i ? -1 : i }) }));
+    const molecule = React.createElement('div', { style: { position: 'absolute', inset: 0, pointerEvents: 'none' } },
+      [[12, 8, 28, 0], [78, 14, 20, 1.2], [84, 72, 24, 2.1], [6, 70, 16, .6]].map(([x, y, r, dl], i) =>
+        React.createElement('span', { key: i, style: { position: 'absolute', left: x + '%', top: y + '%', width: r, height: r, borderRadius: '50%', background: 'radial-gradient(circle at 35% 35%,#fff,#12B5C9)', boxShadow: '0 0 20px #12B5C977', animation: `o3float ${4 + i}s ease-in-out ${dl}s infinite`, opacity: .9 } })));
+    const ru = s.lang === 'RU';
+    return {
+      preview, why, compare, faq, molecule, spheres: d ? d.SPHERES : [],
+      waHome: wa(''), waModel: wa(s.model === 'Не выбрана' ? '' : s.model),
+      modal: s.modal, sent: s.sent, notSent: !s.sent, sentInline: s.sentInline, notSentInline: !s.sentInline,
+      model: s.model, interest: s.interest, menuOpen: s.menuOpen,
+      modalTitle: s.interest === 'Аренда' ? 'Взять в аренду' : 'Получить расчёт',
+      ruBg: ru ? '#0B1F2A' : 'transparent', ruFg: ru ? '#fff' : '#0B1F2A', kzBg: ru ? 'transparent' : '#0B1F2A', kzFg: ru ? '#0B1F2A' : '#fff',
+      setRu: () => this.setState({ lang: 'RU' }), setKz: () => this.setState({ lang: 'KZ' }),
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      openForm: () => this.setState({ modal: true, sent: false, interest: 'Покупка' }),
+      openBuy: () => this.setState({ modal: true, sent: false, interest: 'Покупка' }),
+      closeForm: () => this.setState({ modal: false }), stop: (e) => e.stopPropagation(),
+      setModel: (e) => this.setState({ model: e.target.value }), setInterest: (e) => this.setState({ interest: e.target.value }),
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      onSubmitInline: (e) => { e.preventDefault(); this.setState({ sentInline: true }); },
+      onLead: (e) => { e.preventDefault(); window.open(wa('O3S — пришлите каталог PDF'), '_blank'); },
+    };
+  }
+}
+</script>
+</body>
+</html>

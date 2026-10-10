@@ -16,7 +16,7 @@
 </helmet>
 <header style="position:sticky;top:0;z-index:50;background:rgba(246,249,250,.88);backdrop-filter:blur(14px);border-bottom:1px solid #E1E8EB;font-family:Inter,system-ui,sans-serif">
   <div style="max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px);height:72px;display:flex;align-items:center;gap:24px">
-    <a href="index.dc.html" style="display:flex;align-items:center;gap:10px;color:#0B1F2A;text-decoration:none">
+    <a href="./" style="display:flex;align-items:center;gap:10px;color:#0B1F2A;text-decoration:none">
       <span style="display:flex;gap:3px"><i style="width:8px;height:8px;border-radius:50%;background:#12B5C9"></i><i style="width:8px;height:8px;border-radius:50%;background:#12B5C9;opacity:.7"></i><i style="width:8px;height:8px;border-radius:50%;background:#12B5C9;opacity:.4"></i></span>
       <span style="font-family:Onest,sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em">O<sub style="font-size:14px;vertical-align:-4px">3</sub>S</span>
     </a>
@@ -51,7 +51,7 @@ class Component extends DCLogic {
   renderVals() {
     const NAV = [
       ['Каталог', 'catalog.dc.html'], ['Аренда', 'rent.dc.html'], ['Стоматологиям', 'dental.dc.html'],
-      ['Технология', 'index.dc.html#tech'], ['О компании', 'index.dc.html#about'], ['Контакты', 'contacts.dc.html'],
+      ['Технология', './#tech'], ['О компании', './#about'], ['Контакты', 'contacts.dc.html'],
     ];
     const active = this.props.active ?? '';
     const ru = this.state.lang === 'RU';
