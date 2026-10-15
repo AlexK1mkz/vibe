@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Аллергопроба — кастдев 15.10</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#16202c;--muted:#5d6b7a;--line:#e2e7ee;--acc:#1f5fbf;--accs:#e8f0fc;
+--ok:#1e8a5a;--oks:#e3f5ec;--pn:#b26b00;--pns:#fff4e0;--cr:#c0352b;--crs:#fdecea;--p3:#5b6878;--p3s:#eef1f5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f141a;--card:#171e26;--ink:#e6ebf1;--muted:#93a1b0;--line:#2a3440;--acc:#6ea8ff;--accs:#1a2a42;
+--ok:#4cc58c;--oks:#15302a;--pn:#f0a640;--pns:#33270f;--cr:#ff7a6e;--crs:#3a1c1a;--p3:#a6b2bf;--p3s:#232c36}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,"Segoe UI",Inter,Roboto,Arial,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 16px 64px}
+header h1{font-size:28px;margin:0 0 4px;letter-spacing:-.01em}.muted{color:var(--muted)}.sm{font-size:13px}.mono{font-variant-numeric:tabular-nums;font-family:ui-monospace,Menlo,Consolas,monospace}.c{text-align:center}
+nav{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 8px}nav a{font-size:13px;color:var(--acc);text-decoration:none;background:var(--accs);padding:4px 10px;border-radius:999px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px}
+h2{font-size:20px;margin:0 0 14px}h3{font-size:16px;margin:20px 0 10px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}.kpi b{display:block;font-size:26px}
+.verdict{border-left:4px solid var(--cr);background:var(--crs);padding:14px 16px;border-radius:8px}
+.grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+ul.top{list-style:none;padding:0;margin:0}ul.top li{padding:7px 0;border-bottom:1px solid var(--line)}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:720px}th,td{border-bottom:1px solid var(--line);padding:9px 8px;vertical-align:top;text-align:left}
+thead th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:var(--bg);position:sticky;top:0}
+.b{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px}.b-p1{background:var(--crs);color:var(--cr)}.b-p2{background:var(--pns);color:var(--pn)}.b-p3{background:var(--p3s);color:var(--p3)}
+.bar{height:6px;background:var(--line);border-radius:3px;margin:6px 0 3px}.bar span{display:block;height:100%;background:var(--acc);border-radius:3px}
+ol.flow{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;counter-reset:s}
+.step{border:1px solid var(--line);border-top:4px solid var(--ok);border-radius:10px;padding:12px;background:var(--card)}
+.step.pain{border-top-color:var(--pn);background:linear-gradient(var(--pns),var(--card) 60%)}.step.crit{border-top-color:var(--cr);background:linear-gradient(var(--crs),var(--card) 60%)}
+.step h4{margin:6px 0 4px;font-size:14px}.sh{display:flex;gap:6px;align-items:center;font-size:12px}.n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--card);display:grid;place-items:center;font-weight:700}
+.st{font-weight:700}.ok .st{color:var(--ok)}.pain .st{color:var(--pn)}.crit .st{color:var(--cr)}.pain-t{font-size:13px;margin:8px 0 0}
+.fid{margin-left:auto;font-size:11px;font-family:ui-monospace,Menlo,monospace;background:var(--accs);color:var(--acc);padding:1px 6px;border-radius:5px}
+.curve{width:100%;height:auto;max-height:170px}.ln{fill:none;stroke:var(--acc);stroke-width:3}.gl{stroke:var(--line)}.dl{font-size:13px;fill:var(--ink);font-weight:700}
+.dot{stroke:var(--card);stroke-width:2}.d1,.d2{fill:var(--cr)}.d3{fill:var(--pn)}.d4,.d5{fill:var(--ok)}
+.emo{display:inline-block;width:28px;height:28px;line-height:28px;border-radius:50%;color:#fff;font-weight:700}span.emo.d1,span.emo.d2{background:var(--cr)}span.emo.d3{background:var(--pn)}span.emo.d4,span.emo.d5{background:var(--ok)}
+.cjm td,.cjm th{font-size:13px;min-width:130px}.rh{background:var(--bg);white-space:nowrap}
+.qs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.q{margin:0;border:1px solid var(--line);border-radius:10px;padding:14px}.q blockquote{margin:0 0 8px;font-style:italic}.q figcaption{font-size:13px;color:var(--muted)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-bottom:8px}.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+footer{margin-top:24px;font-size:12px;color:var(--muted)}
+@media print{body{background:#fff}section{break-inside:avoid;border-color:#ccc}nav{display:none}}
+</style></head><body><div class="wrap">
+<header><div class="muted sm">Аллергопроба · Отчёт по кастдеву · 15.10.2026</div>
+<h1>Итоги кастдева и UX-интервью</h1>
+<div class="muted">Zoom, запись + транскрипт · Алекс (технический директор), Алишер (разработка и тестирование)</div>
+<nav><a href="#sum">Сводка</a><a href="#prio">Приоритеты фич</a><a href="#flow">User flow</a><a href="#cjm">CJM</a><a href="#ins">Инсайты</a><a href="#breg">Брегис</a><a href="#next">Методика и шаги</a></nav></header>
+
+<div class="kpis">
+<div class="kpi"><span class="muted sm">Интервью</span><b>2 / 5</b><span class="sm muted">выполнено 40% плана</span></div>
+<div class="kpi"><span class="muted sm">Гипотеза</span><b style="color:var(--cr)">0 / 2</b><span class="sm muted">не подтверждена</span></div>
+<div class="kpi"><span class="muted sm">Фич в бэклоге</span><b>14</b><span class="sm muted">P1 5 · P2 5 · P3 4</span></div>
+<div class="kpi"><span class="muted sm">Главная потеря времени</span><b>1–1,5 ч</b><span class="sm muted">в день на печать листов</span></div>
+</div>
+
+<section id="sum"><h2>Сводка</h2><div class="grid2"><div>
+<p class="verdict"><b>Гипотеза «Упростить выбор аллергенов при оформлении заявки» не подтверждена.</b> Оба респондента считают выбор тарифа и аллергенов рабочим. Боль смещена: на точке забора — регистрация по ИИН и электронное согласие, в главном офисе — печать сопроводительных листов и серии препаратов.</p>
+<p class="sm muted">Оговорка: оба респондента — опытные пользователи. Для новых клиник гипотеза остаётся открытой и проверяется в трёх оставшихся интервью.</p>
+<p><b>Сильная сторона продукта:</b> автоподтяжка данных пациента по ИИН из согласия. По оценке пользователя, по скорости Аллергопроба не уступает Брегис.</p>
+</div><div><h3 style="margin-top:0">Топ-5 к доработке</h3><ul class="top"><li><span class="b b-p1">P1</span> <b>Пакетная печать сопроводительных листов по адресам</b> <span class='muted'>ICE 75</span></li><li><span class="b b-p1">P1</span> <b>Регистрация по ИИН: ребёнок по согласию родителя + понятная ошибка</b> <span class='muted'>ICE 64</span></li><li><span class="b b-p1">P1</span> <b>Справочник серий препаратов: одна активная серия на препарат</b> <span class='muted'>ICE 60</span></li><li><span class="b b-p1">P1</span> <b>Автоподстановка лаборанта по логину</b> <span class='muted'>ICE 60</span></li><li><span class="b b-p1">P1</span> <b>Сохранение добавленных вручную аллергенов</b> <span class='muted'>ICE 60</span></li></ul></div></div></section>
+
+<section id="prio"><h2>Приоритеты фич на доработку</h2>
+<p class="sm muted">ICE = Impact × Confidence × Ease, шкала 1–5, максимум 125. P1 ≥ 50, P2 ≥ 30, P3 &lt; 30. Ease — предварительная оценка, сверить с разработкой. Оценки можно менять в Excel, приоритет пересчитается.</p>
+<div class="tw"><table><thead><tr><th>ID</th><th>Фича</th><th>Проблема</th><th>Решение</th><th>I·C·E</th><th>ICE</th><th>Приор.</th><th>Источник</th></tr></thead><tbody><tr>
+<td class="mono">F01</td>
+<td><b>Пакетная печать сопроводительных листов по адресам</b><div class="muted sm">Back-office / приёмка · Фича</div></td>
+<td class="sm">Каждый адрес печатается отдельно: выбрать город → адрес → дату → открыть лист → открыть акт → печать → снять галочку → следующий. При ~200 пациентах по городу уходит 1–1,5 часа в день у администратора, параллельно с приёмом пациентов.</td>
+<td class="sm">Одна кнопка «Печать по адресам»: каждый адрес — отдельный блок с разрывом страницы, сортировка по маршруту курьера (левый берег, юго-восток…), только адреса с пациентами за дату.</td>
+<td class="c mono">5·5·3</td>
+<td class="c"><div class="bar"><span style="width:60%"></span></div><span class="mono">75</span></td>
+<td class="c"><span class="b b-p1">P1</span></td>
+<td class="sm">Айгуль (назвала «одной вещью, которую поменять»)</td>
+</tr>
+<tr>
+<td class="mono">F05</td>
+<td><b>Регистрация по ИИН: ребёнок по согласию родителя + понятная ошибка</b><div class="muted sm">Регистрация · Фича</div></td>
+<td class="sm">Данные не подтягиваются, если ИИН в согласии с ошибкой или согласие подписал родитель на свой ИИН, а заявка на ребёнка. Для пользователя это выглядит как «зависание». Точки пишут Алишеру, он вручную проверяет согласия в Metabase.</td>
+<td class="sm">Поле «ИИН ребёнка» + ИИН и телефон родителя в согласии; при ненайденном согласии — понятное сообщение с причиной и поиском по ФИО/телефону вместо пустой формы.</td>
+<td class="c mono">4·4·4</td>
+<td class="c"><div class="bar"><span style="width:51%"></span></div><span class="mono">64</span></td>
+<td class="c"><span class="b b-p1">P1</span></td>
+<td class="sm">Алия (главная боль), Алишер<div class="muted">Отв.: Алишер (прописать задачу)</div></td>
+</tr>
+<tr>
+<td class="mono">F02</td>
+<td><b>Справочник серий препаратов: одна активная серия на препарат</b><div class="muted sm">Выдача результатов · Фича</div></td>
+<td class="sm">В списке десятки устаревших серий, похожих друг на друга (отличается год). Сотрудники сверяют серии с Word-файлом, прыгают между экранами. Риск выбрать не ту серию, при проверке СЭС серия должна точно совпадать.</td>
+<td class="sm">Справочник «препарат → активная серия» с подстановкой по умолчанию, архив старых серий, обновление по итогам ревизии раз в полгода (ответственный — главный лаборант).</td>
+<td class="c mono">5·4·3</td>
+<td class="c"><div class="bar"><span style="width:48%"></span></div><span class="mono">60</span></td>
+<td class="c"><span class="b b-p1">P1</span></td>
+<td class="sm">Айгуль</td>
+</tr>
+<tr>
+<td class="mono">F03</td>
+<td><b>Автоподстановка лаборанта по логину</b><div class="muted sm">Выдача результатов · Баг / доработка</div></td>
+<td class="sm">Имя лаборанта вносится вручную (копировать-вставить). Раньше подставлялось автоматически. Задача висит у Расула ~5 недель.</td>
+<td class="sm">Лаборант выдаёт результат под своим логином, имя подставляется автоматически. Уточнить статус и срок у Расула.</td>
+<td class="c mono">3·4·5</td>
+<td class="c"><div class="bar"><span style="width:48%"></span></div><span class="mono">60</span></td>
+<td class="c"><span class="b b-p1">P1</span></td>
+<td class="sm">Айгуль, Алишер<div class="muted">Отв.: Расул</div></td>
+</tr>
+<tr>
+<td class="mono">F04</td>
+<td><b>Сохранение добавленных вручную аллергенов</b><div class="muted sm">Регистрация · Баг</div></td>
+<td class="sm">Препараты, которые пациенты приносят свои (например, артикаин другого производителя), добавляются в заявку, но на следующий день пропадают из списка — их вбивают заново.</td>
+<td class="sm">Сохранять пользовательские аллергены в справочник (с модерацией/дедупликацией), поиск по названию.</td>
+<td class="c mono">3·4·5</td>
+<td class="c"><div class="bar"><span style="width:48%"></span></div><span class="mono">60</span></td>
+<td class="c"><span class="b b-p1">P1</span></td>
+<td class="sm">Айгуль; Алия упоминала добавление препаратов</td>
+</tr>
+<tr>
+<td class="mono">F06</td>
+<td><b>Архивация неактивных адресов</b><div class="muted sm">Back-office / приёмка · Фича</div></td>
+<td class="sm">В списке адресов много неактивных точек (полгода без регистраций). Мешает печати и поиску ошибок.</td>
+<td class="sm">Авто-статус «неактивен» после N дней без регистраций, скрытие из списков по умолчанию. Связать с админкой адресов, которая уже в разработке.</td>
+<td class="c mono">3·4·4</td>
+<td class="c"><div class="bar"><span style="width:38%"></span></div><span class="mono">48</span></td>
+<td class="c"><span class="b b-p2">P2</span></td>
+<td class="sm">Айгуль</td>
+</tr>
+<tr>
+<td class="mono">F07</td>
+<td><b>Упрощение электронного согласия для пациента</b><div class="muted sm">Согласие пациента · Фича</div></td>
+<td class="sm">Пациенты не понимают пункты (5 вопросов про хронические заболевания, инвалидность и т.д.), переспрашивают, забывают отметить принимаемые препараты. Пожилым сложно, старые телефоны не читают QR — администратор даёт свой телефон.</td>
+<td class="sm">Простые формулировки и подсказки, обязательный вопрос про препараты, крупный шрифт, альтернатива QR (ссылка по SMS или планшет на точке).</td>
+<td class="c mono">4·3·3</td>
+<td class="c"><div class="bar"><span style="width:29%"></span></div><span class="mono">36</span></td>
+<td class="c"><span class="b b-p2">P2</span></td>
+<td class="sm">Айгуль</td>
+</tr>
+<tr>
+<td class="mono">F08</td>
+<td><b>Обработка недоставленных результатов в WhatsApp</b><div class="muted sm">Отправка пациенту · Фича</div></td>
+<td class="sm">4–5 случаев в день по Астане: статус «не доставлено» (ошибка WhatsApp Business, код уточнить). Администратор копирует номер, проверяет WhatsApp и отправляет вручную с рабочего телефона.</td>
+<td class="sm">Список недоставленных за день, кнопка «Открыть в WhatsApp», валидация номера при регистрации, расшифровка причины ошибки.</td>
+<td class="c mono">3·4·3</td>
+<td class="c"><div class="bar"><span style="width:29%"></span></div><span class="mono">36</span></td>
+<td class="c"><span class="b b-p2">P2</span></td>
+<td class="sm">Айгуль, Алишер</td>
+</tr>
+<tr>
+<td class="mono">F09</td>
+<td><b>Валидация данных пациента в согласии</b><div class="muted sm">Согласие пациента · Фича</div></td>
+<td class="sm">Пациенты вводят ФИО и телефон с ошибками. Часть точек не перепроверяет — ошибки попадают в бланк результата.</td>
+<td class="sm">Маски и проверки полей, шаг «Проверьте свои данные», подсветка подозрительных значений для регистратора.</td>
+<td class="c mono">3·3·4</td>
+<td class="c"><div class="bar"><span style="width:29%"></span></div><span class="mono">36</span></td>
+<td class="c"><span class="b b-p2">P2</span></td>
+<td class="sm">Айгуль</td>
+</tr>
+<tr>
+<td class="mono">F10</td>
+<td><b>Памятка с нормативным актом на каждой точке</b><div class="muted sm">Согласие пациента · Процесс</div></td>
+<td class="sm">~10% пациентов возражают против заполнения согласия.</td>
+<td class="sm">Распечатка постановления и короткая памятка «зачем это нужно» на каждой точке забора.</td>
+<td class="c mono">2·3·5</td>
+<td class="c"><div class="bar"><span style="width:24%"></span></div><span class="mono">30</span></td>
+<td class="c"><span class="b b-p2">P2</span></td>
+<td class="sm">Айгуль</td>
+</tr>
+<tr>
+<td class="mono">F11</td>
+<td><b>Аудит единого справочника аллергенов и тарифов</b><div class="muted sm">Регистрация · Проверка</div></td>
+<td class="sm">По наблюдению Айгуль списки на разных логинах отличаются. По словам Алишера база единая, различаться могут только тарифы (эксклюзив, экспресс).</td>
+<td class="sm">Сравнить справочники по логинам, зафиксировать правила.</td>
+<td class="c mono">2·2·5</td>
+<td class="c"><div class="bar"><span style="width:16%"></span></div><span class="mono">20</span></td>
+<td class="c"><span class="b b-p3">P3</span></td>
+<td class="sm">Айгуль, Алишер</td>
+</tr>
+<tr>
+<td class="mono">F12</td>
+<td><b>Массовая отправка результатов</b><div class="muted sm">Отправка пациенту · Гипотеза</div></td>
+<td class="sm">Отправка — кнопка на каждого пациента с ожиданием зелёной галочки. При 30–40+ выдачах в день растёт нагрузка.</td>
+<td class="sm">Отправка выбранных результатов одним действием. Проверить в оставшихся интервью.</td>
+<td class="c mono">3·2·3</td>
+<td class="c"><div class="bar"><span style="width:14%"></span></div><span class="mono">18</span></td>
+<td class="c"><span class="b b-p3">P3</span></td>
+<td class="sm">Вывод команды из интервью</td>
+</tr>
+<tr>
+<td class="mono">F13</td>
+<td><b>Автотесты на AI-агентах для QA</b><div class="muted sm">Разработка · Инфраструктура</div></td>
+<td class="sm">Цикл «разработчик проверяет → команда проверяет → прод» замедляет выпуск фич. Бюджет на автотесты не согласован.</td>
+<td class="sm">Решение по бюджету на автотесты (предложение Марата).</td>
+<td class="c mono">3·3·2</td>
+<td class="c"><div class="bar"><span style="width:14%"></span></div><span class="mono">18</span></td>
+<td class="c"><span class="b b-p3">P3</span></td>
+<td class="sm">Обсуждение команды<div class="muted">Отв.: Алекс (решение по бюджету)</div></td>
+</tr>
+<tr>
+<td class="mono">F14</td>
+<td><b>Дашборд лаборатории на экранах</b><div class="muted sm">Выдача результатов · Этап 2</div></td>
+<td class="sm">Сейчас список выдачи на день ведётся на бумаге.</td>
+<td class="sm">Экран с приоритетами выдачи на сегодня и завтра. После F01.</td>
+<td class="c mono">4·2·2</td>
+<td class="c"><div class="bar"><span style="width:13%"></span></div><span class="mono">16</span></td>
+<td class="c"><span class="b b-p3">P3</span></td>
+<td class="sm">Идея Алекса, Айгуль поддержала</td>
+</tr></tbody></table></div></section>
+
+<section id="flow"><h2>User flow: текущий процесс и точки боли</h2>
+<div class="legend"><span><i style="background:var(--ok)"></i>Работает</span><span><i style="background:var(--pn)"></i>Боль</span><span><i style="background:var(--cr)"></i>Критичная боль</span><span class="muted">Метка справа — связанные фичи</span></div>
+<h3>Поток A. Регистрация на точке забора</h3><ol class="flow"><li class="step ok">
+<div class="sh"><span class="n">1</span><span class="st">OK</span></div>
+<h4>Пациент приходит с направлением</h4><div class="muted sm">Пациент · Бланк направления</div></li><li class="step pain">
+<div class="sh"><span class="n">2</span><span class="st">Боль</span><span class="fid">F07, F10</span></div>
+<h4>Сканирует QR и заполняет электронное согласие</h4><div class="muted sm">Пациент · Телефон пациента</div><p class="pain-t">Старые телефоны не читают QR; пожилым сложно; 5 пунктов непонятны; забывают отметить препараты; ~10% возражают</p></li><li class="step pain">
+<div class="sh"><span class="n">3</span><span class="st">Боль</span><span class="fid">F05</span></div>
+<h4>Вводит ИИН — данные подтягиваются из согласия</h4><div class="muted sm">Регистратор · Аллергопроба</div><p class="pain-t">Не подтягивается при ошибке в ИИН или согласии родителя на свой ИИН; выглядит как зависание; эскалация Алишеру</p></li><li class="step pain">
+<div class="sh"><span class="n">4</span><span class="st">Боль</span><span class="fid">F09</span></div>
+<h4>Проверяет ФИО и телефон пациента</h4><div class="muted sm">Регистратор · Аллергопроба</div><p class="pain-t">Пациенты вводят данные с ошибками, часть точек не перепроверяет</p></li><li class="step ok">
+<div class="sh"><span class="n">5</span><span class="st">OK</span><span class="fid">F04</span></div>
+<h4>Выбирает тариф и аллергены</h4><div class="muted sm">Регистратор · Аллергопроба</div><p class="pain-t">Работает чётко. Боль только в добавленных вручную препаратах — пропадают на следующий день</p></li><li class="step ok">
+<div class="sh"><span class="n">6</span><span class="st">OK</span></div>
+<h4>Забор биоматериала, данные в базе к 11:00</h4><div class="muted sm">Медсестра · Точка забора</div></li></ol><h3>Поток B. Back-office главного офиса</h3><ol class="flow"><li class="step ok">
+<div class="sh"><span class="n">1</span><span class="st">OK</span></div>
+<h4>11:00 — сверка: все ли клиники внесли пациентов</h4><div class="muted sm">Администратор · Аллергопроба</div></li><li class="step crit">
+<div class="sh"><span class="n">2</span><span class="st">Критично</span><span class="fid">F01, F06</span></div>
+<h4>Печать сопроводительных листов по каждому адресу</h4><div class="muted sm">Администратор · Аллергопроба → принтер</div><p class="pain-t">~8 действий на адрес, 1–1,5 часа в день; лишние неактивные адреса</p></li><li class="step ok">
+<div class="sh"><span class="n">3</span><span class="st">OK</span></div>
+<h4>Курьеры привозят кровь по маршрутам</h4><div class="muted sm">Курьер · Офлайн</div></li><li class="step ok">
+<div class="sh"><span class="n">4</span><span class="st">OK</span></div>
+<h4>Приёмка: листы по адресам, сверка пробирка ↔ лист</h4><div class="muted sm">Лаборанты · Бумажные листы</div></li><li class="step crit">
+<div class="sh"><span class="n">5</span><span class="st">Критично</span><span class="fid">F02, F03</span></div>
+<h4>Ввод результата, выбор серии препарата и лаборанта</h4><div class="muted sm">Лаборант / администратор · Аллергопроба + Word</div><p class="pain-t">Десятки устаревших похожих серий, сверка с Word; имя лаборанта вручную; усталость к вечеру</p></li><li class="step pain">
+<div class="sh"><span class="n">6</span><span class="st">Боль</span><span class="fid">F12</span></div>
+<h4>«Расчёт» → «Отправить клиенту» по каждому пациенту</h4><div class="muted sm">Администратор · Аллергопроба → WhatsApp Business</div><p class="pain-t">Отправка поштучно, ожидание галочки</p></li><li class="step pain">
+<div class="sh"><span class="n">7</span><span class="st">Боль</span><span class="fid">F08</span></div>
+<h4>Контроль доставки и ручная переотправка</h4><div class="muted sm">Администратор · Рабочий WhatsApp</div><p class="pain-t">4–5 недоставленных в день по Астане</p></li></ol></section>
+
+<section id="cjm"><h2>CJM: путь сотрудника от согласия до отправки результата</h2>
+<p class="sm muted">Эмоция: 1 — сильный негатив, 5 — позитив. Оценка команды по словам респондентов.</p><svg viewBox="0 0 700 150" class="curve" role="img" aria-label="Кривая эмоций по этапам"><line x1="30" x2="670" y1="120" y2="120" class="gl"/><line x1="30" x2="670" y1="75" y2="75" class="gl"/><line x1="30" x2="670" y1="30" y2="30" class="gl"/><path d="M30,98 L137,75 L243,52 L350,120 L457,75 L563,98 L670,75" class="ln"/><circle cx="30" cy="98" r="6" class="dot d2"/><text x="30" y="86" text-anchor="middle" class="dl">2</text><circle cx="137" cy="75" r="6" class="dot d3"/><text x="137" y="63" text-anchor="middle" class="dl">3</text><circle cx="243" cy="52" r="6" class="dot d4"/><text x="243" y="40" text-anchor="middle" class="dl">4</text><circle cx="350" cy="120" r="6" class="dot d1"/><text x="350" y="108" text-anchor="middle" class="dl">1</text><circle cx="457" cy="75" r="6" class="dot d3"/><text x="457" y="63" text-anchor="middle" class="dl">3</text><circle cx="563" cy="98" r="6" class="dot d2"/><text x="563" y="86" text-anchor="middle" class="dl">2</text><circle cx="670" cy="75" r="6" class="dot d3"/><text x="670" y="63" text-anchor="middle" class="dl">3</text></svg>
+<div class="tw"><table class="cjm"><thead><tr><th>Этап</th><th>Согласие пациента</th><th>Регистрация</th><th>Тариф и аллергены</th><th>Подготовка к приёмке</th><th>Приёмка в лаборатории</th><th>Ввод и выдача результата</th><th>Отправка пациенту</th></tr></thead><tbody><tr><th class='rh'>Кто</th><td>Пациент + регистратор</td><td>Регистратор / медсестра</td><td>Регистратор</td><td>Администратор главного офиса</td><td>Лаборанты</td><td>Лаборант / администратор</td><td>Администратор</td></tr><tr><th class='rh'>Действия</th><td>QR → форма согласия, 5 вопросов, препараты</td><td>Ввод ИИН, проверка данных</td><td>Выбор тарифа, отметка аллергенов, добавление своих препаратов</td><td>Сверка внесения, печать листов по каждому адресу</td><td>Раскладка листов по маршрутам, сверка пробирок</td><td>Ввод результата, серия препарата, имя лаборанта, расчёт</td><td>Кнопка «Отправить», контроль доставки</td></tr><tr><th class='rh'>Точки контакта</th><td>Телефон пациента, QR</td><td>Аллергопроба</td><td>Аллергопроба</td><td>Аллергопроба, принтер</td><td>Бумажные листы</td><td>Аллергопроба, Word со списком серий</td><td>WhatsApp Business, рабочий телефон</td></tr><tr><th class='rh'>Эмоция (1–5)</th><td class="c"><span class="emo d2">2</span></td><td class="c"><span class="emo d3">3</span></td><td class="c"><span class="emo d4">4</span></td><td class="c"><span class="emo d1">1</span></td><td class="c"><span class="emo d3">3</span></td><td class="c"><span class="emo d2">2</span></td><td class="c"><span class="emo d3">3</span></td></tr><tr><th class='rh'>Ощущение</th><td>Объяснять по много раз, давать свой телефон</td><td>Быстро, когда ИИН находится; тупик, когда нет</td><td>Работает чётко после патча производительности</td><td>Рутина, час-полтора, параллельно с пациентами</td><td>Процесс отлажен, но держится на бумаге</td><td>Устаёшь к вечеру, «глаз замыливается»</td><td>Терпимо, но 4–5 ручных переотправок в день</td></tr><tr><th class='rh'>Боли</th><td>Непонятные пункты, забытые препараты, старые телефоны, ~10% возражений</td><td>Не подтягиваются данные (опечатка в ИИН, согласие родителя); ошибки в ФИО/телефоне</td><td>Добавленные вручную препараты пропадают на следующий день</td><td>~8 действий на адрес, неактивные адреса в списке</td><td>Нет цифрового контроля приёмки</td><td>Мусор из старых серий, риск при проверке СЭС, ручной ввод лаборанта</td><td>Поштучная отправка, ошибки доставки</td></tr><tr><th class='rh'>Возможности</th><td>F07, F09, F10</td><td>F05, F09</td><td>F04, F11</td><td>F01, F06</td><td>F14 (этап 2)</td><td>F02, F03</td><td>F08, F12</td></tr></tbody></table></div></section>
+
+<section id="ins"><h2>Инсайты и цитаты</h2><div class="qs"><figure class="q"><blockquote>«вводишь ИИН, выходят данные уже пациента полностью… На это время не уходит»</blockquote><figcaption><b>Айгуль</b> — Автоподтяжка данных по ИИН из согласия — главное улучшение: раньше всё вводили вручную, это было намного дольше. <span class="fid">Сильная сторона</span></figcaption></figure><figure class="q"><blockquote>«сейчас все работает четко»</blockquote><figcaption><b>Айгуль</b> — Выбор тарифа и аллергенов сейчас работает без ошибок. Прежние сбои (препараты не выбирались) ушли. <span class="fid">Гипотеза не подтверждена</span></figcaption></figure><figure class="q"><blockquote>«когда человек 200 по городу… это занимает около часа, и может даже иногда полтора»</blockquote><figcaption><b>Айгуль</b> — Печать сопроводительных листов — самая дорогая по времени операция дня. <span class="fid">F01</span></figcaption></figure><figure class="q"><blockquote>«глаз замыливается и не туда нажмешь»</blockquote><figcaption><b>Айгуль</b> — Устаревшие серии препаратов создают риск ошибки и несоответствия при проверках. <span class="fid">F02</span></figcaption></figure><figure class="q"><blockquote>«на следующий день его уже нету»</blockquote><figcaption><b>Айгуль</b> — Свои препараты пациента не сохраняются в справочнике. <span class="fid">F04</span></figcaption></figure><figure class="q"><blockquote>«сейчас волнует вот этот вопрос, электронное согласие»</blockquote><figcaption><b>Алия</b> — Главная боль точки забора — электронное согласие и регистрация по ИИН. <span class="fid">F05</span></figcaption></figure><figure class="q"><blockquote>«очень мало процентов людей, которые до конца понимают»</blockquote><figcaption><b>Айгуль</b> — Пациенты плохо понимают смысл согласия и его пункты. <span class="fid">F07</span></figcaption></figure><figure class="q"><blockquote>«По скорости работы там точно не быстрее»</blockquote><figcaption><b>Айгуль</b> — Брегис по скорости не лучше: данные вводятся вручную, штрихкоды печатаются вручную. <span class="fid">Конкурентное преимущество</span></figcaption></figure></div></section>
+
+<section id="breg"><h2>Сравнение с Брегис</h2>
+<div class="tw"><table><thead><tr><th>Критерий</th><th>Аллергопроба</th><th>Брегис</th><th>Преимущество</th></tr></thead><tbody><tr><td><b>Ввод данных пациента</b></td><td>Автоподтяжка по ИИН из согласия</td><td>Вручную</td><td>Аллергопроба</td></tr><tr><td><b>Выбор услуг</b></td><td>Тариф + аллергены</td><td>Отдельные анализы, без тарифов</td><td>Аллергопроба (для аллергодиагностики)</td></tr><tr><td><b>Штрихкоды</b></td><td>Не упоминались как боль</td><td>Печать вручную</td><td>Аллергопроба</td></tr><tr><td><b>Профиль</b></td><td>Аллергодиагностика</td><td>Клинические анализы</td><td>—</td></tr><tr><td><b>Скорость</b></td><td>Быстрее (оценка Айгуль)</td><td>Не быстрее</td><td>Аллергопроба</td></tr><tr><td><b>Стабильность</b></td><td>Лаги ушли после патча производительности ~1,5 недели назад</td><td>По мнению Гульнары — не лагает</td><td>Проверить в оставшихся интервью</td></tr></tbody></table></div>
+<p class="sm muted">Источник — Айгуль (работает в Брегис). Мнение Гульнары передано со слов Алишера и относится к периоду до патча производительности. Выборка — один пользователь.</p></section>
+
+<section id="next"><h2>Респонденты, методика и следующие шаги</h2>
+<div class="tw"><table><thead><tr><th>Респондент</th><th>Роль</th><th>Нагрузка</th><th>Другие ЛИС</th><th>Время</th><th>Статус</th></tr></thead><tbody><tr><td><b>Алия Абжит</b></td><td class='sm'>Медсестра точки забора при клинике (сама регистрирует пациентов)</td><td class='sm'>н/д</td><td class='sm'>Программа клиники (вторая система)</td><td>~10 мин</td><td class='sm'>Прервано: респондент отвлекалась на работу в процедурном. UX-задача не выполнена. Follow-up — голосовое сообщение о проблемах.</td></tr><tr><td><b>Айгуль Жуматаева</b></td><td class='sm'>Администратор главного офиса, Астана (точка забора 8:00–14:00, печать сопроводительных листов, выдача результатов)</td><td class='sm'>40–50 регистраций в день; ~111–200 пациентов по городу</td><td class='sm'>Брегис (работает сейчас)</td><td>~30 мин</td><td class='sm'>Полное интервью, сильная фактура. Экран показывал Алишер — замеров UX нет. Договорились об офлайн-встрече в офисе.</td></tr></tbody></table></div>
+<h3>Выводы по методике</h3><ul><li>Выборка: проведено 2 из 5, обе — опытные пользователи. Новые клиники недоступны: одна не работает в программе, ещё одна не отвечает, медпредставитель не предупредил.</li><li>UX-задачу респонденты не выполняли — экран показывал Алишер. Замеров времени и кликов нет. Дальше: респондент сам шарит экран и оформляет тестовую заявку.</li><li>Второму респонденту не назначили время — ожидание и простой. Дальше: слоты по 15 минут в календаре.</li><li>Респондент на рабочем месте отвлекается — использовать аварийную версию на 7 минут (задача + «одна вещь»).</li><li>Интервью с администратором главного офиса заняло ~30 минут и дало больше всего фактуры. Для back-office закладывать отдельную встречу или визит в офис.</li></ul>
+<h3>Следующие шаги</h3><div class="tw"><table><thead><tr><th>Задача</th><th>Ответственный</th><th>Срок</th></tr></thead><tbody><tr><td>Провести 3 оставшихся интервью, включая новые клиники</td><td>Алишер, Данил</td><td class='mono'>до 20.10 (вт)</td></tr><tr><td>Получить голосовое от Алии о проблемах с регистрацией</td><td>Алишер</td><td class='mono'>16.10</td></tr><tr><td>Получить актуальный список серий препаратов</td><td>Айгуль, главный лаборант</td><td class='mono'>16.10</td></tr><tr><td>Прописать задачу: регистрация ребёнка по согласию родителя (F05)</td><td>Алишер</td><td class='mono'>15.10</td></tr><tr><td>Уточнить статус задачи по лаборанту (F03)</td><td>Алишер → Расул</td><td class='mono'>16.10</td></tr><tr><td>Офлайн-встреча в офисе по сопроводительным листам (F01)</td><td>Алекс</td><td class='mono'>согласовать</td></tr><tr><td>Решение по бюджету на автотесты (F13)</td><td>Алекс</td><td class='mono'>согласовать</td></tr><tr><td>Показать сводные результаты команде</td><td>Алекс</td><td class='mono'>20.10 (вт)</td></tr></tbody></table></div></section>
+
+<footer>Источник: транскрипт Zoom-сессии 15.10.2026. Подготовлено для команды Аллергопробы.</footer>
+</div></body></html>
