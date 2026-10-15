@@ -1,0 +1,723 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Аллергопроба · Модуль платежей</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: технический документ — липкое оглавление слева, колонка текста ~70ch, схемы на всю ширину колонки */
+:root{
+  --bg:#F5F8F7; --surface:#FFFFFF; --ink:#14211F; --muted:#5A6A67; --line:#DCE4E2; --line-strong:#B9C7C4;
+  --accent:#0D6A62; --accent-soft:#E2F0EE;
+  --kaspi:#D23A2E; --kaspi-soft:#FBE9E7;
+  --card:#2C5BB5; --card-soft:#E7EDF9;
+  --cash:#2C7A4D; --cash-soft:#E4F2E9;
+  --mix:#764CAD; --mix-soft:#EFE8F8;
+  --warn:#A86F12; --warn-soft:#FBF0DC;
+  --crit:#B83226; --crit-soft:#FBE6E3;
+  --f-display:"Unbounded","Golos Text",system-ui,sans-serif;
+  --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1514; --surface:#15201F; --ink:#E3ECEA; --muted:#94A5A2; --line:#25332F; --line-strong:#3A4B47;
+  --accent:#55C2B4; --accent-soft:#143029;
+  --kaspi:#FF7466; --kaspi-soft:#3A1D1A; --card:#86A8F2; --card-soft:#1A2541;
+  --cash:#6FCB92; --cash-soft:#15301F; --mix:#B898EA; --mix-soft:#2A1F3B;
+  --warn:#E9B24E; --warn-soft:#36290F; --crit:#FF7D6E; --crit-soft:#3B1A16; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1514; --surface:#15201F; --ink:#E3ECEA; --muted:#94A5A2; --line:#25332F; --line-strong:#3A4B47;
+  --accent:#55C2B4; --accent-soft:#143029;
+  --kaspi:#FF7466; --kaspi-soft:#3A1D1A; --card:#86A8F2; --card-soft:#1A2541;
+  --cash:#6FCB92; --cash-soft:#15301F; --mix:#B898EA; --mix-soft:#2A1F3B;
+  --warn:#E9B24E; --warn-soft:#36290F; --crit:#FF7D6E; --crit-soft:#3B1A16; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px}
+@media(min-width:1080px){.wrap{grid-template-columns:210px minmax(0,1fr)}}
+nav.toc{display:none}
+@media(min-width:1080px){nav.toc{display:block;position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:13px;padding-top:40px}}
+nav.toc a{display:block;color:var(--muted);text-decoration:none;padding:5px 0 5px 12px;border-left:2px solid var(--line)}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--accent);border-left-color:var(--accent);outline:none}
+nav.toc .tl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:14px 0 6px}
+main{min-width:0}
+header.doc{padding-block:40px 28px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);font-weight:600}
+h1{font-family:var(--f-display);font-weight:600;font-size:clamp(26px,4.2vw,40px);line-height:1.15;margin:10px 0 14px;text-wrap:balance;letter-spacing:-.01em}
+h2{font-family:var(--f-display);font-weight:500;font-size:clamp(20px,2.6vw,25px);line-height:1.25;margin:0 0 12px;text-wrap:balance}
+h3{font-size:17px;font-weight:600;margin:28px 0 10px}
+section{padding-block:44px 8px;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+.secno{font-family:var(--f-mono);font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
+p{margin:0 0 12px;max-width:72ch}
+.lead{font-size:17px;color:var(--muted);max-width:68ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--muted);margin-top:18px}
+.meta b{color:var(--ink);font-weight:600}
+code,.mono{font-family:var(--f-mono);font-size:.86em}
+ul.clean{margin:0 0 12px;padding-left:20px;max-width:72ch}
+ul.clean li{margin:4px 0}
+
+/* outcome grid */
+.outcomes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:20px}
+.out{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.out b{display:block;font-size:15px;margin-bottom:4px}
+.out span{color:var(--muted);font-size:14px}
+.reading{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:16px}
+.reading div{padding:12px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;font-size:14px}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.c-kaspi{color:var(--kaspi);background:var(--kaspi-soft)}
+.c-card{color:var(--card);background:var(--card-soft)}
+.c-cash{color:var(--cash);background:var(--cash-soft)}
+.c-mix{color:var(--mix);background:var(--mix-soft)}
+.c-warn{color:var(--warn);background:var(--warn-soft)}
+.c-crit{color:var(--crit);background:var(--crit-soft)}
+.c-ok{color:var(--cash);background:var(--cash-soft)}
+.c-acc{color:var(--accent);background:var(--accent-soft)}
+.c-mute{color:var(--muted);background:var(--bg);border:1px solid var(--line)}
+
+/* figure */
+figure{margin:20px 0 8px}
+figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+
+/* swimlane */
+.lanes{display:grid;grid-template-columns:120px repeat(6,minmax(150px,1fr));min-width:1020px;font-size:13px}
+.lanes > div{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:10px}
+.lanes > div:nth-child(7n){border-right:0}
+.lanes .hd{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600;background:var(--bg)}
+.lanes .ln{font-weight:600;background:var(--bg);display:flex;align-items:center}
+.lanes .last{border-bottom:0}
+.box{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:8px;padding:7px 9px;line-height:1.35}
+.box.k{background:var(--kaspi-soft);border-color:color-mix(in srgb,var(--kaspi) 30%,transparent)}
+.box.f{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 30%,transparent)}
+.box.s{background:var(--bg);border-color:var(--line-strong)}
+
+/* linear flow */
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:14px 0}
+.fstep{flex:1 1 170px;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;position:relative}
+.fstep .n{font-family:var(--f-mono);font-size:11px;color:var(--accent);font-weight:500}
+.fstep b{display:block;font-size:14.5px;margin:2px 0 4px;line-height:1.3}
+.fstep span{font-size:13px;color:var(--muted);display:block;line-height:1.45}
+.fstep.hl{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.fstep.kx{border-color:color-mix(in srgb,var(--kaspi) 45%,var(--line))}
+.fstep.ok{background:var(--cash-soft);border-color:color-mix(in srgb,var(--cash) 35%,transparent)}
+.arrow{display:flex;align-items:center;color:var(--line-strong);font-size:18px;flex:0 0 auto}
+@media(max-width:640px){.flow{flex-direction:column}.arrow{justify-content:center;transform:rotate(90deg);height:14px}}
+
+/* entry cards */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:14px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0}
+.panel h4{margin:0 0 4px;font-size:15.5px}
+.panel .sub{font-size:13px;color:var(--muted);margin-bottom:12px}
+.vlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+.vlist li{display:grid;grid-template-columns:26px 1fr;gap:10px;padding:8px 0;border-top:1px dashed var(--line);font-size:14px}
+.vlist li:first-child{border-top:0}
+.vlist .d{width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:11.5px;font-weight:700;display:grid;place-items:center;font-family:var(--f-mono)}
+
+/* callouts */
+.note{border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0;max-width:76ch;border:1px solid}
+.note.warn{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 30%,transparent)}
+.note.crit{background:var(--crit-soft);border-color:color-mix(in srgb,var(--crit) 30%,transparent)}
+.note.info{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 30%,transparent)}
+.note b{display:block;margin-bottom:2px}
+
+/* mock UI */
+.mock{background:var(--surface);border:1px solid var(--line-strong);border-radius:14px;overflow:hidden;max-width:560px}
+.mock .bar{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.mock .body{padding:16px;display:flex;flex-direction:column;gap:12px}
+.fld label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+.fld .v{border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:14px;display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.fld .v small{color:var(--accent);font-weight:600;cursor:default}
+.alert-row{background:var(--crit-soft);color:var(--crit);border-radius:8px;padding:9px 12px;font-size:13px;font-weight:600}
+.methods{display:flex;flex-wrap:wrap;gap:8px}
+.methods button{font:inherit;font-size:13px;font-weight:600;border-radius:8px;padding:8px 12px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
+.methods button[aria-pressed="true"]{border-color:var(--kaspi);color:var(--kaspi);background:var(--kaspi-soft)}
+.methods button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn-main{align-self:flex-start;font:inherit;font-weight:600;font-size:14px;border:0;border-radius:8px;padding:10px 16px;background:var(--accent);color:var(--surface)}
+.mock-hint{font-size:13px;color:var(--muted);min-height:2.6em}
+.mockwrap{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:24px;align-items:start;margin-top:14px}
+@media(max-width:860px){.mockwrap{grid-template-columns:1fr}}
+
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;background:var(--bg);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td .id{font-family:var(--f-mono);font-size:12px;color:var(--accent);white-space:nowrap}
+.t-wide{min-width:760px}
+.yes{color:var(--cash);font-weight:600}.no{color:var(--crit);font-weight:600}
+
+/* state machine */
+.states{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}
+.states .st{font-size:13px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface)}
+.states .ar{color:var(--muted)}
+
+/* returns */
+.ret{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:14px}
+.ret .panel{border-top:4px solid var(--accent)}
+.ret .panel.slow{border-top-color:var(--warn)}
+
+/* timing bars */
+.bars{display:flex;flex-direction:column;gap:12px;margin-top:10px;max-width:640px}
+.brow{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;font-size:13.5px}
+.track{position:relative;height:22px;background:var(--bg);border:1px solid var(--line);border-radius:6px}
+.fill{position:absolute;top:2px;bottom:2px;border-radius:4px}
+.ticks{display:grid;grid-template-columns:150px 1fr;gap:12px;font-size:11.5px;color:var(--muted)}
+.ticks .sc{position:relative;height:14px}
+.ticks .sc span{position:absolute;transform:translateX(-50%);font-variant-numeric:tabular-nums}
+@media(max-width:520px){.brow,.ticks{grid-template-columns:96px 1fr}}
+
+/* data model */
+.model{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px}
+.ent{background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;overflow:hidden;font-size:13px}
+.ent .eh{background:var(--accent-soft);color:var(--accent);font-weight:700;padding:8px 12px;font-size:13.5px}
+.ent ul{list-style:none;margin:0;padding:8px 12px}
+.ent li{font-family:var(--f-mono);font-size:12px;padding:3px 0;color:var(--ink)}
+.ent li em{font-style:normal;color:var(--muted)}
+
+/* timeline */
+.road{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:14px}
+.ph{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.ph .tag{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.ph b{font-size:14.5px;line-height:1.3}
+.ph p{font-size:13px;color:var(--muted);margin:0}
+.ph.go{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.launch{margin-top:12px;padding:12px 16px;border:1px dashed var(--accent);border-radius:10px;font-size:14px;max-width:76ch}
+
+/* questions */
+.q{display:grid;grid-template-columns:auto 1fr auto;gap:6px 14px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+.q .qn{font-family:var(--f-mono);font-size:12px;color:var(--accent);padding-top:2px}
+.q .qt b{display:block;font-size:14.5px}
+.q .qt span{font-size:13.5px;color:var(--muted)}
+.q .who{font-size:12.5px;color:var(--muted);white-space:nowrap}
+@media(max-width:560px){.q{grid-template-columns:auto 1fr}.q .who{grid-column:2}}
+
+svg text{font-family:var(--f-body)}
+.sv-life{stroke:var(--line-strong);stroke-dasharray:4 5}
+.sv-head{fill:var(--accent-soft);stroke:var(--accent)}
+.sv-headk{fill:var(--kaspi-soft);stroke:var(--kaspi)}
+.sv-t{fill:var(--ink);font-size:13px;font-weight:600}
+.sv-m{fill:var(--ink);font-size:12px}
+.sv-mm{fill:var(--muted);font-size:11.5px}
+.sv-a{stroke:var(--ink);stroke-width:1.4;fill:none}
+.sv-ad{stroke:var(--muted);stroke-width:1.4;fill:none;stroke-dasharray:5 4}
+.sv-ah{fill:var(--ink)}
+.sv-alt{fill:var(--warn-soft);stroke:var(--warn);stroke-dasharray:4 3}
+.sv-n{fill:var(--accent);font-family:var(--f-mono);font-size:11px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="Оглавление">
+  <div class="tl">Бизнес</div>
+  <a href="#result">1. Что будет на выходе</a>
+  <a href="#map">2. Карта процесса</a>
+  <a href="#entry">3. Точки входа</a>
+  <a href="#reg">4. Регистрация и оплата</a>
+  <a href="#returns">5. Возвраты</a>
+  <a href="#reports">6. Отчётность</a>
+  <div class="tl">Разработка</div>
+  <a href="#kaspi">7. Kaspi и интеграции</a>
+  <a href="#rules">8. Правила и статусы</a>
+  <a href="#points">9. Справочник точек</a>
+  <a href="#spec">10. Требования (ТЗ)</a>
+  <a href="#accept">11. Критерии приёмки</a>
+  <div class="tl">План</div>
+  <a href="#road">12. Этапы и запуск</a>
+  <a href="#questions">13. Открытые вопросы</a>
+</nav>
+
+<main>
+<header class="doc">
+  <div class="eyebrow">Аллергопроба · CRM · модуль платежей</div>
+  <h1>Приём платежей, возвраты и отчёт «Наши кассы»</h1>
+  <p class="lead">User Flow и техническое задание на модуль оплаты: Kaspi-счёт на телефон, карта через терминал, наличные и смешанная оплата. Путь пациента от направления стоматолога до сверки кассы, правила возвратов, своя точка и точка партнёра.</p>
+  <div class="meta">
+    <span><b>Версия</b> 0.1, черновик для согласования</span>
+    <span><b>Дата</b> 15.10.2026</span>
+    <span><b>Основа</b> созвон 15.10 (Alex, Наталья, Камила, Алишер, Аида, Данил) и чат «Прием платежей» с февраля 2026</span>
+  </div>
+  <div class="reading">
+    <div><b>Бизнесу и регистраторам</b><br>Разделы 1–6 и 12–13: путь пациента, что меняется на точке, какие отчёты появятся.</div>
+    <div><b>Команде разработки</b><br>Разделы 7–11: последовательность Kaspi, статусы, модель данных, требования с ID и критерии приёмки.</div>
+  </div>
+</header>
+
+<section id="result">
+  <span class="secno">01</span>
+  <h2>Что будет на выходе</h2>
+  <p>После внедрения регистратор оформляет заявку и оплату в одном окне CRM, а финансы получают ежедневную сверку по своим кассам без ручного сбора из Excel и выписок Kaspi.</p>
+  <div class="note crit"><b>Какую боль закрываем</b>На точках забывают проводить оплату наличными в системе, и суммы не сходятся: пример из практики, взяли 5 000 ₸, а в CRM забили 7 250 ₸. Поэтому каждая оплата фиксируется в заявке, а наличные сверяются с кассой.</div>
+  <div class="outcomes">
+    <div class="out"><b>Счёт в Kaspi на телефон</b><span>Пациент оплачивает со своего телефона. Статус «Оплачено» приходит в CRM автоматически.</span></div>
+    <div class="out"><b>Четыре способа оплаты</b><span>Kaspi-счёт, карта через терминал, наличные, смешанная. Без выбранного способа регистрация не закрывается.</span></div>
+    <div class="out"><b>ИИН пациента в платеже</b><span>В платёж и чек уходит ИИН того, кто сдаёт анализ, а не плательщика. Детям счёт на их номер не выставляется.</span></div>
+    <div class="out"><b>Возвраты с причиной</b><span>Две ветки: по нашей вине (быстро, регистратор) и по желанию пациента (через заявление). История видна в заявке.</span></div>
+    <div class="out"><b>Отчёт «Наши кассы»</b><span>Точка, клиника, наличные / карта / Kaspi, возвраты, сумма по CRM и по факту, расхождение.</span></div>
+    <div class="out"><b>Единый справочник точек</b><span>Один стандарт адреса для CRM, сайта и чат-бота. Своя точка или партнёр, с датами действия договора.</span></div>
+  </div>
+</section>
+
+<section id="map">
+  <span class="secno">02</span>
+  <h2>Карта процесса: кто что делает</h2>
+  <p>Основной поток пациентов идёт от стоматолога. Ниже весь путь по ролям, от направления до отчёта. Красные блоки зависят от Kaspi, жёлтые относятся к финансам.</p>
+  <figure>
+    <div class="scroll">
+      <div class="lanes" role="table" aria-label="Карта процесса по ролям">
+        <div class="hd">Роль</div><div class="hd">1 · Направление</div><div class="hd">2 · Данные пациента</div><div class="hd">3 · Регистрация на точке</div><div class="hd">4 · Оплата</div><div class="hd">5 · Работа и возвраты</div><div class="hd">6 · Отчётность</div>
+
+        <div class="ln">Стоматолог</div>
+        <div><div class="box">Выбирает препараты на сайте стоматологов, вводит телефон пациента</div></div>
+        <div></div><div></div><div></div><div></div><div></div>
+
+        <div class="ln">Пациент</div>
+        <div></div>
+        <div><div class="box">Получает ссылку в WhatsApp: ИИН, ФИО, дата визита, тариф, точки на карте</div></div>
+        <div><div class="box">Приходит на точку забора</div></div>
+        <div><div class="box k">Платит: счёт в Kaspi, карта или наличные</div></div>
+        <div><div class="box s">При отказе по своей причине заполняет заявление на возврат</div></div>
+        <div></div>
+
+        <div class="ln">Регистратор</div>
+        <div></div><div></div>
+        <div><div class="box">Находит заявку по ИИН, сверяет препараты и тариф с пациентом, подтверждает</div></div>
+        <div><div class="box">Выбирает способ оплаты и номер для счёта</div></div>
+        <div><div class="box">Забор материала. Оформляет возврат, если причина на нашей стороне</div></div>
+        <div></div>
+
+        <div class="ln">CRM</div>
+        <div></div>
+        <div><div class="box s">Создаёт заявку-черновик, подтягивает данные из согласия</div></div>
+        <div><div class="box s">Проверяет возраст, блокирует номер ребёнка для счёта</div></div>
+        <div><div class="box s">Ждёт подтверждения оплаты; после оплаты блокирует тариф и препараты</div></div>
+        <div><div class="box s">Ведёт историю: возврат, сумма, способ, причина</div></div>
+        <div><div class="box s">Считает суммы по точкам и способам оплаты</div></div>
+
+        <div class="ln last">Kaspi / финансы</div>
+        <div class="last"></div><div class="last"></div><div class="last"></div>
+        <div class="last"><div class="box k">Kaspi: счёт, push пациенту, webhook «оплачено»</div></div>
+        <div class="last"><div class="box k">Возврат через кабинет Kaspi Pay</div></div>
+        <div class="last"><div class="box f">Финансы: ежедневная сверка «Наши кассы», реестр партнёров раз в месяц</div></div>
+      </div>
+    </div>
+    <figcaption>На телефоне таблицу можно прокрутить вбок.</figcaption>
+  </figure>
+</section>
+
+<section id="entry">
+  <span class="secno">03</span>
+  <h2>Точки входа пациента</h2>
+  <p>Сейчас пациент приходит с бумажным направлением, а регистратор переносит данные в CRM вручную. Новый процесс переводит направление в электронный вид в обоих сценариях.</p>
+  <div class="two">
+    <div class="panel">
+      <h4>А. Через стоматолога <span class="chip c-acc">основной поток</span></h4>
+      <div class="sub">Уже в разработке, Алишер</div>
+      <ul class="vlist">
+        <li><span class="d">1</span><span>Стоматолог выбирает препараты и вводит телефон пациента.</span></li>
+        <li><span class="d">2</span><span>Пациенту приходит ссылка: ИИН, ФИО, дата визита, выбор тарифа, точки на карте.</span></li>
+        <li><span class="d">3</span><span>Пациент <b>не может</b> менять количество и состав препаратов, только тариф.</span></li>
+        <li><span class="d">4</span><span>Заявка доступна на любой точке по ИИН.</span></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4>Б. Самостоятельный приход <span class="chip c-warn">нужно согласовать</span></h4>
+      <div class="sub">Пациент пришёл без электронного направления</div>
+      <ul class="vlist">
+        <li><span class="d">1</span><span>Сканирует QR на точке, заполняет информационное согласие: ИИН, телефон, ФИО.</span></li>
+        <li><span class="d">2</span><span>В той же форме отмечает препараты и ставит галочку «Подтверждаю выбор препаратов». Это заменяет бумажный бланк.</span></li>
+        <li><span class="d">3</span><span>Регистратор видит выбор, вслух сверяет с пациентом и нажимает «Подтвердить».</span></li>
+        <li><span class="d">4</span><span>Ответственность за выбор препаратов на пациенте, подтверждение хранится в заявке как доказательство при спорах.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note warn"><b>Почему сейчас два документа</b>Пациент заполняет электронное согласие и бумажный бланк с препаратами. Бумагу хранят, чтобы разбирать ошибки регистраторов (например, перепутанный вариант артикаина). Электронный выбор с галочкой пациента и логом даёт ту же доказательную базу без бумаги. Медицинская сторона (Гульнара) может возразить против выбора препаратов пациентом, см. вопрос Q4.</div>
+</section>
+
+<section id="reg">
+  <span class="secno">04</span>
+  <h2>Регистрация и оплата на точке</h2>
+  <p>Шаги регистратора на своей точке. Регистрация не завершается, пока не выбран и не подтверждён реальный способ оплаты.</p>
+  <div class="flow" role="list">
+    <div class="fstep" role="listitem"><span class="n">ШАГ 1</span><b>Ввод ИИН</b><span>Подтягиваются ФИО, дата рождения, телефон из согласия или заявка стоматолога</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="fstep" role="listitem"><span class="n">ШАГ 2</span><b>Проверка возраста</b><span>Младше 18 лет: красная плашка, номер ребёнка для счёта запрещён</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="fstep" role="listitem"><span class="n">ШАГ 3</span><b>Препараты и тариф</b><span>Сверка с пациентом. Последний момент, когда их можно изменить</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="fstep hl" role="listitem"><span class="n">ШАГ 4</span><b>Способ оплаты</b><span>Kaspi-счёт, карта, наличные или смешанная</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="fstep ok" role="listitem"><span class="n">ШАГ 5</span><b>Оплачено</b><span>Заявка блокируется и уходит в работу, формируется сопроводительный лист</span></div>
+  </div>
+
+  <h3>Экран оплаты в CRM (эскиз)</h3>
+  <div class="mockwrap">
+    <div class="mock" aria-label="Эскиз экрана оплаты">
+      <div class="bar"><span>Заявка · пример</span><span>Точка: своя касса</span></div>
+      <div class="body">
+        <div class="fld"><label>Пациент (сдаёт анализ)</label><div class="v"><span>Пример: Пациентка, 12 лет · ИИН ●●●●●●●●●●●●</span></div></div>
+        <div class="alert-row">Пациент младше 18 лет. Счёт выставляется только на номер родителя.</div>
+        <div class="fld"><label>Препараты · тариф</label><div class="v"><span>3 препарата · «2 рабочих дня»</span><span class="mono">к оплате: 0 ₸</span></div></div>
+        <div class="fld"><label>Способ оплаты</label>
+          <div class="methods" id="methods">
+            <button type="button" id="m-kaspi" data-m="kaspi" aria-pressed="true">Kaspi-счёт</button>
+            <button type="button" id="m-card" data-m="card" aria-pressed="false">Карта (терминал)</button>
+            <button type="button" id="m-cash" data-m="cash" aria-pressed="false">Наличные</button>
+            <button type="button" id="m-mix" data-m="mix" aria-pressed="false">Смешанная</button>
+          </div>
+        </div>
+        <div class="fld" id="phoneFld"><label>Номер для счёта Kaspi</label><div class="v"><span>+7 7●● ●●● ●● ●● · номер родителя</span><small>Изменить номер</small></div></div>
+        <div class="mock-hint" id="hint">Счёт уходит в приложение Kaspi. На точке можно показать QR или код оплаты. Статус сменится на «Оплачено» сам.</div>
+        <button type="button" class="btn-main" id="cta">Выставить счёт / показать QR</button>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Способы оплаты</h3>
+      <div class="scroll"><table>
+        <thead><tr><th>Способ</th><th>Как фиксируется</th><th>Этап</th></tr></thead>
+        <tbody>
+          <tr><td><span class="chip c-kaspi">Kaspi-счёт / QR</span></td><td>Автоматически: Kaspi вызывает наш метод pay после оплаты</td><td>1</td></tr>
+          <tr><td><span class="chip c-card">Карта (POS)</span></td><td>Терминал Kaspi принимает карты любых банков. Сначала регистратор отмечает «Карта» и сумму, затем интеграция с POS (документация Kaspi Smart-POS и Halyk PAX есть)</td><td>2</td></tr>
+          <tr><td><span class="chip c-cash">Наличные</span></td><td>Регистратор отмечает «Наличные» и сумму</td><td>2</td></tr>
+          <tr><td><span class="chip c-mix">Смешанная</span></td><td>Две части: наличные + Kaspi или наличные + карта. Сумма частей равна итогу</td><td>2</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:13.5px;color:var(--muted);margin-top:10px">Терминал Halyk стоит только в Саамед. Остальные точки принимают все карты через терминал Kaspi с его комиссией.</p>
+    </div>
+  </div>
+
+  <div class="note crit"><b>Требование законодательства (со слов финансов)</b>Медицинская организация передаёт в платёж ИИН пациента до оплаты. Это ИИН того, кто сдаёт анализ, даже если платит родитель. Где именно передаётся ИИН (в счёт Kaspi Pay или в фискальный чек ОФД), уточняем, см. Q3.</div>
+</section>
+
+<section id="returns">
+  <span class="secno">05</span>
+  <h2>Возвраты</h2>
+  <p>Возвраты случаются редко, но процесс должен быть зафиксирован. Ветка выбирается по причине возврата.</p>
+  <div class="ret">
+    <div class="panel">
+      <h4>По нашей вине <span class="chip c-ok">быстрая ветка</span></h4>
+      <div class="sub">Нет препарата (пример: септонез зелёный летом), анализ невозможно выполнить, ошибка данных</div>
+      <ul class="vlist">
+        <li><span class="d">1</span><span>Регистратор открывает заявку, нажимает «Возврат».</span></li>
+        <li><span class="d">2</span><span>Указывает причину из списка, сумму и способ возврата.</span></li>
+        <li><span class="d">3</span><span>Деньги возвращаются тем же способом, которым платил пациент.</span></li>
+        <li><span class="d">4</span><span>Статус «Возвращено», сумма вычитается в отчётах.</span></li>
+      </ul>
+    </div>
+    <div class="panel slow">
+      <h4>По желанию пациента <span class="chip c-warn">через заявление</span></h4>
+      <div class="sub">Передумал, сменил тариф после оплаты, решил сдать меньше препаратов</div>
+      <ul class="vlist">
+        <li><span class="d">1</span><span>Пациент заполняет форму: ФИО, ИИН, номер заявки, обоснование.</span></li>
+        <li><span class="d">2</span><span>Заявление попадает ответственному. Решение: одобрить или отклонить, с комментарием.</span></li>
+        <li><span class="d">3</span><span>После одобрения регистратор или финансы проводят возврат.</span></li>
+        <li><span class="d">4</span><span>Пациент видит условия и сроки возврата до подачи заявления.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Сроки возврата по способу оплаты</h3>
+  <p style="font-size:14px;color:var(--muted)">Предлагаемые сроки для документа «Условия возврата». Срок по Kaspi уточняем у Kaspi.</p>
+  <div class="bars" aria-label="Сроки возврата, рабочие дни">
+    <div class="brow"><span>Наличные</span><div class="track"><div class="fill" style="left:0;width:2%;background:var(--cash)"></div></div></div>
+    <div class="brow"><span>Kaspi-счёт / QR</span><div class="track"><div class="fill" style="left:0;width:14.3%;background:var(--kaspi);opacity:.85"></div></div></div>
+    <div class="brow"><span>Карта</span><div class="track"><div class="fill" style="left:35.7%;width:64.3%;background:var(--card);opacity:.35"></div><div class="fill" style="left:0;width:35.7%;background:var(--card)"></div></div></div>
+    <div class="ticks"><span></span><div class="sc"><span style="left:0">0</span><span style="left:14.3%">2</span><span style="left:35.7%">5</span><span style="left:50%">7</span><span style="left:100%">14 дн.</span></div></div>
+  </div>
+  <figcaption>Наличные: сразу. Kaspi: через кабинет Kaspi Pay, ориентир до 2 дней (уточнить). Карта: до 5 рабочих дней, в регламенте фиксируем до 14 с запасом на сторону банка.</figcaption>
+
+  <div class="note info"><b>Что сохраняется по каждому возврату</b>Кто оформил, когда, сумма, способ (наличные / карта / Kaspi), причина, ветка (наша вина / заявление пациента), ссылка на заявление. Возврат без причины сохранить нельзя.</div>
+</section>
+
+<section id="reports">
+  <span class="secno">06</span>
+  <h2>Отчётность: свои точки и партнёры</h2>
+  <div class="two">
+    <div class="panel">
+      <h4>Своя точка</h4>
+      <div class="sub">Наш кассовый аппарат или терминал</div>
+      <ul class="clean">
+        <li>Платежи идут через модуль оплаты</li>
+        <li>Способ оплаты обязателен для каждой заявки</li>
+        <li>Попадает в ежедневный отчёт «Наши кассы»</li>
+        <li>Сверка: сумма по CRM против факта по кассе</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4>Точка партнёра</h4>
+      <div class="sub">Клиника принимает оплату на свою кассу</div>
+      <ul class="clean">
+        <li>Модуль оплаты не используется, в CRM видна только сумма по заявкам</li>
+        <li>Способ оплаты у партнёра нам не важен</li>
+        <li>В «Наши кассы» не попадает</li>
+        <li>Раз в месяц: реестр по партнёру для взаиморасчёта</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Отчёт «Наши кассы» (макет, цифры условные)</h3>
+  <p>Фильтр по дате или периоду. Точка попадает в отчёт автоматически, как только к ней привязана наша касса. Добавлять адреса вручную не нужно.</p>
+  <figure>
+    <div class="scroll"><table class="t-wide">
+      <thead><tr><th>Клиника</th><th>Адрес точки</th><th class="num">Наличные</th><th class="num">Карта</th><th class="num">Kaspi</th><th class="num">Возвраты</th><th class="num">Итого CRM</th><th class="num">Факт</th><th>Сверка</th></tr></thead>
+      <tbody>
+        <tr><td>Пример: своя лаборатория</td><td>г. Астана, ул. Е67, 1</td><td class="num">48 000</td><td class="num">36 000</td><td class="num">72 000</td><td class="num">−6 000</td><td class="num">150 000</td><td class="num">150 000</td><td><span class="chip c-ok">сходится</span></td></tr>
+        <tr><td>Пример: своя касса</td><td>г. Алматы, ул. Бухар-Жырау, 1</td><td class="num">24 000</td><td class="num">12 000</td><td class="num">30 000</td><td class="num">0</td><td class="num">66 000</td><td class="num">60 000</td><td><span class="chip c-crit">−6 000</span></td></tr>
+        <tr><td>Пример: своя касса</td><td>г. Караганда, пр. Абая, 1</td><td class="num">18 000</td><td class="num">0</td><td class="num">24 000</td><td class="num">0</td><td class="num">42 000</td><td class="num">—</td><td><span class="chip c-warn">нет факта</span></td></tr>
+      </tbody>
+    </table></div>
+    <figcaption>«Факт» по Kaspi берётся из выписки Kaspi Pay, по наличным вводится при сдаче кассы (предложение, Q10). Смешанная оплата раскладывается по колонкам частей.</figcaption>
+  </figure>
+</section>
+
+<section id="kaspi">
+  <span class="secno">07</span>
+  <h2>Kaspi и другие интеграции</h2>
+  <p>Kaspi подключается по протоколу «Платежи на Kaspi.kz» (check / pay): мы не отправляем счёт в Kaspi, а Kaspi сам обращается к нашему серверу. Пациент открывает платёж в приложении Kaspi по коду заявки, QR или счёту, Kaspi запрашивает у нас сумму (check), после оплаты сообщает об успехе (pay).</p>
+  <div class="note info"><b>Статус на 15.10</b>Получено предварительное одобрение Kaspi, IP-адреса Kaspi внесены в allowlist тестового сервера. Прототип Арлана (карточка «Оплата» в заявке, QR и код, check/pay, защита от дублей, смена статуса без перезагрузки, «Отметить возврат») на ревью у Марата, ответ Kaspi до конца недели. Оценка Марата: разработка 8–13 дней, полноценный запуск Kaspi реален к концу октября.</div>
+  <figure>
+    <div class="scroll" style="padding:8px 4px">
+      <svg viewBox="0 0 880 640" width="880" height="640" role="img" aria-label="Диаграмма последовательности оплаты через Kaspi по протоколу check и pay">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="sv-ah"/></marker></defs>
+        <rect x="30" y="20" width="130" height="40" rx="8" class="sv-head"/><text x="95" y="45" text-anchor="middle" class="sv-t">Регистратор / CRM</text>
+        <rect x="205" y="20" width="130" height="40" rx="8" class="sv-head"/><text x="270" y="45" text-anchor="middle" class="sv-t">Наш сервер</text>
+        <rect x="380" y="20" width="130" height="40" rx="8" class="sv-headk"/><text x="445" y="45" text-anchor="middle" class="sv-t">Kaspi</text>
+        <rect x="555" y="20" width="130" height="40" rx="8" class="sv-headk"/><text x="620" y="45" text-anchor="middle" class="sv-t">Пациент (Kaspi)</text>
+        <rect x="730" y="20" width="130" height="40" rx="8" class="sv-head"/><text x="795" y="45" text-anchor="middle" class="sv-t">ОФД / КГД</text>
+        <line x1="95" y1="60" x2="95" y2="630" class="sv-life"/><line x1="270" y1="60" x2="270" y2="630" class="sv-life"/><line x1="445" y1="60" x2="445" y2="630" class="sv-life"/><line x1="620" y1="60" x2="620" y2="630" class="sv-life"/><line x1="795" y1="60" x2="795" y2="630" class="sv-life"/>
+
+        <text x="182" y="92" text-anchor="middle" class="sv-m"><tspan class="sv-n">1 </tspan>Создать оплату</text>
+        <text x="182" y="106" text-anchor="middle" class="sv-mm">код заявки, сумма, ИИН пациента</text>
+        <line x1="95" y1="114" x2="268" y2="114" class="sv-a" marker-end="url(#ah)"/>
+
+        <text x="357" y="146" text-anchor="middle" class="sv-m"><tspan class="sv-n">2 </tspan>Счёт в приложении Kaspi или QR / код на точке</text>
+        <text x="357" y="160" text-anchor="middle" class="sv-mm">формат счёта Kaspi пришлёт после запуска наших методов</text>
+        <line x1="95" y1="168" x2="618" y2="168" class="sv-ad" marker-end="url(#ah)"/>
+
+        <text x="532" y="200" text-anchor="middle" class="sv-m"><tspan class="sv-n">3 </tspan>Открывает платёж</text>
+        <line x1="620" y1="210" x2="447" y2="210" class="sv-a" marker-end="url(#ah)"/>
+
+        <text x="357" y="242" text-anchor="middle" class="sv-m"><tspan class="sv-n">4 </tspan>check (код заявки)</text>
+        <line x1="445" y1="252" x2="272" y2="252" class="sv-a" marker-end="url(#ah)"/>
+
+        <text x="357" y="284" text-anchor="middle" class="sv-m"><tspan class="sv-n">5 </tspan>result=0, сумма, данные заявки</text>
+        <text x="357" y="298" text-anchor="middle" class="sv-mm">сумма фиксированная, пациент её не меняет</text>
+        <line x1="270" y1="306" x2="443" y2="306" class="sv-a" marker-end="url(#ah)"/>
+
+        <text x="532" y="338" text-anchor="middle" class="sv-m"><tspan class="sv-n">6 </tspan>Подтверждает оплату</text>
+        <line x1="620" y1="348" x2="447" y2="348" class="sv-a" marker-end="url(#ah)"/>
+
+        <text x="357" y="380" text-anchor="middle" class="sv-m"><tspan class="sv-n">7 </tspan>pay (txn_id, сумма)</text>
+        <line x1="445" y1="390" x2="272" y2="390" class="sv-a" marker-end="url(#ah)"/>
+
+        <text x="357" y="422" text-anchor="middle" class="sv-m"><tspan class="sv-n">8 </tspan>result=0, prv_txn_id</text>
+        <text x="357" y="436" text-anchor="middle" class="sv-mm">повтор того же txn_id: тот же ответ, без дубля</text>
+        <line x1="270" y1="444" x2="443" y2="444" class="sv-a" marker-end="url(#ah)"/>
+
+        <text x="182" y="476" text-anchor="middle" class="sv-m"><tspan class="sv-n">9 </tspan>«Оплачена · дата, время»</text>
+        <text x="182" y="490" text-anchor="middle" class="sv-mm">без перезагрузки, тариф заблокирован</text>
+        <line x1="270" y1="498" x2="97" y2="498" class="sv-a" marker-end="url(#ah)"/>
+
+        <text x="532" y="530" text-anchor="middle" class="sv-m"><tspan class="sv-n">10 </tspan>Чек с ИИН пациента: кто формирует, уточнить (Q3)</text>
+        <line x1="270" y1="540" x2="793" y2="540" class="sv-ad" marker-end="url(#ah)"/>
+
+        <rect x="30" y="564" width="830" height="54" rx="8" class="sv-alt"/>
+        <text x="46" y="586" class="sv-t">Нет оплаты за N минут или pay не дошёл</text>
+        <text x="46" y="605" class="sv-m">«Не оплачен»: повторить, сменить способ или отменить. Политику повторов pay (таймаут 15 с, result=5) уточняем у Kaspi.</text>
+      </svg>
+    </div>
+    <figcaption>Запросы Kaspi принимаются только с адресов из протокола (allowlist уже настроен на тестовом сервере). Время в ответах сейчас считаем по Алматы.</figcaption>
+  </figure>
+
+  <h3>Что уже сделано в прототипе (Арлан, 29.09)</h3>
+  <ul class="clean">
+    <li>Поиск заявки по ИИН, в карточке заявки блок «Оплата»: статус, сумма, способ.</li>
+    <li>«Показать QR для оплаты»: QR, ссылка, код оплаты крупно для ручного ввода в Kaspi, сумма.</li>
+    <li>check и pay отвечают по протоколу, повторный pay с тем же txn_id не создаёт дубль.</li>
+    <li>Статус «Оплачена» с датой и временем появляется сам, без перезагрузки.</li>
+    <li>На оплаченной через Kaspi заявке нельзя выбрать «Наличные»: способ откатывается на Kaspi.</li>
+    <li>«Отметить возврат» с подтверждением; после возврата снова доступна оплата. Возврат пока без причины и способа, доработать по разделу 5.</li>
+  </ul>
+
+  <h3>Интеграции: что есть на руках</h3>
+  <div class="scroll"><table class="t-wide">
+    <thead><tr><th>Провайдер</th><th>Для чего</th><th>Статус</th><th>Условия</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip c-kaspi">Kaspi Платежи</span></td><td>Удалённая оплата: счёт, QR, код</td><td><span class="chip c-acc">в разработке</span></td><td>Комиссию, сроки зачисления и формат реестров уточняем (Q13)</td></tr>
+      <tr><td><span class="chip c-kaspi">Kaspi Smart-POS</span></td><td>Оплата картой и QR на терминале точки</td><td><span class="chip c-mute">документация</span></td><td>Есть документ по интеграции и стоимости приёма через POS</td></tr>
+      <tr><td><span class="chip c-card">Halyk PAX POS</span></td><td>Терминал Halyk (Саамед), интеграция по HTTP</td><td><span class="chip c-mute">документация</span></td><td>Инструкция по интеграции POS от Halyk</td></tr>
+      <tr><td><span class="chip c-card">Freedom Pay</span></td><td>Альтернатива для карт</td><td><span class="chip c-mute">документация</span></td><td>Открытая документация и SDK на GitHub</td></tr>
+      <tr><td><span class="chip c-card">ForteBank e-com</span></td><td>Оплата картой онлайн, Apple Pay, Google Pay</td><td><span class="chip c-warn">тестовый доступ</span></td><td>2,5% (мин. 25 ₸) по картам РК, 4% (мин. 350 ₸) по зарубежным; зачисление на следующий день. На сайте нужны оферта, реквизиты, политика конфиденциальности, условия оплаты и возврата</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="rules">
+  <span class="secno">08</span>
+  <h2>Правила изменения заявки и статусы</h2>
+  <p>Сейчас тариф и препараты поменять нельзя, поэтому точки 5–6 раз в день просят в чате удалить заявку. Если тариф меняют после формирования сопроводительного листа, лаборатория выдаёт результат не в тот срок. Правило ниже убирает оба случая.</p>
+  <div class="scroll"><table class="t-wide">
+    <thead><tr><th>Поле</th><th>До оплаты</th><th>После оплаты</th><th>Кто</th></tr></thead>
+    <tbody>
+      <tr><td>ФИО, ИИН, дата рождения, пол, телефон</td><td class="yes">можно</td><td class="yes">можно, с записью в лог</td><td>Регистратор</td></tr>
+      <tr><td>Препараты</td><td class="yes">можно, при подтверждении на точке</td><td class="no">нельзя: возврат и новая заявка</td><td>Регистратор своей точки. Пациент по направлению стоматолога не меняет</td></tr>
+      <tr><td>Тариф</td><td class="yes">можно, при подтверждении на точке</td><td class="no">нельзя: возврат и новая заявка</td><td>Регистратор. Регистратор партнёра меняет только до подтверждения</td></tr>
+      <tr><td>Способ оплаты</td><td class="yes">можно, пока нет подтверждения оплаты</td><td class="no">нельзя, только через возврат</td><td>Регистратор</td></tr>
+      <tr><td>Удаление заявки</td><td class="yes">можно</td><td class="no">нельзя, только возврат</td><td>Администратор</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Статусы оплаты</h3>
+  <div class="states">
+    <span class="st">Черновик</span><span class="ar">→</span>
+    <span class="st">Подтверждена на точке</span><span class="ar">→</span>
+    <span class="st" style="border-color:var(--kaspi)">Ожидает оплаты</span><span class="ar">→</span>
+    <span class="st" style="border-color:var(--cash);background:var(--cash-soft)">Оплачено</span><span class="ar">→</span>
+    <span class="st">В работе</span>
+  </div>
+  <div class="states">
+    <span class="st" style="border-color:var(--cash);background:var(--cash-soft)">Оплачено</span><span class="ar">→</span>
+    <span class="st" style="border-color:var(--warn)">Возврат запрошен</span><span class="ar">→</span>
+    <span class="st" style="border-color:var(--warn)">Возврат одобрен</span><span class="ar">→</span>
+    <span class="st" style="border-color:var(--crit)">Возвращено</span>
+  </div>
+  <div class="states">
+    <span class="st" style="border-color:var(--kaspi)">Ожидает оплаты</span><span class="ar">→</span>
+    <span class="st">Не оплачен</span><span class="ar">→</span>
+    <span class="st">Отменена</span>
+  </div>
+  <p style="font-size:13.5px;color:var(--muted)">Быстрая ветка (наша вина) идёт из «Оплачено» сразу в «Возвращено», минуя «Возврат запрошен». Смешанная оплата получает «Оплачено», когда оплачены обе части.</p>
+</section>
+
+<section id="points">
+  <span class="secno">09</span>
+  <h2>Справочник точек и адресов</h2>
+  <p>Один и тот же адрес сейчас записан по-разному: «ул. Е67», «улица E67»; «Бухар-Жырау 52/3» встречался в четырёх вариантах. Отчёт финансов строится по адресам, поэтому дубли ломают сверку. Нужен единый справочник, из которого берут данные CRM, сайт и чат-бот.</p>
+  <div class="model">
+    <div class="ent"><div class="eh">Адрес</div><ul><li>город</li><li>улица <em>(из справочника)</em></li><li>дом, корпус, офис</li><li>display_name <em>(собирается)</em></li><li>aliases[] <em>(старые написания)</em></li><li>lat, lng</li></ul></div>
+    <div class="ent"><div class="eh">Клиника</div><ul><li>название</li><li>юрлицо, БИН</li><li>тип: своя / партнёр</li></ul></div>
+    <div class="ent"><div class="eh">Точка забора</div><ul><li>адрес_id</li><li>клиника_id</li><li>тип кассы: наша / партнёра</li><li>действует_с, действует_по</li><li>логины[]</li></ul></div>
+    <div class="ent"><div class="eh">Касса / терминал</div><ul><li>точка_id</li><li>тип: ККМ / терминал Kaspi / Halyk</li><li>серийный №</li><li>активна: да / нет</li></ul></div>
+  </div>
+  <div class="note info"><b>Один адрес, разные договоры</b>В Алматы лаборатория переехала на адрес, где раньше была точка партнёра LS Clinic. До середины октября там принимал партнёр, после этого принимает наша касса. Это две разные записи «Точка забора» с одним адресом и разными датами действия. Отчёт делит их по периоду, а не по написанию адреса. Колонка «Клиника» нужна в выгрузке, чтобы финансам не держать в голове, какой адрес к какой клинике относится.</div>
+  <p>Нормализация адресов: вариант с геокодером (2ГИС или Яндекс) или справочник вручную. Решение и оценку даёт Марат, связь с задачей Арлана по админке чат-бота уточняем.</p>
+</section>
+
+<section id="spec">
+  <span class="secno">10</span>
+  <h2>Требования</h2>
+  <div class="scroll"><table class="t-wide">
+    <thead><tr><th>ID</th><th>Требование</th><th>Этап</th></tr></thead>
+    <tbody>
+      <tr><td><span class="id">PAY-01</span></td><td>Счёт Kaspi на номер телефона из заявки, с возможностью изменить номер перед отправкой. Механику счёта в приложении Kaspi уточняем (документ Kaspi пришлёт после запуска наших методов).</td><td>1</td></tr>
+      <tr><td><span class="id">PAY-02</span></td><td>Методы check и pay по протоколу Kaspi: фиксированная сумма, идемпотентность по txn_id, автоматическая смена статуса заявки без перезагрузки.</td><td>1</td></tr>
+      <tr><td><span class="id">PAY-10</span></td><td>Приём запросов Kaspi только с адресов из протокола (allowlist), на тестовом и боевом контуре.</td><td>1</td></tr>
+      <tr><td><span class="id">PAY-11</span></td><td>QR и код оплаты на точке для пациента рядом с регистратором (реализовано в прототипе).</td><td>1</td></tr>
+      <tr><td><span class="id">PAY-12</span></td><td>На оплаченной заявке нельзя сменить способ оплаты (реализовано для Kaspi, распространить на все способы).</td><td>2</td></tr>
+      <tr><td><span class="id">PAY-03</span></td><td>Передача ИИН пациента (не плательщика) в платёж / чек согласно требованию для медорганизаций.</td><td>1</td></tr>
+      <tr><td><span class="id">PAY-04</span></td><td>Проверка возраста по ИИН. Младше 18: красная плашка, запрет выставить счёт на номер пациента-ребёнка.</td><td>1</td></tr>
+      <tr><td><span class="id">PAY-05</span></td><td>Таймаут неоплаченного счёта, статус «Не оплачен», действия: повторить, сменить номер, сменить способ, отменить.</td><td>1</td></tr>
+      <tr><td><span class="id">PAY-06</span></td><td>Оплата картой через терминал: отметка способа и суммы регистратором. Интеграция с POS (Kaspi Smart-POS или Halyk PAX) отдельной задачей.</td><td>2</td></tr>
+      <tr><td><span class="id">PAY-07</span></td><td>Оплата наличными: отметка способа и суммы регистратором.</td><td>2</td></tr>
+      <tr><td><span class="id">PAY-08</span></td><td>Смешанная оплата: две части с разными способами, сумма частей равна итогу заявки.</td><td>2</td></tr>
+      <tr><td><span class="id">PAY-09</span></td><td>Регистрацию нельзя завершить без выбранного и подтверждённого способа оплаты.</td><td>2</td></tr>
+      <tr><td><span class="id">REG-01</span></td><td>Тариф и препараты меняются только до оплаты. После оплаты поля заблокированы, сопроводительный лист формируется по оплаченному тарифу.</td><td>2</td></tr>
+      <tr><td><span class="id">REG-02</span></td><td>Электронный выбор препаратов в форме согласия с галочкой подтверждения пациента; кнопка «Подтвердить» у регистратора. Лог хранит оба подтверждения.</td><td>2</td></tr>
+      <tr><td><span class="id">REG-03</span></td><td>Телефон подтягивается из согласия и редактируется регистратором.</td><td>1</td></tr>
+      <tr><td><span class="id">RET-01</span></td><td>Возврат по нашей вине: регистратор, причина из списка, сумма, способ, статус «Возвращено».</td><td>3</td></tr>
+      <tr><td><span class="id">RET-02</span></td><td>Возврат по заявлению пациента: форма, очередь на рассмотрение, одобрить / отклонить с комментарием.</td><td>3</td></tr>
+      <tr><td><span class="id">RET-03</span></td><td>Документ «Условия возврата» доступен пациенту до подачи заявления, сроки по способу оплаты.</td><td>3</td></tr>
+      <tr><td><span class="id">RET-04</span></td><td>Возвраты вычитаются из сумм в отчётах, история по заявке хранится полностью.</td><td>3</td></tr>
+      <tr><td><span class="id">REP-01</span></td><td>Отчёт «Наши кассы»: фильтр по дате, только точки с нашей кассой, колонки из раздела 6, расчёт расхождения.</td><td>4</td></tr>
+      <tr><td><span class="id">REP-02</span></td><td>Точка попадает в «Наши кассы» автоматически при привязке нашей кассы, без ручного добавления.</td><td>4</td></tr>
+      <tr><td><span class="id">REP-03</span></td><td>Колонка «Клиника» в общем финансовом отчёте и выгрузке.</td><td>4</td></tr>
+      <tr><td><span class="id">REP-04</span></td><td>Реестр по партнёру за месяц для взаиморасчёта.</td><td>4</td></tr>
+      <tr><td><span class="id">ADR-01</span></td><td>Единый справочник адресов и точек с датами действия, синхронизация с сайтом и чат-ботом. Миграция существующих дублей.</td><td>4</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="accept">
+  <span class="secno">11</span>
+  <h2>Критерии приёмки</h2>
+  <ul class="clean">
+    <li>Тестовая оплата Kaspi на минимальную сумму (100–200 ₸) проходит, статус в CRM меняется без действий регистратора.</li>
+    <li>Повторный pay с тем же txn_id возвращает тот же prv_txn_id и не создаёт вторую оплату.</li>
+    <li>Запрос check/pay с адреса вне allowlist отклоняется.</li>
+    <li>Для пациента младше 18 лет кнопка «Выставить счёт» неактивна, пока номер совпадает с номером пациента.</li>
+    <li>В платёжных данных стоит ИИН пациента при оплате родителем.</li>
+    <li>После «Оплачено» поля тарифа и препаратов недоступны для редактирования любой ролью.</li>
+    <li>Регистрацию нельзя закрыть без способа оплаты; смешанную оплату нельзя сохранить, если части не дают итог.</li>
+    <li>Возврат без причины не сохраняется; сумма возврата вычитается в «Наших кассах» за дату возврата.</li>
+    <li>Новая точка с привязанной нашей кассой появляется в «Наших кассах» без ручных действий.</li>
+  </ul>
+</section>
+
+<section id="road">
+  <span class="secno">12</span>
+  <h2>Этапы и запуск</h2>
+  <div class="road">
+    <div class="ph go"><span class="tag">Этап 1 · до конца октября</span><b>Kaspi-счёт и QR</b><p>Прототип на ревью, ответ Kaspi до конца недели, затем отладка с Kaspi. ИИН пациента, проверка возраста.</p></div>
+    <div class="ph"><span class="tag">Этап 2</span><b>Наличные, карта, смешанная</b><p>Обязательный выбор способа, блокировка заявки после оплаты.</p></div>
+    <div class="ph"><span class="tag">Этап 3</span><b>Возвраты</b><p>Две ветки, форма заявления, условия возврата.</p></div>
+    <div class="ph"><span class="tag">Этап 4</span><b>Отчёты и справочник</b><p>«Наши кассы», колонка «Клиника», реестр партнёров, адреса.</p></div>
+    <div class="ph"><span class="tag">Позже</span><b>Интеграция POS</b><p>Автоматическая фиксация оплат картой: Kaspi Smart-POS, Halyk PAX в Саамед.</p></div>
+  </div>
+  <div class="launch"><b>Условие запуска на точках.</b> Финансы не запускают модуль, пока работает только Kaspi-счёт: большая часть пациентов платит картой через терминал и наличными, удалённая оплата пока малая доля. Предложение: запуск после этапа 2, этап 3 как минимум в быстрой ветке.</div>
+</section>
+
+<section id="questions">
+  <span class="secno">13</span>
+  <h2>Открытые вопросы</h2>
+  <div class="q"><span class="qn">Q1</span><div class="qt"><b>Что вторым приоритетом: наличные или карта?</b><span>Наталья склоняется к наличным, Камиле без разницы. Если запуск требует всех способов, предлагаем делать их вместе в этапе 2.</span></div><span class="who">Наталья</span></div>
+  <div class="q"><span class="qn">Q2</span><div class="qt"><b>Нужна ли интеграция с терминалом Kaspi на старте?</b><span>Или на этапе 2 достаточно ручной отметки «Карта» и сверки по выписке. Отдельно: оставлять ли Halyk в Саамед.</span></div><span class="who">Наталья, Alex</span></div>
+  <div class="q"><span class="qn">Q3</span><div class="qt"><b>Какой документ требует ИИН пациента в платеже, и куда он передаётся?</b><span>В счёт Kaspi Pay или в фискальный чек ОФД. Кто формирует чек при удалённой оплате.</span></div><span class="who">Наталья, бухгалтерия</span></div>
+  <div class="q"><span class="qn">Q4</span><div class="qt"><b>Может ли пациент сам выбирать препараты при самостоятельном приходе?</b><span>Возможное возражение медицинской стороны. Альтернатива: выбирает регистратор, пациент подтверждает галочкой.</span></div><span class="who">Гульнара, Аида</span></div>
+  <div class="q"><span class="qn">Q5</span><div class="qt"><b>Разные тарифы для препаратов в одной заявке?</b><span>Пример: один препарат экспресс, два в обычный срок. Сейчас один тариф на заявку. Вариант: делить на две заявки.</span></div><span class="who">Камила</span></div>
+  <div class="q"><span class="qn">Q6</span><div class="qt"><b>Пациент с направлениями от нескольких стоматологов</b><span>Сдаёт часть препаратов из разных направлений. Объединять заявки или оформлять каждую отдельно.</span></div><span class="who">Камила, Алишер</span></div>
+  <div class="q"><span class="qn">Q7</span><div class="qt"><b>Сколько живёт неоплаченный Kaspi-счёт?</b><span>Значение N минут и что происходит с заявкой после истечения.</span></div><span class="who">Alex, разработка</span></div>
+  <div class="q"><span class="qn">Q8</span><div class="qt"><b>Сроки возврата в документе для пациентов</b><span>Картой: 5–7 или до 14 рабочих дней. Кто пишет текст условий возврата и кто рассматривает заявления.</span></div><span class="who">Наталья, Аида</span></div>
+  <div class="q"><span class="qn">Q9</span><div class="qt"><b>Номер ребёнка: запрет или предупреждение?</b><span>На созвоне склонились к запрету, нужно подтвердить. Как быть с 16–17-летними, которые платят сами.</span></div><span class="who">Камила, Наталья</span></div>
+  <div class="q"><span class="qn">Q10</span><div class="qt"><b>Откуда брать фактическую сумму наличных по точке?</b><span>Ввод при сдаче кассы, инкассация, отчёт ККМ. Без этого сверка наличных остаётся ручной.</span></div><span class="who">Наталья</span></div>
+  <div class="q"><span class="qn">Q11</span><div class="qt"><b>Стандартизация адресов: геокодер или справочник вручную?</b><span>Оценка трудозатрат и связь с админкой чат-бота (задача Арлана).</span></div><span class="who">Марат, Алишер</span></div>
+  <div class="q"><span class="qn">Q13</span><div class="qt"><b>Вопросы к Kaspi (отправлены 01.10, частично закрыты)</b><span>Закрыто: IP-адреса верные. Открыто: часовой пояс txn_date, повторы pay при таймауте 15 с или result=5, устраивает ли формат ответа, документ по счёту и ссылке, сроки зачисления, формат реестров, комиссия.</span></div><span class="who">Данил, группа Kaspi</span></div>
+  <div class="q"><span class="qn">Q14</span><div class="qt"><b>Какой POS-терминал интегрируем?</b><span>Kaspi Smart-POS на всех точках или ещё Halyk в Саамед. Нужен ли онлайн-эквайринг Forte для оплаты на сайте, тогда понадобятся оферта и условия возврата на сайте.</span></div><span class="who">Наталья, Alex</span></div>
+  <div class="q"><span class="qn">Q12</span><div class="qt"><b>Kaspi QR на точке остаётся?</b><span>В прототипе QR и код уже есть. 13.10 решено, что ссылка не нужна, если счёт приходит в Kaspi. Подтвердить: QR на точке оставляем вместе со счётом в приложении.</span></div><span class="who">Камила</span></div>
+
+  <h3>Решено на созвоне</h3>
+  <ul class="clean">
+    <li>Первый способ в работе: удалённый Kaspi-счёт на номер телефона.</li>
+    <li>Плательщик и пациент разделены: счёт на номер плательщика, ИИН пациента в платеже.</li>
+    <li>Пациент по направлению стоматолога меняет только тариф, не препараты.</li>
+    <li>Две ветки возврата с обязательной причиной.</li>
+    <li>Партнёры принимают оплату на свои кассы, в «Наши кассы» не попадают.</li>
+    <li>Следующий шаг: Alex отправляет flow в чат сегодня, созвон по нему завтра.</li>
+  </ul>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+  var hints={
+    kaspi:["Счёт уходит в приложение Kaspi. На точке можно показать QR или код оплаты. Статус сменится на «Оплачено» сам.","Выставить счёт / показать QR",true],
+    card:["Пациент платит на терминале. Регистратор отмечает сумму и подтверждает оплату.","Подтвердить оплату картой",false],
+    cash:["Регистратор принимает наличные, вводит сумму и подтверждает.","Подтвердить оплату наличными",false],
+    mix:["Две части: наличные + Kaspi или наличные + карта. Сумма частей должна совпасть с итогом.","Разделить сумму",true]
+  };
+  var box=document.getElementById('methods'),hint=document.getElementById('hint'),cta=document.getElementById('cta'),ph=document.getElementById('phoneFld');
+  if(!box)return;
+  box.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-m]');if(!b)return;
+    box.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    var h=hints[b.dataset.m];hint.textContent=h[0];cta.textContent=h[1];ph.hidden=!h[2];
+  });
+})();
+</script>
+
+</body></html>
