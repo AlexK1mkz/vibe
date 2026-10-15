@@ -7,51 +7,108 @@
 </head>
 <body>
 <x-dc>
-<div style="background:#fff;border:1px solid #E1E8EB;border-radius:20px;padding:clamp(24px,3vw,40px);font-family:Inter,system-ui,sans-serif;color:#0B1F2A">
-  <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;margin:0 0 8px">{{ heading }}</h2>
-  <p style="color:#5C7380;margin:0 0 24px;font-size:15px">Перезвоним в течение 15 минут в рабочее время.</p>
+<div style="background:#fff;border:1px solid #D6E6EE;border-radius:20px;padding:clamp(24px,3vw,40px);font-family:Inter,system-ui,sans-serif;color:#172B3A">
+  <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;margin:0 0 8px;line-height:1.15">{{ heading }}</h2>
+  <p style="color:#536570;margin:0 0 20px;font-size:15px">{{ sub }}</p>
+  <sc-if value="{{ showSwitch }}" hint-placeholder-val="{{ true }}">
+    <div style="display:inline-flex;background:#E8F6FA;border-radius:999px;padding:4px;margin-bottom:20px;gap:4px">
+      <button type="button" onClick="{{ setSter }}" style="border:0;border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;background:{{ sterBg }};color:{{ sterFg }}">Стерилизатор</button>
+      <button type="button" onClick="{{ setRec }}" style="border:0;border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;background:{{ recBg }};color:{{ recFg }}">Рециркулятор</button>
+    </div>
+  </sc-if>
   <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
   <form onSubmit="{{ onSubmit }}" style="display:grid;gap:14px">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
-      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Имя<input required placeholder="Как к вам обращаться" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit" style-focus="border-color:#12B5C9"></label>
-      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Телефон<input required type="tel" placeholder="+7 ___ ___ __ __" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit" style-focus="border-color:#12B5C9"></label>
+      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3B4F5C">Имя<input required name="name" placeholder="Как к вам обращаться" style="border:1px solid #CFE0E8;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F5FAFC;font-family:inherit;color:#172B3A" style-focus="border-color:#058CC5;background:#fff"></label>
+      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3B4F5C">Телефон<input required type="tel" name="phone" value="{{ phone }}" onChange="{{ onPhone }}" placeholder="+7 ___ ___ __ __" pattern="\+7 \d{3} \d{3} \d{2} \d{2}" title="+7 777 123 45 67" style="border:1px solid #CFE0E8;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F5FAFC;font-family:inherit;font-variant-numeric:tabular-nums;color:#172B3A" style-focus="border-color:#058CC5;background:#fff"></label>
     </div>
-    <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Клиника / организация<input placeholder="Название" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit" style-focus="border-color:#12B5C9"></label>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
-      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Город<select style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit"><option>Астана</option><option>Алматы</option><option>Другой</option></select></label>
-      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Интерес<select value="{{ interest }}" onChange="{{ setInterest }}" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit"><option>Покупка</option><option>Аренда</option><option>Консультация</option></select></label>
-    </div>
-    <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Модель<select value="{{ model }}" onChange="{{ setModel }}" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit"><option>Не выбрана</option><option>O3S-16</option><option>O3S-36</option><option>O3S-40</option><option>O3S-85</option><option>O3S-140</option><option>O3S-250</option><option>O3S-P</option></select></label>
-    <sc-if value="{{ showDaily }}" hint-placeholder-val="{{ false }}">
-      <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3D5461">Сколько стерилизаций в день<input type="number" min="1" placeholder="например, 8" style="border:1px solid #D5DEE2;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F6F9FA;font-family:inherit" style-focus="border-color:#12B5C9"></label>
+    <sc-if value="{{ isSter }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;gap:14px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3B4F5C">Клиника / организация<input name="org" placeholder="Название" style="border:1px solid #CFE0E8;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F5FAFC;font-family:inherit" style-focus="border-color:#058CC5;background:#fff"></label>
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3B4F5C">Город<select name="city" style="border:1px solid #CFE0E8;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F5FAFC;font-family:inherit"><option>Астана</option><option>Алматы</option><option>Шымкент</option><option>Другой</option></select></label>
+        </div>
+        <div style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3B4F5C">Интерес
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ interests }}" as="it" hint-placeholder-count="3">
+              <button type="button" onClick="{{ it.select }}" style="border:1px solid {{ it.bd }};background:{{ it.bg }};color:{{ it.fg }};border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">{{ it.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3B4F5C">Какие изделия стерилизуете<select name="items" style="border:1px solid #CFE0E8;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F5FAFC;font-family:inherit"><option>Стоматологический инструмент</option><option>Эндоскопы и оптика</option><option>Хирургические наборы</option><option>Другое</option></select></label>
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3B4F5C">Макс. длина изделия, см<input type="number" name="len" min="1" max="200" placeholder="например, 30" style="border:1px solid #CFE0E8;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F5FAFC;font-family:inherit" style-focus="border-color:#058CC5;background:#fff"></label>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3B4F5C">Циклов за смену<select name="cycles" style="border:1px solid #CFE0E8;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F5FAFC;font-family:inherit"><option>1–5</option><option>6–10</option><option>Больше 10</option></select></label>
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3B4F5C">Модель<select name="model" value="{{ model }}" onChange="{{ setModel }}" style="border:1px solid #CFE0E8;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F5FAFC;font-family:inherit"><option>Не выбрана</option><option>OTRI S-16</option><option>OTRI S-36</option><option>OTRI S-40</option><option>OTRI S-85</option><option>OTRI S-250</option></select></label>
+        </div>
+      </div>
     </sc-if>
-    <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#5C7380"><input required type="checkbox" style="margin-top:3px;accent-color:#12B5C9">Согласен на обработку персональных данных согласно <a href="#" style="color:#2E5BFF;text-decoration:none">политике конфиденциальности</a></label>
-    <button type="submit" style="border:0;background:#12B5C9;color:#fff;border-radius:999px;padding:16px 28px;font-weight:600;font-size:16px;cursor:pointer;justify-self:start;font-family:inherit" style-hover="background:#0FA3B5">{{ button }}</button>
+    <sc-if value="{{ isRec }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+        <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3B4F5C">Площадь помещения, м²<input required type="number" name="area" min="1" placeholder="например, 25" style="border:1px solid #CFE0E8;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F5FAFC;font-family:inherit" style-focus="border-color:#058CC5;background:#fff"></label>
+        <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:#3B4F5C">Количество помещений<input type="number" name="rooms" min="1" value="1" style="border:1px solid #CFE0E8;border-radius:12px;padding:13px 16px;font-size:15px;outline:none;background:#F5FAFC;font-family:inherit" style-focus="border-color:#058CC5;background:#fff"></label>
+      </div>
+    </sc-if>
+    <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#536570"><input required type="checkbox" style="margin-top:3px;accent-color:#058CC5">Согласен на обработку персональных данных согласно <a href="#" style="color:#058CC5;text-decoration:none">политике конфиденциальности</a></label>
+    <button type="submit" style="border:0;background:#058CC5;color:#fff;border-radius:999px;padding:16px 28px;font-weight:600;font-size:16px;cursor:pointer;justify-self:start;font-family:inherit;box-shadow:0 10px 26px -12px #058CC5" style-hover="background:#0478AB">{{ button }}</button>
   </form>
   </sc-if>
   <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
-    <div style="background:#E3F7F9;border-radius:16px;padding:28px;display:grid;gap:12px;justify-items:start">
-      <div style="width:48px;height:48px;border-radius:50%;background:#12B5C9;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px">✓</div>
+    <div style="background:#DFF2F9;border-radius:16px;padding:28px;display:grid;gap:12px;justify-items:start">
+      <div style="width:48px;height:48px;border-radius:50%;background:#058CC5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px">✓</div>
       <h3 style="font-family:Onest,sans-serif;font-size:22px;margin:0">Спасибо, заявка принята</h3>
-      <p style="margin:0;color:#3D5461">Чтобы не ждать звонка, продолжите в WhatsApp — так контакт будет с обеих сторон.</p>
-      <a href="{{ wa }}" target="_blank" style="background:#25D366;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600;text-decoration:none" style-hover="background:#1EBE5A">Продолжить в WhatsApp</a>
+      <p style="margin:0;color:#3B4F5C">Чтобы не ждать звонка, продолжите в WhatsApp — менеджер сразу увидит ваш запрос.</p>
+      <a href="{{ wa }}" onClick="{{ onWa }}" target="_blank" style="background:#25D366;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600;text-decoration:none" style-hover="background:#1EBE5A">Продолжить в WhatsApp</a>
     </div>
   </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:600,&quot;height&quot;:640},&quot;heading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Получить расчёт&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;button&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Отправить заявку&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;model&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Не выбрана&quot;,&quot;O3S-16&quot;,&quot;O3S-36&quot;,&quot;O3S-40&quot;,&quot;O3S-85&quot;,&quot;O3S-140&quot;,&quot;O3S-250&quot;,&quot;O3S-P&quot;],&quot;default&quot;:&quot;Не выбрана&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;interest&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Покупка&quot;,&quot;Аренда&quot;,&quot;Консультация&quot;],&quot;default&quot;:&quot;Покупка&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showDaily&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:620,&quot;height&quot;:760},&quot;kind&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sterilizer&quot;,&quot;recirculator&quot;],&quot;default&quot;:&quot;sterilizer&quot;,&quot;tsType&quot;:&quot;'sterilizer' | 'recirculator'&quot;},&quot;heading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Подобрать модель&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sub&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Подберём модель под вашу загрузку за 1 консультацию.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;button&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Отправить заявку&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;model&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Не выбрана&quot;,&quot;OTRI S-16&quot;,&quot;OTRI S-36&quot;,&quot;OTRI S-40&quot;,&quot;OTRI S-85&quot;,&quot;OTRI S-250&quot;,&quot;OTRI Desktop 30&quot;,&quot;OTRI Desktop 60&quot;],&quot;default&quot;:&quot;Не выбрана&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;interest&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Покупка&quot;,&quot;Аренда&quot;,&quot;Консультация&quot;],&quot;default&quot;:&quot;Покупка&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;allowSwitch&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
 class Component extends DCLogic {
-  state = { sent: false, model: null, interest: null };
+  state = { sent: false, model: null, interest: null, kind: null, phone: '+7 ' };
+  componentDidMount() {
+    this._onPick = (e) => {
+      const d = e.detail || {};
+      this.setState({ sent: false, kind: d.kind || 'sterilizer', model: d.model || 'Не выбрана', interest: d.interest || 'Покупка' });
+    };
+    window.addEventListener('otri:pick', this._onPick);
+  }
+  componentWillUnmount() { window.removeEventListener('otri:pick', this._onPick); }
+  mask(v) {
+    let d = (v || '').replace(/\D/g, '');
+    if (d.startsWith('8')) d = '7' + d.slice(1);
+    if (!d.startsWith('7')) d = '7' + d;
+    d = d.slice(1, 11);
+    const p = [d.slice(0, 3), d.slice(3, 6), d.slice(6, 8), d.slice(8, 10)].filter(Boolean);
+    return '+7 ' + p.join(' ');
+  }
   renderVals() {
-    const model = this.state.model ?? this.props.model ?? 'Не выбрана';
+    const kind = this.state.kind ?? this.props.kind ?? 'sterilizer';
+    const isSter = kind === 'sterilizer';
+    const model = this.state.model ?? this.props.model ?? (isSter ? 'Не выбрана' : 'OTRI Desktop 30');
     const interest = this.state.interest ?? this.props.interest ?? 'Покупка';
+    const track = (g) => { try { (window.dataLayer = window.dataLayer || []).push({ event: g, model }); } catch (e) {} };
+    const subj = isSter ? (model === 'Не выбрана' ? 'стерилизатор OTRI' : 'стерилизатор ' + model) + (interest === 'Аренда' ? ' в аренду' : '') : 'рециркулятор ' + (model.startsWith('OTRI Desktop') ? model : 'OTRI Desktop');
+    const on = '#058CC5';
     return {
-      heading: this.props.heading ?? 'Получить расчёт', button: this.props.button ?? 'Отправить заявку',
-      showDaily: this.props.showDaily ?? false,
-      model, interest, sent: this.state.sent, notSent: !this.state.sent,
-      wa: 'https://wa.me/77710010744?text=' + encodeURIComponent('Здравствуйте! Интересует стерилизатор ' + (model === 'Не выбрана' ? 'O3S' : model) + (interest === 'Аренда' ? ' в аренду' : '')),
-      setModel: (e) => this.setState({ model: e.target.value }), setInterest: (e) => this.setState({ interest: e.target.value }),
-      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      heading: this.props.heading ?? (isSter ? 'Подобрать модель' : 'Подберём модель под площадь помещения'),
+      sub: this.props.sub ?? (isSter ? 'Подберём модель под вашу загрузку за 1 консультацию.' : 'Перезвоним и посчитаем количество рециркуляторов.'),
+      button: this.props.button ?? 'Отправить заявку',
+      showSwitch: this.props.allowSwitch ?? true,
+      isSter, isRec: !isSter, model, phone: this.state.phone,
+      sterBg: isSter ? '#fff' : 'transparent', sterFg: isSter ? '#058CC5' : '#536570',
+      recBg: isSter ? 'transparent' : '#fff', recFg: isSter ? '#536570' : '#058CC5',
+      setSter: () => this.setState({ kind: 'sterilizer', model: 'Не выбрана' }),
+      setRec: () => this.setState({ kind: 'recirculator', model: 'OTRI Desktop 30' }),
+      interests: ['Покупка', 'Аренда', 'Консультация'].map((l) => ({ label: l, bg: l === interest ? on : '#fff', fg: l === interest ? '#fff' : '#172B3A', bd: l === interest ? on : '#CFE0E8', select: () => this.setState({ interest: l }) })),
+      sent: this.state.sent, notSent: !this.state.sent,
+      wa: 'https://wa.me/77710010744?text=' + encodeURIComponent('Здравствуйте! Интересует ' + subj),
+      onWa: () => track('click_whatsapp'),
+      onPhone: (e) => this.setState({ phone: this.mask(e.target.value) }),
+      setModel: (e) => this.setState({ model: e.target.value }),
+      onSubmit: (e) => { e.preventDefault(); track('form_submit'); this.setState({ sent: true }); },
     };
   }
 }

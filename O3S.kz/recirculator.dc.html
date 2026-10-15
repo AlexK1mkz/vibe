@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Бактерицидный рециркулятор OTRI Desktop 30 до 30 м² — 65 000 ₸</title>
+  <meta name="description" content="Закрытый бактерицидный УФ-рециркулятор OTRI Desktop. Без НДС, доставка включена, поставка 10 рабочих дней, гарантия 12 месяцев. РК-МТ-0№022741.">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;background:#F5FAFC;color:#172B3A;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+    a{color:#058CC5;text-decoration:none}a:hover{color:#0478AB}
+    *{box-sizing:border-box}input,select,button,textarea{font-family:inherit}
+    :focus-visible{outline:2px solid #058CC5;outline-offset:2px}
+    @media(max-width:1180px){[data-desk]{display:none!important}}
+    @media(min-width:1181px){[data-mob]{display:none!important}}
+  </style>
+</helmet>
+<dc-import name="header" active="Рециркуляторы" hint-size="100%,72px"></dc-import>
+<main style="padding-bottom:72px">
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(24px,4vw,40px) clamp(16px,4vw,40px) 0">
+    <nav style="font-size:13px;color:#536570;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:8px"><a href="./" style="color:#536570">Главная</a><span>›</span><a href="catalog.dc.html#recirculators" style="color:#536570">Рециркуляторы</a><span>›</span><span>{{ m.name }}</span></nav>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,56px);align-items:start">
+      <div style="position:relative;overflow:hidden;background:linear-gradient(180deg,#E8F6FA,#DFF2F9);border-radius:24px;min-height:520px;display:flex;align-items:center;justify-content:center;padding:32px">
+        <div style="position:absolute;width:440px;height:440px;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 32px,#1AA9E026 32px 34px)"></div>
+        <img src="img/otri/otri-desktop-recirculator.webp" alt="Бактерицидный УФ-рециркулятор {{ m.name }}" style="position:relative;height:460px;max-height:70vh;width:auto;filter:drop-shadow(0 30px 30px #172B3A33)">
+      </div>
+      <div>
+        <div style="display:inline-flex;background:#E8F6FA;border-radius:999px;padding:4px;gap:4px;margin-bottom:18px">
+          <sc-for list="{{ variants }}" as="v" hint-placeholder-count="2">
+            <a href="{{ v.href }}" onClick="{{ v.select }}" style="border-radius:999px;padding:9px 18px;font-size:14px;font-weight:600;background:{{ v.bg }};color:{{ v.fg }}">{{ v.short }}</a>
+          </sc-for>
+        </div>
+        <h1 style="font-family:Onest,sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em;margin:0 0 20px;text-wrap:balance">{{ h1 }}</h1>
+        <dl style="margin:0 0 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px">
+          <sc-for list="{{ params }}" as="p" hint-placeholder-count="6">
+            <div style="background:#fff;border:1px solid #D6E6EE;border-radius:16px;padding:14px"><dt style="font-size:12px;color:#536570">{{ p.k }}</dt><dd style="margin:0;font-family:Onest,sans-serif;font-weight:700;font-size:18px;font-variant-numeric:tabular-nums">{{ p.v }}</dd></div>
+          </sc-for>
+        </dl>
+        <div style="background:#fff;border:1px solid #D6E6EE;border-radius:20px;padding:22px;display:grid;gap:14px">
+          <div><div style="font-family:Onest,sans-serif;font-weight:800;font-size:clamp(28px,3vw,36px);font-variant-numeric:tabular-nums">{{ priceLabel }}</div><div style="font-size:14px;color:#536570">за 1 шт., без НДС, доставка включена</div></div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:14px 0;border-top:1px solid #E6F0F4;border-bottom:1px solid #E6F0F4">
+            <span style="font-size:14px;font-weight:600;color:#3B4F5C">Количество помещений</span>
+            <div style="display:flex;align-items:center;border:1px solid #CFE0E8;border-radius:999px"><button onClick="{{ dec }}" aria-label="Меньше" style="border:0;background:none;width:40px;height:40px;font-size:18px;cursor:pointer;color:#172B3A">−</button><b style="min-width:28px;text-align:center;font-variant-numeric:tabular-nums">{{ qty }}</b><button onClick="{{ inc }}" aria-label="Больше" style="border:0;background:none;width:40px;height:40px;font-size:18px;cursor:pointer;color:#172B3A">+</button></div>
+            <span style="margin-left:auto;font-family:Onest,sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums">{{ total }}</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <button onClick="{{ order }}" style="border:0;background:#058CC5;color:#fff;border-radius:999px;padding:14px 22px;font-size:15px;font-weight:600;cursor:pointer" style-hover="background:#0478AB">Заказать</button>
+            <a href="{{ waLink }}" target="_blank" style="display:inline-flex;align-items:center;border:2px solid #25D366;color:#128C4A;border-radius:999px;padding:12px 20px;font-size:15px;font-weight:600" style-hover="background:#25D366;color:#fff">Спросить в WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,4vw,40px) 0">
+    <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(26px,3vw,36px);letter-spacing:-.02em;margin:0 0 20px">Чистый воздух — без остановки работы</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px">
+      <sc-for list="{{ pros }}" as="p" hint-placeholder-count="4">
+        <div style="background:#fff;border:1px solid #D6E6EE;border-radius:18px;padding:20px;display:grid;gap:8px;align-content:start"><span style="width:36px;height:36px;border-radius:50%;background:#058CC5;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Onest,sans-serif;font-weight:700;font-size:13px">{{ p.n }}</span><b style="font-family:Onest,sans-serif;font-size:16px">{{ p.t }}</b><span style="font-size:14px;color:#536570">{{ p.d }}</span></div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,4vw,40px) 0">
+    <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(26px,3vw,36px);letter-spacing:-.02em;margin:0 0 20px">Условия поставки</h2>
+    <dl style="margin:0;background:#fff;border:1px solid #D6E6EE;border-radius:20px;padding:6px 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));column-gap:40px">
+      <sc-for list="{{ terms }}" as="r" hint-placeholder-count="6">
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid #E6F0F4;font-size:15px"><dt style="color:#536570">{{ r.k }}</dt><dd style="margin:0;font-weight:600;text-align:right">{{ r.v }}</dd></div>
+      </sc-for>
+    </dl>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,4vw,40px)">
+    <div id="form" style="max-width:760px"><dc-import name="lead-form" kind="recirculator" model="{{ m.name }}" allow-switch="{{ false }}" heading="Подберём модель под площадь вашего помещения" hint-size="100%,560px"></dc-import></div>
+  </section>
+</main>
+<dc-import name="footer" hint-size="100%,460px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showPrices&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { d: null, id: null, qty: 1 };
+  async componentDidMount() { this.setState({ d: await import('./o3s-data.js') }); }
+  componentDidUpdate() {
+    const m = this.model();
+    if (m && typeof document !== 'undefined') {
+      const t = 'Бактерицидный рециркулятор ' + m.name + ' до ' + m.area + ' м² — ' + this.state.d.fmt(m.price);
+      if (document.title !== t) document.title = t;
+    }
+  }
+  model() {
+    const d = this.state.d; if (!d) return null;
+    const id = this.state.id ?? this.props.model ?? d.getParam('m') ?? 'desktop-30';
+    const m = d.byId(id);
+    return m && m.category === 'recirculator' ? m : d.byId('desktop-30');
+  }
+  renderVals() {
+    const s = this.state, d = s.d;
+    const m = this.model() || { id: 'desktop-30', name: 'OTRI Desktop 30', area: 30, price: 65000 };
+    const show = this.props.showPrices ?? true;
+    return {
+      m, h1: 'Бактерицидный УФ-рециркулятор ' + m.name + ', до ' + m.area + ' м²',
+      variants: (d ? d.RECIRCULATORS : []).map((v) => ({ ...v, href: 'recirculator.dc.html?m=' + v.id, bg: v.id === m.id ? '#fff' : 'transparent', fg: v.id === m.id ? '#058CC5' : '#536570',
+        select: (e) => { e.preventDefault(); this.setState({ id: v.id }); try { history.replaceState(null, '', '?m=' + v.id); } catch (er) {} } })),
+      params: [['Площадь', 'до ' + m.area + ' м²'], ['Объём помещения', m.roomVol], ['Лампы', m.lamps + ' шт.'], ['Ресурс ламп', m.lampLife], ['Индикатор', m.indicator], ['Установка', m.mount]].map(([k, v]) => ({ k, v })),
+      priceLabel: show && d ? d.fmt(m.price) : 'Цена по запросу',
+      qty: s.qty, total: show && d ? d.fmt(m.price * s.qty) : '',
+      dec: () => this.setState({ qty: Math.max(1, s.qty - 1) }), inc: () => this.setState({ qty: Math.min(99, s.qty + 1) }),
+      order: () => d && d.pick({ kind: 'recirculator', model: m.name }),
+      waLink: d ? d.waFor(m) : 'https://wa.me/77710010744',
+      pros: (d ? d.RECIRC_PROS : []).map((p, i) => ({ ...p, n: String(i + 1).padStart(2, '0') })),
+      terms: (d ? d.RECIRC_TERMS : []).map(([k, v]) => ({ k, v })),
+    };
+  }
+}
+</script>
+</body>
+</html>
