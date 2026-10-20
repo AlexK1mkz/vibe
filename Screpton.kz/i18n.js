@@ -5,7 +5,7 @@ export function setLang(l) { try { localStorage.setItem('screpton-lang', l); } c
 
 const common = {
   ru: {
-    nav: [['Home.dc.html', 'Главная'], ['Project.dc.html', 'Объекты'], ['Technology.dc.html', 'Технология'], ['Documents.dc.html', 'Документы'], ['Contacts.dc.html', 'Контакты']],
+    nav: [['index.html', 'Главная'], ['Project.dc.html', 'Объекты'], ['Technology.dc.html', 'Технология'], ['Documents.dc.html', 'Документы'], ['Contacts.dc.html', 'Контакты']],
     cta: 'Запросить расчёт', cta2: 'Смотреть объекты', more: 'Подробнее', all: 'Все объекты', download: 'Скачать PDF',
     tagline: 'стабилизатор грунта',
     footer_about: 'Стабилизаторы грунта для дорожного строительства. Казахстанский производитель, эксклюзивное право на технологию. ТОО «Green Roads», БИН 201240012669.',
@@ -22,7 +22,7 @@ const common = {
     f_fast: 'Быстрее — в WhatsApp:'
   },
   kz: {
-    nav: [['Home.dc.html', 'Басты бет'], ['Project.dc.html', 'Нысандар'], ['Technology.dc.html', 'Технология'], ['Documents.dc.html', 'Құжаттар'], ['Contacts.dc.html', 'Байланыс']],
+    nav: [['index.html', 'Басты бет'], ['Project.dc.html', 'Нысандар'], ['Technology.dc.html', 'Технология'], ['Documents.dc.html', 'Құжаттар'], ['Contacts.dc.html', 'Байланыс']],
     cta: 'Есептеу сұрату', cta2: 'Нысандарды көру', more: 'Толығырақ', all: 'Барлық нысандар', download: 'PDF жүктеу',
     tagline: 'топырақ тұрақтандырғыш',
     footer_about: 'Жол құрылысына арналған топырақ тұрақтандырғыштар. Қазақстандық өндіруші, технологияға айрықша құқық. «Green Roads» ЖШС, БСН 201240012669.',
@@ -39,7 +39,7 @@ const common = {
     f_fast: 'Жылдамырақ — WhatsApp:'
   },
   en: {
-    nav: [['Home.dc.html', 'Home'], ['Project.dc.html', 'Projects'], ['Technology.dc.html', 'Technology'], ['Documents.dc.html', 'Documents'], ['Contacts.dc.html', 'Contacts']],
+    nav: [['index.html', 'Home'], ['Project.dc.html', 'Projects'], ['Technology.dc.html', 'Technology'], ['Documents.dc.html', 'Documents'], ['Contacts.dc.html', 'Contacts']],
     cta: 'Request an estimate', cta2: 'See the projects', more: 'Learn more', all: 'All projects', download: 'Download PDF',
     tagline: 'soil stabilizer',
     footer_about: 'Soil stabilizers for road construction. Made in Kazakhstan, exclusive rights to the technology. Green Roads LLP, BIN 201240012669.',
@@ -87,8 +87,8 @@ const home = {
     cases: [
       ['img/grader.jpg', '2016', 'Актюбинская область', 'Трасса Актобе — Атырау — Астрахань', '10 км · −53 млн ₸', 'Стабилизация верхнего слоя основания на международной трассе. Пять слоёв вместо девяти.'],
       ['img/water.jpg', '2013', 'Западно-Казахстанская область', 'Промысловая дорога Тайпак — Сатимола', '30,8 км · без асфальта', 'Дорога для тяжёлого транспорта к месторождению. Щебень был далеко — основание сделали из местного грунта.'],
-      ['', '2010', 'Акмолинская область', 'Подъезд к месторождению «Семизбай»', '27,3 км', 'Капремонт разбитой подъездной дороги: ресайклирование верхнего слоя со SCREPTON.'],
-      ['', '2009', 'Кызылординская область', 'Автодорога в районе Шиели', '7 000 м² · 17 лет службы', 'Первый объект. Средний ремонт проблемного участка с пучением — стоит без капремонта.']
+      ['img/case-semizbay.jpg', '2010', 'Акмолинская область', 'Подъезд к месторождению «Семизбай»', '27,3 км', 'Капремонт разбитой подъездной дороги: ресайклирование верхнего слоя со SCREPTON.'],
+      ['img/case-shieli.jpg', '2009', 'Кызылординская область', 'Автодорога в районе Шиели', '7 000 м² · 17 лет службы', 'Первый объект. Средний ремонт проблемного участка с пучением — стоит без капремонта.']
     ],
     photo_req: 'Фото объекта — запросить у клиента',
     econ_k: 'Экономика', econ_h: 'Девять слоёв против пяти. Одна и та же дорога категории А3',
@@ -147,8 +147,8 @@ const home = {
     cases: [
       ['img/grader.jpg', '2016', 'Ақтөбе облысы', 'Ақтөбе — Атырау — Астрахань жолы', '10 км · −53 млн ₸', 'Халықаралық жолдағы негіздің жоғарғы қабатын тұрақтандыру. Тоғыз қабаттың орнына бесеу.'],
       ['img/water.jpg', '2013', 'Батыс Қазақстан облысы', 'Тайпақ — Сатимола кәсіпшілік жолы', '30,8 км · асфальтсыз', 'Кен орнына ауыр көлікке арналған жол. Қиыршық тас алыс болды — негізді жергілікті топырақтан жасады.'],
-      ['', '2010', 'Ақмола облысы', '«Семізбай» кен орнына кірме жол', '27,3 км', 'Бұзылған кірме жолды күрделі жөндеу: SCREPTON-мен жоғарғы қабатты ресайклингтеу.'],
-      ['', '2009', 'Қызылорда облысы', 'Шиелі ауданындағы автожол', '7 000 м² · 17 жыл қызмет', 'Алғашқы нысан. Ісінетін проблемалы учаскені орташа жөндеу — күрделі жөндеусіз тұр.']
+      ['img/case-semizbay.jpg', '2010', 'Ақмола облысы', '«Семізбай» кен орнына кірме жол', '27,3 км', 'Бұзылған кірме жолды күрделі жөндеу: SCREPTON-мен жоғарғы қабатты ресайклингтеу.'],
+      ['img/case-shieli.jpg', '2009', 'Қызылорда облысы', 'Шиелі ауданындағы автожол', '7 000 м² · 17 жыл қызмет', 'Алғашқы нысан. Ісінетін проблемалы учаскені орташа жөндеу — күрделі жөндеусіз тұр.']
     ],
     photo_req: 'Нысан фотосы — клиенттен сұрау',
     econ_k: 'Экономика', econ_h: 'Тоғыз қабатқа қарсы бес. Бір ғана А3 санатты жол',
@@ -207,8 +207,8 @@ const home = {
     cases: [
       ['img/grader.jpg', '2016', 'Aktobe region', 'Aktobe — Atyrau — Astrakhan highway', '10 km · −53 M ₸', 'Stabilized upper base layer on an international highway. Five layers instead of nine.'],
       ['img/water.jpg', '2013', 'West Kazakhstan region', 'Taipak — Satimola haul road', '30.8 km · no asphalt', 'Road for heavy traffic to an oil field. Stone was far away, so the base was made from local soil.'],
-      ['', '2010', 'Akmola region', 'Access road to the Semizbay deposit', '27.3 km', 'Overhaul of a broken access road: cold recycling of the top layer with SCREPTON.'],
-      ['', '2009', 'Kyzylorda region', 'Road near Shieli', '7,000 m² · 17 years in service', 'The first project. Repair of a frost-heave section, still standing without overhaul.']
+      ['img/case-semizbay.jpg', '2010', 'Akmola region', 'Access road to the Semizbay deposit', '27.3 km', 'Overhaul of a broken access road: cold recycling of the top layer with SCREPTON.'],
+      ['img/case-shieli.jpg', '2009', 'Kyzylorda region', 'Road near Shieli', '7,000 m² · 17 years in service', 'The first project. Repair of a frost-heave section, still standing without overhaul.']
     ],
     photo_req: 'Site photo — request from client',
     econ_k: 'Economics', econ_h: 'Nine layers versus five. The same category A3 road',
@@ -251,7 +251,7 @@ const project = {
     why_k: 'Почему не традиционно', why_h: 'Щебень дороже дороги',
     why_p: 'Доля привозных материалов в смете основания превышала половину. Каждый слой — отдельный цикл доставки, укладки и уплотнения. При этом местный грунт по пробам подходил для укрепления вяжущим.',
     did_k: 'Что сделали', did_h: 'Верхний слой основания — из укреплённого грунта',
-    did_steps: [['img/grader.jpg', 'Распределение порошка SCREPTON 7% и планировка автогрейдером'], ['img/water.jpg', 'Доувлажнение раствором SCREPTON-M, уплотнение катками'], ['', 'Фото: готовое основание перед укладкой асфальта — запросить у клиента']],
+    did_steps: [['img/grader.jpg', 'Распределение порошка SCREPTON 7% и планировка автогрейдером'], ['img/water.jpg', 'Доувлажнение раствором SCREPTON-M, уплотнение катками'], ['img/base-done.jpg', 'Готовое основание перед укладкой асфальта']],
     did_p: 'Смесь готовили на дороге ресайклером за один проход. Слой 15 см укреплённого грунта заменил чёрный щебень, щебень двух фракций, ПГС и геотекстиль. Сверху — те же 5 см мелкозернистого асфальтобетона.',
     econ_k: 'Цифры', econ_h: 'Расчёт по методике КаздорНИИ',
     docs_k: 'Документы по объекту', docs: [['img/protocol.jpg', 'Протокол испытаний № 359-16', 'КаздорНИИ · 2016'], ['img/doc2017.jpg', 'Протокол испытаний № 240-17', 'КаздорНИИ · 2017'], ['img/otzyv.jpg', 'Отзыв генподрядчика', 'Аларыктасстрой · 2016']],
@@ -269,7 +269,7 @@ const project = {
     why_k: 'Неге дәстүрлі емес', why_h: 'Қиыршық тас жолдан қымбат',
     why_p: 'Негіз сметасындағы әкелінетін материалдардың үлесі жартысынан асты. Әр қабат — жеткізу, төсеу және тығыздаудың жеке циклі. Ал жергілікті топырақ сынамалар бойынша тұтқыр затпен бекітуге жарамды болды.',
     did_k: 'Не істелді', did_h: 'Негіздің жоғарғы қабаты — бекітілген топырақтан',
-    did_steps: [['img/grader.jpg', 'SCREPTON 7% ұнтағын тарату және автогрейдермен тегістеу'], ['img/water.jpg', 'SCREPTON-M ерітіндісімен ылғалдау, катоктармен тығыздау'], ['', 'Фото: асфальт төсеу алдындағы дайын негіз — клиенттен сұрау']],
+    did_steps: [['img/grader.jpg', 'SCREPTON 7% ұнтағын тарату және автогрейдермен тегістеу'], ['img/water.jpg', 'SCREPTON-M ерітіндісімен ылғалдау, катоктармен тығыздау'], ['img/base-done.jpg', 'Асфальт төсеу алдындағы дайын негіз']],
     did_p: 'Қоспаны жолда ресайклермен бір жүрісте дайындады. 15 см бекітілген топырақ қабаты қара қиыршық тасты, екі фракциялы қиыршық тасты, ҚҚҚ мен геотекстильді алмастырды. Үстінде — сол 5 см ұсақ түйіршікті асфальтбетон.',
     econ_k: 'Сандар', econ_h: 'ҚазжолҒЗИ әдістемесі бойынша есеп',
     docs_k: 'Нысан бойынша құжаттар', docs: [['img/protocol.jpg', '№ 359-16 сынақ хаттамасы', 'ҚазжолҒЗИ · 2016'], ['img/doc2017.jpg', '№ 240-17 сынақ хаттамасы', 'ҚазжолҒЗИ · 2017'], ['img/otzyv.jpg', 'Бас мердігер пікірі', 'Аларыктасстрой · 2016']],
@@ -287,7 +287,7 @@ const project = {
     why_k: 'Why not the usual way', why_h: 'Stone costs more than the road',
     why_p: 'Imported materials made up more than half of the base estimate. Each layer meant a separate cycle of delivery, laying and compaction. Meanwhile, samples showed the local soil was suitable for binder stabilization.',
     did_k: 'What was done', did_h: 'Upper base layer from stabilized soil',
-    did_steps: [['img/grader.jpg', 'Spreading 7% SCREPTON powder and grading'], ['img/water.jpg', 'Wetting with SCREPTON-M solution, compaction with rollers'], ['', 'Photo: finished base before asphalt — request from client']],
+    did_steps: [['img/grader.jpg', 'Spreading 7% SCREPTON powder and grading'], ['img/water.jpg', 'Wetting with SCREPTON-M solution, compaction with rollers'], ['img/base-done.jpg', 'Finished base before asphalt']],
     did_p: 'The mix was made in place by a recycler in one pass. A 15 cm layer of stabilized soil replaced the coated stone, two stone fractions, sand-gravel mix and geotextile. On top: the same 5 cm of fine-grained asphalt.',
     econ_k: 'Numbers', econ_h: 'Calculated per the KazdorNII method',
     docs_k: 'Project documents', docs: [['img/protocol.jpg', 'Test report No. 359-16', 'KazdorNII · 2016'], ['img/doc2017.jpg', 'Test report No. 240-17', 'KazdorNII · 2017'], ['img/otzyv.jpg', 'Contractor reference', 'Alaryktasstroy · 2016']],
