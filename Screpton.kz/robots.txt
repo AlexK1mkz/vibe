@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alexk1mkz.github.io/vibe/Screpton.kz/sitemap.xml
