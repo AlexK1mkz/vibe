@@ -23,6 +23,7 @@
       nav[data-main] a{white-space:nowrap}
     }
     @media(max-width:760px){
+      header [data-m="logo"]{height:50px!important}
       header a[href^="https://wa.me"]{font-size:0!important;padding:10px!important;gap:0!important;border-radius:50%!important}
       header a[href^="https://wa.me"] svg{width:22px;height:22px}
       header a[href="Contacts.dc.html"]{padding:10px 14px!important;font-size:14px!important}
@@ -41,7 +42,7 @@
     }
     @media(max-width:480px){
       header a[href="Contacts.dc.html"]{display:none!important}
-      header [data-m="tagline"]{display:none!important}
+      header [data-m="logo"]{height:44px!important}
       [data-m="grid2"]{grid-template-columns:1fr!important}
       [data-m="acc-body"]{padding-left:0!important}
       h2{font-size:clamp(26px,7.5vw,34px)!important}
@@ -52,7 +53,7 @@
 
 <header style="position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #E6E6E3">
   <div style="max-width:1440px;margin:0 auto;padding:0 32px;height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px" data-px>
-    <a href="index.html" style="display:flex;align-items:center;flex:none"><span style="display:flex;align-items:center;gap:10px"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke-linecap="round" aria-hidden="true"><path d="M3 34C10 18 22 9 38 6" stroke="#2B2B2B" stroke-width="5"></path><path d="M9 37C15 25 25 18 38 16" stroke="#F5C400" stroke-width="5"></path><path d="M17 38C22 30 29 26 38 25" stroke="#1B5E3B" stroke-width="5"></path></svg><span style="display:flex;flex-direction:column;line-height:1"><span style="font-size:19px;font-weight:600;letter-spacing:.08em">SCREPTON<sup style="font-size:9px;font-weight:400;margin-left:2px">®</sup></span><span data-m="tagline" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6B6B67;margin-top:4px;letter-spacing:.02em">{{ t.tagline }}</span></span></span></a>
+    <a href="index.html" style="display:flex;align-items:center;flex:none"><img src="img/logo-main.svg" alt="ТОО ScreptonKZ — будущее дорог Казахстана" data-m="logo" style="height:60px;width:auto;display:block"></a>
     <nav data-main="1" style="display:flex;gap:28px;font-size:15px;font-weight:500">
       <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5"><a href="{{ n.href }}" style="padding:6px 0">{{ n.label }}</a></sc-for>
     </nav>
@@ -134,7 +135,7 @@
 <footer style="background:#2B2B2B;color:#C9C6BD;margin-top:auto">
   <div style="max-width:1440px;margin:0 auto;padding:56px 32px 28px" data-px>
     <div data-m="fgrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;padding-bottom:40px;border-bottom:1px solid #4A4A47">
-      <div><span style="display:flex;align-items:center;gap:10px;margin-bottom:16px"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke-linecap="round" aria-hidden="true"><path d="M3 34C10 18 22 9 38 6" stroke="#fff" stroke-width="5"></path><path d="M9 37C15 25 25 18 38 16" stroke="#F5C400" stroke-width="5"></path><path d="M17 38C22 30 29 26 38 25" stroke="#4CAF78" stroke-width="5"></path></svg><span style="font-size:19px;font-weight:600;letter-spacing:.08em;color:#fff">SCREPTON</span></span><p style="margin:0;font-size:14px;line-height:1.6">{{ t.footer_about }}</p></div>
+      <div><span style="display:inline-block;background:#fff;border-radius:14px;padding:8px 12px;margin-bottom:16px"><img src="img/logo-main.svg" alt="ТОО ScreptonKZ" style="height:48px;width:auto;display:block"></span><p style="margin:0;font-size:14px;line-height:1.6">{{ t.footer_about }}</p></div>
       <div><div style="color:#fff;font-weight:600;margin-bottom:12px">{{ t.footer_sections }}</div><div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><sc-for list="{{ nav }}" as="n" hint-placeholder-count="5"><a href="{{ n.href }}" style-hover="color:#fff">{{ n.label }}</a></sc-for></div></div>
       <div><div style="color:#fff;font-weight:600;margin-bottom:12px">{{ t.footer_contacts }}</div><div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><a href="tel:+77015668731" style-hover="color:#fff">+7 701 566 87 31</a><a href="tel:+77213301174" style-hover="color:#fff">+7 721 330 11 74</a><a href="mailto:green.roads@mail.ru" style-hover="color:#fff">green.roads@mail.ru</a><span>{{ t.hours }}</span></div></div>
       <div><div style="color:#fff;font-weight:600;margin-bottom:12px">{{ t.footer_addr }}</div><div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><span>{{ t.addr1 }}</span><span>{{ t.addr2 }}</span></div></div>
