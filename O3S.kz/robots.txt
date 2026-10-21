@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /_build/
+Disallow: /_ds/
+Disallow: /uploads/
+Disallow: /img/orion/
+Disallow: /*.md$
+
+Sitemap: https://otri.kz/sitemap.xml

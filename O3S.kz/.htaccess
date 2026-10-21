@@ -1,0 +1,73 @@
+# OTRI (otri.kz) — настройки для Apache / LiteSpeed (hoster.kz)
+AddDefaultCharset utf-8
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+  AddType font/woff2 .woff2
+  AddType image/webp .webp
+  AddType application/manifest+json .webmanifest
+  AddType image/x-icon .ico
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. Только https и без www (нужен SSL-сертификат на домене — в hoster.kz он бесплатный)
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://otri.kz%{REQUEST_URI} [R=301,L]
+  RewriteCond %{HTTP_HOST} ^www\.otri\.kz$ [NC]
+  RewriteRule ^ https://otri.kz%{REQUEST_URI} [R=301,L]
+
+  # 2. /index.html → / (одна главная для поисковиков)
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [R=301,L]
+
+  # 3. Служебные папки и файлы закрыты снаружи
+  RewriteRule ^(_build|_ds|uploads|img/orion|Контент|Сайт[^/]*)(/|$) - [F,L]
+  RewriteRule (^|/)[^/]+\.md$ - [F,L]
+  RewriteRule ^\.thumbnail$ - [F,L]
+  RewriteCond %{THE_REQUEST} \s/+_prerender/ [NC]
+  RewriteRule ^ - [F,L]
+
+  # 4. Готовые снимки страниц моделей: поисковики и мессенджеры получают свою страницу на каждую модель
+  RewriteCond %{QUERY_STRING} (?:^|&)m=(s-36|s-40|s-85|s-250)(?:&|$)
+  RewriteRule ^o3s-16\.dc\.html$ _prerender/o3s-16--%1.html [L]
+  RewriteCond %{QUERY_STRING} (?:^|&)m=(desktop-60)(?:&|$)
+  RewriteRule ^recirculator\.dc\.html$ _prerender/recirculator--%1.html [L]
+</IfModule>
+
+# Сжатие
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript application/json application/manifest+json image/svg+xml image/x-icon
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Кэш: HTML и данные — проверять каждый раз, React и шрифты — на год, картинки — на месяц
+  <FilesMatch "\.(html|xml|txt|webmanifest)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(js|mjs|css)$">
+    Header set Cache-Control "public, max-age=3600, stale-while-revalidate=86400"
+  </FilesMatch>
+  <FilesMatch "(react|react-dom)\.production\.min\.js$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+  <FilesMatch "\.(webp|jpg|jpeg|png|ico|pdf)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  # Части страниц (шапка, подвал, форма) — не индексировать отдельно
+  <FilesMatch "^(header|footer|lead-form)\.dc\.html$">
+    Header set X-Robots-Tag "noindex"
+  </FilesMatch>
+</IfModule>
