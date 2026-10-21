@@ -1,0 +1,249 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Базовая триада</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: one calm reading column, warm paper, gold thread of inline SVG infographics between sections */
+:root{
+  --bg:#f7f1e6; --paper:#fdfaf4; --ink:#3d3328; --muted:#7d6f5e;
+  --gold:#b8924a; --gold-soft:#e6d3ad; --rose:#c9a58f; --line:#e4d8c3;
+  --display:'Cormorant Garamond',Georgia,serif; --body:'Manrope',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#1f1a14; --paper:#28221b; --ink:#efe6d6; --muted:#b4a68f;
+  --gold:#d4b06a; --gold-soft:#5a4a2e; --rose:#b08a74; --line:#3d3429; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#1f1a14; --paper:#28221b; --ink:#efe6d6; --muted:#b4a68f;
+  --gold:#d4b06a; --gold-soft:#5a4a2e; --rose:#b08a74; --line:#3d3429; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:300;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+.wrap{max-width:720px;margin:0 auto;padding-block:48px 80px}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(38px,7vw,58px)}
+h2{font-size:clamp(28px,4.5vw,36px);margin-top:64px;margin-bottom:16px}
+h3{font-size:22px;margin-top:28px;margin-bottom:8px}
+p{margin:0 0 16px;max-width:62ch}
+em{font-family:var(--display);font-size:1.12em;font-style:italic}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:18px}
+.lead{font-family:var(--display);font-size:22px;font-style:italic;color:var(--muted);margin-top:20px;max-width:34ch}
+.hero{padding-bottom:36px;border-bottom:1px solid var(--line)}
+.hero .brand{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px;margin-top:28px}
+.hero .brand b{font-weight:500;color:var(--ink)}
+.rule{width:48px;height:1px;background:var(--gold)}
+
+.quote{font-family:var(--display);font-size:clamp(22px,3.6vw,28px);font-style:italic;line-height:1.35;
+  padding:28px 0 28px 24px;border-left:2px solid var(--gold);margin:36px 0;max-width:40ch}
+.quote small{display:block;font-family:var(--body);font-style:normal;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:14px}
+
+.note{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:22px 24px;margin:28px 0}
+.note .t{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:8px}
+.note p:last-child{margin-bottom:0}
+
+figure{margin:32px 0}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:13px;color:var(--muted);margin-top:10px;text-align:center}
+.svg-t{font-family:var(--display);fill:var(--ink)}
+.svg-s{font-family:var(--body);fill:var(--muted);font-weight:400}
+.svg-g{font-family:var(--body);fill:var(--gold);font-weight:500;letter-spacing:.14em}
+
+.langs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:28px 0;font-size:14px}
+.langs div{background:var(--paper);padding:14px 16px}
+.langs .h{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.langs .head div{background:var(--bg)}
+@media (max-width:520px){.langs{grid-template-columns:1fr}.langs .head{display:none}.langs div::before{content:attr(data-l);display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0}
+.two>div{min-width:0;background:var(--paper);border-top:2px solid var(--gold);padding:20px 22px}
+.two .l{font-family:var(--display);font-size:24px;margin-bottom:6px}
+.two ul{margin:8px 0 0;padding-left:18px;font-size:15px}
+.two li{margin-bottom:4px}
+@media (max-width:520px){.two{grid-template-columns:1fr}}
+
+.steps{display:grid;gap:14px;margin:24px 0;counter-reset:s}
+.steps div{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;padding:16px 0;border-bottom:1px solid var(--line)}
+.steps div::before{counter-increment:s;content:counter(s,upper-roman);font-family:var(--display);font-size:26px;color:var(--gold);line-height:1}
+.steps b{display:block;font-weight:500;font-size:16px;margin-bottom:2px}
+.steps span{font-size:15px;color:var(--muted)}
+
+.closing{margin-top:64px;padding:36px 0 0;border-top:1px solid var(--line)}
+.sign{font-family:var(--display);font-size:26px;font-style:italic;margin-top:28px}
+.foot{margin-top:40px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;gap:14px;align-items:center}
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">FreeDom · Сезон 1 · Отношение к себе и в себе · Лекция 1</div>
+  <h1>Базовая триада</h1>
+  <p class="lead">Выжимка вводной лекции. Чтобы было с чего начать перед тем, как открыть конспект.</p>
+  <div class="brand"><span class="rule"></span><span>С любовью, <b>Света Дубинская</b></span></div>
+</header>
+
+<div class="quote">Если вы считаете, что отношения с собой — это ванна с пеной и поход в спа, добро пожаловать в клуб людей в ложных иллюзиях. Я сама там была.<small>С этого мы начинаем</small></div>
+
+<h2>Почему всё начинается внутри</h2>
+<p>Внешние отношения — это проявление внутренних. То, как мужчина относится к нам, как люди относятся к нам, как мир и деньги отвечают нам, — всё это отражение того, что происходит между частями нашей психики. Поэтому мы идём не в ванну с пеной, а вглубь.</p>
+<p>У отношений с собой очень много уровней. В этом сезоне мы разберём семь. Но сразу честно: это бесконечная чаша, и исследовать её можно всю жизнь.</p>
+
+<figure>
+<svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Зеркало: чумазое отражение убирают не на зеркале, а на себе">
+  <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="var(--gold)" stop-opacity=".0"/><stop offset=".5" stop-color="var(--gold)"/><stop offset="1" stop-color="var(--gold)" stop-opacity=".0"/></linearGradient></defs>
+  <line x1="350" y1="20" x2="350" y2="230" stroke="url(#g1)" stroke-width="1.5"/>
+  <circle cx="175" cy="110" r="62" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+  <circle cx="175" cy="110" r="46" fill="var(--gold-soft)" opacity=".55"/>
+  <text x="175" y="117" text-anchor="middle" class="svg-t" font-size="20">Внутренний мир</text>
+  <text x="175" y="200" text-anchor="middle" class="svg-g" font-size="11">ИСТОЧНИК</text>
+  <circle cx="525" cy="110" r="62" fill="none" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <text x="525" y="104" text-anchor="middle" class="svg-t" font-size="20">Внешний мир</text>
+  <text x="525" y="126" text-anchor="middle" class="svg-s" font-size="12">мужчина · люди · деньги</text>
+  <text x="525" y="200" text-anchor="middle" class="svg-g" font-size="11">ОТРАЖЕНИЕ</text>
+  <path d="M240 110 Q350 70 460 110" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+  <path d="M452 104 l10 6 l-10 6" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+  <text x="350" y="236" text-anchor="middle" class="svg-s" font-size="12">Можно долго протирать зеркало. Чумазое отражение убирают не на зеркале.</text>
+</svg>
+<figcaption>Образ одного из учителей: влиять нужно не на отражение.</figcaption>
+</figure>
+
+<h2>Отношения с собой — это не навсегда</h2>
+<p>Маленькая неожиданность. Отношения с собой есть у нас не всегда. У новорождённого их нет: процессы идут, но внутренний интерпретатор ещё не включён, и ничего не складывается в «отношения». И когда вы однажды выйдете за пределы дуального ума, отношения с собой тоже закончатся. Ванна с пеной останется, но это будет просто ванна с пеной.</p>
+<p>Отношения с собой возможны только тогда, когда мы разделены: «я» отдельно, мир отдельно, одна часть психики отдельно от другой. Вот с этим разделённым состоянием мы и работаем.</p>
+
+<figure>
+<svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Линия жизни отношений с собой">
+  <line x1="60" y1="75" x2="640" y2="75" stroke="var(--line)" stroke-width="1.5"/>
+  <line x1="200" y1="75" x2="500" y2="75" stroke="var(--gold)" stroke-width="2.5"/>
+  <circle cx="60" cy="75" r="6" fill="var(--paper)" stroke="var(--gold)" stroke-width="1.5"/>
+  <circle cx="200" cy="75" r="6" fill="var(--gold)"/>
+  <circle cx="500" cy="75" r="6" fill="var(--gold)"/>
+  <circle cx="640" cy="75" r="6" fill="var(--paper)" stroke="var(--gold)" stroke-width="1.5"/>
+  <text x="60" y="50" text-anchor="middle" class="svg-t" font-size="16">Рождение</text>
+  <text x="60" y="108" text-anchor="middle" class="svg-s" font-size="11">интерпретатор спит</text>
+  <text x="200" y="50" text-anchor="middle" class="svg-t" font-size="16">1–2 года</text>
+  <text x="200" y="108" text-anchor="middle" class="svg-s" font-size="11">появляется «моё», «я»</text>
+  <text x="350" y="108" text-anchor="middle" class="svg-g" font-size="11">ЗДЕСЬ ЖИВУТ ОТНОШЕНИЯ С СОБОЙ</text>
+  <text x="350" y="128" text-anchor="middle" class="svg-s" font-size="11">дуальность · разделённость</text>
+  <text x="500" y="50" text-anchor="middle" class="svg-t" font-size="16">Выход из дуальности</text>
+  <text x="640" y="50" text-anchor="middle" class="svg-t" font-size="16">Просто жизнь</text>
+  <text x="640" y="108" text-anchor="middle" class="svg-s" font-size="11">просто ванна с пеной</text>
+</svg>
+</figure>
+
+<h2>Главный принцип: закон трёх</h2>
+<p>Всё в этой вселенной состоит из триад. Мама, папа, ребёнок. Пассивное, активное, гармонизирующее. Куда бы вы ни посмотрели, любой процесс держится на законе трёх. Человек содержит в себе столько триад, сколько звёзд на небе, и между ними всё время идёт трение и обмен энергией. Это и есть самое базовое внутреннее отношение.</p>
+
+<figure>
+<svg viewBox="0 0 700 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Триада: пассивное, активное, гармонизирующее">
+  <path d="M350 48 L585 262 L115 262 Z" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+  <circle cx="350" cy="172" r="52" fill="var(--gold-soft)" opacity=".5"/>
+  <text x="350" y="168" text-anchor="middle" class="svg-t" font-size="18">Я</text>
+  <text x="350" y="188" text-anchor="middle" class="svg-s" font-size="11">живой организм</text>
+  <circle cx="350" cy="48" r="30" fill="var(--paper)" stroke="var(--gold)" stroke-width="1.2"/>
+  <text x="350" y="53" text-anchor="middle" class="svg-t" font-size="15">Бог</text>
+  <text x="350" y="18" text-anchor="middle" class="svg-g" font-size="11">ГАРМОНИЗИРУЮЩЕЕ</text>
+  <text x="350" y="100" text-anchor="middle" class="svg-s" font-size="12">природа · гиппокамп · Сушумна</text>
+  <circle cx="115" cy="262" r="30" fill="var(--paper)" stroke="var(--rose)" stroke-width="1.2"/>
+  <text x="115" y="267" text-anchor="middle" class="svg-t" font-size="15">Ева</text>
+  <text x="115" y="312" text-anchor="middle" class="svg-g" font-size="11">ПАССИВНОЕ</text>
+  <text x="140" y="222" text-anchor="middle" class="svg-s" font-size="12">женское · инсула · Ида</text>
+  <circle cx="585" cy="262" r="30" fill="var(--paper)" stroke="var(--gold)" stroke-width="1.2"/>
+  <text x="585" y="267" text-anchor="middle" class="svg-t" font-size="15">Адам</text>
+  <text x="585" y="312" text-anchor="middle" class="svg-g" font-size="11">АКТИВНОЕ</text>
+  <text x="560" y="222" text-anchor="middle" class="svg-s" font-size="12">мужское · амигдала · Пингала</text>
+</svg>
+<figcaption>Одна и та же триада на языке Писания, нейробиологии и йоги.</figcaption>
+</figure>
+
+<p>Я знаю, что среди вас есть люди науки, психологи, мистики и эзотерики. Поэтому одно и то же мы будем называть на разных языках. Описывается всегда один корневой процесс, из которого рождается всё остальное.</p>
+
+<div class="langs">
+  <div class="head" style="display:contents"><div class="h">Писание</div><div class="h">Мозг</div><div class="h">Йога · Инь-Ян</div></div>
+  <div data-l="Писание">Ева — женское начало</div><div data-l="Мозг">Инсула — восприятие внутреннего</div><div data-l="Йога">Ида · Инь</div>
+  <div data-l="Писание">Адам — мужское начало</div><div data-l="Мозг">Амигдала — защита, контроль</div><div data-l="Йога">Пингала · Ян</div>
+  <div data-l="Писание">Бог — наша природа</div><div data-l="Мозг">Гиппокамп — условия, память</div><div data-l="Йога">Сушумна · духовное начало</div>
+  <div data-l="Писание">Змей — четвёртая сила</div><div data-l="Мозг">DMN — интерпретатор</div><div data-l="Йога">Ум, описывающий всё постфактум</div>
+</div>
+
+<h2>Три силы внутри вас</h2>
+
+<h3>Инсула. Ева. Просто восприятие</h3>
+<p>Эта часть мозга находится в пассивном состоянии и постоянно воспринимает: тепло, холод, сжатие, расслабление, всё, что происходит внутри. Если она ничем не задавлена и проживается в осознанности, это и есть состояние присутствия. Тихое восприятие. Женское начало.</p>
+
+<h3>Амигдала. Адам. Защитник</h3>
+<p>Рядом живёт более активная сила. Амигдала отвечает за защиту, контроль и срезку внешнего момента. Это наш эго-механизм, первая функция, которая разделяет единое на отдельное «я»: примерно с года-полутора ребёнок начинает понимать «моё», а потом «мама отдельно, я отдельно». Амигдала постоянно на чеку. Её главная задача — любыми способами защитить от боли.</p>
+
+<h3>Гиппокамп. Условия, в которых всё происходит</h3>
+<p>Гармонизирующая сила, божественное в человеке. Но она же хранит всё бессознательное: всю информацию прошлого. Это важно для следующего шага.</p>
+
+<figure>
+<svg viewBox="0 0 700 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Как инсула, амигдала и интерпретатор передают друг другу сигнал">
+  <rect x="30" y="60" width="180" height="110" rx="4" fill="var(--paper)" stroke="var(--rose)" stroke-width="1.2"/>
+  <text x="120" y="98" text-anchor="middle" class="svg-t" font-size="18">Инсула</text>
+  <text x="120" y="120" text-anchor="middle" class="svg-s" font-size="12">воспринимает внутри:</text>
+  <text x="120" y="138" text-anchor="middle" class="svg-s" font-size="12">тепло, сжатие, боль</text>
+  <path d="M212 115 L250 115" stroke="var(--gold)" stroke-width="1.2"/><path d="M243 109 l8 6 l-8 6" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+  <rect x="260" y="60" width="180" height="110" rx="4" fill="var(--paper)" stroke="var(--gold)" stroke-width="1.2"/>
+  <text x="350" y="98" text-anchor="middle" class="svg-t" font-size="18">Амигдала</text>
+  <text x="350" y="120" text-anchor="middle" class="svg-s" font-size="12">реагирует: защитить</text>
+  <text x="350" y="138" text-anchor="middle" class="svg-s" font-size="12">от боли любой ценой</text>
+  <path d="M442 115 L480 115" stroke="var(--gold)" stroke-width="1.2"/><path d="M473 109 l8 6 l-8 6" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+  <rect x="490" y="60" width="180" height="110" rx="4" fill="var(--paper)" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="580" y="98" text-anchor="middle" class="svg-t" font-size="18">Интерпретатор</text>
+  <text x="580" y="120" text-anchor="middle" class="svg-s" font-size="12">объясняет всё по полочкам:</text>
+  <text x="580" y="138" text-anchor="middle" class="svg-s" font-size="12">«это чувства», «это они»</text>
+  <text x="350" y="30" text-anchor="middle" class="svg-g" font-size="11">В УСЛОВИЯХ ГИППОКАМПА — ПАМЯТИ ПРОШЛОГО</text>
+  <path d="M580 172 Q580 215 350 215 Q120 215 120 172" fill="none" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="3 4"/>
+  <text x="350" y="208" text-anchor="middle" class="svg-s" font-size="11">а боль на самом деле не снаружи — она внутри</text>
+</svg>
+</figure>
+
+<div class="note">
+  <div class="t">Четвёртая сила</div>
+  <p>Милый змей из Писания, который портит нам всю малину, — это наш ум, интерпретатор. В науке его называют DMN, Default Mode Network. Он берёт информацию для объяснения реальности не из реальности, а из гиппокампа, где лежит только прошлое. Именно он, а не что-то снаружи, — причина человеческого страдания. И именно он включается, когда вы подходите к зеркалу без одежды и уже слышите комментарий.</p>
+</div>
+
+<h2>Иньская и яньская женщина</h2>
+<p>То, что активнее, выдавливает другое. Если женщина долго живёт в защите, напряжении, достигаторстве, борьбе и необходимости что-то доказывать, женское начало просто блокируется. Не потому что с ней что-то не так, а потому что одна часть мозга годами заглушала другую.</p>
+
+<div class="two">
+  <div><div class="l">Яньская женщина</div><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">активна амигдала</span>
+    <ul><li>система самозащиты включена постоянно</li><li>контроль, напряжение, «на чеку»</li><li>разделение себя и внешнего</li><li>доказывать, показывать, влиять</li></ul></div>
+  <div><div class="l">Иньская женщина</div><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">активна инсула</span>
+    <ul><li>тихое восприятие внутреннего</li><li>присутствие, включённость</li><li>чувствует тело: тепло, сжатие, расслабление</li><li>восприятие вместо борьбы</li></ul></div>
+</div>
+
+<p>Даже такое невинное явление внутри, как подавление одной части мозга другой, снаружи может отражаться жёстко: вплоть до тирании мужчины по отношению к нам. Поэтому мы разбираем это на самом глубоком уровне.</p>
+
+<h2>Куда мы идём в этом сезоне</h2>
+<p>Мы не будем говорить, как полюбить себя. Мы будем, можно сказать, на хирургическом уровне налаживать процессы между тремя силами.</p>
+
+<div class="steps">
+  <div><div><b>Научиться управлять вниманием</b><span>Понимать, что это за процессы и что именно мы высвобождаем. Любая работа с психикой начинается здесь.</span></div></div>
+  <div><div><b>Внести внимание в женское начало</b><span>В саму основу, в кору мозга. Активировать инсулу.</span></div></div>
+  <div><div><b>Сделать тише амигдалу</b><span>Не сломать защитника, а убрать лишнее напряжение.</span></div></div>
+  <div><div><b>Активировать гиппокамп</b><span>Гармонизирующую силу, условия, в которых всё происходит.</span></div></div>
+  <div><div><b>Уменьшить власть интерпретатора</b><span>Инструменты, которые снижают влияние четвёртой силы.</span></div></div>
+</div>
+
+<div class="note">
+  <div class="t">Предупреждение</div>
+  <p>Мы будем очень долго работать с телом и через тело. Вход в инсулу есть только через тело. Лоботомию, слава богу, сделать нельзя, поэтому путь один: глубокая осознанность тела, глубокое погружение в него. Для меня это не менее сложно, чем для вас. Некоторые шаги я буду проходить нога в ногу с вами.</p>
+</div>
+
+<h2>О чём помнить, читая лекции</h2>
+<p>Любая лекция здесь — всего лишь теория и попытка описать неописуемое. Учёные тоже пытаются описать Бога словами. Поэтому изучаем конспект, начинаем замечать, что во мне активно, что пассивно, что подавлено, что раскрыто. И помним: однажды от всех описаний придётся отказаться.</p>
+<p>Я не даю вам чужие концепции вроде «ты не тело». Когда это понимаешь интеллектуально, это может отделить от тела. Когда проживаешь бытийно, наоборот, проживаешь тело тотально. Это очень большая разница, и к своему опыту вы придёте сами.</p>
+
+<div class="quote">Отношения с собой — это то, как в нас проживаются внутренние процессы на бессознательном уровне. И то, как наш ум эти процессы интерпретирует.<small>Главная мысль лекции</small></div>
+
+<section class="closing">
+  <h3 style="margin-top:0">Что сделать сейчас</h3>
+  <p>Обязательно прочтите конспект к этой лекции. Там на научном уровне описано, как единое сознание разделяется на множественное и начинает проживать отдельное «я». Видео готовит вас к работе; текст — это сама работа.</p>
+  <p>Наберитесь терпения и дайте себе время. Мы только начинаем.</p>
+  <div class="sign">Света</div>
+  <div class="foot"><span class="rule"></span><span>FreeDom · Женское Возрождение · Сезон 1</span></div>
+</section>
+
+</div>
+
+</body></html>
