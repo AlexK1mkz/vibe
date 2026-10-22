@@ -1,0 +1,291 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Структура сайта Busurman Group</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: светлая инфографика-схема — серые блоки как вайрфрейм, тёмный цвет только на флагманах */
+:root{
+  --bg:#ffffff; --bg-2:#f4f4f2; --bg-3:#e7e7e3; --line:#d6d6d0; --line-2:#b9b9b2;
+  --fg:#1b1b19; --muted:#6c6c66; --ink:#1b1b19; --ink-fg:#ffffff;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 var(--sans);margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0}
+.label{font:500 11px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.chip{display:inline-block;font:500 12px/1 var(--sans);padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:var(--bg);white-space:nowrap}
+.chip.star{background:var(--ink);color:var(--ink-fg);border-color:var(--ink)}
+.chip.soon{border-style:dashed;color:var(--muted)}
+
+header.hero{padding-block:36px 32px;border-bottom:2px solid var(--ink)}
+.hero h1{font-size:clamp(30px,5vw,50px);line-height:1.08;margin-top:10px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
+.kpi{border:1px solid var(--line);padding:14px 16px}
+.kpi b{display:block;font:600 34px/1 var(--sans);font-variant-numeric:tabular-nums}
+.kpi span{font-size:13px;color:var(--muted)}
+@media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}}
+
+section{padding-block:44px;border-bottom:1px solid var(--line)}
+.sh{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.sh .n{font:500 13px/1 var(--mono);color:var(--muted)}
+.sh h2{font-size:clamp(22px,3vw,30px)}
+
+/* карта */
+.mapbox{overflow-x:auto}
+.map{min-width:880px}
+.root{display:flex;justify-content:center}
+.root div{border:2px solid var(--ink);padding:10px 30px;font-weight:600;font-size:16px}
+.bus{height:22px;position:relative}
+.bus::before{content:"";position:absolute;left:50%;top:0;height:11px;border-left:1.5px solid var(--line-2)}
+.bus::after{content:"";position:absolute;left:8.3%;right:8.3%;top:11px;border-top:1.5px solid var(--line-2)}
+.cols{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.c{position:relative;border:1px solid var(--line);background:var(--bg-2);padding:10px;display:flex;flex-direction:column;gap:6px}
+.c::before{content:"";position:absolute;left:50%;top:-12px;height:11px;border-left:1.5px solid var(--line-2)}
+.c h3{font-size:14px;margin-bottom:2px}
+.c i{font-style:normal;font-size:12.5px;padding:6px 8px;background:var(--bg);border:1px solid var(--line)}
+.c i.star{background:var(--ink);color:var(--ink-fg);border-color:var(--ink);font-weight:600}
+.c i.soon{border-style:dashed;color:var(--muted)}
+.c.soon{border-style:dashed;background:var(--bg)}
+.c.soon h3{color:var(--muted)}
+.common{margin-top:12px;border:1px dashed var(--line-2);padding:10px 14px;font-size:13px;color:var(--muted);text-align:center}
+
+/* путь */
+.path{display:grid;grid-template-columns:repeat(5,1fr);gap:0;align-items:stretch}
+.st{border:1px solid var(--line);padding:16px 14px;display:flex;flex-direction:column;gap:8px;position:relative;background:var(--bg)}
+.st + .st{border-left:0}
+.st .label{margin-bottom:2px}
+.st h3{font-size:17px}
+.st small{font-size:12px;color:var(--muted)}
+.st .chips{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.st .chips .chip{white-space:normal;border-radius:4px}
+.st.core{background:var(--ink);color:var(--ink-fg);border-color:var(--ink)}
+.st.core .label,.st.core small{color:#cfcfca}
+.st.core .chip{background:transparent;color:var(--ink-fg);border-color:#77776f}
+.st:not(:last-child)::after{content:"→";position:absolute;right:-11px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--bg);border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;font-size:12px;z-index:1;color:var(--fg)}
+.pathnote{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.pathnote span{font-size:13px;color:var(--muted);border-left:2px solid var(--ink);padding-left:10px}
+@media (max-width:860px){.path{grid-template-columns:1fr}.st + .st{border-left:1px solid var(--line);border-top:0}.st:not(:last-child)::after{content:"↓";right:auto;left:50%;top:auto;bottom:-11px;transform:translateX(-50%)}}
+
+/* направления */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.p{border:1px solid var(--line);display:flex;flex-direction:column}
+.p .img{aspect-ratio:16/7;background:repeating-linear-gradient(135deg,var(--bg-2) 0 10px,var(--bg-3) 10px 11px);display:flex;align-items:flex-end;padding:10px}
+.p .img span{font:500 10px/1 var(--mono);color:var(--muted);letter-spacing:.08em;background:var(--bg);padding:4px 6px}
+.p .bd{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.p h3{font-size:17px}
+.p q{font-size:13.5px;color:var(--muted);quotes:"«" "»"}
+.p .to{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.b2b{margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--line);padding:14px 16px;flex-wrap:wrap}
+@media (max-width:860px){.pillars{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.pillars{grid-template-columns:1fr}}
+
+/* главная — вайрфрейм */
+.home{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start}
+.phone{border:2px solid var(--ink);border-radius:28px;padding:14px 10px;background:var(--bg);display:flex;flex-direction:column;gap:5px}
+.phone div{background:var(--bg-2);border:1px solid var(--line);border-radius:4px;font:500 10.5px/1.2 var(--mono);color:var(--muted);padding:7px 8px;display:flex;gap:8px;letter-spacing:.02em}
+.phone div b{color:var(--fg);font-weight:500;min-width:16px}
+.phone .hero{height:110px;align-items:flex-end;background:repeating-linear-gradient(135deg,var(--bg-2) 0 10px,var(--bg-3) 10px 11px)}
+.phone .dark{background:var(--ink);color:#d8d8d2;border-color:var(--ink)}
+.phone .dark b{color:#fff}
+.phone .t{height:46px;align-items:flex-end}
+.legend{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line)}
+.legend div{display:grid;grid-template-columns:30px 1fr;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.legend div:nth-child(odd){padding-right:16px}
+.legend i{font:500 12px/1.6 var(--mono);font-style:normal;color:var(--muted)}
+.legend b{font-weight:600}
+.legend span{color:var(--muted);font-size:13px;display:block}
+@media (max-width:900px){.home{grid-template-columns:1fr}.phone{max-width:300px}.legend{grid-template-columns:1fr}.legend div:nth-child(odd){padding-right:0}}
+
+/* шаблоны */
+.tpls{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tp{border:1px solid var(--line);padding:14px;display:flex;flex-direction:column;gap:10px}
+.tp header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tp h3{font-size:16px}
+.wf{display:flex;flex-direction:column;gap:4px}
+.wf span{font:500 10.5px/1 var(--mono);color:var(--muted);background:var(--bg-2);border:1px solid var(--line);padding:7px 8px;border-radius:3px}
+.wf span.big{padding:20px 8px;background:repeating-linear-gradient(135deg,var(--bg-2) 0 10px,var(--bg-3) 10px 11px)}
+.wf span.k{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tp .for{display:flex;gap:6px;flex-wrap:wrap}
+@media (max-width:860px){.tpls{grid-template-columns:1fr}}
+
+/* оплата */
+.pay{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pm{border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:8px}
+.pm .ic{width:42px;height:42px;border:1.5px solid var(--ink);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.pm h3{font-size:17px}
+.pm p{font-size:13.5px;color:var(--muted)}
+.rules{margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line)}
+.rules div{padding:12px 14px;border-right:1px solid var(--line);font-size:13.5px}
+.rules div:last-child{border-right:0}
+.rules b{display:block;margin-bottom:4px;font-size:13px}
+@media (max-width:760px){.pay,.rules{grid-template-columns:1fr}.rules div{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* этапы */
+.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line)}
+.sg{padding:16px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.sg:last-child{border-right:0}
+.sg.now{background:var(--bg-2)}
+.sg h3{font-size:17px}
+.sg .chips{display:flex;gap:6px;flex-wrap:wrap}
+@media (max-width:760px){.stages{grid-template-columns:1fr}.sg{border-right:0;border-bottom:1px solid var(--line)}}
+.dec{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dec label{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);padding:12px;font-size:14px;cursor:pointer}
+.dec input{accent-color:var(--ink);width:16px;height:16px;margin-top:2px;flex:none}
+@media (max-width:760px){.dec{grid-template-columns:1fr}}
+footer{padding-block:24px 44px;font:400 12px/1.6 var(--mono);color:var(--muted)}
+</style>
+
+<header class="wrap hero">
+  <div class="label">ТЗ · структура сайта · 22.10.2026</div>
+  <h1>Сайт Айдара Бусурман: из чего он состоит</h1>
+  <div class="kpis">
+    <div class="kpi"><b>8</b><span>программ</span></div>
+    <div class="kpi"><b>6</b><span>направлений «С чем ты приходишь?»</span></div>
+    <div class="kpi"><b>6</b><span>шаблонов для дизайнера</span></div>
+    <div class="kpi"><b>3</b><span>способа оплаты</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <div class="sh"><span class="n">01</span><h2>Карта сайта</h2></div>
+  <div class="mapbox"><div class="map">
+    <div class="root"><div>Главная</div></div>
+    <div class="bus"></div>
+    <div class="cols">
+      <div class="c"><h3>Об Айдаре</h3><i>История</i><i>Регалии</i><i>Компании</i></div>
+      <div class="c"><h3>Программы</h3><i class="star">★ Batyr Joly</i><i class="star">★ PRO LIFE</i><i>Наставничество</i><i>Прорыв</i><i>Женский тренинг</i><i>Точка решения</i><i>Мастер-класс</i><i>Личный разбор</i></div>
+      <div class="c"><h3>События</h3><i>Календарь</i><i>Фильтр: город</i><i>Оплата</i></div>
+      <div class="c"><h3>Компаниям</h3><i>Тренинги команд</i><i>Презентация</i><i>Запрос КП</i></div>
+      <div class="c"><h3>Сообщество</h3><i>Сакральный Казахстан</i><i>QAZ WILD</i><i>QazMountains</i><i>FC Batyr Pro</i><i>Клубы, капитаны</i></div>
+      <div class="c"><h3>Медиа</h3><i>Видео</i><i>Подкасты</i><i>Медитации</i></div>
+    </div>
+    <div class="common">На каждой странице: меню · WhatsApp · «Выбрать программу» · подвал &nbsp;|&nbsp; <span class="chip soon">Магазин мерча — этап 2</span></div>
+  </div></div>
+</section>
+
+<section>
+  <div class="sh"><span class="n">02</span><h2>Путь участника</h2><span class="muted">«где я и с чего начать»</span></div>
+  <div class="path">
+    <div class="st"><span class="label">Знакомство</span><h3>Смотрю</h3><small>бесплатно</small><div class="chips"><span class="chip">Видео YouTube</span><span class="chip">Подкасты</span><span class="chip">Медитации</span></div></div>
+    <div class="st"><span class="label">Первый шаг</span><h3>Пробую</h3><small>оплата на сайте</small><div class="chips"><span class="chip">Мастер-класс</span><span class="chip">Точка решения</span><span class="chip">Личный разбор</span></div></div>
+    <div class="st"><span class="label">Глубже</span><h3>Работаю</h3><small>можно сразу</small><div class="chips"><span class="chip">Прорыв</span><span class="chip">Женский тренинг</span></div></div>
+    <div class="st core"><span class="label">★ Флагманы</span><h3>Меняюсь</h3><small>ядро сайта</small><div class="chips"><span class="chip">Batyr Joly</span><span class="chip">PRO LIFE · мужчины после BJ</span></div></div>
+    <div class="st"><span class="label">Сообщество</span><h3>Веду других</h3><small>для выпускников</small><div class="chips"><span class="chip">Наставничество ×2</span><span class="chip">Капитан ведёт поток</span></div></div>
+  </div>
+  <div class="pathnote"><span>Не можешь выбрать → консультация или Личный разбор</span><span>Прорыв и Женский тренинг — без мастер-класса</span></div>
+</section>
+
+<section>
+  <div class="sh"><span class="n">03</span><h2>«С чем ты приходишь?»</h2><span class="muted">как Pillars у Тони Роббинса</span></div>
+  <div class="pillars">
+    <article class="p"><div class="img"><span>ФОТО</span></div><div class="bd"><h3>Ясность</h3><q>Знаю, что делать. Не делаю</q><div class="to"><span class="chip">Мастер-класс</span><span class="chip">Точка решения</span></div></div></article>
+    <article class="p"><div class="img"><span>ФОТО</span></div><div class="bd"><h3>Истинные цели</h3><q>Работаю много, а цели не мои</q><div class="to"><span class="chip">Прорыв</span></div></div></article>
+    <article class="p"><div class="img"><span>ФОТО</span></div><div class="bd"><h3>Мужская сила</h3><q>Снаружи всё нормально, внутри нет опоры</q><div class="to"><span class="chip star">★ Batyr Joly</span></div></div></article>
+    <article class="p"><div class="img"><span>ФОТО</span></div><div class="bd"><h3>Отношения и семья</h3><q>Конфликты, потеряли близость</q><div class="to"><span class="chip star">★ PRO LIFE</span></div></div></article>
+    <article class="p"><div class="img"><span>ФОТО</span></div><div class="bd"><h3>Женская сила</h3><q>Всё есть. Раскрыться ещё глубже</q><div class="to"><span class="chip">Женский тренинг</span><span class="chip star">★ PRO LIFE</span></div></div></article>
+    <article class="p"><div class="img"><span>ФОТО</span></div><div class="bd"><h3>Дело и среда</h3><q>Рядом нужен сильный круг</q><div class="to"><span class="chip">Наставничество</span><span class="chip">Личный разбор</span></div></div></article>
+  </div>
+  <div class="b2b"><b>Компаниям — отдельный вход</b><span class="chip">→ Корпоративные тренинги</span></div>
+</section>
+
+<section>
+  <div class="sh"><span class="n">04</span><h2>Главная страница</h2><span class="muted">сначала телефон — 80–90% трафика</span></div>
+  <div class="home">
+    <div class="phone" aria-hidden="true">
+      <div class="hero"><b>1</b>СЛАЙДЕР · СЦЕНА · АНОНС</div>
+      <div><b>2</b>ЦИФРЫ</div>
+      <div class="dark t"><b>3</b>★ ФЛАГМАНЫ</div>
+      <div class="t"><b>4</b>С ЧЕМ ТЫ ПРИХОДИШЬ?</div>
+      <div><b>5</b>ПУТЬ УЧАСТНИКА</div>
+      <div><b>6</b>ОБ АЙДАРЕ</div>
+      <div><b>7</b>С НИМ РАБОТАЛИ</div>
+      <div class="t"><b>8</b>ВИДЕООТЗЫВЫ · СТОРИС</div>
+      <div><b>9</b>БЛИЖАЙШИЕ СОБЫТИЯ</div>
+      <div><b>10</b>НЕ ЗНАЕШЬ, С ЧЕГО НАЧАТЬ?</div>
+      <div><b>11</b>КОМПАНИЯМ</div>
+      <div><b>12</b>СООБЩЕСТВО</div>
+      <div><b>13</b>МЕДИА</div>
+      <div class="dark"><b>14</b>ФИНАЛ · ЗАЯВКА</div>
+    </div>
+    <div class="legend">
+      <div><i>1</i><p><b>Первый экран</b><span>Айдар на сцене, зал, анонс ближайшего события с видео</span></p></div>
+      <div><i>2</i><p><b>Цифры</b><span>10 лет · 20 000+ · 18 городов · 10+ стран</span></p></div>
+      <div><i>3</i><p><b>Флагманы</b><span>Batyr Joly и PRO LIFE — два больших разных блока</span></p></div>
+      <div><i>4</i><p><b>Направления</b><span>6 запросов → программы</span></p></div>
+      <div><i>5</i><p><b>Путь участника</b><span>схема из 5 ступеней</span></p></div>
+      <div><i>6</i><p><b>Об Айдаре</b><span>фото, история, регалии</span></p></div>
+      <div><i>7</i><p><b>С ним работали</b><span>логотипы компаний</span></p></div>
+      <div><i>8</i><p><b>Видеоотзывы</b><span>карусель как сторис</span></p></div>
+      <div><i>9</i><p><b>События</b><span>лента: дата, город, места, оплата</span></p></div>
+      <div><i>10</i><p><b>Помощь с выбором</b><span>консультация или Личный разбор</span></p></div>
+      <div><i>11</i><p><b>Компаниям</b><span>вход на B2B</span></p></div>
+      <div><i>12</i><p><b>Сообщество</b><span>выезды, клубы, проекты</span></p></div>
+      <div><i>13</i><p><b>Медиа</b><span>YouTube, подкасты, медитации</span></p></div>
+      <div><i>14</i><p><b>Финал</b><span>фото на сцене, форма, WhatsApp</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="n">05</span><h2>Шаблоны страниц</h2></div>
+  <div class="tpls">
+    <article class="tp"><header><h3>Флагман</h3><span class="label">большой</span></header>
+      <div class="wf"><span class="big k">ВИДЕО · СУТЬ · ДАТА</span><span>УЗНАЁШЬ СЕБЯ?</span><span>ПО ДНЯМ — ТОЛЬКО ФОРМА</span><span>ЧТО УНОСИШЬ</span><span>ГАЛЕРЕЯ · ВИДЕО ЗАЛА</span><span>ВИДЕООТЗЫВЫ</span><span>КТО ВЕДЁТ</span><span>ДАТЫ · ГОРОДА</span><span class="k">УЧАСТИЕ · 3 ОПЛАТЫ</span><span>FAQ</span><span>→ НАСТАВНИЧЕСТВО</span></div>
+      <div class="for"><span class="chip star">Batyr Joly</span><span class="chip star">PRO LIFE</span></div></article>
+    <article class="tp"><header><h3>Программа</h3><span class="label">компактный</span></header>
+      <div class="wf"><span class="big">ОБЛОЖКА · ДАТА</span><span>ДЛЯ КОГО</span><span>ЧТО БУДЕТ · ЧТО УНОСИШЬ</span><span>ВИДЕО · ОТЗЫВЫ</span><span class="k">ЦЕНА · ОПЛАТА</span><span>FAQ</span><span>→ ФЛАГМАН</span></div>
+      <div class="for"><span class="chip">Мастер-класс</span><span class="chip">Точка решения</span><span class="chip">Прорыв</span><span class="chip">Женский</span><span class="chip">Разбор</span></div></article>
+    <article class="tp"><header><h3>Проект</h3><span class="label">компактный</span></header>
+      <div class="wf"><span class="big">ОБЛОЖКА</span><span>ЧТО ЭТО</span><span>ФОТО · ВИДЕО</span><span>ДАТЫ</span><span class="k">КАК УЧАСТВОВАТЬ</span></div>
+      <div class="for"><span class="chip">Сакральный KZ</span><span class="chip">QAZ WILD</span><span class="chip">QazMountains</span><span class="chip">FC Batyr Pro</span></div></article>
+  </div>
+  <p class="muted" style="margin-top:12px;font-size:13px">Ещё три: Наставничество (2 вкладки) · События · Компаниям.</p>
+</section>
+
+<section>
+  <div class="sh"><span class="n">06</span><h2>Оплата</h2></div>
+  <div class="pay">
+    <div class="pm"><div class="ic" aria-hidden="true"><svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="1" width="20" height="14" rx="2"/><path d="M1 5h20"/></svg></div><h3>Картой на сайте</h3><p>Сумма уже стоит — ввёл карту и оплатил</p></div>
+    <div class="pm"><div class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="1" width="7" height="7"/><rect x="12" y="1" width="7" height="7"/><rect x="1" y="12" width="7" height="7"/><path d="M12 12h3v3h-3zM16 16h3v3"/></svg></div><h3>Kaspi</h3><p>Счёт или ссылка с готовой суммой</p></div>
+    <div class="pm"><div class="ic" aria-hidden="true"><svg width="22" height="20" viewBox="0 0 22 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3h18v11H8l-5 4v-4H2z"/></svg></div><h3>Заявка менеджеру</h3><p>Для тех, кому надо поговорить</p></div>
+  </div>
+  <div class="rules">
+    <div><b>Мастер-класс · интенсив</b>полная оплата</div>
+    <div><b>Флагманы · Прорыв · Женский</b>предоплата или заявка</div>
+    <div><b>Наставничество · компании</b>только заявка</div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="n">07</span><h2>Этапы</h2></div>
+  <div class="stages">
+    <div class="sg now"><span class="label">Сейчас</span><h3>Структура → дизайн</h3><div class="chips"><span class="chip">ТЗ</span><span class="chip">Прототип</span><span class="chip">6 шаблонов</span></div></div>
+    <div class="sg"><span class="label">Запуск</span><h3>Весь сайт</h3><div class="chips"><span class="chip">Astro</span><span class="chip">SEO</span><span class="chip">Оплата</span><span class="chip">amoCRM</span><span class="chip">Пиксели</span></div></div>
+    <div class="sg"><span class="label">Потом</span><h3>Развитие</h3><div class="chips"><span class="chip soon">Онлайн-МК</span><span class="chip soon">Магазин мерча</span><span class="chip soon">Личный кабинет</span></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="n">08</span><h2>Согласовать</h2></div>
+  <div class="dec">
+    <label for="d1"><input type="checkbox" id="d1">Карта сайта и меню</label>
+    <label for="d2"><input type="checkbox" id="d2">6 направлений и их программы</label>
+    <label for="d3"><input type="checkbox" id="d3">Блоки главной</label>
+    <label for="d4"><input type="checkbox" id="d4">Онлайн-МК: сейчас или потом</label>
+    <label for="d5"><input type="checkbox" id="d5">Цены на сайте</label>
+    <label for="d6"><input type="checkbox" id="d6">Календарь: сайт или Taplink</label>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">Busurman Group · структура сайта · Soltrix · подробности — в документе ТЗ v2</div></footer>
+
+</body></html>

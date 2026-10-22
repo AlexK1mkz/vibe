@@ -40,7 +40,22 @@ def load_data():
     return json.loads(out)
 
 D = load_data()
+sys.path.insert(0, os.path.join(ROOT, '_build'))
+from kz_dict import KZ, KZ_RULES, KZ_META
+
+def kz(s):
+    """Перевод строки для мета-тегов и JSON-LD (точное совпадение, иначе как есть)."""
+    return KZ.get(s, s)
+
+def gen_i18n():
+    rules = [[pat, re.sub(r'\\(\d)', r'$\1', rep)] for pat, rep in KZ_RULES]
+    engine = open(os.path.join(ROOT, '_build', 'i18n_engine.js'), encoding='utf-8').read()
+    js = ('window.OTRI_KZ=' + json.dumps(KZ, ensure_ascii=False, separators=(',', ':')) + ';\n'
+          'window.OTRI_KZ_RULES=' + json.dumps(rules, ensure_ascii=False) + ';\n' + engine)
+    wr('i18n-kz.js', js)
+gen_i18n()
 fmt = lambda n: f'{n:,}'.replace(',', ' ') + ' ₸'
+SHOW = bool(D['CONFIG'].get('showPrices'))  # цены в мета-тегах, JSON-LD и превью — по тому же флагу, что на сайте
 ster = {m['id']: m for m in D['STERILIZERS']}
 recs = {m['id']: m for m in D['RECIRCULATORS']}
 ORG_ID = BASE + '#org'
@@ -56,26 +71,28 @@ def crumbs(*items):
 
 def product(m, url, desc):
     imgs = [BASE + g for g in (m.get('gallery') or ['img/otri/otri-desktop-recirculator.webp'])]
-    return {"@type": "Product", "name": m['name'], "sku": m['id'], "image": imgs, "description": desc,
-            "brand": {"@type": "Brand", "name": "OTRI"}, "manufacturer": {"@id": ORG_ID},
-            "offers": {"@type": "Offer", "url": BASE + url, "price": m['price'], "priceCurrency": "KZT",
-                       "itemCondition": "https://schema.org/NewCondition", "seller": {"@id": ORG_ID}}}
+    node = {"@type": "Product", "name": m['name'], "sku": m['id'], "image": imgs, "description": desc,
+            "brand": {"@type": "Brand", "name": "OTRI"}, "manufacturer": {"@id": ORG_ID}}
+    if not SHOW: return None  # без цены Google не принимает Product — не выводим
+    node["offers"] = {"@type": "Offer", "url": BASE + url, "price": m['price'], "priceCurrency": "KZT",
+                       "itemCondition": "https://schema.org/NewCondition", "seller": {"@id": ORG_ID}}
+    return node
 
 # ---------- страницы ----------
 # key -> (file, query, url_for_canonical, title, description, og image, jsonld list, ssr model id)
 PAGES = {}
 def page(key, file, query, url, title, desc, og, ld, model=None):
-    PAGES[key] = dict(file=file, query=query, url=url, title=title, desc=desc, og=og, ld=ld, model=model)
+    PAGES[key] = dict(file=file, query=query, url=url, title=title, desc=desc, og=og, ld=[x for x in ld if x], model=model)
 
 faq = {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": f['q'],
         "acceptedAnswer": {"@type": "Answer", "text": f['a']}} for f in D['FAQ']]}
 page('index', 'index.html', '', '',
      'Озоновые стерилизаторы и рециркуляторы OTRI — производитель в Казахстане',
-     'Низкотемпературная стерилизация за 30–70 мин при до 45 °C. Регистрационное удостоверение РК. Монтаж и обучение включены. Рециркуляторы от 65 000 ₸.',
+     'Низкотемпературная стерилизация за 30–70 мин при до 45 °C. Регистрационное удостоверение РК. Монтаж и обучение включены.' + (' Рециркуляторы от 65 000 ₸.' if SHOW else ' УФ-рециркуляторы для воздуха.'),
      'og-home', [ORG, {"@type": "WebSite", "name": "OTRI", "url": BASE, "inLanguage": "ru", "publisher": {"@id": ORG_ID}}, faq])
 page('catalog', 'catalog.dc.html', '', 'catalog.dc.html',
      'Каталог OTRI: озоновые стерилизаторы OTRI S и УФ-рециркуляторы OTRI Desktop',
-     '5 озоновых стерилизаторов OTRI S от 16 до 250 л и 2 бактерицидных рециркулятора OTRI Desktop от 65 000 ₸. Регистрационное удостоверение РК, поставка под ключ.',
+     '5 озоновых стерилизаторов OTRI S от 16 до 250 л и 2 бактерицидных рециркулятора OTRI Desktop' + (' от 65 000 ₸' if SHOW else '') + '. Регистрационное удостоверение РК, поставка под ключ.',
      'og-catalog', [ORG, crumbs(('Главная', ''), ('Каталог', 'catalog.dc.html')),
                     {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": m['name'],
                      "url": BASE + ('o3s-16.dc.html?m=' if m['category'] == 'sterilizer' else 'recirculator.dc.html?m=') + m['id']}
@@ -96,19 +113,42 @@ page('rent', 'rent.dc.html', '', 'rent.dc.html',
      'og-rent', [ORG, crumbs(('Главная', ''), ('Аренда', 'rent.dc.html'))])
 for i, m in enumerate(D['STERILIZERS']):
     url = 'o3s-16.dc.html?m=' + m['id']
-    desc = f"{m['name']}: камера {m['chamber']} см, цикл {m['cycle']} мин, до 45 °C, 70 Вт. Цена от {fmt(m['price'])}. Поставка под ключ, гарантия от 37 месяцев."
+    desc = f"{m['name']}: камера {m['chamber']} см, цикл {m['cycle']} мин, до 45 °C, 70 Вт. {('Цена от ' + fmt(m['price']) + '. ') if SHOW else 'Цена по запросу. '}Поставка под ключ, гарантия от 37 месяцев."
     page('ster-' + m['id'], 'o3s-16.dc.html', '' if i == 0 else '?m=' + m['id'], url,
          f"Озоновый стерилизатор {m['name']}, {m['vol']} л — цена в Казахстане", desc, 'og-' + m['id'],
          [ORG, product(m, url, m.get('desc') or desc), crumbs(('Главная', ''), ('Каталог', 'catalog.dc.html'), (m['name'], url))], model=m['id'])
 for i, m in enumerate(D['RECIRCULATORS']):
     url = 'recirculator.dc.html?m=' + m['id']
-    desc = f"Закрытый бактерицидный УФ-рециркулятор {m['name']} для помещений до {m['area']} м², {m['lamps']} лампы. {fmt(m['price'])} без НДС, доставка включена, гарантия 12 месяцев."
+    desc = f"Закрытый бактерицидный УФ-рециркулятор {m['name']} для помещений до {m['area']} м², {m['lamps']} лампы. {(fmt(m['price']) + ' без НДС, д') if SHOW else 'Д'}оставка включена, гарантия 12 месяцев."
     page('rec-' + m['id'], 'recirculator.dc.html', '' if i == 0 else '?m=' + m['id'], url,
-         f"Бактерицидный рециркулятор {m['name']} до {m['area']} м² — {fmt(m['price'])}", desc, 'og-' + m['id'],
+         f"Бактерицидный рециркулятор {m['name']} до {m['area']} м² — {fmt(m['price']) if SHOW else 'цена по запросу'}", desc, 'og-' + m['id'],
          [ORG, product(m, url, desc), crumbs(('Главная', ''), ('Каталог', 'catalog.dc.html'), (m['name'], url))], model=m['id'])
 
+# ---------- KZ-варианты всех страниц ----------
+def kz_url(u):
+    return (u + ('&' if '?' in u else '?') + 'lang=kz') if u else '?lang=kz'
+def kz_ld(node):
+    if isinstance(node, dict): return {k: (kz(v) if isinstance(v, str) and k in ('name', 'text', 'description') else kz_ld(v)) for k, v in node.items()}
+    if isinstance(node, list): return [kz_ld(x) for x in node]
+    return node
+for key in list(PAGES):
+    p = dict(PAGES[key]); m = ster.get(p['model']) or recs.get(p['model'])
+    if key in KZ_META: p['title'], p['desc'] = KZ_META[key]
+    elif m and m['category'] == 'sterilizer':
+        p['title'] = f"{m['name']} озон стерилизаторы, {m['vol']} л — Қазақстандағы бағасы"
+        p['desc'] = f"{m['name']}: камера {m['chamber']} см, цикл {m['cycle']} мин, 45 °C дейін, 70 Вт. " + (f"Бағасы {fmt(m['price'])} бастап. " if SHOW else 'Баға сұраныс бойынша. ') + 'Толық жеткізу, кепілдік 37 айдан бастап.'
+    elif m:
+        p['title'] = f"{m['name']} бактерицидті рециркуляторы, {m['area']} м² дейін — " + (fmt(m['price']) if SHOW else 'баға сұраныс бойынша')
+        p['desc'] = f"{m['name']} жабық бактерицидті УК-рециркуляторы, {m['area']} м² дейінгі үй-жайларға, {m['lamps']} шам. " + ((fmt(m['price']) + ' ҚҚС-сыз, ж') if SHOW else 'Ж') + 'еткізу кіреді, кепілдік 12 ай.'
+    p['query'] = (p['query'] + '&lang=kz') if p['query'] else ('?m=' + p['model'] + '&lang=kz' if p['model'] else '?lang=kz')
+    p['url'] = kz_url(p['url']); p['lang'] = 'kz'; p['ru_url'] = PAGES[key]['url']
+    p['ld'] = kz_ld(p['ld'])
+    PAGES[key + '@kz'] = p
+for key, p in PAGES.items():
+    if '@kz' not in key: p['lang'] = 'ru'; p['ru_url'] = p['url']
+
 # ---------- 1. снять прошлую обвязку ----------
-HEAD_SRC = '<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<script src="./support.js"></script>\n</head>'
+HEAD_SRC = '<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<script src="./i18n.js"></script>\n<script src="./support.js"></script>\n</head>'
 def strip(s):
     s = re.sub(r'<head>.*?</head>', HEAD_SRC, s, count=1, flags=re.S)
     s = re.sub(r'<!--ssr:start-->.*?<!--ssr:end-->\s*', '', s, flags=re.S)
@@ -116,7 +156,7 @@ def strip(s):
     m = re.search(r'<!--tpl:start--><script type="text/x-dc-template"[^>]*>(.*?)</script>.*?<!--tpl:end-->', s, flags=re.S)
     if m:
         s = s[:m.start()] + '<x-dc>' + m.group(1).replace('<\\/script', '</script') + '</x-dc>' + s[m.end():]
-    s = s.replace('<html lang="ru">', '<html>')
+    s = s.replace('<html lang="ru">', '<html>').replace('<html lang="kk">', '<html>')
     return s
 
 files = sorted({p['file'] for p in PAGES.values()})
@@ -185,6 +225,8 @@ def esc(s): return html.escape(s, quote=True)
 
 def build_head(p, styles):
     canon = BASE + p['url']
+    alt_ru, alt_kz = BASE + p['ru_url'], BASE + kz_url(p['ru_url'])
+    loc, loc_alt = ('kk_KZ', 'ru_RU') if p['lang'] == 'kz' else ('ru_RU', 'kk_KZ')
     og = BASE + 'img/og/' + p['og'] + '.jpg'
     ld = json.dumps({"@context": "https://schema.org", "@graph": p['ld']}, ensure_ascii=False).replace('</', '<\\/')
     seen, css = set(), []
@@ -193,6 +235,7 @@ def build_head(p, styles):
     return f"""<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="i18n.js"></script>
 <title>{esc(p['title'])}</title>
 <meta name="description" content="{esc(p['desc'])}">
 <link rel="canonical" href="{esc(canon)}">
@@ -200,7 +243,11 @@ def build_head(p, styles):
 <meta name="theme-color" content="#058CC5">
 <meta property="og:type" content="{'product' if p['model'] else 'website'}">
 <meta property="og:site_name" content="OTRI">
-<meta property="og:locale" content="ru_RU">
+<meta property="og:locale" content="{loc}">
+<meta property="og:locale:alternate" content="{loc_alt}">
+<link rel="alternate" hreflang="ru" href="{esc(alt_ru)}">
+<link rel="alternate" hreflang="kk" href="{esc(alt_kz)}">
+<link rel="alternate" hreflang="x-default" href="{esc(alt_ru)}">
 <meta property="og:url" content="{esc(canon)}">
 <meta property="og:title" content="{esc(p['title'])}">
 <meta property="og:description" content="{esc(p['desc'])}">
@@ -243,7 +290,7 @@ def boot_block():
 
 def compose(src, p, snap):
     s = re.sub(r'<head>.*?</head>', build_head(p, snap['styles']), src, count=1, flags=re.S)
-    s = s.replace('<html>', '<html lang="ru">', 1)
+    s = s.replace('<html>', '<html lang="kk">' if p['lang'] == 'kz' else '<html lang="ru">', 1)
     model = f' data-model="{p["model"]}"' if p['model'] else ''
     ssr = f'<!--ssr:start--><div id="ssr"{model}>{snap["html"]}</div><!--ssr:end-->\n'
     a = s.index('<x-dc>'); z = s.index('</x-dc>')
@@ -260,8 +307,10 @@ def compose(src, p, snap):
 sources = {f: rd(f) for f in files}
 for key, p in PAGES.items():
     out = compose(sources[p['file']], p, snaps[key])
-    if p['query']:
-        stem = p['file'].replace('.dc.html', '').replace('.html', '')
+    stem = p['file'].replace('.dc.html', '').replace('.html', '')
+    if p['lang'] == 'kz':
+        wr(f"_prerender/{stem}{'--' + p['model'] if p['model'] else ''}--kz.html", out)
+    elif p['query']:
         wr(f"_prerender/{stem}--{p['model']}.html", out)
     else:
         wr(p['file'], out)

@@ -58,16 +58,16 @@
   <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
     <div style="background:#DFF2F9;border-radius:16px;padding:28px;display:grid;gap:12px;justify-items:start">
       <div style="width:48px;height:48px;border-radius:50%;background:#058CC5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px">✓</div>
-      <h3 style="font-family:Onest,sans-serif;font-size:22px;margin:0">Спасибо, заявка принята</h3>
-      <p style="margin:0;color:#3B4F5C">Чтобы не ждать звонка, продолжите в WhatsApp — менеджер сразу увидит ваш запрос.</p>
-      <a href="{{ wa }}" onClick="{{ onWa }}" target="_blank" style="background:#25D366;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600;text-decoration:none" style-hover="background:#1EBE5A">Продолжить в WhatsApp</a>
+      <h3 style="font-family:Onest,sans-serif;font-size:22px;margin:0">Заявка готова в WhatsApp</h3>
+      <p style="margin:0;color:#3B4F5C">Нажмите «Отправить» в открывшемся чате — менеджер сразу увидит заявку. Если WhatsApp не открылся, нажмите кнопку ниже.</p>
+      <a href="{{ wa }}" onClick="{{ onWa }}" target="_blank" style="background:#25D366;color:#fff;border-radius:999px;padding:14px 24px;font-weight:600;text-decoration:none" style-hover="background:#1EBE5A">Открыть WhatsApp</a>
     </div>
   </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:620,&quot;height&quot;:760},&quot;kind&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sterilizer&quot;,&quot;recirculator&quot;],&quot;default&quot;:&quot;sterilizer&quot;,&quot;tsType&quot;:&quot;'sterilizer' | 'recirculator'&quot;},&quot;heading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Подобрать модель&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sub&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Подберём модель под вашу загрузку за 1 консультацию.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;button&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Отправить заявку&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;model&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Не выбрана&quot;,&quot;OTRI S-16&quot;,&quot;OTRI S-36&quot;,&quot;OTRI S-40&quot;,&quot;OTRI S-85&quot;,&quot;OTRI S-250&quot;,&quot;OTRI Desktop 30&quot;,&quot;OTRI Desktop 60&quot;],&quot;default&quot;:&quot;Не выбрана&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;interest&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Покупка&quot;,&quot;Аренда&quot;,&quot;Консультация&quot;],&quot;default&quot;:&quot;Покупка&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;allowSwitch&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:620,&quot;height&quot;:760},&quot;kind&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sterilizer&quot;,&quot;recirculator&quot;],&quot;default&quot;:&quot;sterilizer&quot;,&quot;tsType&quot;:&quot;'sterilizer' | 'recirculator'&quot;},&quot;heading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Подобрать модель&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sub&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Подберём модель под вашу загрузку за 1 консультацию.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;button&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Отправить в WhatsApp&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;model&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Не выбрана&quot;,&quot;OTRI S-16&quot;,&quot;OTRI S-36&quot;,&quot;OTRI S-40&quot;,&quot;OTRI S-85&quot;,&quot;OTRI S-250&quot;,&quot;OTRI Desktop 30&quot;,&quot;OTRI Desktop 60&quot;],&quot;default&quot;:&quot;Не выбрана&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;interest&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Покупка&quot;,&quot;Аренда&quot;,&quot;Консультация&quot;],&quot;default&quot;:&quot;Покупка&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;allowSwitch&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
 class Component extends DCLogic {
-  state = { sent: false, model: null, interest: null, kind: null, phone: '+7 ' };
+  state = { sent: false, model: null, interest: null, kind: null, phone: '+7 ', waUrl: null };
   componentDidMount() {
     this._onPick = (e) => {
       const d = e.detail || {};
@@ -77,8 +77,8 @@ class Component extends DCLogic {
   }
   componentWillUnmount() { window.removeEventListener('otri:pick', this._onPick); }
   mask(v) {
-    let d = (v || '').replace(/\D/g, '');
-    if (d.startsWith('8')) d = '7' + d.slice(1);
+    let d = (v || '').replace(/\D/g, ''); if (d.length === 10 && d[0] !== '7' || (d.length === 10 && d.startsWith('7') && !(v || '').trim().startsWith('+'))) d = '7' + d;
+    if (d.startsWith('8')) d = '7' + d.slice(1); if (d.startsWith('78')) d = '7' + d.slice(2);
     if (!d.startsWith('7')) d = '7' + d;
     d = d.slice(1, 11);
     const p = [d.slice(0, 3), d.slice(3, 6), d.slice(6, 8), d.slice(8, 10)].filter(Boolean);
@@ -95,7 +95,7 @@ class Component extends DCLogic {
     return {
       heading: this.props.heading ?? (isSter ? 'Подобрать модель' : 'Подберём модель под площадь помещения'),
       sub: this.props.sub ?? (isSter ? 'Подберём модель под вашу загрузку за 1 консультацию.' : 'Перезвоним и посчитаем количество рециркуляторов.'),
-      button: this.props.button ?? 'Отправить заявку',
+      button: this.props.button ?? 'Отправить в WhatsApp',
       showSwitch: this.props.allowSwitch ?? true,
       isSter, isRec: !isSter, model, phone: this.state.phone,
       sterBg: isSter ? '#fff' : 'transparent', sterFg: isSter ? '#058CC5' : '#536570',
@@ -104,11 +104,34 @@ class Component extends DCLogic {
       setRec: () => this.setState({ kind: 'recirculator', model: 'OTRI Desktop 30' }),
       interests: ['Покупка', 'Аренда', 'Консультация'].map((l) => ({ label: l, bg: l === interest ? on : '#fff', fg: l === interest ? '#fff' : '#172B3A', bd: l === interest ? on : '#CFE0E8', select: () => this.setState({ interest: l }) })),
       sent: this.state.sent, notSent: !this.state.sent,
-      wa: 'https://wa.me/77710010744?text=' + encodeURIComponent('Здравствуйте! Интересует ' + subj),
+      wa: this.state.waUrl || ('https://wa.me/77710010744?text=' + encodeURIComponent('Здравствуйте! Интересует ' + subj)),
       onWa: () => track('click_whatsapp'),
       onPhone: (e) => this.setState({ phone: this.mask(e.target.value) }),
       setModel: (e) => this.setState({ model: e.target.value }),
-      onSubmit: (e) => { e.preventDefault(); track('form_submit'); this.setState({ sent: true }); },
+      // Заявка уходит в WhatsApp: собираем поля формы в сообщение и открываем чат
+      onSubmit: (e) => {
+        e.preventDefault(); track('form_submit');
+        const f = new FormData(e.target), v = (k) => String(f.get(k) || '').trim();
+        const kz = typeof window !== 'undefined' && window.OTRI_LANG === 'kz';
+        const lines = ['Здравствуйте! Заявка с сайта otri.kz' + (kz ? ' (KZ)' : ''),
+          'Тема: ' + (isSter ? 'подбор стерилизатора' : 'подбор рециркулятора') + (isSter ? ' — ' + interest.toLowerCase() : ''),
+          'Имя: ' + v('name'), 'Телефон: ' + (v('phone') || this.state.phone)];
+        if (isSter) {
+          if (v('org')) lines.push('Клиника: ' + v('org'));
+          if (v('city')) lines.push('Город: ' + v('city'));
+          if (v('items')) lines.push('Изделия: ' + v('items'));
+          if (v('len')) lines.push('Макс. длина изделия: ' + v('len') + ' см');
+          if (v('cycles')) lines.push('Циклов за смену: ' + v('cycles'));
+          if (model && model !== 'Не выбрана') lines.push('Модель: ' + model);
+        } else {
+          if (v('area')) lines.push('Площадь помещения: ' + v('area') + ' м²');
+          if (v('rooms')) lines.push('Количество помещений: ' + v('rooms'));
+          lines.push('Модель: ' + model);
+        }
+        const url = 'https://wa.me/77710010744?text=' + encodeURIComponent(lines.join('\n'));
+        try { const w = window.open(url, '_blank'); if (!w) window.location.href = url; } catch (err) { window.location.href = url; }
+        this.setState({ sent: true, waUrl: url });
+      },
     };
   }
 }

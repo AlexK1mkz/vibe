@@ -38,8 +38,10 @@
     </div>
     <div style="display:grid;gap:10px;align-content:start;font-size:15px"><b style="color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:.06em">Документы</b>
       <a href="./#docs" style="color:#B4C4CE;text-decoration:none" style-hover="color:#fff">РУ и лицензия</a>
+      <sc-if value="{{ showKp }}" hint-placeholder-val="{{ false }}">
       <a href="docs/kp-otri-s.pdf" target="_blank" style="color:#B4C4CE;text-decoration:none" style-hover="color:#fff">КП стерилизаторы, PDF</a>
       <a href="docs/kp-otri-recirculators.pdf" target="_blank" style="color:#B4C4CE;text-decoration:none" style-hover="color:#fff">КП рециркуляторы, PDF</a>
+      </sc-if>
       <a href="#" style="color:#B4C4CE;text-decoration:none" style-hover="color:#fff">Политика конфиденциальности</a>
     </div>
   </div>
@@ -54,8 +56,14 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;onCalc&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;}}">
 class Component extends DCLogic {
+  state = { d: null };
+  async componentDidMount() { this.setState({ d: await import('./o3s-data.js') }); }
   renderVals() {
-    return { onCalc: this.props.onCalc ?? (() => { const f = document.getElementById('form'); if (f) window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY - 84, behavior: 'smooth' }); }) };
+    const d = this.state.d;
+    return {
+      // КП в PDF содержат цены — показываем ссылки только вместе с ценами
+      showKp: !!(d && d.CONFIG.showPrices),
+      onCalc: this.props.onCalc ?? (() => { const f = document.getElementById('form'); if (f) window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY - 84, behavior: 'smooth' }); }) };
   }
 }
 </script>

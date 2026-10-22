@@ -3,17 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="i18n.js"></script>
 <title>Озоновые стерилизаторы и рециркуляторы OTRI — производитель в Казахстане</title>
-<meta name="description" content="Низкотемпературная стерилизация за 30–70 мин при до 45 °C. Регистрационное удостоверение РК. Монтаж и обучение включены. Рециркуляторы от 65 000 ₸.">
+<meta name="description" content="Низкотемпературная стерилизация за 30–70 мин при до 45 °C. Регистрационное удостоверение РК. Монтаж и обучение включены. УФ-рециркуляторы для воздуха.">
 <link rel="canonical" href="https://otri.kz/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#058CC5">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OTRI">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="kk_KZ">
+<link rel="alternate" hreflang="ru" href="https://otri.kz/">
+<link rel="alternate" hreflang="kk" href="https://otri.kz/?lang=kz">
+<link rel="alternate" hreflang="x-default" href="https://otri.kz/">
 <meta property="og:url" content="https://otri.kz/">
 <meta property="og:title" content="Озоновые стерилизаторы и рециркуляторы OTRI — производитель в Казахстане">
-<meta property="og:description" content="Низкотемпературная стерилизация за 30–70 мин при до 45 °C. Регистрационное удостоверение РК. Монтаж и обучение включены. Рециркуляторы от 65 000 ₸.">
+<meta property="og:description" content="Низкотемпературная стерилизация за 30–70 мин при до 45 °C. Регистрационное удостоверение РК. Монтаж и обучение включены. УФ-рециркуляторы для воздуха.">
 <meta property="og:image" content="https://otri.kz/img/og/og-home.jpg">
 <meta property="og:image:secure_url" content="https://otri.kz/img/og/og-home.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -22,7 +27,7 @@
 <meta property="og:image:alt" content="Озоновые стерилизаторы и рециркуляторы OTRI — производитель в Казахстане">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Озоновые стерилизаторы и рециркуляторы OTRI — производитель в Казахстане">
-<meta name="twitter:description" content="Низкотемпературная стерилизация за 30–70 мин при до 45 °C. Регистрационное удостоверение РК. Монтаж и обучение включены. Рециркуляторы от 65 000 ₸.">
+<meta name="twitter:description" content="Низкотемпературная стерилизация за 30–70 мин при до 45 °C. Регистрационное удостоверение РК. Монтаж и обучение включены. УФ-рециркуляторы для воздуха.">
 <meta name="twitter:image" content="https://otri.kz/img/og/og-home.jpg">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -86,6 +91,25 @@
     :focus-visible{outline:2px solid #058CC5;outline-offset:2px}
     @media(max-width:1180px){[data-desk]{display:none!important}}
     @media(min-width:1181px){[data-mob]{display:none!important}}
+    /* Мобильный первый экран: заголовок → фото аппарата → кнопки, потом текст и цифры */
+    @media(max-width:640px){
+      [data-hero-grid]{display:flex!important;flex-direction:column;align-items:stretch!important;gap:0!important;padding:16px 16px 24px!important}
+      [data-hero-text]{display:contents}
+      [data-hero-badge]{order:1;align-self:flex-start;font-size:11px!important;padding:5px 10px!important;margin-bottom:12px!important;white-space:nowrap}
+      [data-hero-h1]{order:2;font-size:clamp(26px,7.6vw,32px)!important;line-height:1.08!important;margin:0 0 16px!important}
+      [data-hero-media]{order:3;margin-bottom:16px}
+      [data-hero-photo]{aspect-ratio:16/10!important;border-radius:18px!important;box-shadow:0 24px 48px -28px #172B3A66!important}
+      [data-hero-kz]{left:10px!important;bottom:10px!important;padding:6px 8px!important;border-radius:12px!important}
+      [data-hero-kz] img{width:68px!important}
+      [data-hero-cta]{order:4;display:grid!important;grid-template-columns:1fr;gap:10px!important}
+      [data-hero-cta]>*{width:100%;justify-content:center;text-align:center;padding:14px 20px!important;font-size:16px!important}
+      [data-hero-p]{order:5;font-size:15px!important;line-height:1.5;margin:18px 0 0!important}
+      [data-hero-stats]{order:6;display:grid!important;grid-template-columns:repeat(3,1fr);gap:8px!important;margin-top:20px!important;padding-top:16px!important}
+      [data-hero-stats]>div>div:first-child{font-size:22px!important;white-space:nowrap}
+      [data-hero-stats]>div>div:first-child span{font-size:13px!important}
+      [data-hero-stats]>div>div:last-child{font-size:12px!important}
+    }
+    @media(max-width:640px) and (max-height:720px){[data-hero-photo]{aspect-ratio:2/1!important}[data-hero-h1]{font-size:26px!important;margin-bottom:12px!important}[data-hero-cta]>*{padding:12px 20px!important}}
   
     @media(max-width:1180px){[data-desk]{display:none!important}}
     @media(min-width:1181px){[data-mob]{display:none!important}}
@@ -113,8 +137,8 @@
     </nav>
     <div data-dc-tpl="8" style="margin-left: auto; display: flex; align-items: center; gap: 14px;">
       <div data-dc-tpl="9" style="display: flex; border: 1px solid rgb(207, 224, 232); border-radius: 999px; padding: 3px; font-size: 12px; font-weight: 600;">
-        <button data-dc-tpl="10" style="border: 0px; border-radius: 999px; padding: 4px 10px; cursor: pointer; background: rgb(23, 43, 58); color: rgb(255, 255, 255);">RU</button>
-        <button data-dc-tpl="11" style="border: 0px; border-radius: 999px; padding: 4px 10px; cursor: pointer; background: transparent; color: rgb(23, 43, 58);">KZ</button>
+        <button data-dc-tpl="10" lang="ru" aria-label="Русский" style="border: 0px; border-radius: 999px; padding: 4px 10px; cursor: pointer; background: rgb(23, 43, 58); color: rgb(255, 255, 255);">RU</button>
+        <button data-dc-tpl="11" lang="kk" aria-label="Қазақша" style="border: 0px; border-radius: 999px; padding: 4px 10px; cursor: pointer; background: transparent; color: rgb(23, 43, 58);">KZ</button>
       </div>
       <a data-dc-tpl="12" data-desk="" href="tel:+77710010744" style="color: rgb(23, 43, 58); font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; text-decoration: none; white-space: nowrap;">+7 771 001 07 44</a>
       <a data-dc-tpl="13" data-desk="" href="https://wa.me/77710010744?text=Здравствуйте!%20Интересует%20оборудование%20OTRI" target="_blank" class="scp9" style="display: inline-flex; align-items: center; gap: 8px; background: rgb(37, 211, 102); color: rgb(255, 255, 255); border-radius: 999px; padding: 10px 18px; font-weight: 600; font-size: 14px; text-decoration: none;">
@@ -127,26 +151,26 @@
   <section data-dc-tpl="4" style="position: relative; overflow: hidden; background: linear-gradient(rgb(245, 250, 252) 0%, rgb(232, 246, 250) 100%);">
     <div data-dc-tpl="5" style="position: absolute; right: -220px; top: -220px; width: 640px; height: 640px; border-radius: 50%; background: repeating-radial-gradient(circle, transparent 0px, transparent 46px, rgba(26, 169, 224, 0.15) 46px, rgba(26, 169, 224, 0.15) 48px); pointer-events: none;"></div>
     <div data-dc-tpl="6" style="position: absolute; left: -180px; bottom: -260px; width: 480px; height: 480px; border-radius: 50%; background: repeating-radial-gradient(circle, transparent 0px, transparent 40px, rgba(26, 169, 224, 0.1) 40px, rgba(26, 169, 224, 0.1) 42px); pointer-events: none;"></div>
-    <div data-dc-tpl="7" style="position: relative; max-width: 1240px; margin: 0px auto; padding: clamp(40px, 6vw, 88px) clamp(16px, 4vw, 40px) clamp(32px, 4vw, 56px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: clamp(32px, 4vw, 56px); align-items: center;">
-      <div data-dc-tpl="8">
-        <div data-dc-tpl="9" style="display: inline-flex; align-items: center; gap: 8px; background: rgb(223, 242, 249); color: rgb(5, 105, 154); border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 600; margin-bottom: 22px;"><i data-dc-tpl="10" style="width: 6px; height: 6px; border-radius: 50%; background: rgb(5, 140, 197);"></i>Производство медицинского оборудования · Астана</div>
-        <h1 data-dc-tpl="11" style="font-family: Onest, sans-serif; font-weight: 800; font-size: clamp(34px, 4.4vw, 58px); line-height: 1.05; letter-spacing: -0.03em; margin: 0px 0px 20px; text-wrap: balance;">Быстрая низкотемпературная стерилизация инструментов</h1>
-        <p data-dc-tpl="12" style="font-size: clamp(16px, 1.4vw, 19px); color: rgb(59, 79, 92); margin: 0px 0px 30px; max-width: 560px; text-wrap: pretty;">Озоновые стерилизаторы OTRI S для термочувствительных изделий, оптики и эндоскопов. Цикл 30–70 минут при температуре до 45 °C. Поставка под ключ: монтаж и обучение включены.</p>
-        <div data-dc-tpl="13" style="display: flex; flex-wrap: wrap; gap: 12px;">
+    <div data-dc-tpl="7" data-hero-grid="" style="position: relative; max-width: 1240px; margin: 0px auto; padding: clamp(40px, 6vw, 88px) clamp(16px, 4vw, 40px) clamp(32px, 4vw, 56px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: clamp(32px, 4vw, 56px); align-items: center;">
+      <div data-dc-tpl="8" data-hero-text="">
+        <div data-dc-tpl="9" data-hero-badge="" style="display: inline-flex; align-items: center; gap: 8px; background: rgb(223, 242, 249); color: rgb(5, 105, 154); border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 600; margin-bottom: 22px;"><i data-dc-tpl="10" style="width: 6px; height: 6px; border-radius: 50%; background: rgb(5, 140, 197);"></i>Производство медицинского оборудования · Астана</div>
+        <h1 data-dc-tpl="11" data-hero-h1="" style="font-family: Onest, sans-serif; font-weight: 800; font-size: clamp(34px, 4.4vw, 58px); line-height: 1.05; letter-spacing: -0.03em; margin: 0px 0px 20px; text-wrap: balance;">Быстрая низкотемпературная стерилизация инструментов</h1>
+        <p data-dc-tpl="12" data-hero-p="" style="font-size: clamp(16px, 1.4vw, 19px); color: rgb(59, 79, 92); margin: 0px 0px 30px; max-width: 560px; text-wrap: pretty;">Озоновые стерилизаторы OTRI S для термочувствительных изделий, оптики и эндоскопов. Цикл 30–70 минут при температуре до 45 °C. Поставка под ключ: монтаж и обучение включены.</p>
+        <div data-dc-tpl="13" data-hero-cta="" style="display: flex; flex-wrap: wrap; gap: 12px;">
           <button data-dc-tpl="14" class="scp0" style="border: 0px; background: rgb(5, 140, 197); color: rgb(255, 255, 255); border-radius: 999px; padding: 16px 28px; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: rgb(5, 140, 197) 0px 12px 30px -12px;">Подобрать модель</button>
           <a data-dc-tpl="15" href="https://wa.me/77710010744?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%BE%D0%B1%D0%BE%D1%80%D1%83%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20OTRI" target="_blank" class="scp1" style="display: inline-flex; align-items: center; gap: 10px; border: 2px solid rgb(37, 211, 102); color: rgb(18, 140, 74); border-radius: 999px; padding: 14px 26px; font-size: 16px; font-weight: 600; background: rgb(255, 255, 255);">Написать в WhatsApp</a>
         </div>
-        <div data-dc-tpl="16" style="display: flex; flex-wrap: wrap; gap: clamp(24px, 4vw, 52px); margin-top: 40px; padding-top: 26px; border-top: 1px solid rgb(207, 224, 232); font-variant-numeric: tabular-nums;">
+        <div data-dc-tpl="16" data-hero-stats="" style="display: flex; flex-wrap: wrap; gap: clamp(24px, 4vw, 52px); margin-top: 40px; padding-top: 26px; border-top: 1px solid rgb(207, 224, 232); font-variant-numeric: tabular-nums;">
           <div data-dc-tpl="17"><div data-dc-tpl="18" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 32px; letter-spacing: -0.02em; color: rgb(23, 43, 58);">30–70 <span data-dc-tpl="19" style="font-size: 18px; color: rgb(5, 140, 197);">мин</span></div><div data-dc-tpl="20" style="font-size: 13px; color: rgb(83, 101, 112);">цикл</div></div>
           <div data-dc-tpl="21"><div data-dc-tpl="22" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 32px; letter-spacing: -0.02em; color: rgb(23, 43, 58);">до 45 <span data-dc-tpl="23" style="font-size: 18px; color: rgb(5, 140, 197);">°C</span></div><div data-dc-tpl="24" style="font-size: 13px; color: rgb(83, 101, 112);">температура</div></div>
           <div data-dc-tpl="25"><div data-dc-tpl="26" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 32px; letter-spacing: -0.02em; color: rgb(23, 43, 58);">16–250 <span data-dc-tpl="27" style="font-size: 18px; color: rgb(5, 140, 197);">л</span></div><div data-dc-tpl="28" style="font-size: 13px; color: rgb(83, 101, 112);">объём камеры</div></div>
         </div>
       </div>
-      <div data-dc-tpl="29" style="position: relative;">
-        <div data-dc-tpl="30" style="position: relative; border-radius: 24px; overflow: hidden; background: rgb(255, 255, 255); box-shadow: rgba(23, 43, 58, 0.333) 0px 40px 80px -40px; aspect-ratio: 4 / 3;">
+      <div data-dc-tpl="29" data-hero-media="" style="position: relative;">
+        <div data-dc-tpl="30" data-hero-photo="" style="position: relative; border-radius: 24px; overflow: hidden; background: rgb(255, 255, 255); box-shadow: rgba(23, 43, 58, 0.333) 0px 40px 80px -40px; aspect-ratio: 4 / 3;">
           <img data-dc-tpl="31" src="img/otri/otri-s-cube-34.webp" alt="Озоновый стерилизатор OTRI S с прозрачной камерой и озонатором" fetchpriority="high" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
-        <div data-dc-tpl="32" style="position: absolute; left: -12px; bottom: 24px; background: rgb(255, 255, 255); border-radius: 16px; padding: 10px 14px; box-shadow: rgba(23, 43, 58, 0.333) 0px 16px 40px -16px; display: flex;">
+        <div data-dc-tpl="32" data-hero-kz="" style="position: absolute; left: -12px; bottom: 24px; background: rgb(255, 255, 255); border-radius: 16px; padding: 10px 14px; box-shadow: rgba(23, 43, 58, 0.333) 0px 16px 40px -16px; display: flex;">
           <img data-dc-tpl="33" src="img/made-in-kz.webp" alt="Сделано в Казахстане — Қазақстанда жасалған" width="160" height="100" loading="lazy" decoding="async" style="display: block; width: 160px; height: auto;">
         </div>
       </div>
@@ -233,7 +257,7 @@
               </div>
               <p data-dc-tpl="78" style="margin: 0px; font-size: 14px; color: rgb(83, 101, 112); line-height: 1.45;"><span class="sc-interp">Кабинет стоматологии или косметологии: наконечники, зеркала, мелкий инструмент</span></p>
               <div data-dc-tpl="79" style="margin-top: auto; padding-top: 10px; border-top: 1px solid rgb(214, 230, 238);">
-                <div data-dc-tpl="80" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums;"><span class="sc-interp">от 3 565 000 ₸</span></div>
+                <div data-dc-tpl="80" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums;"><span class="sc-interp">Цена по запросу</span></div>
                 <div data-dc-tpl="81" style="font-size: 12px; color: rgb(83, 101, 112); margin-bottom: 12px;">Актуальная цена и наличие — в WhatsApp</div>
                 <div data-dc-tpl="82" style="display: flex; gap: 8px;">
                   <a data-dc-tpl="83" href="o3s-16.dc.html?m=s-16" class="scp3" style="flex: 1 1 0%; text-align: center; border: 1px solid rgb(207, 224, 232); background: rgb(255, 255, 255); color: rgb(23, 43, 58); border-radius: 999px; padding: 10px 14px; font-size: 14px; font-weight: 600;">Подробнее</a>
@@ -257,7 +281,7 @@
               </div>
               <p data-dc-tpl="78" style="margin: 0px; font-size: 14px; color: rgb(83, 101, 112); line-height: 1.45;"><span class="sc-interp">Клиника на несколько кабинетов, смешанный инструмент, наборы в лотках</span></p>
               <div data-dc-tpl="79" style="margin-top: auto; padding-top: 10px; border-top: 1px solid rgb(214, 230, 238);">
-                <div data-dc-tpl="80" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums;"><span class="sc-interp">от 7 245 000 ₸</span></div>
+                <div data-dc-tpl="80" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums;"><span class="sc-interp">Цена по запросу</span></div>
                 <div data-dc-tpl="81" style="font-size: 12px; color: rgb(83, 101, 112); margin-bottom: 12px;">Актуальная цена и наличие — в WhatsApp</div>
                 <div data-dc-tpl="82" style="display: flex; gap: 8px;">
                   <a data-dc-tpl="83" href="o3s-16.dc.html?m=s-36" class="scp3" style="flex: 1 1 0%; text-align: center; border: 1px solid rgb(207, 224, 232); background: rgb(255, 255, 255); color: rgb(23, 43, 58); border-radius: 999px; padding: 10px 14px; font-size: 14px; font-weight: 600;">Подробнее</a>
@@ -281,7 +305,7 @@
               </div>
               <p data-dc-tpl="78" style="margin: 0px; font-size: 14px; color: rgb(83, 101, 112); line-height: 1.45;"><span class="sc-interp">Длинные изделия до 55 см: жёсткие эндоскопы, лапароскопический инструмент, оптика</span></p>
               <div data-dc-tpl="79" style="margin-top: auto; padding-top: 10px; border-top: 1px solid rgb(214, 230, 238);">
-                <div data-dc-tpl="80" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums;"><span class="sc-interp">от 9 775 000 ₸</span></div>
+                <div data-dc-tpl="80" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums;"><span class="sc-interp">Цена по запросу</span></div>
                 <div data-dc-tpl="81" style="font-size: 12px; color: rgb(83, 101, 112); margin-bottom: 12px;">Актуальная цена и наличие — в WhatsApp</div>
                 <div data-dc-tpl="82" style="display: flex; gap: 8px;">
                   <a data-dc-tpl="83" href="o3s-16.dc.html?m=s-40" class="scp3" style="flex: 1 1 0%; text-align: center; border: 1px solid rgb(207, 224, 232); background: rgb(255, 255, 255); color: rgb(23, 43, 58); border-radius: 999px; padding: 10px 14px; font-size: 14px; font-weight: 600;">Подробнее</a>
@@ -305,7 +329,7 @@
               </div>
               <p data-dc-tpl="78" style="margin: 0px; font-size: 14px; color: rgb(83, 101, 112); line-height: 1.45;"><span class="sc-interp">Операционные блоки, хирургические наборы</span></p>
               <div data-dc-tpl="79" style="margin-top: auto; padding-top: 10px; border-top: 1px solid rgb(214, 230, 238);">
-                <div data-dc-tpl="80" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums;"><span class="sc-interp">от 11 500 000 ₸</span></div>
+                <div data-dc-tpl="80" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums;"><span class="sc-interp">Цена по запросу</span></div>
                 <div data-dc-tpl="81" style="font-size: 12px; color: rgb(83, 101, 112); margin-bottom: 12px;">Актуальная цена и наличие — в WhatsApp</div>
                 <div data-dc-tpl="82" style="display: flex; gap: 8px;">
                   <a data-dc-tpl="83" href="o3s-16.dc.html?m=s-85" class="scp3" style="flex: 1 1 0%; text-align: center; border: 1px solid rgb(207, 224, 232); background: rgb(255, 255, 255); color: rgb(23, 43, 58); border-radius: 999px; padding: 10px 14px; font-size: 14px; font-weight: 600;">Подробнее</a>
@@ -329,7 +353,7 @@
               </div>
               <p data-dc-tpl="78" style="margin: 0px; font-size: 14px; color: rgb(83, 101, 112); line-height: 1.45;"><span class="sc-interp">ЦСО, многопрофильные и хирургические центры</span></p>
               <div data-dc-tpl="79" style="margin-top: auto; padding-top: 10px; border-top: 1px solid rgb(214, 230, 238);">
-                <div data-dc-tpl="80" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums;"><span class="sc-interp">от 18 515 000 ₸</span></div>
+                <div data-dc-tpl="80" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums;"><span class="sc-interp">Цена по запросу</span></div>
                 <div data-dc-tpl="81" style="font-size: 12px; color: rgb(83, 101, 112); margin-bottom: 12px;">Актуальная цена и наличие — в WhatsApp</div>
                 <div data-dc-tpl="82" style="display: flex; gap: 8px;">
                   <a data-dc-tpl="83" href="o3s-16.dc.html?m=s-250" class="scp3" style="flex: 1 1 0%; text-align: center; border: 1px solid rgb(207, 224, 232); background: rgb(255, 255, 255); color: rgb(23, 43, 58); border-radius: 999px; padding: 10px 14px; font-size: 14px; font-weight: 600;">Подробнее</a>
@@ -340,7 +364,7 @@
           </article>
         
       </div>
-      <p data-dc-tpl="85" style="margin: 18px 0px 0px; font-size: 13px; color: rgb(83, 101, 112);">Цены ориентировочные, точное предложение — после подбора.</p>
+      <p data-dc-tpl="85" style="margin: 18px 0px 0px; font-size: 13px; color: rgb(83, 101, 112);"><span class="sc-interp">Цену и наличие назовём после подбора модели — напишите в WhatsApp или оставьте заявку.</span></p>
     </div>
   </section>
 
@@ -372,7 +396,7 @@
           <span data-dc-tpl="103" style="font-size: 12px; color: rgb(83, 101, 112); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;">Подходит</span>
           <b data-dc-tpl="104" style="font-family: Onest, sans-serif; font-size: 24px;"><span class="sc-interp">OTRI S-36</span></b>
           <span data-dc-tpl="105" style="font-size: 14px; color: rgb(83, 101, 112); font-variant-numeric: tabular-nums;"><span class="sc-interp">Камера 35×35×35 см · 36 л · 35 мин</span></span>
-          <span data-dc-tpl="106" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 17px; font-variant-numeric: tabular-nums;"><span class="sc-interp">от 7 245 000 ₸</span></span>
+          <span data-dc-tpl="106" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 17px; font-variant-numeric: tabular-nums;"><span class="sc-interp">Цена по запросу</span></span>
           <div data-dc-tpl="107" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
             <button data-dc-tpl="108" class="scp0" style="border: 0px; background: rgb(5, 140, 197); color: rgb(255, 255, 255); border-radius: 999px; padding: 11px 18px; font-size: 14px; font-weight: 600; cursor: pointer;">Получить актуальную цену</button>
             <a data-dc-tpl="109" href="o3s-16.dc.html?m=s-36" class="scp3" style="border: 1px solid rgb(207, 224, 232); color: rgb(23, 43, 58); border-radius: 999px; padding: 10px 16px; font-size: 14px; font-weight: 600;">О модели</a>
@@ -388,17 +412,17 @@
       <div data-dc-tpl="112">
         <div data-dc-tpl="113" style="font-size: 13px; font-weight: 600; color: rgb(5, 105, 154); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;">УФ-рециркуляторы OTRI Desktop</div>
         <h2 data-dc-tpl="114" style="font-family: Onest, sans-serif; font-weight: 700; font-size: clamp(28px, 3.2vw, 40px); letter-spacing: -0.02em; margin: 0px 0px 14px; line-height: 1.1;">Чистый воздух — без остановки работы</h2>
-        <p data-dc-tpl="115" style="margin: 0px 0px 24px; color: rgb(59, 79, 92); max-width: 460px;">Закрытые бактерицидные УФ-рециркуляторы OTRI от 65 000 ₸. Без НДС, доставка включена, поставка 10 рабочих дней.</p>
+        <p data-dc-tpl="115" style="margin: 0px 0px 24px; color: rgb(59, 79, 92); max-width: 460px;"><span class="sc-interp">Закрытые бактерицидные УФ-рециркуляторы OTRI. Доставка включена, поставка 10 рабочих дней.</span></p>
         <div data-dc-tpl="116" style="display: grid; gap: 12px;">
           
             <div data-dc-tpl="118" style="background: rgb(255, 255, 255); border-radius: 16px; padding: 16px 18px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
               <div data-dc-tpl="119"><a data-dc-tpl="120" href="recirculator.dc.html?m=desktop-30" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 18px; color: rgb(23, 43, 58);"><span class="sc-interp">OTRI Desktop 30</span></a><div data-dc-tpl="121" style="font-size: 13px; color: rgb(83, 101, 112);">до <span class="sc-interp">30</span> м² · <span class="sc-interp">2</span> лампы · <span class="sc-interp">60–80 м³</span></div></div>
-              <b data-dc-tpl="122" style="font-family: Onest, sans-serif; font-size: 20px; font-variant-numeric: tabular-nums;"><span class="sc-interp">65 000 ₸</span></b>
+              <b data-dc-tpl="122" style="font-family: Onest, sans-serif; font-size: 20px; font-variant-numeric: tabular-nums;"><span class="sc-interp">Цена по запросу</span></b>
             </div>
           
             <div data-dc-tpl="118" style="background: rgb(255, 255, 255); border-radius: 16px; padding: 16px 18px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
               <div data-dc-tpl="119"><a data-dc-tpl="120" href="recirculator.dc.html?m=desktop-60" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 18px; color: rgb(23, 43, 58);"><span class="sc-interp">OTRI Desktop 60</span></a><div data-dc-tpl="121" style="font-size: 13px; color: rgb(83, 101, 112);">до <span class="sc-interp">60</span> м² · <span class="sc-interp">4</span> лампы · <span class="sc-interp">120–160 м³</span></div></div>
-              <b data-dc-tpl="122" style="font-family: Onest, sans-serif; font-size: 20px; font-variant-numeric: tabular-nums;"><span class="sc-interp">100 000 ₸</span></b>
+              <b data-dc-tpl="122" style="font-family: Onest, sans-serif; font-size: 20px; font-variant-numeric: tabular-nums;"><span class="sc-interp">Цена по запросу</span></b>
             </div>
           
         </div>
@@ -586,7 +610,7 @@
     <div data-dc-tpl="193" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 18px;">
       <div data-dc-tpl="194" style="background: rgb(255, 255, 255); border: 1px solid rgb(214, 230, 238); border-radius: 20px; padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 16px;">
         <h3 data-dc-tpl="195" style="font-family: Onest, sans-serif; font-weight: 700; font-size: 24px; margin: 0px;">Покупка</h3>
-        <div data-dc-tpl="196" style="font-family: Onest, sans-serif; font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums;"><span class="sc-interp">от 3 565 000 ₸</span></div>
+        <div data-dc-tpl="196" style="font-family: Onest, sans-serif; font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums;"><span class="sc-interp">Цена по запросу</span></div>
         <ul data-dc-tpl="197" style="margin: 0px; padding: 0px; list-style: none; display: grid; gap: 10px; color: rgb(59, 79, 92); font-size: 15px;"><li data-dc-tpl="198">· Аппарат в собственность, гарантия не менее 37 месяцев</li><li data-dc-tpl="199">· Доставка, монтаж и обучение включены</li><li data-dc-tpl="200">· Поставка до 30 дней после оплаты</li><li data-dc-tpl="201">· Регистрационное удостоверение РК</li></ul>
         <button data-dc-tpl="202" class="scp5" style="margin-top: auto; align-self: flex-start; border: 0px; background: rgb(23, 43, 58); color: rgb(255, 255, 255); border-radius: 999px; padding: 14px 24px; font-weight: 600; font-size: 15px; cursor: pointer;">Подобрать модель</button>
       </div>
@@ -741,7 +765,7 @@
   <section data-dc-tpl="277" style="max-width: 1240px; margin: 0px auto; padding: clamp(56px, 7vw, 96px) clamp(16px, 4vw, 40px) 0px;">
     <div data-dc-tpl="278" style="position: relative; overflow: hidden; background: rgb(5, 140, 197); color: rgb(255, 255, 255); border-radius: 24px; padding: clamp(28px, 4vw, 48px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;">
       <div data-dc-tpl="279" style="position: absolute; right: -140px; top: -180px; width: 440px; height: 440px; border-radius: 50%; background: repeating-radial-gradient(circle, transparent 0px, transparent 34px, rgba(255, 255, 255, 0.133) 34px, rgba(255, 255, 255, 0.133) 36px); pointer-events: none;"></div>
-      <div data-dc-tpl="280" style="position: relative; max-width: 520px;"><h2 data-dc-tpl="281" style="font-family: Onest, sans-serif; font-weight: 700; font-size: clamp(22px, 2.4vw, 30px); margin: 0px 0px 8px; letter-spacing: -0.02em;">Получите КП с ценами и таблицей подбора</h2><p data-dc-tpl="282" style="margin: 0px; font-size: 15px; color: rgb(230, 245, 251);">Оставьте телефон — откроем PDF сразу.</p></div>
+      <div data-dc-tpl="280" style="position: relative; max-width: 520px;"><h2 data-dc-tpl="281" style="font-family: Onest, sans-serif; font-weight: 700; font-size: clamp(22px, 2.4vw, 30px); margin: 0px 0px 8px; letter-spacing: -0.02em;"><span class="sc-interp">Получите КП и подбор модели</span></h2><p data-dc-tpl="282" style="margin: 0px; font-size: 15px; color: rgb(230, 245, 251);"><span class="sc-interp">Оставьте телефон — пришлём КП в WhatsApp.</span></p></div>
       
         <form data-dc-tpl="284" style="position: relative; display: flex; flex-wrap: wrap; gap: 10px;">
           <input data-dc-tpl="285" type="tel" placeholder="+7 ___ ___ __ __" value="+7 " style="flex: 1 1 0%; min-width: 210px; border: 0px; background: rgb(255, 255, 255); color: rgb(23, 43, 58); border-radius: 999px; padding: 14px 20px; font-size: 15px; outline: none; font-variant-numeric: tabular-nums;">
@@ -753,8 +777,8 @@
   </section>
 
   
-  <section data-dc-tpl="291" style="max-width: 1240px; margin: 0px auto; padding: clamp(56px, 7vw, 96px) clamp(16px, 4vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 24px; align-items: stretch;">
-    <div data-dc-tpl="292" id="form"><div class="sc-host" data-sc-name="lead-form" data-dc-tpl="293"><div data-dc-tpl="0" style="background: rgb(255, 255, 255); border: 1px solid rgb(214, 230, 238); border-radius: 20px; padding: clamp(24px, 3vw, 40px); font-family: Inter, system-ui, sans-serif; color: rgb(23, 43, 58);">
+  <section data-dc-tpl="296" style="max-width: 1240px; margin: 0px auto; padding: clamp(56px, 7vw, 96px) clamp(16px, 4vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 24px; align-items: stretch;">
+    <div data-dc-tpl="297" id="form"><div class="sc-host" data-sc-name="lead-form" data-dc-tpl="298"><div data-dc-tpl="0" style="background: rgb(255, 255, 255); border: 1px solid rgb(214, 230, 238); border-radius: 20px; padding: clamp(24px, 3vw, 40px); font-family: Inter, system-ui, sans-serif; color: rgb(23, 43, 58);">
   <h2 data-dc-tpl="1" style="font-family: Onest, sans-serif; font-weight: 700; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.02em; margin: 0px 0px 8px; line-height: 1.15;"><span class="sc-interp">Подобрать модель</span></h2>
   <p data-dc-tpl="2" style="color: rgb(83, 101, 112); margin: 0px 0px 20px; font-size: 15px;"><span class="sc-interp">Подберём модель под вашу загрузку за 1 консультацию.</span></p>
   
@@ -798,23 +822,23 @@
     
     
     <label data-dc-tpl="58" style="display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: rgb(83, 101, 112);"><input data-dc-tpl="59" type="checkbox" style="margin-top: 3px; accent-color: rgb(5, 140, 197);">Согласен на обработку персональных данных согласно <a data-dc-tpl="60" href="#" style="color: rgb(5, 140, 197); text-decoration: none;">политике конфиденциальности</a></label>
-    <button data-dc-tpl="61" type="submit" class="scp0" style="border: 0px; background: rgb(5, 140, 197); color: rgb(255, 255, 255); border-radius: 999px; padding: 16px 28px; font-weight: 600; font-size: 16px; cursor: pointer; justify-self: start; font-family: inherit; box-shadow: rgb(5, 140, 197) 0px 10px 26px -12px;"><span class="sc-interp">Отправить заявку</span></button>
+    <button data-dc-tpl="61" type="submit" class="scp0" style="border: 0px; background: rgb(5, 140, 197); color: rgb(255, 255, 255); border-radius: 999px; padding: 16px 28px; font-weight: 600; font-size: 16px; cursor: pointer; justify-self: start; font-family: inherit; box-shadow: rgb(5, 140, 197) 0px 10px 26px -12px;"><span class="sc-interp">Отправить в WhatsApp</span></button>
   </form>
   
   </div></div></div>
-    <div data-dc-tpl="294" style="display: grid; gap: 16px; grid-template-rows: auto 1fr;">
-      <div data-dc-tpl="295" style="background: rgb(255, 255, 255); border: 1px solid rgb(214, 230, 238); border-radius: 20px; padding: clamp(24px, 3vw, 32px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 16px; font-size: 15px;">
-        <div data-dc-tpl="296"><div data-dc-tpl="297" style="font-size: 12px; color: rgb(83, 101, 112); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;">Телефон</div><a data-dc-tpl="298" href="tel:+77710010744" style="font-size: 19px; font-weight: 600; color: rgb(23, 43, 58); font-variant-numeric: tabular-nums;">+7 771 001 07 44</a></div>
-        <div data-dc-tpl="299"><div data-dc-tpl="300" style="font-size: 12px; color: rgb(83, 101, 112); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;">E-mail</div><a data-dc-tpl="301" href="mailto:info@otri.kz" style="font-size: 17px;">info@otri.kz</a></div>
-        <div data-dc-tpl="302"><div data-dc-tpl="303" style="font-size: 12px; color: rgb(83, 101, 112); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;">Адрес</div>г. Астана, пр. Кабанбай батыра, 11, нп 43</div>
-        <div data-dc-tpl="304"><div data-dc-tpl="305" style="font-size: 12px; color: rgb(83, 101, 112); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;">График</div>Пн–Пт 9:00–18:00, Сб 10:00–14:00</div>
+    <div data-dc-tpl="299" style="display: grid; gap: 16px; grid-template-rows: auto 1fr;">
+      <div data-dc-tpl="300" style="background: rgb(255, 255, 255); border: 1px solid rgb(214, 230, 238); border-radius: 20px; padding: clamp(24px, 3vw, 32px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 16px; font-size: 15px;">
+        <div data-dc-tpl="301"><div data-dc-tpl="302" style="font-size: 12px; color: rgb(83, 101, 112); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;">Телефон</div><a data-dc-tpl="303" href="tel:+77710010744" style="font-size: 19px; font-weight: 600; color: rgb(23, 43, 58); font-variant-numeric: tabular-nums;">+7 771 001 07 44</a></div>
+        <div data-dc-tpl="304"><div data-dc-tpl="305" style="font-size: 12px; color: rgb(83, 101, 112); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;">E-mail</div><a data-dc-tpl="306" href="mailto:info@otri.kz" style="font-size: 17px;">info@otri.kz</a></div>
+        <div data-dc-tpl="307"><div data-dc-tpl="308" style="font-size: 12px; color: rgb(83, 101, 112); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;">Адрес</div>г. Астана, пр. Кабанбай батыра, 11, нп 43</div>
+        <div data-dc-tpl="309"><div data-dc-tpl="310" style="font-size: 12px; color: rgb(83, 101, 112); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;">График</div>Пн–Пт 9:00–18:00, Сб 10:00–14:00</div>
       </div>
-      <div data-dc-tpl="306" style="min-height: 320px; border-radius: 20px; overflow: hidden; border: 1px solid rgb(214, 230, 238); position: relative; background: rgb(232, 246, 250);">
-        <iframe data-dc-tpl="307" title="Карта: Астана, пр. Кабанбай батыра, 11" src="https://yandex.kz/map-widget/v1/?text=%D0%90%D1%81%D1%82%D0%B0%D0%BD%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%9A%D0%B0%D0%B1%D0%B0%D0%BD%D0%B1%D0%B0%D0%B9%20%D0%B1%D0%B0%D1%82%D1%8B%D1%80%D0%B0%2C%2011&amp;z=16" loading="lazy" style="position: absolute; inset: 0px; width: 100%; height: 100%; border: 0px;"></iframe>
-        <a data-dc-tpl="308" href="https://2gis.kz/astana/search/%D0%9A%D0%B0%D0%B1%D0%B0%D0%BD%D0%B1%D0%B0%D0%B9%20%D0%B1%D0%B0%D1%82%D1%8B%D1%80%D0%B0%2011" target="_blank" class="scp8" style="position: absolute; left: 14px; bottom: 14px; background: rgb(255, 255, 255); color: rgb(23, 43, 58); border-radius: 999px; padding: 10px 16px; font-size: 14px; font-weight: 600; box-shadow: rgba(23, 43, 58, 0.4) 0px 10px 24px -12px;">Открыть в 2ГИС</a>
+      <div data-dc-tpl="311" style="min-height: 320px; border-radius: 20px; overflow: hidden; border: 1px solid rgb(214, 230, 238); position: relative; background: rgb(232, 246, 250);">
+        <iframe data-dc-tpl="312" title="Карта: Астана, пр. Кабанбай батыра, 11" src="https://yandex.kz/map-widget/v1/?text=%D0%90%D1%81%D1%82%D0%B0%D0%BD%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%9A%D0%B0%D0%B1%D0%B0%D0%BD%D0%B1%D0%B0%D0%B9%20%D0%B1%D0%B0%D1%82%D1%8B%D1%80%D0%B0%2C%2011&amp;z=16" loading="lazy" style="position: absolute; inset: 0px; width: 100%; height: 100%; border: 0px;"></iframe>
+        <a data-dc-tpl="313" href="https://2gis.kz/astana/search/%D0%9A%D0%B0%D0%B1%D0%B0%D0%BD%D0%B1%D0%B0%D0%B9%20%D0%B1%D0%B0%D1%82%D1%8B%D1%80%D0%B0%2011" target="_blank" class="scp8" style="position: absolute; left: 14px; bottom: 14px; background: rgb(255, 255, 255); color: rgb(23, 43, 58); border-radius: 999px; padding: 10px 16px; font-size: 14px; font-weight: 600; box-shadow: rgba(23, 43, 58, 0.4) 0px 10px 24px -12px;">Открыть в 2ГИС</a>
       </div>
     </div>
-  </section></main><div class="sc-host" data-sc-name="footer" data-dc-tpl="309"><footer data-dc-tpl="2" style="position: relative; overflow: hidden; background: rgb(23, 43, 58); color: rgb(180, 196, 206); padding: clamp(40px, 5vw, 64px) 0px 110px; font-family: Inter, system-ui, sans-serif;">
+  </section></main><div class="sc-host" data-sc-name="footer" data-dc-tpl="314"><footer data-dc-tpl="2" style="position: relative; overflow: hidden; background: rgb(23, 43, 58); color: rgb(180, 196, 206); padding: clamp(40px, 5vw, 64px) 0px 110px; font-family: Inter, system-ui, sans-serif;">
   <div data-dc-tpl="3" style="position: absolute; right: -160px; top: -160px; width: 420px; height: 420px; border-radius: 50%; background: repeating-radial-gradient(circle, transparent 0px, transparent 34px, rgba(26, 169, 224, 0.12) 34px, rgba(26, 169, 224, 0.12) 36px); pointer-events: none;"></div>
   <div data-dc-tpl="4" style="position: relative; max-width: 1240px; margin: 0px auto; padding: 0px clamp(16px, 4vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 32px;">
     <div data-dc-tpl="5" style="display: grid; gap: 12px; align-content: start;">
@@ -839,15 +863,14 @@
     </div>
     <div data-dc-tpl="29" style="display: grid; gap: 10px; align-content: start; font-size: 15px;"><b data-dc-tpl="30" style="color: rgb(255, 255, 255); font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em;">Документы</b>
       <a data-dc-tpl="31" href="./#docs" class="scpb" style="color: rgb(180, 196, 206); text-decoration: none;">РУ и лицензия</a>
-      <a data-dc-tpl="32" href="docs/kp-otri-s.pdf" target="_blank" class="scpb" style="color: rgb(180, 196, 206); text-decoration: none;">КП стерилизаторы, PDF</a>
-      <a data-dc-tpl="33" href="docs/kp-otri-recirculators.pdf" target="_blank" class="scpb" style="color: rgb(180, 196, 206); text-decoration: none;">КП рециркуляторы, PDF</a>
-      <a data-dc-tpl="34" href="#" class="scpb" style="color: rgb(180, 196, 206); text-decoration: none;">Политика конфиденциальности</a>
+      
+      <a data-dc-tpl="35" href="#" class="scpb" style="color: rgb(180, 196, 206); text-decoration: none;">Политика конфиденциальности</a>
     </div>
   </div>
-  <div data-dc-tpl="35" style="position: relative; max-width: 1240px; margin: 32px auto 0px; padding: 24px clamp(16px, 4vw, 40px) 0px; border-top: 1px solid rgb(42, 66, 82); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px;"><span data-dc-tpl="36">Медицинское изделие. Перед применением ознакомьтесь с инструкцией.</span><span data-dc-tpl="37">© 2026 OTRI</span></div></footer><a data-dc-tpl="38" data-desk="" href="https://wa.me/77710010744?text=Здравствуйте!%20Интересует%20оборудование%20OTRI" target="_blank" aria-label="WhatsApp" class="scpc" style="position: fixed; right: 28px; bottom: 28px; z-index: 60; width: 60px; height: 60px; border-radius: 50%; background: rgb(37, 211, 102); color: rgb(255, 255, 255); display: flex; align-items: center; justify-content: center; box-shadow: rgba(37, 211, 102, 0.667) 0px 14px 30px -10px;"><svg data-dc-tpl="39" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path data-dc-tpl="40" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"></path></svg></a><div data-dc-tpl="41" data-mob="" style="position: fixed; left: 0px; right: 0px; bottom: 0px; z-index: 60; background: rgb(255, 255, 255); border-top: 1px solid rgb(214, 230, 238); padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; font-family: Inter, system-ui, sans-serif;">
-  <a data-dc-tpl="42" href="tel:+77710010744" style="display: flex; align-items: center; justify-content: center; border: 1px solid rgb(207, 224, 232); color: rgb(23, 43, 58); border-radius: 999px; padding: 12px; font-weight: 600; font-size: 14px; min-height: 46px; text-decoration: none;">Позвонить</a>
-  <a data-dc-tpl="43" href="https://wa.me/77710010744?text=Здравствуйте!%20Интересует%20оборудование%20OTRI" target="_blank" style="display: flex; align-items: center; justify-content: center; background: rgb(37, 211, 102); color: rgb(255, 255, 255); border-radius: 999px; padding: 12px; font-weight: 600; font-size: 14px; min-height: 46px; text-decoration: none;">WhatsApp</a>
-  <button data-dc-tpl="44" style="border: 0px; background: rgb(5, 140, 197); color: rgb(255, 255, 255); border-radius: 999px; padding: 12px; font-weight: 600; font-size: 14px; cursor: pointer; min-height: 46px;">Расчёт</button></div></div></div></div><!--ssr:end-->
+  <div data-dc-tpl="36" style="position: relative; max-width: 1240px; margin: 32px auto 0px; padding: 24px clamp(16px, 4vw, 40px) 0px; border-top: 1px solid rgb(42, 66, 82); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px;"><span data-dc-tpl="37">Медицинское изделие. Перед применением ознакомьтесь с инструкцией.</span><span data-dc-tpl="38">© 2026 OTRI</span></div></footer><a data-dc-tpl="39" data-desk="" href="https://wa.me/77710010744?text=Здравствуйте!%20Интересует%20оборудование%20OTRI" target="_blank" aria-label="WhatsApp" class="scpc" style="position: fixed; right: 28px; bottom: 28px; z-index: 60; width: 60px; height: 60px; border-radius: 50%; background: rgb(37, 211, 102); color: rgb(255, 255, 255); display: flex; align-items: center; justify-content: center; box-shadow: rgba(37, 211, 102, 0.667) 0px 14px 30px -10px;"><svg data-dc-tpl="40" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path data-dc-tpl="41" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"></path></svg></a><div data-dc-tpl="42" data-mob="" style="position: fixed; left: 0px; right: 0px; bottom: 0px; z-index: 60; background: rgb(255, 255, 255); border-top: 1px solid rgb(214, 230, 238); padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; font-family: Inter, system-ui, sans-serif;">
+  <a data-dc-tpl="43" href="tel:+77710010744" style="display: flex; align-items: center; justify-content: center; border: 1px solid rgb(207, 224, 232); color: rgb(23, 43, 58); border-radius: 999px; padding: 12px; font-weight: 600; font-size: 14px; min-height: 46px; text-decoration: none;">Позвонить</a>
+  <a data-dc-tpl="44" href="https://wa.me/77710010744?text=Здравствуйте!%20Интересует%20оборудование%20OTRI" target="_blank" style="display: flex; align-items: center; justify-content: center; background: rgb(37, 211, 102); color: rgb(255, 255, 255); border-radius: 999px; padding: 12px; font-weight: 600; font-size: 14px; min-height: 46px; text-decoration: none;">WhatsApp</a>
+  <button data-dc-tpl="45" style="border: 0px; background: rgb(5, 140, 197); color: rgb(255, 255, 255); border-radius: 999px; padding: 12px; font-weight: 600; font-size: 14px; cursor: pointer; min-height: 46px;">Расчёт</button></div></div></div></div><!--ssr:end-->
 <!--tpl:start--><script type="text/x-dc-template" id="dc-tpl">
 <helmet>
   <style>
@@ -858,6 +881,25 @@
     :focus-visible{outline:2px solid #058CC5;outline-offset:2px}
     @media(max-width:1180px){[data-desk]{display:none!important}}
     @media(min-width:1181px){[data-mob]{display:none!important}}
+    /* Мобильный первый экран: заголовок → фото аппарата → кнопки, потом текст и цифры */
+    @media(max-width:640px){
+      [data-hero-grid]{display:flex!important;flex-direction:column;align-items:stretch!important;gap:0!important;padding:16px 16px 24px!important}
+      [data-hero-text]{display:contents}
+      [data-hero-badge]{order:1;align-self:flex-start;font-size:11px!important;padding:5px 10px!important;margin-bottom:12px!important;white-space:nowrap}
+      [data-hero-h1]{order:2;font-size:clamp(26px,7.6vw,32px)!important;line-height:1.08!important;margin:0 0 16px!important}
+      [data-hero-media]{order:3;margin-bottom:16px}
+      [data-hero-photo]{aspect-ratio:16/10!important;border-radius:18px!important;box-shadow:0 24px 48px -28px #172B3A66!important}
+      [data-hero-kz]{left:10px!important;bottom:10px!important;padding:6px 8px!important;border-radius:12px!important}
+      [data-hero-kz] img{width:68px!important}
+      [data-hero-cta]{order:4;display:grid!important;grid-template-columns:1fr;gap:10px!important}
+      [data-hero-cta]>*{width:100%;justify-content:center;text-align:center;padding:14px 20px!important;font-size:16px!important}
+      [data-hero-p]{order:5;font-size:15px!important;line-height:1.5;margin:18px 0 0!important}
+      [data-hero-stats]{order:6;display:grid!important;grid-template-columns:repeat(3,1fr);gap:8px!important;margin-top:20px!important;padding-top:16px!important}
+      [data-hero-stats]>div>div:first-child{font-size:22px!important;white-space:nowrap}
+      [data-hero-stats]>div>div:first-child span{font-size:13px!important}
+      [data-hero-stats]>div>div:last-child{font-size:12px!important}
+    }
+    @media(max-width:640px) and (max-height:720px){[data-hero-photo]{aspect-ratio:2/1!important}[data-hero-h1]{font-size:26px!important;margin-bottom:12px!important}[data-hero-cta]>*{padding:12px 20px!important}}
   </style>
 </helmet>
 <dc-import name="header" hint-size="100%,72px"></dc-import>
@@ -867,26 +909,26 @@
   <section style="position:relative;overflow:hidden;background:linear-gradient(180deg,#F5FAFC 0%,#E8F6FA 100%)">
     <div style="position:absolute;right:-220px;top:-220px;width:640px;height:640px;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 46px,#1AA9E026 46px 48px);pointer-events:none"></div>
     <div style="position:absolute;left:-180px;bottom:-260px;width:480px;height:480px;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 40px,#1AA9E01a 40px 42px);pointer-events:none"></div>
-    <div style="position:relative;max-width:1240px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(16px,4vw,40px) clamp(32px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,4vw,56px);align-items:center">
-      <div>
-        <div style="display:inline-flex;align-items:center;gap:8px;background:#DFF2F9;color:#05699A;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;margin-bottom:22px"><i style="width:6px;height:6px;border-radius:50%;background:#058CC5"></i>Производство медицинского оборудования · Астана</div>
-        <h1 style="font-family:Onest,sans-serif;font-weight:800;font-size:clamp(34px,4.4vw,58px);line-height:1.05;letter-spacing:-.03em;margin:0 0 20px;text-wrap:balance">Быстрая низкотемпературная стерилизация инструментов</h1>
-        <p style="font-size:clamp(16px,1.4vw,19px);color:#3B4F5C;margin:0 0 30px;max-width:560px;text-wrap:pretty">Озоновые стерилизаторы OTRI S для термочувствительных изделий, оптики и эндоскопов. Цикл 30–70 минут при температуре до 45 °C. Поставка под ключ: монтаж и обучение включены.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:12px">
+    <div data-hero-grid style="position:relative;max-width:1240px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(16px,4vw,40px) clamp(32px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,4vw,56px);align-items:center">
+      <div data-hero-text>
+        <div data-hero-badge style="display:inline-flex;align-items:center;gap:8px;background:#DFF2F9;color:#05699A;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;margin-bottom:22px"><i style="width:6px;height:6px;border-radius:50%;background:#058CC5"></i>Производство медицинского оборудования · Астана</div>
+        <h1 data-hero-h1 style="font-family:Onest,sans-serif;font-weight:800;font-size:clamp(34px,4.4vw,58px);line-height:1.05;letter-spacing:-.03em;margin:0 0 20px;text-wrap:balance">Быстрая низкотемпературная стерилизация инструментов</h1>
+        <p data-hero-p style="font-size:clamp(16px,1.4vw,19px);color:#3B4F5C;margin:0 0 30px;max-width:560px;text-wrap:pretty">Озоновые стерилизаторы OTRI S для термочувствительных изделий, оптики и эндоскопов. Цикл 30–70 минут при температуре до 45 °C. Поставка под ключ: монтаж и обучение включены.</p>
+        <div data-hero-cta style="display:flex;flex-wrap:wrap;gap:12px">
           <button onClick="{{ pickAny }}" style="border:0;background:#058CC5;color:#fff;border-radius:999px;padding:16px 28px;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 12px 30px -12px #058CC5" style-hover="background:#0478AB">Подобрать модель</button>
           <a href="{{ waHome }}" onClick="{{ onWa }}" target="_blank" style="display:inline-flex;align-items:center;gap:10px;border:2px solid #25D366;color:#128C4A;border-radius:999px;padding:14px 26px;font-size:16px;font-weight:600;background:#fff" style-hover="background:#25D366;color:#fff">Написать в WhatsApp</a>
         </div>
-        <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,52px);margin-top:40px;padding-top:26px;border-top:1px solid #CFE0E8;font-variant-numeric:tabular-nums">
+        <div data-hero-stats style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,52px);margin-top:40px;padding-top:26px;border-top:1px solid #CFE0E8;font-variant-numeric:tabular-nums">
           <div><div style="font-family:Onest,sans-serif;font-weight:700;font-size:32px;letter-spacing:-.02em;color:#172B3A">30–70 <span style="font-size:18px;color:#058CC5">мин</span></div><div style="font-size:13px;color:#536570">цикл</div></div>
           <div><div style="font-family:Onest,sans-serif;font-weight:700;font-size:32px;letter-spacing:-.02em;color:#172B3A">до 45 <span style="font-size:18px;color:#058CC5">°C</span></div><div style="font-size:13px;color:#536570">температура</div></div>
           <div><div style="font-family:Onest,sans-serif;font-weight:700;font-size:32px;letter-spacing:-.02em;color:#172B3A">16–250 <span style="font-size:18px;color:#058CC5">л</span></div><div style="font-size:13px;color:#536570">объём камеры</div></div>
         </div>
       </div>
-      <div style="position:relative">
-        <div style="position:relative;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 40px 80px -40px #172B3A55;aspect-ratio:4/3">
+      <div data-hero-media style="position:relative">
+        <div data-hero-photo style="position:relative;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 40px 80px -40px #172B3A55;aspect-ratio:4/3">
           <img src="img/otri/otri-s-cube-34.webp" alt="Озоновый стерилизатор OTRI S с прозрачной камерой и озонатором" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;display:block">
         </div>
-        <div style="position:absolute;left:-12px;bottom:24px;background:#fff;border-radius:16px;padding:10px 14px;box-shadow:0 16px 40px -16px #172B3A55;display:flex">
+        <div data-hero-kz style="position:absolute;left:-12px;bottom:24px;background:#fff;border-radius:16px;padding:10px 14px;box-shadow:0 16px 40px -16px #172B3A55;display:flex">
           <img src="img/made-in-kz.webp" alt="Сделано в Казахстане — Қазақстанда жасалған" width="160" height="100" style="display:block;width:160px;height:auto" loading="lazy" decoding="async">
         </div>
       </div>
@@ -951,7 +993,7 @@
           </article>
         </sc-for>
       </div>
-      <p style="margin:18px 0 0;font-size:13px;color:#536570">Цены ориентировочные, точное предложение — после подбора.</p>
+      <p style="margin:18px 0 0;font-size:13px;color:#536570">{{ priceNote }}</p>
     </div>
   </section>
 
@@ -993,7 +1035,7 @@
       <div>
         <div style="font-size:13px;font-weight:600;color:#05699A;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">УФ-рециркуляторы OTRI Desktop</div>
         <h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.02em;margin:0 0 14px;line-height:1.1">Чистый воздух — без остановки работы</h2>
-        <p style="margin:0 0 24px;color:#3B4F5C;max-width:460px">Закрытые бактерицидные УФ-рециркуляторы OTRI от 65 000 ₸. Без НДС, доставка включена, поставка 10 рабочих дней.</p>
+        <p style="margin:0 0 24px;color:#3B4F5C;max-width:460px">{{ recsIntro }}</p>
         <div style="display:grid;gap:12px">
           <sc-for list="{{ recs }}" as="r" hint-placeholder-count="2">
             <div style="background:#fff;border-radius:16px;padding:16px 18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
@@ -1181,7 +1223,7 @@
   <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px) 0">
     <div style="position:relative;overflow:hidden;background:#058CC5;color:#fff;border-radius:24px;padding:clamp(28px,4vw,48px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
       <div style="position:absolute;right:-140px;top:-180px;width:440px;height:440px;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 34px,#ffffff22 34px 36px);pointer-events:none"></div>
-      <div style="position:relative;max-width:520px"><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(22px,2.4vw,30px);margin:0 0 8px;letter-spacing:-.02em">Получите КП с ценами и таблицей подбора</h2><p style="margin:0;font-size:15px;color:#E6F5FB">Оставьте телефон — откроем PDF сразу.</p></div>
+      <div style="position:relative;max-width:520px"><h2 style="font-family:Onest,sans-serif;font-weight:700;font-size:clamp(22px,2.4vw,30px);margin:0 0 8px;letter-spacing:-.02em">{{ kpTitle }}</h2><p style="margin:0;font-size:15px;color:#E6F5FB">{{ kpSub }}</p></div>
       <sc-if value="{{ leadNotSent }}" hint-placeholder-val="{{ true }}">
         <form onSubmit="{{ onLead }}" style="position:relative;display:flex;flex-wrap:wrap;gap:10px">
           <input type="tel" required value="{{ leadPhone }}" onChange="{{ onLeadPhone }}" placeholder="+7 ___ ___ __ __" style="flex:1;min-width:210px;border:0;background:#fff;color:#172B3A;border-radius:999px;padding:14px 20px;font-size:15px;outline:none;font-variant-numeric:tabular-nums">
@@ -1189,10 +1231,18 @@
         </form>
       </sc-if>
       <sc-if value="{{ leadSent }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ kpOpen }}" hint-placeholder-val="{{ true }}">
         <div style="position:relative;display:flex;flex-wrap:wrap;gap:10px">
           <a href="docs/kp-otri-s.pdf" target="_blank" onClick="{{ onKp }}" style="background:#fff;color:#05699A;border-radius:999px;padding:14px 22px;font-weight:600" style-hover="background:#E8F6FA;color:#05699A">КП стерилизаторы OTRI S</a>
           <a href="docs/kp-otri-recirculators.pdf" target="_blank" onClick="{{ onKp }}" style="background:#fff;color:#05699A;border-radius:999px;padding:14px 22px;font-weight:600" style-hover="background:#E8F6FA;color:#05699A">КП рециркуляторы</a>
         </div>
+        </sc-if>
+        <sc-if value="{{ kpClosed }}" hint-placeholder-val="{{ false }}">
+        <div style="position:relative;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+          <span style="font-size:15px;color:#E6F5FB">Спасибо! Отправьте сообщение в открывшемся WhatsApp — менеджер пришлёт КП. Не открылся — нажмите кнопку.</span>
+          <a href="{{ waKp }}" target="_blank" onClick="{{ onWa }}" style="background:#fff;color:#05699A;border-radius:999px;padding:14px 22px;font-weight:600" style-hover="background:#E8F6FA;color:#05699A">Получить КП в WhatsApp</a>
+        </div>
+        </sc-if>
       </sc-if>
     </div>
   </section>
@@ -1221,12 +1271,12 @@ class Component extends DCLogic {
   state = { d: null, faqOpen: 0, len: 30, type: 'Стоматология', leadSent: false, leadPhone: '+7 ' };
   async componentDidMount() { this.setState({ d: await import('./o3s-data.js') }); }
   mask(v) {
-    let d = (v || '').replace(/\D/g, ''); if (d.startsWith('8')) d = '7' + d.slice(1); if (!d.startsWith('7')) d = '7' + d; d = d.slice(1, 11);
+    let d = (v || '').replace(/\D/g, ''); if (d.length === 10 && d[0] !== '7' || (d.length === 10 && d.startsWith('7') && !(v || '').trim().startsWith('+'))) d = '7' + d; if (d.startsWith('8')) d = '7' + d.slice(1); if (d.startsWith('78')) d = '7' + d.slice(2); if (!d.startsWith('7')) d = '7' + d; d = d.slice(1, 11);
     return '+7 ' + [d.slice(0, 3), d.slice(3, 6), d.slice(6, 8), d.slice(8, 10)].filter(Boolean).join(' ');
   }
   renderVals() {
     const s = this.state, d = s.d;
-    const show = this.props.showPrices ?? true;
+    const show = (this.props.showPrices ?? true) && !!(d && d.CONFIG.showPrices); // цены вкл/выкл — CONFIG.showPrices в o3s-data.js
     const nn = (i) => String(i + 1).padStart(2, '0');
     const price = (m) => (show && d ? d.priceLabel(m) : 'Цена по запросу');
     const pick = (detail) => d && d.pick(detail);
@@ -1252,7 +1302,13 @@ class Component extends DCLogic {
       docs: d ? d.DOCS : [],
       faq: (d ? d.FAQ : []).map((f, i) => ({ ...f, open: s.faqOpen === i, sign: s.faqOpen === i ? '−' : '+', signBg: s.faqOpen === i ? '#058CC5' : '#DFF2F9', signFg: s.faqOpen === i ? '#fff' : '#058CC5', toggle: () => this.setState({ faqOpen: s.faqOpen === i ? -1 : i }) })),
       showReviews: this.props.showReviews ?? false,
-      buyFrom: show ? 'от 3 565 000 ₸' : 'Цена по запросу',
+      buyFrom: show ? 'от ' + d.fmt(d.byId('s-16').price) : 'Цена по запросу',
+      priceNote: d ? d.PRICE_NOTE() : '',
+      recsIntro: 'Закрытые бактерицидные УФ-рециркуляторы OTRI' + (show ? ' от ' + d.fmt(d.byId('desktop-30').price) + '. Без НДС, доставка' : '. Доставка') + ' включена, поставка 10 рабочих дней.',
+      kpOpen: show, kpClosed: !show,
+      kpTitle: show ? 'Получите КП с ценами и таблицей подбора' : 'Получите КП и подбор модели',
+      kpSub: show ? 'Оставьте телефон — откроем PDF сразу.' : 'Оставьте телефон — пришлём КП в WhatsApp.',
+      waKp: d ? d.waText('Здравствуйте! Заявка с сайта otri.kz\nЗапрос: коммерческое предложение (КП) на оборудование OTRI\nТелефон: ' + s.leadPhone) : 'https://wa.me/77710010744',
       types: TYPES.map(([label, len]) => ({ label, bg: s.type === label ? '#058CC5' : '#fff', fg: s.type === label ? '#fff' : '#172B3A', bd: s.type === label ? '#058CC5' : '#CFE0E8', select: () => this.setState({ type: label, len }) })),
       len: s.len, lenLabel: s.len + ' см',
       setLen: (e) => this.setState({ len: +e.target.value }),
@@ -1266,7 +1322,7 @@ class Component extends DCLogic {
       onWa: () => d && d.track('click_whatsapp'),
       leadSent: s.leadSent, leadNotSent: !s.leadSent, leadPhone: s.leadPhone,
       onLeadPhone: (e) => this.setState({ leadPhone: this.mask(e.target.value) }),
-      onLead: (e) => { e.preventDefault(); d && d.track('lead_kp'); this.setState({ leadSent: true }); },
+      onLead: (e) => { e.preventDefault(); if (d) { d.track('lead_kp'); d.sendWA(['Запрос: коммерческое предложение (КП) на оборудование OTRI', 'Телефон: ' + s.leadPhone]); } this.setState({ leadSent: true }); },
       onKp: () => d && d.track('download_kp'),
     };
   }

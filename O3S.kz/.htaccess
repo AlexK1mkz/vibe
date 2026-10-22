@@ -14,11 +14,13 @@ DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # 1. Только https и без www (нужен SSL-сертификат на домене — в hoster.kz он бесплатный)
+  # 1. Только https и без www — действует только на otri.kz, тестовые поддомены (1.otri.kz) не трогает.
+  #    Перед включением выпустите SSL-сертификат для otri.kz и www.otri.kz (Plesk → SSL/TLS → Let's Encrypt).
+  RewriteCond %{HTTP_HOST} ^www\.otri\.kz$ [NC]
+  RewriteRule ^ https://otri.kz%{REQUEST_URI} [R=301,L]
+  RewriteCond %{HTTP_HOST} ^otri\.kz$ [NC]
   RewriteCond %{HTTPS} off
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
-  RewriteRule ^ https://otri.kz%{REQUEST_URI} [R=301,L]
-  RewriteCond %{HTTP_HOST} ^www\.otri\.kz$ [NC]
   RewriteRule ^ https://otri.kz%{REQUEST_URI} [R=301,L]
 
   # 2. /index.html → / (одна главная для поисковиков)
@@ -31,6 +33,22 @@ DirectoryIndex index.html
   RewriteRule ^\.thumbnail$ - [F,L]
   RewriteCond %{THE_REQUEST} \s/+_prerender/ [NC]
   RewriteRule ^ - [F,L]
+
+  # 4a. Казахская версия (?lang=kz): готовые снимки страниц на казахском
+  RewriteCond %{QUERY_STRING} (?:^|&)lang=kz(?:&|$)
+  RewriteCond %{QUERY_STRING} (?:^|&)m=(s-16|s-36|s-40|s-85|s-250)(?:&|$)
+  RewriteRule ^o3s-16\.dc\.html$ _prerender/o3s-16--%1--kz.html [L]
+  RewriteCond %{QUERY_STRING} (?:^|&)lang=kz(?:&|$)
+  RewriteRule ^o3s-16\.dc\.html$ _prerender/o3s-16--s-16--kz.html [L]
+  RewriteCond %{QUERY_STRING} (?:^|&)lang=kz(?:&|$)
+  RewriteCond %{QUERY_STRING} (?:^|&)m=(desktop-30|desktop-60)(?:&|$)
+  RewriteRule ^recirculator\.dc\.html$ _prerender/recirculator--%1--kz.html [L]
+  RewriteCond %{QUERY_STRING} (?:^|&)lang=kz(?:&|$)
+  RewriteRule ^recirculator\.dc\.html$ _prerender/recirculator--desktop-30--kz.html [L]
+  RewriteCond %{QUERY_STRING} (?:^|&)lang=kz(?:&|$)
+  RewriteRule ^(catalog|contacts|dental|rent)\.dc\.html$ _prerender/$1--kz.html [L]
+  RewriteCond %{QUERY_STRING} (?:^|&)lang=kz(?:&|$)
+  RewriteRule ^(index\.html)?$ _prerender/index--kz.html [L]
 
   # 4. Готовые снимки страниц моделей: поисковики и мессенджеры получают свою страницу на каждую модель
   RewriteCond %{QUERY_STRING} (?:^|&)m=(s-36|s-40|s-85|s-250)(?:&|$)

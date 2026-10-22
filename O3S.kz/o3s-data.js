@@ -4,7 +4,7 @@
 export const CONFIG = {
   brand: 'OTRI',
   domain: 'otri.kz', // [уточнить] otri.kz или o3s.kz
-  showPrices: true,  // false → везде «Цена по запросу»
+  showPrices: false, // true → показать цены на сайте (цены в моделях ниже сохранены); false → везде «Цена по запросу»
   rentReady: false,  // true → показывать калькулятор «Покупка vs аренда»
   showReviews: false, // отзывы скрыты, пока нет реальных
   showPilot: false,   // блок «Станьте пилотной клиникой» [уточнить оффер]
@@ -33,6 +33,16 @@ export const LEGAL = {
   ruRecirculator: 'РК-МТ-0№022741',
 };
 
+// Все заявки уходят в WhatsApp: сообщение собирается из полей формы и открывается чат с номером компании
+export const WA_PHONE = '77710010744';
+export const waText = (text) => 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(text);
+export const sendWA = (lines) => {
+  const lang = (typeof window !== 'undefined' && window.OTRI_LANG === 'kz') ? ' (KZ)' : '';
+  const text = ['Здравствуйте! Заявка с сайта otri.kz' + lang].concat(lines.filter(Boolean)).join('\n');
+  const url = waText(text);
+  try { const w = window.open(url, '_blank'); if (!w) window.location.href = url; } catch (e) { window.location.href = url; }
+  return url;
+};
 export const wa = (text) => 'https://wa.me/77710010744?text=' + encodeURIComponent('Здравствуйте! Интересует ' + (text || 'оборудование OTRI'));
 export const waFor = (m) => wa(m ? (m.category === 'recirculator' ? 'рециркулятор ' : 'стерилизатор ') + m.name : '');
 
@@ -189,6 +199,7 @@ export const FAQ = [
   { q: 'Можно ли взять в аренду?', a: 'Да, стерилизаторы. Условия рассчитываем под загрузку клиники.' },
 ];
 
+export const PRICE_NOTE = () => (CONFIG.showPrices ? 'Цены ориентировочные, точное предложение — после подбора.' : 'Цену и наличие назовём после подбора модели — напишите в WhatsApp или оставьте заявку.');
 export const KP_FILES = { sterilizer: 'docs/kp-otri-s.pdf', recirculator: 'docs/kp-otri-recirculators.pdf' };
 
 // Аналитика: цели для Яндекс Метрики и GA4
