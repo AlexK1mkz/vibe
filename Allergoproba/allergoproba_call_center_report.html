@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Аллергопроба — аналитика колл-центра (21.09–20.10.2026)</title>
+<style>
+:root{--fg:#1f1e1d;--muted:#6b6862;--bg:#faf9f5;--panel:#fff;--line:#e8e6dc;--accent:#c96442;--mute:#d9d5c7;--grid:#efede6;--bad:#b3261e;--r:10px}
+@media (prefers-color-scheme:dark){:root{--fg:#f0eee6;--muted:#a8a59c;--bg:#1f1e1d;--panel:#2a2927;--line:#3a3935;--accent:#e07a55;--mute:#55534d;--grid:#34332f;--bad:#f2867d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif}
+.ac{max-width:72rem;margin:0 auto;padding:32px 20px 48px;display:flex;flex-direction:column;gap:32px}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:30px;margin:0 0 4px}
+.head p{margin:0;color:var(--muted)} .head .lead{color:var(--fg);margin-top:10px;font-size:16px}
+b{font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10.5rem),1fr));gap:12px}
+.tile,.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px;min-width:0}
+.lbl,.sub{font-size:12.5px;color:var(--muted)}
+.num{font-family:Georgia,serif;font-size:30px;margin:6px 0;font-variant-numeric:tabular-nums}
+.tile.bad .num{color:var(--bad)}
+h2{font-size:19px;font-weight:500;margin:0 0 12px} h3{font-size:16px;font-weight:500;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:12px}
+.wide{grid-column:1/-1}
+.note{font-size:12.5px;color:var(--muted);margin:4px 0 14px;line-height:1.45}
+.chart{position:relative;min-height:220px} .chart svg{display:block;overflow:visible}
+.tick{fill:var(--muted);font-size:11.5px}
+.bars{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;flex-direction:column;gap:4px}
+.rt{display:flex;justify-content:space-between;gap:10px;font-size:12.5px} .rt span:last-child{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.track{position:relative;height:10px;background:var(--grid);border-radius:5px;overflow:hidden}
+.fill{position:absolute;left:0;top:0;bottom:0;border-radius:5px}
+.legend{display:flex;gap:16px;font-size:12.5px;color:var(--muted);margin-bottom:10px;flex-wrap:wrap}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.12);padding:6px 10px;font-size:12px;white-space:nowrap;z-index:2}
+.tip .th{color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:500;color:var(--muted);padding:6px 10px;border-bottom:1px solid var(--line)}
+td{padding:6px 10px;border-bottom:1px solid var(--line);vertical-align:top} .r{text-align:right}
+ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:10px}
+.foot{font-size:12.5px;color:var(--muted)}
+@media print{body{background:#fff} .card,.tile{break-inside:avoid}}
+</style></head><body>
+<div class="ac">
+<header class="head">
+<h1>Аллергопроба — аналитика колл-центра</h1>
+<p>21 сентября — 20 октября 2026 · все записи звонков, Казахстан (UTC+5)</p>
+<p class="lead">За 30 дней — <b>1 490</b> звонков, около <b>50</b> в день. <b>58%</b> нагрузки приходится на 8:00–12:00, а главный вопрос клиентов справочный: «делаете ли пробу на мой препарат» — он звучит в <b>69%</b> разговоров. Большую часть потока можно закрыть справочником и ботом, а операторов перенаправить на запись и продажи.</p>
+</header>
+<section class="tiles">
+<div class="tile"><div class="lbl">Всего звонков · 30 дней</div><div class="num">1 490</div><div class="sub">38,3 ч записанного аудио</div></div>
+<div class="tile"><div class="lbl">Живых разговоров</div><div class="num">1 270</div><div class="sub">85% всех записей</div></div>
+<div class="tile"><div class="lbl">Звонков в день</div><div class="num">49,7</div><div class="sub">в среднем за период</div></div>
+<div class="tile"><div class="lbl">Средний разговор</div><div class="num">106 с</div><div class="sub">медиана всех записей 74 с</div></div>
+<div class="tile bad"><div class="lbl">Ушли на автоответчик</div><div class="num">114</div><div class="sub">77 не перезвонили</div></div>
+<div class="tile bad"><div class="lbl">Повторных звонков</div><div class="num">393</div><div class="sub">74% — в течение часа</div></div>
+</section>
+<section><h2>Нагрузка: когда звонят</h2><div class="grid">
+<div class="card wide"><h3>Звонки по дням</h3><p class="note">Все записи за день. Приглушённые столбцы — суббота и воскресенье. Поток ровный, без явного роста или спада.</p><div class="chart" id="c-daily"></div></div>
+<div class="card"><h3>Звонки по часам</h3><p class="note">Час начала звонка, UTC+5. Выделены пиковые часы. Звонки в 7:00 и после 18:00 короткие — это в основном автоответчик.</p><div class="chart" id="c-hourly"></div></div>
+<div class="card"><h3>Средняя нагрузка по дням недели</h3><p class="note">Звонков в среднем за один такой день. Воскресенье заметно тише будней.</p><div class="chart" id="c-weekday"></div></div>
+</div></section>
+<section><h2>О чём спрашивают</h2><div class="grid">
+<div class="card wide"><h3>Вопросы клиентов</h3><p class="note">«Спросил клиент» — в речи клиента есть вопрос по теме. «Обсуждалось» — тема прозвучала в разговоре, включая информацию от оператора. Один звонок может содержать несколько тем; частоты — автоматическая оценка по расшифровкам.</p>
+<div class="legend"><span><span class="sw" style="background:var(--mute)"></span>Обсуждалось</span><span><span class="sw" style="background:var(--accent)"></span>Спросил клиент</span></div><div class="bars" id="c-topics"></div></div>
+<div class="card wide"><h3>Частые сочетания тем в одном звонке</h3><p class="note">Какие вопросы задают вместе — основа для «пакетного» ответа оператора и бота. Топ-10 пар.</p>
+<table><thead><tr><th>Сочетание тем</th><th class="r">Звонков</th></tr></thead><tbody id="c-pairs"></tbody></table></div>
+</div></section>
+<section><h2>Кто звонит</h2><div class="grid">
+<div class="card"><h3>Язык разговора</h3><p class="note">Автоматическая оценка по записи. Справа — средняя длительность записи.</p><div class="bars" id="c-lang"></div></div>
+<div class="card"><h3>Город обращения</h3><p class="note">Только звонки, где город удалось определить (62% записей без города). Справа — средняя длительность.</p><div class="bars" id="c-city"></div></div>
+</div></section>
+<section><h2>Потери и повторные звонки</h2><div class="grid">
+<div class="card"><h3>Через сколько звонят повторно</h3><p class="note">Повторный звонок с того же номера, накопительно. Доля от всех повторных записей. Это не показатель нерешённого вопроса: часть — сорвавшиеся или недозвоны.</p><div class="bars" id="c-repeats"></div></div>
+<div class="card"><h3>Звонки вне рабочего времени</h3><p class="note">Записи автоответчика и что было дальше в пределах выгрузки.</p><div class="bars" id="c-auto"></div></div>
+</div></section>
+<section><h2>Итоги</h2><div class="card"><ol>
+<li><b>Стабильный поток.</b> В среднем 49,7 звонков в день, в среду до 60,0, в воскресенье — 32,0. Сезонного всплеска за период нет.</li>
+<li><b>Утренний пик.</b> С 9:00 до 11:00 — 531 звонков (36% всего потока за 2 часа), с 8:00 до 12:00 — 58%. Именно здесь вероятнее всего занятая линия и пропущенные.</li>
+<li><b>Главный вопрос — наличие пробы на препарат.</b> Его задали в 459 звонках, обсуждали в 880. Дальше — цена и тарифы (303), анализы детям (260), график (235) и адрес пункта (195). Все пять — справочные и хорошо автоматизируются.</li>
+<li><b>Вопросы идут связками.</b> Самая частая пара — препарат + цена (158 звонков), затем дети + препарат (133). Клиенту нужен полный ответ сразу: есть ли проба, сколько стоит, как подготовиться, где и когда сдать.</li>
+<li><b>Теряются звонки вне графика.</b> 114 звонков попали на автоответчик, 68% из них в выгрузке так и не перезвонили. В 7:00 — 64 звонков до открытия.</li>
+<li><b>Много быстрых повторов.</b> 393 повторных записей, из них 291 — в течение часа, и лишь 61 с той же темой. Это похоже на сорвавшиеся звонки и недозвон, а не на плохие консультации.</li>
+<li><b>Каждый четвёртый звонок — на казахском.</b> Русский — 60%, казахский и смешанная речь — 25%; казахские разговоры чуть длиннее (110 с против 104 с).</li>
+<li><b>Астана — основной рынок, регионы говорят дольше.</b> Из звонков с определённым городом 399 — Астана; разговоры из Павлодара в среднем 177 с — региональным клиентам нужно больше объяснений про пункты сдачи.</li>
+<li><b>Слепые зоны в данных.</b> В 36% записей тема не распознана, в 62% — город. Без разметки в CRM нельзя точно посчитать конверсию звонка в запись.</li>
+</ol></div></section>
+<section><h2>Рекомендации</h2><div class="card"><ol>
+<li><b>Справочник препаратов и аллергенов на сайте и в WhatsApp-боте.</b> Поиск «есть ли проба на ___» с ценой, подготовкой и ближайшим пунктом сразу в ответе. Это закрывает главный вопрос и снимает с операторов значимую часть рутинных звонков.</li>
+<li><b>Скрипт «пакетного ответа».</b> На вопрос о препарате оператор сразу называет тариф, цену забора крови, правила подготовки (натощак, лекарства), график и адрес, и заканчивает предложением записи. Цель — меньше повторных звонков и выше конверсия в визит.</li>
+<li><b>Усилить линию с 8:00 до 12:00.</b> Второй оператор или переадресация на пиковые часы, очередь ожидания и обратный звонок вместо «занято»; перерывы ставить после 13:00.</li>
+<li><b>Вернуть звонки вне графика.</b> Автоответчик заменить на сообщение со ссылкой на WhatsApp-бота и автоматическую заявку на обратный звонок; рассмотреть открытие линии с 7:30.</li>
+<li><b>Разобрать быстрые повторы.</b> Сверить повторы до 1 часа с журналом пропущенных у телефонии: если линия занята — нужна очередь, если звонок обрывается — проверить связь.</li>
+<li><b>Казахский язык.</b> Оператор со свободным казахским в пиковые часы и казахская версия бота и справочника.</li>
+<li><b>Результаты без звонка.</b> Получение и задержка результата обсуждались в 219 разговорах: автоматически присылать результат и статус «готово» в WhatsApp/SMS, упростить вход в личный кабинет.</li>
+<li><b>Разметка звонков в CRM.</b> Обязательные поля: город, тема, итог (записан / думает / отказ). Тогда следующий отчёт покажет конверсию звонка в визит и выручку с колл-центра.</li>
+</ol></div></section>
+<p class="foot">Источник: выгрузка аналитики звонков колл-центра (1 490 MP3, автоматическая расшифровка). Язык, город и темы определены автоматически и могут содержать ошибки распознавания. Длительность записи включает ожидание и тишину.</p>
+</div>
+<script>
+const DATA={"kpi": [{"metric": "records", "value": 1490.0}, {"metric": "conversations", "value": 1270.0}, {"metric": "conv_share", "value": 0.8523}, {"metric": "autoresponder", "value": 114.0}, {"metric": "no_speech", "value": 106.0}, {"metric": "avg_sec", "value": 92.5}, {"metric": "median_sec", "value": 74.3}, {"metric": "conv_avg_sec", "value": 105.6}, {"metric": "audio_hours", "value": 38.3}, {"metric": "days", "value": 30.0}, {"metric": "per_day", "value": 49.7}, {"metric": "peak_calls", "value": 531.0}, {"metric": "peak_share", "value": 0.3564}, {"metric": "morning_calls", "value": 869.0}, {"metric": "morning_share", "value": 0.5832}, {"metric": "offhours_calls", "value": 140.0}, {"metric": "auto_callback", "value": 37.0}, {"metric": "auto_no_callback", "value": 77.0}, {"metric": "auto_lost_share", "value": 0.6754}, {"metric": "auto_reached", "value": 24.0}, {"metric": "repeat_records", "value": 393.0}, {"metric": "repeat_1h", "value": 291.0}, {"metric": "repeat_1h_share", "value": 0.7405}, {"metric": "repeat_same_topic", "value": 61.0}, {"metric": "numbers", "value": 1091.0}, {"metric": "no_topic", "value": 540.0}, {"metric": "no_topic_share", "value": 0.3624}, {"metric": "city_unknown", "value": 922.0}, {"metric": "city_unknown_share", "value": 0.6188}, {"metric": "ru_calls", "value": 894.0}, {"metric": "ru_share", "value": 0.6}, {"metric": "kz_calls", "value": 376.0}, {"metric": "kz_share", "value": 0.2523}, {"metric": "drug_discussed_share", "value": 0.6929}, {"metric": "price_discussed_share", "value": 0.4827}], "daily": [{"day": "2026-09-21", "calls": 15}, {"day": "2026-09-22", "calls": 46}, {"day": "2026-09-23", "calls": 65}, {"day": "2026-09-24", "calls": 54}, {"day": "2026-09-25", "calls": 64}, {"day": "2026-09-26", "calls": 42}, {"day": "2026-09-27", "calls": 37}, {"day": "2026-09-28", "calls": 64}, {"day": "2026-09-29", "calls": 45}, {"day": "2026-09-30", "calls": 55}, {"day": "2026-10-01", "calls": 45}, {"day": "2026-10-02", "calls": 57}, {"day": "2026-10-03", "calls": 30}, {"day": "2026-10-04", "calls": 28}, {"day": "2026-10-05", "calls": 56}, {"day": "2026-10-06", "calls": 60}, {"day": "2026-10-07", "calls": 64}, {"day": "2026-10-08", "calls": 50}, {"day": "2026-10-09", "calls": 51}, {"day": "2026-10-10", "calls": 65}, {"day": "2026-10-11", "calls": 24}, {"day": "2026-10-12", "calls": 61}, {"day": "2026-10-13", "calls": 68}, {"day": "2026-10-14", "calls": 56}, {"day": "2026-10-15", "calls": 56}, {"day": "2026-10-16", "calls": 46}, {"day": "2026-10-17", "calls": 51}, {"day": "2026-10-18", "calls": 39}, {"day": "2026-10-19", "calls": 48}, {"day": "2026-10-20", "calls": 48}], "weekday": [{"weekday": "Пн", "calls": 244, "days": 5, "avg_per_day": 48.8}, {"weekday": "Вт", "calls": 267, "days": 5, "avg_per_day": 53.4}, {"weekday": "Ср", "calls": 240, "days": 4, "avg_per_day": 60.0}, {"weekday": "Чт", "calls": 205, "days": 4, "avg_per_day": 51.2}, {"weekday": "Пт", "calls": 218, "days": 4, "avg_per_day": 54.5}, {"weekday": "Сб", "calls": 188, "days": 4, "avg_per_day": 47.0}, {"weekday": "Вс", "calls": 128, "days": 4, "avg_per_day": 32.0}], "hourly": [{"hour": "00:00", "calls": 1, "audio_min": 0.1, "avg_sec": 7.3, "median_sec": 7.3, "p90_sec": 7.3}, {"hour": "06:00", "calls": 3, "audio_min": 1.1, "avg_sec": 21.5, "median_sec": 12.4, "p90_sec": 40.9}, {"hour": "07:00", "calls": 64, "audio_min": 19.6, "avg_sec": 18.4, "median_sec": 17.7, "p90_sec": 28.0}, {"hour": "08:00", "calls": 170, "audio_min": 263.6, "avg_sec": 93.0, "median_sec": 73.8, "p90_sec": 172.3}, {"hour": "09:00", "calls": 263, "audio_min": 413.6, "avg_sec": 94.4, "median_sec": 84.0, "p90_sec": 162.3}, {"hour": "10:00", "calls": 268, "audio_min": 433.6, "avg_sec": 97.1, "median_sec": 78.9, "p90_sec": 190.2}, {"hour": "11:00", "calls": 168, "audio_min": 291.9, "avg_sec": 104.2, "median_sec": 83.1, "p90_sec": 206.5}, {"hour": "12:00", "calls": 103, "audio_min": 174.8, "avg_sec": 101.8, "median_sec": 75.5, "p90_sec": 204.5}, {"hour": "13:00", "calls": 91, "audio_min": 161.0, "avg_sec": 106.1, "median_sec": 89.2, "p90_sec": 220.4}, {"hour": "14:00", "calls": 86, "audio_min": 144.0, "avg_sec": 100.5, "median_sec": 86.8, "p90_sec": 186.3}, {"hour": "15:00", "calls": 82, "audio_min": 141.4, "avg_sec": 103.5, "median_sec": 75.8, "p90_sec": 209.6}, {"hour": "16:00", "calls": 69, "audio_min": 116.9, "avg_sec": 101.7, "median_sec": 90.8, "p90_sec": 194.5}, {"hour": "17:00", "calls": 50, "audio_min": 107.6, "avg_sec": 129.1, "median_sec": 104.1, "p90_sec": 215.4}, {"hour": "18:00", "calls": 37, "audio_min": 17.8, "avg_sec": 28.8, "median_sec": 20.2, "p90_sec": 34.6}, {"hour": "19:00", "calls": 18, "audio_min": 5.0, "avg_sec": 16.8, "median_sec": 15.7, "p90_sec": 23.0}, {"hour": "20:00", "calls": 8, "audio_min": 2.4, "avg_sec": 18.1, "median_sec": 17.9, "p90_sec": 33.4}, {"hour": "21:00", "calls": 5, "audio_min": 1.6, "avg_sec": 18.7, "median_sec": 20.3, "p90_sec": 29.8}, {"hour": "22:00", "calls": 4, "audio_min": 0.8, "avg_sec": 12.6, "median_sec": 13.6, "p90_sec": 22.9}], "topics": [{"question": "Делаете ли пробу на нужный препарат?", "asked": 459, "discussed": 880, "share_all": 0.3080536912751678, "rank": 1}, {"question": "Сколько стоит анализ и какие есть тарифы?", "asked": 303, "discussed": 613, "share_all": 0.2033557046979865, "rank": 2}, {"question": "Можно ли сдать ребёнку и с какого возраста?", "asked": 260, "discussed": 260, "share_all": 0.174496644295302, "rank": 3}, {"question": "Во сколько и в какие дни принимаете?", "asked": 235, "discussed": 521, "share_all": 0.1577181208053691, "rank": 4}, {"question": "Где можно сдать и какой пункт ближе?", "asked": 195, "discussed": 474, "share_all": 0.1308724832214765, "rank": 5}, {"question": "Нужно ли натощак, можно ли есть и пить?", "asked": 156, "discussed": 312, "share_all": 0.1046979865771812, "rank": 6}, {"question": "Можно ли получить результат срочно или в тот же день?", "asked": 118, "discussed": 354, "share_all": 0.0791946308724832, "rank": 7}, {"question": "Как получить результат и почему он не пришёл?", "asked": 90, "discussed": 219, "share_all": 0.0604026845637583, "rank": 8}, {"question": "Можно ли сдавать после лекарств и какие есть ограничения?", "asked": 87, "discussed": 208, "share_all": 0.0583892617449664, "rank": 9}, {"question": "Когда будет готов результат?", "asked": 73, "discussed": 391, "share_all": 0.048993288590604, "rank": 10}, {"question": "Забор крови оплачивается отдельно?", "asked": 70, "discussed": 334, "share_all": 0.046979865771812, "rank": 11}, {"question": "Нужна ли предварительная запись?", "asked": 48, "discussed": 88, "share_all": 0.0322147651006711, "rank": 12}, {"question": "Как проходит проба и откуда берут кровь?", "asked": 38, "discussed": 38, "share_all": 0.0255033557046979, "rank": 13}, {"question": "Как связаться с бухгалтерией и оформить документы?", "asked": 28, "discussed": 28, "share_all": 0.0187919463087248, "rank": 14}, {"question": "Как войти на сайт и получить код доступа?", "asked": 22, "discussed": 80, "share_all": 0.0147651006711409, "rank": 15}, {"question": "Как оплатить, есть ли скидки или бесплатное направление?", "asked": 19, "discussed": 59, "share_all": 0.0127516778523489, "rank": 16}, {"question": "Что означает результат и сколько он действует?", "asked": 18, "discussed": 18, "share_all": 0.0120805369127516, "rank": 17}, {"question": "Можно ли без ИИН и какие документы нужны?", "asked": 12, "discussed": 12, "share_all": 0.0080536912751677, "rank": 18}, {"question": "Куда обратиться с жалобой на обслуживание?", "asked": 12, "discussed": 12, "share_all": 0.0080536912751677, "rank": 19}, {"question": "Делаете ли другие исследования, УЗИ или есть ли приём врача?", "asked": 12, "discussed": 12, "share_all": 0.0080536912751677, "rank": 20}, {"question": "Это стоматология / нужная мне клиника?", "asked": 5, "discussed": 5, "share_all": 0.0033557046979865, "rank": 21}], "language": [{"language": "Русский", "calls": 894, "audio_min": 1548.6, "avg_sec": 103.9, "median_sec": 86.7, "p90_sec": 196.0}, {"language": "Казахский", "calls": 267, "audio_min": 489.1, "avg_sec": 109.9, "median_sec": 87.5, "p90_sec": 205.5}, {"language": "Автоответчик", "calls": 114, "audio_min": 37.3, "avg_sec": 19.6, "median_sec": 19.8, "p90_sec": 31.2}, {"language": "Казахский / смешанная речь", "calls": 109, "audio_min": 196.7, "avg_sec": 108.3, "median_sec": 89.1, "p90_sec": 185.2}, {"language": "Нет разборчивой речи", "calls": 106, "audio_min": 25.1, "avg_sec": 14.2, "median_sec": 12.3, "p90_sec": 27.1}], "city": [{"city": "Астана", "calls": 399, "audio_min": 817.8, "avg_sec": 123.0, "median_sec": 104.0, "p90_sec": 206.7}, {"city": "Алматы", "calls": 55, "audio_min": 130.8, "avg_sec": 142.7, "median_sec": 122.4, "p90_sec": 252.5}, {"city": "Караганда", "calls": 52, "audio_min": 114.5, "avg_sec": 132.1, "median_sec": 113.2, "p90_sec": 210.1}, {"city": "Павлодар", "calls": 27, "audio_min": 79.7, "avg_sec": 177.2, "median_sec": 136.6, "p90_sec": 361.0}, {"city": "Шымкент", "calls": 11, "audio_min": 20.7, "avg_sec": 112.7, "median_sec": 104.0, "p90_sec": 164.4}, {"city": "Атырау", "calls": 6, "audio_min": 14.0, "avg_sec": 140.3, "median_sec": 133.2, "p90_sec": 237.2}, {"city": "Семей", "calls": 5, "audio_min": 6.2, "avg_sec": 74.1, "median_sec": 67.4, "p90_sec": 135.4}, {"city": "Туркестан", "calls": 4, "audio_min": 7.6, "avg_sec": 114.6, "median_sec": 107.0, "p90_sec": 153.3}, {"city": "Экибастуз", "calls": 3, "audio_min": 6.7, "avg_sec": 134.9, "median_sec": 156.2, "p90_sec": 197.8}, {"city": "Тараз", "calls": 2, "audio_min": 3.8, "avg_sec": 114.3, "median_sec": 114.3, "p90_sec": 130.5}, {"city": "Кокшетау", "calls": 1, "audio_min": 4.0, "avg_sec": 238.6, "median_sec": 238.6, "p90_sec": 238.6}, {"city": "Актау", "calls": 1, "audio_min": 1.4, "avg_sec": 86.9, "median_sec": 86.9, "p90_sec": 86.9}, {"city": "Петропавловск", "calls": 1, "audio_min": 4.9, "avg_sec": 296.1, "median_sec": 296.1, "p90_sec": 296.1}, {"city": "Уральск", "calls": 1, "audio_min": 1.4, "avg_sec": 85.0, "median_sec": 85.0, "p90_sec": 85.0}], "pairs": [{"topic_a": "Наличие анализа или пробы на препарат", "topic_b": "Стоимость и тарифы", "calls": 158, "pair": "Наличие анализа или пробы на препарат + Стоимость и тарифы"}, {"topic_a": "Анализы детям и возраст", "topic_b": "Наличие анализа или пробы на препарат", "calls": 133, "pair": "Анализы детям и возраст + Наличие анализа или пробы на препарат"}, {"topic_a": "График работы и время приёма", "topic_b": "Наличие анализа или пробы на препарат", "calls": 97, "pair": "График работы и время приёма + Наличие анализа или пробы на препарат"}, {"topic_a": "Адрес и выбор пункта сдачи", "topic_b": "Наличие анализа или пробы на препарат", "calls": 93, "pair": "Адрес и выбор пункта сдачи + Наличие анализа или пробы на препарат"}, {"topic_a": "Анализы детям и возраст", "topic_b": "Стоимость и тарифы", "calls": 85, "pair": "Анализы детям и возраст + Стоимость и тарифы"}, {"topic_a": "Наличие анализа или пробы на препарат", "topic_b": "Подготовка: еда и вода", "calls": 83, "pair": "Наличие анализа или пробы на препарат + Подготовка: еда и вода"}, {"topic_a": "Подготовка: еда и вода", "topic_b": "Стоимость и тарифы", "calls": 71, "pair": "Подготовка: еда и вода + Стоимость и тарифы"}, {"topic_a": "График работы и время приёма", "topic_b": "Стоимость и тарифы", "calls": 69, "pair": "График работы и время приёма + Стоимость и тарифы"}, {"topic_a": "Анализы детям и возраст", "topic_b": "График работы и время приёма", "calls": 63, "pair": "Анализы детям и возраст + График работы и время приёма"}, {"topic_a": "Адрес и выбор пункта сдачи", "topic_b": "Стоимость и тарифы", "calls": 63, "pair": "Адрес и выбор пункта сдачи + Стоимость и тарифы"}], "repeats": [{"window": "Не более 1 ч", "calls": 291, "share": 0.7404580152671756}, {"window": "Не более 24 ч", "calls": 356, "share": 0.905852417302799}, {"window": "Не более 72 ч", "calls": 377, "share": 0.9592875318066156}]};
+const nf=new Intl.NumberFormat('ru-RU'),pf=new Intl.NumberFormat('ru-RU',{style:'percent',maximumFractionDigits:0}),df=new Intl.NumberFormat('ru-RU',{maximumFractionDigits:1});
+const MON=['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
+const dl=s=>{const p=s.split('-');return +p[2]+' '+MON[+p[1]-1]};
+const we=s=>{const g=new Date(s+'T00:00:00Z').getUTCDay();return g===0||g===6};
+const NS='http://www.w3.org/2000/svg';
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function S(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent&&parent.appendChild(e);return e}
+function nice(max){const p=Math.pow(10,Math.floor(Math.log10(max)));const s=[1,2,2.5,5,10].map(x=>x*p).find(x=>max/x<=5);return {step:s,top:Math.ceil(max/s)*s}}
+function vbar(id,rows,o){
+ const el=document.getElementById(id);el.innerHTML='';
+ const W=Math.max(280,el.clientWidth||600),H=220;
+ const svg=S('svg',{width:'100%',height:H,viewBox:`0 0 ${W} ${H}`},el);
+ const max=Math.max(...rows.map(o.y))||1,{step,top}=nice(max);
+ const ticks=[];for(let t=0;t<=top+1e-9;t+=step)ticks.push(t);
+ const tx=ticks.map(t=>S('text',{class:'tick','text-anchor':'end',dy:'0.32em'},svg));
+ tx.forEach((e,i)=>e.textContent=nf.format(ticks[i]));
+ const ml=Math.ceil(Math.max(...tx.map(e=>e.getComputedTextLength())))+10,mb=28,mt=10,mr=4;
+ const ys=v=>H-mb-(v/top)*(H-mb-mt);
+ ticks.forEach((t,i)=>{tx[i].setAttribute('x',ml-6);tx[i].setAttribute('y',ys(t));const l=S('line',{x1:ml,x2:W-mr,y1:ys(t),y2:ys(t),stroke:css('--grid')});svg.insertBefore(l,svg.firstChild)});
+ const n=rows.length,band=(W-ml-mr)/n,bw=Math.min(32,band*0.78);
+ const tip=document.createElement('div');tip.className='tip';tip.hidden=true;el.appendChild(tip);
+ rows.forEach((d,i)=>{
+  const x=ml+i*band+(band-bw)/2,y=ys(o.y(d));
+  const r=S('rect',{x,y,width:bw,height:Math.max(0,ys(0)-y),rx:3,fill:o.muted&&o.muted(d)?css('--mute'):css('--accent')},svg);
+  r.addEventListener('mouseenter',()=>{r.setAttribute('opacity',.8);tip.innerHTML='';const h=document.createElement('div');h.className='th';h.textContent=o.th(d);tip.appendChild(h);o.tl(d).forEach(t=>{const q=document.createElement('div');q.textContent=t;tip.appendChild(q)});tip.hidden=false;const sc=el.clientWidth/W;tip.style.left=Math.min(Math.max(0,(x+bw/2)*sc-tip.offsetWidth/2),el.clientWidth-tip.offsetWidth)+'px';tip.style.top=Math.max(0,y-tip.offsetHeight-6)+'px'});
+  r.addEventListener('mouseleave',()=>{r.setAttribute('opacity',1);tip.hidden=true});
+ });
+ const stepL=Math.max(1,Math.ceil(n*(o.lw||40)/(W-ml-mr)));
+ rows.forEach((d,i)=>{if(i%stepL)return;const t=S('text',{class:'tick','text-anchor':'middle',x:ml+i*band+band/2,y:H-8},svg);t.textContent=o.xl(d)});
+}
+function hbars(id,items,max){
+ const el=document.getElementById(id);el.innerHTML='';
+ items.forEach(it=>{const row=document.createElement('div');row.className='row';
+  const top=document.createElement('div');top.className='rt';const a=document.createElement('span');a.textContent=it.label;const b=document.createElement('span');b.textContent=it.vt;top.append(a,b);
+  const tr=document.createElement('div');tr.className='track';
+  it.bars.forEach(bar=>{const f=document.createElement('div');f.className='fill';f.style.width=Math.min(100,bar.v/max*100)+'%';f.style.background=bar.c;tr.appendChild(f)});
+  row.append(top,tr);el.appendChild(row)});
+}
+function draw(){
+ const A='var(--accent)',M='var(--mute)',B='var(--bad)';
+ vbar('c-daily',DATA.daily,{y:d=>d.calls,xl:d=>dl(d.day),lw:46,muted:d=>we(d.day),th:d=>dl(d.day)+(we(d.day)?' · выходной':''),tl:d=>[nf.format(d.calls)+' звонков']});
+ const hm=Math.max(...DATA.hourly.map(d=>d.calls));
+ vbar('c-hourly',DATA.hourly,{y:d=>d.calls,xl:d=>d.hour.slice(0,2),lw:22,muted:d=>d.calls<hm*.6,th:d=>d.hour,tl:d=>[nf.format(d.calls)+' звонков','в среднем '+nf.format(Math.round(d.avg_sec))+' с']});
+ vbar('c-weekday',DATA.weekday,{y:d=>d.avg_per_day,xl:d=>d.weekday,lw:24,muted:d=>d.weekday==='Сб'||d.weekday==='Вс',th:d=>d.weekday,tl:d=>[df.format(d.avg_per_day)+' звонков в день',nf.format(d.calls)+' за '+d.days+' дн.']});
+ const tm=Math.max(...DATA.topics.map(r=>r.discussed));
+ hbars('c-topics',DATA.topics.map(r=>({label:r.question,vt:nf.format(r.asked)+' спросили · '+nf.format(r.discussed)+' обсуждали',bars:[{v:r.discussed,c:M},{v:r.asked,c:A}]})),tm);
+ const lm=Math.max(...DATA.language.map(r=>r.calls));
+ hbars('c-lang',DATA.language.map(r=>({label:r.language,vt:nf.format(r.calls)+' · '+nf.format(Math.round(r.avg_sec))+' с',bars:[{v:r.calls,c:(r.language==='Автоответчик'||r.language==='Нет разборчивой речи')?M:A}]})),lm);
+ const ct=DATA.city.filter(r=>r.calls>=3),cm=Math.max(...ct.map(r=>r.calls));
+ hbars('c-city',ct.map(r=>({label:r.city,vt:nf.format(r.calls)+' · '+nf.format(Math.round(r.avg_sec))+' с',bars:[{v:r.calls,c:A}]})),cm);
+ hbars('c-repeats',DATA.repeats.map(r=>({label:r.window,vt:nf.format(r.calls)+' · '+pf.format(r.share),bars:[{v:r.share,c:A}]})),1);
+ const K={};DATA.kpi.forEach(r=>K[r.metric]=r.value);const t=K.autoresponder;
+ hbars('c-auto',[['Попали на автоответчик','autoresponder',M],['Перезвонили позже','auto_callback',A],['Дозвонились до оператора','auto_reached',A],['Не перезвонили в периоде','auto_no_callback',B]].map(([l,m,c])=>({label:l,vt:nf.format(K[m])+(m==='autoresponder'?'':' · '+pf.format(K[m]/t)),bars:[{v:K[m],c}]})),t);
+ const tb=document.getElementById('c-pairs');tb.innerHTML='';
+ DATA.pairs.forEach(r=>{const tr=document.createElement('tr');const a=document.createElement('td');a.textContent=r.pair;const b=document.createElement('td');b.className='r';b.textContent=nf.format(r.calls);tr.append(a,b);tb.appendChild(tr)});
+}
+draw();let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(draw,150)});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
+</script></body></html>
