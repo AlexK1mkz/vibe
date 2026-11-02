@@ -58,7 +58,7 @@ def make(name,title,sub,chips,photo,cut=False):
         w=d.textlength(c,font=cf)+36
         d.rounded_rectangle([cxp,cyp,cxp+w,cyp+46],radius=23,fill=(255,255,255),outline=(207,224,232),width=2)
         d.text((cxp+18,cyp+10),c,font=cf,fill=NAVY); cxp+=w+10
-    d.text((X,H-60),'otri.kz  ·  +7 771 001 07 44',font=font('inter-500.ttf',22),fill=BLUE)
+    d.text((X,H-60),'otri.kz  ·  +7 747 226 85 39',font=font('inter-500.ttf',22),fill=BLUE)
     # photo card
     cw,ch=440,500; px,py=W-cw-56,(H-ch)//2
     sh=Image.new('RGBA',(W,H),(0,0,0,0)); sd=ImageDraw.Draw(sh)
@@ -84,7 +84,7 @@ make('og-home','Озоновые стерилизаторы и УФ-рецирк
 make('og-catalog','Каталог оборудования OTRI','5 озоновых стерилизаторов от 16 до 250 л и 2 бактерицидных рециркулятора.',['OTRI S-16…S-250','OTRI Desktop'],P+'otri-s-long-34.webp')
 make('og-dental','Озоновый стерилизатор для стоматологии','OTRI S-16 для кабинета: цикл 30\u00a0минут, до 45\u00a0°C, прозрачная камера, РУ РК.',['Астана','Алматы','под ключ'],P+'otri-s-long-cabinet.webp')
 make('og-rent','Аренда озонового стерилизатора для клиники','Без покупки оборудования: гарантийный взнос, ежемесячный платёж, сервис включён.',['S-16','S-36','S-40'],P+'otri-s-long-clinic.webp')
-make('og-contacts','Контакты OTRI','г. Астана, пр. Кабанбай батыра, 11, нп 43. Телефон и WhatsApp +7 771 001 07 44, info@otri.kz.',['WhatsApp','info@otri.kz'],P+'otri-ozonator-panel.webp')
+make('og-contacts','Контакты OTRI','г. Астана, пр. Кабанбай батыра, 11, нп 43. Телефон и WhatsApp +7 747 226 85 39, info@otri.kz.',['WhatsApp','info@otri.kz'],P+'otri-ozonator-panel.webp')
 import json, subprocess
 tmp=os.path.join(S,'_build','_data.mjs'); open(tmp,'w',encoding='utf-8').write(open(os.path.join(S,'o3s-data.js'),encoding='utf-8').read())
 d=json.loads(subprocess.check_output(['node','-e',"import(process.argv[1]).then(m=>{const o={};for(const k in m){if(typeof m[k]!=='function')o[k]=m[k]};process.stdout.write(JSON.stringify(o))})",tmp])); os.remove(tmp)

@@ -12,9 +12,10 @@ export const CONFIG = {
 };
 
 export const CONTACT = {
-  phone: '+7 771 001 07 44',
-  tel: 'tel:+77710010744',
+  phone: '+7 747 226 85 39',
+  tel: 'tel:+77472268539',
   email: 'info@otri.kz',
+  instagram: 'https://www.instagram.com/otri_kz/',
   site: 'www.otri.kz',
   address: 'г. Астана, 010000, пр. Кабанбай батыра, 11, нп 43',
   addressShort: 'Астана, пр. Кабанбай батыра, 11, нп 43',
@@ -34,7 +35,7 @@ export const LEGAL = {
 };
 
 // Все заявки уходят в WhatsApp: сообщение собирается из полей формы и открывается чат с номером компании
-export const WA_PHONE = '77710010744';
+export const WA_PHONE = '77472268539';
 export const waText = (text) => 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(text);
 export const sendWA = (lines) => {
   const lang = (typeof window !== 'undefined' && window.OTRI_LANG === 'kz') ? ' (KZ)' : '';
@@ -43,7 +44,7 @@ export const sendWA = (lines) => {
   try { const w = window.open(url, '_blank'); if (!w) window.location.href = url; } catch (e) { window.location.href = url; }
   return url;
 };
-export const wa = (text) => 'https://wa.me/77710010744?text=' + encodeURIComponent('Здравствуйте! Интересует ' + (text || 'оборудование OTRI'));
+export const wa = (text) => 'https://wa.me/77472268539?text=' + encodeURIComponent('Здравствуйте! Интересует ' + (text || 'оборудование OTRI'));
 export const waFor = (m) => wa(m ? (m.category === 'recirculator' ? 'рециркулятор ' : 'стерилизатор ') + m.name : '');
 
 export const fmt = (n) => (typeof n === 'number' ? n.toLocaleString('ru-RU').replace(/\u00a0/g, ' ') + ' ₸' : n);

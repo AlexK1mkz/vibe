@@ -61,7 +61,7 @@ recs = {m['id']: m for m in D['RECIRCULATORS']}
 ORG_ID = BASE + '#org'
 
 ORG = {"@type": "Organization", "@id": ORG_ID, "name": "OTRI", "legalName": "ТОО «OTRI»", "url": BASE,
-       "logo": BASE + "icon-512.png", "email": "info@otri.kz", "telephone": "+7 771 001 07 44", "taxID": D['LEGAL']['bin'],
+       "logo": BASE + "icon-512.png", "sameAs": ["https://www.instagram.com/otri_kz/"], "email": "info@otri.kz", "telephone": "+7 747 226 85 39", "taxID": D['LEGAL']['bin'],
        "address": {"@type": "PostalAddress", "streetAddress": "пр. Кабанбай батыра, 11, нп 43", "addressLocality": "Астана",
                    "postalCode": "010000", "addressCountry": "KZ"}}
 
@@ -98,10 +98,10 @@ page('catalog', 'catalog.dc.html', '', 'catalog.dc.html',
                      "url": BASE + ('o3s-16.dc.html?m=' if m['category'] == 'sterilizer' else 'recirculator.dc.html?m=') + m['id']}
                      for i, m in enumerate(D['STERILIZERS'] + D['RECIRCULATORS'])]}])
 page('contacts', 'contacts.dc.html', '', 'contacts.dc.html',
-     'Контакты OTRI — Астана, пр. Кабанбай батыра, 11 | +7 771 001 07 44',
-     'Телефон и WhatsApp +7 771 001 07 44, info@otri.kz. г. Астана, пр. Кабанбай батыра, 11, нп 43. Реквизиты ТОО «OTRI».',
+     'Контакты OTRI — Астана, пр. Кабанбай батыра, 11 | +7 747 226 85 39',
+     'Телефон и WhatsApp +7 747 226 85 39, info@otri.kz. г. Астана, пр. Кабанбай батыра, 11, нп 43. Реквизиты ТОО «OTRI».',
      'og-contacts', [ORG, {"@type": "LocalBusiness", "@id": BASE + "#place", "name": "OTRI", "image": BASE + "img/og/og-contacts.jpg",
-                           "telephone": "+7 771 001 07 44", "email": "info@otri.kz", "url": BASE, "address": ORG['address'], "parentOrganization": {"@id": ORG_ID}},
+                           "telephone": "+7 747 226 85 39", "email": "info@otri.kz", "url": BASE, "address": ORG['address'], "parentOrganization": {"@id": ORG_ID}},
                      crumbs(('Главная', ''), ('Контакты', 'contacts.dc.html'))])
 page('dental', 'dental.dc.html', '', 'dental.dc.html',
      'Озоновый стерилизатор для стоматологии в Астане и Алматы — OTRI S-16',
