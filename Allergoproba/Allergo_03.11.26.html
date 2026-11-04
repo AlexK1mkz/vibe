@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Аллергопроба — постановка задач</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Лабораторный бланк: холодная бумага, чернила, кобальт для действий, коралл для рисков. Сетка: шапка + вкладки + рабочая область */
+  --paper:#f4f6f9; --card:#ffffff; --ink:#18213a; --muted:#5d6782; --line:#dde2ec;
+  --accent:#2e55c4; --accent-soft:#e7edfb; --warn:#c2531b; --warn-soft:#fbeee6;
+  --ok:#1f7a55; --ok-soft:#e4f3ec; --hold:#8a6d12; --hold-soft:#f8f1d9;
+  --display:"Unbounded", "Golos Text", system-ui, sans-serif;
+  --body:"Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10141f; --card:#171d2c; --ink:#e6e9f2; --muted:#9aa3bb; --line:#2a3247;
+    --accent:#7d9bf0; --accent-soft:#1f2a4a; --warn:#f0936a; --warn-soft:#3a2219;
+    --ok:#5fcf9c; --ok-soft:#163327; --hold:#e2c25d; --hold-soft:#33290f; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10141f; --card:#171d2c; --ink:#e6e9f2; --muted:#9aa3bb; --line:#2a3247;
+  --accent:#7d9bf0; --accent-soft:#1f2a4a; --warn:#f0936a; --warn-soft:#3a2219;
+  --ok:#5fcf9c; --ok-soft:#163327; --hold:#e2c25d; --hold-soft:#33290f; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--body)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{padding:28px 0 8px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:700 28px/1.2 var(--display);margin:6px 0 8px;text-wrap:balance}
+h2{font:600 19px/1.3 var(--display);margin:0 0 12px;text-wrap:balance}
+h3{font-size:16px;margin:0 0 6px}
+p{margin:0 0 10px;max-width:72ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:13px}
+nav.tabs{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line);margin-top:14px}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto}
+nav.tabs a{padding:12px 12px;color:var(--muted);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;font-weight:500}
+nav.tabs a[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+nav.tabs a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main{padding:22px 0 60px}
+section.view{display:none;flex-direction:column;gap:18px}
+section.view.on{display:flex}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.tile .n{font:700 26px/1 var(--display);font-variant-numeric:tabular-nums}
+.tile .l{color:var(--muted);font-size:13px;margin-top:6px}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.p-must{background:var(--warn-soft);color:var(--warn)}
+.p-should{background:var(--accent-soft);color:var(--accent)}
+.p-could{background:var(--hold-soft);color:var(--hold)}
+.p-done{background:var(--ok-soft);color:var(--ok)}
+.p-tag{background:transparent;border:1px solid var(--line);color:var(--muted);font-weight:500}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+.scroll{overflow-x:auto}
+.id{font-variant-numeric:tabular-nums;font-weight:600;color:var(--accent);white-space:nowrap}
+ul.clean{margin:0;padding-left:18px}
+ul.clean li{margin:3px 0}
+.quote{border-left:3px solid var(--accent);padding:4px 0 4px 12px;color:var(--muted);font-size:14px;margin:8px 0}
+/* backlog */
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.filters label{display:flex;flex-direction:column;font-size:12px;color:var(--muted);gap:4px}
+select,input[type=search]{font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);min-width:150px}
+.epic{border:1px solid var(--line);border-radius:10px;background:var(--card);overflow:hidden}
+.epic>header{padding:16px 18px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto 1fr auto;gap:6px 14px;align-items:start}
+.epic .code{font:700 13px/1 var(--display);background:var(--accent);color:var(--card);padding:8px 9px;border-radius:7px}
+.epic .goal{color:var(--muted);font-size:14px;max-width:80ch}
+.epic .note{grid-column:1/-1;background:var(--hold-soft);color:var(--hold);font-size:13px;padding:8px 10px;border-radius:8px}
+details.story{border-bottom:1px solid var(--line)}
+details.story:last-child{border-bottom:0}
+details.story summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:70px 1fr auto;gap:10px;padding:12px 18px;align-items:center}
+details.story summary::-webkit-details-marker{display:none}
+details.story summary:hover{background:var(--paper)}
+details.story .tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+details.story .body{padding:2px 18px 16px 98px;display:grid;gap:10px}
+.us{font-style:italic}
+.ac{display:grid;gap:6px}
+.ac div{font-size:14px;background:var(--paper);border-radius:8px;padding:7px 10px}
+.ac b{color:var(--accent)}
+.empty{padding:18px;color:var(--muted)}
+.feat{padding:10px 18px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+.feat span{color:var(--muted);font-weight:500;margin-left:6px}
+.owner{margin-top:8px;display:inline-block;background:var(--ok-soft);color:var(--ok);font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px}
+/* process lanes */
+.lanes{display:grid;grid-template-columns:150px repeat(6,minmax(130px,1fr));min-width:980px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.lane-h{background:var(--accent-soft);font-weight:600;font-size:13px;padding:10px;border-bottom:1px solid var(--line);display:flex;align-items:center}
+.cell{border-bottom:1px solid var(--line);border-left:1px dashed var(--line);padding:8px;min-height:70px;display:flex;align-items:center}
+.step{background:var(--card);border:1.5px solid var(--accent);border-radius:8px;padding:6px 8px;font-size:12.5px;line-height:1.35;width:100%}
+.step.new{border-color:var(--warn);box-shadow:inset 3px 0 0 var(--warn)}
+.step small{display:block;color:var(--muted)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:2px solid var(--accent)}
+.sw.new{border-color:var(--warn)}
+/* states */
+.states{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.st{padding:8px 12px;border-radius:8px;background:var(--accent-soft);color:var(--ink);font-size:13.5px;font-weight:500}
+.st.end{background:var(--ok-soft);color:var(--ok)}
+.st.bad{background:var(--warn-soft);color:var(--warn)}
+.arr{color:var(--muted)}
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;counter-reset:s}
+.rung{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--card);position:relative}
+.rung .k{font:700 22px/1 var(--display);color:var(--accent)}
+.rung .t{font-weight:600;margin:6px 0 4px}
+.rung p{font-size:13.5px;color:var(--muted);margin:0}
+/* roadmap */
+.road{display:grid;grid-template-columns:200px repeat(5,1fr);min-width:820px;font-size:13px}
+.road .h{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em;padding:6px 8px;border-bottom:1px solid var(--line)}
+.road .r{padding:10px 8px;border-bottom:1px solid var(--line);font-weight:600}
+.road .bar{margin:8px 0;border-radius:6px;padding:6px 8px;font-size:12.5px;color:#fff;align-self:center}
+.b1{background:var(--warn)} .b2{background:var(--accent)} .b3{background:var(--hold)} .b4{background:var(--ok)}
+.chart-row{display:grid;grid-template-columns:200px 1fr 40px;gap:10px;align-items:center;font-size:13px;margin:6px 0}
+.stack{display:flex;height:16px;border-radius:4px;overflow:hidden;background:var(--paper)}
+.stack span{display:block;height:100%}
+.s-must{background:var(--warn)} .s-should{background:var(--accent)} .s-could{background:var(--hold)} .s-done{background:var(--ok)}
+.num{font-variant-numeric:tabular-nums;text-align:right;color:var(--muted)}
+.foot{color:var(--muted);font-size:13px}
+@media (max-width:640px){
+  h1{font-size:22px}
+  details.story summary{grid-template-columns:1fr;gap:4px}
+  details.story .tags{justify-content:flex-start}
+  details.story .body{padding:2px 16px 14px}
+  .epic>header{grid-template-columns:1fr}
+  .chart-row{grid-template-columns:110px 1fr 30px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="eyebrow">Аллергопроба · постановка задач по BABOK v3</div>
+  <h1>Электронные направления, бонусы стоматологам, платежи и ИИ-анализ</h1>
+  <div class="meta">
+    <span>Источник: планёрка проекта (транскрипт), отчёт колл-центра 21.09–20.10.2026, контекст проекта</span>
+    <span>Версия 1.1 · 04.11.2026</span>
+    <span>Владелец бэклога: Alex Kim</span>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Разделы">
+  <div class="wrap">
+    <a href="#overview">1. Стратегия</a>
+    <a href="#stakeholders">2. Стейкхолдеры</a>
+    <a href="#process">3. Процессы и модели</a>
+    <a href="#backlog">4. Бэклог</a>
+    <a href="#nfr">5. Нефункциональные</a>
+    <a href="#roadmap">6. Релизы</a>
+    <a href="#questions">7. Вопросы и риски</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- 1 STRATEGY -->
+<section class="view" id="v-overview">
+  <div class="card">
+    <h2>Бизнес-потребность</h2>
+    <p>Основной канал пациентов — стоматологи. Сегодня они выписывают бумажные направления: на печать уходит около 1 млн ₸ в месяц, пациент теряет бланк и получает новый, а мы не видим, кто направил и дошёл ли пациент. Цель — перевести стоматологов на электронное направление из браузера по номеру телефона пациента и закрепить эту привычку через бонусы и пользу для клиники.</p>
+    <div class="quote">Цель захватническая: завести всем логины, чтобы админ или сам стоматолог, набрав номер пациента, отправлял ему направление.</div>
+  </div>
+
+  <div class="grid g4">
+    <div class="card tile"><div class="n">≈1 млн ₸</div><div class="l">в месяц уходит на печать направлений</div></div>
+    <div class="card tile"><div class="n">10</div><div class="l">лояльных стоматологий — критическая масса старта</div></div>
+    <div class="card tile"><div class="n">≤10 / мес</div><div class="l">новых стоматологий в бонусной программе</div></div>
+    <div class="card tile"><div class="n">2–3 нед.</div><div class="l">обещанный срок появления 15 бонусов в кабинете</div></div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h2>Текущее состояние (As-Is)</h2>
+      <ul class="clean">
+        <li>Бумажные направления, повторная печать, нет атрибуции врача.</li>
+        <li>Кабинет стоматолога работает частично: наборы препаратов, отправка уведомления пациенту, запись пациента. Логины выдаём вручную.</li>
+        <li>Подключены 2 точки OneDent (эксклюзивный тариф 5 000 ₸/аллерген), ещё не направляли из-за доработок.</li>
+        <li>Оплата через Kaspi запущена, смешанной оплаты и своей фискализации нет.</li>
+        <li>Результаты уходят файлом в WhatsApp — риск по закону о персональных данных.</li>
+        <li>Медпредставители работают без трекинга, эффект визитов не измеряется.</li>
+        <li>Анализ R-SAL под микроскопом долгий и зависит от лаборанта.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Целевое состояние (To-Be)</h2>
+      <ul class="clean">
+        <li>Стоматолог за 30 секунд отправляет направление с телефона или компьютера, видит статус «дошёл / не дошёл».</li>
+        <li>Бонусная программа: 15 приветственных аллергенов поэтапно, затем 1 аллерген за каждые 10 оплаченных пациентов.</li>
+        <li>Реклама клиники на 2-й странице бланка результата с модерацией.</li>
+        <li>Все платежи через CRM: Kaspi, карта, наличные, QR, фискальный чек.</li>
+        <li>Результат пациенту по ссылке в личный кабинет после авторизации.</li>
+        <li>Трекер медпредставителей связан с направлениями: виден эффект каждого обхода.</li>
+        <li>ИИ предразмечает мазки, лаборант подтверждает.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Бизнес-требования (BR)</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>ID</th><th>Требование</th><th>Метрика успеха</th><th>Эпики</th></tr></thead>
+      <tbody id="br-table"></tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>Границы решения</h2>
+    <div class="grid g2">
+      <div><h3>В рамках</h3><ul class="clean">
+        <li>Веб-кабинет стоматолога с мобильной вёрсткой, без нативного приложения.</li>
+        <li>Бонусная программа, тариф «Бонусный», учёт для финансов.</li>
+        <li>Активация электронных заявок на точках забора.</li>
+        <li>Приём платежей и фискализация в CRM.</li>
+        <li>Трекер медпредставителей и аналитика.</li>
+        <li>R&amp;D: ИИ-определение реакции по мазку.</li>
+      </ul></div>
+      <div><h3>Вне рамок этой версии</h3><ul class="clean">
+        <li>Денежные выплаты стоматологам (запрещено, заменяем бонусами).</li>
+        <li>Нативное мобильное приложение (только если веб не взлетит).</li>
+        <li>Полная самостоятельная регистрация без модерации.</li>
+        <li>Выход в Узбекистан и масштабирование на тысячи клиник.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 STAKEHOLDERS -->
+<section class="view" id="v-stakeholders">
+  <div class="card">
+    <h2>Стейкхолдеры и RACI</h2>
+    <p class="foot">R — исполняет, A — утверждает, C — консультирует, I — информируется. Роли собраны по транскрипту, уточните, если кто-то отвечает за другое.</p>
+    <div class="scroll"><table id="raci"></table></div>
+  </div>
+  <div class="card">
+    <h2>Карта интересов</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Группа</th><th>Что получает</th><th>Чего опасается</th><th>Как вовлекаем</th></tr></thead>
+      <tbody>
+        <tr><td>Стоматолог</td><td>Бонусные аллергены для пациентов, семьи; реклама на бланке; видит, дошёл ли пациент</td><td>Лишняя работа, тратить рабочее время, путаница с логинами</td><td>Пилот с медпредставителем рядом, видеоинструкция, кастдев с вознаграждением</td></tr>
+        <tr><td>Админ клиники</td><td>Быстрое направление по номеру, без бумаги</td><td>Несколько врачей и один логин</td><td>Модель «врач ↔ клиники», переключение клиники</td></tr>
+        <tr><td>Пациент</td><td>WhatsApp-уведомление со ссылкой, запись онлайн, результат в кабинете</td><td>Потерять направление, заплатить за «бесплатное»</td><td>Явно: «аллерген — бонус, забор крови — платно»</td></tr>
+        <tr><td>Точка забора</td><td>Готовая заявка, меньше ручного ввода</td><td>Бесплатная работа на бонусных</td><td>Оплата забора по себестоимости, кликабельное уведомление</td></tr>
+        <tr><td>Финансы</td><td>Деньги сразу к нам, без дебиторки; бонусы видны в отчёте</td><td>Перерасход бюджета на бонусы</td><td>Тариф «Бонусный» 0 ₸, лимиты, дашборд стоимости программы</td></tr>
+        <tr><td>Медпредставитель</td><td>Аргументы, буклеты, видимый результат обходов</td><td>Контроль «ради контроля»</td><td>Отчёт об эффекте визита, а не только о маршруте</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 3 PROCESS -->
+<section class="view" id="v-process">
+  <div class="card">
+    <h2>Процесс To-Be: электронное направление от стоматолога до результата</h2>
+    <div class="legend"><span><i class="sw"></i>есть или частично есть</span><span><i class="sw new"></i>новое в этой постановке</span></div>
+    <div class="scroll" style="margin-top:12px"><div class="lanes" id="lanes"></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Жизненный цикл направления (статусы)</h2>
+    <div class="states">
+      <span class="st">Создано врачом</span><span class="arr">→</span>
+      <span class="st">WhatsApp-уведомление отправлено</span><span class="arr">→</span>
+      <span class="st">Пациент записался</span><span class="arr">→</span>
+      <span class="st">Активировано на точке</span><span class="arr">→</span>
+      <span class="st">Оплачено / забор</span><span class="arr">→</span>
+      <span class="st">В лаборатории</span><span class="arr">→</span>
+      <span class="st end">Результат готов</span>
+    </div>
+    <div class="states" style="margin-top:10px">
+      <span class="st">WhatsApp-уведомление отправлено</span><span class="arr">→ 24 ч без перехода →</span><span class="st">Напоминание</span><span class="arr">→ N дней →</span><span class="st bad">Не дошёл</span>
+      <span class="st bad">Отменено</span>
+    </div>
+    <p class="foot" style="margin-top:10px">Врач видит только статус. Содержание результата врачу показываем лишь после решения юриста и согласия пациента (вопрос Q3).</p>
+  </div>
+
+  <div class="card">
+    <h2>Механика бонусной программы</h2>
+    <div class="ladder">
+      <div class="rung"><div class="k">0</div><div class="t">Подключение</div><p>Врач принимает правила программы. На балансе 15 бонус-аллергенов, все заблокированы.</p></div>
+      <div class="rung"><div class="k">2</div><div class="t">Верификация</div><p>2 первых пациента реально пришли и получили результат. Защита от фиктивных стоматологий.</p></div>
+      <div class="rung"><div class="k">+5</div><div class="t">Первые бонусы</div><p>Открываются 5 бесплатных аллергенов. Врач сам отмечает их в направлении.</p></div>
+      <div class="rung"><div class="k">5 оплат</div><div class="t">Привычка</div><p>Отправить 5 платных направлений, которые дошли до оплаты.</p></div>
+      <div class="rung"><div class="k">+10</div><div class="t">Остаток приветственных</div><p>Открываются оставшиеся 10 бонусов.</p></div>
+      <div class="rung"><div class="k">10 → 1</div><div class="t">Постоянное начисление</div><p>Каждые 10 оплаченных пациентов дают 1 бонус-аллерген. Потолок баланса 15.</p></div>
+    </div>
+    <p class="foot" style="margin-top:10px">Забор крови всегда платный для пациента. Бонусные сдаются только на собственных точках. Индивидуальные условия клиники (например, OneDent) могут отключать программу.</p>
+  </div>
+
+  <div class="card">
+    <h2>Модель данных (ключевые сущности)</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Сущность</th><th>Ключевые поля</th><th>Связи</th></tr></thead>
+      <tbody>
+        <tr><td>Врач</td><td>ФИО, телефон, статус верификации, участие в программе, рекламный блок</td><td>N клиник через «Место работы»</td></tr>
+        <tr><td>Клиника</td><td>Название, БИН, адрес, тариф клиники, флаг «бонусы отключены»</td><td>N врачей, N направлений</td></tr>
+        <tr><td>Место работы</td><td>врач, клиника, статус подтверждения клиникой</td><td>Врач ↔ Клиника</td></tr>
+        <tr><td>Направление</td><td>пациент (телефон), врач, клиника, препараты, точка забора, спец. условие, статус</td><td>N позиций, 1 заказ</td></tr>
+        <tr><td>Позиция направления</td><td>аллерген, цена, признак «бонус»</td><td>Списание бонуса</td></tr>
+        <tr><td>Бонусная операция</td><td>врач, тип (начисление / списание / разблокировка / сгорание), кол-во, основание</td><td>Неизменяемый журнал</td></tr>
+        <tr><td>Платёж</td><td>способ (Kaspi, карта, наличные, QR), сумма, фискальный чек</td><td>Заказ</td></tr>
+        <tr><td>Визит медпредставителя</td><td>сотрудник, клиника, гео, время, фото, итог</td><td>Клиника, врачи</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 4 BACKLOG -->
+<section class="view" id="v-backlog">
+  <div class="card">
+    <h2>Приоритеты по эпикам</h2>
+    <div id="prio-chart"></div>
+    <div class="legend" style="margin-top:8px">
+      <span><i class="sw" style="background:var(--warn);border-color:var(--warn)"></i>Must</span>
+      <span><i class="sw" style="background:var(--accent);border-color:var(--accent)"></i>Should</span>
+      <span><i class="sw" style="background:var(--hold);border-color:var(--hold)"></i>Could</span>
+      <span><i class="sw" style="background:var(--ok);border-color:var(--ok)"></i>Готово</span>
+    </div>
+  </div>
+  <div class="card filters">
+    <label for="f-epic">Эпик<select id="f-epic"><option value="">Все эпики</option></select></label>
+    <label for="f-prio">Приоритет<select id="f-prio"><option value="">Любой</option><option>Must</option><option>Should</option><option>Could</option><option>Готово</option></select></label>
+    <label for="f-rel">Релиз<select id="f-rel"><option value="">Любой</option><option>R1</option><option>R2</option><option>R3</option><option>R&amp;D</option></select></label>
+    <label for="f-q">Поиск<input type="search" id="f-q" placeholder="бонус, Kaspi, статус…"></label>
+    <span class="foot" id="f-count"></span>
+  </div>
+  <div id="epics" style="display:flex;flex-direction:column;gap:16px"></div>
+</section>
+
+<!-- 5 NFR -->
+<section class="view" id="v-nfr">
+  <div class="card">
+    <h2>Нефункциональные требования</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>ID</th><th>Категория</th><th>Требование</th><th>Как проверяем</th></tr></thead>
+      <tbody id="nfr-table"></tbody>
+    </table></div>
+  </div>
+  <div class="card">
+    <h2>Переходные требования (Transition)</h2>
+    <ul class="clean">
+      <li>Печать бумажных направлений продолжается ещё около года; через 6 месяцев объём печати сокращаем.</li>
+      <li>Действующим клиникам с особыми условиями (OneDent и др.) условия переносятся в «тариф клиники» без изменений.</li>
+      <li>До запуска бонусов подключаем стоматологов с обещанием: «через 2–3 недели в кабинете появятся 15 аллергопроб».</li>
+      <li>Видеоинструкции для стоматолога и администратора точки готовы до первого пилота.</li>
+      <li>Партнёрская точка на правом берегу обучена приёму электронных заявок.</li>
+      <li>Отправка результатов файлом в WhatsApp отключается только после запуска кабинета пациента.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 6 ROADMAP -->
+<section class="view" id="v-roadmap">
+  <div class="card">
+    <h2>План релизов</h2>
+    <div class="scroll"><div class="road" id="road"></div></div>
+  </div>
+  <div class="grid g2" id="rel-cards"></div>
+  <div class="card">
+    <h2>KPI для оценки решения (Solution Evaluation)</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Метрика</th><th>Формула</th><th>Ориентир</th></tr></thead>
+      <tbody>
+        <tr><td>Доля электронных направлений</td><td>электронные / все направления за месяц</td><td>рост каждый месяц; через 6 мес — заметно меньше печати</td></tr>
+        <tr><td>Расход на печать</td><td>₸ в месяц</td><td>ниже 1 млн ₸ и снижается</td></tr>
+        <tr><td>Активные стоматологи</td><td>≥1 направление в неделю</td><td>10 к концу пилота</td></tr>
+        <tr><td>Конверсия направления</td><td>пациенты с забором / отправленные направления</td><td>базовая линия в R1, затем рост</td></tr>
+        <tr><td>Стоимость программы</td><td>(себестоимость бонусов + оплата заборов) / оплаченный пациент</td><td>в пределах маркетингового бюджета</td></tr>
+        <tr><td>Эффект визита медпредставителя</td><td>прирост направлений клиники за 14 дней после визита</td><td>считается с R2</td></tr>
+        <tr><td>Точность ИИ</td><td>совпадение с экспертом, чувствительность / специфичность</td><td>порог задаёт лаборатория (Q11)</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 7 QUESTIONS -->
+<section class="view" id="v-questions">
+  <div class="card">
+    <h2>Открытые вопросы</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>ID</th><th>Вопрос</th><th>Варианты</th><th>Кто решает</th><th>Блокирует</th></tr></thead>
+      <tbody id="q-table"></tbody>
+    </table></div>
+  </div>
+  <div class="card">
+    <h2>Риски</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Риск</th><th>Вероятность</th><th>Влияние</th><th>Митигация</th></tr></thead>
+      <tbody id="r-table"></tbody>
+    </table></div>
+  </div>
+  <div class="card">
+    <h2>Решения, принятые на планёрке</h2>
+    <ul class="clean">
+      <li>Работаем в браузере, без мобильного приложения; один вход, сессия не выкидывает.</li>
+      <li>Вместо денег стоматологам — бонусные аллергены; пациент всегда платит за забор крови.</li>
+      <li>Заводим новый тариф «Бонусный»: аллерген 0 ₸ с пометкой, чтобы финансы видели бонусы в отчёте.</li>
+      <li>Не более 10 стоматологий в месяц в бонусной программе; старт с 1–3 пилотных.</li>
+      <li>Бонусные направления пока принимаем только на своих точках.</li>
+      <li>Пока логины выдаём сами; самостоятельная регистрация — позже, с модерацией.</li>
+      <li>Аккаунт привязан к врачу, клиника выбирается внутри кабинета.</li>
+      <li>Информированное согласие подписывается у администратора точки, из онлайн-записи убираем.</li>
+      <li>Берём в работу трекер медпредставителей через Telegram с интеграцией в нашу CRM: делает Алишер, архитектуру утверждает Марат.</li>
+      <li>Уведомления пациенту отправляются в WhatsApp, не по SMS.</li>
+      <li>Электронное направление, бонусы и активация заявки — части одного эпика «Кабинет стоматолога».</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<script>
+const EPICS = [
+ {id:'E1',name:'Кабинет стоматолога',goal:'Единое рабочее место стоматолога: электронное направление по номеру пациента, бонусы, статусы, реклама клиники и активация заявки на точке забора.',br:['BR-01','BR-02','BR-03'],
+  features:['Аккаунт и доступ','Электронное направление','Бонусная программа','Активация на точке забора','Реклама на бланке','Аналитика']},
+ {id:'E2',name:'Платёжная система',goal:'Все платежи проходят через CRM: Kaspi, карта, наличные, QR, с собственной фискализацией и без дебиторки.',br:['BR-04']},
+ {id:'E3',name:'Определение анализов с ИИ',goal:'ИИ находит реакцию агломерации лейкоцитов на оцифрованном мазке, лаборант подтверждает. Быстрее и стабильнее.',br:['BR-06'],note:'На планёрке эпик не разбирали. Требования собраны из контекста проекта (R-SAL, сканер стёкол, Viva Cell) и требуют отдельной сессии выявления с лабораторией.'},
+ {id:'E4',name:'Трекер медпредставителей + CRM',goal:'Telegram-бот фиксирует обходы, данные живут в нашей CRM рядом с клиниками, врачами и направлениями.',br:['BR-05'],owner:'Исполнитель: Алишер · Архитектуру утверждает: Марат',
+  features:['Архитектура','Telegram-бот','Интеграция с CRM','Отчёты и аналитика']},
+ {id:'E5',name:'Внедрение и кастдев',goal:'Запустить пилот, обучить пользователей и получать обратную связь каждый день.',br:['BR-02','BR-03']},
+ {id:'E6',name:'Пациент: результаты и коммуникации',goal:'Безопасная выдача результата через WhatsApp-уведомление и кабинет, снижение нагрузки на колл-центр.',br:['BR-07','BR-01']}
+];
+
+const BR = [
+ ['BR-01','Перевести стоматологов с бумажных направлений на электронные','расход на печать < 1 млн ₸/мес и снижается; доля электронных направлений растёт','E1, E6'],
+ ['BR-02','Набрать критическую массу лояльных стоматологий','10 стоматологий с ≥1 направлением в неделю','E1, E5'],
+ ['BR-03','Мотивировать стоматологов без денежных выплат','удержание врачей в программе через 3 мес; стоимость программы в бюджете','E1, E5'],
+ ['BR-04','Принимать все платежи через CRM с фискализацией','100% оплат с фискальным чеком из CRM; дебиторка → 0','E2'],
+ ['BR-05','Управлять эффективностью медпредставителей','отчёт по визитам и приросту направлений за любой период','E4'],
+ ['BR-06','Ускорить и стандартизировать анализ R-SAL','время анализа одного образца, совпадение с экспертом','E3'],
+ ['BR-07','Выдавать результаты в соответствии с законом о персональных данных','0 файлов результатов, отправленных в мессенджер','E6']
+];
+
+// prio: Must/Should/Could/Готово ; rel: R1/R2/R3/R&D
+const S = [
+ // E1
+ {id:'E1-01',e:'E1',f:'Аккаунт и доступ',t:'Постоянная сессия и мобильная веб-версия',p:'Must',r:'R1',type:'Функциональное',
+  us:'Как стоматолог, я один раз вхожу на компьютере и на телефоне и дальше пользуюсь кабинетом без повторного ввода пароля.',
+  ac:['Дано: врач вошёл в кабинет. Когда: он открывает ссылку через 7 дней. Тогда: кабинет открыт без входа.','Кабинет корректно работает в мобильном браузере от 360 px, без установки приложения.','При блокировке врача все его сессии завершаются в течение 1 минуты.'],
+  src:'«Сделайте, чтобы в браузере открыто… чтобы оно заходило, не выкидывало»'},
+ {id:'E1-05',e:'E1',f:'Электронное направление',t:'Направление по номеру телефона',p:'Готово',r:'R1',type:'Функциональное',
+  us:'Как стоматолог или администратор клиники, я ввожу номер пациента, выбираю препараты и точку забора, и пациенту приходит WhatsApp-уведомление со ссылкой на запись.',
+  ac:['Номер вводится по маске +7, проверяется формат.','Набор препаратов по умолчанию подставляется, его можно изменить для конкретного пациента.','После отправки пациент получает WhatsApp-уведомление со ссылкой на выбор точки и времени.','Создание направления занимает не больше 30 секунд.'],
+  src:'Демонстрация на планёрке: функция работает, нужна доводка'},
+ {id:'E1-06',e:'E1',f:'Электронное направление',t:'Избранные наборы препаратов',p:'Готово',r:'R1',type:'Функциональное',
+  us:'Как стоматолог, я сохраняю свой набор препаратов (например, артикаин, септанест) и он подставляется по умолчанию.',
+  ac:['Можно добавить и убрать препараты и сохранить набор.','Сохранённый набор подставляется в новое направление.'],src:'Демонстрация на планёрке'},
+ {id:'E1-07',e:'E1',f:'Электронное направление',t:'Статус направления для врача',p:'Must',r:'R1',type:'Функциональное',
+  us:'Как стоматолог, я вижу, дошёл ли мой пациент до сдачи анализа, чтобы напомнить ему на следующем приёме.',
+  ac:['В списке направлений видны статусы: создано, записался, сдал, результат готов, не дошёл.','Статус «не дошёл» ставится, если за N дней нет активации (N задаёт админ, по умолчанию 7).','Врач не видит содержание результата, пока не закрыт вопрос Q3.'],
+  src:'«Предлагаю, чтобы был добавлен статус сдал / не сдал»'},
+ {id:'E1-24',e:'E1',f:'Аналитика',t:'Аналитика врача',p:'Should',r:'R2',type:'Функциональное',
+  us:'Как стоматолог, я вижу за месяц, сколько пациентов направил и сколько дошли.',
+  ac:['Фильтр по периоду; показатели: отправлено, дошли, конверсия, бонусы начислено и списано.','Выгрузка в Excel.','Та же аналитика в админке по каждой клинике и врачу.'],
+  src:'«Сколько за месяц пациентов он отправил, сколько дошло… для них и для нас классная аналитика»'},
+ {id:'E1-03',e:'E1',f:'Аккаунт и доступ',t:'Врач работает в нескольких клиниках',p:'Should',r:'R2',type:'Функциональное',
+  us:'Как стоматолог, который принимает в двух клиниках, я выбираю в кабинете клинику, из которой сейчас направляю.',
+  ac:['Аккаунт принадлежит врачу; врач добавляет места работы.','Клиника получает уведомление и подтверждает, что врач у неё работает.','В направлении фиксируются и врач, и клиника.','Переключатель активной клиники в шапке кабинета.'],
+  src:'«Когда он заходит, он будет выбирать стоматологию, с которой работает, переключать»'},
+ {id:'E1-04',e:'E1',f:'Аккаунт и доступ',t:'Самостоятельная регистрация с верификацией',p:'Could',r:'R3',type:'Функциональное',
+  us:'Как новый стоматолог, я регистрируюсь сам по номеру телефона, а компания проверяет, что я реальный врач.',
+  ac:['Регистрация по телефону с кодом подтверждения в WhatsApp.','Проверка клиники по БИН и открытым реестрам (ИИ-помощник), финальное решение — сотрудник.','До проверки бонусы недоступны, направления можно отправлять.','До релиза R3 логины выдаём вручную.'],
+  src:'«Сейчас не самостоятельно, сейчас мы заводим. В будущем можем сделать»'},
+ {id:'E1-22',e:'E1',f:'Реклама на бланке',t:'Реклама клиники на 2-й странице бланка',p:'Should',r:'R2',type:'Функциональное',
+  us:'Как стоматолог, я размещаю слоган, акцию и услуги своей клиники на второй странице бланка результата моего пациента.',
+  ac:['Поля: слоган, акция, услуги, контакты; редактируются в кабинете.','Первая страница бланка остаётся без рекламы.','Если врач работает в нескольких клиниках, блок берётся от клиники направления.','Образец бланка согласован с юристом и показан 3 стоматологам до разработки.'],
+  src:'«На второй странице будет реклама той стоматологии, которая направила»'},
+ {id:'E1-23',e:'E1',f:'Реклама на бланке',t:'Модерация рекламного блока',p:'Should',r:'R2',type:'Функциональное',
+  us:'Как компания, мы публикуем на бланке только проверенную рекламу, чтобы не отвечать за нарушения.',
+  ac:['ИИ проверяет текст по правилам: брань, сравнение с конкурентами, недостоверные обещания.','Колл-центр подтверждает или отклоняет в течение 24 часов с причиной.','Пока изменение не одобрено, на бланке показывается прежняя версия.'],
+  src:'«ИИ проверяет, потом финальный человек проверяет, колл-центр»'},
+ {id:'E1-02',e:'E1',f:'Аккаунт и доступ',t:'Правила программы при подключении',p:'Must',r:'R1',type:'Функциональное',
+  us:'Как стоматолог, при первом входе я читаю и принимаю правила бонусной программы.',
+  ac:['Без принятия правил бонусы не начисляются.','Правила содержат: этапы, потолок баланса, платный забор крови, точки приёма бонусных.','Хранится дата и версия принятых правил.'],
+  src:'«Обо всём обязательно нужно написать, когда регистрировались, всё это прочитали»'},
+ // E1
+ {id:'E1-08',e:'E1',f:'Бонусная программа',t:'Бонусный баланс врача',p:'Must',r:'R1',type:'Функциональное',
+  us:'Как стоматолог, я вижу баланс бонус-аллергенов: сколько доступно, сколько заблокировано и что нужно, чтобы открыть следующие.',
+  ac:['Виджет баланса на главной кабинета: доступно, заблокировано, прогресс до следующего этапа.','История операций: начисление, разблокировка, списание, с основанием.','Журнал операций неизменяем, исправления — только сторнирующей записью.'],
+  src:'«Он сам списывает со своего баланса эти бесплатные»'},
+ {id:'E1-09',e:'E1',f:'Бонусная программа',t:'Поэтапное открытие 15 приветственных',p:'Must',r:'R1',type:'Бизнес-правило',
+  us:'Как компания, мы открываем приветственные бонусы по шагам, чтобы проверить врача и сформировать привычку.',
+  ac:['При подключении начисляется 15 заблокированных бонусов.','Когда 2 первых пациента врача получили результат, открываются 5.','Когда после этого 5 направлений врача оплачены, открываются оставшиеся 10.','Каждый переход сопровождается уведомлением врачу.'],
+  src:'«Два… первый он направил должны реально прийти сдать и получить результат и тогда активируется 5, а потом ещё 10»'},
+ {id:'E1-10',e:'E1',f:'Бонусная программа',t:'Начисление за объём',p:'Must',r:'R2',type:'Бизнес-правило',
+  us:'Как стоматолог, после приветственных бонусов я получаю 1 бонус-аллерген за каждые 10 оплаченных пациентов.',
+  ac:['Счётчик учитывает только оплаченные направления этого врача.','Начисление автоматическое, в момент 10-й оплаты.','Коэффициент (10 → 1) и тип бонуса настраиваются в админке без релиза.','Гипотеза для Астаны: вместе с аллергеном — общий анализ крови (решение Q6).'],
+  src:'«За каждые 10 будет один аллерген бесплатно, начисляться постоянно»'},
+ {id:'E1-11',e:'E1',f:'Бонусная программа',t:'Потолок баланса',p:'Must',r:'R1',type:'Бизнес-правило',
+  us:'Как компания, мы ограничиваем накопление бонусов, чтобы не получить разовый наплыв бесплатных анализов.',
+  ac:['Доступный баланс не превышает потолка (по умолчанию 15, значение в настройках).','Начисления сверх потолка не производятся, врач видит предупреждение.','Значение потолка — решение Q1.'],
+  src:'«Это как бомба замедленного действия… пусть будет число 15 в обиходе»'},
+ {id:'E1-12',e:'E1',f:'Бонусная программа',t:'Списание бонуса в направлении',p:'Must',r:'R1',type:'Функциональное',
+  us:'Как стоматолог, при создании направления я отмечаю, какие аллергены оплачиваются бонусами.',
+  ac:['Галочка «бонус» у каждого аллергена, пока есть доступный баланс.','Пациент в WhatsApp-уведомлении и на странице записи видит: «аллерген — бонус, забор крови оплачивается».','Если пациент не дошёл, бонус возвращается на баланс при отмене или через N дней.'],
+  src:'«Он может выбирать один в подарок, второй платно»; «вы оплачиваете за забор крови»'},
+ {id:'E1-13',e:'E1',f:'Бонусная программа',t:'Тариф «Бонусный» и учёт для финансов',p:'Must',r:'R1',type:'Функциональное',
+  us:'Как финансовый специалист, я вижу в отчётах бонусные анализы отдельно, с ценой 0 ₸.',
+  ac:['В справочнике тарифов есть тариф «Бонусный».','Позиция в заказе: аллерген 0 ₸ с пометкой «бонус», забор — по прайсу точки.','Отчёт за период: бонусы по врачам и клиникам, себестоимость, оплата точкам забора.'],
+  src:'«Аллерген и цена 0 тенге, потому что это бонус… новый тариф называется бонус»'},
+ {id:'E1-14',e:'E1',f:'Бонусная программа',t:'Приём бонусных только на своих точках',p:'Must',r:'R1',type:'Бизнес-правило',
+  us:'Как компания, мы принимаем бонусные направления только на собственных и арендованных точках, чтобы не платить партнёрам за бесплатные анализы.',
+  ac:['Если в направлении есть бонус, пациенту доступны только разрешённые точки (левый берег — головной пункт, правый берег — арендованная точка).','Список разрешённых точек настраивается в админке.'],
+  src:'«Бонусы только здесь сдают… на правом берегу туда только сдают бонусный»'},
+ {id:'E1-15',e:'E1',f:'Бонусная программа',t:'Индивидуальные условия клиник',p:'Should',r:'R1',type:'Функциональное',
+  us:'Как администратор системы, я задаю клинике особый тариф и отключаю для неё бонусы.',
+  ac:['У клиники есть поле «тариф клиники» (например, 5 000 ₸ за аллерген, бессрочно) и флаг «бонусы отключены».','Спецусловие клиники подставляется в направление автоматически.'],
+  src:'«Бонусные системы будут по-разному подключаться… кому-то мы будем отключать бонусы»'},
+ {id:'E1-16',e:'E1',f:'Бонусная программа',t:'Лимит участников и бюджет программы',p:'Must',r:'R1',type:'Функциональное',
+  us:'Как руководитель, я контролирую, сколько стоматологов вступает в программу и сколько она стоит.',
+  ac:['В админке включение врача в программу вручную; не более 10 новых участников в календарный месяц (настраивается).','Дашборд: выдано бонусов, использовано, себестоимость, оплата точкам забора, стоимость на 1 оплаченного пациента.'],
+  src:'«Чтобы мы не обанкротились за один месяц, давайте в месяц не больше 10 стоматологий»'},
+ // E1
+ {id:'E1-17',e:'E1',f:'Активация на точке забора',t:'Поиск заявки по телефону',p:'Must',r:'R1',type:'Функциональное',
+  us:'Как администратор точки забора, я ввожу номер пациента и вижу его электронное направление от клиники.',
+  ac:['Поиск в реестре заявок по номеру и ФИО.','Заявка клиники отображается со статусом «создана клиникой, не активирована».','Активация в один клик переводит заявку в работу.'],
+  src:'«Администратор заходит в реестр заявок, вводит пациента… видит, что заявка создана, не активирована»'},
+ {id:'E1-18',e:'E1',f:'Активация на точке забора',t:'Кликабельное уведомление о существующей заявке',p:'Must',r:'R1',type:'Функциональное',
+  us:'Как администратор точки, при вводе нового пациента я получаю уведомление, что заявка уже есть, и перехожу в неё одним кликом.',
+  ac:['Уведомление появляется, если по номеру есть неактивированная заявка.','Клик открывает существующую заявку, новая не создаётся.'],
+  src:'«Чтобы на этом уведомлении можно было кликнуть и сразу переходил на ту заявку»'},
+ {id:'E1-19',e:'E1',f:'Активация на точке забора',t:'Видно направившего врача',p:'Must',r:'R1',type:'Функциональное',
+  us:'Как администратор точки, я вижу, какой врач и какая клиника направили пациента.',
+  ac:['В карточке заявки: врач (ФИО), клиника, дата направления, бонусные позиции.'],
+  src:'«Желательно врач, чтобы было видно»'},
+ {id:'E1-20',e:'E1',f:'Активация на точке забора',t:'Согласие подписывается на точке',p:'Must',r:'R1',type:'Функциональное',
+  us:'Как пациент, я подписываю информированное согласие у администратора, а не при онлайн-записи.',
+  ac:['Шаг подписания согласия убран из онлайн-записи.','На точке администратор не может активировать заявку без отметки о подписанном согласии.'],
+  src:'«Информационное согласие он должен здесь подписывать, у администратора»'},
+ {id:'E1-21',e:'E1',f:'Активация на точке забора',t:'Исправить окно «иностранный гражданин»',p:'Must',r:'R1',type:'Дефект',
+  us:'Как администратор точки, я не получаю лишнее окно «иностранный гражданин» при активации заявки.',
+  ac:['Окно не появляется для граждан РК с корректным ИИН.','Регресс-тест на сценарий с интеграцией.'],src:'Замечание на демонстрации'},
+ // E2
+ {id:'E2-01',e:'E2',t:'Приём оплаты через Kaspi',p:'Готово',r:'R1',type:'Функциональное',
+  us:'Как пациент, я оплачиваю анализ через Kaspi.',
+  ac:['Платежи проходят (запущено, первые оплаты поступили).','Мониторинг: доля неуспешных оплат и время зачисления в отчёте.','Регистрация пока не блокируется без оплаты.'],
+  src:'«Уже платежи пошли сегодня»'},
+ {id:'E2-02',e:'E2',t:'Смешанная оплата',p:'Must',r:'R2',type:'Функциональное',
+  us:'Как администратор точки, я принимаю оплату частями разными способами: Kaspi, карта, наличные, QR.',
+  ac:['В одном заказе несколько платежей разными способами; сумма должна совпасть с итогом.','Каждый способ фиксируется отдельно для сверки.','Бонусные позиции 0 ₸ не требуют оплаты, забор — требует.'],
+  src:'«Будем постепенно добавлять смешанную оплату, банковской картой, наличными, чтобы всё фиксировалось»'},
+ {id:'E2-03',e:'E2',t:'Фискализация через CRM',p:'Must',r:'R2',type:'Интеграция',
+  us:'Как компания, мы выдаём фискальный чек из своей CRM и отказываемся от терминалов Kaspi.',
+  ac:['Интеграция с онлайн-кассой / ОФД выбранного провайдера.','Чек отправляется пациенту в WhatsApp и хранится в заказе.','Возвраты формируют чек возврата.'],
+  src:'«Мы полностью забираем на себя фискализацию через нашу CRM»'},
+ {id:'E2-04',e:'E2',t:'Выбор провайдера и комиссий',p:'Must',r:'R2',type:'Анализ',
+  us:'Как руководитель, я выбираю провайдера эквайринга и кассы по сравнению комиссий и условий.',
+  ac:['Сравнительная таблица: комиссии по способам оплаты, сроки зачисления, API, стоимость кассы.','Встреча с финансами (четверг), решение зафиксировано.'],
+  src:'«По комиссиям это всё посмотрим»'},
+ {id:'E2-05',e:'E2',t:'Оплата как условие активации',p:'Could',r:'R3',type:'Бизнес-правило',
+  us:'Как компания, мы активируем заявку только после оплаты, когда доступны все способы оплаты.',
+  ac:['Включается флагом после релиза смешанной оплаты.','Исключения: бонусные позиции, особые тарифы клиник.'],
+  src:'«Мы блокировку не ставили, потому что у нас нет другого варианта»'},
+ {id:'E2-06',e:'E2',t:'Взаиморасчёты с партнёрами',p:'Should',r:'R3',type:'Функциональное',
+  us:'Как финансовый специалист, я вижу, сколько мы должны партнёрским точкам и клиникам, и не трачу время на дебиторку.',
+  ac:['Все оплаты поступают нам; начисления партнёрам (например, оплата забора 500–1 000 ₸) считаются автоматически.','Реестр выплат за период с выгрузкой.'],
+  src:'«Главное, что все деньги сразу к нам идут… на дебиторку уходит слишком много времени»'},
+ // E3
+ {id:'E3-01',e:'E3',t:'Оцифровка мазков: сканер стёкол',p:'Must',r:'R&D',type:'Анализ',
+  us:'Как лаборатория, мы получаем цифровое изображение мазка, пригодное для ИИ.',
+  ac:['Выбран сканер предметных стёкол, доступный в Казахстане.','Подтверждены разрешение, формат и скорость сканирования, API для интеграции.'],src:'Контекст проекта'},
+ {id:'E3-02',e:'E3',t:'Датасет и разметка',p:'Must',r:'R&D',type:'Функциональное',
+  us:'Как команда ИИ, мы собираем размеченный набор мазков «контроль / с аллергеном».',
+  ac:['Протокол разметки утверждён лабораторией.','Каждый образец размечен минимум двумя специалистами, расхождения разбираются.','Данные обезличены.'],src:'Контекст проекта'},
+ {id:'E3-03',e:'E3',t:'Модель определения реакции',p:'Must',r:'R&D',type:'Функциональное',
+  us:'Как лаборант, я получаю от ИИ оценку: есть ли агломерация лейкоцитов и с какой уверенностью.',
+  ac:['Модель возвращает класс и вероятность, подсвечивает участки на изображении.','Точность на отложенной выборке не ниже порога, утверждённого лабораторией (Q11).'],src:'Контекст проекта'},
+ {id:'E3-04',e:'E3',t:'Подтверждение лаборантом',p:'Must',r:'R&D',type:'Функциональное',
+  us:'Как лаборант, я подтверждаю или исправляю вывод ИИ, и исправления идут в дообучение.',
+  ac:['Ни один результат не уходит пациенту без подтверждения специалиста.','Исправления сохраняются как новые размеченные данные.'],src:'Контекст проекта'},
+ {id:'E3-05',e:'E3',t:'Интеграция с CRM',p:'Should',r:'R&D',type:'Интеграция',
+  us:'Как лаборант, я вижу вывод ИИ в карточке анализа и формирую заключение без переноса данных вручную.',
+  ac:['Результат ИИ сохраняется в заказе как черновик.','Время от сканирования до черновика измеряется.'],src:'Контекст проекта'},
+ {id:'E3-06',e:'E3',t:'Валидация и регуляторика',p:'Should',r:'R&D',type:'Анализ',
+  us:'Как компания, мы подтверждаем, что ИИ-модуль можно применять в медицинской практике.',
+  ac:['Отчёт валидации против эксперта.','Консультация по статусу ПО как медицинского изделия в РК.'],src:'Контекст проекта'},
+ // E4
+ {id:'E4-01',e:'E4',f:'Архитектура',t:'Архитектура трекера и интеграции с CRM',p:'Must',r:'R2',type:'Анализ',
+  us:'Как команда разработки, мы до начала работ фиксируем, как Telegram-бот, админка и CRM обмениваются данными.',
+  ac:['Алишер готовит схему: Telegram-бот → API CRM, где хранятся визиты, как сотрудник авторизуется в боте, как хранится геолокация.','Описаны сущности: сотрудник-медпредставитель, визит, клиника и врач из справочников CRM.','Решение по персональным данным и сроку хранения координат.','Марат утверждает архитектуру. Без его утверждения разработка не стартует.'],
+  src:'Решение после планёрки: трекер соединить с CRM, архитектуру утверждает Марат'},
+ {id:'E4-02',e:'E4',f:'Telegram-бот',t:'Telegram-бот: визит с геолокацией',p:'Must',r:'R2',type:'Функциональное',
+  us:'Как медпредставитель, я отмечаю визит в клинику в Telegram: геолокация, фото, итог.',
+  ac:['Бот принимает текущую геолокацию и фото, клинику выбираю из справочника CRM.','Визит без геолокации не засчитывается.','Вход в бот только для сотрудника, заведённого в CRM с ролью «медпредставитель».'],
+  src:'«Трекер медпредставителей через Telegram, который даёт координаты»'},
+ {id:'E4-03',e:'E4',f:'Интеграция с CRM',t:'Интеграция трекера с CRM',p:'Must',r:'R2',type:'Интеграция',
+  us:'Как руководитель, я вижу визиты медпредставителей в той же CRM, где клиники, врачи и направления.',
+  ac:['Справочник клиник и врачей бот берёт из CRM, дублей не создаёт.','Каждый визит записывается в CRM и привязан к клинике и сотруднику.','Новый врач, подключённый на визите, сразу появляется в CRM и получает доступ в кабинет стоматолога.','Ошибки обмена логируются, повторная отправка автоматическая.'],
+  src:'«Это должно быть связано с логинами врачей»'},
+ {id:'E4-04',e:'E4',f:'Интеграция с CRM',t:'Управление доступами в CRM',p:'Must',r:'R2',type:'Функциональное',
+  us:'Как руководитель, я вижу в CRM всех медпредставителей и блокирую доступ уволившимся.',
+  ac:['Список сотрудников со статусом активен / заблокирован.','Карта визитов за день.','Блокировка в CRM сразу отключает сотруднику Telegram-бот.'],
+  src:'«Медпредставитель пришёл, он активен, ушёл, мы его заблокировали»'},
+ {id:'E4-05',e:'E4',f:'Отчёты и аналитика',t:'Отчёты за любой период',p:'Must',r:'R2',type:'Функциональное',
+  us:'Как руководитель, я выгружаю отчёт по визитам за день, неделю, месяц или любой период.',
+  ac:['Показатели: визиты, уникальные клиники, новые подключения врачей.','Выгрузка в Excel; ежедневная автоотправка руководителю.'],
+  src:'«Должна выгружаться отчётность ежедневно, за любой период»'},
+ {id:'E4-06',e:'E4',f:'Отчёты и аналитика',t:'Эффект визита на направления',p:'Should',r:'R3',type:'Функциональное',
+  us:'Как руководитель, я вижу, растут ли направления клиники после визита медпредставителя.',
+  ac:['Для каждой клиники: направления за 14 дней до и после визита (данные кабинета стоматолога в CRM).','Список «просевших» клиник: падение направлений больше заданного порога.'],
+  src:'«Есть ли прирост после их обхода… мы должны видеть точки, которые просели»'},
+ {id:'E4-07',e:'E4',f:'Отчёты и аналитика',t:'ИИ-аналитик «коммерческий директор»',p:'Could',r:'R3',type:'Функциональное',
+  us:'Как руководитель, я получаю еженедельный разбор: кто из медпредставителей и регионов даёт эффект и куда идти дальше.',
+  ac:['Еженедельная сводка по регионам и сотрудникам.','Рекомендации по клиникам для повторного визита с обоснованием на данных.'],
+  src:'«Туда даже я бы подключила искусственный интеллект с способностями коммерческого директора»'},
+ // E5
+ {id:'E5-01',e:'E5',t:'Пилот с 1–3 стоматологиями рядом с офисом',p:'Must',r:'R1',type:'Переходное',
+  us:'Как команда, мы запускаем электронные направления в ближайших клиниках и присутствуем при первом направлении.',
+  ac:['Определены 1–3 клиники рядом (кандидаты обсуждались на планёрке).','Первое направление врач делает при медпредставителе.','О первом дошедшем пациенте сообщаем руководителю в тот же день.'],
+  src:'«Вот поэтому мы сейчас с одним, двумя, тремя максимум стоматологами начнём»'},
+ {id:'E5-02',e:'E5',t:'Видеоинструкции',p:'Must',r:'R1',type:'Переходное',
+  us:'Как стоматолог или администратор точки, я разбираюсь в кабинете по короткому видео.',
+  ac:['Видео для врача (до 3 минут): вход, направление, бонусы.','Видео для точки забора: поиск и активация заявки.'],
+  src:'«Видеоинструкцию скинули? — Нет, ещё нету»'},
+ {id:'E5-03',e:'E5',t:'Образец бланка с рекламой для стоматологов',p:'Should',r:'R1',type:'Переходное',
+  us:'Как медпредставитель, я показываю стоматологам образец бланка с рекламой и собираю реакцию.',
+  ac:['Образец согласован с юристом.','Реакция 3 стоматологов записана в журнал кастдева.'],
+  src:'«Надо показать стоматологам, если им окей, мы можем сделать»'},
+ {id:'E5-04',e:'E5',t:'Регулярный кастдев',p:'Must',r:'R1',type:'Переходное',
+  us:'Как продуктовая команда, мы каждый день получаем обратную связь от стоматологов и лаборантов.',
+  ac:['Общий чат или форма обратной связи; журнал реакций (дословно, включая молчание и недовольство).','Вознаграждение за интервью: бонус-аллерген.','Еженедельный разбор журнала и изменения бэклога.'],
+  src:'«Любую реакцию давайте… надо бонусы давать за кастдев»'},
+ {id:'E5-05',e:'E5',t:'Скрипт подключения стоматолога',p:'Must',r:'R1',type:'Переходное',
+  us:'Как медпредставитель, я подключаю стоматолога по единому скрипту с тремя ценностями.',
+  ac:['Скрипт: бережём природу, реклама клиники на бланке, бонус-аллергены для пациентов.','Честное обещание сроков: 15 аллергопроб появятся в кабинете через 2–3 недели.'],
+  src:'«Три бонуса: мы бережём природу, ваша реклама, бонусы на аллергены»'},
+ {id:'E5-06',e:'E5',t:'Буклеты для медпредставителей',p:'Should',r:'R1',type:'Переходное',
+  us:'Как медпредставитель, я прихожу в клинику с печатными материалами.',
+  ac:['Буклет о программе и электронных направлениях отпечатан и выдан.'],src:'«У вас будут красивые буклетики»'},
+ {id:'E5-07',e:'E5',t:'Обучение точки на правом берегу',p:'Should',r:'R1',type:'Переходное',
+  us:'Как администратор арендованной точки, я умею активировать электронные и бонусные заявки.',
+  ac:['Обучение проведено, тестовая заявка активирована.'],src:'«Обучите тех, кто на правом, чтобы им удобно было»'},
+ // E6
+ {id:'E6-01',e:'E6',t:'Результат через личный кабинет пациента',p:'Must',r:'R2',type:'Функциональное',
+  us:'Как пациент, я получаю уведомление о готовности и открываю результат в личном кабинете после входа по коду.',
+  ac:['В WhatsApp приходит только уведомление и ссылка, без файла.','Вход по коду подтверждения из WhatsApp; файл скачивается в кабинете.','Отправка файлов в мессенджер отключается после запуска.'],
+  src:'«По WhatsApp то, что мы отправляем, это незаконно… будет просто информация, что результат готов»'},
+ {id:'E6-02',e:'E6',t:'Напоминание пациенту через 24 часа',p:'Готово',r:'R1',type:'Функциональное',
+  us:'Как пациент, я получаю повторное напоминание, если не перешёл по ссылке.',
+  ac:['Через сутки без перехода — повторное сообщение.'],src:'«Это у нас уже есть»'},
+ {id:'E6-03',e:'E6',t:'WhatsApp-бот и справочник препаратов',p:'Should',r:'R3',type:'Функциональное',
+  us:'Как пациент, я сам узнаю, есть ли проба на мой препарат, цену, адрес и график.',
+  ac:['Справочник препаратов с синонимами и торговыми названиями.','Бот отвечает на 5 топ-вопросов на русском и казахском.','Передача оператору при неуверенном ответе.'],
+  src:'Отчёт колл-центра: «есть ли проба на препарат» — 459 обращений за 30 дней'},
+ {id:'E6-04',e:'E6',t:'Разметка звонков в CRM',p:'Should',r:'R2',type:'Функциональное',
+  us:'Как руководитель колл-центра, я вижу город, тему и итог каждого звонка.',
+  ac:['Поля город, тема, итог обязательны для закрытия звонка.','Доля звонков без темы < 5%.'],
+  src:'Отчёт колл-центра: 62% записей без города, 36% без темы'}
+];
+
+const NFR = [
+ ['NFR-01','Безопасность данных','Врач видит только статус направления. Медданные пациента — в кабинете пациента после авторизации. Соответствие закону РК «О персональных данных и их защите».','Ревизия ролей и прав, проверка юристом'],
+ ['NFR-02','Аудит','Все операции с бонусами, тарифами и платежами пишутся в неизменяемый журнал (кто, когда, что, основание).','Выборочная сверка журнала с отчётами'],
+ ['NFR-03','Удобство','Направление создаётся за ≤ 30 секунд; кабинет работает в мобильном браузере от 360 px.','UX-тест с 3 стоматологами'],
+ ['NFR-04','Сессия','Долгая сессия на доверенном устройстве; отзыв всех сессий при блокировке ≤ 1 минуты.','Тест-кейс'],
+ ['NFR-05','Производительность','Страницы кабинета открываются ≤ 2 секунд на 4G.','Замер Lighthouse'],
+ ['NFR-06','Доставка уведомлений','WhatsApp-уведомления доставляются ≥ 98% через WhatsApp Business API; статус доставки виден в заявке, при недоставке создаётся задача колл-центру.','Отчёт по статусам доставки'],
+ ['NFR-07','Язык','Интерфейс пациента, WhatsApp-уведомления и бот — на русском и казахском (25% обращений на казахском).','Проверка носителем языка'],
+ ['NFR-08','Настраиваемость','Параметры бонусной программы (этапы, коэффициент, потолок, лимит участников, разрешённые точки) меняются в админке без релиза.','Тест-кейс'],
+ ['NFR-09','Фискальное соответствие','Каждый платёж сопровождается фискальным чеком через ОФД.','Сверка с кабинетом ОФД']
+];
+
+const QS = [
+ ['Q1','Потолок бонусного баланса','15 (предложение по итогам обсуждения) или 100','Аида','E1-11'],
+ ['Q2','Приветственные 15 — разово или ежемесячно?','разово при подключении; или ежемесячно при выполнении условий','Аида','E1-09'],
+ ['Q3','Что врач видит по пациенту?','только статус; статус + результат с согласия пациента','Юрист','E1-07'],
+ ['Q4','Сгорают ли бонусы?','без срока; сгорают через N месяцев','Аида, финансы','E1-08'],
+ ['Q5','Сколько платим точке за забор по бонусному направлению?','себестоимость 500–1 000 ₸; фикс по договору','Финансы','E1-13, E2-06'],
+ ['Q6','Бонус — только аллерген или + ОАК / биохимия в Астане?','только аллерген; аллерген + ОАК','Аида','E1-10'],
+ ['Q7','Бонусы для клиник со спецтарифом (OneDent и др.)','отключены; включаются по решению','Аида','E1-15'],
+ ['Q8','Название бонусной единицы для врача и пациента','«бонус-аллерген», «аллергобонус», свой знак','Маркетинг','E1-02, E1-08'],
+ ['Q9','Провайдер эквайринга и онлайн-кассы','сравнение комиссий и API','Финансы, Alex','E2-03, E2-04'],
+ ['Q10','Срок N, после которого направление «не дошло»','7 / 14 / 30 дней','Продукт','E1-07, E1-12'],
+ ['Q11','ИИ-анализ: целевая точность, объём датасета, регуляторный статус','определяет лаборатория','Лаборатория, Марат','E3'],
+ ['Q12','Можно ли размещать рекламу клиники на бланке медицинского результата','да на 2-й странице; нет','Юрист','E1-22']
+];
+
+const RISKS = [
+ ['Наплыв бонусных анализов разом (накопленные балансы)','Средняя','Высокое','Потолок баланса, лимит 10 участников в месяц, дашборд стоимости'],
+ ['Фиктивные стоматологии ради бонусов','Средняя','Среднее','Верификация 2 реальными пациентами, подтверждение клиникой, ручное включение в программу'],
+ ['Нарушение закона о персональных данных','Высокая сейчас','Высокое','Кабинет пациента, врач видит только статус, отказ от файлов в WhatsApp'],
+ ['Нарушение законодательства о рекламе на бланке','Средняя','Среднее','Согласование образца юристом, ИИ + ручная модерация'],
+ ['Стоматологи не меняют привычку','Высокая','Высокое','Пилот с сопровождением, ежедневный кастдев, гибкая подстройка бонусов'],
+ ['Нагрузка на точки забора и путаница с заявками','Средняя','Среднее','Кликабельное уведомление, поиск по номеру, видеоинструкция'],
+ ['Обещание «2–3 недели» не выполнено','Средняя','Высокое','R1 ограничен Must-историями E1 и E1, остальное — R2']
+];
+
+const STAKE = [
+ ['Аида Диканбаева','Основатель, спонсор','A','A','C','I','A','A'],
+ ['Alex Kim','Продукт, тех. директор','A','R','R','A','R','R'],
+ ['Данил','PM разработки','R','R','C','C','C','R'],
+ ['Марат','Ведущий разработчик, архитектор','R','R','R','A','I','R'],
+ ['Алишер','Разработка трекера, кастдев','I','I','I','R','R','I'],
+ ['Медпредставители (Астана и др.)','Подключение врачей, обратная связь','C','I','I','C','R','I'],
+ ['Финансы (Наталья)','Учёт бонусов, комиссии, дебиторка','C','R','I','I','I','I'],
+ ['Колл-центр','Модерация рекламы, звонки','C','I','I','I','C','R'],
+ ['Админы точек забора','Активация заявок, согласие','C','C','I','I','C','I'],
+ ['Лаборатория','Анализ R-SAL, разметка','I','I','R','I','I','C'],
+ ['Юрист','Персональные данные, реклама','C','C','C','C','I','C'],
+ ['Стоматологи и админы клиник','Пользователи кабинета','C','I','I','I','C','I']
+];
+
+const LANES = [
+ ['Стоматолог / админ клиники',[['Вводит номер пациента','',0],['Выбирает препараты, отмечает бонусы','E1-12',1],['Отправляет','',0],null,null,['Видит статус «дошёл»','E1-07',1]]],
+ ['Пациент',[null,null,['WhatsApp-уведомление со ссылкой','',0],['Выбирает точку и время','',0],null,['Уведомление → кабинет','E6-01',1]]],
+ ['CRM',[['Проверка тарифа клиники','E1-15',1],['Списание бонуса с баланса','E1-08',1],['Создаёт заявку «не активирована»','',0],['Напоминание через 24 ч','',0],['Начисление: 10 оплат → 1','E1-10',1],null]],
+ ['Точка забора',[null,null,null,['Поиск по номеру, уведомление','E1-18',1],['Согласие, оплата, забор','E1-20',1],null]],
+ ['Касса',[null,null,null,null,['Kaspi / карта / наличные, чек','E2-02',1],null]],
+ ['Лаборатория',[null,null,null,null,['ИИ-предразметка, подтверждение','E3-04',1],['Результат в CRM','',0]]]
+];
+
+const RELEASES = [
+ {id:'R1',name:'R1 · Бонусы и активация',when:'до конца ноября 2026 (обещание 2–3 недели)',cls:'b1',from:0,to:1,desc:'Минимум, чтобы пилотные стоматологи начали направлять и увидели 15 бонусов.'},
+ {id:'R2',name:'R2 · Деньги и прозрачность',when:'декабрь 2026',cls:'b2',from:1,to:2,desc:'Смешанная оплата и фискализация, реклама на бланке, аналитика, трекер медпредставителей, кабинет пациента.'},
+ {id:'R3',name:'R3 · Масштаб',when:'январь–февраль 2027',cls:'b3',from:2,to:4,desc:'Самостоятельная регистрация, взаиморасчёты, ИИ-аналитика медпредставителей, WhatsApp-бот.'},
+ {id:'R&D',name:'R&D · ИИ-анализ мазков',when:'параллельно, ноябрь 2026 – март 2027',cls:'b4',from:0,to:5,desc:'Сканер, датасет, модель, валидация. Стадии уточняются после сессии с лабораторией.'}
+];
+
+const PCLS = {Must:'p-must',Should:'p-should',Could:'p-could','Готово':'p-done'};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// BR
+document.getElementById('br-table').innerHTML = BR.map(r=>`<tr><td class="id">${r[0]}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${r[3]}</td></tr>`).join('');
+
+// RACI
+document.getElementById('raci').innerHTML = '<thead><tr><th>Стейкхолдер</th><th>Роль</th>'+EPICS.map(e=>`<th title="${esc(e.name)}">${e.id}</th>`).join('')+'</tr></thead><tbody>'+
+ STAKE.map(s=>`<tr><td><b>${esc(s[0])}</b></td><td>${esc(s[1])}</td>${s.slice(2).map(v=>`<td><span class="pill ${v==='A'?'p-must':v==='R'?'p-should':'p-tag'}">${v}</span></td>`).join('')}</tr>`).join('')+'</tbody>';
+document.querySelector('#v-stakeholders .foot').insertAdjacentHTML('beforeend',' Колонки: E1 кабинет стоматолога, E2 платежи, E3 ИИ, E4 трекер + CRM, E5 внедрение, E6 пациент.');
+
+// lanes
+(function(){
+ const heads=['Старт','Направление','Отправка','Запись / приход','Оплата и анализ','Результат'];
+ let h='<div class="lane-h" style="background:var(--card)"></div>'+heads.map(x=>`<div class="lane-h" style="background:var(--card);color:var(--muted)">${x}</div>`).join('');
+ LANES.forEach(([lane,cells])=>{
+   h+=`<div class="lane-h">${lane}</div>`;
+   cells.forEach(c=>{ h+= c?`<div class="cell"><div class="step ${c[2]?'new':''}">${esc(c[0])}${c[1]?`<small>${c[1]}</small>`:''}</div></div>`:'<div class="cell"></div>'; });
+ });
+ document.getElementById('lanes').innerHTML=h;
+})();
+
+// prio chart
+(function(){
+ const order=['Must','Should','Could','Готово'], cls={Must:'s-must',Should:'s-should',Could:'s-could','Готово':'s-done'};
+ const max=Math.max(...EPICS.map(e=>S.filter(s=>s.e===e.id).length));
+ document.getElementById('prio-chart').innerHTML=EPICS.map(e=>{
+   const items=S.filter(s=>s.e===e.id);
+   const segs=order.map(p=>{const n=items.filter(s=>s.p===p).length;return n?`<span class="${cls[p]}" style="width:${n/max*100}%" title="${p}: ${n}"></span>`:''}).join('');
+   return `<div class="chart-row"><span>${e.id} · ${esc(e.name)}</span><div class="stack">${segs}</div><span class="num">${items.length}</span></div>`;
+ }).join('');
+})();
+
+// backlog
+const fe=document.getElementById('f-epic');
+EPICS.forEach(e=>fe.insertAdjacentHTML('beforeend',`<option value="${e.id}">${e.id} · ${esc(e.name)}</option>`));
+function renderBacklog(){
+ const ep=fe.value, pr=document.getElementById('f-prio').value, rl=document.getElementById('f-rel').value, q=document.getElementById('f-q').value.trim().toLowerCase();
+ let total=0;
+ const html=EPICS.filter(e=>!ep||e.id===ep).map(e=>{
+   const items=S.filter(s=>s.e===e.id&&(!pr||s.p===pr)&&(!rl||s.r===rl)&&(!q||(s.t+' '+s.us+' '+s.ac.join(' ')+' '+s.id).toLowerCase().includes(q)));
+   total+=items.length;
+   if(!items.length) return '';
+   const storyHtml=x=>`<details class="story"><summary><span class="id">${x.id}</span><span>${esc(x.t)}</span><span class="tags"><span class="pill ${PCLS[x.p]}">${x.p}</span><span class="pill p-tag">${x.r}</span><span class="pill p-tag">${x.type}</span></span></summary>
+   <div class="body"><div class="us">${esc(x.us)}</div><div class="ac">${x.ac.map((a,i)=>`<div><b>AC${i+1}.</b> ${esc(a)}</div>`).join('')}</div><div class="foot">Источник: ${esc(x.src)}</div></div></details>`;
+   let body;
+   if(e.features){
+     body=e.features.map(f=>{const g=items.filter(x=>x.f===f).sort((a,b)=>a.id.localeCompare(b.id));return g.length?`<div class="feat">${esc(f)} <span>${g.length}</span></div>`+g.map(storyHtml).join(''):'';}).join('');
+   } else body=items.map(storyHtml).join('');
+   return `<article class="epic"><header><span class="code">${e.id}</span><div><h2 style="margin:0 0 4px">${e.features?'Эпик · ':''}${esc(e.name)}</h2><div class="goal">${esc(e.goal)}</div>${e.owner?`<div class="owner">${esc(e.owner)}</div>`:''}</div><div class="tags">${e.br.map(b=>`<span class="pill p-tag">${b}</span>`).join(' ')}</div>${e.note?`<div class="note">${esc(e.note)}</div>`:''}</header>`+body+'</article>';
+ }).join('');
+ document.getElementById('epics').innerHTML=html||'<div class="card empty">Ничего не найдено. Сбросьте фильтры или измените поиск.</div>';
+ document.getElementById('f-count').textContent=`Показано требований: ${total} из ${S.length}`;
+}
+['f-epic','f-prio','f-rel','f-q'].forEach(id=>document.getElementById(id).addEventListener('input',renderBacklog));
+renderBacklog();
+
+// NFR, Q, risks
+document.getElementById('nfr-table').innerHTML=NFR.map(r=>`<tr><td class="id">${r[0]}</td><td>${r[1]}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join('');
+document.getElementById('q-table').innerHTML=QS.map(r=>`<tr><td class="id">${r[0]}</td><td><b>${esc(r[1])}</b></td><td>${esc(r[2])}</td><td>${esc(r[3])}</td><td>${r[4]}</td></tr>`).join('');
+document.getElementById('r-table').innerHTML=RISKS.map(r=>`<tr><td>${esc(r[0])}</td><td><span class="pill ${r[1].startsWith('Высокая')?'p-must':'p-could'}">${r[1]}</span></td><td><span class="pill ${r[2]==='Высокое'?'p-must':'p-could'}">${r[2]}</span></td><td>${esc(r[3])}</td></tr>`).join('');
+
+// roadmap
+(function(){
+ const cols=['Ноябрь','Декабрь','Январь','Февраль','Март'];
+ let h='<div class="h">Релиз</div>'+cols.map(c=>`<div class="h">${c}</div>`).join('');
+ RELEASES.forEach(r=>{
+   h+=`<div class="r">${r.name}</div>`;
+   const span=Math.min(r.to,5)-r.from;
+   for(let i=0;i<5;i++){
+     if(i===r.from) h+=`<div class="bar ${r.cls}" style="grid-column:span ${span}">${S.filter(s=>s.r===r.id).length} требований</div>`;
+     else if(i<r.from||i>=r.from+span) h+='<div></div>';
+   }
+ });
+ document.getElementById('road').innerHTML=h;
+ document.getElementById('rel-cards').innerHTML=RELEASES.map(r=>`<div class="card"><h2>${r.name}</h2><div class="foot" style="margin-bottom:8px">${r.when}</div><p>${esc(r.desc)}</p><ul class="clean">${S.filter(s=>s.r===r.id).sort((x,y)=>x.id.localeCompare(y.id)).map(s=>`<li><span class="id">${s.id}</span> ${esc(s.t)} <span class="pill ${PCLS[s.p]}">${s.p}</span></li>`).join('')}</ul></div>`).join('');
+})();
+
+// routing
+const VIEWS=['overview','stakeholders','process','backlog','nfr','roadmap','questions'];
+function route(){
+ const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):'overview';
+ VIEWS.forEach(x=>document.getElementById('v-'+x).classList.toggle('on',x===v));
+ document.querySelectorAll('nav.tabs a').forEach(a=>{ if(a.getAttribute('href')==='#'+v) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+}
+window.addEventListener('hashchange',route); route();
+</script>
+</body>
+</html>
