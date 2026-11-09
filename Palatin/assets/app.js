@@ -96,7 +96,7 @@
       <div><h4>Каталог</h4><ul>${cats}<li><a href="stock.html">Palatin Stock</a></li></ul></div>
       <div><h4>Бренды</h4><ul>${br}</ul></div>
       <div><h4>Салоны</h4><ul>${sal}</ul><p style="margin-top:14px">Колл-центр: <a href="tel:${CALL.tel}">${CALL.phone}</a></p></div>
-    </div><div class="ftr-b"><span>© 2026 Palatin Group. Территория безупречного вкуса.</span><span><a href="dizayneram.html">Дизайнерам</a> · <a href="dizayneram.html#obektam">Объектам</a> · <a href="o-nas.html">О компании</a> · Политика конфиденциальности</span></div></div></footer>
+    </div><div class="ftr-b"><span>© 1998–2026 Palatin Group. Территория безупречного вкуса.</span><span><a href="dizayneram.html">Дизайнерам</a> · <a href="dizayneram.html#obektam">Объектам</a> · <a href="o-nas.html">О компании</a> · Политика конфиденциальности</span></div></div></footer>
     <a class="fab" data-wa href="${waLink()}" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">${I.wa.replace('currentColor', '#fff')}</a>
     <div class="mbar"><button class="pk" data-quiz-open>${I.spark}Подобрать</button><a class="wa" data-wa href="${waLink()}" target="_blank" rel="noopener">${I.wa}Написать</a><a href="salony.html">${I.pin}Салоны</a></div>
     <dialog class="mq" data-mq aria-label="Подбор плитки"><div class="c light"><button class="x" data-mq-close aria-label="Закрыть">×</button><div data-quiz="modal"></div></div></dialog>`;
