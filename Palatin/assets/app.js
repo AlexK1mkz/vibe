@@ -68,6 +68,7 @@
 
   /* ---------- шапка / подвал ---------- */
   const page = document.body.dataset.page || '';
+  const IG = 'https://www.instagram.com/palatinhill_kz/';
   function header() {
     const nav = [['katalog.html', 'Каталог', 'katalog'], ['palatin-hill.html', 'Palatin Hill', 'hill'], ['dizayneram.html', 'Дизайнерам', 'dizayneram'], ['salony.html', 'Салоны', 'salony'], ['o-nas.html', 'О нас', 'onas']];
     const links = nav.map(([h, t, k]) => `<a href="${h}"${k === page ? ' aria-current="page"' : ''}>${t}</a>`).join('');
@@ -76,12 +77,13 @@
       <nav class="nav" aria-label="Основное меню">${links}</nav>
       <div class="hdr-r">
         <select class="city" aria-label="Город" data-city>${Object.entries(CITIES).map(([k, v]) => `<option value="${k}"${k === city ? ' selected' : ''}>${v.name}</option>`).join('')}</select>
+        <a class="ig-h" href="${IG}" target="_blank" rel="noopener" aria-label="Instagram @palatinhill_kz">${I.ig}</a>
         <a class="hdr-phone" data-phone href="tel:${C().tel}">${C().phone}</a>
         <a class="btn btn-sm wa-h" data-wa href="${waLink()}" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">${I.wa}WhatsApp</a>
         <button class="btn btn-acc btn-sm" data-quiz-open>Подобрать</button>
         <button class="burger" aria-label="Меню" aria-expanded="false" data-burger><span></span><span></span><span></span></button>
       </div></div></header>
-      <nav class="mnav" data-mnav aria-label="Мобильное меню"><a href="index.html">Главная</a>${links}<a href="stock.html">Palatin Stock</a><a href="podbor.html">Подбор за 1 минуту</a></nav>`;
+      <nav class="mnav" data-mnav aria-label="Мобильное меню"><a href="index.html">Главная</a>${links}<a href="stock.html">Palatin Stock</a><a href="podbor.html">Подбор за 1 минуту</a><a href="${IG}" target="_blank" rel="noopener">Instagram</a></nav>`;
   }
   function footer() {
     const cats = Object.entries(CATS).map(([k, v]) => `<li><a href="katalog.html?cat=${k}">${v}</a></li>`).join('');
@@ -89,7 +91,8 @@
     const sal = SALONS.map(s => `<li><b>${CITIES[s.city].name}</b>, ${s.addr}<br><span class="muted">${s.title} · ${hoursStr(s)}</span></li>`).join('');
     return `<footer class="ftr"><div class="wrap"><div class="ftr-g">
       <div><img src="img/ui/logo.webp" alt="Palatin Hill" width="140" height="55" style="height:55px;width:auto"><p class="muted" style="margin-top:14px;max-width:300px">Palatin Group — сеть салонов европейской плитки, керамогранита и сантехники. 28 лет в Казахстане.</p>
-        <div class="soc"><a href="https://instagram.com/palatinhill_kz" target="_blank" rel="noopener" aria-label="Instagram Palatin Hill">${I.ig}</a><a href="#" aria-label="YouTube">${I.yt}</a><a href="#" aria-label="TikTok">${I.tt}</a></div></div>
+        <div class="soc"><a href="${IG}" target="_blank" rel="noopener" aria-label="Instagram Palatin Hill">${I.ig}</a><a href="#" aria-label="YouTube">${I.yt}</a><a href="#" aria-label="TikTok">${I.tt}</a></div>
+        <p style="margin-top:12px"><a href="${IG}" target="_blank" rel="noopener">Instagram · @palatinhill_kz</a></p></div>
       <div><h4>Каталог</h4><ul>${cats}<li><a href="stock.html">Palatin Stock</a></li></ul></div>
       <div><h4>Бренды</h4><ul>${br}</ul></div>
       <div><h4>Салоны</h4><ul>${sal}</ul><p style="margin-top:14px">Колл-центр: <a href="tel:${CALL.tel}">${CALL.phone}</a></p></div>
