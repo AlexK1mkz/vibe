@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Салоны плитки Palatin в Алматы и Астане — адреса и часы | Palatin</title>
+<meta name="description" content="4 салона Palatin: Кажымукана 39, ТК Armada, Ауэзова 1Д в Алматы и Калдаякова 11 в Астане. Адреса, часы работы, маршрут.">
+<link rel="icon" href="img/ui/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="salony">
+<div data-header></div>
+<main class="wrap">
+  <nav class="crumbs"><a href="index.html">Главная</a><span>/</span><span>Салоны</span></nav>
+  <div class="sec-h" style="margin-top:0"><h1 style="font-size:clamp(36px,4.4vw,56px)">Салоны Palatin</h1><p class="muted">Образцы всех коллекций, консультация, расчёт и резерв. Колл-центр: <a href="tel:+77717051747" style="color:var(--text)">+7 771 705 17 47</a></p></div>
+  <div data-list style="display:grid;gap:16px"></div>
+  <p class="note-demo" style="margin-top:16px">Часы работы — черновые, сверим с карточками 2ГИС до запуска</p>
+</main>
+<div data-footer></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  const {SALONS,CITIES,LINES,routeUrl,hoursStr,isOpen,I}=PL;
+  document.querySelector('[data-list]').innerHTML=SALONS.map(s=>{const op=isOpen(s);return `<section class="bento rv" id="${s.id}" style="grid-auto-rows:auto">
+    <div class="c photo s7" style="min-height:400px"><img src="${s.img}" alt="Салон ${s.title}" loading="lazy"><div class="ov"><span class="cap" style="color:#D8D1C6">${CITIES[s.city].name}</span><h2 style="margin-top:8px">${s.title}</h2><p class="muted" style="margin-top:6px">${s.note}</p></div></div>
+    <div class="c s5"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><span class="cap">Адрес</span><span class="open ${op?'':'closed'}"><i></i>${op?'Открыто сейчас':'Сейчас закрыто'}</span></div>
+      <p class="serif" style="font-size:28px;line-height:1.15;margin-top:8px">${CITIES[s.city].name}, ${s.addr}</p>
+      <p class="muted" style="margin-top:8px;font-size:15px">${hoursStr(s)}</p>
+      <p style="margin-top:10px">${s.phones.map(p=>`<a href="tel:${p.replace(/\s/g,'')}">${p}</a>`).join('<br>')}</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px">${s.lines.map(l=>`<span class="tag solid ${l}"><i></i>${LINES[l].name}</span>`).join('')}</div>
+      <div class="push" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px">
+        <a class="btn btn-acc btn-sm" href="${routeUrl(s,'2gis')}" target="_blank" rel="noopener" data-route>2ГИС</a>
+        <a class="btn btn-sm" href="${routeUrl(s,'g')}" target="_blank" rel="noopener" data-route>Google Maps</a>
+        <a class="btn btn-sm" href="${routeUrl(s,'y')}" target="_blank" rel="noopener" data-route>Яндекс</a>
+        <a class="btn btn-sm" href="https://wa.me/${s.wa}" target="_blank" rel="noopener" data-wa-raw>${I.wa}WhatsApp</a></div></div></section>`;}).join('');
+})();
+</script>
+</body>
+</html>

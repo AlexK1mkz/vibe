@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Каталог плитки и керамогранита — Алматы, Астана | Palatin</title>
+<meta name="description" content="Керамогранит, плитка, мозаика, сантехника и мебель для ванной от европейских фабрик. Цены за м², наличие в салонах Алматы и Астаны.">
+<link rel="icon" href="img/ui/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="katalog">
+<div data-header></div>
+<main class="wrap">
+  <nav class="crumbs" aria-label="Хлебные крошки"><a href="index.html">Главная</a><span>/</span><span data-crumb>Каталог</span></nav>
+  <div class="sec-h" style="margin-top:0"><h1 data-h1 style="font-size:clamp(36px,4.4vw,56px)">Каталог</h1><p class="muted" data-lead>Плитка, керамогранит и сантехника от фабрик Италии, Испании и Германии. Цена всегда видна, наличие — по салонам.</p></div>
+  <div class="cat-wrap">
+    <aside class="filters" data-filters aria-label="Фильтры">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b>Фильтры</b><button class="chip" data-reset>Сбросить</button></div>
+      <div data-fg></div>
+      <button class="btn btn-acc f-open" style="width:100%;margin-top:10px" data-fclose>Показать</button>
+    </aside>
+    <section>
+      <div class="cat-top">
+        <div class="cat-tabs" data-tabs></div>
+        <div style="display:flex;gap:8px;align-items:center"><button class="btn btn-sm f-open" data-fopen>Фильтры <span data-fcount></span></button>
+        <select class="sel" data-sort aria-label="Сортировка"><option value="pop">Сначала популярные</option><option value="asc">Цена ↑</option><option value="desc">Цена ↓</option></select></div>
+      </div>
+      <p class="muted" style="font-size:14px;margin-bottom:12px" data-count></p>
+      <div class="grid-p" data-grid></div>
+    </section>
+  </div>
+</main>
+<div data-footer></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  const {P,LINES,CATS,BRANDS,card,reveal,track}=PL; const $=s=>document.querySelector(s);
+  const G=[
+    ['line','Линейка',Object.fromEntries(Object.entries(LINES).map(([k,v])=>[k,v.name]))],
+    ['brand','Бренд',Object.fromEntries(Object.keys(BRANDS).map(b=>[b,b]))],
+    ['country','Страна',{'Италия':'Италия','Испания':'Испания','Германия':'Германия','Россия':'Россия'}],
+    ['room','Помещение',{'ванная':'Ванная','кухня':'Кухня','гостиная':'Гостиная','спальня':'Спальня','терраса':'Терраса'}],
+    ['effect','Эффект',{'мрамор':'Мрамор','бетон':'Бетон','дерево':'Дерево','камень':'Камень','терраццо':'Терраццо','металл':'Металл'}],
+    ['surface','Поверхность',{'матовая':'Матовая','полированная':'Полированная','лаппатированная':'Лаппатированная','структурная':'Структурная','глянцевая':'Глянцевая','сатинированная':'Сатинированная'}],
+    ['size','Формат',{s:'до 30 см',m:'60×60 – 60×120',l:'крупный от 75 см',x:'слэбы 120×278'}],
+    ['price','Цена за м²',{a:'до 30 000 ₸',b:'30–50 000 ₸',c:'50–80 000 ₸',d:'от 80 000 ₸'}],
+    ['avail','Наличие',{in:'В наличии',order:'Под заказ'}],
+  ];
+  const q=new URLSearchParams(location.search); const S={};
+  G.forEach(([k])=>S[k]=q.get(k)?q.get(k).split(','):[]);
+  let cat=q.get('cat')||'';
+  const sizeOf=p=>{if(!p.w)return'';const m=Math.max(p.w,p.h);return m>=200?'x':m>=150||Math.min(p.w,p.h)>=75?'l':m>=60?'m':'s';};
+  const priceOf=p=>!p.price?'':p.price<30000?'a':p.price<50000?'b':p.price<80000?'c':'d';
+  const test={line:p=>p.line,brand:p=>p.brand,country:p=>(BRANDS[p.brand]||{}).c,room:p=>p.rooms,effect:p=>p.effect,surface:p=>p.surface,size:sizeOf,price:priceOf,avail:p=>p.status==='check'?'in':p.status};
+  function match(p){ if(cat&&p.cat!==cat)return false; return G.every(([k])=>{if(!S[k].length)return true;const v=test[k](p);return Array.isArray(v)?v.some(x=>S[k].includes(x)):S[k].includes(v);}); }
+  $('[data-tabs]').innerHTML=[['','Все'],...Object.entries(CATS)].map(([k,v])=>`<button class="chip" data-cat="${k}" aria-pressed="${k===cat}">${v}</button>`).join('');
+  $('[data-fg]').innerHTML=G.map(([k,t,o])=>`<div class="fgrp"><h4>${t}</h4><div class="chips">${Object.entries(o).map(([v,l])=>`<button class="chip" data-k="${k}" data-v="${v}" aria-pressed="${S[k].includes(v)}">${l}</button>`).join('')}</div></div>`).join('');
+  function sync(){
+    const u=new URLSearchParams(); if(cat)u.set('cat',cat); G.forEach(([k])=>S[k].length&&u.set(k,S[k].join(',')));
+    history.replaceState(null,'',location.pathname+(u.toString()?'?'+u:''));
+  }
+  function render(){
+    let list=P.filter(match); const so=$('[data-sort]').value;
+    if(so!=='pop')list.sort((a,b)=>((a.price||1e9)-(b.price||1e9))*(so==='asc'?1:-1));
+    const n=G.reduce((s,[k])=>s+S[k].length,0);
+    $('[data-fcount]').textContent=n?`· ${n}`:'';
+    $('[data-count]').textContent=`${list.length} ${list.length%10===1&&list.length%100!==11?'позиция':list.length%10>=2&&list.length%10<=4&&(list.length%100<10||list.length%100>=20)?'позиции':'позиций'}`;
+    const t=cat?CATS[cat]:'Каталог'; $('[data-h1]').textContent=t; $('[data-crumb]').textContent=t; document.title=`${t} — купить в Алматы и Астане | Palatin`;
+    $('[data-grid]').innerHTML=list.length?list.map(card).join(''):`<div class="empty"><h3 style="font-family:var(--serif);font-size:30px;font-weight:500">Ничего не нашлось</h3><p class="muted" style="margin:8px 0 18px">Сбросьте часть фильтров — или опишите задачу менеджеру, он подберёт вручную.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn" data-reset>Сбросить фильтры</button><a class="btn btn-acc" data-wa href="${PL.waLink('Здравствуйте! Не нашёл на сайте подходящую плитку, помогите подобрать.')}" target="_blank" rel="noopener">Спросить в WhatsApp</a></div></div>`;
+    reveal(); sync();
+  }
+  document.addEventListener('click',e=>{
+    const c=e.target.closest('[data-cat]'); if(c){cat=c.dataset.cat;document.querySelectorAll('[data-cat]').forEach(b=>b.setAttribute('aria-pressed',b===c));render();}
+    const f=e.target.closest('[data-k]'); if(f){const k=f.dataset.k,v=f.dataset.v;S[k]=S[k].includes(v)?S[k].filter(x=>x!==v):[...S[k],v];f.setAttribute('aria-pressed',S[k].includes(v));track('catalog_filter',{k,v});render();}
+    if(e.target.closest('[data-reset]')){G.forEach(([k])=>S[k]=[]);document.querySelectorAll('[data-k]').forEach(b=>b.setAttribute('aria-pressed','false'));render();}
+    if(e.target.closest('[data-fopen]'))$('[data-filters]').classList.add('on');
+    if(e.target.closest('[data-fclose]'))$('[data-filters]').classList.remove('on');
+  });
+  $('[data-sort]').onchange=render;
+  render();
+})();
+</script>
+</body>
+</html>

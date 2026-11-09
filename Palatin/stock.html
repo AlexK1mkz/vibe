@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Palatin Stock — остатки коллекций со скидкой | Palatin</title>
+<meta name="description" content="Остатки европейской плитки и керамогранита со скидкой до 26%. Покупка через Kaspi, самовывоз из салонов Алматы.">
+<link rel="icon" href="img/ui/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* Stock — проще и светлее, чтобы не смешиваться с Hill */
+  .stock-page{background:#ECEBE8;color:#1C1C1B;padding:8px 0 64px;margin-top:0}
+  .stock-page .muted,.stock-page .cap{color:#5D5C58}
+  .stock-page h1,.stock-page h2{font-family:var(--sans);font-weight:800;letter-spacing:-.02em}
+  .stock-page .crumbs{color:#5D5C58}
+  .sp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .sp{background:#fff;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;border:1px solid #DEDCD7}
+  .sp img{aspect-ratio:1;object-fit:cover;width:100%;filter:saturate(.9)}
+  .sp .b{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .sp h3{font-size:17px;line-height:1.25}
+  .sp .pr{font-size:22px;font-weight:800}
+  .sp .pr s{font-size:14px;font-weight:400;color:#8A8883;margin-left:6px}
+  .sp .d{position:absolute;left:10px;top:10px;background:#1C1C1B;color:#fff;font-weight:800;font-size:13px;padding:5px 9px;border-radius:8px}
+  .sp .acts{display:grid;gap:8px;margin-top:auto;padding-top:8px}
+  .kaspi{background:#F14635;border-color:#F14635;color:#fff}
+  .kaspi:hover{background:#D93A2A;border-color:#D93A2A}
+  .sp .btn{min-height:44px;font-size:14px}
+  .sp .wa2{border-color:#D3D1CB;color:#1C1C1B}
+  .s-hero{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin-bottom:28px}
+  .s-hero>div{background:#fff;border-radius:16px;padding:28px;border:1px solid #DEDCD7}
+  @media(max-width:1000px){.sp-grid{grid-template-columns:repeat(2,1fr)}.s-hero{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-page="stock">
+<div data-header></div>
+<main class="stock-page">
+  <div class="wrap">
+    <nav class="crumbs"><a href="index.html">Главная</a><span>/</span><span>Palatin Stock</span></nav>
+    <div class="s-hero">
+      <div><span class="tag stock" style="background:#ECEBE8;border-color:#DEDCD7;color:#1C1C1B"><i></i>Palatin Stock</span><h1 style="font-size:clamp(34px,4vw,52px);margin-top:14px;line-height:1.05">Остатки коллекций со скидкой</h1><p class="muted" style="margin-top:10px">Европейская плитка из последних партий: количество ограничено, цена ниже каталожной. Оформление и оплата — через Kaspi, самовывоз из салона.</p></div>
+      <div><span class="cap">Как купить</span><div class="steps-l" style="margin-top:8px"><div><b style="color:#1C1C1B">1</b><p>Проверьте количество м² — это весь остаток</p></div><div><b style="color:#1C1C1B">2</b><p>Нажмите «Купить на Kaspi» — оплата и рассрочка там</p></div><div><b style="color:#1C1C1B">3</b><p>Заберите в салоне ТК Armada или закажите доставку</p></div></div></div>
+    </div>
+    <div class="sp-grid" data-sg></div>
+  </div>
+</main>
+<div data-footer></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  const {P,fmt,img,sizeStr,waLink,I}=PL;
+  const list=P.filter(p=>p.line==='stock');
+  document.querySelector('[data-sg]').innerHTML=list.map((p,i)=>{const d=p.old?Math.round((1-p.price/p.old)*100):0;const mm=p.note&&p.note.match(/(\d+) м²/);
+    return `<article class="sp rv"><a href="product.html?id=${p.id}" style="position:relative;display:block"><img src="${img(p,p.tex?'t':'i')}" alt="${p.brand} ${p.name} ${sizeStr(p)}" loading="lazy">${d?`<span class="d">−${d}%</span>`:''}</a>
+      <div class="b"><span class="muted" style="font-size:13px">${p.brand} · ${sizeStr(p)} см</span><h3>${p.name}</h3><div class="pr">${fmt(p.price)} ₸<span style="font-size:14px;font-weight:600">/м²</span>${p.old?`<s>${fmt(p.old)}</s>`:''}</div>
+      <span style="font-size:14px">Остаток: <b>${mm?mm[1]+' м²':'уточняйте'}</b></span>
+      <div class="acts"><a class="btn kaspi" href="https://kaspi.kz/shop/search/?text=${encodeURIComponent(p.brand+' '+p.name)}" target="_blank" rel="noopener">Купить на Kaspi</a><a class="btn wa2" href="${waLink('Здравствуйте! Интересует остаток '+p.brand+' '+p.name+' '+sizeStr(p))}" target="_blank" rel="noopener" data-wa-raw>${I.wa}Уточнить</a></div></div></article>`;}).join('');
+})();
+</script>
+</body>
+</html>

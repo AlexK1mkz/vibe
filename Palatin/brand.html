@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Бренд | Palatin</title>
+<meta name="description" content="Официальный дистрибьютор европейских фабрик в Казахстане: коллекции, цены, наличие.">
+<link rel="icon" href="img/ui/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="katalog">
+<div data-header></div>
+<main class="wrap" data-b></main>
+<div data-footer></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  const {P,BRANDS,card,brandBySlug,img}=PL;
+  const name=brandBySlug(new URLSearchParams(location.search).get('b'))||'Peronda'; const b=BRANDS[name];
+  const TXT={
+    'Peronda':'Peronda Group — семейная фабрика из Вила-реала (Кастельон), один из лидеров испанской керамики. Сильные стороны — крупноформатный керамогранит под мрамор и камень (линия Museum) и декоративная плитка ручной эстетики в серии FS.',
+    'Porcelanosa':'Porcelanosa — испанский концерн, символ премиальной керамики. Рельефная настенная плитка, керамогранит под дерево и камень, мозаика. В Palatin — избранные коллекции и остатки со скидкой в Palatin Stock.',
+    'Pamesa':'Pamesa Cerámica — один из крупнейших производителей Испании. Керамогранит 60×120 и 120×120 под мрамор и камень по разумной цене — основа линейки Palatin.',
+    'Monopole':'Monopole Cerámica — испанская фабрика настенной плитки в духе ремесленной керамики: «кабанчик», рельефы, насыщенные глазури.',
+    'Marazzi Italy':'Marazzi — итальянская фабрика из Сассуоло, с 1935 года. Изобрела технологию однократного обжига. Слэбы Grande 120×278 под мрамор, терраццо, керамогранит под дерево.',
+    'Sant’Agostino':'Ceramica Sant’Agostino основана в 1964 году в Ферраре. Технологичный керамогранит Krystal с глубоким блеском, дерево и бетон.',
+    'Sbordoni':'Sbordoni — итальянская фабрика классической сантехники: консольные раковины, смесители в бронзе и золоте, зеркала.',
+    'Villeroy & Boch':'Villeroy & Boch — немецкая марка с 1748 года. Унитазы с открытым смывным краем, раковины CeramicPlus, мебель Subway, Antao, Finion.',
+    'Kerama Marazzi':'Kerama Marazzi — крупнейший производитель керамики в России. Широкий ассортимент в наличии на складе Алматы, линейка Palatin.',
+  };
+  const list=P.filter(p=>p.brand===name); const hero=list[0];
+  document.title=`${name} в Казахстане — официальный дистрибьютор | Palatin`;
+  document.querySelector('[data-b]').innerHTML=`
+  <nav class="crumbs"><a href="index.html">Главная</a><span>/</span><a href="katalog.html">Каталог</a><span>/</span><span>${name}</span></nav>
+  <div class="bento">
+    <div class="c photo s8 r2"><img src="${img(hero)}" alt="${name} — коллекция ${hero.name}"><div class="ov"><span class="tag"><i style="background:var(--accent)"></i>Официальный дистрибьютор в Казахстане</span><h1 style="margin-top:14px">${name}</h1><p class="muted" style="margin-top:8px">${b.flag} ${b.c} · ${b.y?'фабрика с '+b.y+' года':'европейская фабрика'}</p></div></div>
+    <div class="c s4 r2"><span class="cap">О фабрике</span><p style="margin-top:12px">${TXT[name]}</p><p class="muted" style="margin-top:12px;font-size:15px">Здесь будет SEO-текст 1 500–2 500 знаков и видео с фабрики.</p>
+      <div class="push" style="display:grid;gap:10px;margin-top:20px"><a class="btn btn-acc" data-wa data-wa-text="Здравствуйте! Интересует ${name}, помогите подобрать." href="#" target="_blank" rel="noopener">Подобрать ${name} в WhatsApp</a></div></div>
+  </div>
+  <div class="sec-h"><h2>Коллекции ${name}</h2><p class="muted">${list.length} в демо-каталоге</p></div>
+  <div class="grid-p">${list.map(card).join('')}</div>`;
+})();
+</script>
+</body>
+</html>

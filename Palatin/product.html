@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Коллекция | Palatin</title>
+<meta name="description" content="Карточка коллекции: цена за м², наличие в салонах Алматы и Астаны, характеристики, калькулятор.">
+<link rel="icon" href="img/ui/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="katalog">
+<div data-header></div>
+<main class="wrap" data-pp></main>
+<div data-footer></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+  const {P,LINES,CATS,BRANDS,SALONS,CITIES,card,tenge,fmt,sizeStr,slug,img,statusHtml,waLink,I,track}=PL; const $=s=>document.querySelector(s);
+  const id=new URLSearchParams(location.search).get('id'); const p=P.find(x=>x.id===id)||P[0];
+  const b=BRANDS[p.brand]||{}; const tile=!!p.w; const L=LINES[p.line];
+  const code=10000+P.indexOf(p)*37;
+  document.title=`${p.name} ${p.brand}${tile?' '+sizeStr(p):''} — купить в Алматы и Астане | Palatin`;
+  track('product_view',{id:p.id});
+  const waText=`Здравствуйте! Хочу узнать наличие и цену: ${p.brand} ${p.name}${tile?' '+sizeStr(p):''}${p.sku?' (арт. '+p.sku+')':''} — palatin.kz/p/${code}`;
+  const spec=tile?[['Формат',`${sizeStr(p)} см`],['Толщина',`${String(p.t).replace('.',',')} см`],['Поверхность',p.surface],['Эффект',p.effect],['Ректификация',p.w>=60||p.h>=100?'Да':'Нет'],['Класс износостойкости PEI','IV (уточняется по артикулу)'],['Морозостойкость',p.cat==='keramogranit'?'Да':'Нет'],['Противоскольжение','уточняется по артикулу'],['Назначение',p.rooms.join(', ')]]
+    :[['Артикул фабрики',p.sku],['Бренд',p.brand],['Страна',b.c],['Категория',CATS[p.cat]],['Помещение','ванная']];
+  const avail=SALONS.map((s,i)=>{const has=p.status==='in'&&(s.lines.includes(p.line)||i===0);return `<div><span>${CITIES[s.city].name}, ${s.addr.split(',').slice(0,2).join(',')}</span><span class="st ${has?'':'order'}"><i></i>${has?(tile?(20+((code+i*13)%140))+' м²':'Есть'):'Под заказ'}</span></div>`;}).join('');
+  const imgs=[img(p,'i'),...(p.tex?[img(p,'t')]:[])];
+  const same=P.filter(x=>x.effect===p.effect&&x.id!==p.id&&x.line!==p.line&&x.price).slice(0,3);
+  const brandMore=P.filter(x=>x.brand===p.brand&&x.id!==p.id).slice(0,3);
+  $('[data-pp]').innerHTML=`
+  <nav class="crumbs" aria-label="Хлебные крошки"><a href="index.html">Главная</a><span>/</span><a href="katalog.html">Каталог</a><span>/</span><a href="katalog.html?cat=${p.cat}">${CATS[p.cat]}</a><span>/</span><a href="brand.html?b=${slug(p.brand)}">${p.brand}</a><span>/</span><span>${p.name}</span></nav>
+  <div class="pp">
+    <div class="gal">
+      <div class="gal-main"><img data-main src="${imgs[0]}" alt="${p.brand} ${p.name} ${sizeStr(p)} в интерьере" width="1000" height="820"></div>
+      <div class="thumbs" role="group" aria-label="Фото">${imgs.map((s,i)=>`<button aria-pressed="${!i}" data-src="${s}" aria-label="${i?'Фактура крупно':'В интерьере'}"><img src="${s}" alt=""></button>`).join('')}</div>
+      <div class="c" style="flex-direction:row;gap:20px;align-items:center;padding:22px">
+        <div style="flex:1"><span class="cap">Смотреть в интерьере · 3D</span><p style="margin-top:6px">Здесь появится 3D/360-визуализация коллекции. Тот же экран откроется по QR с ценника в салоне.</p><p class="muted" style="font-size:14px;margin-top:6px">Короткая ссылка: palatin.kz/p/${code}</p></div>
+        <div class="qr" data-qr aria-label="QR-код на карточку товара"></div>
+      </div>
+    </div>
+    <div class="pp-side">
+      <div class="c">
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="tag solid ${p.line}"><i></i>${L.name}</span>${p.note?`<span class="tag solid">${p.note}</span>`:''}</div>
+        <h1 style="font-size:clamp(34px,3.6vw,48px);margin-top:14px">${p.name}</h1>
+        <p class="muted" style="margin-top:6px">${b.flag||''} <a href="brand.html?b=${slug(p.brand)}" style="text-decoration:underline;text-underline-offset:3px">${p.brand}</a>, ${b.c}${tile?` · ${sizeStr(p)} см · ${p.surface}`:` · арт. ${p.sku}`}</p>
+        <div style="margin:22px 0 6px">${p.price?`<div class="pp-price">${tenge(p.price)}<span style="font-size:18px;font-weight:400"> /м²</span>${p.old?`<s>${tenge(p.old)}</s>`:''}</div>`:`<div class="pp-price" style="font-size:24px">Цену назовёт менеджер</div><p class="muted" style="font-size:14px;margin-top:4px">Сантехника — под заказ с фабрики, цена зависит от комплектации</p>`}</div>
+        ${statusHtml(p)}
+        <div style="display:grid;gap:10px;margin-top:20px">
+          ${p.line==='stock'?`<a class="btn btn-acc" href="https://kaspi.kz/shop/search/?text=${encodeURIComponent(p.brand+' '+p.name)}" target="_blank" rel="noopener">Купить на Kaspi</a>`:''}
+          <a class="btn ${p.line==='stock'?'':'btn-acc'}" href="${waLink(waText)}" target="_blank" rel="noopener" data-wa-raw>${I.wa}Узнать наличие и цену в WhatsApp</a>
+          <button class="btn" data-sample>Забронировать образец в салоне</button>
+        </div>
+        <div data-sample-box hidden style="margin-top:14px"></div>
+      </div>
+      <div class="c"><span class="cap">Наличие по салонам</span><div class="salons-av" style="margin-top:12px">${avail}</div><p class="note-demo" style="margin-top:12px">Демо: остатки подтянутся из админки / 1С</p></div>
+      ${tile&&p.price?`<div class="c"><span class="cap">Калькулятор</span><p style="margin:8px 0 12px;font-size:15px" class="muted">Площадь → м² с запасом 10% → сумма</p>
+        <div class="calc dark"><input class="fld" type="number" min="1" step="0.5" value="12" inputmode="decimal" aria-label="Площадь, м²" data-area><span class="muted">м²</span></div>
+        <output data-calc style="display:block;margin-top:12px"></output></div>`:''}
+    </div>
+  </div>
+  <div class="bento" style="margin-top:16px;grid-auto-rows:auto">
+    <div class="c s7"><span class="cap">Характеристики</span><table class="spec" style="margin-top:10px">${spec.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table></div>
+    <div class="c s5"><span class="cap">Сопутствующие</span><div class="steps-l">
+      ${tile?`<div><b>·</b><p>Затирка в тон — Mapei / Litokol, подберём оттенок</p></div><div><b>·</b><p>Профили и раскладки из алюминия</p></div><div><b>·</b><p><a class="link" href="katalog.html?cat=santehnika">Сантехника Villeroy &amp; Boch и Sbordoni →</a></p></div>`
+      :`<div><b>·</b><p>Инсталляции и клавиши смыва</p></div><div><b>·</b><p><a class="link" href="katalog.html?cat=mebel">Мебель для ванной →</a></p></div><div><b>·</b><p><a class="link" href="katalog.html?cat=keramogranit&room=ванная">Плитка для ванной →</a></p></div>`}
+      </div><p class="muted" style="font-size:14px;margin-top:16px">Укладка — через проверенных партнёров, раскрой крупного формата — в салоне.</p></div>
+  </div>
+  ${same.length?`<div class="sec-h"><h2>Похожие в другой линейке</h2><p class="muted">Тот же эффект «${p.effect}» — дешевле или дороже.</p></div><div class="grid-p">${same.map(card).join('')}</div>`:''}
+  ${brandMore.length?`<div class="sec-h"><h2>Ещё от ${p.brand}</h2><a class="link" href="brand.html?b=${slug(p.brand)}">Все коллекции бренда →</a></div><div class="grid-p">${brandMore.map(card).join('')}</div>`:''}`;
+  // галерея
+  document.querySelectorAll('.thumbs button').forEach(t=>t.onclick=()=>{$('[data-main]').src=t.dataset.src;document.querySelectorAll('.thumbs button').forEach(x=>x.setAttribute('aria-pressed',x===t));});
+  // калькулятор
+  const a=$('[data-area]'); if(a){const f=()=>{const v=Math.max(0,parseFloat(a.value)||0),m=Math.ceil(v*1.1*10)/10;$('[data-calc]').innerHTML=`Нужно <b>${String(m).replace('.',',')} м²</b> с запасом · сумма <b style="font-size:20px">${tenge(Math.round(m*p.price))}</b><br><span class="muted" style="font-size:13px">Количество упаковок рассчитает менеджер по партии</span>`;};a.oninput=f;f();}
+  // образец
+  $('[data-sample]').onclick=()=>{const bx=$('[data-sample-box]');bx.hidden=false;bx.innerHTML=`<form class="form dark" data-lead="sample" novalidate><input class="hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <select class="fld" name="salon" aria-label="Салон">${SALONS.map(s=>`<option>${CITIES[s.city].name}, ${s.addr.split(',')[0]}</option>`).join('')}</select>
+    <input class="fld" name="name" placeholder="Имя" aria-label="Имя"><input class="fld" name="phone" type="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" aria-label="Телефон" data-mask>
+    <span class="err" data-err>Проверьте имя и номер телефона</span><button class="btn btn-acc" type="submit">Забронировать образец</button></form>`;PL.leadForm(bx.querySelector('form'),{sku:p.id});track('sample_request',{id:p.id});};
+  // QR
+  if(window.QRCode)new QRCode(document.querySelector('[data-qr]'),{text:location.href,width:80,height:80,colorDark:'#1C1B19',colorLight:'#ffffff'});
+})();
+</script>
+</body>
+</html>

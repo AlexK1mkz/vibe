@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Подбор плитки под бюджет за 1 минуту | Palatin</title>
+<meta name="description" content="Ответьте на 5 вопросов — подберём коллекции под ваш бюджет, стиль и площадь. Palatin Hill, Palatin или Palatin Stock.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/ui/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .lp{min-height:100vh;display:grid;grid-template-columns:1fr 1fr}
+  .lp-img{position:relative;overflow:hidden}
+  .lp-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .lp-img .ov{position:absolute;inset:auto 0 0 0;padding:48px;background:linear-gradient(to top,rgba(10,10,9,.85),transparent)}
+  .lp-q{display:flex;align-items:center;justify-content:center;padding:32px 24px;background:var(--light);color:var(--light-ink)}
+  .lp-q .box{width:100%;max-width:520px;min-height:620px;display:flex;flex-direction:column}
+  @media(max-width:900px){.lp{grid-template-columns:1fr}.lp-img{min-height:260px}.lp-img .ov{padding:20px}.lp-q{padding:20px 16px 40px}.lp-q .box{min-height:auto}}
+</style>
+</head>
+<body data-page="podbor">
+<div class="lp">
+  <div class="lp-img"><img src="img/p/linen-desert-i.webp" alt="Peronda Linen Desert в интерьере" fetchpriority="high">
+    <a href="index.html" style="position:absolute;left:32px;top:28px"><img src="img/ui/logo.webp" alt="Palatin Hill" style="height:48px;width:auto;position:static"></a>
+    <div class="ov"><h1 style="font-size:clamp(32px,4vw,52px)">Подберём плитку под ваш бюджет за&nbsp;1&nbsp;минуту</h1><p class="muted" style="margin-top:10px;color:#D8D1C6">28 лет · 20+ европейских брендов · 4 салона в Алматы и Астане</p></div></div>
+  <div class="lp-q"><div class="box c light" style="border:0;padding:0;background:transparent" data-quiz></div></div>
+</div>
+<div data-footer hidden></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<style>.ftr{display:none}@media(max-width:900px){.lp-q{padding-bottom:100px}}</style>
+</body>
+</html>

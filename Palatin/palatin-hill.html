@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Palatin Hill — премиальная плитка из Италии и Испании | Palatin</title>
+<meta name="description" content="Palatin Hill — премиум-линейка Palatin Group: Peronda, Marazzi, Sant’Agostino, Villeroy &amp; Boch. Салоны на Кажымукана 39 в Алматы и Калдаякова 11 в Астане.">
+<link rel="icon" href="img/ui/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="hill">
+<div data-header></div>
+<main class="wrap">
+  <nav class="crumbs"><a href="index.html">Главная</a><span>/</span><span>Palatin Hill</span></nav>
+  <section class="c photo manifest">
+    <img src="img/p/grande-taj-mahal-i.webp" alt="Marazzi Grande Marble Look Taj Mahal в интерьере" fetchpriority="high">
+    <div class="ov"><span class="tag hill"><i></i>Palatin Hill</span>
+      <h1 style="margin-top:16px;max-width:860px">Территория безупречного вкуса</h1>
+      <p>Palatin Hill — премиальная линейка Palatin Group. Только прямой импорт из Италии, Испании и Германии: фабрики, с которыми мы работаем десятилетиями.</p>
+      <p>Каждую коллекцию отбирает основатель компании, Кунсулу, — на крупнейших выставках и фабриках Европы. Мы привозим не «всё подряд», а то, за что готовы отвечать именем.</p>
+      <p>Слэбы 120×278, мрамор с перламутровым блеском, ручная плитка, сантехника, которая служит десятилетия.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px"><a class="btn btn-acc" href="#zapis">Записаться на приватную консультацию</a><a class="btn" style="color:#fff;border-color:rgba(255,255,255,.3)" href="katalog.html?line=hill">Каталог Hill</a></div>
+    </div>
+  </section>
+
+  <div class="sec-h"><h2>Фабрики Palatin Hill</h2></div>
+  <div class="bento" style="grid-auto-rows:auto" data-hb></div>
+
+  <div class="sec-h"><h2>Избранные коллекции</h2><a class="link" href="katalog.html?line=hill">Все коллекции Hill →</a></div>
+  <div class="grid-p" data-fav></div>
+
+  <div class="sec-h"><h2>Салоны Palatin Hill</h2></div>
+  <div class="bento" data-sal></div>
+
+  <div class="bento" style="margin-top:16px" id="zapis">
+    <div class="c portrait s6"><span class="mono" aria-hidden="true">К</span><span class="cap">Кунсулу</span><p class="quote" style="margin-top:auto">«Я сама отбираю каждую коллекцию на фабриках Италии и&nbsp;Испании».</p><a class="link" style="margin-top:14px" href="o-nas.html#kunsulu">О Кунсулу →</a></div>
+    <div class="c light s6"><span class="cap">Приватная консультация</span><h2 style="margin-top:10px">Запишитесь на визит в салон</h2><p style="color:var(--light-muted);margin:8px 0 16px">Персональный менеджер подготовит образцы под ваш проект к назначенному времени.</p>
+      <form class="form" data-lead="hill-visit" novalidate><input class="hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input class="fld" name="name" placeholder="Имя" aria-label="Имя"><input class="fld" name="phone" type="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" aria-label="Телефон" data-mask>
+        <span class="err" data-err>Проверьте имя и номер телефона</span><button class="btn btn-dark" type="submit">Записаться</button></form></div>
+  </div>
+</main>
+<div data-footer></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  const {P,BRANDS,SALONS,card,salonCard,slug}=PL;
+  const hb=['Peronda','Marazzi Italy','Sant’Agostino','Villeroy & Boch','Sbordoni','Porcelanosa'];
+  document.querySelector('[data-hb]').innerHTML=hb.map(b=>{const n=P.filter(p=>p.brand===b&&p.line==='hill').length;return `<a class="c s4 half rv" href="brand.html?b=${slug(b)}" style="min-height:150px"><span class="cap">${BRANDS[b].flag} ${BRANDS[b].c}</span><span class="serif" style="font-size:34px;margin-top:auto">${b}</span><span class="muted" style="font-size:14px">${n?n+' коллекций в каталоге':'коллекции в салоне'}</span></a>`;}).join('');
+  const fav=['grande-golden-white','mystic-ivory','praline-gold','yorkwood-glam','meraki-green','vb-finion-bath'];
+  document.querySelector('[data-fav]').innerHTML=fav.map(id=>card(P.find(p=>p.id===id))).join('');
+  document.querySelector('[data-sal]').innerHTML=SALONS.filter(s=>s.title.includes('Hill')).map(s=>salonCard(s,'s6')).join('');
+})();
+</script>
+</body>
+</html>
