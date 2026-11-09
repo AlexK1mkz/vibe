@@ -326,3 +326,6 @@ dialog.mq .c{min-height:600px}
   .city{padding:8px 26px 8px 12px;font-size:13px}
 }
 @media (max-width:560px){.btn{white-space:normal;text-align:center;line-height:1.25;padding-top:8px;padding-bottom:8px}}
+/* портрет Кунсулу: лицо справа в кадре, держим его в фокусе */
+.c.kunsulu>img{object-position:62% 30%}
+.c.kunsulu .ov{background:linear-gradient(to top,rgba(10,10,9,.9) 0%,rgba(10,10,9,.55) 50%,rgba(10,10,9,0) 100%)}
