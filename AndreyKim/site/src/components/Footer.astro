@@ -1,0 +1,91 @@
+---
+import Brand from './Brand.astro';
+import { site } from '../data/site';
+---
+
+<footer class="on-night bg-night pb-24 pt-10 text-mist md:pt-14 md:pb-14">
+  <div class="wrap">
+    <div class="grid grid-cols-2 gap-x-5 gap-y-7 md:grid-cols-[1.3fr_1fr_1fr] md:gap-10">
+      <div class="col-span-2 md:col-span-1">
+        <p class="text-lg font-semibold text-white">{site.name}</p>
+        <p class="mt-1 text-[0.9688rem]">{site.role}</p>
+        <p class="mt-3 max-w-sm text-[0.9375rem] leading-relaxed md:mt-6">
+          {site.legal}<br />{site.address}
+        </p>
+      </div>
+
+      <div>
+        <p class="text-[0.8125rem] font-semibold uppercase tracking-[0.09em] text-white/60">Контакты</p>
+        <ul class="mt-4 space-y-1 text-[0.9688rem]">
+          {
+            site.phones.map((p) => (
+              <li>
+                <a href={p.href} class="inline-block py-1.5 text-white transition-colors hover:text-ember">
+                  {p.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a href={`mailto:${site.email}`} class="inline-block py-1.5 text-white transition-colors hover:text-ember">
+              {site.email}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-[0.8125rem] font-semibold uppercase tracking-[0.09em] text-white/60">На связи</p>
+        <ul class="mt-4 space-y-1 text-[0.9688rem]">
+          <li>
+            <a
+              href={site.whatsapp}
+              target="_blank"
+              rel="noopener"
+              data-wa="footer"
+              class="inline-flex items-center gap-2.5 py-1.5 text-white transition-colors hover:text-ember"
+            >
+              <Brand name="whatsapp" size={18} /> WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              href={site.telegram}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2.5 py-1.5 text-white transition-colors hover:text-ember"
+            >
+              <Brand name="telegram" size={18} /> Telegram<span class="max-sm:hidden"> · @metaselfs</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href={site.instagram}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2.5 py-1.5 text-white transition-colors hover:text-ember"
+            >
+              <Brand name="instagram" size={18} /> Instagram<span class="max-sm:hidden"> · @akim_ihmk</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="mt-8 flex flex-col gap-3 border-t border-night-line pt-6 text-[0.875rem] sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>© 2026 {site.name}</p>
+      <ul class="flex flex-wrap gap-x-6 gap-y-1">
+        <li>
+          <a href={site.academy} target="_blank" rel="noopener" class="inline-block py-1.5 hover:text-white">
+            Обучение в АЭК
+          </a>
+        </li>
+        <li>
+          <a href="/politika" class="inline-block py-1.5 hover:text-white">Политика конфиденциальности</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>

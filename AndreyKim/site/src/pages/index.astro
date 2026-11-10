@@ -1,0 +1,649 @@
+---
+import { Image } from 'astro:assets';
+import {
+  Layers,
+  FileText,
+  Award,
+  Check,
+  Plus,
+  ShieldCheck,
+  ArrowRight,
+  Play,
+  Lock,
+  MessageCircle,
+  Wallet,
+  LifeBuoy,
+} from '@lucide/astro';
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+import Chain from '../components/Chain.astro';
+import LeadForm from '../components/LeadForm.astro';
+import StickyBar from '../components/StickyBar.astro';
+import portrait from '../assets/andrey-portrait.jpg';
+import face from '../assets/andrey-face.jpg';
+import logoIhmk from '../assets/logo-ihmk.png';
+import {
+  site,
+  media,
+  trustFacts,
+  situations,
+  benefits,
+  methods,
+  steps,
+  credentials,
+  quote,
+  reviews,
+  fits,
+  notFits,
+  included,
+  faq,
+} from '../data/site';
+
+const factIcons = { layers: Layers, report: FileText, award: Award } as const;
+const pad = (n: number) => String(n).padStart(2, '0');
+const siteUrl = Astro.site!.href;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${siteUrl}#andrey-kim`,
+    name: 'Андрей Ким',
+    jobTitle: 'Коуч, аналитик МКП (IMCP)',
+    url: siteUrl,
+    image: new URL('/og.jpg', siteUrl).href,
+    email: site.email,
+    telephone: '+77012779499',
+    worksFor: { '@type': 'Organization', name: site.org },
+    address: { '@type': 'PostalAddress', addressLocality: 'Караганда', addressCountry: 'KZ', streetAddress: 'ул. Мустафина 9/2' },
+    sameAs: [site.instagram, site.telegram],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Глубинный анализ МКП личности',
+    serviceType: 'Аналитика личности, коучинг',
+    description: site.description,
+    provider: { '@id': `${siteUrl}#andrey-kim` },
+    areaServed: ['Казахстан', 'Онлайн'],
+    offers: { '@type': 'Offer', price: '150000', priceCurrency: 'KZT', url: `${siteUrl}#price` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  },
+];
+---
+
+<Base>
+  <Fragment slot="head">
+    {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
+  </Fragment>
+
+  <!-- 1. HERO -->
+  <section class="relative overflow-hidden">
+    <div class="wrap grid items-center gap-10 pb-8 pt-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16 lg:pb-20 lg:pt-14">
+      <div>
+        <div class="flex items-center gap-3.5">
+          <Image
+            src={face}
+            alt="Андрей Ким"
+            width={112}
+            height={112}
+            loading="eager"
+            fetchpriority="high"
+            class="size-14 flex-none rounded-full object-cover ring-2 ring-surface lg:hidden"
+          />
+          <p class="text-[0.8125rem] leading-snug text-muted lg:text-[0.9375rem]">
+            <span class="font-semibold text-ink">Андрей Ким</span> · Коуч, аналитик МКП (IMCP)
+            <span class="block">Institute Human Management Kazakhstan</span>
+          </p>
+        </div>
+
+        <h1 class="mt-5 text-[2.125rem] leading-[1.06] xs:text-[2.375rem] lg:mt-7 lg:text-[4rem] lg:leading-[1.02]">
+          Почему вы снова оказываетесь <span class="hero-loop">в&nbsp;той&nbsp;же точке?</span>
+        </h1>
+
+        <p class="mt-4 max-w-[34rem] text-[1.0313rem] leading-[1.5] text-ink/85 lg:mt-6 lg:text-[1.25rem]">
+          Глубинный анализ личности по 5 методикам показывает, какие автоматические реакции повторяют ваш сценарий —
+          в бизнесе, в команде, в отношениях. И что делать иначе.
+        </p>
+
+        <Cta block="hero" class="mt-6 lg:mt-9" />
+      </div>
+
+      <div class="relative mx-auto hidden w-full max-w-[28rem] lg:block">
+        <!-- замкнутый круг — мотив всей страницы -->
+        <svg class="pointer-events-none absolute -right-16 -top-10 -z-10 size-[26rem] text-accent/35" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+          <circle cx="200" cy="200" r="190" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 9" stroke-linecap="round"></circle>
+          <circle cx="200" cy="10" r="6" fill="var(--color-accent)"></circle>
+        </svg>
+        <div class="relative overflow-hidden rounded-[2rem] bg-sand" data-video-box>
+          <Image
+            src={portrait}
+            alt="Андрей Ким — коуч, аналитик МКП"
+            widths={[448, 586]}
+            sizes="448px"
+            loading="eager"
+            class="aspect-[4/5] w-full object-cover object-top"
+          />
+          {
+            media.heroVideoId && (
+              <button
+                type="button"
+                data-video={media.heroVideoId}
+                class="absolute inset-x-4 bottom-4 flex min-h-14 items-center gap-3 rounded-2xl bg-surface/95 px-4 text-left text-[0.9688rem] font-medium backdrop-blur transition-colors hover:bg-white"
+              >
+                <span class="grid size-10 flex-none place-items-center rounded-full bg-accent text-white">
+                  <Play size={18} fill="currentColor" aria-hidden="true" />
+                </span>
+                Видео-приветствие · 1 минута
+              </button>
+            )
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap pb-10 lg:pb-20">
+      <ul class="grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
+        {
+          trustFacts.map((fact) => {
+            const Icon = factIcons[fact.icon as keyof typeof factIcons];
+            return (
+              <li class="flex items-start gap-3.5 bg-surface px-4 py-3 text-[0.9063rem] leading-snug md:p-5 md:text-[0.9688rem] lg:p-6">
+                <Icon size={22} class="mt-0.5 flex-none text-accent" aria-hidden="true" />
+                {fact.text}
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2. УЗНАЁТЕ СЕБЯ? -->
+  <section class="section border-t border-line" aria-labelledby="h-situations">
+    <div class="wrap">
+      <div class="max-w-3xl" data-reveal>
+        <p class="eyebrow">Узнаёте себя?</p>
+        <h2 id="h-situations" class="h2 mt-4">
+          Вы стараетесь изменить результат. Но некоторые ситуации повторяются
+        </h2>
+      </div>
+
+      <ol class="mt-6 grid border-t border-line sm:mt-8 sm:grid-cols-2 sm:gap-3 sm:border-t-0 lg:mt-14 lg:gap-5">
+        {
+          situations.map((s, i) => (
+            <li class="grid grid-cols-[2.25rem_1fr] border-b border-line py-4 sm:block sm:rounded-[1.25rem] sm:border sm:bg-surface sm:p-5 lg:p-8" data-reveal>
+              <span class="num pt-0.5 text-[0.9375rem] sm:pt-0">{pad(i + 1)}</span>
+              <h3 class="text-[1.1875rem] sm:mt-2 sm:text-[1.25rem] lg:mt-3 lg:text-[1.5rem]">{s.title}</h3>
+              <p class="col-start-2 mt-1.5 text-muted max-sm:text-[0.9688rem] sm:mt-2">{s.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p class="mt-6 max-w-3xl border-l-2 border-accent pl-4 text-[1.0625rem] sm:mt-10 sm:pl-5 sm:text-[1.125rem] leading-[1.45] lg:mt-14 lg:text-[1.375rem]" data-reveal>
+        Внешние обстоятельства меняются. Способ, которым вы их воспринимаете и реагируете, — остаётся.
+        {" "}<span class="font-semibold">Его и исследуем.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. ПОЧЕМУ СЦЕНАРИЙ ПОВТОРЯЕТСЯ -->
+  <section class="section on-night bg-night text-white" aria-labelledby="h-chain">
+    <div class="wrap">
+      <div class="max-w-3xl">
+        <p class="eyebrow">Почему сценарий повторяется</p>
+        <h2 id="h-chain" class="h2 mt-4">Как одна привычная мысль создаёт знакомый результат</h2>
+      </div>
+
+      <div class="mt-6 lg:mt-12">
+        <Chain />
+      </div>
+
+      <div class="mt-5 flex flex-col gap-3 lg:mt-14 lg:flex-row lg:items-end lg:justify-between">
+        <p class="max-w-2xl text-[0.9688rem] text-mist">
+          Это условные примеры. Одна схема не объясняет личность — поэтому анализ идёт по пяти направлениям, а не
+          по одному тесту.
+        </p>
+        <a
+          href="/#zayavka"
+          data-cta="chain-link"
+          class="group inline-flex min-h-11 items-center gap-2 self-start font-semibold text-ember underline-offset-4 hover:underline"
+        >
+          Разобрать мою ситуацию на встрече
+          <ArrowRight size={20} class="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ЧТО ВЫ ПОЛУЧИТЕ -->
+  <section class="section" aria-labelledby="h-benefits">
+    <div class="wrap grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+      <div class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <p class="eyebrow">Что вы получите</p>
+        <h2 id="h-benefits" class="h2 mt-4">От догадок о себе — к ясной картине и конкретным шагам</h2>
+        <Cta block="benefits" class="mt-8 hidden lg:flex" />
+      </div>
+
+      <div>
+        <ol class="border-t border-line">
+          {
+            benefits.map((b, i) => (
+              <li class="grid grid-cols-[2.75rem_1fr] gap-x-3 border-b border-line py-4 lg:grid-cols-[4rem_1fr] lg:py-8" data-reveal>
+                <span class="num pt-1 text-[0.9375rem]">{pad(i + 1)}</span>
+                <div>
+                  <h3 class="text-[1.1875rem] sm:text-[1.3125rem] lg:text-[1.5rem]">{b.title}</h3>
+                  <p class="mt-1.5 text-muted max-sm:text-[0.9688rem]">{b.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <Cta block="benefits" class="mt-6 lg:hidden" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ЧТО ВНУТРИ АНАЛИЗА -->
+  <section class="section bg-sand/60" aria-labelledby="h-methods">
+    <div class="wrap">
+      <div class="max-w-3xl" data-reveal>
+        <p class="eyebrow">Что внутри анализа</p>
+        <h2 id="h-methods" class="h2 mt-4">Пять направлений диагностики и аналитическая работа эксперта</h2>
+        <p class="mt-3 text-[1rem] text-muted sm:mt-5 sm:text-[1.0625rem] lg:text-[1.1875rem]">
+          Отдельный тест измеряет одну характеристику. Здесь результаты пяти методик сопоставляются между собой и
+          с вашим запросом.
+        </p>
+      </div>
+
+      <ol class="mt-6 grid items-start gap-2 md:mt-10 md:gap-3 md:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:gap-4">
+        {
+          methods.map((m, i) => (
+            <li data-reveal>
+              <details class="method card group open:border-ink/25">
+                <summary class="flex items-center gap-4 p-4 md:items-start md:p-5 lg:p-6">
+                  <span class="min-w-0 flex-1">
+                    <span class="num mr-1.5 text-[0.9375rem] md:mr-0 md:block">{i < 5 ? pad(i + 1) : 'Итог'}</span>
+                    <span class="text-[1.0625rem] font-semibold leading-tight tracking-tight md:mt-2 md:block md:text-[1.1875rem]">{m.title}</span>
+                    <span class="mt-2 hidden text-[0.9688rem] leading-snug text-muted md:block">{m.lead}</span>
+                  </span>
+                  <span class="grid size-9 flex-none place-items-center rounded-full border border-line text-ink transition-[rotate,background-color,color] duration-200 group-open:rotate-45 group-open:bg-ink group-open:text-white">
+                    <Plus size={18} aria-hidden="true" />
+                  </span>
+                </summary>
+                <p class="border-t border-line px-4 pb-4 pt-3 text-[0.9688rem] leading-relaxed md:px-5 md:pb-5 md:pt-4 lg:px-6 lg:pb-6"><span class="md:hidden">{m.lead} </span>{m.more}</p>
+              </details>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p class="mt-3 flex items-start gap-3 rounded-2xl border border-line bg-surface p-4 text-[0.9375rem] md:mt-6 md:p-5 md:text-[0.9688rem] lg:mt-8 lg:items-center" data-reveal>
+        <ShieldCheck size={22} class="mt-0.5 flex-none text-accent lg:mt-0" aria-hidden="true" />
+        <span><strong class="font-semibold">Это не терапия и не медицинский диагноз.</strong> Это аналитическая работа для самопознания и развития.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 6. КАК ПРОХОДИТ -->
+  <section id="process" class="section" aria-labelledby="h-process">
+    <div class="wrap grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+      <div class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <p class="eyebrow">Как проходит</p>
+        <h2 id="h-process" class="h2 mt-4">Пять шагов от первой встречи до вашего отчёта</h2>
+      </div>
+
+      <div>
+        <ol>
+          {
+            steps.map((s, i) => (
+              <li class="relative grid grid-cols-[2.75rem_1fr] gap-x-4 pb-4 last:pb-0 md:pb-9 lg:grid-cols-[3.25rem_1fr] lg:gap-x-6 lg:pb-11" data-reveal>
+                {i < steps.length - 1 && <span class="absolute bottom-0 left-[calc(1.375rem-1px)] top-11 w-0.5 bg-line lg:left-[calc(1.625rem-1px)] lg:top-[3.25rem]" aria-hidden="true" />}
+                <span
+                  class:list={[
+                    'num relative grid size-11 place-items-center rounded-full border-[1.5px] text-[1.0625rem] lg:size-[3.25rem]',
+                    i === 0 ? 'border-accent bg-accent !text-white' : 'border-line bg-surface',
+                  ]}
+                >
+                  {i + 1}
+                </span>
+                <details open class="step group pt-1.5 lg:pt-2.5">
+                  <summary class="flex min-h-9 items-start justify-between gap-3 md:pointer-events-none md:block">
+                  <span class="block">
+                  <h3 class="text-[1.1875rem] md:text-[1.25rem] lg:text-[1.4375rem]">{s.title}</h3>
+                  {s.badge && (
+                    <span class="mt-2 inline-block rounded-full bg-accent-soft px-3 py-1 text-[0.875rem] font-medium text-accent-deep">{s.badge}</span>
+                  )}
+                  </span>
+                  <Plus size={18} class="mt-1.5 flex-none text-muted transition-transform duration-200 group-open:rotate-45 md:hidden" aria-hidden="true" />
+                  </summary>
+                  <p class="mt-2 text-muted max-sm:text-[0.9688rem]">{s.text}</p>
+                </details>
+              </li>
+            ))
+          }
+        </ol>
+        <script is:inline>
+          // На телефоне раскрыт только первый шаг — остальные по нажатию
+          if (window.matchMedia('(max-width: 47.99rem)').matches) {
+            document.querySelectorAll('details.step').forEach(function (d, i) {
+              if (i) d.open = false;
+            });
+          }
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ОБ АНДРЕЕ -->
+  <section class="section bg-sand/60" aria-labelledby="h-about">
+    <div class="wrap grid items-start gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+      <div class="relative mx-auto hidden w-full max-w-[26rem] sm:block" data-reveal>
+        <div class="relative overflow-hidden rounded-[2rem] bg-sand">
+          <Image
+            src={portrait}
+            alt="Андрей Ким за рабочим столом"
+            widths={[360, 586]}
+            sizes="(min-width: 64rem) 416px, 90vw"
+            class="aspect-[5/4] w-full object-cover object-top sm:aspect-[4/5]"
+          />
+          {
+            media.aboutVideoId && (
+              <button
+                type="button"
+                data-video={media.aboutVideoId}
+                class="absolute inset-x-4 bottom-4 flex min-h-14 items-center gap-3 rounded-2xl bg-surface/95 px-4 text-left text-[0.9688rem] font-medium backdrop-blur transition-colors hover:bg-white"
+              >
+                <span class="grid size-10 flex-none place-items-center rounded-full bg-accent text-white">
+                  <Play size={18} fill="currentColor" aria-hidden="true" />
+                </span>
+                Как я работаю · 1,5 минуты
+              </button>
+            )
+          }
+        </div>
+        <div class="mt-4 flex items-center gap-4 rounded-2xl border border-line bg-white px-4 py-2">
+          <Image src={logoIhmk} alt="Institute Human Management Kazakhstan" width={150} height={68} class="h-14 w-auto flex-none" />
+          <p class="text-[0.8125rem] leading-snug text-muted">Основатель института</p>
+        </div>
+      </div>
+
+      <div data-reveal>
+        <p class="eyebrow">Кто проводит анализ</p>
+        <div class="mt-4 flex items-center gap-4">
+          <Image src={face} alt="Андрей Ким" width={160} height={160} class="size-20 flex-none rounded-2xl object-cover sm:hidden" />
+          <div>
+            <h2 id="h-about" class="h2">Андрей Ким</h2>
+            <p class="mt-1.5 text-[1rem] leading-snug text-muted sm:mt-3 sm:text-[1.125rem] lg:text-[1.25rem]">Коуч, бизнес-тренер, аналитик МКП (IMCP)</p>
+          </div>
+        </div>
+
+        <ul class="mt-5 grid gap-2.5 sm:mt-7 sm:grid-cols-2 sm:gap-3">
+          {
+            credentials.map((c) => (
+              <li class="flex items-start gap-3 text-[0.9688rem] leading-snug">
+                <Check size={20} class="mt-0.5 flex-none text-accent" aria-hidden="true" />
+                {c}
+              </li>
+            ))
+          }
+        </ul>
+
+        <figure class="mt-6 border-l-2 border-accent pl-4 sm:mt-9 sm:pl-5 lg:pl-7">
+          <blockquote class="space-y-2.5 text-[1rem] leading-[1.5] sm:space-y-3 sm:text-[1.0625rem] sm:leading-[1.55] lg:text-[1.1875rem]">
+            {quote.map((line, i) => <p>{i === 0 && '«'}{line}{i === quote.length - 1 && '»'}</p>)}
+          </blockquote>
+          <figcaption class="mt-4 text-[0.9375rem] text-muted">— Андрей Ким</figcaption>
+        </figure>
+
+        <Cta block="about" class="mt-6 sm:mt-9" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. ОТЗЫВЫ -->
+  <section id="reviews" class="section overflow-hidden" aria-labelledby="h-reviews">
+    <div class="wrap">
+      <div class="max-w-3xl" data-reveal>
+        <p class="eyebrow">Отзывы</p>
+        <h2 id="h-reviews" class="h2 mt-4">Что меняется у людей после анализа</h2>
+      </div>
+
+      <ul
+        class="-mx-5 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:mt-14 [&::-webkit-scrollbar]:hidden"
+        tabindex="0"
+        aria-label="Отзывы клиентов — листайте в сторону"
+      >
+        {
+          reviews.map((r) => (
+            <li class="card flex w-[86%] flex-none snap-center flex-col p-5 md:w-auto lg:p-8">
+              <svg width="30" height="22" viewBox="0 0 30 22" class="text-accent" fill="currentColor" aria-hidden="true">
+                <path d="M0 22V13.2C0 5.6 4.1 1.1 11.6 0l1 3.6C8.9 4.6 7 6.9 6.8 10H12v12H0Zm17 0V13.2C17 5.6 21.1 1.1 28.6 0l1 3.6c-3.7 1-5.6 3.3-5.8 6.4H29v12H17Z" />
+              </svg>
+              <blockquote class="mt-5 flex-1 text-[0.9688rem] leading-relaxed lg:text-[1.0313rem]">{r.text}</blockquote>
+              <div class="mt-6 flex items-center gap-3.5 border-t border-line pt-5">
+                <span class="grid size-11 flex-none place-items-center rounded-full bg-ink text-[1.0625rem] font-semibold text-white" aria-hidden="true">
+                  {r.name[0]}
+                </span>
+                <p class="leading-tight">
+                  <span class="block font-semibold">{r.name}</span>
+                  <span class="mt-0.5 block text-[0.9063rem] text-muted">{r.role}</span>
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      {
+        media.reviewVideoIds.length > 0 && (
+          <ul class="mt-6 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+            {media.reviewVideoIds.map((id, i) => (
+              <li class="relative overflow-hidden rounded-3xl bg-night" data-video-box>
+                <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt={`Видео-отзыв ${i + 1}`} loading="lazy" class="aspect-[9/16] w-full object-cover opacity-90" />
+                <button type="button" data-video={id} aria-label={`Смотреть видео-отзыв ${i + 1}`} class="absolute inset-0 grid place-items-center">
+                  <span class="grid size-16 place-items-center rounded-full bg-accent text-white">
+                    <Play size={26} fill="currentColor" aria-hidden="true" />
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- 9. КОМУ ПОДХОДИТ -->
+  <section class="section border-t border-line" aria-labelledby="h-fit">
+    <div class="wrap">
+      <div class="max-w-3xl" data-reveal>
+        <p class="eyebrow">Кому подходит</p>
+        <h2 id="h-fit" class="h2 mt-4">Для кого эта работа</h2>
+      </div>
+
+      <div class="mt-6 grid items-start gap-3 sm:gap-5 lg:mt-14 lg:grid-cols-[1.55fr_1fr]">
+        <div class="card p-5 lg:p-9" data-reveal>
+          <h3 class="text-[1.3125rem] lg:text-[1.5rem]">Подходит</h3>
+          <ul class="mt-2 divide-y divide-line sm:mt-5">
+            {
+              fits.map((f) => (
+                <li class="flex items-start gap-3 py-3 last:pb-0 sm:gap-3.5 sm:py-3.5">
+                  <Check size={22} class="mt-0.5 flex-none text-accent" aria-hidden="true" />
+                  <p class="max-sm:text-[0.9688rem]"><strong class="font-semibold">{f.who}</strong> — {f.text}</p>
+                </li>
+              ))
+            }
+          </ul>
+          <Cta block="fit" class="mt-6 sm:mt-8" />
+        </div>
+
+        <div class="rounded-[1.25rem] border border-dashed border-ink/25 p-5 lg:p-8" data-reveal>
+          <LifeBuoy size={26} class="hidden text-muted sm:block" aria-hidden="true" />
+          <h3 class="text-[1.1875rem] sm:mt-4 sm:text-[1.3125rem] lg:text-[1.5rem]">Не заменит необходимую помощь</h3>
+          <ul class="mt-3 space-y-2 text-muted max-sm:text-[0.9688rem] sm:mt-4 sm:space-y-3">
+            {notFits.map((n) => <li class="flex gap-3"><span class="mt-[0.7em] h-px w-3 flex-none bg-muted" aria-hidden="true" />{n}</li>)}
+          </ul>
+          <p class="mt-3 font-medium max-sm:text-[0.9688rem] sm:mt-5">В таких ситуациях нужен профильный специалист.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. СТОИМОСТЬ -->
+  <section id="price" class="section bg-sand/60" aria-labelledby="h-price">
+    <div class="wrap">
+      <div class="max-w-3xl" data-reveal>
+        <p class="eyebrow">Стоимость</p>
+        <h2 id="h-price" class="h2 mt-4">Персональная программа «Глубинный анализ МКП личности»</h2>
+      </div>
+
+      <div class="card mt-6 grid overflow-hidden lg:mt-14 lg:grid-cols-[1.1fr_1fr]" data-reveal>
+        <div class="p-5 lg:p-10">
+          <h3 class="text-[1.3125rem] lg:text-[1.5rem]">Что входит</h3>
+          <ul class="mt-4 space-y-3 max-sm:text-[0.9688rem] sm:mt-5 sm:space-y-4">
+            {
+              included.map((item) => (
+                <li class="flex items-start gap-3.5">
+                  <span class="mt-0.5 grid size-6 flex-none place-items-center rounded-full bg-accent-soft text-accent-deep">
+                    <Check size={15} stroke-width={2.6} aria-hidden="true" />
+                  </span>
+                  {item}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="border-t border-line bg-white p-5 lg:border-l lg:border-t-0 lg:p-10">
+          <p class="text-[0.9375rem] text-muted">Единый платёж</p>
+          <p class="mt-1 text-[2.5rem] font-semibold leading-none tracking-tight lg:text-[3.5rem]">
+            150 000&nbsp;₸
+          </p>
+          <p class="mt-5 border-t border-line pt-5 text-[0.9688rem] text-muted">
+            <span class="font-semibold text-ink">Или 80 000&nbsp;₸ + 80 000&nbsp;₸</span> — в два этапа
+            (160&nbsp;000&nbsp;₸ итого)
+          </p>
+          <Cta
+            block="price"
+            class="mt-7 [&>a]:w-full"
+            note="Оплата — только после встречи, если решите идти дальше. Программа не обязывает покупать коучинг или что-то ещё."
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. ФОРМА -->
+  <section id="zayavka" class="section on-night scroll-mt-16 bg-night text-white" aria-labelledby="h-form">
+    <div class="wrap grid items-start gap-6 lg:grid-cols-[1fr_0.9fr] lg:gap-20">
+      <div class="lg:pt-6">
+        <p class="eyebrow">Первый шаг</p>
+        <h2 id="h-form" class="h2 mt-4">Запишитесь на бесплатную ознакомительную встречу</h2>
+        <p class="mt-3 max-w-xl text-[1.0625rem] text-mist lg:text-[1.1875rem]">
+          30 минут онлайн. Обсудим ваш запрос и поймём, подходит ли вам анализ.
+        </p>
+
+        <ul class="mt-9 hidden space-y-5 lg:block">
+          <li class="flex items-start gap-4">
+            <MessageCircle size={22} class="mt-0.5 flex-none text-ember" aria-hidden="true" />
+            <span>Запрос может быть размытым — уточним его вместе на встрече.</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <Wallet size={22} class="mt-0.5 flex-none text-ember" aria-hidden="true" />
+            <span>Встреча бесплатная. Оплата программы — только если решите идти дальше.</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <Lock size={22} class="mt-0.5 flex-none text-ember" aria-hidden="true" />
+            <span>Конфиденциальность ответов и результатов закрепляется в договоре.</span>
+          </li>
+        </ul>
+      </div>
+
+      <LeadForm />
+    </div>
+  </section>
+
+  <!-- 12. FAQ -->
+  <section id="faq" class="section" aria-labelledby="h-faq">
+    <div class="wrap grid gap-5 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+      <div class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <p class="eyebrow">FAQ</p>
+        <h2 id="h-faq" class="h2 mt-4">Частые вопросы</h2>
+      </div>
+
+      <div class="border-t border-line" data-reveal>
+        {
+          faq.map((item) => (
+            <details name="faq" class="group border-b border-line">
+              <summary class="flex min-h-14 items-center justify-between gap-4 py-3.5 text-[1.0313rem] sm:min-h-16 sm:gap-5 sm:py-5 sm:text-[1.0938rem] font-semibold leading-snug transition-colors hover:text-accent lg:text-[1.1875rem]">
+                {item.q}
+                <span class="grid size-9 flex-none place-items-center rounded-full border border-line text-ink transition-[rotate,background-color,color] duration-200 group-open:rotate-45 group-open:bg-ink group-open:text-white">
+                  <Plus size={18} aria-hidden="true" />
+                </span>
+              </summary>
+              <p class="max-w-2xl pb-5 pr-4 text-muted max-sm:text-[0.9688rem] sm:pb-6 sm:pr-12">{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. ФИНАЛЬНЫЙ CTA -->
+  <section class="section relative overflow-hidden border-t border-line" aria-labelledby="h-final">
+    <svg class="pointer-events-none absolute left-1/2 top-1/2 size-[44rem] max-w-none -translate-x-1/2 -translate-y-1/2 text-accent/25" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+      <circle cx="200" cy="200" r="190" stroke="currentColor" stroke-width="1" stroke-dasharray="3 9" stroke-linecap="round"></circle>
+    </svg>
+    <div class="wrap relative text-center" data-reveal>
+      <h2 id="h-final" class="h2 mx-auto max-w-3xl">Один разговор — и станет понятно, подходит ли вам этот путь</h2>
+      <p class="mx-auto mt-5 max-w-xl text-[1.0625rem] text-muted lg:text-[1.1875rem]">
+        30 минут онлайн, без обязательств. Если анализ не под ваш запрос — скажу прямо.
+      </p>
+      <Cta block="final" align="center" note={false} class="mt-6 sm:mt-8" />
+    </div>
+  </section>
+
+  <StickyBar slot="after" />
+</Base>
+
+<style is:global>
+  /* Подчёркнутая «петля» в заголовке первого экрана */
+  .hero-loop {
+    background-image: linear-gradient(var(--color-accent), var(--color-accent));
+    background-repeat: no-repeat;
+    background-size: 100% 0.09em;
+    background-position: 0 96%;
+    padding-bottom: 0.04em;
+  }
+  .method summary:hover > span:last-child {
+    border-color: var(--color-ink);
+  }
+</style>
+
+<script>
+  // Видео: постер + кнопка, плеер подгружается только по клику
+  document.querySelectorAll<HTMLButtonElement>('[data-video]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const box = btn.closest('[data-video-box]');
+      if (!box) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.video}?autoplay=1&rel=0&cc_load_policy=1`;
+      iframe.title = 'Видео';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.className = 'absolute inset-0 size-full';
+      box.appendChild(iframe);
+      btn.remove();
+    });
+  });
+</script>

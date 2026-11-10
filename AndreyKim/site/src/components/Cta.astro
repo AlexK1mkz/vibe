@@ -1,0 +1,21 @@
+---
+import { ArrowRight } from '@lucide/astro';
+import { site } from '../data/site';
+
+interface Props {
+  block: string; // id блока для события cta_click
+  note?: boolean | string;
+  align?: 'start' | 'center';
+  class?: string;
+}
+const { block, note = true, align = 'start', class: cls = '' } = Astro.props;
+const noteText = typeof note === 'string' ? note : site.ctaNote;
+---
+
+<div class:list={['flex flex-col gap-3', align === 'center' ? 'items-center text-center' : 'items-start', cls]}>
+  <a href="/#zayavka" data-cta={block} class="btn btn-primary group w-full sm:w-auto">
+    {site.cta}
+    <ArrowRight size={20} class="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+  </a>
+  {note && <p class="max-w-md text-[0.9375rem] leading-snug text-muted [.on-night_&]:text-mist">{noteText}</p>}
+</div>

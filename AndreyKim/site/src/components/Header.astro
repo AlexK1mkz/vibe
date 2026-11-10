@@ -1,0 +1,68 @@
+---
+import Brand from './Brand.astro';
+import { site, nav } from '../data/site';
+
+interface Props {
+  minimal?: boolean;
+}
+const { minimal = false } = Astro.props;
+---
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 border-b border-transparent bg-paper/85 backdrop-blur-md transition-[border-color,box-shadow] duration-200 data-[stuck]:border-line"
+>
+  <div class="wrap flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
+    <a href="/" class="flex items-baseline gap-2.5 py-2" aria-label="Андрей Ким — на главную">
+      <span class="text-[1.125rem] font-semibold tracking-tight">{site.name}</span>
+      <span class="hidden text-sm text-muted xs:inline">аналитик МКП</span>
+    </a>
+
+    {
+      !minimal && (
+        <nav aria-label="Разделы страницы" class="hidden lg:block">
+          <ul class="flex items-center gap-8 text-[0.9688rem]">
+            {nav.map((item) => (
+              <li>
+                <a href={item.href} class="py-3 text-ink/80 transition-colors hover:text-accent">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+
+    <div class="flex items-center gap-2.5">
+      <a
+        href={site.whatsapp}
+        target="_blank"
+        rel="noopener"
+        data-wa="header"
+        aria-label="Написать в WhatsApp"
+        class="grid size-11 place-items-center rounded-full border border-line text-ink transition-colors hover:border-ink"
+      >
+        <Brand name="whatsapp" size={20} />
+      </a>
+      {
+        !minimal && (
+          <a
+            href="/#zayavka"
+            data-cta="header"
+            class="btn btn-primary hidden !min-h-11 !px-5 !py-2 !text-[0.9688rem] md:inline-flex"
+          >
+            {site.cta}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const onScroll = () => header?.toggleAttribute('data-stuck', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>

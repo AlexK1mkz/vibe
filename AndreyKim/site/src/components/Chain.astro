@@ -1,0 +1,294 @@
+---
+import { Repeat2, ArrowRight } from '@lucide/astro';
+import { chainExamples, chainLabels } from '../data/site';
+---
+
+<div data-chain data-examples={JSON.stringify(chainExamples.map((e) => e.steps))}>
+  <div
+    role="tablist"
+    aria-label="Пример ситуации"
+    class="inline-flex max-w-full gap-1 overflow-x-auto rounded-full border border-night-line bg-night-2 p-1"
+  >
+    {
+      chainExamples.map((ex, i) => (
+        <button
+          type="button"
+          role="tab"
+          id={`chain-tab-${ex.id}`}
+          aria-controls="chain-panel"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          tabindex={i === 0 ? 0 : -1}
+          data-tab={i}
+          class="min-h-11 shrink-0 rounded-full px-4 text-[0.9688rem] font-medium text-mist transition-colors hover:text-white aria-selected:bg-paper aria-selected:text-ink sm:px-5"
+        >
+          {ex.tab}
+        </button>
+      ))
+    }
+  </div>
+
+  <div id="chain-panel" role="tabpanel" aria-labelledby={`chain-tab-${chainExamples[0].id}`} class="mt-8 lg:mt-10">
+    <ol class="chain-list grid gap-0 lg:grid-cols-5 lg:gap-3">
+      {
+        chainLabels.map((label, i) => (
+          <li class="chain-item relative">
+            <button
+              type="button"
+              data-step={i}
+              aria-pressed={i === 0 ? 'true' : 'false'}
+              class="chain-step group flex w-full items-start gap-4 text-left lg:h-full lg:flex-col lg:gap-5"
+            >
+              <span class="chain-dot num" aria-hidden="true">
+                {i + 1}
+              </span>
+              <span class="chain-body block min-w-0 flex-1 lg:w-full">
+                <span class="block text-[0.75rem] font-semibold uppercase tracking-[0.09em] text-mist">{label}</span>
+                <span data-value class="chain-value mt-1 block text-[1rem] font-medium leading-snug lg:text-[1.125rem]">
+                  {chainExamples[0].steps[i]}
+                </span>
+              </span>
+            </button>
+            {i < chainLabels.length - 1 && (
+              <ArrowRight size={18} class="chain-arrow absolute hidden text-night-line lg:block" aria-hidden="true" />
+            )}
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="chain-return" aria-hidden="true">
+      <span class="chain-return-label">
+        <Repeat2 size={16} />
+        и снова по кругу
+      </span>
+    </div>
+    <p class="sr-only">После результата цепочка начинается заново — сценарий повторяется.</p>
+  </div>
+</div>
+
+<style is:global>
+  /* ── Шаг ─────────────────────────────── */
+  .chain-dot {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--color-night-line);
+    background: var(--color-night);
+    color: var(--color-mist);
+    font-size: 0.9375rem;
+    position: relative;
+    z-index: 1;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      color 0.3s ease;
+  }
+  .chain-body {
+    padding: 0.25rem 0 1.125rem 0;
+    transition: opacity 0.2s ease;
+  }
+  .chain-value {
+    color: #c9d1dc;
+    transition: color 0.3s ease;
+  }
+  .chain-step[aria-pressed='true'] .chain-dot {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+  .chain-step[aria-pressed='true'] .chain-value {
+    color: #fff;
+  }
+  .chain-step[data-passed] .chain-dot {
+    border-color: var(--color-ember);
+    color: var(--color-ember);
+  }
+  .chain-step:hover .chain-value {
+    color: #fff;
+  }
+  [data-chain][data-swapping] .chain-value {
+    opacity: 0;
+  }
+  .chain-value {
+    transition:
+      color 0.3s ease,
+      opacity 0.18s ease;
+  }
+
+  /* ── Мобильная вертикаль: рельс слева ── */
+  .chain-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: calc(1.25rem - 1px);
+    top: 2.5rem;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-night-line);
+  }
+  .chain-return {
+    margin-top: -0.25rem;
+    padding-left: 0.5rem;
+  }
+  .chain-return-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ember);
+  }
+
+  /* ── Десктоп: горизонталь + возвратная петля ── */
+  @media (min-width: 64rem) {
+    .chain-item:not(:last-child)::before {
+      display: none;
+    }
+    .chain-step {
+      padding: 1.25rem 1.25rem 1.5rem;
+      border-radius: 1.125rem;
+      border: 1px solid var(--color-night-line);
+      background: var(--color-night-2);
+      transition:
+        border-color 0.3s ease,
+        background-color 0.3s ease,
+        transform 0.3s ease;
+    }
+    .chain-step:hover {
+      border-color: #44546d;
+    }
+    .chain-step[aria-pressed='true'] {
+      border-color: var(--color-ember);
+      background: #222e42;
+      transform: translateY(-4px);
+    }
+    .chain-body {
+      padding: 0;
+    }
+    .chain-dot {
+      background: transparent;
+    }
+    .chain-arrow {
+      right: -0.95rem;
+      top: 50%;
+      translate: 0 -50%;
+      z-index: 2;
+      background: var(--color-night);
+      border-radius: 999px;
+    }
+    .chain-return {
+      position: relative;
+      height: 3.25rem;
+      margin: 0 10%;
+      padding: 0;
+      border: 1.5px dashed #44546d;
+      border-top: 0;
+      border-radius: 0 0 1.5rem 1.5rem;
+    }
+    /* стрелка вверх — к «Событию» */
+    .chain-return::before {
+      content: '';
+      position: absolute;
+      left: -0.44rem;
+      top: 0.15rem;
+      width: 0.75rem;
+      height: 0.75rem;
+      border-left: 1.5px solid #6a7b95;
+      border-top: 1.5px solid #6a7b95;
+      rotate: 45deg;
+    }
+    .chain-return-label {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      translate: -50% 50%;
+      padding: 0.25rem 0.875rem;
+      background: var(--color-night);
+      white-space: nowrap;
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-chain]');
+  if (root) {
+    const examples: string[][] = JSON.parse(root.dataset.examples || '[]');
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const steps = [...root.querySelectorAll<HTMLButtonElement>('[data-step]')];
+    const values = [...root.querySelectorAll<HTMLElement>('[data-value]')];
+    const panel = root.querySelector<HTMLElement>('#chain-panel');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let active = 0;
+    let timer: number | undefined;
+    let touched = false;
+    let visible = false;
+
+    const setStep = (index: number) => {
+      active = index;
+      steps.forEach((btn, i) => {
+        btn.setAttribute('aria-pressed', String(i === index));
+        btn.toggleAttribute('data-passed', i < index);
+      });
+    };
+
+    const play = () => {
+      stop();
+      if (reduced || touched || !visible) return;
+      timer = window.setInterval(() => setStep((active + 1) % steps.length), 2200);
+    };
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    const setTab = (index: number, focus = false) => {
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(i === index));
+        tab.tabIndex = i === index ? 0 : -1;
+      });
+      panel?.setAttribute('aria-labelledby', tabs[index].id);
+      if (focus) tabs[index].focus();
+      root.toggleAttribute('data-swapping', true);
+      window.setTimeout(
+        () => {
+          values.forEach((el, i) => (el.textContent = examples[index][i]));
+          root.toggleAttribute('data-swapping', false);
+          setStep(0);
+          play();
+        },
+        reduced ? 0 : 180,
+      );
+    };
+
+    steps.forEach((btn, i) =>
+      btn.addEventListener('click', () => {
+        touched = true;
+        stop();
+        setStep(i);
+      }),
+    );
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => setTab(i));
+      tab.addEventListener('keydown', (e) => {
+        const dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!dir) return;
+        e.preventDefault();
+        setTab((i + dir + tabs.length) % tabs.length, true);
+      });
+    });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(
+        ([entry]) => {
+          visible = entry.isIntersecting;
+          visible ? play() : stop();
+        },
+        { threshold: 0.35 },
+      ).observe(root);
+    }
+  }
+</script>

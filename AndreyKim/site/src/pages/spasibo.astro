@@ -1,0 +1,73 @@
+---
+import { Check, ArrowUpRight } from '@lucide/astro';
+import Base from '../layouts/Base.astro';
+import Brand from '../components/Brand.astro';
+import { site, media } from '../data/site';
+
+const links =
+  media.whileWaiting.length > 0
+    ? media.whileWaiting
+    : [
+        { title: 'Instagram Андрея — @akim_ihmk', href: site.instagram },
+        { title: 'Telegram-канал — @metaselfs', href: site.telegram },
+      ];
+---
+
+<Base title="Заявка принята — Андрей Ким" description="Заявка на ознакомительную встречу принята." noindex minimalHeader>
+  <section class="section">
+    <div class="wrap max-w-2xl">
+      <span class="grid size-14 place-items-center rounded-full bg-accent text-white">
+        <Check size={28} stroke-width={2.4} aria-hidden="true" />
+      </span>
+      <h1 class="mt-7 text-[2.25rem] lg:text-[3.25rem]">Заявка принята</h1>
+      <p class="mt-5 text-[1.125rem] text-ink/85 lg:text-[1.25rem]">
+        Андрей свяжется с вами в течение рабочего дня, чтобы согласовать время встречи. Если удобнее сразу —
+        напишите в WhatsApp.
+      </p>
+
+      <a href={site.whatsapp} target="_blank" rel="noopener" data-wa="spasibo" class="btn btn-primary mt-8 w-full sm:w-auto">
+        <Brand name="whatsapp" size={22} />
+        Написать в WhatsApp
+      </a>
+
+      <ol class="mt-12 space-y-4 border-t border-line pt-8 text-[0.9688rem]">
+        <li class="flex gap-4"><span class="num">1</span>Андрей напишет или позвонит и предложит время.</li>
+        <li class="flex gap-4"><span class="num">2</span>Встреча — 30 минут онлайн. Готовиться не нужно.</li>
+        <li class="flex gap-4"><span class="num">3</span>После встречи вы сами решаете, идти ли в программу.</li>
+      </ol>
+
+      <div class="mt-12">
+        <h2 class="text-[1.3125rem]">Пока ждёте</h2>
+        <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+          {
+            links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener"
+                  class="card flex min-h-16 items-center justify-between gap-3 px-5 py-4 text-[0.9688rem] font-medium transition-colors hover:border-ink"
+                >
+                  {link.title}
+                  <ArrowUpRight size={20} class="flex-none text-accent" aria-hidden="true" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <p class="mt-10"><a href="/" class="text-muted underline underline-offset-4 hover:text-accent">Вернуться на главную</a></p>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Событие конверсии: Метрика (цель lead) и Meta Pixel (Lead). Один раз на заявку.
+  const fire = () => {
+    if (sessionStorage.getItem('lead_fired')) return;
+    sessionStorage.setItem('lead_fired', '1');
+    window.track('lead');
+  };
+  document.addEventListener('analytics:ready', fire, { once: true });
+</script>
