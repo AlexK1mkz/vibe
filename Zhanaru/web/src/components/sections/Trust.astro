@@ -1,0 +1,27 @@
+---
+import { trust } from '../../content/sections';
+import { site } from '../../content/site';
+import Icon from '../ui/Icon.astro';
+import SectionHead from '../ui/SectionHead.astro';
+---
+<section id="trust" class="section !pt-0">
+  <div class="wrap">
+    <SectionHead eyebrow={trust.eyebrow} title={trust.title} />
+    <ul class="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+      {trust.items.map((item, i) => (
+        <li class="reveal flex gap-4">
+          <span class:list={[`chip-${['aqua', 'green', 'amber', 'sky', 'lilac', 'peach'][i % 6]}`, 'grid size-12 shrink-0 place-items-center rounded-2xl']}><Icon name={item.icon} /></span>
+          <div>
+            <h3 class="font-display text-lg font-bold">{item.title}</h3>
+            <p class="mt-1 text-[15px] text-muted">{item.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <p class="reveal mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 rounded-3xl border border-line bg-surface px-6 py-5 text-[15px] text-muted">
+      Лаборатории-партнёры:
+      {site.labs.map((lab) => <b class="font-display tracking-[0.04em] text-ink">{lab}</b>)}
+      <span>· анализы сдаются прямо в клинике</span>
+    </p>
+  </div>
+</section>

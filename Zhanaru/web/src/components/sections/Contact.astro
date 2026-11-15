@@ -1,0 +1,64 @@
+---
+import LeadForm from '../ui/LeadForm';
+import { contact } from '../../content/sections';
+import { site, waLink, waDefaultText } from '../../content/site';
+import { ru } from '../../i18n/ru';
+import Icon from '../ui/Icon.astro';
+import WaIcon from '../ui/WaIcon.astro';
+---
+<section id="contacts" class="section !pt-0" data-hide-fab>
+  <div class="wrap grid gap-4 lg:grid-cols-2">
+    <div class="panel-deep on-dark reveal rounded-[32px] p-6 sm:p-10">
+      <p class="eyebrow">{contact.eyebrow}</p>
+      <h2 class="h2 mt-4 !text-[clamp(26px,3.2vw,40px)]">{contact.title}</h2>
+      <p class="mt-4 text-white/85">{contact.lead}</p>
+      <div class="mt-6 rounded-3xl bg-surface p-5 text-ink sm:p-6 [&_:focus-visible]:outline-brand">
+        <LeadForm client:visible source="contact" redirect idPrefix="contact" />
+      </div>
+      <a class="btn btn-light mt-4 w-full" href={waLink(waDefaultText)} target="_blank" rel="noopener" data-cta="contact" data-lead="whatsapp">
+        <WaIcon />{ru.common.writeWhatsapp}
+      </a>
+    </div>
+    <div class="card reveal flex flex-col p-6 sm:p-10">
+      <h3 class="h3">{site.name}, {site.tagline}</h3>
+      <ul class="mt-6 grid gap-5">
+        <li class="flex gap-4">
+          <span class="grid size-11 shrink-0 place-items-center rounded-2xl bg-brand-soft text-brand"><Icon name="pin" /></span>
+          <div>
+            <p class="text-sm text-muted">Адрес</p>
+            <p class="font-semibold">{site.address.place}, {site.address.street}</p>
+            <p class="text-sm text-muted">{site.address.district}, {site.city}. {site.address.note}</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="grid size-11 shrink-0 place-items-center rounded-2xl bg-brand-soft text-brand"><Icon name="clock" /></span>
+          <div><p class="text-sm text-muted">Часы работы</p><p class="font-semibold">{site.hours.label}</p></div>
+        </li>
+        <li class="flex gap-4">
+          <span class="grid size-11 shrink-0 place-items-center rounded-2xl bg-brand-soft text-brand"><Icon name="phone" /></span>
+          <div>
+            <p class="text-sm text-muted">Телефон и WhatsApp</p>
+            <p class="font-semibold"><a href={`tel:${site.phone}`} data-cta="contact_phone" class="hover:underline">{site.phoneLabel}</a></p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="grid size-11 shrink-0 place-items-center rounded-2xl bg-brand-soft text-brand"><Icon name="at" /></span>
+          <div>
+            <p class="text-sm text-muted">Instagram</p>
+            <p class="font-semibold"><a href={site.instagram.url} target="_blank" rel="noopener" class="hover:underline">{site.instagram.label}</a></p>
+          </div>
+        </li>
+      </ul>
+      <a href={site.gis.url} target="_blank" rel="noopener" data-cta="map"
+        class="relative mt-8 flex min-h-[180px] flex-1 items-end overflow-hidden rounded-3xl bg-brand-soft p-5">
+        <svg class="absolute inset-0 size-full" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <g fill="none" stroke="#fff" stroke-width="7"><path d="M-20 60 420 30M-20 150 420 135M70 -20 95 240M210 -20 225 240M330 -20 340 240"/></g>
+          <path d="M-20 110C90 95 150 125 230 100S360 70 420 85" fill="none" stroke="#BFD9CF" stroke-width="12" stroke-linecap="round"/>
+          <circle cx="225" cy="100" r="22" fill="var(--brand)" opacity=".18"/>
+          <circle cx="225" cy="100" r="9" fill="var(--brand)" stroke="#fff" stroke-width="3"/>
+        </svg>
+        <span class="btn btn-primary btn-sm relative">{ru.common.route}<Icon name="arrow-right" size={18} /></span>
+      </a>
+    </div>
+  </div>
+</section>

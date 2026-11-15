@@ -1,0 +1,19 @@
+---
+// Простая служебная страница: шапка, текст, подвал.
+import Base from './Base.astro';
+import Header from '../components/sections/Header.astro';
+import Footer from '../components/sections/Footer.astro';
+
+interface Props { title: string; description?: string; noindex?: boolean; fab?: boolean }
+const { title, description, noindex = false, fab = true } = Astro.props;
+---
+<Base title={`${title} — ZhanaRu`} description={description} noindex={noindex} fab={fab}>
+  <Header home={false} />
+  <main id="main" class="wrap max-w-3xl py-12 lg:py-20">
+    <h1 class="h2">{title}</h1>
+    <div class="mt-8 grid gap-4 [&_a]:text-brand [&_a]:underline [&_a]:underline-offset-2 [&_h2]:mt-6 [&_h2]:text-xl [&_li]:ml-5 [&_li]:list-disc [&_ul]:grid [&_ul]:gap-1.5">
+      <slot />
+    </div>
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,7 @@
+node_modules
+dist
+.astro
+public/api/private/config.php
+public/api/private/rate
+test-results
+playwright-report

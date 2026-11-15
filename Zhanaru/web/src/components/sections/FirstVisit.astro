@@ -1,0 +1,21 @@
+---
+import { firstVisit } from '../../content/sections';
+import SectionHead from '../ui/SectionHead.astro';
+---
+<section id="first-visit" class="section !pt-0">
+  <div class="wrap">
+    <SectionHead eyebrow={firstVisit.eyebrow} title={firstVisit.title} />
+    <ol class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {firstVisit.steps.map((step, i) => (
+        <li class="reveal rounded-3xl border border-line bg-surface p-6">
+          <span class:list={[`chip-${['aqua', 'amber', 'lilac', 'green'][i]}`, 'grid size-11 place-items-center rounded-full font-display font-bold']}>{i + 1}</span>
+          <h3 class="mt-4 font-display text-lg font-bold">{step.title}</h3>
+          <p class="mt-1 text-[15px] text-muted">{step.text}</p>
+        </li>
+      ))}
+    </ol>
+    <ul class="reveal mt-6 grid gap-1 text-[15px] text-muted">
+      {firstVisit.notes.map((note) => <li>{note}</li>)}
+    </ul>
+  </div>
+</section>

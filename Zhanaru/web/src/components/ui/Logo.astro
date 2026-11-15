@@ -1,0 +1,39 @@
+---
+// Временный знак-дерево с действующего сайта. Заменить на фирменный SVG (TODO-CONTENT.md).
+import { site } from '../../content/site';
+const { light = false } = Astro.props;
+---
+<span class="flex items-center gap-3">
+  <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" class="shrink-0">
+    <circle cx="20" cy="20" r="20" fill={light ? '#fff' : 'var(--brand)'} />
+    <g transform="translate(6 5) scale(0.28 0.3)" color={light ? 'var(--brand)' : '#fff'}>
+      <g fill="none" stroke="currentColor" stroke-linecap="round">
+        <path stroke-width="3.6" d="M50 94 C50 82 49 72 50 60"/>
+        <path stroke-width="2.6" d="M50 72 C45 67 40 63 34 58M50 68 C56 63 61 59 66 53"/>
+        <path stroke-width="2.4" d="M50 62 C47 55 45 49 43 42M50 62 C53 55 56 49 58 41M50 60 C50 50 50 42 50 32"/>
+      </g>
+      <g fill="currentColor">
+        <ellipse cx="34" cy="56" rx="4.8" ry="2.5" transform="rotate(-30 34 56)"/>
+        <ellipse cx="28" cy="50" rx="4.8" ry="2.5" transform="rotate(-10 28 50)"/>
+        <ellipse cx="26" cy="42" rx="4.8" ry="2.5" transform="rotate(20 26 42)"/>
+        <ellipse cx="30" cy="34" rx="4.8" ry="2.5" transform="rotate(40 30 34)"/>
+        <ellipse cx="36" cy="27" rx="4.8" ry="2.5" transform="rotate(60 36 27)"/>
+        <ellipse cx="43" cy="22" rx="4.8" ry="2.5" transform="rotate(75 43 22)"/>
+        <ellipse cx="50" cy="19" rx="4.8" ry="2.5" transform="rotate(90 50 19)"/>
+        <ellipse cx="57" cy="22" rx="4.8" ry="2.5" transform="rotate(105 57 22)"/>
+        <ellipse cx="64" cy="27" rx="4.8" ry="2.5" transform="rotate(120 64 27)"/>
+        <ellipse cx="70" cy="34" rx="4.8" ry="2.5" transform="rotate(140 70 34)"/>
+        <ellipse cx="74" cy="42" rx="4.8" ry="2.5" transform="rotate(160 74 42)"/>
+        <ellipse cx="72" cy="50" rx="4.8" ry="2.5" transform="rotate(190 72 50)"/>
+        <ellipse cx="66" cy="56" rx="4.8" ry="2.5" transform="rotate(210 66 56)"/>
+        <ellipse cx="42" cy="35" rx="4.2" ry="2.2" transform="rotate(60 42 35)"/>
+        <ellipse cx="50" cy="27" rx="4.2" ry="2.2" transform="rotate(90 50 27)"/>
+        <ellipse cx="58" cy="35" rx="4.2" ry="2.2" transform="rotate(120 58 35)"/>
+      </g>
+    </g>
+  </svg>
+  <span class="font-display text-[19px] font-bold leading-none tracking-[0.02em]">
+    {site.name}
+    <small class:list={['mt-1 block text-[10.5px] font-medium tracking-[0.06em]', light ? 'text-white/70' : 'text-muted']}>{site.tagline}</small>
+  </span>
+</span>

@@ -1,0 +1,25 @@
+---
+import { site } from '../../content/site';
+import Logo from '../ui/Logo.astro';
+---
+<footer class="border-t border-line bg-surface py-10 text-sm text-muted">
+  <div class="wrap">
+    <div class="flex flex-wrap justify-between gap-8">
+      <div class="max-w-md">
+        <div class="text-ink"><Logo /></div>
+        <p class="mt-4">© {new Date().getFullYear()} {site.legal.company} · БИН {site.legal.bin}</p>
+        <p>Государственная лицензия на медицинскую деятельность {site.legal.license}</p>
+      </div>
+      <div>
+        <p>{site.address.place}, {site.address.street}, {site.city}</p>
+        <p>{site.hours.label}</p>
+        <p><a href={`tel:${site.phone}`} class="hover:underline">{site.phoneLabel}</a></p>
+      </div>
+      <ul class="grid content-start gap-1">
+        <li><a href="/privacy/" class="underline underline-offset-2 hover:text-ink">Политика конфиденциальности</a></li>
+        <li><a href="/offer/" class="underline underline-offset-2 hover:text-ink">Публичная оферта</a></li>
+      </ul>
+    </div>
+    <p class="mt-8 rounded-2xl bg-brand-soft px-5 py-4 text-center font-semibold tracking-[0.01em] text-brand-deep">{site.disclaimer}</p>
+  </div>
+</footer>

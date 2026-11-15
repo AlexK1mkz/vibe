@@ -1,0 +1,100 @@
+---
+// Главная страница: общая для / и /kk/.
+import Base from '../layouts/Base.astro';
+import { faq } from '../content/faq';
+import { hero, seo } from '../content/sections';
+import { site } from '../content/site';
+import { ru } from '../i18n/ru';
+import { kk } from '../i18n/kk';
+import Header from './sections/Header.astro';
+import Hero, { heroSrcset, wideSrcset } from './sections/Hero.astro';
+import Jobs from './sections/Jobs.astro';
+import Recognize from './sections/Recognize.astro';
+import QuizSection from './sections/QuizSection.astro';
+import Method from './sections/Method.astro';
+import Directions from './sections/Directions.astro';
+import Checkups from './sections/Checkups.astro';
+import Programs from './sections/Programs.astro';
+import Trust from './sections/Trust.astro';
+import Doctors from './sections/Doctors.astro';
+import Space from './sections/Space.astro';
+import Reviews from './sections/Reviews.astro';
+import FirstVisit from './sections/FirstVisit.astro';
+import Mission from './sections/Mission.astro';
+import Faq from './sections/Faq.astro';
+import Contact from './sections/Contact.astro';
+import Footer from './sections/Footer.astro';
+
+interface Props { lang: 'ru' | 'kk' }
+const { lang } = Astro.props;
+const dict = lang === 'kk' ? kk : ru;
+const home = new URL('/', Astro.site).href;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalClinic',
+    '@id': home + '#clinic',
+    name: `${site.name} (${site.nameKk})`,
+    description: seo.description,
+    url: home,
+    image: new URL('/og/cover.jpg', Astro.site).href,
+    telephone: site.phone,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: `${site.address.street}, ${site.address.place}`,
+      addressLocality: site.city,
+      postalCode: site.address.postal,
+      addressCountry: 'KZ',
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: site.hours.opens,
+      closes: site.hours.closes,
+    },
+    sameAs: [site.instagram.url, site.gis.url],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Главная', item: home }],
+  },
+];
+---
+<Base lang={lang} noindex={!dict.meta.translated} alternates={{ ru: '/', kk: '/kk/' }} jsonLd={jsonLd}>
+  {/* первое фото слайдера — самый крупный элемент первого экрана (LCP): на телефоне кадр 4:3, на десктопе вертикальный */}
+  <link slot="head" rel="preload" as="image" fetchpriority="high" media="(max-width: 1023px)"
+    imagesrcset={wideSrcset(hero.slides[0].img)} imagesizes="calc(100vw - 56px)" />
+  <link slot="head" rel="preload" as="image" fetchpriority="high" media="(min-width: 1024px)"
+    imagesrcset={heroSrcset(hero.slides[0].img)} imagesizes="560px" />
+  <Header lang={lang} />
+  <main id="main">
+    <Hero />
+    <Jobs />
+    <Recognize />
+    <QuizSection />
+    <Method />
+    <Directions />
+    <Checkups />
+    <Programs />
+    <Trust />
+    <Doctors />
+    <Space />
+    <Reviews />
+    <FirstVisit />
+    <Mission />
+    <Faq />
+    <Contact />
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,21 @@
+---
+import { faq } from '../../content/faq';
+import Icon from '../ui/Icon.astro';
+import SectionHead from '../ui/SectionHead.astro';
+---
+<section id="faq" class="section !pt-0">
+  <div class="wrap grid gap-x-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
+    <SectionHead eyebrow="Вопросы" title="Частые вопросы" />
+    <div class="grid gap-3">
+      {faq.map((item) => (
+        <details class="reveal group rounded-3xl border border-line bg-surface px-5 sm:px-7">
+          <summary class="flex min-h-[64px] list-none items-center justify-between gap-4 py-4 font-display text-[17px] font-semibold [&::-webkit-details-marker]:hidden">
+            {item.q}
+            <Icon name="chevron-down" class="shrink-0 text-brand transition-transform duration-300 group-open:rotate-180" />
+          </summary>
+          <p class="pb-5 text-muted">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

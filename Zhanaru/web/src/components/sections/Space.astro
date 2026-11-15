@@ -1,0 +1,28 @@
+---
+import { space } from '../../content/sections';
+import SectionHead from '../ui/SectionHead.astro';
+const layout = [
+  'col-span-2 aspect-[16/10] lg:col-span-1 lg:row-span-2 lg:aspect-auto',
+  'row-span-2',
+  'aspect-[4/3] lg:aspect-auto',
+  'aspect-[4/3] lg:aspect-auto',
+];
+---
+<section id="space" class="section">
+  <div class="wrap">
+    <SectionHead eyebrow={space.eyebrow} title={space.title} lead={space.lead} />
+    <div class="grid grid-cols-2 gap-3 lg:h-[540px] lg:grid-cols-[2fr_1fr_1fr] lg:grid-rows-2 lg:gap-4">
+      {space.photos.map((p, i) => (
+        <figure class:list={['reveal relative overflow-hidden rounded-3xl bg-brand-soft', layout[i]]}>
+          <img
+            src={p.src.replace('.jpg', '-800.webp')}
+            srcset={[480, 800, 1600].map((w) => `${p.src.replace('.jpg', `-${w}.webp`)} ${w}w`).join(', ')}
+            sizes={i === 0 ? '(min-width: 1024px) 560px, 100vw' : '(min-width: 1024px) 280px, 50vw'}
+            alt={p.alt} loading="lazy" decoding="async" class="size-full object-cover"
+          />
+          <figcaption class="absolute bottom-3 left-3 rounded-full bg-ink/55 px-3 py-1.5 text-[13px] font-medium text-white backdrop-blur-sm">{p.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+---
+// Два входа под задачи сегментов A и B: карточка запускает тест с подходящей целью.
+import { jobs } from '../../content/sections';
+import Icon from '../ui/Icon.astro';
+---
+<section class="pb-4 pt-2" aria-label="С какой задачей вы пришли">
+  <div class="wrap grid gap-4 md:grid-cols-2">
+    {jobs.map((job) => (
+      <a href="#test" data-quiz-goal={job.goal} data-cta={`job_${job.goal}`}
+        class:list={[`tint-${job.tone}`, 'reveal group relative flex flex-col gap-4 overflow-hidden rounded-[28px] p-6 shadow-soft transition-transform duration-300 ease-out hover:-translate-y-1 sm:p-8']}>
+        <span class="flex items-center gap-3">
+          <span class:list={[`chip-${job.tone}`, 'grid size-12 shrink-0 place-items-center rounded-2xl']}><Icon name={job.icon} /></span>
+          <span class="text-[13px] font-semibold uppercase tracking-[0.1em] text-ink/70">{job.kicker}</span>
+        </span>
+        <h2 class="h3 !text-[clamp(22px,2.4vw,30px)]">{job.title}</h2>
+        <p class="text-ink/75">{job.text}</p>
+        <ul class="flex flex-wrap gap-2">
+          {job.points.map((point) => <li class="rounded-full bg-white/75 px-3 py-1.5 text-sm font-medium">{point}</li>)}
+        </ul>
+        <span class="mt-auto flex items-center gap-2 pt-2 font-display font-semibold text-brand-deep">
+          Пройти тест с этой целью
+          <Icon name="arrow-right" size={20} class="transition-transform duration-300 group-hover:translate-x-1" />
+        </span>
+      </a>
+    ))}
+  </div>
+</section>

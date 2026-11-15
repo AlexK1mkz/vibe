@@ -1,0 +1,160 @@
+---
+import { hero } from '../../content/sections';
+import { waLink, waDefaultText } from '../../content/site';
+import Icon from '../ui/Icon.astro';
+
+/** Фото слайдера: на десктопе вертикальные 480/800/1600 px, на телефоне — кадры 4:3 (scripts/make-photos.mjs). */
+export const heroSrcset = (img: string) => [480, 800, 1600].map((w) => `/img/${img}-${w}.webp ${w}w`).join(', ');
+export const wideSrcset = (img: string) => [480, 800].map((w) => `/img/${img}-wide-${w}.webp ${w}w`).join(', ');
+const heroSizes = '(min-width: 1024px) 560px, calc(100vw - 56px)';
+const mobileSizes = 'calc(100vw - 56px)';
+/** У первого слайда — обычные атрибуты, у остальных — data-*, их подставит скрипт ниже. */
+const lazyAttr = (i: number, name: 'src' | 'srcset', value: string) => ({ [i === 0 ? name : `data-${name}`]: value });
+---
+<section id="top" class="pb-4 pt-3 lg:pt-5">
+  <div class="wrap">
+    <div class="panel-deep on-dark relative overflow-hidden rounded-[30px] lg:rounded-[40px]">
+      <div class="grid lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)]">
+        <div class="flex min-w-0 flex-col justify-center p-6 pt-7 sm:p-10 lg:p-14">
+          <p class="eyebrow">{hero.eyebrow}</p>
+          <h1 class="h1 mt-4"><span class="text-gradient">{hero.h1Accent}</span> {hero.h1Rest}</h1>
+          <p class="lead mt-5">{hero.lead}</p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a class="btn btn-sun max-sm:w-full" href="#test" data-cta="hero_test">{hero.cta}<Icon name="arrow-right" size={20} /></a>
+            <a class="btn btn-glass max-sm:w-full" href={waLink(waDefaultText)} target="_blank" rel="noopener" data-cta="hero_book" data-lead="whatsapp">{hero.ctaSecondary}</a>
+          </div>
+          <p class="mt-3 text-sm text-white/65">{hero.under}</p>
+          <ul class="mt-7 flex flex-wrap gap-2 text-sm font-medium">
+            {hero.trust.map((item) => (
+              <li class="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-2">
+                <Icon name="check" size={16} class="text-sun" />{item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Главный слайдер: реальные фото клиники -->
+        <div class="min-w-0 p-3 max-lg:order-first lg:p-5">
+          <div
+            data-hero-slider
+            role="region" aria-roledescription="карусель" aria-label="Фото клиники ZhanaRu"
+            class="relative aspect-[4/3] overflow-hidden rounded-[22px] bg-deep-2 lg:aspect-auto lg:h-full lg:min-h-[640px] lg:rounded-[30px]"
+          >
+            {hero.slides.map((slide, i) => (
+              <figure class:list={['hero-slide absolute inset-0 m-0', i === 0 && 'is-active']} data-slide aria-hidden={i === 0 ? 'false' : 'true'}>
+                {/* телефон — горизонтальный кадр 4:3, десктоп — вертикальное фото; первое фото грузится сразу,
+                    остальные — после загрузки страницы (data-srcset), чтобы первый экран рисовался быстрее */}
+                <picture>
+                  <source media="(max-width: 1023px)" sizes={mobileSizes} {...lazyAttr(i, 'srcset', wideSrcset(slide.img))} />
+                  <img
+                    {...lazyAttr(i, 'srcset', heroSrcset(slide.img))}
+                    {...lazyAttr(i, 'src', `/img/${slide.img}-800.webp`)}
+                    sizes={heroSizes}
+                    alt={slide.alt}
+                    width="1000" height="1333"
+                    loading={i === 0 ? 'eager' : undefined}
+                    fetchpriority={i === 0 ? 'high' : undefined}
+                    decoding={i === 0 ? undefined : 'async'}
+                    class="size-full object-cover"
+                  />
+                </picture>
+              </figure>
+            ))}
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-deep/80 via-transparent to-deep/25"></div>
+
+            <p class="glass-dark absolute left-3 top-3 rounded-full px-3.5 py-1.5 text-[13px] font-medium lg:left-4 lg:top-4">{hero.sliderNote}</p>
+
+            <div class="absolute inset-x-3 bottom-3 flex items-end justify-between gap-3 lg:inset-x-4 lg:bottom-4">
+              <div>
+                <p data-slide-caption class="font-display text-xl font-bold lg:text-2xl" aria-live="polite">{hero.slides[0].caption}</p>
+                <div class="mt-2 flex gap-1.5" role="group" aria-label="Выбрать фото">
+                  {hero.slides.map((slide, i) => (
+                    <button type="button" data-slide-dot={i} aria-label={`Фото ${i + 1}: ${slide.caption}`} aria-current={i === 0 ? 'true' : 'false'}
+                      class="grid h-6 place-items-center px-0.5 after:block after:h-1.5 after:w-6 after:rounded-full after:bg-white/40 after:transition-all after:duration-300 aria-[current=true]:after:w-10 aria-[current=true]:after:bg-sun"></button>
+                  ))}
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <button type="button" data-slide-pause aria-label="Остановить смену фото" aria-pressed="false" class="glass-dark grid size-11 place-items-center rounded-full">
+                  <span data-icon-pause><Icon name="pause" size={18} /></span>
+                  <span data-icon-play hidden><Icon name="play" size={18} /></span>
+                </button>
+                <button type="button" data-slide-prev aria-label="Предыдущее фото" class="glass-dark grid size-11 place-items-center rounded-full"><Icon name="chevron-left" size={20} /></button>
+                <button type="button" data-slide-next aria-label="Следующее фото" class="glass-dark grid size-11 place-items-center rounded-full"><Icon name="chevron-right" size={20} /></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { hero } from '../../content/sections';
+
+  const root = document.querySelector<HTMLElement>('[data-hero-slider]');
+  if (root) {
+    const slides = [...root.querySelectorAll<HTMLElement>('[data-slide]')];
+    const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-slide-dot]')];
+    const caption = root.querySelector<HTMLElement>('[data-slide-caption]');
+    const pauseBtn = root.querySelector<HTMLButtonElement>('[data-slide-pause]');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // отложенные фото: подставляем адреса, когда страница загрузилась
+    const loadRest = () =>
+      root.querySelectorAll<HTMLImageElement | HTMLSourceElement>('[data-srcset]').forEach((el) => {
+        el.srcset = el.dataset.srcset!;
+        el.removeAttribute('data-srcset');
+        if (el instanceof HTMLImageElement) el.src = el.dataset.src!;
+      });
+    if (document.readyState === 'complete') setTimeout(loadRest, 1200);
+    else addEventListener('load', () => setTimeout(loadRest, 1200), { once: true });
+    let index = 0;
+    let paused = reduced; // при prefers-reduced-motion фото сами не листаются
+    let hold = false;
+    let timer = 0;
+
+    const show = (next: number) => {
+      index = (next + slides.length) % slides.length;
+      loadRest();
+      slides.forEach((s, i) => {
+        s.classList.toggle('is-active', i === index);
+        s.setAttribute('aria-hidden', String(i !== index));
+      });
+      dots.forEach((d, i) => d.setAttribute('aria-current', String(i === index)));
+      if (caption) caption.textContent = hero.slides[index].caption;
+    };
+    const schedule = () => {
+      clearInterval(timer);
+      if (!paused) timer = window.setInterval(() => !hold && !document.hidden && show(index + 1), 5000);
+    };
+    const setPaused = (value: boolean) => {
+      paused = value;
+      pauseBtn?.setAttribute('aria-pressed', String(paused));
+      pauseBtn?.setAttribute('aria-label', paused ? 'Запустить смену фото' : 'Остановить смену фото');
+      pauseBtn?.querySelector<HTMLElement>('[data-icon-pause]')?.toggleAttribute('hidden', paused);
+      pauseBtn?.querySelector<HTMLElement>('[data-icon-play]')?.toggleAttribute('hidden', !paused);
+      schedule();
+    };
+
+    root.querySelector('[data-slide-prev]')?.addEventListener('click', () => { show(index - 1); schedule(); });
+    root.querySelector('[data-slide-next]')?.addEventListener('click', () => { show(index + 1); schedule(); });
+    dots.forEach((d, i) => d.addEventListener('click', () => { show(i); schedule(); }));
+    pauseBtn?.addEventListener('click', () => setPaused(!paused));
+    root.addEventListener('pointerenter', () => (hold = true));
+    root.addEventListener('pointerleave', () => (hold = false));
+    root.addEventListener('focusin', () => (hold = true));
+    root.addEventListener('focusout', () => (hold = false));
+
+    // свайп по горизонтали; вертикальный жест остаётся скроллом
+    let startX = 0;
+    root.style.touchAction = 'pan-y';
+    root.addEventListener('pointerdown', (e) => (startX = e.clientX));
+    root.addEventListener('pointerup', (e) => {
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 48) { show(index + (dx < 0 ? 1 : -1)); schedule(); }
+    });
+
+    setPaused(paused);
+  }
+</script>

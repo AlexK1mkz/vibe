@@ -1,0 +1,164 @@
+---
+import '../styles/global.css';
+import { site, waLink, waDefaultText } from '../content/site';
+import { seo } from '../content/sections';
+import { ru } from '../i18n/ru';
+import WaIcon from '../components/ui/WaIcon.astro';
+// Шрифты первого экрана (кириллица) грузим заранее, чтобы заголовок не «прыгал»
+import manropeCyr from '@fontsource-variable/manrope/files/manrope-cyrillic-wght-normal.woff2?url';
+import interCyr from '@fontsource-variable/inter/files/inter-cyrillic-wght-normal.woff2?url';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'ru' | 'kk';
+  noindex?: boolean;
+  /** Пути языковых версий для hreflang, например { ru: '/', kk: '/kk/' }. */
+  alternates?: Record<string, string>;
+  jsonLd?: object[];
+  /** Плавающая кнопка WhatsApp на мобильном. */
+  fab?: boolean;
+}
+const {
+  title = seo.title, description = seo.description, lang = 'ru',
+  noindex = false, alternates, jsonLd = [], fab = true,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const abs = (path: string) => new URL(path, Astro.site).href;
+const og = abs('/og/cover.jpg');
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonical}>
+  {alternates && Object.entries(alternates).map(([l, path]) => <link rel="alternate" hreflang={l} href={abs(path)}>)}
+  {alternates?.ru && <link rel="alternate" hreflang="x-default" href={abs(alternates.ru)}>}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content={site.name}>
+  <meta property="og:locale" content={lang === 'kk' ? 'kk_KZ' : 'ru_KZ'}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content={og}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F4F6F3">
+  <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}>
+  <meta property="og:image:alt" content="Клиника ZhanaRu в Астане">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preload" href={manropeCyr} as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href={interCyr} as="font" type="font/woff2" crossorigin>
+  <slot name="head" />
+  <script is:inline>document.documentElement.classList.add('js');</script>
+  {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
+</head>
+<body>
+  <a href="#main" class="btn btn-primary btn-sm fixed left-3 top-3 z-[60] -translate-y-24 focus:translate-y-0">{ru.common.skip}</a>
+  <slot />
+
+  {fab && (
+    <a
+      id="wa-fab"
+      href={waLink(waDefaultText)} target="_blank" rel="noopener"
+      data-cta="fab" data-lead="whatsapp"
+      aria-label={ru.common.writeWhatsapp}
+      class="fixed bottom-4 right-4 z-40 grid size-14 place-items-center rounded-full bg-brand text-white shadow-float transition-[opacity,transform] duration-300 lg:hidden [&.is-hidden]:pointer-events-none [&.is-hidden]:translate-y-4 [&.is-hidden]:opacity-0"
+    >
+      <WaIcon size={28} />
+    </a>
+  )}
+
+  <div
+    id="cookie-banner" hidden
+    role="region" aria-label="Cookies"
+    class="glass fixed inset-x-3 bottom-3 z-50 mx-auto flex max-w-2xl flex-col gap-3 rounded-3xl p-4 text-sm sm:flex-row sm:items-center sm:p-5"
+  >
+    <p class="flex-1">
+      {ru.cookie.text} <a href="/privacy/" class="text-brand underline underline-offset-2">Подробнее</a>
+    </p>
+    <div class="flex gap-2">
+      <button type="button" class="btn btn-ghost btn-sm flex-1" data-cookie="necessary">{ru.cookie.decline}</button>
+      <button type="button" class="btn btn-primary btn-sm flex-1" data-cookie="all">{ru.cookie.accept}</button>
+    </div>
+  </div>
+
+  <script>
+    import { captureUtm, getConsent, loadCounters, setConsent, track } from '../lib/analytics';
+
+    captureUtm();
+
+    // Cookies: счётчики подключаются только после согласия
+    const banner = document.getElementById('cookie-banner');
+    const consent = getConsent();
+    if (consent === 'all') loadCounters();
+    else if (!consent && banner) banner.hidden = false;
+    banner?.querySelectorAll<HTMLButtonElement>('[data-cookie]').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        setConsent(btn.dataset.cookie as 'all' | 'necessary');
+        banner.hidden = true;
+      }),
+    );
+
+    // Клики: cta_click для всех CTA, lead_whatsapp для ссылок в WhatsApp; карточки с целью запускают тест
+    document.addEventListener('click', (e) => {
+      const el = (e.target as Element).closest<HTMLElement>('[data-cta], [data-quiz-goal]');
+      if (!el) return;
+      if (el.dataset.cta) track('cta_click', { block: el.dataset.cta });
+      if (el.dataset.lead === 'whatsapp') track('lead_whatsapp', { source: el.dataset.cta });
+      const goal = el.dataset.quizGoal;
+      if (goal) {
+        (window as unknown as { __zrGoal?: string }).__zrGoal = goal;
+        window.dispatchEvent(new CustomEvent('zr:quiz-goal', { detail: goal }));
+      }
+    });
+
+    // Появление блоков по скроллу
+    const reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add('in');
+            io.unobserve(en.target);
+          }
+        }),
+        { rootMargin: '0px 0px -8% 0px' },
+      );
+      reveals.forEach((el) => io.observe(el));
+    } else reveals.forEach((el) => el.classList.add('in'));
+
+    // Плавающая кнопка WhatsApp скрыта на экране теста и рядом с формой записи
+    const fab = document.getElementById('wa-fab');
+    const quiet = document.querySelectorAll('[data-hide-fab]');
+    if (fab && quiet.length && 'IntersectionObserver' in window) {
+      const seen = new Set<Element>();
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => (en.isIntersecting ? seen.add(en.target) : seen.delete(en.target)));
+          fab.classList.toggle('is-hidden', seen.size > 0);
+        },
+        { rootMargin: '-25% 0px -25% 0px' },
+      );
+      quiet.forEach((el) => io.observe(el));
+    }
+
+    // Мобильное меню
+    const header = document.querySelector('[data-header]');
+    const toggle = header?.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    const setMenu = (open: boolean) => {
+      header?.classList.toggle('menu-open', open);
+      toggle?.setAttribute('aria-expanded', String(open));
+    };
+    toggle?.addEventListener('click', () => setMenu(!header!.classList.contains('menu-open')));
+    header?.querySelectorAll('[data-nav] a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  </script>
+</body>
+</html>

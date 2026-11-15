@@ -1,0 +1,29 @@
+---
+import { directions } from '../../content/directions';
+import { directionsSection } from '../../content/sections';
+import Icon from '../ui/Icon.astro';
+import SectionHead from '../ui/SectionHead.astro';
+---
+<section id="directions" class="section !pt-0">
+  <div class="wrap">
+    <SectionHead {...directionsSection} />
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {directions.map((d) => (
+        <article class="card reveal flex flex-col gap-4 p-6 sm:p-7">
+          <span class:list={[`chip-${d.tone}`, 'grid size-12 place-items-center rounded-2xl']}><Icon name={d.icon} /></span>
+          <h3 class="h3">{d.title}</h3>
+          <p class="text-muted">{d.forWhom}</p>
+          <div class:list={[`tint-${d.tone}`, 'rounded-2xl p-4 text-[15px]']}>
+            <p class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink/70">С чего начинаем</p>
+            <p class="mt-1">{d.startWith}</p>
+          </div>
+          <ul class="grid gap-2 text-[15px]">
+            {d.includes.map((item) => (
+              <li class="flex gap-3"><Icon name="check" size={18} class="mt-0.5 shrink-0 text-goal" />{item}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

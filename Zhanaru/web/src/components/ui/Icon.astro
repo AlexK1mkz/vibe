@@ -1,0 +1,25 @@
+---
+// Один набор линейных иконок (Lucide). В контенте иконка задаётся строкой.
+import {
+  Activity, ArrowRight, AtSign, BadgeCheck, BatteryLow, CalendarCheck, Check, ChevronDown, ChevronLeft, ChevronRight, Clock,
+  Droplet, FlaskConical, Heart, Leaf, MapPin, Menu, MessageCircle, Moon, Pause, Phone, Play, Scale, Shield,
+  Sparkles, Star, Stethoscope, Sunrise, Users, Zap,
+} from '@lucide/astro';
+
+const icons = {
+  activity: Activity, 'arrow-right': ArrowRight, at: AtSign, 'badge-check': BadgeCheck, battery: BatteryLow,
+  'calendar-check': CalendarCheck, check: Check, 'chevron-down': ChevronDown, 'chevron-left': ChevronLeft, 'chevron-right': ChevronRight, pause: Pause, play: Play, clock: Clock, droplet: Droplet,
+  flask: FlaskConical, heart: Heart, leaf: Leaf, pin: MapPin, menu: Menu, 'message-circle': MessageCircle,
+  moon: Moon, phone: Phone, scale: Scale, shield: Shield, sparkles: Sparkles, star: Star,
+  stethoscope: Stethoscope, sunrise: Sunrise, users: Users, zap: Zap,
+};
+
+interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+}
+const { name, size = 22, class: cls } = Astro.props;
+const Cmp = icons[name as keyof typeof icons] ?? Check;
+---
+<Cmp size={size} class={cls} aria-hidden="true" stroke-width={1.75} />

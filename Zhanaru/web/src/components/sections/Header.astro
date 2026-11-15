@@ -1,0 +1,41 @@
+---
+import { nav } from '../../content/sections';
+import { waLink, waDefaultText } from '../../content/site';
+import { ru } from '../../i18n/ru';
+import Icon from '../ui/Icon.astro';
+import Logo from '../ui/Logo.astro';
+import WaIcon from '../ui/WaIcon.astro';
+
+interface Props { lang?: 'ru' | 'kk'; home?: boolean }
+const { lang = 'ru', home = true } = Astro.props;
+const base = lang === 'kk' ? '/kk/' : '/';
+const href = (anchor: string) => (home ? anchor : base + anchor);
+---
+<header data-header class="group sticky top-0 z-30 border-b border-line/70 bg-bg/85 backdrop-blur-md">
+  <div class="wrap flex h-[68px] items-center justify-between gap-4">
+    <a href={home ? '#top' : base} aria-label="ZhanaRu, центр осознанного здоровья — на главную"><Logo /></a>
+    <nav data-nav aria-label="Основная навигация"
+      class="max-lg:absolute max-lg:inset-x-0 max-lg:top-[68px] max-lg:hidden max-lg:border-b max-lg:border-line max-lg:bg-bg max-lg:px-4 max-lg:pb-5 max-lg:pt-2 max-lg:group-[.menu-open]:block">
+      <ul class="flex gap-1 max-lg:flex-col lg:gap-6">
+        {nav.map((item) => (
+          <li><a href={href(item.href)} class="block py-3 text-[15px] font-medium text-muted transition-colors hover:text-ink max-lg:text-lg max-lg:text-ink">{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="flex items-center gap-2">
+      <div class="flex rounded-full border border-line bg-surface p-0.5 text-[13px] font-semibold" role="group" aria-label="Язык сайта">
+        <a href="/" hreflang="ru" lang="ru" aria-current={lang === 'ru' ? 'true' : undefined}
+          class:list={['rounded-full px-2.5 py-1.5', lang === 'ru' ? 'bg-brand text-white' : 'text-muted hover:text-ink']}>RU</a>
+        <a href="/kk/" hreflang="kk" lang="kk" aria-current={lang === 'kk' ? 'true' : undefined}
+          class:list={['rounded-full px-2.5 py-1.5', lang === 'kk' ? 'bg-brand text-white' : 'text-muted hover:text-ink']}>KZ</a>
+      </div>
+      <a class="btn btn-primary btn-sm max-sm:hidden" href={waLink(waDefaultText)} target="_blank" rel="noopener" data-cta="header" data-lead="whatsapp">
+        <WaIcon size={18} />{ru.common.whatsapp}
+      </a>
+      <button type="button" data-menu-toggle aria-expanded="false" aria-label={ru.common.menu}
+        class="grid size-11 place-items-center rounded-full border border-line bg-surface lg:hidden">
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+</header>
