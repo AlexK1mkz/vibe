@@ -39,7 +39,14 @@ var COLUMNS = [
   ['Страница', function (d) { return d.page; }],
   ['Устройство', function (d) { return d.device; }],
   ['Статус', function () { return 'Новая'; }],
+  ['Комментарий куратора', function () { return ''; }],
+  ['ID заявки', function (d) { return d.leadId; }],
+  ['Этап', function (d) { return STAGES[d.stage] || ''; }],
 ];
+
+var STAGES = { contact: 'Контакты, тест не прошёл', done: 'Тест пройден' };
+// Колонки, которые при повторной отправке (тест пройден) не трогаем: дата, статус и комментарий куратора
+var KEEP = ['Дата и время', 'Статус', 'Комментарий куратора'];
 
 function doPost(e) {
   try {
@@ -60,7 +67,16 @@ function doPost(e) {
     var lock = LockService.getScriptLock();
     lock.waitLock(10000);
     try {
-      sheet().appendRow(row);
+      var sh = sheet();
+      var found = data.leadId ? findRow(sh, String(data.leadId)) : 0;
+      if (found) {
+        // тот же человек дошёл до конца теста: дописываем ответы в его строку
+        COLUMNS.forEach(function (c, i) {
+          if (KEEP.indexOf(c[0]) === -1) sh.getRange(found, i + 1).setValue(row[i]);
+        });
+      } else {
+        sh.appendRow(row);
+      }
     } finally {
       lock.releaseLock();
     }
@@ -79,6 +95,16 @@ function sheet() {
   var sh = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
   if (sh.getLastRow() === 0) sh.appendRow(COLUMNS.map(function (c) { return c[0]; }));
   return sh;
+}
+
+/** Номер строки с заявкой по её ID или 0. */
+function findRow(sh, id) {
+  var col = COLUMNS.map(function (c) { return c[0]; }).indexOf('ID заявки') + 1;
+  var last = sh.getLastRow();
+  if (last < 2) return 0;
+  var ids = sh.getRange(2, col, last - 1, 1).getValues();
+  for (var i = ids.length - 1; i >= 0; i--) if (String(ids[i][0]) === id) return i + 2;
+  return 0;
 }
 
 function utmText(utm) {

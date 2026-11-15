@@ -103,6 +103,8 @@ if (mt_rand(1, 50) === 1) {
 // ---------- валидация ----------
 $name = clean($data['name'] ?? '', 60);
 $surname = clean($data['surname'] ?? '', 60);
+$leadId = preg_replace('/[^A-Z0-9-]/', '', strtoupper(clean($data['leadId'] ?? '', 20)));
+$stage = ($data['stage'] ?? '') === 'contact' ? 'contact' : 'done';
 $phone = preg_replace('/\D+/', '', (string) ($data['phone'] ?? ''));
 if (mb_strlen($name) < 2 || !preg_match('/^7\d{10}$/', $phone) || empty($data['consent'])) {
     respond(422, ['ok' => false, 'error' => 'validation']);
@@ -117,8 +119,12 @@ $device = preg_match('/Mobi|Android|iPhone|iPad/i', $ua) ? 'телефон' : '�
 $tz = new DateTimeZone($config['timezone'] ?? 'Asia/Almaty');
 $time = (new DateTime('now', $tz))->format('d.m.Y H:i');
 
+$titles = [
+    'contact' => 'Новый лид: оставил контакты и начал тест',
+    'done' => $quiz ? 'Тест пройден' : 'Новая заявка с сайта ZhanaRu',
+];
 $lines = [
-    'Новая заявка с сайта ZhanaRu',
+    $titles[$stage] . ($leadId !== '' ? ' · ' . $leadId : ''),
     'Имя: ' . trim($name . ' ' . $surname),
     'Телефон: +' . $phone,
     'Источник: ' . clean($data['source'] ?? 'сайт', 40),
@@ -199,6 +205,8 @@ $sentSheets = false;
 if (!empty($config['sheets_webhook'])) {
     $row = [
         'secret' => (string) ($config['sheets_secret'] ?? ''),
+        'leadId' => $leadId,
+        'stage' => $stage,
         'time' => $time,
         'name' => $name,
         'surname' => $surname,

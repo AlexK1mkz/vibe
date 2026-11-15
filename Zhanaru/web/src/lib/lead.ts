@@ -14,12 +14,19 @@ export interface LeadPayload {
   surname?: string;
   phone: string;
   source: string;
+  /** Номер заявки: повторная отправка с тем же номером обновляет строку в таблице, а не добавляет новую. */
+  leadId?: string;
+  /** contact — оставил контакты и начал тест, done — прошёл тест до конца. */
+  stage?: 'contact' | 'done';
   quiz?: Record<string, unknown>;
   /** Мс от открытия формы — защита от ботов. */
   elapsed: number;
   /** Honeypot: у людей пустой. */
   website?: string;
 }
+
+/** Короткий случайный номер заявки, например «ZR-7K3Q9A». */
+export const newLeadId = () => 'ZR-' + Math.random().toString(36).slice(2, 8).toUpperCase();
 
 /** Ответы и результат теста в виде, удобном для куратора и таблицы. */
 export function quizPayload(a: Answers, r: QuizResult): Record<string, unknown> {

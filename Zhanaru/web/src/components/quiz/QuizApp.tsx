@@ -1,11 +1,15 @@
-// Первичный тест + модель тела (ТЗ, раздел 6). Один вопрос на экран, затем контакты
-// (имя, фамилия, телефон) — после них результат на карте тела и переход в WhatsApp.
+// Первичный тест + модель тела (ТЗ, раздел 6). Сначала контакты (имя, фамилия, телефон) — заявка уходит сразу,
+// затем вопросы по одному на экран. На последнем ответе открывается WhatsApp с результатом,
+// ответы дописываются в ту же заявку, а результат показывается на карте тела.
 import { ArrowLeft, Check } from 'lucide-react';
 import { useEffect, useMemo, useRef, type CSSProperties } from 'react';
 import BodyView from '../body3d/BodyView';
-import { questions, type Goal, type QuestionId } from '../../content/quiz';
+import { questions, type Answers, type Goal, type QuestionId } from '../../content/quiz';
 import { ru } from '../../i18n/ru';
 import { track } from '../../lib/analytics';
+import { quizPayload, sendLead } from '../../lib/lead';
+import { phoneDigits } from '../../lib/phone';
+import { resultWaLink } from '../../lib/whatsapp';
 import { bmi, computeScales, score, zoneValues } from '../../lib/scoring';
 import BodyMetrics from './BodyMetrics';
 import ContactStep from './ContactStep';
@@ -20,7 +24,7 @@ declare global {
 }
 
 const total = questions.length;
-/** Вопросы + шаг с контактами. */
+/** Шаг с контактами + вопросы. */
 const steps = total + 1;
 
 export default function QuizApp() {
@@ -57,6 +61,27 @@ export default function QuizApp() {
     if (phase === 'contact') track('quiz_contact_step');
   }, [phase]);
 
+  /** Последний ответ: WhatsApp с результатом и дозапись ответов в заявку. Вызывается прямо в обработчике клика —
+   *  иначе браузер (особенно Safari) заблокирует открытие WhatsApp. */
+  function complete(final: Answers) {
+    if (!contact || completed.current) return;
+    completed.current = true;
+    const r = score(final);
+    const name = `${contact.firstName} ${contact.lastName}`;
+    window.open(resultWaLink(final, r, { name }), '_blank', 'noopener');
+    void sendLead({
+      leadId: contact.leadId,
+      stage: 'done',
+      name: contact.firstName,
+      surname: contact.lastName,
+      phone: '+' + phoneDigits(contact.phone),
+      source: 'quiz',
+      quiz: quizPayload(final, r),
+      elapsed: 60_000,
+    });
+    track('lead_whatsapp', { source: 'quiz_result', segment: r.segment });
+  }
+
   const q = questions[step];
   const current = answers[q.id];
   const selected: string[] = Array.isArray(current) ? current : typeof current === 'string' ? [current] : [];
@@ -71,6 +96,13 @@ export default function QuizApp() {
     track(`quiz_step_${step + 1}`, { question: q.id });
   }
 
+  const isLast = step === total - 1;
+  // защита от двойного клика по последнему ответу; при уходе с последнего вопроса сбрасывается
+  const completed = useRef(false);
+  useEffect(() => {
+    if (phase === 'quiz' && !isLast) completed.current = false;
+  }, [phase, isLast]);
+
   function goNext() {
     clearTimeout(advance.current);
     trackStep();
@@ -80,6 +112,7 @@ export default function QuizApp() {
   function choose(id: QuestionId, option: { id: string; exclusive?: boolean }) {
     if (!q.multi) {
       setAnswer(id, option.id);
+      if (isLast) complete({ ...answers, [id]: option.id });
       clearTimeout(advance.current);
       advance.current = setTimeout(goNext, 320); // короткая пауза, чтобы выбор было видно
       return;
@@ -93,7 +126,7 @@ export default function QuizApp() {
     setAnswer(id, nextSel);
   }
 
-  const progress = phase === 'quiz' ? step / steps : total / steps;
+  const progress = phase === 'quiz' ? (step + 1) / steps : 0;
   const modelHeight =
     phase === 'result'
       ? 'h-[72vh] min-h-[500px] max-h-[680px] lg:h-[720px] lg:max-h-none'
@@ -134,15 +167,14 @@ export default function QuizApp() {
       {result ? (
         <Result answers={answers} result={result} />
       ) : phase === 'contact' ? (
-        <ContactStep answers={answers} />
+        <ContactStep />
       ) : (
         <div className="card p-5 sm:p-8 lg:min-h-[620px] lg:p-10">
           <div className="flex items-center gap-4">
             <button
               type="button"
               onClick={() => { clearTimeout(advance.current); back(); }}
-              disabled={step === 0}
-              className="grid size-11 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors hover:border-brand hover:text-brand disabled:opacity-0"
+              className="grid size-11 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors hover:border-brand hover:text-brand"
               aria-label={ru.quiz.back}
             >
               <ArrowLeft size={20} aria-hidden="true" />
@@ -209,9 +241,9 @@ export default function QuizApp() {
                   className="btn btn-primary w-full sm:w-auto"
                   disabled={!canNext}
                   style={!canNext ? { opacity: 0.45 } : undefined}
-                  onClick={goNext}
+                  onClick={() => { if (isLast) complete(answers); goNext(); }}
                 >
-                  {ru.quiz.next}
+                  {isLast ? ru.quiz.showResult : ru.quiz.next}
                 </button>
                 {isBody && (
                   <button

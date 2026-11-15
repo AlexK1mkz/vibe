@@ -24,48 +24,61 @@ async function passQuiz(page: Page) {
   }
 }
 
+/** Первый шаг теста — контакты. */
+async function fillContact(page: Page) {
+  const quiz = page.locator('#test');
+  await quiz.scrollIntoViewIfNeeded();
+  await quiz.getByLabel('Имя', { exact: true }).fill('Айгерим');
+  await quiz.getByLabel('Фамилия').fill('Сапарова');
+  await quiz.getByLabel('Телефон (WhatsApp)').fill('7011234567');
+  await quiz.getByRole('checkbox').check();
+  await quiz.getByRole('button', { name: 'Начать тест' }).click();
+}
+
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('zr_cookie', 'necessary'));
+  await page.route('**/api/lead.php', (route) => route.fulfill({ json: { ok: true } }));
 });
 
-test('тест: вопросы → контакты → заявка, WhatsApp и результат на карте', async ({ page, context }) => {
+test('тест: контакты → заявка сразу → вопросы → WhatsApp, дозапись ответов и результат на карте', async ({ page, context }) => {
   const errors: string[] = [];
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   page.on('pageerror', (e) => errors.push(e.message));
   // PHP в preview нет — подменяем ответ lead.php и проверяем, что ушло
-  let lead: Record<string, any> | null = null;
+  const leads: Record<string, any>[] = [];
   await page.route('**/api/lead.php', async (route) => {
-    lead = route.request().postDataJSON();
+    leads.push(route.request().postDataJSON());
     await route.fulfill({ json: { ok: true } });
   });
   await context.route('https://wa.me/**', (route) => route.fulfill({ body: 'wa' }));
 
   await page.goto('/');
-  await passQuiz(page);
-
   const quiz = page.locator('#test');
-  await expect(quiz.getByRole('heading', { name: 'Куда отправить разбор?' })).toBeVisible();
-  await quiz.getByRole('button', { name: /Показать результат/ }).click();
+  await quiz.scrollIntoViewIfNeeded();
+  // контакты — первый шаг, без них тест не начинается
+  await expect(quiz.getByRole('heading', { name: 'Давайте познакомимся' })).toBeVisible();
+  await quiz.getByRole('button', { name: 'Начать тест' }).click();
   await expect(quiz.getByText('Укажите фамилию')).toBeVisible();
+  await fillContact(page);
 
-  await quiz.getByLabel('Имя', { exact: true }).fill('Айгерим');
-  await quiz.getByLabel('Фамилия').fill('Сапарова');
-  await quiz.getByLabel('Телефон (WhatsApp)').fill('7011234567');
-  await quiz.getByRole('checkbox').check();
+  // заявка ушла сразу после контактов, ещё до вопросов
+  await expect.poll(() => leads.length).toBe(1);
+  expect(leads[0]).toMatchObject({ stage: 'contact', name: 'Айгерим', surname: 'Сапарова', phone: '+77011234567' });
+  expect(leads[0].leadId).toMatch(/^ZR-[A-Z0-9]{6}$/);
+  expect(leads[0].quiz).toBeUndefined();
+
+  // последний ответ открывает WhatsApp и дописывает ответы в ту же заявку
   const popup = context.waitForEvent('page');
-  await quiz.getByRole('button', { name: /Показать результат/ }).click();
-
+  await passQuiz(page);
   const wa = await popup;
   const waText = decodeURIComponent(wa.url().split('text=')[1]);
   expect(wa.url()).toContain('https://wa.me/');
   expect(waText).toContain('Меня зовут Айгерим Сапарова');
 
-  await expect.poll(() => lead).not.toBeNull();
-  expect(lead!.name).toBe('Айгерим');
-  expect(lead!.surname).toBe('Сапарова');
-  expect(lead!.phone).toBe('+77011234567');
-  expect(lead!.quiz.bmi).toBe(26.4);
-  expect(lead!.quiz.segment).toBe('A');
+  await expect.poll(() => leads.length).toBe(2);
+  expect(leads[1]).toMatchObject({ stage: 'done', leadId: leads[0].leadId, phone: '+77011234567' });
+  expect(leads[1].quiz.bmi).toBe(26.4);
+  expect(leads[1].quiz.segment).toBe('A');
 
   // результат и рекомендации на карте тела
   await expect(quiz.locator('[data-map-index]')).toContainText('Айгерим');
@@ -100,7 +113,7 @@ test('фигура меняется по полу, зоны подсвечива
   await page.goto('/');
   const quiz = page.locator('#test');
   const body = quiz.locator('[data-body-mode]');
-  await quiz.scrollIntoViewIfNeeded();
+  await fillContact(page);
   await expect(body).toHaveAttribute('data-body-sex', 'f');
   await expect(quiz.locator('[data-zone-on="true"]')).toHaveCount(0);
 
@@ -136,6 +149,7 @@ test('карточка «Узнаёте себя?» запускает тест 
   await page.goto('/');
   await page.locator('[data-quiz-goal="weight"]').click();
   const quiz = page.locator('#test');
+  await fillContact(page);
   await quiz.getByRole('radio', { name: 'Мужчина' }).click();
   await quiz.getByRole('radio', { name: '25–34' }).click();
   await quiz.getByRole('button', { name: 'Пропустить' }).click();

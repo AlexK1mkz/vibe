@@ -1,20 +1,17 @@
-// Последний шаг теста: имя, фамилия, телефон. После отправки результат открывается на карте,
-// заявка уходит клинике (Telegram + Google-таблица), а посетитель переходит в WhatsApp с готовым сообщением.
-import { ArrowLeft, LockKeyhole, MessageCircle } from 'lucide-react';
+// Первый шаг теста: имя, фамилия, телефон. Заявка уходит клинике сразу (Telegram + Google-таблица),
+// чтобы куратор мог связаться, даже если человек бросит тест. Ответы дописываются в ту же заявку в конце.
+import { ArrowRight, LockKeyhole } from 'lucide-react';
 import { useRef, useState, type FormEvent } from 'react';
-import type { Answers } from '../../content/quiz';
 import { ru } from '../../i18n/ru';
 import { track } from '../../lib/analytics';
-import { quizPayload, sendLead } from '../../lib/lead';
+import { newLeadId, sendLead } from '../../lib/lead';
 import { isPhoneComplete, nextPhone, phoneDigits } from '../../lib/phone';
-import { score } from '../../lib/scoring';
-import { resultWaLink } from '../../lib/whatsapp';
 import { useQuiz } from './store';
 
 const t = ru.contact;
 
-export default function ContactStep({ answers }: { answers: Answers }) {
-  const { contact, finish, back } = useQuiz();
+export default function ContactStep() {
+  const { contact, setContact } = useQuiz();
   const [firstName, setFirstName] = useState(contact?.firstName ?? '');
   const [lastName, setLastName] = useState(contact?.lastName ?? '');
   const [phone, setPhone] = useState(contact?.phone ?? '');
@@ -36,22 +33,22 @@ export default function ContactStep({ answers }: { answers: Answers }) {
       return;
     }
 
-    const result = score(answers);
-    const name = `${firstName.trim()} ${lastName.trim()}`;
-    // WhatsApp открываем сразу в обработчике клика — иначе браузер заблокирует окно
-    window.open(resultWaLink(answers, result, { name }), '_blank', 'noopener');
-    void sendLead({
-      name: firstName.trim(),
-      surname: lastName.trim(),
-      phone: '+' + phoneDigits(phone),
-      source: 'quiz',
-      quiz: quizPayload(answers, result),
-      elapsed: Date.now() - openedAt.current,
-      website: trap.current?.value ?? '',
-    });
-    track('lead_whatsapp', { source: 'quiz_contact', segment: result.segment });
-    track('lead_callback', { source: 'quiz_contact' });
-    finish({ firstName: firstName.trim(), lastName: lastName.trim(), phone });
+    const same = contact && contact.phone === phone && contact.firstName === firstName.trim() && contact.lastName === lastName.trim();
+    const leadId = same ? contact.leadId : newLeadId();
+    if (!same) {
+      void sendLead({
+        leadId,
+        stage: 'contact',
+        name: firstName.trim(),
+        surname: lastName.trim(),
+        phone: '+' + phoneDigits(phone),
+        source: 'quiz',
+        elapsed: Date.now() - openedAt.current,
+        website: trap.current?.value ?? '',
+      });
+      track('lead_callback', { source: 'quiz_contact' });
+    }
+    setContact({ firstName: firstName.trim(), lastName: lastName.trim(), phone, leadId });
   }
 
   const field = (key: keyof typeof errors) => ({
@@ -64,17 +61,11 @@ export default function ContactStep({ answers }: { answers: Answers }) {
 
   return (
     <div className="card p-5 sm:p-8 lg:min-h-[620px] lg:p-10">
-      <div className="flex items-center gap-4">
-        <button
-          type="button" onClick={back} aria-label={ru.quiz.back}
-          className="grid size-11 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors hover:border-brand hover:text-brand"
-        >
-          <ArrowLeft size={20} aria-hidden="true" />
-        </button>
-        <div className="flex-1">
-          <p className="text-sm font-medium text-muted">{t.step}</p>
-          <div className="progress-track mt-2" aria-hidden="true"><div className="progress-fill" style={{ width: '100%' }} /></div>
-        </div>
+      <div>
+        <p className="flex justify-between text-sm font-medium text-muted">
+          <span>{t.step}</span><span className="tabular-nums">0%</span>
+        </p>
+        <div className="progress-track mt-2" aria-hidden="true"><div className="progress-fill" style={{ width: '4%' }} /></div>
       </div>
 
       <form onSubmit={onSubmit} noValidate className="step-in mt-6 grid gap-3 lg:mt-10" data-lead-form="quiz">
@@ -118,8 +109,8 @@ export default function ContactStep({ answers }: { answers: Answers }) {
           </label>
           {err('consent')}
         </div>
-        <button type="submit" className="btn btn-wa mt-2 w-full" data-quiz-submit>
-          <MessageCircle size={20} aria-hidden="true" /> {t.submit}
+        <button type="submit" className="btn btn-sun mt-2 w-full" data-quiz-submit>
+          {t.submit} <ArrowRight size={20} aria-hidden="true" />
         </button>
         <p className="flex items-start gap-2 text-sm text-muted">
           <LockKeyhole size={16} className="mt-0.5 shrink-0" aria-hidden="true" /> {t.note}
