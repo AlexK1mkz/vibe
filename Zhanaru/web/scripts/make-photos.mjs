@@ -6,11 +6,14 @@ import { readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
-const dir = path.join(path.dirname(path.dirname(fileURLToPath(import.meta.url))), 'public/img');
+// исходники лежат вне public/, чтобы тяжёлые JPG не попадали на хостинг
+const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const srcDir = path.join(root, 'src-photos');
+const dir = path.join(root, 'public/img');
 const kb = (n) => Math.round(n / 1024) + ' KB';
-for (const file of readdirSync(dir).filter((f) => f.endsWith('.jpg'))) {
+for (const file of readdirSync(srcDir).filter((f) => f.endsWith('.jpg'))) {
   const name = file.replace('.jpg', '');
-  const src = path.join(dir, file);
+  const src = path.join(srcDir, file);
   const meta = await sharp(src).metadata();
   for (const w of [480, 800, 1600]) {
     const info = await sharp(src).resize({ width: Math.min(w, meta.width) }).webp({ quality: w === 1600 ? 78 : 70 }).toFile(path.join(dir, `${name}-${w}.webp`));

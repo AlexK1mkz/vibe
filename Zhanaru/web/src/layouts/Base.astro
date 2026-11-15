@@ -25,7 +25,7 @@ const {
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const abs = (path: string) => new URL(path, Astro.site).href;
-const og = abs('/og/cover.jpg');
+const og = abs(site.ogImage);
 ---
 <!doctype html>
 <html lang={lang}>
@@ -37,19 +37,30 @@ const og = abs('/og/cover.jpg');
   <link rel="canonical" href={canonical}>
   {alternates && Object.entries(alternates).map(([l, path]) => <link rel="alternate" hreflang={l} href={abs(path)}>)}
   {alternates?.ru && <link rel="alternate" hreflang="x-default" href={abs(alternates.ru)}>}
+  {/* предпросмотр ссылки: Facebook, Instagram, WhatsApp, Telegram, VK, Яндекс — только растровая картинка */}
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content={site.name}>
+  <meta property="og:site_name" content={`${site.name} — ${site.tagline}`}>
   <meta property="og:locale" content={lang === 'kk' ? 'kk_KZ' : 'ru_KZ'}>
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   <meta property="og:url" content={canonical}>
   <meta property="og:image" content={og}>
+  <meta property="og:image:secure_url" content={og}>
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content={site.ogImageAlt}>
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#F4F6F3">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={og}>
+  <link rel="image_src" href={og}>
+  {site.verification.google && <meta name="google-site-verification" content={site.verification.google}>}
+  {site.verification.yandex && <meta name="yandex-verification" content={site.verification.yandex}>}
+  <meta name="geo.region" content="KZ-71">
+  <meta name="geo.placename" content={site.city}>
+  <meta name="theme-color" content="#0D3B36">
   <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}>
-  <meta property="og:image:alt" content="Клиника ZhanaRu в Астане">
   <meta name="format-detection" content="telephone=no">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">

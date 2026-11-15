@@ -5,3 +5,4 @@ public/api/private/config.php
 public/api/private/rate
 test-results
 playwright-report
+deploy

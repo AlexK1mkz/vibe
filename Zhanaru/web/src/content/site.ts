@@ -51,6 +51,16 @@ export const site = {
    */
   sheetsWebhook: '',
 
+  /**
+   * Подтверждение прав в поисковиках: код из мета-тега (только значение content).
+   * Google Search Console → «Тег HTML», Яндекс Вебмастер → «Мета-тег». Пусто — тег не выводится.
+   */
+  verification: { google: '', yandex: '' },
+
+  /** Обложка для предпросмотра ссылки (JPG 1200×630, scripts/make-og.mjs). */
+  ogImage: '/og/zhanaru-cover.jpg',
+  ogImageAlt: 'ZhanaRu, Астана: «Энергия — ваш новый статус. Чекап покажет, где вы её теряете»',
+
   /** ID счётчиков. Пустая строка — счётчик не загружается. */
   analytics: { ga4: '', metaPixel: '', yandexMetrika: '' },
 

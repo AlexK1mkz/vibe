@@ -14,6 +14,10 @@ export default defineConfig({
     sitemap({
       // служебные страницы и непереведённая KZ-версия в карту сайта не попадают
       filter: (page) => !/\/(thanks|404|offer|kk)\/?$/.test(page),
+      // дата сборки как дата обновления: Google и Яндекс быстрее переобходят изменённые страницы
+      lastmod: new Date(),
+      changefreq: 'weekly',
+      serialize: (item) => ({ ...item, priority: new URL(item.url).pathname === '/' ? 1 : 0.3 }),
     }),
   ],
   // CSS встраивается в HTML: без отдельного блокирующего запроса первый экран рисуется быстрее
