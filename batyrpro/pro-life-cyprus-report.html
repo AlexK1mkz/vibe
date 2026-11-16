@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRO LIFE Кипр — итоги анкет</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: внутренний отчёт команде — спокойно, по-газетному, вывод первым
+   IDEA: «честное зеркало» потока — цифры участников без украшений
+   PICTURE: распределение оценок 5–10 крупными столбцами в первом экране
+   COLOUR and TYPE: чёрный PRO LIFE + мятный #2FD3BD акцентом, Manrope
+   LAYOUT: чёрная шапка с выводом и KPI, дальше светлые разделы с барами и выводами */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0f1111);--ink:light-dark(#111414,#eef2f1);--mute:light-dark(#5c6463,#9aa5a3);--line:light-dark(#e3e7e6,#252b2a);--soft:light-dark(#f3f6f5,#171c1b);--mint:#2FD3BD;--mintd:light-dark(#0f8f7e,#2FD3BD);--track:light-dark(#eef1f0,#1f2524)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Manrope,system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+h1{font-size:clamp(30px,4.4vw,50px);line-height:1.06;font-weight:800;margin:0 0 14px;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(24px,2.6vw,32px);line-height:1.1;font-weight:800;margin:0 0 8px;text-wrap:balance}
+h3{font-size:16px;margin:0 0 12px;font-weight:700}
+p{margin:0 0 12px;max-width:70ch}
+.lead{color:var(--mute);font-size:17px}
+header{background:#0b0d0d;color:#f2f5f4}
+header .lead{color:#a8b3b1}
+.kick{color:var(--mint);font-weight:700;font-size:15px;margin-bottom:14px}
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:end}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#262c2b;margin-top:28px;border:1px solid #262c2b}
+.kpi{background:#0b0d0d;padding:16px 14px}
+.kpi b{display:block;font-size:clamp(26px,3vw,38px);line-height:1;font-weight:800;color:#fff}
+.kpi b em{font-style:normal;color:var(--mint)}
+.kpi span{display:block;color:#a8b3b1;font-size:13px;margin-top:8px;line-height:1.35}
+.pic h3{color:#a8b3b1;font-weight:500;font-size:14px}
+.cols{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;height:250px;align-items:end;border-bottom:1px solid #3a4241}
+.c{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:6px}
+.c i{display:block;width:100%;background:#2b3332;border-radius:4px 4px 0 0;min-height:2px}
+.c.p i{background:var(--mint)}.c.d i{background:#e2725b}
+.c b{font-size:18px;color:#fff}
+.c span{order:3;font-size:13px;color:#a8b3b1;margin-top:-2px;transform:translateY(22px)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:32px;font-size:13px;color:#a8b3b1}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+section{border-top:1px solid var(--line)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,44px);margin-top:24px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,36px);margin-top:24px}
+.bars{display:grid;gap:7px}
+.b{display:grid;grid-template-columns:minmax(0,1fr) minmax(60px,38%) 28px;gap:10px;align-items:center;font-size:14px;line-height:1.3}
+.b .t{height:12px;background:var(--track);border-radius:3px;overflow:hidden}
+.b .t i{display:block;height:100%;background:light-dark(#9fb0ad,#4b5755);border-radius:3px}
+.b.hi .t i{background:var(--mint)}
+.b .n{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.note{background:var(--soft);border-left:3px solid var(--mint);padding:14px 16px;margin-top:22px;border-radius:0 6px 6px 0;max-width:none}
+.note b{font-weight:700}
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}
+figure{margin:0;padding:18px;background:var(--soft);border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;gap:12px}
+blockquote{margin:0;font-size:16px;line-height:1.5}
+figcaption{font-size:13px;color:var(--mute)}
+table{width:100%;border-collapse:collapse;margin-top:18px;font-size:15px}
+th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--mute);font-weight:500}
+.tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:13px;background:var(--track);white-space:nowrap}
+.tag.hot{background:var(--mint);color:#062a25;font-weight:700}
+.tag.warm{background:light-dark(#d6f6f1,#163a35);color:light-dark(#0b5c51,#9df0e4)}
+ol.recs{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:14px;counter-reset:r}
+ol.recs li{counter-increment:r;display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;padding:18px;border:1px solid var(--line);border-radius:8px}
+ol.recs li::before{content:counter(r);width:36px;height:36px;border-radius:50%;background:#0b0d0d;color:var(--mint);display:grid;place-items:center;font-weight:800}
+ol.recs b{display:block;font-size:17px;margin-bottom:4px}
+ul.qs{margin:16px 0 0;padding-left:20px}ul.qs li{margin:6px 0}ul.qs em{color:var(--mintd);font-style:normal;font-weight:700}
+footer{color:var(--mute);font-size:13px}
+@media(max-width:860px){.hero,.grid2,.grid3,.quotes{grid-template-columns:minmax(0,1fr)}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:flex;justify-content:space-between;gap:12px;border:0;padding:4px 0}.stack td::before{content:attr(data-l);color:var(--mute)}.b{grid-template-columns:minmax(0,1fr) 34% 24px;font-size:13px}.cols{height:190px}}
+@media(prefers-reduced-motion:no-preference){.b .t i,.c i{animation:g .7s ease-out both}@keyframes g{from{transform:scaleX(.2);opacity:.3}}.c i{transform-origin:bottom}}
+</style>
+</head>
+<body>
+<header class="band"><div class="wrap">
+  <div class="kick">PRO LIFE · Кипр · 12–15 ноября 2026 · анкета выпускника</div>
+  <div class="hero">
+    <div>
+      <h1>Айдару — 9,8 из 10. Слабое место одно: что делать после выпуска</h1>
+      <p class="lead">17 участников заполнили анкету. Тренинг рекомендуют, Айдару доверяют, решение принимали быстро и через знакомых. 11 из 17 просят понятный план на первые недели после тренинга, 13 из 17 боятся откатиться в привычную среду.</p>
+      <div class="kpis">
+        <div class="kpi"><b>17</b><span>анкет: 10 женщин, 7 мужчин</span></div>
+        <div class="kpi"><b><em>+65</em></b><span>NPS · средняя оценка 8,9</span></div>
+        <div class="kpi"><b>9,8</b><span>работа Айдара как тренера, 15 из 17 — «10»</span></div>
+        <div class="kpi"><b>13<em>/17</em></b><span>решили идти меньше чем за месяц</span></div>
+      </div>
+    </div>
+    <div class="pic">
+      <h3>«Насколько вероятно, что порекомендуете PRO LIFE?» — число ответов по баллам</h3>
+      <div class="cols"><div class="c d"><b>1</b><i style="height:12%"></i><span>5</span></div><div class="c d"><b>0</b><i style="height:0%"></i><span>6</span></div><div class="c"><b>1</b><i style="height:12%"></i><span>7</span></div><div class="c"><b>3</b><i style="height:38%"></i><span>8</span></div><div class="c p"><b>4</b><i style="height:50%"></i><span>9</span></div><div class="c p"><b>8</b><i style="height:100%"></i><span>10</span></div></div>
+      <div class="legend"><span><i style="background:var(--mint)"></i>Промоутеры, 9–10: 12</span><span><i style="background:#2b3332;outline:1px solid #4b5755"></i>Нейтральные, 7–8: 4</span><span><i style="background:#e2725b"></i>Критики, 0–6: 1</span></div>
+    </div>
+  </div>
+</div></header>
+
+<section class="band"><div class="wrap">
+  <h2>Кто пришёл: Кипр и Рига, 29–52 года, половина — собственники и эксперты</h2>
+  <p class="lead">Медианный возраст — 39 лет. 7 из 17 в браке и с детьми, 5 — не в браке. Самая частая группа по доходу — $1 000–3 000 в месяц, но 5 человек зарабатывают от $6 000.</p>
+  <div class="grid3">
+    <div><h3>Страна проживания</h3><div class="bars"><div class="b hi"><span class="l">Кипр (Лимассол, Никосия)</span><span class="t"><i style="width:100%"></i></span><span class="n">9</span></div><div class="b"><span class="l">Латвия, Рига</span><span class="t"><i style="width:44%"></i></span><span class="n">4</span></div><div class="b"><span class="l">Германия</span><span class="t"><i style="width:22%"></i></span><span class="n">2</span></div><div class="b"><span class="l">Исландия</span><span class="t"><i style="width:11%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Туркменистан</span><span class="t"><i style="width:11%"></i></span><span class="n">1</span></div></div></div>
+    <div><h3>Личный доход в месяц</h3><div class="bars"><div class="b hi"><span class="l">$1 000 – 3 000</span><span class="t"><i style="width:100%"></i></span><span class="n">8</span></div><div class="b"><span class="l">$3 000 – 6 000</span><span class="t"><i style="width:50%"></i></span><span class="n">4</span></div><div class="b"><span class="l">$6 000 – 10 000</span><span class="t"><i style="width:25%"></i></span><span class="n">2</span></div><div class="b"><span class="l">$10 000 – 20 000</span><span class="t"><i style="width:25%"></i></span><span class="n">2</span></div><div class="b"><span class="l">Более $20 000</span><span class="t"><i style="width:12%"></i></span><span class="n">1</span></div></div></div>
+    <div><h3>Род деятельности</h3><div class="bars"><div class="b hi"><span class="l">Собственник или совладелец</span><span class="t"><i style="width:100%"></i></span><span class="n">6</span></div><div class="b"><span class="l">Эксперт, самозанятость</span><span class="t"><i style="width:83%"></i></span><span class="n">5</span></div><div class="b"><span class="l">Руководитель компании</span><span class="t"><i style="width:33%"></i></span><span class="n">2</span></div><div class="b"><span class="l">Специалист в найме</span><span class="t"><i style="width:50%"></i></span><span class="n">3</span></div><div class="b"><span class="l">Стилист</span><span class="t"><i style="width:17%"></i></span><span class="n">1</span></div></div></div>
+  </div>
+  <p class="note"><b>Рига — второй город потока:</b> 4 человека из Латвии, все пришли через знакомых. Это повод проверить спрос на мастер-класс Айдара в Риге.</p>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <h2>С чем пришли: автопилот, тревога и «пропал вкус к жизни»</h2>
+  <p class="lead">Боль не про деньги в первую очередь. Люди описывают пустоту и усталость при внешне нормальной жизни. Каждый второй не разрешает себе желать по-крупному.</p>
+  <div class="grid2">
+    <div><h3>Что тяготило перед тренингом</h3><div class="bars"><div class="b hi"><span class="l">Живу на автопилоте</span><span class="t"><i style="width:100%"></i></span><span class="n">10</span></div><div class="b hi"><span class="l">Тревога и страхи за будущее</span><span class="t"><i style="width:80%"></i></span><span class="n">8</span></div><div class="b hi"><span class="l">Нет сил, выгорание</span><span class="t"><i style="width:70%"></i></span><span class="n">7</span></div><div class="b"><span class="l">Кризис в паре, мысли о расставании</span><span class="t"><i style="width:60%"></i></span><span class="n">6</span></div><div class="b"><span class="l">Обиды на близких или родителей</span><span class="t"><i style="width:50%"></i></span><span class="n">5</span></div><div class="b"><span class="l">Доход упёрся в потолок</span><span class="t"><i style="width:50%"></i></span><span class="n">5</span></div><div class="b"><span class="l">Всё тяну на себе</span><span class="t"><i style="width:40%"></i></span><span class="n">4</span></div><div class="b"><span class="l">Конфликты, холод в отношениях</span><span class="t"><i style="width:40%"></i></span><span class="n">4</span></div><div class="b"><span class="l">Эмоции выходят из-под контроля</span><span class="t"><i style="width:40%"></i></span><span class="n">4</span></div><div class="b"><span class="l">Всё в порядке — пора глубже</span><span class="t"><i style="width:20%"></i></span><span class="n">2</span></div><div class="b"><span class="l">Переезд, нет своего круга</span><span class="t"><i style="width:0%"></i></span><span class="n">0</span></div></div></div>
+    <div><h3>Какое внутреннее состояние мешало</h3><div class="bars"><div class="b hi"><span class="l">Пропали лёгкость и вкус к жизни</span><span class="t"><i style="width:100%"></i></span><span class="n">10</span></div><div class="b hi"><span class="l">Чувство, что делаю недостаточно</span><span class="t"><i style="width:90%"></i></span><span class="n">9</span></div><div class="b hi"><span class="l">Нет опоры и ясности внутри</span><span class="t"><i style="width:80%"></i></span><span class="n">8</span></div><div class="b"><span class="l">Тревога за будущее</span><span class="t"><i style="width:80%"></i></span><span class="n">8</span></div><div class="b"><span class="l">Не разрешаю себе желать по-крупному</span><span class="t"><i style="width:80%"></i></span><span class="n">8</span></div><div class="b"><span class="l">Постоянное напряжение и раздражение</span><span class="t"><i style="width:60%"></i></span><span class="n">6</span></div><div class="b"><span class="l">Одиночество — всё держу на себе</span><span class="t"><i style="width:20%"></i></span><span class="n">2</span></div></div></div>
+  </div>
+  <p class="note"><b>Тема переезда не отозвалась:</b> вариант «новая страна, нет своего круга» не выбрал никто. Рекламу на Кипре строить на автопилоте, тревоге и потере лёгкости, а не на эмиграции.</p>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <h2>Как решили: через знакомых и быстро</h2>
+  <p class="lead">13 из 17 пришли по рекомендации конкретного человека. Капитаны и выпускники — главный канал: Кристину и Дамира назвали по три человека, Машу — одна участница. Только один человек пришёл из Telegram.</p>
+  <div class="grid3">
+    <div><h3>Откуда узнали</h3><div class="bars"><div class="b hi"><span class="l">Через знакомого, друга, партнёра или супруга</span><span class="t"><i style="width:100%"></i></span><span class="n">13</span></div><div class="b"><span class="l">После Batyr Way / Batyr Joly</span><span class="t"><i style="width:15%"></i></span><span class="n">2</span></div><div class="b"><span class="l">Мастер-класс Айдара на Кипре</span><span class="t"><i style="width:8%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Telegram</span><span class="t"><i style="width:8%"></i></span><span class="n">1</span></div></div></div>
+    <div><h3>Что убедило окончательно</h3><div class="bars"><div class="b hi"><span class="l">Стало ясно: дальше так нельзя</span><span class="t"><i style="width:100%"></i></span><span class="n">8</span></div><div class="b"><span class="l">Перемены в знакомом после тренинга</span><span class="t"><i style="width:62%"></i></span><span class="n">5</span></div><div class="b"><span class="l">Личность и опыт Айдара</span><span class="t"><i style="width:62%"></i></span><span class="n">5</span></div><div class="b"><span class="l">Следующий шаг после Batyr Way / Joly</span><span class="t"><i style="width:62%"></i></span><span class="n">5</span></div><div class="b"><span class="l">Отзывы и результаты выпускников</span><span class="t"><i style="width:50%"></i></span><span class="n">4</span></div><div class="b"><span class="l">Мастер-класс Айдара на Кипре</span><span class="t"><i style="width:38%"></i></span><span class="n">3</span></div><div class="b"><span class="l">Позвал или подарил участие близкий человек</span><span class="t"><i style="width:25%"></i></span><span class="n">2</span></div><div class="b"><span class="l">Решение вместе с супругом или супругой</span><span class="t"><i style="width:25%"></i></span><span class="n">2</span></div></div></div>
+    <div><h3>Что чуть не остановило</h3><div class="bars"><div class="b hi"><span class="l">Ничего не останавливало</span><span class="t"><i style="width:100%"></i></span><span class="n">9</span></div><div class="b"><span class="l">Цена</span><span class="t"><i style="width:44%"></i></span><span class="n">4</span></div><div class="b"><span class="l">Сложно выделить 4 дня</span><span class="t"><i style="width:33%"></i></span><span class="n">3</span></div><div class="b"><span class="l">Опасения давления или «секты»</span><span class="t"><i style="width:22%"></i></span><span class="n">2</span></div><div class="b"><span class="l">Не с кем оставить детей</span><span class="t"><i style="width:22%"></i></span><span class="n">2</span></div><div class="b"><span class="l">Перелёт и проживание на Кипре</span><span class="t"><i style="width:11%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Сработает ли в моём случае</span><span class="t"><i style="width:11%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Непонятно, какой будет результат</span><span class="t"><i style="width:11%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Неверие в 4 дня</span><span class="t"><i style="width:11%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Страх открываться при других людях</span><span class="t"><i style="width:11%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Мало информации об Айдаре</span><span class="t"><i style="width:11%"></i></span><span class="n">1</span></div></div></div>
+  </div>
+  <p class="note"><b>Барьеры слабые:</b> у 9 из 17 не было ни одного. Цена — у 4, «4 дня выпасть из жизни» — у 3, страх «секты» — у 2. Последнее стоит закрывать контентом: живые отзывы и разговор с выпускником до оплаты.</p>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <h2>Итоги: проживание и день 2 — ядро программы</h2>
+  <p class="lead">Практики отметили 15 из 17, день 2 — 14. День 4 выбрал только один человек: стоит проверить, запомнился ли он участникам и как он закрывает программу.</p>
+  <div class="grid2">
+    <div><h3>Что «зашло» больше всего</h3><div class="bars"><div class="b hi"><span class="l">Практики — не слушать, а проживать</span><span class="t"><i style="width:100%"></i></span><span class="n">15</span></div><div class="b hi"><span class="l">День 2 — обиды, эмоции, выход из роли жертвы</span><span class="t"><i style="width:93%"></i></span><span class="n">14</span></div><div class="b"><span class="l">Личные разборы Айдара</span><span class="t"><i style="width:73%"></i></span><span class="n">11</span></div><div class="b"><span class="l">День 3 — обратная связь, «честное зеркало»</span><span class="t"><i style="width:67%"></i></span><span class="n">10</span></div><div class="b"><span class="l">Работа в парах и мини-группах</span><span class="t"><i style="width:60%"></i></span><span class="n">9</span></div><div class="b"><span class="l">Совместный формат мужчин и женщин</span><span class="t"><i style="width:47%"></i></span><span class="n">7</span></div><div class="b"><span class="l">Учебный материал Айдара</span><span class="t"><i style="width:27%"></i></span><span class="n">4</span></div><div class="b"><span class="l">Обратная связь тренера и капитанов</span><span class="t"><i style="width:27%"></i></span><span class="n">4</span></div><div class="b"><span class="l">День 1 — доверие, ответственность, страхи</span><span class="t"><i style="width:27%"></i></span><span class="n">4</span></div><div class="b"><span class="l">День 4 — ценности, благодарность, прощение</span><span class="t"><i style="width:7%"></i></span><span class="n">1</span></div></div></div>
+    <div><h3>Что улучшить до 10 из 10</h3><div class="bars"><div class="b hi"><span class="l">План на первые недели после выпуска</span><span class="t"><i style="width:100%"></i></span><span class="n">11</span></div><div class="b"><span class="l">Всё было на уровне</span><span class="t"><i style="width:64%"></i></span><span class="n">7</span></div><div class="b"><span class="l">Больше времени на личные разборы</span><span class="t"><i style="width:18%"></i></span><span class="n">2</span></div><div class="b"><span class="l">Площадка, питание, быт</span><span class="t"><i style="width:18%"></i></span><span class="n">2</span></div><div class="b"><span class="l">Меньше теории</span><span class="t"><i style="width:9%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Тайминг — долгие дни</span><span class="t"><i style="width:9%"></i></span><span class="n">1</span></div></div></div>
+  </div>
+  <h3 style="margin-top:36px">Своими словами — из анкет участников, давших согласие на публикацию</h3>
+  <div class="quotes"><figure><blockquote>Пришло осознание, стал более решительным и уверенным. Решаю говорить близким, что люблю их, решил сразу же поправить здоровье, решил пробежать марафон осенью 2027, решил чаще навещать родителей.</blockquote><figcaption>Канат Батырханов, 42, Ашхабад</figcaption></figure><figure><blockquote>Я жила в режиме экономии энергии, а когда отдаю — я и заряжаюсь, показал тренинг.</blockquote><figcaption>Карина Суркова, 52, Рига</figcaption></figure><figure><blockquote>За эти четыре дня я почувствовал лёгкость и душевный подъём. Сейчас я полон решимости действовать.</blockquote><figcaption>Raitis Simanis, 48, Рига</figcaption></figure><figure><blockquote>Пришла лёгкость и жажда к жизни. Выбирать себя. Смотреть на свою жизнь и действия каждый день через призму результата.</blockquote><figcaption>Анастасия Репетило, 30, Германия</figcaption></figure><figure><blockquote>Самое сложное, но самое важное — позвонила папе, просила его прощения.</blockquote><figcaption>Участница, 29, Лимассол · без имени</figcaption></figure><figure><blockquote>Важное решение: энергию направлять не на сомнения и старания, а на действия, звонить родственникам, не жадничать на слова и чувства.</blockquote><figcaption>Участница, 31, Лимассол · без имени</figcaption></figure></div>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <h2>Дальше: удержать перемены важнее, чем новый шаг</h2>
+  <p class="lead">Главный запрос после выпуска — не откатиться. К капитанству и наставничеству большинство относится как к шагу «позже»: 8 человек прямо пишут, что сначала нужна пауза, чтобы внедрить пройденное.</p>
+  <div class="grid2">
+    <div><h3>Какая тема сейчас важнее всего</h3><div class="bars"><div class="b hi"><span class="l">Не откатиться в привычной среде</span><span class="t"><i style="width:100%"></i></span><span class="n">13</span></div><div class="b hi"><span class="l">Выйти на новый уровень в деле и доходе</span><span class="t"><i style="width:85%"></i></span><span class="n">11</span></div><div class="b hi"><span class="l">Довести решения до действия</span><span class="t"><i style="width:77%"></i></span><span class="n">10</span></div><div class="b"><span class="l">Круг сильных людей рядом</span><span class="t"><i style="width:62%"></i></span><span class="n">8</span></div><div class="b"><span class="l">Удержать перемены в семье и в паре</span><span class="t"><i style="width:54%"></i></span><span class="n">7</span></div><div class="b"><span class="l">Отпустить обиды до конца</span><span class="t"><i style="width:31%"></i></span><span class="n">4</span></div><div class="b"><span class="l">Наладить отношения с родителями</span><span class="t"><i style="width:8%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Справлюсь самостоятельно</span><span class="t"><i style="width:8%"></i></span><span class="n">1</span></div></div></div>
+    <div><h3>Что учесть, чтобы формат подошёл</h3><div class="bars"><div class="b hi"><span class="l">Нужна пауза, чтобы внедрить пройденное</span><span class="t"><i style="width:100%"></i></span><span class="n">8</span></div><div class="b"><span class="l">Ничего не мешает</span><span class="t"><i style="width:38%"></i></span><span class="n">3</span></div><div class="b"><span class="l">Плотный график</span><span class="t"><i style="width:25%"></i></span><span class="n">2</span></div><div class="b"><span class="l">Не с кем оставить детей</span><span class="t"><i style="width:12%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Бюджет, важна рассрочка</span><span class="t"><i style="width:12%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Непонятны формат и результат</span><span class="t"><i style="width:12%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Перелёты и выезды из страны проживания</span><span class="t"><i style="width:12%"></i></span><span class="n">1</span></div></div></div>
+    <div><h3>Капитанская подготовка</h3><div class="bars"><div class="b"><span class="l">Обсудить участие</span><span class="t"><i style="width:9%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Нужны подробности</span><span class="t"><i style="width:9%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Интересно через 3–6 месяцев</span><span class="t"><i style="width:36%"></i></span><span class="n">4</span></div><div class="b"><span class="l">Сейчас не актуально</span><span class="t"><i style="width:100%"></i></span><span class="n">11</span></div></div></div>
+    <div><h3>Групповое наставничество</h3><div class="bars"><div class="b"><span class="l">Есть желание пройти</span><span class="t"><i style="width:14%"></i></span><span class="n">1</span></div><div class="b"><span class="l">Нужны подробности</span><span class="t"><i style="width:43%"></i></span><span class="n">3</span></div><div class="b"><span class="l">Интересно, но позже</span><span class="t"><i style="width:100%"></i></span><span class="n">7</span></div><div class="b"><span class="l">Сейчас не актуально</span><span class="t"><i style="width:86%"></i></span><span class="n">6</span></div></div></div>
+  </div>
+  <h3 style="margin-top:36px">Кому позвонить отделу продаж</h3>
+  <table class="stack"><thead><tr><th>Участник</th><th>Пол</th><th>Интерес</th><th>Статус</th></tr></thead><tbody><tr><td data-l="Участник">Канат Батырханов</td><td data-l="Пол">М</td><td data-l="Интерес">Капитанство: обсудить участие · Наставничество: есть желание</td><td data-l="Статус"><span class="tag hot">Горячий</span></td></tr><tr><td data-l="Участник">Валерия Рублевская</td><td data-l="Пол">Ж</td><td data-l="Интерес">Капитанство: нужны подробности</td><td data-l="Статус"><span class="tag warm">Тёплый</span></td></tr><tr><td data-l="Участник">Normunds Sitniks</td><td data-l="Пол">М</td><td data-l="Интерес">Наставничество: нужны подробности · важна рассрочка</td><td data-l="Статус"><span class="tag warm">Тёплый</span></td></tr><tr><td data-l="Участник">Виктория Бритик</td><td data-l="Пол">Ж</td><td data-l="Интерес">Наставничество: нужны подробности · согласна на интервью</td><td data-l="Статус"><span class="tag warm">Тёплый</span></td></tr><tr><td data-l="Участник">Катерина Павленко</td><td data-l="Пол">Ж</td><td data-l="Интерес">Наставничество: подробности · капитанство через 3–6 мес · интервью</td><td data-l="Статус"><span class="tag warm">Тёплый</span></td></tr><tr><td data-l="Участник">Raitis Simanis</td><td data-l="Пол">М</td><td data-l="Интерес">Капитанство через 3–6 мес</td><td data-l="Статус"><span class="tag ">Позже</span></td></tr><tr><td data-l="Участник">Анастасия Репетило</td><td data-l="Пол">Ж</td><td data-l="Интерес">Капитанство через 3–6 мес</td><td data-l="Статус"><span class="tag ">Позже</span></td></tr><tr><td data-l="Участник">Алексей Васильев</td><td data-l="Пол">М</td><td data-l="Интерес">Капитанство через 3–6 мес</td><td data-l="Статус"><span class="tag ">Позже</span></td></tr></tbody></table>
+  <p class="note"><b>Рекомендации:</b> 13 из 17 знают человека, которому нужен PRO LIFE или Batyr Way. 12 сначала поговорят сами, одна участница назвала мужчину для Batyr Way. Контент: 5 согласны на публикацию с именем, 5 — без имени, 3 — на интервью 20 минут.</p>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <h2>Вопросы Айдару — готовые темы для Reels и YouTube</h2>
+  <ul class="qs"><li>Как не откатиться в привычное состояние и не скатиться обратно? <em>×2</em></li><li>Как ты начал свой путь, что повлияло? <em>×2</em></li><li>Как преодолевать сопротивление и нежелание действовать?</li><li>Как не требовать изменений от близких?</li><li>Может ли постоянная трансформация стать бегством от себя?</li><li>Не обкрадывает ли работа с участниками твоих близких?</li><li>Как выражать уважение к мужчинам — практика</li></ul>
+</div></section>
+
+<section class="band" style="background:var(--soft)"><div class="wrap">
+  <h2>Что сделать</h2>
+  <ol class="recs">
+    <li><div><b>Собрать «первые 30 дней после PRO LIFE»</b>Это ответ на главный запрос: 11 просят план, 13 боятся откатиться. Решения участника — в трекер, чат потока, еженедельная встреча с капитаном, одна живая встреча через месяц. Это же мост к наставничеству для семи «интересно, но позже».</div></li>
+    <li><div><b>Сделать рекомендацию системой</b>Сарафан приводит 13 из 17. Дать выпускникам готовое приглашение на ближайший мастер-класс на Кипре и привилегию «один билет на двоих». Отдельно поблагодарить Кристину и Дамира: на двоих они привели шестерых.</div></li>
+    <li><div><b>Обзвонить 5 тёплых контактов за неделю</b>Канат Батырханов — горячий: готов обсуждать капитанство и наставничество. Ещё четверо просят подробности. Четверых, кто смотрит на капитанство «через 3–6 месяцев», поставить в напоминание на февраль.</div></li>
+    <li><div><b>Связаться с единственным критиком</b>Одна оценка «5» — мужчина из Риги, Айдару при этом поставил 10. Пишет про «лёгкость внутри и тупость в голове» — похоже на усталость после интенсива. Капитану стоит позвонить лично.</div></li>
+    <li><div><b>Снять контент, пока горячо</b>Интервью с тремя согласившимися, посты по шести цитатам из отчёта. Темы роликов — вопросы участников выше, в первую очередь «как не откатиться».</div></li>
+  </ol>
+</div></section>
+
+<footer class="band"><div class="wrap">
+  <p>Источник: Google-форма «Анкета выпускника PRO LIFE · Кипр», 17 ответов, выгрузка от 16.11.2026. NPS = доля промоутеров (9–10) минус доля критиков (0–6). В вопросах с несколькими вариантами сумма больше 17. Отчёт внутренний: имена участников указаны для работы отдела продаж, телефоны и почты не включены. Цитаты — только от тех, кто разрешил публикацию; анонимные подписаны без имени.</p>
+</div></footer>
+</body>
+</html>
