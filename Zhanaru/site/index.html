@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZHANARU — центр осознанного здоровья в Астане</title>
+<meta name="description" content="ZHANARU — центр осознанного здоровья в Астане: check-up и анализы, эндокринолог, гинеколог, программы снижения веса, авторские капельницы, остеопатия, УЗИ и массаж. Ежедневно 08:00–20:00, ЖК Manhattan, ул. Анет баба, 13.">
+<meta property="og:title" content="ZHANARU — центр осознанного здоровья">
+<meta property="og:description" content="Находим причину, а не лечим симптом. Check-up, эндокринолог, гинеколог, снижение веса, капельницы, остеопатия.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img/moss-wall.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #F7F4EC;
+    --surface: #FFFFFF;
+    --ink: #1F261A;
+    --muted: #5D6656;
+    --line: #E5E0D2;
+    --sage: #8A9A4E;
+    --sage-soft: #ECEFDF;
+    --forest: #4A5A2A;
+    --forest-hover: #3B4821;
+    --cognac: #A5683F;
+    --cognac-soft: #F4E8DC;
+    --radius: 20px;
+    --shadow: 0 1px 2px rgba(31, 38, 26, .04), 0 10px 28px rgba(31, 38, 26, .08);
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 17px/1.6 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; }
+  h1, h2, h3 { margin: 0; font-weight: 600; }
+  h1, h2 { font-family: var(--serif); letter-spacing: -.01em; line-height: 1.05; }
+  h1 { font-size: clamp(44px, 6.2vw, 76px); }
+  h2 { font-size: clamp(34px, 4.4vw, 52px); }
+  h3 { font-size: 20px; line-height: 1.3; }
+  p { margin: 0; }
+  .wrap { width: min(1160px, 100% - 32px); margin-inline: auto; }
+  section { padding: clamp(64px, 9vw, 112px) 0; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--cognac);
+    margin-bottom: 16px;
+  }
+  .lead { font-size: clamp(17px, 1.6vw, 19px); color: var(--muted); max-width: 580px; }
+  .section-head { display: grid; gap: 16px; max-width: 700px; margin-bottom: 48px; }
+  .section-head .eyebrow { margin-bottom: 0; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 52px; padding: 0 26px;
+    border-radius: 999px; border: 1px solid transparent;
+    font: 600 16px/1 var(--sans); text-decoration: none; cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s, transform .2s;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--forest); color: #fff; }
+  .btn-primary:hover { background: var(--forest-hover); }
+  .btn-ghost { border-color: var(--ink); color: var(--ink); background: transparent; }
+  .btn-ghost:hover { background: var(--ink); color: var(--bg); }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+  .link-more { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 15px; color: var(--forest); text-decoration: none; }
+  .link-more:hover { text-decoration: underline; }
+
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(247, 244, 236, .9);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand-mark { width: 40px; height: 40px; }
+  .brand-name { font: 600 19px/1 var(--sans); letter-spacing: .18em; }
+  .brand-name small { display: block; margin-top: 4px; font-size: 9.5px; font-weight: 500; letter-spacing: .2em; color: var(--muted); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
+  .nav-links a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--muted); }
+  .nav-links a:hover { color: var(--ink); }
+  .nav .btn { min-height: 44px; padding: 0 20px; font-size: 15px; }
+  .menu-toggle { display: none; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--ink); }
+  .menu-toggle svg { width: 28px; height: 28px; }
+
+  /* Hero */
+  .hero { padding-top: clamp(40px, 6vw, 72px); }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .hero h1 em { font-style: italic; color: var(--forest); }
+  .hero .lead { margin-top: 24px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .hero-facts {
+    display: flex; flex-wrap: wrap; gap: 12px 28px;
+    margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line);
+    font-size: 15px; color: var(--muted);
+  }
+  .hero-facts b { color: var(--ink); font-weight: 600; }
+  .hero-art { position: relative; padding: 0 0 28px 28px; }
+  .hero-photo {
+    aspect-ratio: 4 / 5; overflow: hidden;
+    border-radius: 999px 999px 28px 28px;
+    box-shadow: 0 30px 60px rgba(74, 90, 42, .22);
+  }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .float-card {
+    position: absolute;
+    background: var(--surface); border-radius: 16px; padding: 14px 18px;
+    box-shadow: var(--shadow);
+  }
+  .float-rating { left: 0; bottom: 18%; display: flex; align-items: center; gap: 12px; }
+  .float-rating .score { font: 600 32px/1 var(--serif); }
+  .float-rating .stars { color: var(--cognac); font-size: 14px; letter-spacing: 2px; }
+  .float-rating span, .float-price span { font-size: 13px; color: var(--muted); line-height: 1.35; }
+  .float-price { right: -8px; top: 12%; max-width: 200px; }
+  .float-price b { display: block; font: 600 26px/1.1 var(--serif); color: var(--forest); }
+
+  /* Manifesto */
+  .manifesto { padding: 0; }
+  .manifesto-box { background: var(--forest); color: #EEF0E4; border-radius: 28px; overflow: hidden; }
+  .manifesto-top { display: grid; grid-template-columns: auto 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; padding: clamp(32px, 5vw, 56px); }
+  .manifesto-top .word { font: italic 600 clamp(56px, 8vw, 96px)/1 var(--serif); color: #fff; }
+  .manifesto-top .word small { display: block; margin-top: 8px; font: 500 15px/1.4 var(--sans); font-style: normal; color: #C9D3A6; letter-spacing: .04em; }
+  .manifesto-top p { font-size: clamp(17px, 1.7vw, 20px); color: rgba(238, 240, 228, .88); }
+  .principles-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255, 255, 255, .14); }
+  .principle { padding: 28px; border-right: 1px solid rgba(255, 255, 255, .14); }
+  .principle:last-child { border-right: 0; }
+  .principle .num { font: 600 14px/1 var(--sans); color: #C9D3A6; letter-spacing: .1em; }
+  .principle h3 { margin: 12px 0 6px; color: #fff; font-size: 19px; }
+  .principle p { font-size: 15px; color: rgba(238, 240, 228, .75); }
+
+  /* Services */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 30px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .card .icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: grid; place-items: center;
+    background: var(--sage-soft); color: var(--forest);
+  }
+  .card .icon svg { width: 26px; height: 26px; }
+  .card .tag { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--cognac); }
+  .card p { color: var(--muted); font-size: 16px; }
+  .card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; font-size: 15px; }
+  .card li { display: flex; gap: 10px; }
+  .card li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: 9px; border-radius: 50%; background: var(--sage); }
+  .card .link-more { margin-top: auto; padding-top: 6px; }
+
+  /* Check-up */
+  .checkup { background: var(--sage-soft); }
+  .checkup-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
+  .checkup-name { font: 600 15px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--forest); }
+  .checkup h2 { margin-top: 10px; }
+  .price-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; margin: 28px 0 24px; }
+  .price { font: 600 clamp(48px, 6vw, 64px)/1 var(--serif); color: var(--forest); }
+  .price-note { font-size: 14px; color: var(--muted); }
+  .includes { list-style: none; margin: 0 0 32px; padding: 0; display: grid; gap: 14px; }
+  .includes li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center; background: var(--surface); border-radius: 14px; padding: 12px 16px 12px 12px; }
+  .includes .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--sage-soft); color: var(--forest); }
+  .includes .ic svg { width: 22px; height: 22px; }
+  .includes b { display: block; font-weight: 600; }
+  .includes span { font-size: 14px; color: var(--muted); }
+  .includes .gift { display: inline-block; margin-left: 6px; padding: 2px 10px; border-radius: 999px; background: var(--cognac); color: #fff; font-size: 12px; font-weight: 600; vertical-align: 2px; }
+  .analyses { background: var(--surface); border-radius: 24px; padding: clamp(24px, 3.5vw, 40px); box-shadow: var(--shadow); }
+  .analyses h3 { font: 600 28px/1.1 var(--serif); }
+  .analyses > p { margin-top: 6px; color: var(--muted); font-size: 15px; }
+  .groups { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 28px; margin-top: 26px; }
+  .group h4 { margin: 0 0 8px; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--cognac); }
+  .group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 15px; }
+  .group li { display: flex; gap: 10px; align-items: baseline; }
+  .group li span { flex: none; width: 22px; font-size: 12px; font-weight: 600; color: var(--sage); }
+
+  /* Drips */
+  .drips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .drip { display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .drip .bag { width: 48px; height: 58px; }
+  .drip h3 { font-size: 18px; }
+  .drip h3 small { display: block; margin-top: 2px; font-size: 14px; font-weight: 500; color: var(--cognac); }
+  .drip p { margin-top: 8px; font-size: 15px; color: var(--muted); }
+  .drips-note { margin-top: 20px; font-size: 14px; color: var(--muted); }
+  .offer-box {
+    display: grid; grid-template-columns: 280px 1fr auto; align-items: center; gap: clamp(24px, 3vw, 40px);
+    margin-top: 40px;
+    background: var(--cognac-soft); border-radius: var(--radius); overflow: hidden;
+    padding-right: clamp(24px, 4vw, 52px);
+  }
+  .offer-photo { align-self: stretch; min-height: 240px; }
+  .offer-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .offer-text { padding: 32px 0; }
+  .offer-box h2 { font-size: clamp(28px, 3.4vw, 40px); }
+  .offer-box p { margin-top: 8px; color: var(--muted); }
+
+  /* Approach */
+  .approach-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .approach .why { margin-top: 28px; padding: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .approach .why h3 { font-family: var(--serif); font-size: 26px; margin-bottom: 10px; }
+  .approach .why p { color: var(--muted); }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .step { display: grid; grid-template-columns: 72px 1fr; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .step:last-child { border-bottom: 0; }
+  .step .n { font: 600 44px/1 var(--serif); color: var(--sage); }
+  .step h3 { margin-bottom: 6px; }
+  .step p { color: var(--muted); }
+
+  /* Doctors */
+  .doctors { background: var(--surface); }
+  .doctors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .doctor { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+  .doctor .portrait { aspect-ratio: 1; background: linear-gradient(180deg, #fff 60%, var(--sage-soft)); border-bottom: 1px solid var(--line); }
+  .doctor .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center bottom; }
+  .doctor .info { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .doctor .role { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--cognac); }
+  .doctor h3 { font: 600 24px/1.1 var(--serif); }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; }
+  .badge { padding: 4px 10px; border-radius: 999px; background: var(--forest); color: #fff; font-size: 12px; font-weight: 600; }
+  .doctor ul { margin: 2px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 14.5px; color: var(--muted); }
+  .doctor li { display: flex; gap: 8px; }
+  .doctor li::before { content: ""; flex: none; width: 5px; height: 5px; margin-top: 9px; border-radius: 50%; background: var(--sage); }
+  .doctors-note { margin-top: 24px; font-size: 15px; color: var(--muted); }
+
+  /* Clinic */
+  .clinic-head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px clamp(32px, 5vw, 72px); align-items: end; margin-bottom: 40px; }
+  .clinic-head .lead + .lead { margin-top: 14px; }
+  .gallery {
+    display: grid; gap: 14px;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 270px 270px;
+    grid-template-areas: "a b c" "a b d";
+  }
+  .photo { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--sage-soft); }
+  .photo:nth-child(1) { grid-area: a; }
+  .photo:nth-child(2) { grid-area: b; }
+  .photo:nth-child(3) { grid-area: c; }
+  .photo:nth-child(4) { grid-area: d; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .photo:hover img { transform: scale(1.03); }
+  .photo figcaption {
+    position: absolute; left: 12px; bottom: 12px;
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(31, 38, 26, .55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    font-size: 13px; font-weight: 500; color: #fff;
+  }
+  .partners { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 28px; padding: 20px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  .partners span { font-size: 15px; color: var(--muted); }
+  .partners b { font-weight: 700; letter-spacing: .04em; }
+
+  /* Reviews */
+  .reviews-box {
+    display: grid; grid-template-columns: auto 1fr; gap: clamp(32px, 6vw, 80px); align-items: center;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 28px;
+    padding: clamp(32px, 5vw, 56px);
+  }
+  .rating { text-align: center; }
+  .rating .big { font: 600 clamp(80px, 10vw, 112px)/.9 var(--serif); color: var(--forest); }
+  .rating .stars { margin-top: 10px; color: var(--cognac); font-size: 22px; letter-spacing: 4px; }
+  .rating .src { margin-top: 8px; font-size: 14px; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 28px; }
+  .chip { padding: 10px 16px; border-radius: 999px; background: var(--sage-soft); font-size: 15px; font-weight: 500; color: var(--forest); }
+
+  /* Contacts */
+  .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .contact-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(28px, 4vw, 44px); }
+  .contact-list { list-style: none; margin: 28px 0 32px; padding: 0; display: grid; gap: 22px; }
+  .contact-list li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+  .contact-list .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--sage-soft); color: var(--forest); }
+  .contact-list .ic svg { width: 22px; height: 22px; }
+  .contact-list .label { font-size: 13px; color: var(--muted); }
+  .contact-list .value { font-weight: 600; }
+  .contact-list a { text-decoration: none; }
+  .contact-list a:hover { text-decoration: underline; }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .map-card {
+    position: relative; overflow: hidden; border-radius: var(--radius); min-height: 380px;
+    background: var(--forest); color: #fff; padding: clamp(28px, 4vw, 44px);
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 12px;
+  }
+  .map-card .map-bg { position: absolute; inset: 0; opacity: .5; }
+  .map-card > *:not(.map-bg) { position: relative; }
+  .map-card h3 { font: 600 32px/1.1 var(--serif); }
+  .map-card p { color: rgba(255, 255, 255, .82); font-size: 15px; }
+  .map-card .btn { align-self: flex-start; margin-top: 8px; background: #fff; color: var(--forest); }
+  .map-card .btn:hover { background: var(--sage-soft); }
+
+  /* Footer */
+  footer { padding: 48px 0 40px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
+  .foot .brand-name { color: var(--ink); }
+  .foot p { max-width: 520px; }
+  .disclaimer { margin-top: 28px; padding: 16px 20px; border-radius: 12px; background: var(--sage-soft); color: var(--forest); font-weight: 600; text-align: center; letter-spacing: .02em; }
+
+  /* Mobile WhatsApp bar */
+  .mobile-cta { display: none; }
+
+  @media (max-width: 1060px) {
+    .services-grid, .drips-grid { grid-template-columns: repeat(2, 1fr); }
+    .doctors-grid { grid-template-columns: repeat(2, 1fr); }
+    .principles-grid { grid-template-columns: repeat(2, 1fr); }
+    .principle:nth-child(2) { border-right: 0; }
+    .principle:nth-child(-n+2) { border-bottom: 1px solid rgba(255, 255, 255, .14); }
+    .nav-links { gap: 18px; }
+  }
+  @media (max-width: 900px) {
+    .nav-links, .nav .btn { display: none; }
+    .menu-toggle { display: block; }
+    header.open .nav-links {
+      display: grid; gap: 4px;
+      position: absolute; top: 72px; left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--line);
+      padding: 12px 16px 20px;
+    }
+    header.open .nav-links a { display: block; padding: 12px 0; font-size: 18px; color: var(--ink); }
+    .hero-grid, .approach-grid, .clinic-head, .contacts-grid, .checkup-grid { grid-template-columns: 1fr; }
+    .hero-art { max-width: 440px; margin-inline: auto; width: 100%; }
+    .manifesto-top { grid-template-columns: 1fr; }
+    .reviews-box { grid-template-columns: 1fr; }
+    .gallery { grid-template-rows: 220px 220px; }
+    .offer-box { grid-template-columns: 200px 1fr; }
+    .offer-box .btn { grid-column: 2; justify-self: start; margin-bottom: 32px; }
+    .offer-photo { grid-row: span 2; }
+    .mobile-cta {
+      display: flex; position: fixed; z-index: 30; left: 12px; right: 12px; bottom: 12px;
+      box-shadow: 0 10px 30px rgba(31, 38, 26, .25);
+    }
+    body { padding-bottom: 84px; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .services-grid, .doctors-grid, .principles-grid, .drips-grid { grid-template-columns: 1fr; }
+    .groups { gap: 18px 16px; }
+    .group ul { font-size: 14px; }
+    .principle { border-right: 0; border-bottom: 1px solid rgba(255, 255, 255, .14); }
+    .principle:last-child { border-bottom: 0; }
+    .card { padding: 26px 22px; }
+    .hero-actions .btn { flex: 1 1 100%; }
+    .hero-art { padding: 0 0 24px 12px; }
+    .float-price { right: 0; top: 8%; }
+    .step { grid-template-columns: 52px 1fr; gap: 14px; }
+    .step .n { font-size: 36px; }
+    .doctor { display: grid; grid-template-columns: 118px 1fr; }
+    .doctor .portrait { aspect-ratio: auto; min-height: 150px; border-bottom: 0; border-right: 1px solid var(--line); }
+    .doctor .portrait img { object-position: center top; }
+    .doctor .info { padding: 16px 16px 18px; gap: 8px; }
+    .doctor h3 { font-size: 21px; }
+    .gallery {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 230px 170px 170px;
+      grid-template-areas: "a a" "b c" "b d";
+      gap: 10px;
+    }
+    .offer-box { grid-template-columns: 1fr; padding: 0; gap: 0; }
+    .offer-photo { grid-row: auto; min-height: 0; height: 200px; }
+    .offer-text { padding: 24px 22px 16px; }
+    .offer-box .btn { grid-column: auto; margin: 0 22px 24px; justify-self: stretch; }
+    .contact-actions .btn, .checkup .btn { flex: 1 1 100%; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="tree" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-linecap="round">
+        <path stroke-width="3.6" d="M50 94 C50 82 49 72 50 60"/>
+        <path stroke-width="2.6" d="M50 72 C45 67 40 63 34 58"/>
+        <path stroke-width="2.6" d="M50 68 C56 63 61 59 66 53"/>
+        <path stroke-width="2.4" d="M50 62 C47 55 45 49 43 42"/>
+        <path stroke-width="2.4" d="M50 62 C53 55 56 49 58 41"/>
+        <path stroke-width="2.4" d="M50 60 C50 50 50 42 50 32"/>
+        <path stroke-width="1.8" d="M50 93 C44 94 38 95.5 31 96 M50 93 C56 94 62 95.5 69 96"/>
+      </g>
+      <g fill="currentColor">
+        <ellipse cx="34" cy="56" rx="4.8" ry="2.5" transform="rotate(-30 34 56)"/>
+        <ellipse cx="28" cy="50" rx="4.8" ry="2.5" transform="rotate(-10 28 50)"/>
+        <ellipse cx="26" cy="42" rx="4.8" ry="2.5" transform="rotate(20 26 42)"/>
+        <ellipse cx="30" cy="34" rx="4.8" ry="2.5" transform="rotate(40 30 34)"/>
+        <ellipse cx="36" cy="27" rx="4.8" ry="2.5" transform="rotate(60 36 27)"/>
+        <ellipse cx="43" cy="22" rx="4.8" ry="2.5" transform="rotate(75 43 22)"/>
+        <ellipse cx="50" cy="19" rx="4.8" ry="2.5" transform="rotate(90 50 19)"/>
+        <ellipse cx="57" cy="22" rx="4.8" ry="2.5" transform="rotate(105 57 22)"/>
+        <ellipse cx="64" cy="27" rx="4.8" ry="2.5" transform="rotate(120 64 27)"/>
+        <ellipse cx="70" cy="34" rx="4.8" ry="2.5" transform="rotate(140 70 34)"/>
+        <ellipse cx="74" cy="42" rx="4.8" ry="2.5" transform="rotate(160 74 42)"/>
+        <ellipse cx="72" cy="50" rx="4.8" ry="2.5" transform="rotate(190 72 50)"/>
+        <ellipse cx="66" cy="56" rx="4.8" ry="2.5" transform="rotate(210 66 56)"/>
+        <ellipse cx="38" cy="46" rx="4.2" ry="2.2" transform="rotate(30 38 46)"/>
+        <ellipse cx="42" cy="35" rx="4.2" ry="2.2" transform="rotate(60 42 35)"/>
+        <ellipse cx="50" cy="27" rx="4.2" ry="2.2" transform="rotate(90 50 27)"/>
+        <ellipse cx="58" cy="35" rx="4.2" ry="2.2" transform="rotate(120 58 35)"/>
+        <ellipse cx="62" cy="46" rx="4.2" ry="2.2" transform="rotate(150 62 46)"/>
+        <ellipse cx="45" cy="47" rx="3.8" ry="2" transform="rotate(80 45 47)"/>
+        <ellipse cx="55" cy="47" rx="3.8" ry="2" transform="rotate(100 55 47)"/>
+      </g>
+    </symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.53 14.94L2 22l5.2-1.47A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.08.87.89-3-.2-.31a8.2 8.2 0 1 1 6.87 3.77Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.55.12-.16.25-.63.8-.78.97-.14.16-.29.18-.53.06a6.7 6.7 0 0 1-3.34-2.92c-.25-.43.25-.4.72-1.34.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.74 2.74 0 0 0-.86 2.04 4.76 4.76 0 0 0 1 2.53 10.9 10.9 0 0 0 4.17 3.68c1.55.67 2.16.73 2.94.61.47-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M5 3.5h3.2l1.6 4.2-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1 4.2 1.6V17a3 3 0 0 1-3 3A15.5 15.5 0 0 1 2 6.5a3 3 0 0 1 3-3Z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M9 3h6M10 3v6.5L5.5 18a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 9.5V3M8 14h8"/></symbol>
+    <symbol id="i-body" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M6 9h12M12 9v5m0 0-3 7m3-7 3 7"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M5 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5M12 14.5v3m-1.5-1.5h3"/></symbol>
+  </defs>
+</svg>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="ZHANARU — на главную">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <defs>
+          <linearGradient id="mk" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#9AAA5C"/><stop offset="1" stop-color="#4A5A2A"/>
+          </linearGradient>
+        </defs>
+        <circle cx="20" cy="20" r="20" fill="url(#mk)"/>
+        <use href="#tree" x="6" y="5" width="28" height="30" color="#fff"/>
+      </svg>
+      <span class="brand-name">ZHANARU<small>центр осознанного здоровья</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#checkup">Check-up</a></li>
+      <li><a href="#drips">Капельницы</a></li>
+      <li><a href="#doctors">Врачи</a></li>
+      <li><a href="#clinic">Клиника</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+    <a class="btn btn-primary wa-link" href="https://wa.me/77020660633" target="_blank" rel="noopener">
+      <svg aria-hidden="true"><use href="#i-wa"/></svg>Записаться
+    </a>
+    <button class="menu-toggle" aria-label="Меню" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Центр осознанного здоровья · Астана</span>
+        <h1>Находим причину, <em>а не лечим симптом</em></h1>
+        <p class="lead">Check-up и анализы, эндокринолог и гинеколог, программы снижения веса, авторские капельницы, остеопатия и УЗИ — в одном месте и под контролем врача.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary wa-link" href="https://wa.me/77020660633" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-wa"/></svg>Записаться в WhatsApp
+          </a>
+          <a class="btn btn-ghost" href="#checkup">Пройти check-up</a>
+        </div>
+        <div class="hero-facts">
+          <span><b>Ежедневно</b> 08:00–20:00</span>
+          <span><b>ЖК Manhattan</b> · ул. Анет баба, 13</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-photo"><img src="img/moss-wall.jpg" alt="Стена из живого мха с логотипом ZHANARU на ресепшене"></div>
+        <div class="float-card float-rating">
+          <div class="score">4.8</div>
+          <div>
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <span>34 оценки в 2ГИС</span>
+          </div>
+        </div>
+        <a class="float-card float-price" href="#checkup" style="text-decoration:none">
+          <span>Check-up · 20 анализов</span>
+          <b>66 000 ₸</b>
+          <span>InBody в подарок</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="manifesto" aria-label="О клинике">
+    <div class="wrap">
+      <div class="manifesto-box">
+        <div class="manifesto-top">
+          <div class="word">Жаңару<small>по-казахски — «обновление»</small></div>
+          <p>Мы объединили современную доказательную медицину и интегративный подход, чтобы видеть в человеке не набор симптомов, а целую систему. Врач ZHANARU — ваш навигатор: расшифровывает анализы, подбирает терапию и помогает выстроить образ жизни.</p>
+        </div>
+        <div class="principles-grid">
+          <div class="principle">
+            <div class="num">01</div>
+            <h3>Профилактика</h3>
+            <p>Выявляем риски заболеваний до появления симптомов.</p>
+          </div>
+          <div class="principle">
+            <div class="num">02</div>
+            <h3>Причины, а не мифы</h3>
+            <p>Решения опираются на анализы и доказательную медицину.</p>
+          </div>
+          <div class="principle">
+            <div class="num">03</div>
+            <h3>Безопасный подход</h3>
+            <p>Терапия только после диагностики и под контролем врача.</p>
+          </div>
+          <div class="principle">
+            <div class="num">04</div>
+            <h3>Медицина как забота</h3>
+            <p>Вы у нас гость, а не пациент в очереди.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Услуги</span>
+        <h2>Чем мы помогаем</h2>
+        <p class="lead">Сначала разбираемся в причине, потом подбираем решение. Без самоназначений и «капельниц наугад».</p>
+      </div>
+      <div class="services-grid">
+        <article class="card">
+          <div class="icon"><svg aria-hidden="true"><use href="#i-flask"/></svg></div>
+          <span class="tag">Диагностика</span>
+          <h3>Check-up и анализы</h3>
+          <p>Полная картина здоровья за один визит: анализы сдаются прямо в клинике, врач расшифровывает результаты.</p>
+          <ul>
+            <li>Программа Check-up: 20 анализов</li>
+            <li>Поиск дефицитов витаминов и микроэлементов</li>
+            <li>Лаборатории-партнёры «Олимп» и «Инвитро»</li>
+          </ul>
+          <a class="link-more" href="#checkup">Состав и цена →</a>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 8v13M12 9c-1.5-3-5-4.5-8-3.5.5 4 3 7 8 7.5M12 9c1.5-3 5-4.5 8-3.5-.5 4-3 7-8 7.5"/></svg></div>
+          <span class="tag">Эндокринология</span>
+          <h3>Гормоны и обмен веществ</h3>
+          <p>Ведёт врач-эндокринолог, профессор с 20-летним стажем.</p>
+          <ul>
+            <li>Заболевания щитовидной железы</li>
+            <li>Гормональные нарушения, кортизол, анемия</li>
+            <li>Эндокринные причины бесплодия</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="icon"><svg aria-hidden="true"><use href="#i-body"/></svg></div>
+          <span class="tag">Снижение веса</span>
+          <h3>Программа контроля веса</h3>
+          <p>По этапам: консультация эндокринолога, обследования, разбор результатов и индивидуальный план.</p>
+          <ul>
+            <li>Анализ состава тела InBody</li>
+            <li>Пептидная терапия — по показаниям</li>
+            <li>Дозировку подбирает и корректирует врач</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9.5 15a2.5 2.5 0 0 0 2.5 2.5"/></svg></div>
+          <span class="tag">Капельницы</span>
+          <h3>Авторские коктейли</h3>
+          <p>Для энергии, иммунитета и восстановления. Перед процедурой — бесплатная консультация терапевта.</p>
+          <ul>
+            <li>6 авторских составов</li>
+            <li>Инфузионные программы поддержки печени</li>
+            <li>Приватная зона с удобными креслами</li>
+          </ul>
+          <a class="link-more" href="#drips">Выбрать коктейль →</a>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 14v7M9 18h6"/></svg></div>
+          <span class="tag">Гинекология</span>
+          <h3>Женское здоровье</h3>
+          <p>Диагностика и лечение гинекологических заболеваний, планирование беременности, эстетическая гинекология.</p>
+          <ul>
+            <li>Интимная контурная пластика филлерами</li>
+            <li>Лабиопластика</li>
+            <li>Плазмолифтинг</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 2.5v19M8.5 5h7M8 9h8M8.5 13h7M9 17h6"/></svg></div>
+          <span class="tag">Остеопатия · неврология</span>
+          <h3>Работа с болью и телом</h3>
+          <p>Приём длится час: диагностика, остеопатические и мануальные техники под ваш запрос.</p>
+          <ul>
+            <li>Боли в спине, шее, запястьях</li>
+            <li>Нарушения осанки, сколиоз</li>
+            <li>Восстановление после травм</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M5 19a10 10 0 0 1 0-14M8.5 15.5a5 5 0 0 1 0-7M12 12h.01M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></div>
+          <span class="tag">УЗИ</span>
+          <h3>Ультразвуковая диагностика</h3>
+          <p>Все виды УЗИ в клинике — в одном месте с анализами и приёмом врача.</p>
+          <ul>
+            <li>Все виды УЗИ-исследований</li>
+            <li>Подготовка по рекомендации врача</li>
+            <li>Запись на удобное время</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 11V6.5a1.5 1.5 0 0 1 3 0V11m0-1V5a1.5 1.5 0 0 1 3 0v6m0-5.5a1.5 1.5 0 0 1 3 0V12m0-3.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5A6.5 6.5 0 0 1 5 16.5L4 13a1.5 1.5 0 0 1 2.6-1.3L7 12"/></svg></div>
+          <span class="tag">Массаж</span>
+          <h3>Массаж и восстановление</h3>
+          <p>Снимаем мышечные зажимы, помогаем телу расслабиться и восстановиться.</p>
+          <ul>
+            <li>Лечебный массаж</li>
+            <li>Скульптурный массаж для коррекции фигуры</li>
+            <li>Работа с «холкой» и зажимами шеи</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M19 16v4M17 18h4"/></svg></div>
+          <span class="tag">Anti-age</span>
+          <h3>Омоложение и пептиды</h3>
+          <p>Программы для энергии, гормонального баланса и качества кожи — после анализов.</p>
+          <ul>
+            <li>Пептидная терапия</li>
+            <li>Коррекция дефицитов и нутрицевтики</li>
+            <li>Наблюдение врача на всём курсе</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="checkup" class="checkup">
+    <div class="wrap checkup-grid">
+      <div>
+        <span class="checkup-name">ZHANARU Salem Check-up</span>
+        <h2>Диагностика и осознанный старт</h2>
+        <div class="price-row">
+          <span class="price">66 000 ₸</span>
+          <span class="price-note">Актуальную стоимость уточняйте у администратора</span>
+        </div>
+        <ul class="includes">
+          <li>
+            <span class="ic"><svg aria-hidden="true"><use href="#i-flask"/></svg></span>
+            <div><b>20 анализов и исследований</b><span>Кровь, витамины, печень, сахар, липиды, щитовидная железа</span></div>
+          </li>
+          <li>
+            <span class="ic"><svg aria-hidden="true"><use href="#i-body"/></svg></span>
+            <div><b>InBody — состав тела <span class="gift">в подарок</span></b><span>Мышцы, жир, вода и обмен веществ</span></div>
+          </li>
+          <li>
+            <span class="ic"><svg aria-hidden="true"><use href="#i-doc"/></svg></span>
+            <div><b>Ведение терапевта-эндокринолога</b><span>Разбор результатов и план действий</span></div>
+          </li>
+        </ul>
+        <a class="btn btn-primary wa-link" data-wa="Здравствуйте! Хочу записаться на Check-up в ZHANARU." href="https://wa.me/77020660633" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-wa"/></svg>Записаться на check-up
+        </a>
+      </div>
+      <div class="analyses">
+        <h3>Что входит в check-up</h3>
+        <p>20 показателей, которые дают базовую картину здоровья.</p>
+        <div class="groups">
+          <div class="group">
+            <h4>Общие анализы</h4>
+            <ul><li><span>01</span>ОАК — общий анализ крови</li><li><span>02</span>ОАМ — общий анализ мочи</li></ul>
+          </div>
+          <div class="group">
+            <h4>Витамины и железо</h4>
+            <ul><li><span>03</span>Ферритин</li><li><span>04</span>Витамин D3</li><li><span>05</span>Фолиевая кислота</li><li><span>06</span>Витамин B12</li></ul>
+          </div>
+          <div class="group">
+            <h4>Печень и белок</h4>
+            <ul><li><span>07</span>Общий белок</li><li><span>08</span>АЛТ</li><li><span>09</span>АСТ</li><li><span>10</span>Общий билирубин</li></ul>
+          </div>
+          <div class="group">
+            <h4>Сахар и поджелудочная</h4>
+            <ul><li><span>11</span>Амилаза</li><li><span>12</span>Инсулин</li><li><span>13</span>Гликированный гемоглобин (HbA1c)</li></ul>
+          </div>
+          <div class="group">
+            <h4>Липидный профиль</h4>
+            <ul><li><span>14</span>Холестерин</li><li><span>15</span>ЛПВП</li><li><span>16</span>ЛПНП</li><li><span>17</span>Триглицериды</li></ul>
+          </div>
+          <div class="group">
+            <h4>Щитовидная железа</h4>
+            <ul><li><span>18</span>ТТГ</li><li><span>19</span>Свободный Т4</li><li><span>20</span>Кальцитонин</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="drips">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Капельницы</span>
+        <h2>Авторские коктейли ZHANARU</h2>
+        <p class="lead">Состав подбирает врач-терапевт после бесплатной консультации — по самочувствию, симптомам и анализам.</p>
+      </div>
+      <div class="drips-grid">
+        <article class="drip">
+          <svg class="bag" viewBox="0 0 48 58" aria-hidden="true"><rect x="8" y="6" width="32" height="40" rx="9" fill="#E8B04A"/><rect x="21" y="46" width="6" height="10" rx="2" fill="#C9C2B0"/><path d="M26 16l-6 11h5l-3 9 7-12h-5z" fill="#fff"/></svg>
+          <div><h3>Qush boost<small>энергия и сила</small></h3><p>Для тех, кто устал, мало спит и много работает: поддержка сил и концентрации.</p></div>
+        </article>
+        <article class="drip">
+          <svg class="bag" viewBox="0 0 48 58" aria-hidden="true"><rect x="8" y="6" width="32" height="40" rx="9" fill="#DCE3CC"/><rect x="21" y="46" width="6" height="10" rx="2" fill="#C9C2B0"/><path d="M16 30c4-8 12-10 17-7-3 1-5 3-6 6 2-1 4-1 5 0-5 4-12 5-16 1z" fill="#8A9A4E"/></svg>
+          <div><h3>Zhanaru detox<small>детокс и очищение</small></h3><p>Поддержка печени и кожи, помогает снять ощущение усталости.</p></div>
+        </article>
+        <article class="drip">
+          <svg class="bag" viewBox="0 0 48 58" aria-hidden="true"><rect x="8" y="6" width="32" height="40" rx="9" fill="#6FAE4E"/><rect x="21" y="46" width="6" height="10" rx="2" fill="#C9C2B0"/><path d="M24 15l8 3v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10v-6z" fill="none" stroke="#fff" stroke-width="2"/><path d="M24 20v8M20 24h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><h3>Immuno qorgau<small>иммунитет</small></h3><p>Укрепляет защиту организма, помогает восстановиться после простуды, перелёта и нагрузок.</p></div>
+        </article>
+        <article class="drip">
+          <svg class="bag" viewBox="0 0 48 58" aria-hidden="true"><rect x="8" y="6" width="32" height="40" rx="9" fill="#EBC3AC"/><rect x="21" y="46" width="6" height="10" rx="2" fill="#C9C2B0"/><path d="M24 15l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#fff"/></svg>
+          <div><h3>Beyne shine<small>сияние кожи</small></h3><p>Капельница с глутатионом: ровный тон и «внутренний уход» для лица и тела.</p></div>
+        </article>
+        <article class="drip">
+          <svg class="bag" viewBox="0 0 48 58" aria-hidden="true"><rect x="8" y="6" width="32" height="40" rx="9" fill="#D9643A"/><rect x="21" y="46" width="6" height="10" rx="2" fill="#C9C2B0"/><circle cx="22" cy="28" r="6" fill="none" stroke="#fff" stroke-width="2"/><path d="M26 24l6-6m-5 0h5v5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><h3>Jigit energy<small>мужская энергия</small></h3><p>Тонус, выносливость и концентрация — баланс для мужского здоровья.</p></div>
+        </article>
+        <article class="drip">
+          <svg class="bag" viewBox="0 0 48 58" aria-hidden="true"><rect x="8" y="6" width="32" height="40" rx="9" fill="#EFDDAA"/><rect x="21" y="46" width="6" height="10" rx="2" fill="#C9C2B0"/><path d="M18 20h10v14H18zM28 23h3v6h-3" fill="none" stroke="#A5683F" stroke-width="2" stroke-linejoin="round"/></svg>
+          <div><h3>Toydan keiin<small>после праздника</small></h3><p>Восполняет воду, минералы и витамины, помогает быстрее прийти в себя.</p></div>
+        </article>
+      </div>
+      <p class="drips-note">Капельная терапия проводится по назначению врача с учётом показаний и противопоказаний.</p>
+
+      <div class="offer-box">
+        <div class="offer-photo"><img src="img/drip-room-2.jpg" alt="Кресла для капельниц в процедурном зале" loading="lazy"></div>
+        <div class="offer-text">
+          <h2>Консультация терапевта перед капельницей — бесплатно</h2>
+          <p>Врач оценит самочувствие и подберёт состав, который действительно нужен вашему организму.</p>
+        </div>
+        <a class="btn btn-primary wa-link" data-wa="Здравствуйте! Хочу записаться на консультацию перед капельницей в ZHANARU." href="https://wa.me/77020660633" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-wa"/></svg>Записаться
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="approach" class="approach" style="padding-top:0">
+    <div class="wrap approach-grid">
+      <div>
+        <span class="eyebrow">Подход</span>
+        <h2>Сначала диагностика, потом лечение</h2>
+        <div class="why">
+          <h3>Почему так</h3>
+          <p>Хаотичный приём витаминов и препаратов без анализов в лучшем случае бесполезен, а в худшем вредит. Поэтому в ZHANARU каждое назначение опирается на результаты обследования, а схему ведёт врач.</p>
+        </div>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <span class="n">01</span>
+          <div><h3>Консультация врача</h3><p>Разбираем жалобы, образ жизни, сон, питание и цели.</p></div>
+        </li>
+        <li class="step">
+          <span class="n">02</span>
+          <div><h3>Анализы и обследования</h3><p>Лаборатория, InBody, УЗИ — по показаниям, прямо в клинике.</p></div>
+        </li>
+        <li class="step">
+          <span class="n">03</span>
+          <div><h3>Индивидуальный план</h3><p>Коррекция дефицитов, терапия и рекомендации — только то, что нужно именно вам.</p></div>
+        </li>
+        <li class="step">
+          <span class="n">04</span>
+          <div><h3>Контроль результата</h3><p>Отслеживаем динамику и корректируем схему постепенно, без резких шагов.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="doctors" class="doctors">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Врачи</span>
+        <h2>Команда клиники</h2>
+        <p class="lead">Врачи, которые объясняют результаты анализов простым языком и подбирают лечение без лишних назначений.</p>
+      </div>
+      <div class="doctors-grid">
+        <article class="doctor">
+          <div class="portrait"><img src="img/doctors/anna.jpg" alt="Анна Жолдасбаевна, врач-терапевт" loading="lazy"></div>
+          <div class="info">
+            <div class="role">Врач-терапевт</div>
+            <h3>Анна Жолдасбаевна</h3>
+            <ul><li>Интегративная медицина</li><li>Клиническая нутрициология</li><li>Пептидная и IV-терапия</li><li>Дерматокосметология</li></ul>
+          </div>
+        </article>
+        <article class="doctor">
+          <div class="portrait"><img src="img/doctors/akbayan.jpg" alt="Акбаян Мейргазыевна, врач-эндокринолог" loading="lazy"></div>
+          <div class="info">
+            <div class="role">Врач-эндокринолог</div>
+            <h3>Акбаян Мейргазыевна</h3>
+            <div class="badges"><span class="badge">Профессор</span><span class="badge">Стаж 20 лет</span></div>
+            <ul><li>Заболевания щитовидной железы</li><li>Нарушения обмена веществ</li><li>Гормональные нарушения</li><li>Ожирение</li></ul>
+          </div>
+        </article>
+        <article class="doctor">
+          <div class="portrait"><img src="img/doctors/meruert.jpg" alt="Меруерт Жанаткызы, врач акушер-гинеколог" loading="lazy"></div>
+          <div class="info">
+            <div class="role">Акушер-гинеколог</div>
+            <h3>Меруерт Жанаткызы</h3>
+            <ul><li>Диагностика и лечение гинекологических заболеваний</li><li>Планирование беременности</li><li>Интимопластика</li><li>Плазмолифтинг</li></ul>
+          </div>
+        </article>
+        <article class="doctor">
+          <div class="portrait"><img src="img/doctors/mark.jpg" alt="Марк Николаевич, остеопат и врач-невролог" loading="lazy"></div>
+          <div class="info">
+            <div class="role">Остеопат · невролог</div>
+            <h3>Марк Николаевич</h3>
+            <div class="badges"><span class="badge">Мануальный терапевт</span></div>
+            <ul><li>Боли в позвоночнике</li><li>Нарушения осанки, сколиоз</li><li>Восстановление после травм</li></ul>
+          </div>
+        </article>
+      </div>
+      <p class="doctors-note">Также в клинике принимают врач УЗИ-диагностики и специалисты по массажу, процедуры проводят медицинские сёстры процедурного кабинета.</p>
+    </div>
+  </section>
+
+  <section id="clinic">
+    <div class="wrap">
+      <div class="clinic-head">
+        <div>
+          <span class="eyebrow">Клиника</span>
+          <h2>Медицина может быть эстетичной</h2>
+        </div>
+        <div>
+          <p class="lead">Оливковые стены, живой мох, тёплая кожа кресел и кофе в ожидании. Мы создавали пространство, где забота о здоровье проходит спокойно и комфортно.</p>
+          <p class="lead">Приватная зона капельниц, кабинеты врачей и процедурный — в одном месте, в ЖК Manhattan.</p>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="photo"><img src="img/corridor.jpg" alt="Зона ожидания с кожаным диваном и оливковыми стенами" loading="lazy"><figcaption>Зона ожидания</figcaption></figure>
+        <figure class="photo"><img src="img/hall.jpg" alt="Холл клиники с зеркалом в раме из мха" loading="lazy"><figcaption>Холл</figcaption></figure>
+        <figure class="photo"><img src="img/drip-room.jpg" alt="Зал капельниц с кожаными креслами" loading="lazy"><figcaption>Зал капельниц</figcaption></figure>
+        <figure class="photo"><img src="img/cabinet.jpg" alt="Витрина клиники у входа в кабинет" loading="lazy"><figcaption>Кабинеты</figcaption></figure>
+      </div>
+      <div class="partners">
+        <span>Официальные партнёры-лаборатории:</span>
+        <b>ОЛИМП</b>
+        <b>INVITRO</b>
+        <span>· анализы сдаются прямо в клинике</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" style="padding-top:0">
+    <div class="wrap">
+      <div class="reviews-box">
+        <div class="rating">
+          <div class="big">4.8</div>
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <div class="src">34 оценки · 32 отзыва в 2ГИС</div>
+        </div>
+        <div>
+          <span class="eyebrow">Отзывы</span>
+          <h2>Что отмечают пациенты</h2>
+          <div class="chips">
+            <span class="chip">Вежливый персонал</span>
+            <span class="chip">Понятно объясняют анализы</span>
+            <span class="chip">Безболезненные уколы и капельницы</span>
+            <span class="chip">Чисто и уютно</span>
+            <span class="chip">Приём вовремя</span>
+            <span class="chip">Сильный эндокринолог</span>
+          </div>
+          <a class="btn btn-ghost" href="https://2gis.kz/astana/firm/70000001109795066/tab/reviews" target="_blank" rel="noopener">Читать отзывы в 2ГИС</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacts" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Контакты</span>
+        <h2>Ждём вас в клинике</h2>
+      </div>
+      <div class="contacts-grid">
+        <div class="contact-card">
+          <h3>ZHANARU, центр осознанного здоровья</h3>
+          <ul class="contact-list">
+            <li>
+              <span class="ic"><svg aria-hidden="true"><use href="#i-pin"/></svg></span>
+              <div><div class="label">Адрес</div><div class="value">ЖК Manhattan, ул. Анет баба, 13</div><div class="label">район Нура, Астана, Z05T6G5 · остановка «Анет баба» в 150 м</div></div>
+            </li>
+            <li>
+              <span class="ic"><svg aria-hidden="true"><use href="#i-clock"/></svg></span>
+              <div><div class="label">Режим работы</div><div class="value">Ежедневно, 08:00–20:00</div></div>
+            </li>
+            <li>
+              <span class="ic"><svg aria-hidden="true"><use href="#i-phone"/></svg></span>
+              <div><div class="label">Телефон и WhatsApp</div><div class="value"><a href="tel:+77020660633">+7 702 066 06 33</a></div></div>
+            </li>
+            <li>
+              <span class="ic"><svg aria-hidden="true"><use href="#i-ig"/></svg></span>
+              <div><div class="label">Instagram</div><div class="value"><a href="https://www.instagram.com/zhanaru.med/" target="_blank" rel="noopener">@zhanaru.med</a></div></div>
+            </li>
+          </ul>
+          <div class="contact-actions">
+            <a class="btn btn-primary wa-link" href="https://wa.me/77020660633" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-wa"/></svg>Написать в WhatsApp
+            </a>
+            <a class="btn btn-ghost" href="tel:+77020660633">Позвонить</a>
+          </div>
+        </div>
+        <div class="map-card">
+          <svg class="map-bg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g fill="none" stroke="#9AAA5C" stroke-width="1.5">
+              <path d="M-20 80 L420 40"/><path d="M-20 170 L420 150"/><path d="M-20 260 L420 250"/><path d="M-20 350 L420 340"/>
+              <path d="M60 -20 L90 420"/><path d="M170 -20 L190 420"/><path d="M280 -20 L290 420"/><path d="M370 -20 L380 420"/>
+            </g>
+            <path d="M-20 210 C100 190 160 230 230 200 S360 150 420 170" fill="none" stroke="#C9D3A6" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+          <svg width="44" height="44" aria-hidden="true" style="color:#F2D9AE"><use href="#i-pin"/></svg>
+          <h3>ЖК Manhattan, Анет баба, 13</h3>
+          <p>Рядом парковки и остановка общественного транспорта.</p>
+          <a class="btn" href="https://2gis.kz/astana/firm/70000001109795066" target="_blank" rel="noopener">Построить маршрут в 2ГИС</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="brand-name">ZHANARU<small>центр осознанного здоровья</small></div>
+        <p style="margin-top:14px">© <span id="year">2026</span> ТОО «NurKam med» · БИН 251140003556</p>
+        <p>Государственная лицензия на медицинскую деятельность № 26002112 от 23.01.2026</p>
+      </div>
+      <div>
+        <p>ЖК Manhattan, ул. Анет баба, 13, Астана</p>
+        <p>Ежедневно 08:00–20:00</p>
+        <p><a href="tel:+77020660633">+7 702 066 06 33</a></p>
+      </div>
+    </div>
+    <p class="disclaimer">Имеются противопоказания. Необходима консультация специалиста.</p>
+  </div>
+</footer>
+
+<a class="btn btn-primary mobile-cta wa-link" href="https://wa.me/77020660633" target="_blank" rel="noopener">
+  <svg aria-hidden="true"><use href="#i-wa"/></svg>Записаться в WhatsApp
+</a>
+
+<script>
+  // Готовый текст сообщения для WhatsApp; у кнопок с data-wa свой текст
+  const waDefault = 'Здравствуйте! Хочу записаться на консультацию в ZHANARU.';
+  document.querySelectorAll('.wa-link').forEach(a => {
+    a.href = 'https://wa.me/77020660633?text=' + encodeURIComponent(a.dataset.wa || waDefault);
+  });
+
+  const header = document.querySelector('header');
+  const toggle = document.querySelector('.menu-toggle');
+  toggle.addEventListener('click', () => {
+    const open = header.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+    header.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

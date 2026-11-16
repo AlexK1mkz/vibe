@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Выпускники Batyr Joly 33</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Golos+Text:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F2F5F3; --surface:#FFFFFF; --ink:#11201A; --ink2:#3E4E47; --muted:#6A7A73; --line:#DCE4DF;
+  --accent:#0D4A3A; --bar:#16877B; --bar-hl:#0D4A3A; --track:#E5ECE8; --gold:#8C6A38; --gold-bg:#F6EFE3;
+  --warn:#A2471E; --warn-bg:#FBEDE5; --good:#1E6B3C; --chip:#E4EFEB;
+  --display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --body:"Golos Text","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0B1411; --surface:#121E1A; --ink:#E3ECE8; --ink2:#B5C4BD; --muted:#8A9A93; --line:#22332C;
+    --accent:#6AD3C3; --bar:#2BA597; --bar-hl:#6AD3C3; --track:#1B2A24; --gold:#D2AE73; --gold-bg:#231E14;
+    --warn:#F0916A; --warn-bg:#2A1A13; --good:#6CCB8F; --chip:#1A2B25;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0B1411; --surface:#121E1A; --ink:#E3ECE8; --ink2:#B5C4BD; --muted:#8A9A93; --line:#22332C;
+  --accent:#6AD3C3; --bar:#2BA597; --bar-hl:#6AD3C3; --track:#1B2A24; --gold:#D2AE73; --gold-bg:#231E14;
+  --warn:#F0916A; --warn-bg:#2A1A13; --good:#6CCB8F; --chip:#1A2B25;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+h1,h2,h3{text-wrap:balance;margin:0}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(28px,4.6vw,48px);line-height:1.08;letter-spacing:-.01em}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(20px,2.6vw,27px);line-height:1.2}
+h3{font-size:15px;font-weight:600;line-height:1.35}
+p{margin:0}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+header.top{padding-block:40px 28px;display:grid;gap:18px;border-bottom:1px solid var(--line)}
+.lede{max-width:68ch;color:var(--ink2);font-size:17px}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.meta span{background:var(--chip);color:var(--ink2);border-radius:999px;padding:4px 12px;font-size:13px}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-20px;padding:10px 20px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+nav.toc a{display:inline-block;color:var(--ink2);text-decoration:none;font-size:13px;font-weight:500;padding:5px 10px;border-radius:6px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--chip);color:var(--ink);outline:none}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:28px}
+.kpi{background:var(--surface);padding:18px 18px 16px;display:grid;gap:4px;align-content:start}
+.kpi .n{font-family:var(--display);font-weight:600;font-size:34px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.kpi .l{font-size:13px;color:var(--ink2);line-height:1.35}
+section{padding-top:56px;display:grid;gap:22px;scroll-margin-top:56px}
+.shead{display:grid;gap:8px;max-width:72ch}
+.shead p{color:var(--ink2)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;display:grid;gap:14px;min-width:0}
+.card.wide{grid-column:1/-1}
+.csub{color:var(--muted);font-size:13px;margin-top:2px}
+.cnote{color:var(--muted);font-size:13px}
+.bars{display:grid;gap:7px}
+.bar{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(60px,1fr) 64px;align-items:center;gap:10px;font-size:13.5px}
+.bl{color:var(--ink2);line-height:1.3}
+.bt{height:10px;background:var(--track);border-radius:3px;overflow:hidden}
+.bf{display:block;height:100%;background:var(--bar);border-radius:0 3px 3px 0}
+.bar.hl .bf{background:var(--bar-hl)}
+.bar.hl .bl{color:var(--ink);font-weight:600}
+.bv{display:flex;justify-content:flex-end;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
+.bv b{font-weight:600;color:var(--ink)}
+.bv i{font-style:normal;color:var(--muted);font-size:12px;min-width:18px;text-align:right}
+.insight{background:var(--gold-bg);border-radius:10px;padding:14px 16px;display:grid;gap:6px}
+.insight .itag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--gold)}
+.insight p{color:var(--ink);max-width:80ch}
+.insight.warn{background:var(--warn-bg)} .insight.warn .itag{color:var(--warn)}
+.key{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 28px;counter-reset:k}
+.key li{list-style:none;display:grid;grid-template-columns:30px 1fr;gap:10px;padding-block:12px;border-top:1px solid var(--line)}
+.key li::before{counter-increment:k;content:counter(k);font-family:var(--display);font-weight:600;color:var(--accent);font-size:18px;line-height:1.3}
+.key b{display:block;margin-bottom:2px}
+.key span{color:var(--ink2);font-size:14px}
+ul.key{padding:0;margin:0}
+.personas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.persona{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:12px;align-content:start}
+.persona .ph{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.persona .share{font-family:var(--display);font-weight:600;font-size:28px;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+.persona .share small{font-family:var(--body);font-size:13px;color:var(--muted);font-weight:500;margin-left:4px}
+.persona .who{color:var(--ink2);font-size:14px}
+.persona dl{display:grid;grid-template-columns:118px 1fr;gap:6px 12px;margin:0;font-size:13.5px}
+.persona dt{color:var(--muted)}
+.persona dd{margin:0;color:var(--ink)}
+.persona .hook{border-top:1px solid var(--line);padding-top:10px;font-size:14px}
+.persona .hook b{color:var(--accent)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:600;white-space:nowrap}
+.pill.go{background:var(--chip);color:var(--good)}
+.pill.info{background:var(--track);color:var(--ink2)}
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+blockquote{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px;align-content:space-between}
+blockquote p{font-size:15px;line-height:1.5}
+blockquote cite{font-style:normal;color:var(--muted);font-size:12.5px}
+.themes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.theme{border-top:3px solid var(--bar);padding-top:12px;display:grid;gap:6px}
+.theme .tn{font-family:var(--display);font-weight:600;font-size:26px;color:var(--accent)}
+.theme p{color:var(--ink2);font-size:14px}
+.npsrow{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.npsbig{font-family:var(--display);font-weight:700;font-size:64px;line-height:1;color:var(--accent)}
+.npsbig small{display:block;font-family:var(--body);font-size:13px;font-weight:500;color:var(--muted);margin-top:6px}
+.split{display:flex;height:14px;border-radius:4px;overflow:hidden;gap:2px;background:var(--surface)}
+.split span{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--ink2);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.recs{display:grid;gap:12px}
+.rec{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:grid;grid-template-columns:150px 1fr;gap:16px}
+.rec .rk{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--gold);padding-top:2px}
+.rec h3{margin-bottom:6px;font-size:16px}
+.rec ul{margin:6px 0 0;padding-left:18px;color:var(--ink2);font-size:14px;display:grid;gap:4px}
+.qlist{columns:2;column-gap:28px;padding:0;margin:0}
+.qlist li{list-style:none;break-inside:avoid;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+.qlist li span{color:var(--muted);font-size:12.5px;display:block}
+.dq{color:var(--ink2);font-size:14px;padding-left:18px;margin:0;display:grid;gap:6px}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+@media (max-width:860px){
+  .kpis{grid-template-columns:repeat(2,1fr)} .kpi:last-child{grid-column:1/-1}
+  .grid,.grid.three,.personas,.quotes,.themes,.key{grid-template-columns:1fr}
+  .rec{grid-template-columns:1fr;gap:6px}
+  .qlist{columns:1}
+}
+@media (max-width:480px){
+  .wrap{padding-inline:16px} nav.toc{margin-inline:-16px;padding-inline:16px}
+  .bar{grid-template-columns:1fr 64px;row-gap:4px} .bl{grid-column:1/-1} .bt{grid-column:1/2}
+  .persona dl{grid-template-columns:1fr} .persona dt{margin-top:4px}
+  .npsrow{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){ .bf{transition:width .6s ease} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <p class="eyebrow">Batyr Joly · поток БЖ 33 · анкета выпускника</p>
+  <h1>Кто на самом деле приходит на Batyr Joly</h1>
+  <p class="lede">Разбор 41 анкеты выпускников 33-го потока: кто эти мужчины, с чем пришли, что их привело, что сработало на тренинге и куда их вести дальше по лестнице продуктов.</p>
+  <div class="meta"><span>41 анкета</span><span>Заполнены 26–27 сентября 2026</span><span>Сразу после тренинга</span><span>Проценты — от 41, в вопросах с несколькими ответами сумма больше 100%</span></div>
+</header>
+<nav class="toc" aria-label="Разделы">
+  <a href="#main">Главное</a><a href="#portrait">Портрет</a><a href="#segments">Сегменты</a><a href="#path">Путь к решению</a><a href="#pain">Боли</a><a href="#training">Тренинг</a><a href="#result">Что забирают</a><a href="#next">Спрос дальше</a><a href="#ref">Рекомендации и контент</a><a href="#todo">Что делать</a><a href="#data">Качество данных</a>
+</nav>
+
+<div class="kpis">
+  <div class="kpi"><span class="n">35</span><span class="l">медианный возраст, ядро 25–44 года (83%)</span></div>
+  <div class="kpi"><span class="n">61%</span><span class="l">собственники, партнёры и директора</span></div>
+  <div class="kpi"><span class="n">90%</span><span class="l">пришли по рекомендации, реклама дала 2 человек</span></div>
+  <div class="kpi"><span class="n">78</span><span class="l">NPS: 35 промоутеров, 3 критика</span></div>
+  <div class="kpi"><span class="n">76%</span><span class="l">боятся откатиться или не удержать дисциплину без поддержки</span></div>
+</div>
+
+<section id="main">
+<div class="shead"><h2>Главное за минуту</h2></div>
+<ul class="key">
+<li><div><b>Реальный покупатель — собственник малого бизнеса, а не «долларовый миллионер».</b><span>Ядро: 30–45 лет, женат, дети, команда до 20 человек, доход 0,5–5 млн ₸ в месяц. Больше 10 млн ₸ зарабатывают только 3 из 41.</span></div></li>
+<li><div><b>Главная боль — управление собой.</b><span>Хаос в голове и прокрастинация (по 54%), выгорание (49%), автопилот (46%). «Одиночество на вершине» и нехватка сильного окружения — на последних местах (17%).</span></div></li>
+<li><div><b>Сильнейший внутренний крючок — «делаю недостаточно» (61%).</b><span>Это язык, которым мужчины сами описывают своё состояние. Он точнее, чем «стеклянный потолок».</span></div></li>
+<li><div><b>Продаёт сарафан и живой пример.</b><span>90% пришли по рекомендации. Каждый второй решился, увидев изменения знакомого или результаты выпускников (46%). Капитаны — рабочий канал продаж.</span></div></li>
+<li><div><b>Пришли за делом, уходят с семьёй.</b><span>С конфликтами в семье пришли 29%, а самым частым итогом в свободных ответах стали отношения с родителями, женой и близкими (≈29%). Это готовая формула кейсов.</span></div></li>
+<li><div><b>День 2 — хит, День 3 проседает.</b><span>Работу с телом и пределом отметили 76%, блок ценностей и целей — 12%. Просят больше личных разборов (22%) и лучше быт (20%).</span></div></li>
+<li><div><b>Спрос на поддержку есть, на Капитанскую подготовку прямо сейчас — нет.</b><span>76% боятся отката, но к Капитанской готовы 29%. Главный барьер — «нужна пауза, чтобы внедрить» (32%). Нужен мост между выпуском и Капитанской.</span></div></li>
+<li><div><b>Горячие ресурсы на ближайшие две недели.</b><span>12 кандидатов на Капитанскую, 13 готовых на PRO LIFE, 24 мужчины на примете для следующего потока, 18 готовы дать отзыв или интервью.</span></div></li>
+</ul>
+</section>
+<section id="portrait"><div class="shead"><h2>Портрет выпускника</h2><p>Кто сидел в зале 33-го потока: возраст, семья, дело, доход.</p></div><div class="grid">
+<figure class="card"><figcaption><h3>Возраст</h3><p class="csub">Медиана 35 лет, разброс от 16 до 49</p></figcaption><div class="bars" role="list">
+<div class="bar" role="listitem" title="до 25: 5 из 41 (12%)"><span class="bl">до 25</span><span class="bt"><span class="bf" style="width:26.3%"></span></span><span class="bv"><b>12%</b><i>5</i></span></div>
+<div class="bar" role="listitem" title="25–34: 15 из 41 (37%)"><span class="bl">25–34</span><span class="bt"><span class="bf" style="width:78.9%"></span></span><span class="bv"><b>37%</b><i>15</i></span></div>
+<div class="bar hl" role="listitem" title="35–44: 19 из 41 (46%)"><span class="bl">35–44</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>46%</b><i>19</i></span></div>
+<div class="bar" role="listitem" title="45+: 2 из 41 (5%)"><span class="bl">45+</span><span class="bt"><span class="bf" style="width:10.5%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Семейное положение</h3><p class="csub">68% с детьми</p></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Женат, есть дети: 25 из 41 (61%)"><span class="bl">Женат, есть дети</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>61%</b><i>25</i></span></div>
+<div class="bar" role="listitem" title="Не женат: 11 из 41 (27%)"><span class="bl">Не женат</span><span class="bt"><span class="bf" style="width:44.0%"></span></span><span class="bv"><b>27%</b><i>11</i></span></div>
+<div class="bar" role="listitem" title="В разводе, есть дети: 3 из 41 (7%)"><span class="bl">В разводе, есть дети</span><span class="bt"><span class="bf" style="width:12.0%"></span></span><span class="bv"><b>7%</b><i>3</i></span></div>
+<div class="bar" role="listitem" title="Женат, детей пока нет: 2 из 41 (5%)"><span class="bl">Женат, детей пока нет</span><span class="bt"><span class="bf" style="width:8.0%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Род деятельности</h3><p class="csub">Собственники, партнёры и директор вместе — 25 человек (61%)</p></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Собственник бизнеса: 22 из 41 (54%)"><span class="bl">Собственник бизнеса</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>54%</b><i>22</i></span></div>
+<div class="bar" role="listitem" title="Специалист в найме: 8 из 41 (20%)"><span class="bl">Специалист в найме</span><span class="bt"><span class="bf" style="width:36.4%"></span></span><span class="bv"><b>20%</b><i>8</i></span></div>
+<div class="bar" role="listitem" title="Руководитель отдела: 4 из 41 (10%)"><span class="bl">Руководитель отдела</span><span class="bt"><span class="bf" style="width:18.2%"></span></span><span class="bv"><b>10%</b><i>4</i></span></div>
+<div class="bar" role="listitem" title="Совладелец, партнёр: 2 из 41 (5%)"><span class="bl">Совладелец, партнёр</span><span class="bt"><span class="bf" style="width:9.1%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+<div class="bar" role="listitem" title="Директор компании: 1 из 41 (2%)"><span class="bl">Директор компании</span><span class="bt"><span class="bf" style="width:4.5%"></span></span><span class="bv"><b>2%</b><i>1</i></span></div>
+<div class="bar" role="listitem" title="Эксперт / менеджер продукта: 2 из 41 (5%)"><span class="bl">Эксперт / менеджер продукта</span><span class="bt"><span class="bf" style="width:9.1%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+<div class="bar" role="listitem" title="Студент / нет работы: 2 из 41 (5%)"><span class="bl">Студент / нет работы</span><span class="bt"><span class="bf" style="width:9.1%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Сфера</h3><p class="csub">Стройка и торговля — почти половина потока</p></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Строительство, недвижимость: 12 из 41 (29%)"><span class="bl">Строительство, недвижимость</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>29%</b><i>12</i></span></div>
+<div class="bar" role="listitem" title="Торговля, дистрибуция: 7 из 41 (17%)"><span class="bl">Торговля, дистрибуция</span><span class="bt"><span class="bf" style="width:58.3%"></span></span><span class="bv"><b>17%</b><i>7</i></span></div>
+<div class="bar" role="listitem" title="Спорт, образование, медицина: 6 из 41 (15%)"><span class="bl">Спорт, образование, медицина</span><span class="bt"><span class="bf" style="width:50.0%"></span></span><span class="bv"><b>15%</b><i>6</i></span></div>
+<div class="bar" role="listitem" title="Производство: 4 из 41 (10%)"><span class="bl">Производство</span><span class="bt"><span class="bf" style="width:33.3%"></span></span><span class="bv"><b>10%</b><i>4</i></span></div>
+<div class="bar" role="listitem" title="IT, digital, медиа, инфобиз: 4 из 41 (10%)"><span class="bl">IT, digital, медиа, инфобиз</span><span class="bt"><span class="bf" style="width:33.3%"></span></span><span class="bv"><b>10%</b><i>4</i></span></div>
+<div class="bar" role="listitem" title="Услуги и досуг: 3 из 41 (7%)"><span class="bl">Услуги и досуг</span><span class="bt"><span class="bf" style="width:25.0%"></span></span><span class="bv"><b>7%</b><i>3</i></span></div>
+<div class="bar" role="listitem" title="Другое: 5 из 41 (12%)"><span class="bl">Другое</span><span class="bt"><span class="bf" style="width:41.7%"></span></span><span class="bv"><b>12%</b><i>5</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Личный доход в месяц</h3><p class="csub">46% зарабатывают от 1,5 млн ₸. Вариант «5–10 млн» не выбрал никто</p></figcaption><div class="bars" role="list">
+<div class="bar" role="listitem" title="до 500 тыс. ₸: 6 из 41 (15%)"><span class="bl">до 500 тыс. ₸</span><span class="bt"><span class="bf" style="width:37.5%"></span></span><span class="bv"><b>15%</b><i>6</i></span></div>
+<div class="bar hl" role="listitem" title="500 тыс. – 1,5 млн ₸: 16 из 41 (39%)"><span class="bl">500 тыс. – 1,5 млн ₸</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>39%</b><i>16</i></span></div>
+<div class="bar" role="listitem" title="1,5 – 3 млн ₸: 7 из 41 (17%)"><span class="bl">1,5 – 3 млн ₸</span><span class="bt"><span class="bf" style="width:43.8%"></span></span><span class="bv"><b>17%</b><i>7</i></span></div>
+<div class="bar" role="listitem" title="3 – 5 млн ₸: 9 из 41 (22%)"><span class="bl">3 – 5 млн ₸</span><span class="bt"><span class="bf" style="width:56.2%"></span></span><span class="bv"><b>22%</b><i>9</i></span></div>
+<div class="bar" role="listitem" title="5 – 10 млн ₸: 0 из 41 (0%)"><span class="bl">5 – 10 млн ₸</span><span class="bt"><span class="bf" style="width:0.0%"></span></span><span class="bv"><b>0%</b><i>0</i></span></div>
+<div class="bar" role="listitem" title="более 10 млн ₸: 3 из 41 (7%)"><span class="bl">более 10 млн ₸</span><span class="bt"><span class="bf" style="width:18.8%"></span></span><span class="bv"><b>7%</b><i>3</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Людей в подчинении</h3><p class="csub">73% управляют командой до 20 человек</p></figcaption><div class="bars" role="list">
+<div class="bar" role="listitem" title="Никого: 8 из 41 (20%)"><span class="bl">Никого</span><span class="bt"><span class="bf" style="width:47.1%"></span></span><span class="bv"><b>20%</b><i>8</i></span></div>
+<div class="bar hl" role="listitem" title="1–5: 17 из 41 (41%)"><span class="bl">1–5</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>41%</b><i>17</i></span></div>
+<div class="bar" role="listitem" title="6–20: 13 из 41 (32%)"><span class="bl">6–20</span><span class="bt"><span class="bf" style="width:76.5%"></span></span><span class="bv"><b>32%</b><i>13</i></span></div>
+<div class="bar" role="listitem" title="21–100: 1 из 41 (2%)"><span class="bl">21–100</span><span class="bt"><span class="bf" style="width:5.9%"></span></span><span class="bv"><b>2%</b><i>1</i></span></div>
+<div class="bar" role="listitem" title="Больше 100: 2 из 41 (5%)"><span class="bl">Больше 100</span><span class="bt"><span class="bf" style="width:11.8%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+</div></figure>
+</div>
+<figure class="card wide"><figcaption><h3>Город</h3><p class="csub">Регионы — 24%: Петропавловск дал 4 человек, это заметный кластер</p></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Астана: 31 из 41 (76%)"><span class="bl">Астана</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>76%</b><i>31</i></span></div>
+<div class="bar" role="listitem" title="Петропавловск: 4 из 41 (10%)"><span class="bl">Петропавловск</span><span class="bt"><span class="bf" style="width:12.9%"></span></span><span class="bv"><b>10%</b><i>4</i></span></div>
+<div class="bar" role="listitem" title="Алматы: 2 из 41 (5%)"><span class="bl">Алматы</span><span class="bt"><span class="bf" style="width:6.5%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+<div class="bar" role="listitem" title="Костанай: 2 из 41 (5%)"><span class="bl">Костанай</span><span class="bt"><span class="bf" style="width:6.5%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+<div class="bar" role="listitem" title="Уральск: 1 из 41 (2%)"><span class="bl">Уральск</span><span class="bt"><span class="bf" style="width:3.2%"></span></span><span class="bv"><b>2%</b><i>1</i></span></div>
+<div class="bar" role="listitem" title="Актобе: 1 из 41 (2%)"><span class="bl">Актобе</span><span class="bt"><span class="bf" style="width:3.2%"></span></span><span class="bv"><b>2%</b><i>1</i></span></div>
+</div></figure>
+<aside class="insight "><span class="itag">Вывод</span><p>Документ проекта описывает ЦА как «людей, у которых снаружи всё есть: статус, дело, семья», вплоть до долларовых миллионеров. Поток 33 другой: это мужчины на подъёме, у которых дело уже есть, но работает на ручном управлении. Для 39% участников цена тренинга (560 000 ₸) сопоставима с месячным доходом. Премиальный образ бренда держать стоит, но рекламные тексты и воронка должны говорить с собственником малого бизнеса, а не с олигархом.</p></aside>
+</section>
+<section id="segments">
+<div class="shead"><h2>Четыре сегмента внутри потока</h2><p>Сегменты собраны по двум признакам: статус (собственник или в найме) и доход. У каждого своя боль, свой триггер и своя готовность идти дальше.</p></div>
+<div class="personas">
+<article class="persona">
+  <div class="ph"><h3>А. Собственник на плато</h3><span class="share">17<small>41%</small></span></div>
+  <p class="who">Собственник или партнёр, 28–46 лет (медиана 40), почти все женаты и с детьми. Доход от 1,5 млн ₸, у половины 3–5 млн. Команда 6–20 человек, стройка и производство.</p>
+  <dl>
+    <dt>Боль</dt><dd>Хаос в голове (9 из 17), выгорание (8)</dd>
+    <dt>Внутри</dt><dd>«Делаю недостаточно» и постоянное напряжение (по 10)</dd>
+    <dt>Триггер</dt><dd>«Дальше так нельзя» (9). Личность Айдара важнее, чем в других сегментах (4)</dd>
+    <dt>Скорость решения</dt><dd>Быстрая: 7 из 17 решили меньше чем за месяц</dd>
+    <dt>После тренинга</dt><dd>Довести решения до действия и вырасти в доходе (по 13), удержать перемены в семье (7)</dd>
+    <dt>Дальше</dt><dd>Капитанская: 5 готовы или ждут подробностей, 8 «не актуально». NPS 9,7</dd>
+  </dl>
+  <p class="hook"><b>Говорить с ним:</b> «Дело растёт, а ты выгораешь. Голова в хаосе, и кажется, что делаешь недостаточно».</p>
+</article>
+<article class="persona">
+  <div class="ph"><h3>Б. Малый бизнес в ручном режиме</h3><span class="share">8<small>20%</small></span></div>
+  <p class="who">Собственник, 24–44 года (медиана 34), доход 0,5–1,5 млн ₸, команда 1–5 человек. Разные сферы: спорт, IT, медиа, торговля.</p>
+  <dl>
+    <dt>Боль</dt><dd>Выгорание и автопилот (по 7 из 8)</dd>
+    <dt>Внутри</dt><dd>Тревога за будущее (7 из 8)</dd>
+    <dt>Сомнение</dt><dd>«Не верил, что за 3 дня можно что-то изменить» (4 из 8)</dd>
+    <dt>После тренинга</dt><dd>Не откатиться и вырасти в доходе (по 7), найти круг мужчин (5 из 8, выше всех)</dd>
+    <dt>Дальше</dt><dd>Капитанская: никто не отказался. 4 готовы или ждут подробностей, 4 через 3–6 месяцев. Упираются в бюджет и график</dd>
+  </dl>
+  <p class="hook"><b>Говорить с ним:</b> «Ты тащишь всё сам, и сил всё меньше. Тебе нужна среда, которая держит». Лучший сегмент для Капитанской с рассрочкой.</p>
+</article>
+<article class="persona">
+  <div class="ph"><h3>В. Молодой специалист в найме</h3><span class="share">14<small>34%</small></span></div>
+  <p class="who">Специалист или руководитель отдела, 22–49 лет (медиана 28), половина не женаты. Доход до 1,5 млн ₸, стройка и торговля.</p>
+  <dl>
+    <dt>Боль</dt><dd>Откладываю и не держу дисциплину (11 из 14), автопилот (9), потолок дохода (8)</dd>
+    <dt>Внутри</dt><dd>Пропал драйв и «делаю недостаточно» (по 9)</dd>
+    <dt>Триггер</dt><dd>Увидел, как изменился знакомый (8 из 14). Социальное доказательство сильнее всего здесь</dd>
+    <dt>Скорость решения</dt><dd>Долгая: 6 из 14 думали больше года. Цену как стоп назвали 3</dd>
+    <dt>Дальше</dt><dd>Капитанская: 3 заинтересованы, 8 «не актуально». PRO LIFE «позже» (9). NPS 9,2</dd>
+  </dl>
+  <p class="hook"><b>Говорить с ним:</b> «Живёшь на автопилоте, всё откладываешь, а годы идут». Продаёт живой пример друга-выпускника.</p>
+</article>
+<article class="persona">
+  <div class="ph"><h3>Г. Сыновья, которых привели родители</h3><span class="share">2<small>5%</small></span></div>
+  <p class="who">16 и 18 лет, пришли потому, что «настояла семья» (отец, мама). Отметили «всё в порядке, пришёл за ростом».</p>
+  <dl>
+    <dt>Оценка</dt><dd>NPS 7 и 8, ниже среднего потока (9,3)</dd>
+    <dt>Что зашло</dt><dd>День 2 — работа с телом</dd>
+    <dt>Что просят</dt><dd>Меньше теории</dd>
+  </dl>
+  <p class="hook"><b>Решение нужно принять команде:</b> пускать ли несовершеннолетних на поток для взрослых мужчин. Если спрос от отцов есть, это отдельный продукт «Отец и сын» или молодёжный формат, а не место в общем зале.</p>
+</article>
+</div>
+<div class="tbl"><table>
+<thead><tr><th>Показатель</th><th>А. Собственник на плато</th><th>Б. Малый бизнес</th><th>В. В найме</th></tr></thead>
+<tbody>
+<tr><td>Человек</td><td class="num">17</td><td class="num">8</td><td class="num">14</td></tr>
+<tr><td>Медианный возраст</td><td class="num">40</td><td class="num">34,5</td><td class="num">28,5</td></tr>
+<tr><td>Главная внешняя боль</td><td>Хаос в голове</td><td>Выгорание, автопилот</td><td>Прокрастинация</td></tr>
+<tr><td>Главное внутреннее состояние</td><td>Делаю недостаточно, напряжение</td><td>Тревога за будущее</td><td>Нет драйва, делаю недостаточно</td></tr>
+<tr><td>Что убедило</td><td>Дальше так нельзя</td><td>Дальше так нельзя</td><td>Изменения знакомого</td></tr>
+<tr><td>Капитанская: готов или нужны подробности</td><td class="num">5 из 17</td><td class="num">4 из 8</td><td class="num">3 из 14</td></tr>
+<tr><td>Средняя оценка «порекомендую»</td><td class="num">9,7</td><td class="num">9,0*</td><td class="num">9,2</td></tr>
+<tr><td>Готов назвать мужчину для БЖ</td><td class="num">11 из 17</td><td class="num">6 из 8</td><td class="num">6 из 14</td></tr>
+</tbody></table></div>
+<p class="cnote">* В сегменте Б одна оценка «2» при очень позитивном текстовом ответе, похоже на ошибку при заполнении. Без неё средняя 10.</p>
+</section>
+<section id="path"><div class="shead"><h2>Путь к решению</h2><p>Как узнали, сколько думали, что убедило и что чуть не остановило.</p></div><div class="grid">
+<figure class="card"><figcaption><h3>Как узнали об Айдаре и Batyr Joly</h3><p class="csub">Сюда же отнесены «подарила семья» и «брат позвал на мастер-класс»</p></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Посоветовал друг, родственник, коллега: 37 из 41 (90%)"><span class="bl">Посоветовал друг, родственник, коллега</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>90%</b><i>37</i></span></div>
+<div class="bar" role="listitem" title="Реклама в Instagram / Facebook: 2 из 41 (5%)"><span class="bl">Реклама в Instagram / Facebook</span><span class="bt"><span class="bf" style="width:5.4%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+<div class="bar" role="listitem" title="Instagram Айдара: 1 из 41 (2%)"><span class="bl">Instagram Айдара</span><span class="bt"><span class="bf" style="width:2.7%"></span></span><span class="bv"><b>2%</b><i>1</i></span></div>
+<div class="bar" role="listitem" title="Работает с командой Айдара: 1 из 41 (2%)"><span class="bl">Работает с командой Айдара</span><span class="bt"><span class="bf" style="width:2.7%"></span></span><span class="bv"><b>2%</b><i>1</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Сколько думали до решения</h3><p class="csub">56% решились в течение 3 месяцев, 22% думали больше года</p></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Меньше месяца: 11 из 41 (27%)"><span class="bl">Меньше месяца</span><span class="bt"><span class="bf" style="width:91.7%"></span></span><span class="bv"><b>27%</b><i>11</i></span></div>
+<div class="bar hl" role="listitem" title="1–3 месяца: 12 из 41 (29%)"><span class="bl">1–3 месяца</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>29%</b><i>12</i></span></div>
+<div class="bar" role="listitem" title="3–6 месяцев: 4 из 41 (10%)"><span class="bl">3–6 месяцев</span><span class="bt"><span class="bf" style="width:33.3%"></span></span><span class="bv"><b>10%</b><i>4</i></span></div>
+<div class="bar" role="listitem" title="6–12 месяцев: 5 из 41 (12%)"><span class="bl">6–12 месяцев</span><span class="bt"><span class="bf" style="width:41.7%"></span></span><span class="bv"><b>12%</b><i>5</i></span></div>
+<div class="bar" role="listitem" title="Больше года: 9 из 41 (22%)"><span class="bl">Больше года</span><span class="bt"><span class="bf" style="width:75.0%"></span></span><span class="bv"><b>22%</b><i>9</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Что окончательно убедило</h3><p class="csub">Изменения знакомого или отзывы выпускников — 19 человек (46%)</p></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Понял, что дальше так нельзя: 20 из 41 (49%)"><span class="bl">Понял, что дальше так нельзя</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>49%</b><i>20</i></span></div>
+<div class="bar" role="listitem" title="Увидел, как изменился знакомый: 12 из 41 (29%)"><span class="bl">Увидел, как изменился знакомый</span><span class="bt"><span class="bf" style="width:60.0%"></span></span><span class="bv"><b>29%</b><i>12</i></span></div>
+<div class="bar" role="listitem" title="Отзывы и результаты выпускников: 10 из 41 (24%)"><span class="bl">Отзывы и результаты выпускников</span><span class="bt"><span class="bf" style="width:50.0%"></span></span><span class="bv"><b>24%</b><i>10</i></span></div>
+<div class="bar" role="listitem" title="Личность и опыт Айдара: 7 из 41 (17%)"><span class="bl">Личность и опыт Айдара</span><span class="bt"><span class="bf" style="width:35.0%"></span></span><span class="bv"><b>17%</b><i>7</i></span></div>
+<div class="bar" role="listitem" title="Позвал или подарил участие близкий: 7 из 41 (17%)"><span class="bl">Позвал или подарил участие близкий</span><span class="bt"><span class="bf" style="width:35.0%"></span></span><span class="bv"><b>17%</b><i>7</i></span></div>
+<div class="bar" role="listitem" title="Настояла семья: 5 из 41 (12%)"><span class="bl">Настояла семья</span><span class="bt"><span class="bf" style="width:25.0%"></span></span><span class="bv"><b>12%</b><i>5</i></span></div>
+<div class="bar" role="listitem" title="Понятная программа и метод: 1 из 41 (2%)"><span class="bl">Понятная программа и метод</span><span class="bt"><span class="bf" style="width:5.0%"></span></span><span class="bv"><b>2%</b><i>1</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Что чуть не остановило</h3><p class="csub">Цена — только на 5-м месте</p></figcaption><div class="bars" role="list">
+<div class="bar" role="listitem" title="Ничего не останавливало: 21 из 41 (51%)"><span class="bl">Ничего не останавливало</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>51%</b><i>21</i></span></div>
+<div class="bar hl" role="listitem" title="Непонятно, какой будет результат: 13 из 41 (32%)"><span class="bl">Непонятно, какой будет результат</span><span class="bt"><span class="bf" style="width:61.9%"></span></span><span class="bv"><b>32%</b><i>13</i></span></div>
+<div class="bar" role="listitem" title="Не верил, что за 3 дня можно что-то изменить: 8 из 41 (20%)"><span class="bl">Не верил, что за 3 дня можно что-то изменить</span><span class="bt"><span class="bf" style="width:38.1%"></span></span><span class="bv"><b>20%</b><i>8</i></span></div>
+<div class="bar" role="listitem" title="Сложно выделить 3 дня: 6 из 41 (15%)"><span class="bl">Сложно выделить 3 дня</span><span class="bt"><span class="bf" style="width:28.6%"></span></span><span class="bv"><b>15%</b><i>6</i></span></div>
+<div class="bar" role="listitem" title="Цена: 5 из 41 (12%)"><span class="bl">Цена</span><span class="bt"><span class="bf" style="width:23.8%"></span></span><span class="bv"><b>12%</b><i>5</i></span></div>
+<div class="bar" role="listitem" title="Опасения давления или «секты»: 4 из 41 (10%)"><span class="bl">Опасения давления или «секты»</span><span class="bt"><span class="bf" style="width:19.0%"></span></span><span class="bv"><b>10%</b><i>4</i></span></div>
+<div class="bar" role="listitem" title="Сомневался, что сработает у меня: 3 из 41 (7%)"><span class="bl">Сомневался, что сработает у меня</span><span class="bt"><span class="bf" style="width:14.3%"></span></span><span class="bv"><b>7%</b><i>3</i></span></div>
+<div class="bar" role="listitem" title="Мало знал об Айдаре: 3 из 41 (7%)"><span class="bl">Мало знал об Айдаре</span><span class="bt"><span class="bf" style="width:14.3%"></span></span><span class="bv"><b>7%</b><i>3</i></span></div>
+</div></figure>
+</div>
+<aside class="insight "><span class="itag">Вывод</span><p>Кто приводит: 10 человек (24%) позвали родственники: братья, мать, отец, жена, родня жены. Капитаны и выпускники приводят поимённо: Ильяс — троих, Женис — двоих, капитан Дима — одного. Это готовый список амбассадоров. Реклама в соцсетях дала 2 человек из 41, значит платный трафик пока работает на прогрев и узнаваемость, а продаёт личная рекомендация.</p></aside>
+<aside class="insight warn"><span class="itag">Вывод</span><p>Главные сомнения до покупки — не цена, а неясный результат (32%) и неверие, что за 3 дня что-то изменится (20%). Лечится кейсами «точка А → точка Б» и видео выпускников, а не скидками.</p></aside>
+</section>
+<section id="pain"><div class="shead"><h2>С чем пришли: боли и состояния</h2><p>В среднем каждый отметил 3 внешние проблемы. Слова ниже — готовый язык для рекламы и прогрева.</p></div><div class="grid">
+<figure class="card"><figcaption><h3>Что тяготило сильнее всего</h3></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="В голове хаос, непонятно, за что браться: 22 из 41 (54%)"><span class="bl">В голове хаос, непонятно, за что браться</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>54%</b><i>22</i></span></div>
+<div class="bar hl" role="listitem" title="Откладываю, не держу дисциплину: 22 из 41 (54%)"><span class="bl">Откладываю, не держу дисциплину</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>54%</b><i>22</i></span></div>
+<div class="bar" role="listitem" title="Нет сил, выгорание: 20 из 41 (49%)"><span class="bl">Нет сил, выгорание</span><span class="bt"><span class="bf" style="width:90.9%"></span></span><span class="bv"><b>49%</b><i>20</i></span></div>
+<div class="bar" role="listitem" title="Живу на автопилоте: 19 из 41 (46%)"><span class="bl">Живу на автопилоте</span><span class="bt"><span class="bf" style="width:86.4%"></span></span><span class="bv"><b>46%</b><i>19</i></span></div>
+<div class="bar" role="listitem" title="Много работаю, а доход упёрся в потолок: 18 из 41 (44%)"><span class="bl">Много работаю, а доход упёрся в потолок</span><span class="bt"><span class="bf" style="width:81.8%"></span></span><span class="bv"><b>44%</b><i>18</i></span></div>
+<div class="bar" role="listitem" title="Напряжение, обиды, конфликты с близкими: 12 из 41 (29%)"><span class="bl">Напряжение, обиды, конфликты с близкими</span><span class="bt"><span class="bf" style="width:54.5%"></span></span><span class="bv"><b>29%</b><i>12</i></span></div>
+<div class="bar" role="listitem" title="Не уверен в стратегии или своём деле: 10 из 41 (24%)"><span class="bl">Не уверен в стратегии или своём деле</span><span class="bt"><span class="bf" style="width:45.5%"></span></span><span class="bv"><b>24%</b><i>10</i></span></div>
+<div class="bar" role="listitem" title="Всё в порядке, пришёл за ростом: 9 из 41 (22%)"><span class="bl">Всё в порядке, пришёл за ростом</span><span class="bt"><span class="bf" style="width:40.9%"></span></span><span class="bv"><b>22%</b><i>9</i></span></div>
+<div class="bar" role="listitem" title="Рядом нет людей, которые тянут вверх: 7 из 41 (17%)"><span class="bl">Рядом нет людей, которые тянут вверх</span><span class="bt"><span class="bf" style="width:31.8%"></span></span><span class="bv"><b>17%</b><i>7</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Какое внутреннее состояние мешало</h3></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Чувство, что делаю недостаточно: 25 из 41 (61%)"><span class="bl">Чувство, что делаю недостаточно</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>61%</b><i>25</i></span></div>
+<div class="bar" role="listitem" title="Постоянное напряжение и раздражение: 22 из 41 (54%)"><span class="bl">Постоянное напряжение и раздражение</span><span class="bt"><span class="bf" style="width:88.0%"></span></span><span class="bv"><b>54%</b><i>22</i></span></div>
+<div class="bar" role="listitem" title="Тревога за будущее: 20 из 41 (49%)"><span class="bl">Тревога за будущее</span><span class="bt"><span class="bf" style="width:80.0%"></span></span><span class="bv"><b>49%</b><i>20</i></span></div>
+<div class="bar" role="listitem" title="Нет опоры и ясности внутри: 17 из 41 (41%)"><span class="bl">Нет опоры и ясности внутри</span><span class="bt"><span class="bf" style="width:68.0%"></span></span><span class="bv"><b>41%</b><i>17</i></span></div>
+<div class="bar" role="listitem" title="Пропал драйв и вкус к жизни: 16 из 41 (39%)"><span class="bl">Пропал драйв и вкус к жизни</span><span class="bt"><span class="bf" style="width:64.0%"></span></span><span class="bv"><b>39%</b><i>16</i></span></div>
+<div class="bar" role="listitem" title="Одиночество, всё держу на себе: 14 из 41 (34%)"><span class="bl">Одиночество, всё держу на себе</span><span class="bt"><span class="bf" style="width:56.0%"></span></span><span class="bv"><b>34%</b><i>14</i></span></div>
+</div></figure>
+</div>
+<aside class="insight "><span class="itag">Вывод</span><p>Карта болей в документе проекта ставит на первое место стеклянный потолок, одиночество на вершине и напряжение в семье. Анкета показывает другой порядок. Первыми идут хаос, прокрастинация, выгорание и автопилот, то есть потеря управления собой. Потолок дохода на 5-м месте (44%), конфликты в семье на 6-м (29%), нехватка сильного окружения на последнем (17%). Одиночество как внутреннее ощущение при этом есть у 34%: мужчина не жалуется, что рядом нет людей, но чувствует, что всё держит на себе.</p></aside>
+</section>
+<section id="training"><div class="shead"><h2>Опыт тренинга</h2><p>Что сработало, что улучшить и насколько готовы рекомендовать.</p></div>
+<figure class="card wide"><figcaption><h3>Готовность рекомендовать (NPS)</h3><p class="csub">Шкала 0–10. Оценок 0–1, 3–4 и 6 нет</p></figcaption><div class="npsrow"><div class="npsbig">78<small>средняя оценка 9,3 из 10</small></div><div><div class="split" role="img" aria-label="Промоутеры 35, нейтральные 3, критики 3"><span style="width:85.4%;background:var(--bar)"></span><span style="width:7.3%;background:var(--muted)"></span><span style="width:7.3%;background:var(--warn)"></span></div><div class="legend"><span><i style="background:var(--bar)"></i>Промоутеры 9–10: 35 (85%)</span><span><i style="background:var(--muted)"></i>Нейтральные 7–8: 3 (7%)</span><span><i style="background:var(--warn)"></i>Критики 0–6: 3 (7%)</span></div></div></div><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="10: 31 из 41 (76%)"><span class="bl">10</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>76%</b><i>31</i></span></div>
+<div class="bar" role="listitem" title="9: 4 из 41 (10%)"><span class="bl">9</span><span class="bt"><span class="bf" style="width:12.9%"></span></span><span class="bv"><b>10%</b><i>4</i></span></div>
+<div class="bar" role="listitem" title="8: 2 из 41 (5%)"><span class="bl">8</span><span class="bt"><span class="bf" style="width:6.5%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+<div class="bar" role="listitem" title="7: 1 из 41 (2%)"><span class="bl">7</span><span class="bt"><span class="bf" style="width:3.2%"></span></span><span class="bv"><b>2%</b><i>1</i></span></div>
+<div class="bar" role="listitem" title="6: 0 из 41 (0%)"><span class="bl">6</span><span class="bt"><span class="bf" style="width:0.0%"></span></span><span class="bv"><b>0%</b><i>0</i></span></div>
+<div class="bar" role="listitem" title="5: 2 из 41 (5%)"><span class="bl">5</span><span class="bt"><span class="bf" style="width:6.5%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+<div class="bar" role="listitem" title="4: 0 из 41 (0%)"><span class="bl">4</span><span class="bt"><span class="bf" style="width:0.0%"></span></span><span class="bv"><b>0%</b><i>0</i></span></div>
+<div class="bar" role="listitem" title="3: 0 из 41 (0%)"><span class="bl">3</span><span class="bt"><span class="bf" style="width:0.0%"></span></span><span class="bv"><b>0%</b><i>0</i></span></div>
+<div class="bar" role="listitem" title="2: 1 из 41 (2%)"><span class="bl">2</span><span class="bt"><span class="bf" style="width:3.2%"></span></span><span class="bv"><b>2%</b><i>1</i></span></div>
+</div></figure>
+<div class="grid">
+<figure class="card"><figcaption><h3>Что «зашло» больше всего</h3></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="День 2: работа с телом и пределом: 31 из 41 (76%)"><span class="bl">День 2: работа с телом и пределом</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>76%</b><i>31</i></span></div>
+<div class="bar" role="listitem" title="Практики и упражнения: 27 из 41 (66%)"><span class="bl">Практики и упражнения</span><span class="bt"><span class="bf" style="width:87.1%"></span></span><span class="bv"><b>66%</b><i>27</i></span></div>
+<div class="bar" role="listitem" title="Личные разборы Айдара: 24 из 41 (59%)"><span class="bl">Личные разборы Айдара</span><span class="bt"><span class="bf" style="width:77.4%"></span></span><span class="bv"><b>59%</b><i>24</i></span></div>
+<div class="bar" role="listitem" title="Мужской круг потока: 20 из 41 (49%)"><span class="bl">Мужской круг потока</span><span class="bt"><span class="bf" style="width:64.5%"></span></span><span class="bv"><b>49%</b><i>20</i></span></div>
+<div class="bar" role="listitem" title="Работа в парах и мини-группах: 16 из 41 (39%)"><span class="bl">Работа в парах и мини-группах</span><span class="bt"><span class="bf" style="width:51.6%"></span></span><span class="bv"><b>39%</b><i>16</i></span></div>
+<div class="bar" role="listitem" title="Обратная связь тренера и капитанов: 14 из 41 (34%)"><span class="bl">Обратная связь тренера и капитанов</span><span class="bt"><span class="bf" style="width:45.2%"></span></span><span class="bv"><b>34%</b><i>14</i></span></div>
+<div class="bar" role="listitem" title="Учебный материал Айдара: 10 из 41 (24%)"><span class="bl">Учебный материал Айдара</span><span class="bt"><span class="bf" style="width:32.3%"></span></span><span class="bv"><b>24%</b><i>10</i></span></div>
+<div class="bar hl" role="listitem" title="День 3: ценности и цели: 5 из 41 (12%)"><span class="bl">День 3: ценности и цели</span><span class="bt"><span class="bf" style="width:16.1%"></span></span><span class="bv"><b>12%</b><i>5</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Что улучшить до 10 из 10</h3><p class="csub">Ещё одно пожелание пришло в свободном ответе: учитывать в расписании время намаза</p></figcaption><div class="bars" role="list">
+<div class="bar" role="listitem" title="Всё было на уровне: 26 из 41 (63%)"><span class="bl">Всё было на уровне</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>63%</b><i>26</i></span></div>
+<div class="bar hl" role="listitem" title="Больше времени на личные разборы: 9 из 41 (22%)"><span class="bl">Больше времени на личные разборы</span><span class="bt"><span class="bf" style="width:34.6%"></span></span><span class="bv"><b>22%</b><i>9</i></span></div>
+<div class="bar" role="listitem" title="Площадка, питание, быт: 8 из 41 (20%)"><span class="bl">Площадка, питание, быт</span><span class="bt"><span class="bf" style="width:30.8%"></span></span><span class="bv"><b>20%</b><i>8</i></span></div>
+<div class="bar" role="listitem" title="Информация до тренинга: 4 из 41 (10%)"><span class="bl">Информация до тренинга</span><span class="bt"><span class="bf" style="width:15.4%"></span></span><span class="bv"><b>10%</b><i>4</i></span></div>
+<div class="bar" role="listitem" title="План на первые недели после выпуска: 3 из 41 (7%)"><span class="bl">План на первые недели после выпуска</span><span class="bt"><span class="bf" style="width:11.5%"></span></span><span class="bv"><b>7%</b><i>3</i></span></div>
+<div class="bar" role="listitem" title="Тайминг: долгие дни: 3 из 41 (7%)"><span class="bl">Тайминг: долгие дни</span><span class="bt"><span class="bf" style="width:11.5%"></span></span><span class="bv"><b>7%</b><i>3</i></span></div>
+<div class="bar" role="listitem" title="Работа кураторов: 2 из 41 (5%)"><span class="bl">Работа кураторов</span><span class="bt"><span class="bf" style="width:7.7%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+<div class="bar" role="listitem" title="Меньше теории: 2 из 41 (5%)"><span class="bl">Меньше теории</span><span class="bt"><span class="bf" style="width:7.7%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+</div></figure>
+</div>
+<aside class="insight "><span class="itag">Вывод</span><p>Кто ставит низкие оценки. Из трёх критиков один, судя по тексту («победил в бою, горжусь собой», «сниму фильм об этом»), ошибся шкалой. Двое других — руководитель отдела, которого привела семья, и специалист в найме 49 лет с доходом до 500 тыс. ₸. Среди пришедших потому, что «настояла семья», средняя оценка 8,0 против 9,3 по потоку. Мужчина, которого привели против воли, получает меньше. Близким, которые дарят участие, стоит давать сценарий разговора, чтобы решение стало собственным решением мужчины.</p></aside>
+<aside class="insight warn"><span class="itag">Вывод</span><p>День 3 (ценности и цели) отметили только 5 человек из 41. Вероятные причины: усталость после Дня 2 (3 человека просят сократить длинные дни), теория (2 просят меньше теории) или блок слабее по форме. Стоит разобрать с Айдаром отдельно: это день, после которого мужчина уходит домой, и его итог должен быть самым сильным.</p></aside>
+</section>
+<section id="result">
+<div class="shead"><h2>Что забирают с собой</h2><p>Свободные ответы на вопрос «что изменилось и какое важное решение забираете». Разметка ручная, ответ мог попасть в несколько тем. 4 ответа пустые или не по теме.</p></div>
+<div class="themes">
+  <div class="theme"><span class="tn">≈13</span><h3>Действие, дисциплина, ответственность</h3><p>«Главное — начать», «топить до конца», цели и планы до конца года, «брать ответственность за свои поступки».</p></div>
+  <div class="theme"><span class="tn">≈12</span><h3>Семья, родители, близкие</h3><p>Новое отношение к отцу и матери, внимание к жене и детям, «начать слышать родных». До тренинга это была боль только у 29%.</p></div>
+  <div class="theme"><span class="tn">≈8</span><h3>Ограничения только в голове</h3><p>Страхи, блоки, сомнения, подавленные эмоции. «Все барьеры и пределы только у меня в голове».</p></div>
+</div>
+<div class="quotes">
+<blockquote><p>«Я стал мужчиной. Забираю ответственность за свою семью»</p><cite>Собственник, торговля, 42</cite></blockquote>
+<blockquote><p>«Я забираю с собой мысли о том, что все барьеры и пределы только у меня в голове»</p><cite>Руководитель отдела, торговля, 26</cite></blockquote>
+<blockquote><p>«Все мои теории, которые читал в книгах, видео, подкастах, за два дня больше понял и прожил»</p><cite>Собственник, образование и спорт, 32</cite></blockquote>
+<blockquote><p>«Понял, что я очень много в работе, не общаюсь ни с кем: ни с родными, ни со знакомыми. Решение: буду больше времени проводить с близкими»</p><cite>Специалист, IT, 22</cite></blockquote>
+<blockquote><p>«Оказывается, я просто перегорел, в целом всё хорошо. Понял, что сомнения убивают внутри»</p><cite>Собственник, спортивная школа, 33</cite></blockquote>
+<blockquote><p>«Пробил потолок, сломались блоки, увидел и поставил цели, увидел, на что способен в реальности»</p><cite>Собственник, строительство, 40</cite></blockquote>
+</div>
+<aside class="insight "><span class="itag">Вывод</span><p>Цитата «за два дня больше понял и прожил, чем из книг и подкастов» — прямое подтверждение опорной фразы бренда «Знать — не значит изменить». Её стоит ставить в рекламу рядом с этой формулировкой. Перед публикацией любой цитаты нужно согласие автора: публикацию без имени разрешили 4 человека, с именем — 1.</p></aside>
+</section>
+<section id="next"><div class="shead"><h2>Спрос после тренинга</h2><p>Что важно сейчас и насколько откликаются следующие продукты лестницы.</p></div>
+<figure class="card wide"><figcaption><h3>Какая тема сейчас важнее всего</h3><p class="csub">31 человек (76%) отметил хотя бы одну из тем про удержание результата</p></figcaption><div class="bars" role="list">
+<div class="bar" role="listitem" title="Выйти на новый уровень в деле и доходе: 28 из 41 (68%)"><span class="bl">Выйти на новый уровень в деле и доходе</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>68%</b><i>28</i></span></div>
+<div class="bar" role="listitem" title="Довести решения до действия: 28 из 41 (68%)"><span class="bl">Довести решения до действия</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>68%</b><i>28</i></span></div>
+<div class="bar hl" role="listitem" title="Не откатиться в привычной среде: 23 из 41 (56%)"><span class="bl">Не откатиться в привычной среде</span><span class="bt"><span class="bf" style="width:82.1%"></span></span><span class="bv"><b>56%</b><i>23</i></span></div>
+<div class="bar hl" role="listitem" title="Держать дисциплину и слово без поддержки: 23 из 41 (56%)"><span class="bl">Держать дисциплину и слово без поддержки</span><span class="bt"><span class="bf" style="width:82.1%"></span></span><span class="bv"><b>56%</b><i>23</i></span></div>
+<div class="bar" role="listitem" title="Найти круг мужчин, которые держат уровень: 16 из 41 (39%)"><span class="bl">Найти круг мужчин, которые держат уровень</span><span class="bt"><span class="bf" style="width:57.1%"></span></span><span class="bv"><b>39%</b><i>16</i></span></div>
+<div class="bar" role="listitem" title="Удержать перемены в семье: 13 из 41 (32%)"><span class="bl">Удержать перемены в семье</span><span class="bt"><span class="bf" style="width:46.4%"></span></span><span class="bv"><b>32%</b><i>13</i></span></div>
+<div class="bar" role="listitem" title="Справлюсь сам: 2 из 41 (5%)"><span class="bl">Справлюсь сам</span><span class="bt"><span class="bf" style="width:7.1%"></span></span><span class="bv"><b>5%</b><i>2</i></span></div>
+</div></figure>
+<div class="grid three">
+<figure class="card"><figcaption><h3>Капитанская подготовка: 3–4 месяца в мужском круге</h3><p class="csub">Готовы или ждут подробностей — 12 человек (29%)</p></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Откликается, готов обсудить: 5 из 41 (12%)"><span class="bl">Откликается, готов обсудить</span><span class="bt"><span class="bf" style="width:27.8%"></span></span><span class="bv"><b>12%</b><i>5</i></span></div>
+<div class="bar hl" role="listitem" title="Интересно, нужны подробности: 7 из 41 (17%)"><span class="bl">Интересно, нужны подробности</span><span class="bt"><span class="bf" style="width:38.9%"></span></span><span class="bv"><b>17%</b><i>7</i></span></div>
+<div class="bar" role="listitem" title="Интересно, но через 3–6 месяцев: 11 из 41 (27%)"><span class="bl">Интересно, но через 3–6 месяцев</span><span class="bt"><span class="bf" style="width:61.1%"></span></span><span class="bv"><b>27%</b><i>11</i></span></div>
+<div class="bar" role="listitem" title="Сейчас не актуально: 18 из 41 (44%)"><span class="bl">Сейчас не актуально</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>44%</b><i>18</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Что учесть, чтобы формат подошёл</h3></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Нужна пауза, чтобы внедрить пройденное: 13 из 41 (32%)"><span class="bl">Нужна пауза, чтобы внедрить пройденное</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>32%</b><i>13</i></span></div>
+<div class="bar" role="listitem" title="Плотный график: 8 из 41 (20%)"><span class="bl">Плотный график</span><span class="bt"><span class="bf" style="width:61.5%"></span></span><span class="bv"><b>20%</b><i>8</i></span></div>
+<div class="bar" role="listitem" title="Ничего не мешает: 7 из 41 (17%)"><span class="bl">Ничего не мешает</span><span class="bt"><span class="bf" style="width:53.8%"></span></span><span class="bv"><b>17%</b><i>7</i></span></div>
+<div class="bar" role="listitem" title="Бюджет, важна рассрочка: 6 из 41 (15%)"><span class="bl">Бюджет, важна рассрочка</span><span class="bt"><span class="bf" style="width:46.2%"></span></span><span class="bv"><b>15%</b><i>6</i></span></div>
+<div class="bar" role="listitem" title="Не понимаю формат и результат: 4 из 41 (10%)"><span class="bl">Не понимаю формат и результат</span><span class="bt"><span class="bf" style="width:30.8%"></span></span><span class="bv"><b>10%</b><i>4</i></span></div>
+<div class="bar" role="listitem" title="Сложно уезжать на выезды: 3 из 41 (7%)"><span class="bl">Сложно уезжать на выезды</span><span class="bt"><span class="bf" style="width:23.1%"></span></span><span class="bv"><b>7%</b><i>3</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>PRO LIFE: страхи, обиды, отношения</h3><p class="csub">Готовы идти 13 человек (32%), из них 5 с женой</p></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Пройду сам: 8 из 41 (20%)"><span class="bl">Пройду сам</span><span class="bt"><span class="bf" style="width:38.1%"></span></span><span class="bv"><b>20%</b><i>8</i></span></div>
+<div class="bar hl" role="listitem" title="Пройду вместе с супругой: 5 из 41 (12%)"><span class="bl">Пройду вместе с супругой</span><span class="bt"><span class="bf" style="width:23.8%"></span></span><span class="bv"><b>12%</b><i>5</i></span></div>
+<div class="bar" role="listitem" title="Интересно, но позже: 21 из 41 (51%)"><span class="bl">Интересно, но позже</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>51%</b><i>21</i></span></div>
+<div class="bar" role="listitem" title="Сейчас не актуально: 7 из 41 (17%)"><span class="bl">Сейчас не актуально</span><span class="bt"><span class="bf" style="width:33.3%"></span></span><span class="bv"><b>17%</b><i>7</i></span></div>
+</div></figure>
+</div>
+<aside class="insight "><span class="itag">Вывод</span><p>Разрыв. Из 31 человека, которые боятся отката, 10 назвали Капитанскую неактуальной и ещё 10 отложили на 3–6 месяцев. Потребность в поддержке есть, но 3–4 месяца обязательств сразу после трёх интенсивных дней кажутся тяжёлыми. Людям нужен лёгкий промежуточный шаг: 4–6 недель сопровождения после выпуска (еженедельный круг с капитаном, задания, одна живая встреча). Он удержит результат и подведёт к Капитанской через 3–6 месяцев, когда созреют 11 «позже».</p></aside>
+<figure class="card wide"><figcaption><h3>Горячий список на Капитанскую подготовку</h3><p class="csub">12 человек, позывные из анкеты. Контакты — в исходной таблице. Все 12 поставили «порекомендую» на 10</p></figcaption>
+<div class="tbl"><table><thead><tr><th>Позывной</th><th>Возраст</th><th>Кто</th><th>Доход, ₸</th><th>Статус</th><th>Что мешает</th></tr></thead><tbody><tr><td><b>Архитектор</b></td><td class="num">25</td><td>эксперт, инфобизнес</td><td class="num">1,5–3 млн</td><td><span class="pill go">Готов обсудить</span></td><td>плотный график</td></tr><tr><td><b>Грек</b></td><td class="num">40</td><td>собственник, стройка · Костанай</td><td class="num">3–5 млн</td><td><span class="pill go">Готов обсудить</span></td><td>ничего не мешает</td></tr><tr><td><b>Бэтмен</b></td><td class="num">42</td><td>собственник, торговля</td><td class="num">3–5 млн</td><td><span class="pill go">Готов обсудить</span></td><td>бюджет, рассрочка</td></tr><tr><td><b>Седой</b></td><td class="num">35</td><td>собственник, образование/спорт</td><td class="num">1,5–3 млн</td><td><span class="pill go">Готов обсудить</span></td><td>бюджет, рассрочка</td></tr><tr><td><b>аба</b></td><td class="num">39</td><td>собственник, закуп мяса · Петропавловск</td><td class="num">0,5–1,5 млн</td><td><span class="pill go">Готов обсудить</span></td><td>плотный график</td></tr><tr><td><b>Табын</b></td><td class="num">40</td><td>собственник, образование/спорт</td><td class="num">> 10 млн</td><td><span class="pill info">Нужны подробности</span></td><td>плотный график</td></tr><tr><td><b>Дида</b></td><td class="num">33</td><td>собственник, футбольная школа, 100+ чел.</td><td class="num">3–5 млн</td><td><span class="pill info">Нужны подробности</span></td><td>плотный график</td></tr><tr><td><b>Маке</b></td><td class="num">34</td><td>собственник, IT · Петропавловск</td><td class="num">0,5–1,5 млн</td><td><span class="pill info">Нужны подробности</span></td><td>плотный график</td></tr><tr><td><b>Айбике</b></td><td class="num">32</td><td>собственник, образование/спорт</td><td class="num">0,5–1,5 млн</td><td><span class="pill info">Нужны подробности</span></td><td>плотный график</td></tr><tr><td><b>James</b></td><td class="num">24</td><td>собственник, образование/спорт</td><td class="num">0,5–1,5 млн</td><td><span class="pill info">Нужны подробности</span></td><td>бюджет, рассрочка</td></tr><tr><td><b>Скала</b></td><td class="num">39</td><td>в найме, стройка</td><td class="num">0,5–1,5 млн</td><td><span class="pill info">Нужны подробности</span></td><td>нужна пауза</td></tr><tr><td><b>Жора</b></td><td class="num">32</td><td>в найме, торговля</td><td class="num">0,5–1,5 млн</td><td><span class="pill info">Нужны подробности</span></td><td>не понимает формат</td></tr></tbody></table></div></figure>
+</section>
+<section id="ref"><div class="shead"><h2>Рекомендации и контент</h2><p>Ресурс для следующего потока и для соцсетей Айдара.</p></div><div class="grid">
+<figure class="card"><figcaption><h3>Есть мужчина, которому сейчас нужен БЖ</h3><p class="csub">24 выпускника (59%) держат кого-то на примете. Чаще всего это братья и друзья</p></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Да, готов передать контакт: 9 из 41 (22%)"><span class="bl">Да, готов передать контакт</span><span class="bt"><span class="bf" style="width:52.9%"></span></span><span class="bv"><b>22%</b><i>9</i></span></div>
+<div class="bar" role="listitem" title="Да, но сначала поговорю сам: 15 из 41 (37%)"><span class="bl">Да, но сначала поговорю сам</span><span class="bt"><span class="bf" style="width:88.2%"></span></span><span class="bv"><b>37%</b><i>15</i></span></div>
+<div class="bar" role="listitem" title="Пока нет: 17 из 41 (41%)"><span class="bl">Пока нет</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>41%</b><i>17</i></span></div>
+</div></figure>
+<figure class="card"><figcaption><h3>Готов поделиться историей</h3><p class="csub">18 человек (44%) готовы в той или иной форме</p></figcaption><div class="bars" role="list">
+<div class="bar hl" role="listitem" title="Запишу видео-отзыв: 9 из 41 (22%)"><span class="bl">Запишу видео-отзыв</span><span class="bt"><span class="bf" style="width:39.1%"></span></span><span class="bv"><b>22%</b><i>9</i></span></div>
+<div class="bar" role="listitem" title="Готов к интервью на 20 минут: 4 из 41 (10%)"><span class="bl">Готов к интервью на 20 минут</span><span class="bt"><span class="bf" style="width:17.4%"></span></span><span class="bv"><b>10%</b><i>4</i></span></div>
+<div class="bar" role="listitem" title="Можно опубликовать без имени: 4 из 41 (10%)"><span class="bl">Можно опубликовать без имени</span><span class="bt"><span class="bf" style="width:17.4%"></span></span><span class="bv"><b>10%</b><i>4</i></span></div>
+<div class="bar" role="listitem" title="Можно опубликовать с именем: 1 из 41 (2%)"><span class="bl">Можно опубликовать с именем</span><span class="bt"><span class="bf" style="width:4.3%"></span></span><span class="bv"><b>2%</b><i>1</i></span></div>
+<div class="bar" role="listitem" title="Не сейчас: 23 из 41 (56%)"><span class="bl">Не сейчас</span><span class="bt"><span class="bf" style="width:100.0%"></span></span><span class="bv"><b>56%</b><i>23</i></span></div>
+</div></figure>
+</div>
+<figure class="card wide"><figcaption><h3>Вопросы выпускников к Айдару → темы для Instagram и YouTube</h3><p class="csub">Сгруппированы по смыслу. Самая частая тема — как не растерять результат</p></figcaption>
+<ul class="qlist">
+<li>Как не растерять полученное в первые дни после тренинга? Что будет дальше, какие рекомендации?<span>3 вопроса · тема «путь после тренинга»</span></li>
+<li>Как научиться кайфовать от дисциплины и сделать её образом жизни всей семьи?<span>дисциплина и семья</span></li>
+<li>Как сохранить баланс между личной жизнью и работой?<span>баланс</span></li>
+<li>Как упорядочить дела в голове, улучшить фокус и выйти на новый уровень?<span>хаос и фокус</span></li>
+<li>Как открыть замки в голове и снять ограничения?<span>ограничения</span></li>
+<li>Что мотивирует каждый день?<span>мотивация</span></li>
+<li>Как восстановиться после развода, если есть дети?<span>семья после развода</span></li>
+<li>Как выстроить отношения с отцом, если его слова давят? Нужно ли отдаляться?<span>отец и сын · пересказ, без деталей автора</span></li>
+<li>В чём смысл жизни? Что значит «главное в сердце»?<span>смысл</span></li>
+<li>Каким был ваш первый путь как тренера?<span>личная история Айдара</span></li>
+</ul></figure>
+</section>
+<section id="todo">
+<div class="shead"><h2>Что делать</h2><p>Действия по порядку срочности. Первые два блока лучше сделать в ближайшие 7–14 дней, пока выпускники на эмоциональном подъёме.</p></div>
+<div class="recs">
+<div class="rec"><span class="rk">Эта неделя</span><div><h3>Обработать горячих, пока горячо</h3><ul>
+<li>Созвониться с 12 кандидатами на Капитанскую. Для 3 человек, которые упираются в бюджет, сразу подготовить рассрочку. Для 6 с плотным графиком — показать даты выездов заранее. Одному, кто «не понимает формат», дать одностраничник: что, сколько, какой результат.</li>
+<li>Предложить PRO LIFE 13 готовым, пятерым — парный оффер с женой.</li>
+<li>Забрать 9 видео-отзывов и 4 интервью. Структура: точка А → точка Б, упор на семью и дело. Согласие на публикацию — письменно.</li>
+</ul></div></div>
+<div class="rec"><span class="rk">Эта неделя</span><div><h3>Запустить рекомендации</h3><ul>
+<li>9 контактов получить сразу. 15 выпускникам, которые «сначала поговорят сами», дать инструмент: личное видео-приглашение от Айдара и гостевое место на мастер-классе по целям.</li>
+<li>Поблагодарить и отметить капитанов, которые приводят людей (Ильяс, Женис, Дима). Сделать реферальную механику капитанов системной.</li>
+<li>Для тех, кто дарит участие близкому, подготовить сценарий разговора, чтобы мужчина пришёл по своему решению, а не по требованию семьи.</li>
+</ul></div></div>
+<div class="rec"><span class="rk">Этот месяц</span><div><h3>Построить мост к Капитанской</h3><ul>
+<li>Собрать сопровождение на 4–6 недель после выпуска: еженедельный круг с капитаном, короткие задания, одна живая встреча, план на первые недели.</li>
+<li>Прямо отвечает на самые частые вопросы («как не растерять») и на главную тему (76% боятся отката).</li>
+<li>Через 3–6 месяцев вернуться к 11 «позже» с приглашением на Капитанскую.</li>
+</ul></div></div>
+<div class="rec"><span class="rk">Маркетинг</span><div><h3>Переписать язык прогрева под реальную ЦА</h3><ul>
+<li>Первые крючки: «хаос в голове», «всё откладываю», «работаю много, а доход стоит», «делаю недостаточно». Потолок и одиночество — вторым слоем.</li>
+<li>Кейсы строить по формуле «пришёл за делом, забрал семью».</li>
+<li>Закрывать главные сомнения: «какой будет результат» и «что изменится за 3 дня». Видео выпускников, а не скидки: цена мешала только 12%.</li>
+<li>День 2 — главное впечатление. Показывать форму (телесная практика, предел, выдержка), содержание не раскрывать: правило 80/20.</li>
+</ul></div></div>
+<div class="rec"><span class="rk">Продукт</span><div><h3>Доработать тренинг</h3><ul>
+<li>Разобрать День 3: отметили 12% против 76% у Дня 2.</li>
+<li>Больше времени на личные разборы (22%). Возможность продать Личный разбор (150 000 ₸) тем, кому не хватило.</li>
+<li>Быт и площадка (20%), информация до тренинга (10%), паузы на намаз в расписании.</li>
+<li>Определить политику по несовершеннолетним участникам.</li>
+</ul></div></div>
+</div>
+</section>
+<section id="data">
+<div class="shead"><h2>Качество данных и правки анкеты</h2></div>
+<ul class="dq">
+<li>41 ответ — все из потока БЖ 33. Выборка небольшая, доли в сегментах Б и Г — ориентир, а не статистика.</li>
+<li>В шкале дохода нет варианта «5–10 млн ₸»: после «3–5 млн» сразу идёт «более 10 млн». Стоит добавить.</li>
+<li>Один адрес почты указан у двух разных участников. Для CRM нужна проверка.</li>
+<li>Одна оценка NPS «2» при восторженном текстовом ответе. Похоже на ошибку. Если исправить на 10, NPS вырастет с 78 до 83.</li>
+<li>Среди участников — 16-летний. Это вопрос к правилам набора, а не к анкете.</li>
+<li>Пожелание про намаз попало в поле «что изменилось». Чтобы такое не терялось, стоит добавить отдельное поле «пожелания к организации».</li>
+<li>В отчёте нет телефонов и почт. Контакты рекомендованных мужчин и горячих кандидатов — в исходной таблице.</li>
+</ul>
+</section>
+<footer>Источник: Google-форма «Анкета выпускника Batyr Joly (2026)», ответы 26–27 сентября 2026. Подготовлено для команды Busurman Group.</footer>
+</div>
+</body>
+</html>

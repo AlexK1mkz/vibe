@@ -1,0 +1,29 @@
+$(document).ready(function () {
+
+    $(document).on('click', '#btn_selector_lang', function () {
+        $('#selector_lang_options').toggleClass('active');
+        $(this).toggleClass('active');
+    });
+
+    $(document).on('click', '#btn_selector_lang_mobile', function () {
+        $('#selector_lang_options_mobile').toggleClass('active');
+        $(this).toggleClass('active');
+    });
+
+    $(document).click(function (event) {
+        if (!$(event.target).is('#btn_selector_lang') && !$(event.target).is('#selector_lang_options') && !$(event.target).closest('#selector_lang_options').length) {
+            $('#selector_lang_options').removeClass('active');
+            $('#btn_selector_lang').removeClass('active');
+        }
+    });
+
+    $('#burger_menu_btn').click(function (event) {
+
+        //$('body').toggleClass('no-scroll');
+
+        $('#mobile_menu_block').toggleClass('active');
+        $(this).toggleClass('active');
+        event.stopPropagation(); // Предотвращаем распространение события
+    });
+
+});

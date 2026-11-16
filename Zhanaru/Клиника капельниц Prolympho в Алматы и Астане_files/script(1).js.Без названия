@@ -1,0 +1,20 @@
+const cards = document.querySelectorAll(".napravleniy_card");
+const firstCard = cards[0];
+if (window.innerWidth > 767) {
+    firstCard?.classList.add("active");
+    cards.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+            cards.forEach((c) => c.classList.remove("active"));
+            card.classList.add("active");
+        });
+        card.addEventListener("mouseleave", () => {
+            if (!document.querySelector(".napravleniy_card:hover") && firstCard) {
+                firstCard.classList.add("active");
+            }
+        });
+    });
+} else {
+    cards.forEach((card) => {
+        card.classList.remove("active");
+    });
+}

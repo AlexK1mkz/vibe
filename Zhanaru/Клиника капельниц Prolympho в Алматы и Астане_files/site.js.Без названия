@@ -1,0 +1,39 @@
+(function () {
+  const phone = '77005883242';
+  const lang = document.documentElement.lang || 'ru';
+  const messages = {
+    ru: 'Здравствуйте! Хочу записаться на консультацию.',
+    kk: 'Сәлеметсіз бе! Кеңеске жазылғым келеді.',
+    en: 'Hello! I would like to book a consultation.'
+  };
+  const directionLabels = {
+    ru: 'Направления',
+    kk: 'Бағыттар',
+    en: 'Programs'
+  };
+  document.querySelectorAll('.megamenu a[href$="/services/"], .footer_menu a[href$="/services/"]').forEach(function (link) {
+    const label = directionLabels[lang] || directionLabels.ru;
+    const textHolder = link.querySelector('.menu_item_text');
+    (textHolder || link).textContent = label;
+    link.title = label;
+  });
+  function whatsapp(text) {
+    window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(text || messages[lang]), '_blank', 'noopener');
+  }
+  document.addEventListener('click', function (event) {
+    const button = event.target.closest('.open-popup');
+    if (!button) return;
+    event.preventDefault();
+    whatsapp();
+  });
+  document.addEventListener('submit', function (event) {
+    const form = event.target;
+    if (!(form instanceof HTMLFormElement)) return;
+    event.preventDefault();
+    const data = new FormData(form);
+    const name = data.get('name') || data.get('botcheck') || '';
+    const phoneValue = data.get('phone') || '';
+    const detail = [messages[lang], name && ('Name: ' + name), phoneValue && ('Phone: ' + phoneValue)].filter(Boolean).join('\n');
+    whatsapp(detail);
+  }, true);
+}());

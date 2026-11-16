@@ -1,0 +1,75 @@
+(function () {
+	if (typeof Swiper === 'undefined') {
+		return;
+	}
+
+	var section = document.querySelector('.akcii-home');
+	var slider = section && section.querySelector('.akcii-home-slider');
+	if (!slider) {
+		return;
+	}
+
+	var swiper = new Swiper(slider, {
+		slidesPerView: 'auto',
+		spaceBetween: 16,
+		watchOverflow: true,
+		grabCursor: true,
+		breakpoints: {
+			640: {
+				slidesPerView: 2,
+				spaceBetween: 16
+			},
+			960: {
+				slidesPerView: 3,
+				spaceBetween: 18
+			},
+			1200: {
+				slidesPerView: 4,
+				spaceBetween: 16
+			}
+		}
+	});
+
+	function formatCountdown(ms) {
+		if (ms <= 0) {
+			return '';
+		}
+		var total = Math.floor(ms / 1000);
+		var days = Math.floor(total / 86400);
+		var hours = Math.floor((total % 86400) / 3600);
+		var mins = Math.floor((total % 3600) / 60);
+		return 'осталось: ' + days + 'дн. ' + hours + 'ч. ' + mins + 'м.';
+	}
+
+	function tick() {
+		var timers = section.querySelectorAll('.akcii-home-card__timer[data-end]');
+		var removed = false;
+
+		Array.prototype.forEach.call(timers, function (el) {
+			var end = parseInt(el.getAttribute('data-end'), 10);
+			if (!end) {
+				return;
+			}
+			var left = end - Date.now();
+			if (left <= 0) {
+				var slide = el.closest('.swiper-slide');
+				if (slide) {
+					slide.parentNode.removeChild(slide);
+					removed = true;
+				}
+				return;
+			}
+			el.textContent = formatCountdown(left);
+		});
+
+		if (removed) {
+			swiper.update();
+			if (!slider.querySelector('.swiper-slide')) {
+				section.style.display = 'none';
+			}
+		}
+	}
+
+	tick();
+	setInterval(tick, 1000);
+})();

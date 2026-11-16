@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "zhanaru-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "F:/github/vibe/Zhanaru/web", "run", "dev", "--", "--port", "4331"],
+      "port": 4331
+    },
+    {
+      "name": "zhanaru-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "F:/github/vibe/Zhanaru/web", "run", "preview", "--", "--port", "4332"],
+      "port": 4332
+    }
+  ]
+}
