@@ -1,8 +1,12 @@
 # ZhanaRu: автовыкладка на Hoster.kz (Plesk).
 # Любое изменение в Zhanaru/web на main → тесты → сборка под zhanaru.vip →
-# готовые файлы коммитятся в ветку deploy-zhanaru → GitHub шлёт webhook в Plesk →
-# Plesk (Git-репозиторий сайта) забирает ветку и выкладывает её в httpdocs.
-# Секретов здесь нет: config с ключами лежит на хостинге вне httpdocs и в репозиторий не попадает.
+# заливка готовых файлов в httpdocs по FTPS (только изменённые файлы).
+# Если тесты или сборка упали — сайт не трогается.
+#
+# Нужны два секрета репозитория (Settings → Secrets and variables → Actions):
+#   ZHANARU_FTP_USERNAME — логин FTP из Plesk (zhanaru.vip → «Доступ по FTP»)
+#   ZHANARU_FTP_PASSWORD — его пароль
+# Настройки заявок (zhanaru-config.php) лежат на хостинге выше httpdocs — выкладка их не видит и не трогает.
 name: ZhanaRu → Hoster.kz
 
 on:
@@ -14,7 +18,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: zhanaru-deploy
@@ -22,14 +26,10 @@ concurrency:
 
 env:
   SITE_URL: https://zhanaru.vip
-  DEPLOY_BRANCH: deploy-zhanaru
 
 jobs:
-  build-and-publish:
+  deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Zhanaru/web
     steps:
       - uses: actions/checkout@v4
 
@@ -40,42 +40,58 @@ jobs:
           cache-dependency-path: Zhanaru/web/package-lock.json
 
       - name: Зависимости
+        working-directory: Zhanaru/web
         run: npm ci --no-audit --no-fund
 
       - name: Тесты
+        working-directory: Zhanaru/web
         run: npm test
 
       - name: Сборка
+        working-directory: Zhanaru/web
         run: npm run build
 
       - name: Проверка сборки
+        working-directory: Zhanaru/web
         run: |
           test -f dist/index.html
           test -f dist/.htaccess
           test -f dist/api/lead.php
           rm -rf dist/api/private/config.php dist/api/private/rate
 
-      - name: Коммит в ветку выкладки
+      - name: Есть ли доступ к FTP
+        id: ftp
         env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FTP_USER: ${{ secrets.ZHANARU_FTP_USERNAME }}
         run: |
-          REMOTE="https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          if git clone --depth 1 --branch "$DEPLOY_BRANCH" "$REMOTE" /tmp/out 2>/dev/null; then
-            echo "Ветка $DEPLOY_BRANCH найдена"
+          if [ -z "$FTP_USER" ]; then
+            echo "::warning::Сайт собран и проверен, но не выложен: не заданы секреты ZHANARU_FTP_USERNAME / ZHANARU_FTP_PASSWORD (см. шапку файла)"
+            echo "ok=false" >> "$GITHUB_OUTPUT"
           else
-            mkdir -p /tmp/out && cd /tmp/out
-            git init -q -b "$DEPLOY_BRANCH" && git remote add origin "$REMOTE"
-            cd - >/dev/null
+            echo "ok=true" >> "$GITHUB_OUTPUT"
           fi
-          rsync -a --delete --exclude '.git' dist/ /tmp/out/
-          cd /tmp/out
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "Изменений в сайте нет — выкладка не нужна"
-          else
-            git commit -q -m "ZhanaRu build ${GITHUB_SHA::7}"
-            git push origin "$DEPLOY_BRANCH"
-            echo "Опубликовано в $DEPLOY_BRANCH — Plesk заберёт по webhook"
-          fi
+
+      - name: Выкладка в httpdocs
+        if: steps.ftp.outputs.ok == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: pkz21.hoster.kz
+          protocol: ftps
+          username: ${{ secrets.ZHANARU_FTP_USERNAME }}
+          password: ${{ secrets.ZHANARU_FTP_PASSWORD }}
+          local-dir: Zhanaru/web/dist/
+          server-dir: /httpdocs/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            api/private/rate/**
+            api/private/config.php
+
+      - name: Проверка живого сайта
+        if: steps.ftp.outputs.ok == 'true'
+        run: |
+          sleep 5
+          code=$(curl -s -o /tmp/home.html -w '%{http_code}' https://zhanaru.vip/)
+          echo "HTTP $code"
+          test "$code" = 200
+          grep -q "ZhanaRu" /tmp/home.html
