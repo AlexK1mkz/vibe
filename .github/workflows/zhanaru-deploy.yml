@@ -63,8 +63,9 @@ jobs:
         id: ftp
         env:
           FTP_USER: ${{ secrets.ZHANARU_FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.ZHANARU_FTP_PASSWORD }}
         run: |
-          if [ -z "$FTP_USER" ]; then
+          if [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
             echo "::warning::Сайт собран и проверен, но не выложен: не заданы секреты ZHANARU_FTP_USERNAME / ZHANARU_FTP_PASSWORD (см. шапку файла)"
             echo "ok=false" >> "$GITHUB_OUTPUT"
           else
