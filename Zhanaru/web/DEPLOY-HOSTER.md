@@ -12,7 +12,8 @@
    там же кнопка «Run workflow» для ручного запуска.
 
 Доступ к FTP хранится в секретах репозитория (Settings → Secrets and variables → Actions):
-`ZHANARU_FTP_USERNAME` и `ZHANARU_FTP_PASSWORD` — логин и пароль из Plesk (zhanaru.vip → «Доступ по FTP»).
+`ZHANARU_FTP_USERNAME` и `ZHANARU_FTP_PASSWORD` — отдельная FTP-учётка Plesk `zhanaru_deploy` с домашней папкой
+`/httpdocs` (Plesk → FTP). Она видит только сайт, а не настройки заявок выше `httpdocs`.
 Без них сайт собирается и проверяется, но не выкладывается.
 
 Настройки заявок (`zhanaru-config.php`) лежат на хостинге **выше** `httpdocs` — выкладка их не трогает.

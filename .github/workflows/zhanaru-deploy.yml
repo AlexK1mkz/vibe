@@ -4,8 +4,8 @@
 # Если тесты или сборка упали — сайт не трогается.
 #
 # Нужны два секрета репозитория (Settings → Secrets and variables → Actions):
-#   ZHANARU_FTP_USERNAME — логин FTP из Plesk (zhanaru.vip → «Доступ по FTP»)
-#   ZHANARU_FTP_PASSWORD — его пароль
+#   ZHANARU_FTP_USERNAME — отдельная FTP-учётка Plesk с домашней папкой /httpdocs (zhanaru_deploy)
+#   ZHANARU_FTP_PASSWORD — её пароль
 # Настройки заявок (zhanaru-config.php) лежат на хостинге выше httpdocs — выкладка их не видит и не трогает.
 name: ZhanaRu → Hoster.kz
 
@@ -80,7 +80,8 @@ jobs:
           username: ${{ secrets.ZHANARU_FTP_USERNAME }}
           password: ${{ secrets.ZHANARU_FTP_PASSWORD }}
           local-dir: Zhanaru/web/dist/
-          server-dir: /httpdocs/
+          # FTP-учётка zhanaru_deploy видит только httpdocs — это её корень
+          server-dir: ./
           exclude: |
             **/.git*
             **/.git*/**
