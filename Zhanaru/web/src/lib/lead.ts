@@ -28,7 +28,7 @@ export interface LeadPayload {
 /** Короткий случайный номер заявки, например «ZR-7K3Q9A». */
 export const newLeadId = () => 'ZR-' + Math.random().toString(36).slice(2, 8).toUpperCase();
 
-/** Ответы и результат теста в виде, удобном для куратора и таблицы. */
+/** Ответы и результат теста в виде, удобном для помощника врача и таблицы. */
 export function quizPayload(a: Answers, r: QuizResult): Record<string, unknown> {
   const b = bmi(a.height, a.mass);
   return {

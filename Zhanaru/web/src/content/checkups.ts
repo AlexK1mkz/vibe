@@ -27,7 +27,7 @@ export const baseCheckup = {
 
 export interface CheckupFocus {
   id: DirectionId;
-  /** Название фокуса — так чекап называется в результате теста и в сообщении куратору. */
+  /** Название фокуса — так чекап называется в результате теста и в сообщении помощнику врача. */
   name: string;
   question: string;
   markers: string[];

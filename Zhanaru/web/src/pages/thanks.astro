@@ -3,7 +3,7 @@ import Page from '../layouts/Page.astro';
 import { site, waLink, waDefaultText } from '../content/site';
 ---
 <Page title="Заявка принята" noindex fab={false}>
-  <p class="lead">Куратор свяжется с вами {site.sla}. Клиника работает {site.hours.label.toLowerCase()}.</p>
+  <p class="lead">Помощник врача свяжется с вами {site.sla}. Клиника работает {site.hours.label.toLowerCase()}.</p>
   <p>Если удобнее переписка — напишите нам сами, ответим в чате.</p>
   <p class="flex flex-wrap gap-3">
     <a class="btn btn-primary !text-white !no-underline" href={waLink(waDefaultText)} target="_blank" rel="noopener" data-cta="thanks" data-lead="whatsapp">Написать в WhatsApp</a>

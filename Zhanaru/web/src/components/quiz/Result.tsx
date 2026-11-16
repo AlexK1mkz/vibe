@@ -232,7 +232,7 @@ export default function Result({ answers, result }: { answers: Answers; result: 
           <p role="status" className="mt-5 flex items-start gap-3 rounded-2xl bg-goal-soft px-4 py-3 text-sm text-brand-deep">
             <CheckCircle2 size={20} className="mt-0.5 shrink-0" aria-hidden="true" />
             <span>
-              {contact.firstName}, результат у куратора. {seg === 'D' ? t.memoNote : `Куратор напишет в WhatsApp ${site.sla}.`}
+              {contact.firstName}, результат у помощника врача. {seg === 'D' ? t.memoNote : `Помощник врача напишет в WhatsApp ${site.sla}.`}
             </span>
           </p>
         )}

@@ -16,8 +16,8 @@ export const scaleNames: Record<ScaleId, { full: string; short: string; inText: 
 export const attentionText = (r: QuizResult) => r.attention.map((id) => scaleNames[id].inText).join(', ');
 
 const closing: Record<QuizResult['segment'], string> = {
-  A: 'Желаю обсудить результат с куратором.',
-  B: 'Желаю обсудить результат с куратором.',
+  A: 'Желаю обсудить результат с помощником врача.',
+  B: 'Желаю обсудить результат с помощником врача.',
   C: 'Хочу записаться на чекап.',
   D: 'Пришлите, пожалуйста, памятку «Какие анализы сдавать раз в год».',
 };
