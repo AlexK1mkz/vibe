@@ -67,7 +67,11 @@ export const site = {
   /** ID счётчиков. Пустая строка — счётчик не загружается. */
   analytics: { ga4: '', metaPixel: '', yandexMetrika: '' },
 
-  labs: ['ОЛИМП', 'INVITRO'],
+  /** Лаборатории-партнёры: логотипы в public/img/labs (обрезаны, высота 112 px). */
+  labs: [
+    { name: 'ОЛИМП', logo: '/img/labs/olymp.webp', w: 351, h: 112, height: 48 },
+    { name: 'INVITRO', logo: '/img/labs/invitro.webp', w: 610, h: 112, height: 28 },
+  ],
 } as const;
 
 export const waLink = (text: string) =>

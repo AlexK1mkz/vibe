@@ -18,10 +18,24 @@ import SectionHead from '../ui/SectionHead.astro';
         </li>
       ))}
     </ul>
-    <p class="reveal mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 rounded-3xl border border-line bg-surface px-6 py-5 text-[15px] text-muted">
-      Лаборатории-партнёры:
-      {site.labs.map((lab) => <b class="font-display tracking-[0.04em] text-ink">{lab}</b>)}
-      <span>· анализы сдаются прямо в клинике</span>
-    </p>
+    <div class="reveal mt-10 flex flex-wrap items-center gap-x-6 gap-y-4 rounded-3xl border border-line bg-surface px-6 py-5 text-[15px] text-muted">
+      <span>Лаборатории-партнёры:</span>
+      <ul class="grid w-full grid-cols-2 gap-3 sm:flex sm:w-auto sm:flex-wrap sm:items-center">
+        {site.labs.map((lab) => (
+          <li class="grid h-16 place-items-center rounded-2xl bg-white px-3 ring-1 ring-line sm:min-w-[170px] sm:px-4">
+            <img
+              src={lab.logo}
+              alt={`Лаборатория ${lab.name}`}
+              width={lab.w}
+              height={lab.h}
+              loading="lazy"
+              decoding="async"
+              style={`height:${lab.height}px;width:auto;max-width:100%;object-fit:contain`}
+            />
+          </li>
+        ))}
+      </ul>
+      <span>Анализы сдаются прямо в клинике</span>
+    </div>
   </div>
 </section>
