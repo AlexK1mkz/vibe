@@ -9,7 +9,7 @@ let n = 0;
   <div class="wrap">
     <SectionHead eyebrow={checkupsSection.eyebrow} title={checkupsSection.title} lead={checkupsSection.lead} />
     <div class="grid gap-4 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-      <article class="card reveal flex flex-col p-6 sm:p-8">
+      <article class="card reveal flex flex-col p-5 sm:p-8">
         <p class="eyebrow">{baseCheckup.name}</p>
         <h3 class="h3 mt-3 !text-[clamp(22px,2.4vw,28px)]">{baseCheckup.title}</h3>
         <p class="mt-3 text-muted">{baseCheckup.lead}</p>
@@ -32,8 +32,11 @@ let n = 0;
           <a class="btn btn-primary max-sm:w-full" href="#test" data-cta="checkups">{checkupsSection.cta}</a>
         </div>
       </article>
-      <div class="card reveal p-6 sm:p-8">
-        <h3 class="h3">Что входит в базовый чекап</h3>
+      <details class="card reveal group/list p-5 sm:p-8" open data-m-collapse>
+        <summary class="flex list-none items-center justify-between gap-3 sm:pointer-events-none [&::-webkit-details-marker]:hidden">
+          <h3 class="h3">Что входит в базовый чекап</h3>
+          <span class="grid size-9 shrink-0 place-items-center rounded-full bg-brand-soft text-brand-deep transition-transform group-open/list:rotate-180 sm:hidden"><Icon name="chevron-down" size={18} /></span>
+        </summary>
         <div class="mt-5 grid gap-x-8 gap-y-5 sm:grid-cols-2">
           {baseCheckup.groups.map((group) => (
             <div>
@@ -46,11 +49,11 @@ let n = 0;
             </div>
           ))}
         </div>
-      </div>
+      </details>
     </div>
 
-    <h3 class="h3 reveal mt-12">{checkupsSection.focusTitle}</h3>
-    <ul class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <h3 class="h3 reveal mt-10 sm:mt-12">{checkupsSection.focusTitle}</h3>
+    <ul class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 m-rail">
       {checkupFocuses.map((f) => (
         <li class="reveal rounded-3xl border border-line bg-surface p-5">
           <p class="font-display text-lg font-bold">{f.name}</p>

@@ -4,7 +4,7 @@ import { jobs } from '../../content/sections';
 import Icon from '../ui/Icon.astro';
 ---
 <section class="pb-4 pt-2" aria-label="С какой задачей вы пришли">
-  <div class="wrap grid gap-4 md:grid-cols-2">
+  <div class="wrap grid gap-4 md:grid-cols-2 m-rail">
     {jobs.map((job) => (
       <a href="#test" data-quiz-goal={job.goal} data-cta={`job_${job.goal}`}
         class:list={[`tint-${job.tone}`, 'reveal group relative flex flex-col gap-4 overflow-hidden rounded-[28px] p-6 shadow-soft transition-transform duration-300 ease-out hover:-translate-y-1 sm:p-8']}>

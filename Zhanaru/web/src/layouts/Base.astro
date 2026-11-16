@@ -92,6 +92,28 @@ const og = abs(site.ogImage);
 
     captureUtm();
 
+    // Телефон: точки под лентами карточек и свёрнутый список показателей чекапа.
+    const phone = matchMedia('(max-width: 639px)');
+    if (phone.matches) document.querySelectorAll<HTMLDetailsElement>('details[data-m-collapse]').forEach((d) => { d.open = false; });
+    document.querySelectorAll<HTMLElement>('.m-rail').forEach((rail) => {
+      const n = rail.children.length;
+      if (n < 2) return;
+      const dots = document.createElement('div');
+      dots.className = 'm-dots';
+      dots.setAttribute('aria-hidden', 'true');
+      dots.innerHTML = '<i></i>'.repeat(n);
+      rail.after(dots);
+      const mark = () => {
+        const first = rail.children[0] as HTMLElement;
+        const step = first.offsetWidth + 12;
+        const max = rail.scrollWidth - rail.clientWidth;
+        const i = rail.scrollLeft >= max - 4 ? n - 1 : Math.round(rail.scrollLeft / step);
+        dots.querySelectorAll('i').forEach((dot, k) => dot.classList.toggle('on', k === i));
+      };
+      rail.addEventListener('scroll', mark, { passive: true });
+      mark();
+    });
+
     // Плашки согласия на cookies нет (для Казахстана не нужна): счётчики грузятся сразу, если их ID заданы
     loadCounters();
 

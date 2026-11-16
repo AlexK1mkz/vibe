@@ -4,7 +4,7 @@ import { method } from '../../content/sections';
 <section id="method" class="section">
   <div class="wrap">
     <div class="panel-deep on-dark reveal overflow-hidden rounded-[32px]">
-      <div class="grid gap-6 p-6 sm:p-10 lg:grid-cols-2 lg:gap-12 lg:p-14">
+      <div class="grid gap-4 p-5 sm:gap-6 sm:p-10 lg:grid-cols-2 lg:gap-12 lg:p-14">
         <div>
           <p class="eyebrow">{method.eyebrow}</p>
           <h2 class="h2 mt-4">{method.title}</h2>
@@ -13,10 +13,12 @@ import { method } from '../../content/sections';
       </div>
       <ol class="grid border-t border-white/15 lg:grid-cols-3">
         {method.steps.map((step, i) => (
-          <li class="border-white/15 p-6 max-lg:border-b max-lg:last:border-b-0 sm:p-10 lg:border-r lg:last:border-r-0">
-            <span class="grid size-11 place-items-center rounded-full bg-sun font-display font-bold text-[#1B1405]">{i + 1}</span>
-            <h3 class="h3 mt-3">{step.title}</h3>
-            <p class="mt-2 text-white/80">{step.text}</p>
+          <li class="flex gap-4 border-white/15 p-5 max-lg:border-b sm:block max-lg:last:border-b-0 sm:p-10 lg:border-r lg:last:border-r-0">
+            <span class="grid size-10 shrink-0 place-items-center rounded-full bg-sun sm:size-11 font-display font-bold text-[#1B1405]">{i + 1}</span>
+            <div>
+              <h3 class="h3 sm:mt-3">{step.title}</h3>
+              <p class="mt-1.5 text-white/80 sm:mt-2">{step.text}</p>
+            </div>
           </li>
         ))}
       </ol>
