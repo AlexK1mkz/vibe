@@ -5,6 +5,10 @@ import { site, waLink, waDefaultText } from '../../content/site';
 import { ru } from '../../i18n/ru';
 import Icon from '../ui/Icon.astro';
 import WaIcon from '../ui/WaIcon.astro';
+
+// Яндекс-карта без ключа API: метка по координатам клиники, маршрут — кнопкой в 2ГИС
+const { lat, lon } = site.geo;
+const mapSrc = `https://yandex.kz/map-widget/v1/?ll=${lon}%2C${lat}&z=16&pt=${lon}%2C${lat}%2Cpm2grm`;
 ---
 <section id="contacts" class="section !pt-0" data-hide-fab>
   <div class="wrap grid gap-4 lg:grid-cols-2">
@@ -49,16 +53,17 @@ import WaIcon from '../ui/WaIcon.astro';
           </div>
         </li>
       </ul>
-      <a href={site.gis.url} target="_blank" rel="noopener" data-cta="map"
-        class="relative mt-8 flex min-h-[180px] flex-1 items-end overflow-hidden rounded-3xl bg-brand-soft p-5">
-        <svg class="absolute inset-0 size-full" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <g fill="none" stroke="#fff" stroke-width="7"><path d="M-20 60 420 30M-20 150 420 135M70 -20 95 240M210 -20 225 240M330 -20 340 240"/></g>
-          <path d="M-20 110C90 95 150 125 230 100S360 70 420 85" fill="none" stroke="#BFD9CF" stroke-width="12" stroke-linecap="round"/>
-          <circle cx="225" cy="100" r="22" fill="var(--brand)" opacity=".18"/>
-          <circle cx="225" cy="100" r="9" fill="var(--brand)" stroke="#fff" stroke-width="3"/>
-        </svg>
-        <span class="btn btn-primary btn-sm relative">{ru.common.route}<Icon name="arrow-right" size={18} /></span>
-      </a>
+      <div class="relative mt-8 min-h-[260px] flex-1 overflow-hidden rounded-3xl bg-brand-soft">
+        <iframe
+          src={mapSrc}
+          title={`${site.name} на Яндекс Картах: ${site.address.street}, ${site.city}`}
+          class="absolute inset-0 size-full border-0"
+          loading="lazy"
+          allowfullscreen
+        ></iframe>
+        <a href={site.gis.url} target="_blank" rel="noopener" data-cta="map"
+          class="btn btn-primary btn-sm absolute bottom-4 left-4 shadow-lg">{ru.common.route}<Icon name="arrow-right" size={18} /></a>
+      </div>
     </div>
   </div>
 </section>
