@@ -67,11 +67,6 @@ export const ru = {
     errorConsent: 'Нужно согласие на обработку данных',
     fail: 'Не получилось отправить заявку. Напишите нам в WhatsApp — ответим там.',
   },
-  cookie: {
-    text: 'Мы используем cookies для аналитики, чтобы делать сайт удобнее.',
-    accept: 'Принять',
-    decline: 'Только необходимые',
-  },
 };
 
 export type Dict = typeof ru;

@@ -1,0 +1,81 @@
+# ZhanaRu: автовыкладка на Hoster.kz (Plesk).
+# Любое изменение в Zhanaru/web на main → тесты → сборка под zhanaru.vip →
+# готовые файлы коммитятся в ветку deploy-zhanaru → GitHub шлёт webhook в Plesk →
+# Plesk (Git-репозиторий сайта) забирает ветку и выкладывает её в httpdocs.
+# Секретов здесь нет: config с ключами лежит на хостинге вне httpdocs и в репозиторий не попадает.
+name: ZhanaRu → Hoster.kz
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Zhanaru/web/**'
+      - '.github/workflows/zhanaru-deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: zhanaru-deploy
+  cancel-in-progress: false
+
+env:
+  SITE_URL: https://zhanaru.vip
+  DEPLOY_BRANCH: deploy-zhanaru
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Zhanaru/web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: Zhanaru/web/package-lock.json
+
+      - name: Зависимости
+        run: npm ci --no-audit --no-fund
+
+      - name: Тесты
+        run: npm test
+
+      - name: Сборка
+        run: npm run build
+
+      - name: Проверка сборки
+        run: |
+          test -f dist/index.html
+          test -f dist/.htaccess
+          test -f dist/api/lead.php
+          rm -rf dist/api/private/config.php dist/api/private/rate
+
+      - name: Коммит в ветку выкладки
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          REMOTE="https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git clone --depth 1 --branch "$DEPLOY_BRANCH" "$REMOTE" /tmp/out 2>/dev/null; then
+            echo "Ветка $DEPLOY_BRANCH найдена"
+          else
+            mkdir -p /tmp/out && cd /tmp/out
+            git init -q -b "$DEPLOY_BRANCH" && git remote add origin "$REMOTE"
+            cd - >/dev/null
+          fi
+          rsync -a --delete --exclude '.git' dist/ /tmp/out/
+          cd /tmp/out
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Изменений в сайте нет — выкладка не нужна"
+          else
+            git commit -q -m "ZhanaRu build ${GITHUB_SHA::7}"
+            git push origin "$DEPLOY_BRANCH"
+            echo "Опубликовано в $DEPLOY_BRANCH — Plesk заберёт по webhook"
+          fi

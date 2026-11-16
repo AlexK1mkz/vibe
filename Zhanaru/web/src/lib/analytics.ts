@@ -1,5 +1,5 @@
-// События аналитики (ТЗ 9.6). Счётчики грузятся только после согласия на cookies
-// и только если их ID заданы в src/content/site.ts.
+// События аналитики (ТЗ 9.6). Счётчики грузятся сразу при открытии страницы,
+// если их ID заданы в src/content/site.ts.
 import { site } from '../content/site';
 
 type Params = Record<string, string | number | boolean | undefined>;
@@ -13,27 +13,10 @@ declare global {
   }
 }
 
-const CONSENT_KEY = 'zr_cookie';
 const UTM_KEY = 'zr_utm';
 const LEAD_EVENTS = new Set(['lead_whatsapp', 'lead_callback']);
 
-export function getConsent(): 'all' | 'necessary' | null {
-  try {
-    const v = localStorage.getItem(CONSENT_KEY);
-    return v === 'all' || v === 'necessary' ? v : null;
-  } catch {
-    return null;
-  }
-}
-
-export function setConsent(v: 'all' | 'necessary') {
-  try {
-    localStorage.setItem(CONSENT_KEY, v);
-  } catch { /* приватный режим */ }
-  if (v === 'all') loadCounters();
-}
-
-/** Отправка события во все подключённые счётчики. До согласия события остаются только в dataLayer. */
+/** Отправка события во все подключённые счётчики. */
 export function track(event: string, params: Params = {}) {
   if (typeof window === 'undefined') return;
   (window.dataLayer ||= []).push({ event, ...params });

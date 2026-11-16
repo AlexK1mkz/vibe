@@ -87,36 +87,13 @@ const og = abs(site.ogImage);
     </a>
   )}
 
-  <div
-    id="cookie-banner" hidden
-    role="region" aria-label="Cookies"
-    class="glass fixed inset-x-3 bottom-3 z-50 mx-auto flex max-w-2xl flex-col gap-3 rounded-3xl p-4 text-sm sm:flex-row sm:items-center sm:p-5"
-  >
-    <p class="flex-1">
-      {ru.cookie.text} <a href="/privacy/" class="text-brand underline underline-offset-2">Подробнее</a>
-    </p>
-    <div class="flex gap-2">
-      <button type="button" class="btn btn-ghost btn-sm flex-1" data-cookie="necessary">{ru.cookie.decline}</button>
-      <button type="button" class="btn btn-primary btn-sm flex-1" data-cookie="all">{ru.cookie.accept}</button>
-    </div>
-  </div>
-
   <script>
-    import { captureUtm, getConsent, loadCounters, setConsent, track } from '../lib/analytics';
+    import { captureUtm, loadCounters, track } from '../lib/analytics';
 
     captureUtm();
 
-    // Cookies: счётчики подключаются только после согласия
-    const banner = document.getElementById('cookie-banner');
-    const consent = getConsent();
-    if (consent === 'all') loadCounters();
-    else if (!consent && banner) banner.hidden = false;
-    banner?.querySelectorAll<HTMLButtonElement>('[data-cookie]').forEach((btn) =>
-      btn.addEventListener('click', () => {
-        setConsent(btn.dataset.cookie as 'all' | 'necessary');
-        banner.hidden = true;
-      }),
-    );
+    // Плашки согласия на cookies нет (для Казахстана не нужна): счётчики грузятся сразу, если их ID заданы
+    loadCounters();
 
     // Клики: cta_click для всех CTA, lead_whatsapp для ссылок в WhatsApp; карточки с целью запускают тест
     document.addEventListener('click', (e) => {

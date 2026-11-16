@@ -36,7 +36,6 @@ async function fillContact(page: Page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.addInitScript(() => localStorage.setItem('zr_cookie', 'necessary'));
   await page.route('**/api/lead.php', (route) => route.fulfill({ json: { ok: true } }));
 });
 
