@@ -60,8 +60,9 @@ export const site = {
   verification: { google: '', yandex: '' },
 
   /** Обложка для предпросмотра ссылки (JPG 1200×630, scripts/make-og.mjs). */
-  ogImage: '/og/zhanaru-cover.jpg',
-  ogImageAlt: 'ZhanaRu, Астана: «Энергия — ваш новый статус. Чекап покажет, где вы её теряете»',
+  // ?v= меняется вместе с картинкой, чтобы Facebook и мессенджеры не показывали старую из кеша
+  ogImage: '/og/zhanaru-cover.jpg?v=2',
+  ogImageAlt: 'ZhanaRu, Астана: «Нет сил уже к обеду? За один визит найдём причину и вернём энергию»',
 
   /** ID счётчиков. Пустая строка — счётчик не загружается. */
   analytics: { ga4: '', metaPixel: '', yandexMetrika: '' },

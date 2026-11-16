@@ -54,8 +54,8 @@ p.lead { margin-top: 20px; font-size: 25px; line-height: 1.35; color: rgb(255 25
 </style></head><body>
 <div class="text">
   <div class="brand">${logo}<div><b>ZhanaRu</b><small>центр осознанного здоровья · Астана</small></div></div>
-  <h1><span class="accent">Энергия — ваш новый статус.</span>Чекап покажет, где вы её теряете</h1>
-  <p class="lead">Анализы и разбор с врачом за один визит. Пройдите тест — результат на карте тела.</p>
+  <h1><span class="accent">Нет сил уже к обеду?</span>За один визит найдём причину и вернём энергию</h1>
+  <p class="lead">Анализы, врач и план восполнения дефицитов — в одном месте, без очередей.</p>
   <div class="row"><span class="cta">Тест за 2 минуты →</span><span class="chip">★ 4,8 в 2ГИС</span></div>
 </div>
 <div class="photo"><img src="${file('src-photos/moss-wall.jpg')}"><span>ЖК Manhattan, ул. Анет баба, 13</span></div>
