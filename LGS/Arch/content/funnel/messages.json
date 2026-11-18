@@ -1,0 +1,92 @@
+{
+  "status": "draft",
+  "note": "Цепочка WhatsApp (ТЗ, п. 7.3). Частоту утверждает Alex. Сообщение с enabled=false не отправляется: в нём не хватает реальных данных (видео, история, ссылка на эфир, остаток мест). Подстановки: {name}, {archetype}, {resultUrl}, {consultUrl}, {intensiveUrl}, {unsubscribeUrl}. when.type: immediate | delay (minutes после контакта) | nextDayAt (time) | date (date, time). audience: all | unpaid | intensive_paid. stopAfterPaid: шаг, после оплаты которого сообщение не уходит.",
+  "messages": [
+    {
+      "id": "result_link",
+      "enabled": true,
+      "when": { "type": "immediate" },
+      "segments": ["A", "B", "specialist"],
+      "audience": "all",
+      "text": "{name}, ваш полный разбор: {resultUrl}\n\nВаш архетип: {archetype}. Внутри слепая зона в вашей ситуации и техника на сегодня.\n\nОтписаться: {unsubscribeUrl}"
+    },
+    {
+      "id": "consult_offer",
+      "enabled": true,
+      "when": { "type": "delay", "minutes": 60 },
+      "segments": ["A"],
+      "audience": "unpaid",
+      "stopAfterPaid": ["consult", "intensive", "vip"],
+      "text": "{name}, на консультации мастер за 40 минут найдёт точку проблемы в вашей ситуации и скажет, что с ней делать. Стоимость 2 000 ₸.\n\nЗаписаться: {consultUrl}\n\nОтписаться: {unsubscribeUrl}"
+    },
+    {
+      "id": "technique_video",
+      "enabled": false,
+      "todo": "TODO(content): короткое видео с техникой для каждого архетипа. Без видео сообщение не отправляется.",
+      "when": { "type": "delay", "minutes": 60 },
+      "segments": ["B", "specialist"],
+      "audience": "unpaid",
+      "stopAfterPaid": ["intensive", "vip"],
+      "text": "{name}, техника для архетипа «{archetype}» в коротком видео: {videoUrl}\n\nПять вечеров с Саидой, 14–18 декабря: {intensiveUrl}\n\nОтписаться: {unsubscribeUrl}"
+    },
+    {
+      "id": "story_same_archetype",
+      "enabled": false,
+      "todo": "TODO(content): только реальная история человека с тем же архетипом. Нет истории: сообщение не отправляется.",
+      "when": { "type": "nextDayAt", "time": "10:00" },
+      "segments": ["A", "B", "specialist"],
+      "audience": "unpaid",
+      "stopAfterPaid": ["intensive", "vip"],
+      "text": "{story}\n\nИнтенсив «Структура человека», 14–18 декабря: {intensiveUrl}\n\nОтписаться: {unsubscribeUrl}"
+    },
+    {
+      "id": "daily_objection",
+      "enabled": false,
+      "todo": "TODO(content): текст про возражение утверждает Alex. Дата ставится после утверждения частоты.",
+      "when": { "type": "date", "date": "2026-12-10", "time": "10:00" },
+      "segments": ["A", "B", "specialist"],
+      "audience": "unpaid",
+      "stopAfterPaid": ["intensive", "vip"],
+      "text": "{objectionText}\n\n{intensiveUrl}\n\nОтписаться: {unsubscribeUrl}"
+    },
+    {
+      "id": "daily_program",
+      "enabled": false,
+      "todo": "TODO(content): программа вечера от Саиды.",
+      "when": { "type": "date", "date": "2026-12-11", "time": "10:00" },
+      "segments": ["A", "B", "specialist"],
+      "audience": "unpaid",
+      "stopAfterPaid": ["intensive", "vip"],
+      "text": "{programText}\n\n{intensiveUrl}\n\nОтписаться: {unsubscribeUrl}"
+    },
+    {
+      "id": "daily_vip",
+      "enabled": false,
+      "todo": "TODO(content): состав тарифа VIP.",
+      "when": { "type": "date", "date": "2026-12-12", "time": "10:00" },
+      "segments": ["A", "B", "specialist"],
+      "audience": "unpaid",
+      "stopAfterPaid": ["vip"],
+      "text": "{vipText}\n\n{intensiveUrl}\n\nОтписаться: {unsubscribeUrl}"
+    },
+    {
+      "id": "daily_seats",
+      "enabled": false,
+      "todo": "TODO(content): остаток мест только из реальных данных. Нужен источник фактического остатка.",
+      "when": { "type": "date", "date": "2026-12-13", "time": "10:00" },
+      "segments": ["A", "B", "specialist"],
+      "audience": "unpaid",
+      "stopAfterPaid": ["intensive", "vip"],
+      "text": "{name}, на интенсив осталось мест: {seatsLeft}. Старт завтра.\n\n{intensiveUrl}\n\nОтписаться: {unsubscribeUrl}"
+    },
+    {
+      "id": "broadcast_link",
+      "enabled": false,
+      "todo": "TODO(content): ссылка на эфир и время начала.",
+      "when": { "type": "date", "date": "2026-12-14", "time": "10:00" },
+      "segments": ["A", "B", "specialist"],
+      "audience": "intensive_paid",
+      "text": "{name}, сегодня первый вечер интенсива «Структура человека». Начало в {startTime}. Ссылка на эфир: {broadcastUrl}\n\nОтписаться: {unsubscribeUrl}"
+    }
+  ]
+}
