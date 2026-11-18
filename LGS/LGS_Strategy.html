@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Стратегия и смета старта LGS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: one reading column; every section is a scheme first, words second; money and dates in the display face. */
+:root{
+  --paper:#f3f5f4;--card:#ffffff;--ink:#13212b;--muted:#586874;--line:#d5dcdb;
+  --petrol:#0e6a6c;--petrol-soft:#dcecea;--amber:#c9791a;--amber-soft:#f6e6cf;
+  --display:"Unbounded","Golos Text",system-ui,sans-serif;
+  --body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f171c;--card:#172229;--ink:#e8eeee;--muted:#9aaab3;--line:#2b3a43;
+    --petrol:#5cc2bf;--petrol-soft:#17363a;--amber:#eaa54a;--amber-soft:#3a2c17;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f171c;--card:#172229;--ink:#e8eeee;--muted:#9aaab3;--line:#2b3a43;
+  --petrol:#5cc2bf;--petrol-soft:#17363a;--amber:#eaa54a;--amber-soft:#3a2c17;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+header.top{padding:52px 0 36px;border-bottom:1px solid var(--line)}
+.kicker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--petrol);font-weight:600;margin:0 0 14px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(27px,4.8vw,44px);line-height:1.13;margin:0 0 18px;text-wrap:balance;max-width:20ch}
+.lead{font-size:20px;line-height:1.5;max-width:64ch;margin:0}
+.meta{margin-top:20px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:6px 22px}
+section{padding:50px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+.num{font-family:var(--display);font-size:13px;color:var(--amber);font-weight:500;letter-spacing:.04em}
+h2{font-family:var(--display);font-weight:500;font-size:clamp(21px,3.2vw,28px);line-height:1.2;margin:6px 0 12px;text-wrap:balance;max-width:28ch}
+h3{font-size:17px;font-weight:700;margin:0 0 6px;text-wrap:balance}
+p{margin:0 0 14px;max-width:66ch}
+.sub{color:var(--muted);max-width:68ch;margin-bottom:26px}
+.note{font-size:14.5px;color:var(--muted);max-width:74ch;margin-top:16px}
+.wide{overflow-x:auto;margin:0 -20px;padding:0 20px}
+.fig{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:32px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.tile .v{font-family:var(--display);font-weight:700;font-size:23px;line-height:1.15;font-variant-numeric:tabular-nums;color:var(--petrol)}
+.tile.money .v{color:var(--amber)}
+.tile .l{font-size:14px;color:var(--muted);margin-top:8px;line-height:1.35}
+
+/* horizons */
+.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end;min-width:740px}
+.hz>div{border-radius:10px 10px 0 0;padding:18px;border-top:3px solid var(--petrol);background:var(--petrol-soft);display:flex;flex-direction:column;gap:8px}
+.hz .now{background:var(--amber-soft);border-top-color:var(--amber);min-height:210px}
+.hz .mid{min-height:260px}.hz .far{min-height:310px}
+.hz .when{font-family:var(--display);font-size:12.5px;font-weight:500;color:var(--petrol);letter-spacing:.03em}
+.hz .now .when{color:var(--amber)}
+.hz ul{margin:0;padding-left:18px;font-size:14.5px;color:var(--muted);line-height:1.45}
+.hz .now ul{color:var(--ink)}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:26px;min-width:900px}
+.fstep{position:relative;background:var(--petrol-soft);border:1px solid var(--petrol);border-radius:10px;padding:16px 14px;display:flex;flex-direction:column;gap:6px}
+.fstep::after{content:"";position:absolute;right:-21px;top:50%;width:14px;height:14px;border-top:2px solid var(--muted);border-right:2px solid var(--muted);transform:translateY(-50%) rotate(45deg)}
+.fstep:last-child::after{display:none}
+.fstep.pay{background:var(--amber-soft);border-color:var(--amber)}
+.fstep .k{font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:var(--petrol)}
+.fstep.pay .k{color:var(--amber)}
+.fstep .t{font-weight:700;font-size:16px;line-height:1.25}
+.fstep .p{font-family:var(--display);font-weight:500;font-size:15px;font-variant-numeric:tabular-nums}
+.fstep .w{font-size:13.5px;color:var(--muted);line-height:1.4}
+.loop{margin-top:16px;padding:12px 16px;border:1px dashed var(--line);border-radius:10px;font-size:14.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 26px}
+.loop b{color:var(--ink)}
+
+/* bars */
+.funnel{display:grid;gap:10px}
+.frow{display:grid;grid-template-columns:250px 1fr;gap:14px;align-items:center}
+.frow .fl{font-size:15px;line-height:1.3}
+.frow .fl small{display:block;color:var(--muted);font-size:13px}
+.bar{height:36px;border-radius:6px;background:var(--petrol);display:flex;align-items:center;padding:0 10px;color:var(--card);font-family:var(--display);font-size:14px;font-weight:500;min-width:58px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.bar.soft{background:var(--petrol-soft);color:var(--petrol)}
+.bar.pay{background:var(--amber)}
+
+/* week grid */
+.week{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;min-width:760px}
+.wd{border-radius:8px;padding:12px;border:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;gap:6px;min-height:150px}
+.wd .d{font-family:var(--display);font-size:12.5px;font-weight:500;color:var(--muted)}
+.wd.th{background:var(--petrol-soft);border-color:var(--petrol)}
+.wd.pr{background:var(--amber-soft);border-color:var(--amber)}
+.wd .t{font-weight:700;font-size:15px}
+.wd .w{font-size:13.5px;color:var(--muted);line-height:1.4}
+.wd.pr .w,.wd.th .w{color:var(--ink)}
+
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+.box p,.box li{font-size:15px;color:var(--muted)}
+.box p{margin:0}
+.box ul{margin:6px 0 0;padding-left:18px}
+.box .who{font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:var(--petrol);margin-bottom:6px;display:block}
+
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:820px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+td.t{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--petrol);font-weight:600}
+td.m,th.m{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.grp td{background:var(--petrol-soft);font-weight:700;font-size:14px;letter-spacing:.02em}
+tr.sum td{font-weight:700;border-top:2px solid var(--ink)}
+tr.tot td{font-family:var(--display);font-weight:500;font-size:16px;background:var(--amber-soft)}
+tr:last-child td{border-bottom:0}
+td small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--petrol-soft);color:var(--petrol);white-space:nowrap}
+.pill.a{background:var(--amber-soft);color:var(--amber)}
+
+ol.todo{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:t}
+ol.todo li{counter-increment:t;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px 14px 58px;position:relative;font-size:16px}
+ol.todo li::before{content:counter(t);position:absolute;left:18px;top:13px;font-family:var(--display);font-weight:700;color:var(--amber);font-size:17px}
+ol.todo li small{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+footer{padding:28px 0 60px;color:var(--muted);font-size:13.5px}
+footer p{max-width:84ch}
+
+@media (max-width:900px){
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .grid3,.grid4{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  header.top{padding-top:34px}
+  section{padding:36px 0}
+  .grid2,.grid3,.grid4{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr;gap:4px}
+  .lead{font-size:18px}
+}
+.strip{display:grid;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.strip>div{padding:16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.strip>div:last-child{border-right:0;background:var(--amber-soft)}
+.strip .wk{font-size:12.5px;color:var(--muted)}
+.strip h3{margin:4px 0 6px}
+.strip p{font-size:14.5px;color:var(--muted);margin:0}
+.strip>div:last-child p{color:var(--ink)}
+.strip h3{font-size:15.5px}
+@media (max-width:900px){.strip{grid-template-columns:1fr 1fr!important}}
+@media (max-width:640px){.strip{grid-template-columns:1fr!important}}
+.hbar{display:grid;grid-template-columns:230px 1fr 34px;gap:12px;align-items:center;font-size:15px;margin-bottom:8px}
+.hbar .tr{height:14px;border-radius:7px;background:var(--petrol-soft);overflow:hidden}
+.hbar .tr i{display:block;height:100%;background:var(--petrol);border-radius:7px}
+.hbar b{font-family:var(--display);font-weight:500;font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-weight:700;font-size:24px;color:var(--petrol);line-height:1.15;margin-bottom:6px;font-variant-numeric:tabular-nums}
+@media (max-width:640px){.hbar{grid-template-columns:1fr 34px}.hbar .tr{grid-column:1/-1;order:3}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="kicker">LGS · Институт современного NLP · рабочая группа Marketing LGS</p>
+  <h1>Стратегия старта, личный бренд и прогрев</h1>
+  <p class="lead">Версия с новой сметой и разбором роликов Амира Билялова. Вход в воронку через бесплатный тест, все следующие шаги платные. Саида становится лицом проекта, курс ведёт тренер. Каждый ролик строится по одной формуле: ситуация, причина, одно действие.</p>
+  <div class="meta"><span>Версия 6 от 18 ноября 2026</span><span>К встрече 18 ноября, 12:00</span><span>Суммы предварительные, в тенге</span></div>
+  <div class="tiles">
+    <div class="tile"><div class="v">25 ноября</div><div class="l">распаковка Саиды и съёмка 10 роликов в студии в Астане</div></div>
+    <div class="tile"><div class="v">1 декабря</div><div class="l">старт рекламы на тест «Архетип личности»</div></div>
+    <div class="tile"><div class="v">14–21 декабря</div><div class="l">интенсив и окно продаж НЛП Практик</div></div>
+    <div class="tile money"><div class="v">2,2–3,9 млн ₸</div><div class="l">пробный месяц без масштабирования рекламы и с ним, дальше 2,0 млн ₸ в месяц</div></div>
+  </div>
+</header>
+
+<section>
+  <div class="num">01</div>
+  <h2>Что изменилось после встречи</h2>
+  <div class="wide"><div class="fig" style="padding:6px 10px">
+    <table>
+      <thead><tr><th>Было в версии 2</th><th>Стало</th><th>Почему</th></tr></thead>
+      <tbody>
+        <tr><td>Бесплатная первая консультация</td><td>Бесплатный тест, консультация с мастером от 2 000 ₸</td><td>На бесплатное записываются и не приходят. Кто внёс деньги, тот доходит</td></tr>
+        <tr><td>Одна воронка для всех</td><td>Тест делит людей по доходу и запросу. От 1 000 $ в месяц идёт на консультацию, остальные сразу на интенсив</td><td>Время мастеров и Саиды тратим на тех, кто готов платить за Практик</td></tr>
+        <tr><td>Бесплатный тренинг</td><td>Интенсив за 10 000 ₸ и VIP за 50 000 ₸ с закрытым эфиром Саиды</td><td>Интенсив окупает часть рекламы, VIP показывает будущих покупателей</td></tr>
+        <tr><td>Оплата Практика целиком</td><td>Первый месяц за 100 000 ₸ с возвратом, если не подошло</td><td>Люди перестали верить обещаниям. Гарантия снимает главный страх</td></tr>
+        <tr><td>Саида ведёт обучение</td><td>Саида ведёт эфиры, интенсив и первый модуль. Теорию ведёт тренер</td><td>Саида и Мария в управлении. Поиск тренера становится первой задачей</td></tr>
+        <tr><td>Ежедневный часовой эфир</td><td>Одно короткое видео в день по рубрикам, эфиры по событиям</td><td>Эфиры в Instagram набирают мало, короткие видео расходятся по всем площадкам</td></tr>
+        <tr><td>Сайт дорабатывает Александр</td><td>Alex делает два лендинга, тест и аналитику</td><td>Один ответственный за сайт, рекламу и цифры</td></tr>
+        <tr><td>Реклама на весь русскоязычный рынок</td><td>Первый цикл только Казахстан</td><td>Реклама в Instagram доступна не везде, на юге и в соседних странах мешает языковой барьер</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+</section>
+
+<section>
+  <div class="num">02</div>
+  <h2>Путь клиента: тест, консультация, интенсив, Практик</h2>
+  <p class="sub">Человек входит через бесплатный тест и сразу получает короткий результат о себе. Дальше каждый шаг платный и каждый даёт самостоятельную пользу.</p>
+  <div class="wide"><div class="fig">
+    <div class="flow">
+      <div class="fstep"><span class="k">Шаг 1</span><div class="t">Reels и реклама</div><div class="p">трафик</div><div class="w">Ролик «неуверенный и уверенный», рубрики Саиды, призыв пройти тест</div></div>
+      <div class="fstep"><span class="k">Шаг 2</span><div class="t">Тест «Архетип личности»</div><div class="p">бесплатно, 3 минуты</div><div class="w">Результат сразу. Вопросы о запросе и доходе делят людей на два потока</div></div>
+      <div class="fstep pay"><span class="k">Шаг 3</span><div class="t">Консультация с мастером</div><div class="p">2 000 ₸</div><div class="w">Для дохода от 1 000 $. Мастер находит точку проблемы и приглашает дальше</div></div>
+      <div class="fstep pay"><span class="k">Шаг 4</span><div class="t">Интенсив «Структура человека»</div><div class="p">10 000 ₸ · VIP 50 000 ₸</div><div class="w">Пять вечеров с Саидой. VIP получает закрытый эфир</div></div>
+      <div class="fstep pay"><span class="k">Шаг 5</span><div class="t">НЛП Практик, 3 месяца</div><div class="p">500 000 ₸</div><div class="w">Первый месяц 100 000 ₸ с гарантией возврата. С мастером от 700 000 ₸</div></div>
+    </div>
+    <div class="loop"><span><b>Доход до 1 000 $:</b> после теста автоворонка в WhatsApp ведёт сразу на интенсив, без консультации</span><span><b>Продажи:</b> первые разговоры ведёт Саида, мастера продают через консультации</span></div>
+  </div></div>
+
+  <h3 style="margin-top:32px">Три сценария на 1 000 прошедших тест</h3>
+  <p class="sub" style="margin-bottom:16px">Мария оценивает конверсию шага в 20%, план со встречи закладывал 30%. Разница в итоге больше чем втрое, поэтому смотрим все три варианта.</p>
+  <div class="wide"><div class="fig" style="padding:6px 10px">
+    <table>
+      <thead><tr><th>Сценарий</th><th class="m">Конверсия шага</th><th class="m">Консультации</th><th class="m">Интенсив</th><th class="m">Оплаты Практика</th><th class="m">Выручка, ₸</th><th class="m">Доля маркетинга</th><th class="m">Вход для нормы 30%</th></tr></thead>
+      <tbody>
+        <tr><td>Осторожный</td><td class="m">20%</td><td class="m">200</td><td class="m">40</td><td class="m">8</td><td class="m">4 960 000</td><td class="m">120%</td><td class="m">3 985</td></tr>
+        <tr><td>Средний</td><td class="m">25%</td><td class="m">250</td><td class="m">63</td><td class="m">16</td><td class="m">9 382 000</td><td class="m">63%</td><td class="m">2 107</td></tr>
+        <tr><td>Оптимистичный</td><td class="m">30%</td><td class="m">300</td><td class="m">90</td><td class="m">27</td><td class="m">15 360 000</td><td class="m">39%</td><td class="m">1 287</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+  <p class="note">Выручка считает Практик по 500 000 ₸, интенсив с 10% VIP и консультации. Доля маркетинга посчитана от полной сметы на два месяца, 5 929 000 ₸. Вывод: при конверсии 20% тысячи человек на входе мало, нужно либо около 4 000 прохождений теста, либо выше средний чек за счёт пакетов с наставником. Поэтому стартуем со сметы без масштабирования и увеличиваем рекламу только по фактическим цифрам первой недели.</p>
+</section>
+
+<section>
+  <div class="num">03</div>
+  <h2>Специалисты: сначала тренер, потом мастера</h2>
+  <p class="sub">Весь курс держится на тренере, который ведёт теорию. Пока его нет, дату старта потока объявлять нельзя. Рекламу на специалистов и на клиентов разводим на неделю, чтобы мастера не ждали учеников, а ученики не ждали мастеров.</p>
+  <div class="grid3">
+    <div class="box"><span class="who">Шаг 1 · до 25 ноября</span><h3>Тренер потока</h3><p>Сначала личные контакты Саиды среди тренеров, с которыми она работала. Реклама подключается, если по личному списку никого нет.</p></div>
+    <div class="box"><span class="who">Шаг 2 · 23 ноября – 6 декабря</span><h3>Мастера и практики</h3><p>Реклама ведёт на вебинар Саиды для специалистов. Цель: 5–8 мастеров на практики и консультации, практики как кураторы групп.</p></div>
+    <div class="box"><span class="who">Шаг 3 · с 1 декабря</span><h3>Проверка в деле</h3><p>Первые пять консультаций каждый мастер проводит по единому сценарию. Кто не доводит людей до интенсива, не остаётся в команде.</p></div>
+  </div>
+  <p class="note">Схема подчинения: практики ведут чаты и группы, мастера наблюдают за практиками и ведут практические слоты, тренер наблюдает за мастерами. До рекламы нужны утверждённые ставки тренера за занятие и мастера за слот: сейчас оплачиваются только дополнительные консультации, 50 на 50.</p>
+</section>
+
+<section>
+  <div class="num">04</div>
+  <h2>Личный бренд Саиды: черновик распаковки</h2>
+  <p class="sub">Собрано из трёх встреч. Это основа для распаковки-подкаста: она пройдёт в студии в Астане ориентировочно 25 ноября, там уточняем факты, истории и формулировки. Всё, что идёт в профиль и рекламу, должно подтверждаться документом.</p>
+
+  <div class="grid2">
+    <div class="box"><span class="who">Позиционирование</span><h3>Саида Кадир, основатель Института современного NLP / LGS</h3><p>Учит управлять собой, разговором и решением через ежедневную практику НЛП. Одна тема на всех площадках: навык, который остаётся, потому что его отработали с мастером.</p></div>
+    <div class="box"><span class="who">Ключевая идея блога</span><h3>Любой взрослый человек может научиться управлять собой и разговором за три месяца</h3><p>При одном условии: практика каждый день и мастер, который поправляет ошибки. Теория без практики забывается за две недели.</p></div>
+  </div>
+
+  <p class="note">Одной фразой для шапки профиля: «Учу управлять собой и разговором. НЛП как навык: три месяца ежедневной практики с мастером». Амир Билялов даёт зрителю практику, которая успокаивает. Саида даёт инструмент, который меняет исход разговора и решения. Форма роликов похожа, обещание разное.</p>
+
+  <h3 style="margin-top:28px">История в пяти сценах</h3>
+  <div class="strip" style="grid-template-columns:repeat(5,1fr)">
+    <div><div class="wk">Сцена 1</div><h3>Система</h3><p>Годы в государственных финансах. Большие суммы, ответственность, жёсткие переговоры</p></div>
+    <div><div class="wk">Сцена 2</div><h3>Дорогой урок</h3><p>Обучение НЛП в Москве за большие деньги. Половина забылась: дома не с кем практиковать</p></div>
+    <div><div class="wk">Сцена 3</div><h3>Своя модель</h3><p>Перенесла обучение в онлайн и добавила практику каждый день. Школа выросла до тысяч учеников</p></div>
+    <div><div class="wk">Сцена 4</div><h3>Пауза</h3><p>Поняла, что рост обогнал управление. Остановилась и несколько лет училась строить компании</p></div>
+    <div><div class="wk">Сцена 5</div><h3>Возвращение</h3><p>Новый институт, новая команда, большая цель: объединённое общество LGS</p></div>
+  </div>
+  <p class="note">Сильное место истории в четвёртой сцене. Человек, который сам остановил растущую школу, потому что увидел свою ошибку, вызывает больше доверия, чем рассказ об одних победах.</p>
+
+  <h3 style="margin-top:28px">Шесть мыслей, которые должны остаться у зрителя</h3>
+  <div class="grid3">
+    <div class="box"><h3>1. Проблема не там, где вы думаете</h3><p>Человек называет одно, а мешает другое. НЛП находит точку проблемы.</p></div>
+    <div class="box"><h3>2. Это навык, а не талант</h3><p>Уверенность, голос, умение говорить и договариваться тренируются.</p></div>
+    <div class="box"><h3>3. Теория не работает</h3><p>Технику нужно пройти с мастером пять раз, и тогда она остаётся.</p></div>
+    <div class="box"><h3>4. Она прошла это сама</h3><p>Заплатила, не запомнила, перестроила обучение под себя.</p></div>
+    <div class="box"><h3>5. Здесь отвечают за результат</h3><p>Первый месяц с возвратом денег. Мастера проходят отбор.</p></div>
+    <div class="box"><h3>6. Это вход в большее</h3><p>После Практика есть рост до мастера и тренера, сообщество и работа.</p></div>
+  </div>
+
+  <div class="grid2" style="margin-top:18px">
+    <div class="box"><span class="who">Голос</span><h3>Прямо, коротко, с вызовом</h3><ul><li>Говорит как управленец: факт, вывод, действие</li><li>Провоцирует вопросом, а не оскорблением</li><li>Свои слова: «точка проблемы», «практика, практика, практика», «играем по-крупному»</li><li>Образ: собранная, дорогая картинка, студия или кабинет</li></ul></div>
+    <div class="box"><span class="who">Границы</span><h3>Чего в контенте нет</h3><ul><li>Обещаний вылечить страхи, фобии и болезни</li><li>«Управлять человеком» без оговорки: только там, где выигрывают обе стороны</li><li>Давления на деньги и стыд в эфире и на консультации</li><li>Регалий и цифр без документа</li><li>Материалов московского института без письменного согласия</li></ul></div>
+  </div>
+
+  <h3 style="margin-top:28px">Что подтвердить до упаковки профиля</h3>
+  <div class="wide"><div class="fig" style="padding:6px 10px">
+    <table>
+      <thead><tr><th>Факт из разговоров</th><th>Чем подтверждаем</th><th>Где используем</th></tr></thead>
+      <tbody>
+        <tr><td>Тренер тренеров НЛП</td><td>Сертификат института</td><td>Шапка профиля, лендинги</td></tr>
+        <tr><td>Годы работы в государственных финансах</td><td>Должности и период, которые можно называть</td><td>История, ролики «Большая игра»</td></tr>
+        <tr><td>Диплом профессионального переговорщика, обучение управлению</td><td>Дипломы</td><td>Шапка, рубрика «Читаю людей»</td></tr>
+        <tr><td>Психологическое образование</td><td>Диплом и специальность</td><td>Только если документ есть</td></tr>
+        <tr><td>25 000 учеников за три месяца, 154 страны</td><td>Выгрузка из GetCourse</td><td>История, реклама</td></tr>
+        <tr><td>Официальное представительство института</td><td>Договор или письмо</td><td>Сайт и реклама, до этого используем название «Институт современного NLP / LGS»</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+
+  <h3 style="margin-top:28px">Вопросы на распаковку-подкаст</h3>
+  <ol class="todo">
+    <li>С какой задачей вы пришли в НЛП и что случилось на первом обучении?<small>Нужна сцена: место, год, сумма, что почувствовали</small></li>
+    <li>Какой один случай из государственной службы научил вас переговорам?</li>
+    <li>В какой день вы поняли, что школу нужно остановить?</li>
+    <li>Что вы умеете делать за 20 минут разговора, чего не умеют другие?<small>Попросим показать на ведущем</small></li>
+    <li>Три истории клиентов: с чем пришли, что было настоящей проблемой, что изменилось</li>
+    <li>Кого вы не возьмёте в ученики и в команду?</li>
+    <li>С чем в мире НЛП и тренингов вы не согласны?</li>
+    <li>Каким будет человек через три месяца практики? Что он сможет в понедельник утром?</li>
+    <li>Зачем вам LGS? Что должно измениться в Казахстане через три года?</li>
+    <li>Как вы живёте вне работы: семья, сын, спорт, что даёт силы?</li>
+  </ol>
+</section>
+
+<section>
+  <div class="num">05</div>
+  <h2>Ориентир: как устроены ролики Амира Билялова</h2>
+  <p class="sub">Разобраны тексты из папки с расшифровками: 85 коротких роликов без повторов и 4 прямых эфира почти по два часа. Видео не смотрели, выводы сделаны только по тексту.</p>
+  <div class="grid4">
+    <div class="box"><div class="big">70 секунд</div><p>типичная длина ролика, около 134 слов</p></div>
+    <div class="box"><div class="big">1 мысль</div><p>на ролик: одна ситуация, одно объяснение, одно действие</p></div>
+    <div class="box"><div class="big">15 из 85</div><p>роликов продают. Из них 11 идут серией про один продукт</p></div>
+    <div class="box"><div class="big">4 эфира</div><p>по 1 ч 45 мин – 1 ч 55 мин: ответы на вопросы и практика вживую</p></div>
+  </div>
+
+  <h3 style="margin-top:28px">Анатомия ролика</h3>
+  <div class="strip" style="grid-template-columns:repeat(4,1fr)">
+    <div><div class="wk">Первая фраза</div><h3>Ситуация зрителя</h3><p>«Если у вас был тяжёлый разговор и вы выжаты как лимон…» Человек узнаёт себя до того, как понял тему</p></div>
+    <div><div class="wk">Середина</div><h3>Одно «потому что»</h3><p>Короткое объяснение, почему так происходит. Без терминов и без второго тезиса</p></div>
+    <div><div class="wk">Вторая половина</div><h3>Одно действие</h3><p>Фраза, которую нужно сказать, или шаги, которые можно сделать сразу, не выключая ролик</p></div>
+    <div><div class="wk">Последнее слово</div><h3>«Попробуйте»</h3><p>Без призыва подписаться и без продажи. Зритель уходит с действием, а возвращается за следующим</p></div>
+  </div>
+
+  <h3 style="margin-top:28px">С чего начинаются 85 роликов</h3>
+  <div class="fig">
+    <div class="hbar"><span>«Если вы…», «Если у вас…»</span><div class="tr"><i style="width:54%"></i></div><b>15</b></div>
+    <div class="hbar"><span>«Дам вам секрет», «Есть простая техника»</span><div class="tr"><i style="width:50%"></i></div><b>14</b></div>
+    <div class="hbar"><span>«Как…?»: убрать обиду, сбросить напряжение</span><div class="tr"><i style="width:46%"></i></div><b>13</b></div>
+    <div class="hbar"><span>«Часто…», «Многие…», «Самое худшее…»</span><div class="tr"><i style="width:25%"></i></div><b>7</b></div>
+    <div class="hbar"><span>«Никогда не…»</span><div class="tr"><i style="width:18%"></i></div><b>5</b></div>
+    <div class="hbar"><span>«Говорите эти слова…», «Делайте это…»</span><div class="tr"><i style="width:11%"></i></div><b>3</b></div>
+    <div class="hbar" style="margin-bottom:0"><span>Остальные: прямой тезис, анонсы, серия о продукте</span><div class="tr"><i style="width:100%"></i></div><b>28</b></div>
+  </div>
+  <p class="note">Подсчёт сделан по первым словам текста. В 36 роликах из 85 объяснение идёт через слово «энергия», в 19 звучит Бог или Всевышний.</p>
+
+  <h3 style="margin-top:28px">Что берём и что меняем</h3>
+  <div class="wide"><div class="fig" style="padding:6px 10px">
+    <table>
+      <thead><tr><th>Что делает Амир</th><th>Берём</th><th>Как это звучит у Саиды</th></tr></thead>
+      <tbody>
+        <tr><td>Начинает с бытовой ситуации и обращается на «вы»</td><td><span class="pill">да</span></td><td>Ситуации из работы и денег: переговоры, разговор с руководителем, цена, команда. Семья и дети как вторая линия</td></tr>
+        <tr><td>Даёт практику, которую можно сделать сразу</td><td><span class="pill">да</span></td><td>Называет её техникой НЛП и добавляет: на курсе каждую технику отрабатывают с мастером пять раз</td></tr>
+        <tr><td>Объясняет через энергию, род и веру</td><td><span class="pill a">нет</span></td><td>Объясняет через механику: как человек кодирует опыт, что слышно в словах собеседника, как меняется поведение</td></tr>
+        <tr><td>Говорит о здоровье и исцелении</td><td><span class="pill a">нет</span></td><td>Тему здоровья не трогаем совсем. Обещаем навык, а не избавление</td></tr>
+        <tr><td>Продаёт серией: 10 роликов подряд про один продукт, по минуте на каждый</td><td><span class="pill">да</span></td><td>Пять роликов про пять вечеров интенсива, по одному результату на вечер</td></tr>
+        <tr><td>Продающий ролик: три узнаваемые мысли зрителя, причина, как устроена работа, кодовое слово в директ</td><td><span class="pill">да</span></td><td>Та же структура для консультации и интенсива. Кодовое слово «тест» или «структура»</td></tr>
+        <tr><td>Ведёт двухчасовые эфиры с ответами на вопросы</td><td><span class="pill a">позже</span></td><td>Эфиры по событиям: перед интенсивом и в окне продаж. Регулярный эфир вводим, когда вырастут охваты</td></tr>
+        <tr><td>Говорит для женской аудитории, по его словам это 90% подписчиков</td><td><span class="pill a">иначе</span></td><td>Предприниматели, руководители и специалисты с доходом от 1 000 $, мужчины и женщины</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+  <p class="note">У Руслана Мамедова по-прежнему берём структуру профиля: актуальные с отзывами и сертификатами, кадры процесса, номер потока и дата в шапке. Семь аккаунтов школ и тренеров из списка Саиды пока не разобраны.</p>
+</section>
+
+<section>
+  <div class="num">06</div>
+  <h2>Шесть рубрик и формула ролика</h2>
+  <p class="sub">Каждый экспертный ролик Саиды строится одинаково: ситуация зрителя в первой фразе, одна причина, одно действие, «Попробуйте». Длина 60–75 секунд, один фон, крупный заголовок на обложке. Каждое видео уходит в Instagram, TikTok, YouTube и Threads одним действием.</p>
+  <div class="grid3">
+    <div class="box"><span class="who">Экспертная · «Если вы…»</span><h3>Точка проблемы</h3><p>Узнаваемая ситуация и настоящая причина за ней. «Если вы соглашаетесь на плохие условия, вы боитесь не отказа»</p></div>
+    <div class="box"><span class="who">Экспертная · «Как… за минуту»</span><h3>Техника за минуту</h3><p>Одна техника НЛП, которую зритель делает во время ролика. «Как снять волнение перед трудным разговором за минуту»</p></div>
+    <div class="box"><span class="who">Экспертная · «Три фразы…», «Есть два типа…»</span><h3>Читаю людей</h3><p>Переговоры и скрытые сигналы. «Три фразы, после которых переговоры проиграны»</p></div>
+    <div class="box"><span class="who">Личная · история</span><h3>Большая игра</h3><p>Путь, решения и их цена, семья, сборка института. «Я шесть лет молчала. Вот почему возвращаюсь»</p></div>
+    <div class="box"><span class="who">Экспертная · «Никогда не…»</span><h3>Провокация</h3><p>Запрет или резкий тезис с объяснением. «Никогда не начинайте переговоры с цены». Основной формат для Threads</p></div>
+    <div class="box"><span class="who">Продающая · серия и кодовое слово</span><h3>Люди института</h3><p>Тренер, мастера, кадры практик, отзывы, анонсы теста и интенсива. «Что будет за пять вечеров»</p></div>
+  </div>
+  <div class="grid4" style="margin-top:18px">
+    <div class="box"><h3>Reels в прогреве</h3><p>Ролик в день с 27 ноября по 13 декабря, всего 17: 10 студийных, 6 нарезок распаковки и разговор с тренером</p></div>
+    <div class="box"><h3>Reels после</h3><p>5 в неделю: три экспертных, один личный, один продающий. В месяц 10 студийных и около 10 нарезок подкаста</p></div>
+    <div class="box"><h3>Сторис и Threads</h3><p>Сторис 5–8 в день: жизнь, команда, ответы. Threads 2–3 поста: тезис из «Провокации» и ссылка на тест</p></div>
+    <div class="box"><h3>Telegram</h3><p>Канал повторяет смыслы недели и собирает тех, кто прошёл тест</p></div>
+  </div>
+  <p class="note">В пробном месяце снимаем один подкаст и 10 студийных роликов на двух спикеров, со второго месяца один или два таких выпуска и отдельный монтаж нарезок. Второй спикер в кадре нужен для демонстраций техник и диалогов: тренер потока или мастер. План 17 роликов с заголовками и форматом съёмки лежит в таблице на листе «Контент-план Reels».</p>
+</section>
+
+<section>
+  <div class="num">07</div>
+  <h2>Прогрев по неделям</h2>
+  <p class="sub">Реклама приводит людей, прогрев отвечает на вопросы, которые человек задаёт себе перед оплатой. Продаёт прогревающий и продающий контент, полезный только создаёт доверие, поэтому в каждой неделе есть история, доказательство и предложение. Активный прогрев занимает 17 дней, с 27 ноября по 13 декабря: это рабочий, но плотный срок для блога без истории публикаций.</p>
+  <div class="wide"><div class="fig" style="padding:6px 10px">
+    <table>
+      <thead><tr><th>Даты</th><th>Этап</th><th>Задача</th><th>На какой вопрос отвечаем</th><th>Что выходит</th></tr></thead>
+      <tbody>
+        <tr><td class="t">18–26 ноя</td><td><b>Подготовка</b></td><td>Команда, сайт, распаковка и съёмка 25–26 ноября</td><td></td><td>Саида сама возвращается в сторис: что происходит, как собирается команда. Telegram-канал, первые посты в Threads</td></tr>
+        <tr><td class="t">27 ноя – 3 дек</td><td><b>Контекст</b></td><td>Кто такая Саида и почему она возвращается. Упаковка профиля</td><td>«Кто это и почему её слушать?»</td><td>Нарезки из распаковки, история в сторис, знакомство с командой. 1 декабря ролик о тесте</td></tr>
+        <tr><td class="t">4–13 дек</td><td><b>Вброс продукта и активный прогрев</b></td><td>Готовим «Структуру человека», кейсы, возражения, места на интенсив</td><td>«Что это даст мне? Я смогу? А если я новичок?»</td><td>Техника на камеру, тренер потока, кейс с консультации, программа интенсива, два возражения, счётчик мест, VIP</td></tr>
+        <tr><td class="t">14–21 дек</td><td><b>Интенсив и окно продаж</b></td><td>Пять вечеров и три дня продаж Практика</td><td>«Почему сейчас?»</td><td>Нарезки с интенсива каждый день, реакции участников, гарантия, срок, сколько мест осталось</td></tr>
+        <tr><td class="t">22 дек – 10 янв</td><td><b>Работа над продуктом</b></td><td>Отзывы, подготовка потока, дата второй волны</td><td>«Это настоящее?»</td><td>Отзывы, знакомство группы, лист ожидания на интенсив 18 января</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+</section>
+
+<section>
+  <div class="num">08</div>
+  <h2>Сайт: два лендинга и тест</h2>
+  <div class="grid3">
+    <div class="box"><span class="who">Для специалистов</span><h3>Лендинг с анкетой</h3><p>Что получает тренер, мастер и практик, как проходит отбор, анкета из пяти вопросов. Готовность к 25 ноября.</p></div>
+    <div class="box"><span class="who">Для клиентов</span><h3>Лендинг с тестом</h3><p>Тест «Архетип личности», результат на экране, запись на консультацию или покупка места на интенсив. Готовность к 30 ноября.</p></div>
+    <div class="box"><span class="who">Цифры</span><h3>Аналитика</h3><p>Сейчас на сайте нет ни одного счётчика. Ставим пиксель, Google Analytics, Метрику, цели и передачу заявок в CRM.</p></div>
+  </div>
+  <p class="note">Методику теста и описания архетипов даёт Саида. Вопросы о доходе и запросе добавляем в конец теста, чтобы они не снижали долю прошедших до конца.</p>
+</section>
+
+<section>
+  <div class="num">09</div>
+  <h2>Дорожная карта</h2>
+  <div class="wide"><div class="fig" style="padding:6px 10px">
+    <table>
+      <thead><tr><th>Срок</th><th>Этап</th><th>Что делаем</th><th>Кто</th><th>Результат</th></tr></thead>
+      <tbody>
+        <tr><td class="t">18–24 ноя</td><td><b>Подготовка</b></td><td>Решения по воронке, смете и сценарию партнёрства. Ставки специалистов. Поиск тренера. Подбор SMM-специалиста, менеджера по продажам и таргетолога. Лендинг для специалистов и аналитика. С 23 ноября реклама на специалистов: ролик Саида записывает у себя</td><td>Все</td><td>Команда собрана, первые анкеты специалистов</td></tr>
+        <tr><td class="t">25–26 ноя</td><td><b>Распаковка и съёмка в Астане</b></td><td>Распаковка-подкаст на три камеры и съёмка пакета: 10 студийных Reels на двух спикеров. Дата ориентировочная</td><td>Alex, Саида</td><td>Смыслы и паспорт блога, 10 студийных роликов и нарезки распаковки, рекламные ролики к 30 ноября</td></tr>
+        <tr><td class="t">27 ноя – 3 дек</td><td><b>Голос и тест</b></td><td>Одно видео в день с 27 ноября. Упаковка профиля. Лендинг с тестом готов к 30 ноября, с 1 декабря реклама на тест. Консультации за 2 000 ₸, менеджер по продажам выходит к 1 декабря. Вебинар Саиды для специалистов</td><td>Саида, Alex, команда</td><td>Первые прохождения теста и консультации</td></tr>
+        <tr><td class="t">4–13 дек</td><td><b>Активный прогрев</b></td><td>Отбор мастеров завершён к 6 декабря. Решение о масштабировании рекламы 7–9 декабря. Кейсы и возражения в контенте. Продажа мест на интенсив и VIP</td><td>Alex, Саида, мастера</td><td>5–8 мастеров. Места на интенсив проданы по выбранному сценарию</td></tr>
+        <tr><td class="t">14–18 дек</td><td><b>Интенсив</b></td><td>«Структура человека», пять вечеров, закрытый эфир для VIP</td><td>Саида</td><td>Заявки на Практик</td></tr>
+        <tr><td class="t">19–21 дек</td><td><b>Окно продаж</b></td><td>Практик: первый месяц 100 000 ₸ с гарантией. Созвоны, записи разговоров</td><td>Саида, менеджер по продажам, мастера</td><td>Оплаты первого месяца</td></tr>
+        <tr><td class="t">22 дек – 10 янв</td><td><b>Разбор</b></td><td>Цифры цикла, отзывы, подготовка второй волны</td><td>Alex, Мария</td><td>План на квартал</td></tr>
+        <tr><td class="t">11 янв</td><td><b>Старт потока 1</b></td><td>Первый день теории. 18–22 января второй интенсив</td><td>Тренер, мастера</td><td>Новый набор каждый месяц</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+  <p class="note">Старт потока 11 января возможен, только если тренер подтверждён до конца ноября. Подробная версия с 22 задачами и статусами лежит в таблице.</p>
+</section>
+
+<section>
+  <div class="num">10</div>
+  <h2>Смета: пробный месяц и дальше</h2>
+  <p class="sub">Первый месяц, с 18 ноября по 18 декабря, пробный: команда в минимальном составе и весь рекламный бюджет старта. Со второго месяца растёт контент: дороже SMM, отдельный монтаж и до двух подкастов. Рабочая версия с формулами лежит в <a href="https://docs.google.com/spreadsheets/d/1w7ujcic1w5q2kRTN5xWvzrgWA6KjyZjEY9yu-yD_K5Q/edit" style="color:var(--petrol)">Google Таблице</a>. Оплата тренера и мастеров, юристы и платформа института в смету не входят.</p>
+  <div class="wide"><div class="fig" style="padding:6px 10px">
+    <table style="min-width:780px">
+      <thead><tr><th>Блок</th><th>Статья</th><th class="m">Месяц 1, пробный, ₸</th><th class="m">Со 2-го месяца, ₸ в месяц</th></tr></thead>
+      <tbody>
+        <tr><td><b>Команда</b></td><td>Продюсер Alex<small>Стратегия, сценарии, управление командой. Внутри: воронка, лендинги, тест, интеграции, аналитика, системная настройка. Со 2-го месяца плюс процент</small></td><td class="m">500 000</td><td class="m">500 000</td></tr>
+        <tr><td></td><td>SMM-специалист</td><td class="m">250 000</td><td class="m">300 000</td></tr>
+        <tr><td></td><td>Менеджер по продажам<small>Фикс и процент с продаж. На старте один человек, РОП с окладом около 300 000 ₸ подключается позже</small></td><td class="m">150 000</td><td class="m">150 000</td></tr>
+        <tr><td></td><td>Таргетолог<small>Ставка оценочная, уточняем</small></td><td class="m">200 000</td><td class="m">200 000</td></tr>
+        <tr><td><b>Продакшн</b></td><td>Монтаж<small>Вилка 200 000–300 000 ₸, в расчёте середина</small></td><td class="m">0</td><td class="m">250 000</td></tr>
+        <tr><td></td><td>Подкаст и 10 Reels на двух спикеров, 180 000 ₸ за выпуск<small>Месяц 1: один выпуск. Со 2-го месяца один или два, в расчёте два</small></td><td class="m">180 000</td><td class="m">360 000</td></tr>
+        <tr><td><b>Сервисы</b></td><td>Подписки: GetCourse, рассылки, WhatsApp-бот, кросспостинг<small>Оплачиваются проектом отдельно, сумма оценочная</small></td><td class="m">100 000</td><td class="m">100 000</td></tr>
+        <tr class="sum"><td></td><td>Постоянные расходы</td><td class="m">1 380 000</td><td class="m">1 860 000</td></tr>
+        <tr><td><b>Реклама</b></td><td>Тест 500 000 ₸, масштабирование 1 500 000 ₸ по условию, микроблогеры 150 000 ₸<small>Рекламу со 2-го месяца назначаем по итогам первого цикла</small></td><td class="m">2 150 000</td><td class="m"></td></tr>
+        <tr><td></td><td>Резерв 10%</td><td class="m">353 000</td><td class="m">186 000</td></tr>
+        <tr class="tot"><td></td><td>Всего</td><td class="m">3 883 000</td><td class="m">2 046 000</td></tr>
+        <tr class="tot"><td></td><td>Всего без масштабирования рекламы</td><td class="m">2 233 000</td><td class="m"></td></tr>
+      </tbody>
+    </table>
+  </div></div>
+  <p class="note">За два месяца выходит 5 929 000 ₸ с масштабированием рекламы и 4 279 000 ₸ без него. Если со второго месяца снимать один подкаст, ежемесячная сумма меньше на 198 000 ₸ с резервом. Проценты продюсера и менеджера по продажам в смету не входят, они считаются от поступлений. Гарантия первого месяца растягивает деньги: в декабре приходит 100 000 ₸ с каждой продажи, остальное в январе и феврале.</p>
+</section>
+
+<section>
+  <div class="num">11</div>
+  <h2>Формат партнёрства: фикс и процент</h2>
+  <p class="sub">Первый месяц оплачивается только фиксом: в нём вся подготовка, а выручки ещё нет. Со второго месяца фикс сохраняется и к нему добавляется процент с поступлений. Два сценария отличаются тем, сколько проект платит гарантированно и сколько по результату.</p>
+  <div class="grid2">
+    <div class="box"><span class="who">Сценарий 1</span><h3>Фикс 500 000 ₸ и 10%</h3><ul><li>Первый месяц: 500 000 ₸</li><li>Со второго месяца: 500 000 ₸ в месяц и 10% от поступлений</li><li>Подходит, если проект бережёт долю и готов к ровному платежу</li></ul></div>
+    <div class="box"><span class="who">Сценарий 2</span><h3>Фикс снижается, 20%</h3><ul><li>Первый месяц: 500 000 ₸</li><li>Со второго месяца: 250 000 ₸ в месяц и 20% от поступлений</li><li>Подходит, если важнее снизить постоянные расходы и платить по результату</li></ul></div>
+  </div>
+  <div class="wide" style="margin-top:18px"><div class="fig" style="padding:6px 10px">
+    <table style="min-width:760px">
+      <thead><tr><th>Выручка одного цикла</th><th class="m">Выручка, ₸</th><th class="m">Процент, сценарий 1</th><th class="m">Процент, сценарий 2</th><th class="m">Фикс и процент за два месяца, сценарий 1</th><th class="m">Фикс и процент за два месяца, сценарий 2</th></tr></thead>
+      <tbody>
+        <tr><td>Осторожный, конверсия 20%</td><td class="m">4 960 000</td><td class="m">496 000</td><td class="m">992 000</td><td class="m">1 496 000</td><td class="m">1 742 000</td></tr>
+        <tr><td>Средний, 25%</td><td class="m">9 382 000</td><td class="m">938 200</td><td class="m">1 876 400</td><td class="m">1 938 200</td><td class="m">2 626 400</td></tr>
+        <tr><td>Оптимистичный, 30%</td><td class="m">15 360 000</td><td class="m">1 536 000</td><td class="m">3 072 000</td><td class="m">2 536 000</td><td class="m">3 822 000</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="box"><h3>Общие условия</h3><ul><li>Первый месяц: 18 ноября – 18 декабря</li><li>Процент считается со всех поступлений начиная с 19 декабря, включая доплаты по продажам первого окна</li><li>База: все поступления проекта за вычетом возвратов</li><li>Срок: 12 месяцев с продлением</li></ul></div>
+    <div class="box"><h3>Что входит и как платим</h3><ul><li>В фикс входят воронка, лендинги, тест, интеграции, аналитика и системная настройка</li><li>Подписки на сервисы, команда и рекламный бюджет оплачиваются проектом отдельно</li><li>Сверка раз в месяц по выгрузке из GetCourse, выплата до 10 числа</li></ul></div>
+  </div>
+  <p class="note">Сценарии равны при поступлениях 2 500 000 ₸ в месяц. Ниже этой суммы проекту дешевле сценарий 2, выше неё сценарий 1.</p>
+</section>
+
+<section>
+  <div class="num">12</div>
+  <h2>Что решаем на встрече 18 ноября</h2>
+  <ol class="todo">
+    <li>Воронка и цены ступеней: тест, 2 000 ₸, 10 000 ₸ и VIP 50 000 ₸, Практик 500 000 ₸</li>
+    <li>Гарантия первого месяца: срок возврата, условия доплаты, текст в оферте<small>Без оферты гарантию в рекламе не объявляем</small></li>
+    <li>Тренер потока: кто кандидаты и до какого числа решаем</li>
+    <li>Ставки тренера за занятие и мастера за слот, статус первого месяца работы</li>
+    <li>Смета пробного месяца: 2,2 млн ₸ без масштабирования рекламы, условие увеличения до 3,9 млн ₸. Бюджет со второго месяца: 2,0 млн ₸ без рекламы</li>
+    <li>Сценарий партнёрства с Alex: 500 000 ₸ и 10% или 250 000 ₸ и 20% со второго месяца<small>Фиксируем письменно до начала работ, вместе с датой начала расчёта процента</small></li>
+    <li>Менеджер по продажам: кто нанимает, фикс 150 000 ₸ и размер процента<small>Должен выйти к 1 декабря, до первых консультаций</small></li>
+    <li>Дата распаковки-подкаста и съёмочного дня в Астане<small>Предлагаем 25–26 ноября. Нужен второй спикер для демонстраций техник</small></li>
+    <li>Документы для профиля и рекламы: сертификаты, дипломы, статус представительства</li>
+    <li>Зеркало сайта и библиотека московского института<small>Используем только при письменном согласии правообладателя</small></li>
+    <li>Доступы: сайт и домен, GetCourse, Instagram, рекламный кабинет</li>
+  </ol>
+</section>
+
+<footer>
+  <p>Логика прогрева и рубрик опирается на систему запусков Михаила Тимочко: одна главная тема блога, широкая подача, личный контент рядом с экспертным, прогрев через ответы на вопросы покупателя, лёгкий первый шаг перед основной покупкой. Все количественные цели являются гипотезами и уточняются после первой недели рекламы.</p>
+</footer>
+
+</div>
+
+</body>
+</html>
