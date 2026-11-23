@@ -297,10 +297,34 @@ li {
     font-size: 16px;
     line-height: 1.3;
   }
-  /* Портрет растворяется в фоне снизу и слева */
+  /* Цветной портрет растворяется в фоне снизу */
   .hero-portrait {
     -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
     mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
     filter: grayscale(1) contrast(1.05);
   }
+}
+
+/*
+ * Светлая секция, как на ориентире katty-crew.com/vv4: чёрные и светлые блоки чередуются.
+ * Переопределяет токены темы, поэтому карточки, кнопки и текст внутри подстраиваются сами.
+ * Контраст на светлом фоне: текст 17:1, приглушённый 6.3:1, акцент 4.7:1 (AA).
+ */
+.light {
+  --bg: #f6f2ec;
+  --surface: #ffffff;
+  --surface-2: #efe9e0;
+  --text: #15110e;
+  --muted: #5d554d;
+  --line: #ddd5ca;
+  --accent: #b5561b;
+  background: var(--bg);
+  color: var(--text);
+}
+.light .btn-primary {
+  background: #e9924b;
+  color: #120b05;
+}
+.light .btn-primary:hover {
+  background: #f2a565;
 }

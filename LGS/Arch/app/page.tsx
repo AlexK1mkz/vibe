@@ -40,7 +40,6 @@ function Cta({ note = false }: { note?: boolean }) {
 export default function LandingPage() {
   const sources = l.sources.cards.filter((card) => card.published);
   const stories = l.stories.enabled ? (l.stories.items as { name: string; photo?: string; before: string; after: string }[]) : [];
-  const facts = l.author.facts as string[];
 
   return (
     <>
@@ -83,7 +82,7 @@ export default function LandingPage() {
         </section>
 
         {/* 2. Для кого */}
-        <section className="section">
+        <section className="section light">
           <div className="container-page">
             <Head eyebrow={l.forWhom.eyebrow} title={l.forWhom.title} />
             <ul className="mt-10 flex flex-wrap gap-3">
@@ -135,7 +134,7 @@ export default function LandingPage() {
         </section>
 
         {/* 5. Программа */}
-        <section className="section bg-surface">
+        <section className="section light">
           <div className="container-page">
             <Head eyebrow={l.program.eyebrow} title={l.program.title} />
             <ol className="mt-10 border-b border-line">
@@ -196,30 +195,32 @@ export default function LandingPage() {
           </section>
         )}
 
-        {/* 8. Автор: только подтверждённые факты */}
+        {/* 8. Кто стоит за институтом: лица и только подтверждённые факты */}
         <section className="section bg-surface">
-          <div className="container-page grid gap-8 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-14">
-            <Portrait src={l.author.photo} alt={l.author.photoAlt} className="h-56 w-56 rounded-[28px] grayscale sm:h-80 sm:w-80" />
-            <div>
-              <p className="eyebrow-accent">{l.author.eyebrow}</p>
-              <h2 className="h-section mt-4">
-                <Rich text={l.author.title} />
-              </h2>
-              <p className="mt-4 max-w-xl text-lg">{l.author.role}</p>
-              {facts.length > 0 && (
-                <ul className="mt-6 grid gap-2">
-                  {facts.map((fact) => (
-                    <li key={fact} className="flex gap-3">
-                      <span aria-hidden="true" className="text-accent">
-                        →
-                      </span>
-                      {fact}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <p className="mt-6 max-w-xl border-t border-line pt-5 text-muted">{l.author.team}</p>
-            </div>
+          <div className="container-page">
+            <Head eyebrow={l.author.eyebrow} title={l.author.title} />
+            <ul className="mt-10 grid max-w-4xl grid-cols-2 gap-3 sm:gap-6">
+              {l.author.people.map((person) => (
+                <li key={person.name}>
+                  <Portrait src={person.photo} alt={person.photoAlt} className="aspect-[4/5] w-full rounded-[20px] object-top" />
+                  <h3 className="display mt-4 text-[26px] sm:text-[44px]">{person.name}</h3>
+                  <p className="mt-2 text-sm text-muted sm:text-lg">{person.role}</p>
+                  {(person.facts as string[]).length > 0 && (
+                    <ul className="mt-4 grid gap-2 text-sm sm:text-base">
+                      {(person.facts as string[]).map((fact) => (
+                        <li key={fact} className="flex gap-2">
+                          <span aria-hidden="true" className="text-accent">
+                            →
+                          </span>
+                          {fact}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-8 max-w-xl border-t border-line pt-5 text-muted">{l.author.team}</p>
           </div>
         </section>
 
@@ -232,7 +233,7 @@ export default function LandingPage() {
                 {stories.map((story) => (
                   <li key={story.name} className="card !p-7">
                     <div className="flex items-center gap-4">
-                      <Portrait src={story.photo} alt={story.name} className="h-16 w-16 rounded-full grayscale" />
+                      <Portrait src={story.photo} alt={story.name} className="h-16 w-16 rounded-full" />
                       <p className="text-lg font-bold">{story.name}</p>
                     </div>
                     <p className="mt-5 text-muted">{story.before}</p>
@@ -245,7 +246,7 @@ export default function LandingPage() {
         )}
 
         {/* 10. Как начать */}
-        <section className="section">
+        <section className="section light">
           <div className="container-page">
             <Head eyebrow={l.path.eyebrow} title={l.path.title} />
             <ol className="mt-10 grid gap-3 lg:grid-cols-4">

@@ -51,7 +51,7 @@ export default function SpecialistsPage() {
         </section>
 
         {/* 2. Проблема */}
-        <section className="section" aria-labelledby="sp-problem">
+        <section className="section light" aria-labelledby="sp-problem">
           <div className="container-page">
             <SectionHead id="sp-problem" eyebrow={s.problem.eyebrow} title={s.problem.title} />
             <ul className="mt-10 grid gap-3 sm:mt-14 sm:grid-cols-3 sm:gap-4">
@@ -115,7 +115,7 @@ export default function SpecialistsPage() {
         </section>
 
         {/* 4. Три роли на первом потоке */}
-        <section className="section" aria-labelledby="sp-roles">
+        <section className="section light" aria-labelledby="sp-roles">
           <div className="container-page">
             <SectionHead id="sp-roles" eyebrow={s.roles.eyebrow} title={s.roles.title} />
             <ul className="mt-10 grid gap-3 sm:mt-14 lg:grid-cols-3 lg:gap-4">
@@ -223,7 +223,7 @@ export default function SpecialistsPage() {
         </section>
 
         {/* 8. Отбор */}
-        <section className="section" aria-labelledby="sp-selection">
+        <section className="section light" aria-labelledby="sp-selection">
           <div className="container-page">
             <SectionHead id="sp-selection" eyebrow={s.selection.eyebrow} title={s.selection.title} />
             <ol className="mt-10 grid gap-3 sm:mt-14 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
