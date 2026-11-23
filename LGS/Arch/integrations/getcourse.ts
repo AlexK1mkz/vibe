@@ -23,13 +23,14 @@ export function getcourseConfigured(): boolean {
   return Boolean(process.env.GETCOURSE_ACCOUNT && process.env.GETCOURSE_API_KEY);
 }
 
-export async function syncLead(lead: Lead, archetypeNames: { primary: string; secondary: string }): Promise<SyncResult> {
+/** names: название потолка и главной сферы словами, как их видит человек */
+export async function syncLead(lead: Lead, names: { result: string; sphere: string }): Promise<SyncResult> {
   const addfields = {
-    "Архетип": archetypeNames.primary,
-    "Второй архетип": archetypeNames.secondary,
-    "Работа": lead.job,
+    "Результат": names.result,
+    "Сфера": names.sphere,
     "Цель": lead.goal,
     "Сегмент": lead.segment,
+    "Приоритет": lead.priority ? "да" : "нет",
     lead_id: lead.publicId,
     utm_source: lead.utmSource ?? "",
     utm_medium: lead.utmMedium ?? "",

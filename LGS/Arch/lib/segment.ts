@@ -1,25 +1,35 @@
 import { funnel, type IncomeBand, type Segment } from "@/config/funnel";
 
 export interface SegmentRules {
+  /** Доход от этого порога: сегмент A */
   incomeThreshold: number;
+  /** Доход от этого порога: лид для личного звонка */
+  priorityThreshold: number;
   incomeBandMin: Record<IncomeBand, number | null>;
-  specialist: { occupation: string; job: string };
+  /** Значения D1, которые дают сегмент pro */
+  proOccupations: readonly string[];
+}
+
+function incomeAtLeast(incomeBand: string, threshold: number, rules: SegmentRules): boolean {
+  const min = rules.incomeBandMin[incomeBand as IncomeBand];
+  return typeof min === "number" && min >= threshold;
 }
 
 /**
- * Правила сегментации (ТЗ, п. 7.1):
- *   specialist: D1 = «работаю с людьми» И job = profession
- *   A:          доход ≥ порог
- *   B:          все остальные, включая «не готов(а) отвечать»
+ * Правила сегментации (ТЗ v2, раздел 7):
+ *   pro: D1 = «Работаю с людьми» или «Уже учились НЛП», доход не важен
+ *   A:   доход не ниже incomeThreshold
+ *   B:   все остальные, включая «предпочитаю не отвечать»
  */
 export function segmentFor(
-  input: { occupation: string; job: string; incomeBand: string },
+  input: { occupation: string; incomeBand: string },
   rules: SegmentRules = funnel.segmentation,
 ): Segment {
-  if (input.occupation === rules.specialist.occupation && input.job === rules.specialist.job) {
-    return "specialist";
-  }
-  const min = rules.incomeBandMin[input.incomeBand as IncomeBand];
-  if (typeof min === "number" && min >= rules.incomeThreshold) return "A";
-  return "B";
+  if (rules.proOccupations.includes(input.occupation)) return "pro";
+  return incomeAtLeast(input.incomeBand, rules.incomeThreshold, rules) ? "A" : "B";
+}
+
+/** Лид для личного звонка: доход не ниже priorityThreshold, сегмент не важен */
+export function priorityFor(incomeBand: string, rules: SegmentRules = funnel.segmentation): boolean {
+  return incomeAtLeast(incomeBand, rules.priorityThreshold, rules);
 }

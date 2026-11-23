@@ -1,15 +1,16 @@
 import "server-only";
-import { and, eq, gte, inArray, isNotNull } from "drizzle-orm";
+import { and, eq, gte, inArray, isNotNull, isNull } from "drizzle-orm";
 import { funnel, STATUS_RANK, type LeadStatus, type Product } from "@/config/funnel";
 import messagesJson from "@/content/funnel/messages.json";
-import { archetypeName, test, type ArchetypeCode } from "@/lib/content";
+import { ceilingName, sphereName, test } from "@/lib/content";
 import { getDb, schema } from "@/lib/db";
 import type { Lead } from "@/lib/db/schema";
 import { dueMessages, renderMessage, type FunnelMessage } from "@/lib/funnel-schedule";
 import { computeResult, type Answers } from "@/lib/scoring";
-import { segmentFor } from "@/lib/segment";
+import { priorityFor, segmentFor } from "@/lib/segment";
 import { newId, newPublicId, siteUrl } from "@/lib/server-utils";
 import { sendLeadWebhook } from "@/integrations/crm";
+import { sheetsConfigured, syncLeadToSheet } from "@/integrations/sheets";
 import { syncLead } from "@/integrations/getcourse";
 import { sendMessage } from "@/integrations/whatsapp";
 
@@ -33,7 +34,7 @@ const short = (value: unknown, max = 300) =>
 export async function createLead(input: { answers: Answers; goalText: string | null; utm: Utm }): Promise<Lead> {
   const { result, selections } = computeResult(test, input.answers, {
     maxScore: funnel.test.maxScore,
-    pairMaxDiff: funnel.test.pairMaxDiff,
+    freeThreshold: funnel.test.freeThreshold,
   });
   const db = await getDb();
   const id = newId();
@@ -42,17 +43,19 @@ export async function createLead(input: { answers: Answers; goalText: string | n
     .values({
       id,
       publicId: newPublicId(),
-      job: selections.job,
+      sphere: selections.sphere,
       cost: selections.cost,
       goal: selections.goal,
       goalText: input.goalText,
       occupation: selections.occupation,
       incomeBand: selections.incomeBand,
       scores: result.scores,
-      primary: result.primary,
-      secondary: result.secondary,
-      isPair: result.isPair,
+      sphereScores: result.sphereScores,
+      ceiling: result.ceiling,
+      mainBelief: result.mainBelief,
+      mainSphere: result.mainSphere,
       segment: segmentFor(selections),
+      priority: priorityFor(selections.incomeBand),
       utmSource: short(input.utm.utm_source),
       utmMedium: short(input.utm.utm_medium),
       utmCampaign: short(input.utm.utm_campaign),
@@ -115,14 +118,37 @@ export async function saveContact(
   return { lead: updated, changed: true };
 }
 
+/** Строка лида в Google Таблицу. Ошибка не ломает заявку: запись повторит крон. */
+export async function leadToSheet(lead: Lead): Promise<boolean> {
+  return syncLeadToSheet(lead, {
+    result: ceilingName(lead.ceiling),
+    sphere: sphereName(lead.mainSphere),
+    resultUrl: `${siteUrl()}/result/${lead.publicId}`,
+  }).catch((error) => {
+    console.error("[sheets]", error);
+    return false;
+  });
+}
+
+/** Повтор записи в таблицу для лидов с контактом, у которых она не удалась */
+export async function retryPendingLeadSheets(limit = 20): Promise<number> {
+  if (!sheetsConfigured()) return 0;
+  const db = await getDb();
+  const rows = await db
+    .select()
+    .from(leads)
+    .where(and(isNotNull(leads.whatsapp), isNull(leads.sheetsSyncedAt)))
+    .limit(limit);
+  let done = 0;
+  for (const lead of rows) if (await leadToSheet(lead)) done += 1;
+  return done;
+}
+
 /** После контакта: GetCourse, CRM, первое сообщение цепочки. Ошибки интеграций не ломают ответ. */
 export async function afterContact(lead: Lead): Promise<void> {
   const db = await getDb();
   try {
-    const sync = await syncLead(lead, {
-      primary: archetypeName(lead.primary as ArchetypeCode),
-      secondary: archetypeName(lead.secondary as ArchetypeCode),
-    });
+    const sync = await syncLead(lead, { result: ceilingName(lead.ceiling), sphere: sphereName(lead.mainSphere) });
     if (sync.ok && !sync.stub) {
       await db.update(leads).set({ getcourseSyncedAt: new Date() }).where(eq(leads.id, lead.id));
     } else if (!sync.ok) {
@@ -131,6 +157,7 @@ export async function afterContact(lead: Lead): Promise<void> {
   } catch (error) {
     console.error("[getcourse]", error);
   }
+  await leadToSheet(lead);
   await sendLeadWebhook(lead, "contact_given").catch((e) => console.error("[crm]", e));
   await sendDueMessages(lead).catch((e) => console.error("[whatsapp]", e));
 }
@@ -139,7 +166,8 @@ export function messageVars(lead: Lead): Record<string, string | null> {
   const base = siteUrl();
   return {
     name: lead.name,
-    archetype: archetypeName(lead.primary as ArchetypeCode),
+    /** Название потолка. У записей версии 1 результата нет: сообщение с {result} не соберётся */
+    result: ceilingName(lead.ceiling) || null,
     resultUrl: `${base}/result/${lead.publicId}`,
     consultUrl: `${base}/consultation?lead=${lead.publicId}`,
     intensiveUrl: `${base}/intensive?lead=${lead.publicId}`,
@@ -215,6 +243,8 @@ export async function markPaid(
     .where(eq(leads.id, lead.id))
     .returning();
   await recordEvent({ name: eventName, leadId: lead.id, payload: { amount: sum, currency: "KZT", product } });
+  // Смена статуса: в таблицу дописывается новая строка с актуальным статусом
+  await leadToSheet(updated);
   await sendLeadWebhook(updated, eventName).catch((e) => console.error("[crm]", e));
   return { lead: updated, changed: true };
 }

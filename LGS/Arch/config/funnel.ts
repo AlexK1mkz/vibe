@@ -3,8 +3,8 @@
  * и меняются без правки остального кода (ТЗ, п. 0.4).
  */
 
-export type IncomeBand = "lt250" | "250_500" | "500_1000" | "gte1000" | "na";
-export type Segment = "A" | "B" | "specialist";
+export type IncomeBand = "lt250" | "250_500" | "500_1000" | "1000_5000" | "gte5000" | "na";
+export type Segment = "A" | "B" | "pro";
 export type Product = "consult" | "intensive" | "vip";
 
 export const funnel = {
@@ -19,16 +19,19 @@ export const funnel = {
      * TODO(content): договорённость «доход от 1 000 $», эквивалент в тенге подтверждает заказчик.
      */
     incomeThreshold: 500_000,
-    /** Нижняя граница каждого диапазона из вопроса D2. null = не ответил(а) */
+    /** Порог дохода для пометки priority: лид для личного звонка (ТЗ v2, раздел 7) */
+    priorityThreshold: 1_000_000,
+    /** Нижняя граница каждого диапазона из вопроса D2. null = ответа нет */
     incomeBandMin: {
       lt250: 0,
       "250_500": 250_000,
       "500_1000": 500_000,
-      gte1000: 1_000_000,
+      "1000_5000": 1_000_000,
+      gte5000: 5_000_000,
       na: null,
     } as Record<IncomeBand, number | null>,
-    /** Правило сегмента specialist: D1 = occupation И A1 = job */
-    specialist: { occupation: "people", job: "profession" },
+    /** Значения вопроса D1, которые дают сегмент pro: «Работаю с людьми» и «Уже учились НЛП» */
+    proOccupations: ["people", "nlp"] as readonly string[],
   },
 
   products: {
@@ -81,9 +84,10 @@ export const funnel = {
     minutes: 3,
     /** Экран «Считаем результат», мс. По ТЗ не дольше 2 секунд */
     calcScreenMs: 1400,
-    /** Связка архетипов, если разница первого и второго не больше этого числа */
-    pairMaxDiff: 1,
-    maxScore: 8,
+    /** Максимум баллов одного типа убеждения: число вопросов блока B */
+    maxScore: 12,
+    /** Столько ресурсных ответов и больше: результат «Свободный ход» (ТЗ v2, п. 6.4.5) */
+    freeThreshold: 10,
   },
 
   contacts: {
