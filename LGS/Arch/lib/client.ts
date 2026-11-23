@@ -135,8 +135,13 @@ export function track(name: string, payload: Record<string, unknown> = {}, optio
     if (ids.ym) window.ym?.(Number(ids.ym), "reachGoal", name, payload);
     if (!NO_META.test(name)) {
       const metaName = META_EVENTS[name];
+      // Два сайта различаются параметром audience у события Lead (ТЗ v2, раздел 9)
       const metaPayload =
-        name === "specialist_submit" ? { ...payload, content_category: "specialist" } : payload;
+        name === "specialist_submit"
+          ? { ...payload, audience: "specialist" }
+          : name === "contact_submit"
+            ? { ...payload, audience: "client" }
+            : payload;
       if (metaName) window.fbq?.("track", metaName, metaPayload);
       else window.fbq?.("trackCustom", name, metaPayload);
     }

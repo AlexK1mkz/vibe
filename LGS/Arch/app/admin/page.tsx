@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import managerMessages from "@/content/funnel/manager-messages.json";
+import { fmt } from "@/dictionaries";
+import { sheetsConfigured } from "@/integrations/sheets";
+import { siteUrl } from "@/lib/server-utils";
 import { adminEnabled, isAdmin } from "@/lib/admin-auth";
 import { getStats, listApplications, listLeads, type BreakdownRow, type LeadFilters } from "@/lib/admin-stats";
-import { archetypeName, countDrafts, test, type ArchetypeCode } from "@/lib/content";
+import { CEILING_CODES, ceilingName, countDrafts, sphereName, test } from "@/lib/content";
 import { getDictionary } from "@/dictionaries";
 import { getcourseConfigured } from "@/integrations/getcourse";
 
@@ -9,6 +13,7 @@ export const metadata: Metadata = { title: "Админка", robots: { index: fa
 export const dynamic = "force-dynamic";
 
 const t = getDictionary();
+const ROLE: Record<string, string> = { practitioner: "Практик", master: "Мастер", trainer: "Тренер" };
 const STATUS: Record<string, string> = {
   test_done: "Тест пройден",
   contact_given: "Контакт",
@@ -83,7 +88,7 @@ function Select({ name, label, value, options }: { name: string; label: string; 
   return (
     <label className="text-xs font-semibold text-muted">
       {label}
-      <select name={name} defaultValue={value ?? ""} className="mt-1 block min-h-11 rounded-lg border border-line bg-white px-2 text-sm text-ink">
+      <select name={name} defaultValue={value ?? ""} className="mt-1 block min-h-11 rounded-lg border border-line bg-surface px-2 text-sm text-ink">
         <option value="">Все</option>
         {options.map(([v, l]) => (
           <option key={v} value={v}>
@@ -101,34 +106,56 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
 
   const filters: LeadFilters = {
     segment: params.segment || undefined,
-    archetype: params.archetype || undefined,
-    job: params.job || undefined,
+    ceiling: params.ceiling || undefined,
+    sphere: params.sphere || undefined,
+    priority: params.priority || undefined,
     status: params.status || undefined,
     utm: params.utm || undefined,
   };
   const [stats, leads, applications] = await Promise.all([getStats(), listLeads(filters), listApplications()]);
   const drafts = countDrafts();
   const query = new URLSearchParams(Object.entries(filters).filter(([, v]) => v) as [string, string][]).toString();
-  const name = (code: string) => archetypeName(code as ArchetypeCode);
+  const tab = params.tab === "specialists" ? "specialists" : "clients";
+  const base = siteUrl();
+  /** Ссылка wa.me с готовым текстом: менеджер отправляет сообщение сам */
+  const wa = (phone: string, text: string, vars: Record<string, string>) =>
+    `https://wa.me/${phone.replace(/D/g, "")}?text=${encodeURIComponent(fmt(text, vars))}`;
   const top = Math.max(stats.funnel[0].value, stats.funnel[1].value);
 
   return (
     <main className="mx-auto max-w-[1280px] px-5 py-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-extrabold">Админка: тест «Архетип личности»</h1>
+        <h1 className="text-2xl font-extrabold">Админка: тест «Стеклянный потолок»</h1>
         <form method="post" action="/api/admin/logout">
           <button className="text-sm font-semibold underline">Выйти</button>
         </form>
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2 text-sm">
-        <span className={`rounded-lg px-3 py-1.5 font-semibold ${drafts.draft > 0 ? "bg-[#fff3c4] text-[#7a5b00]" : "bg-lime text-deep"}`}>
+        <span className={`rounded-lg px-3 py-1.5 font-semibold ${drafts.draft > 0 ? "border border-dashed border-muted text-muted" : "bg-accent text-on-accent"}`}>
           Неутверждённых текстов: {drafts.draft} из {drafts.total}
         </span>
-        <span className="rounded-lg bg-white px-3 py-1.5">GetCourse: {getcourseConfigured() ? "подключён" : "заглушка"}</span>
-        <span className="rounded-lg bg-white px-3 py-1.5">WhatsApp: {process.env.WHATSAPP_PROVIDER || "stub"}</span>
-        <span className="rounded-lg bg-white px-3 py-1.5">CRM-вебхук: {process.env.LEAD_WEBHOOK_URL ? "задан" : "не задан"}</span>
+        <span className="rounded-lg bg-surface px-3 py-1.5">GetCourse: {getcourseConfigured() ? "подключён" : "заглушка"}</span>
+        <span className="rounded-lg bg-surface px-3 py-1.5">WhatsApp: {process.env.WHATSAPP_PROVIDER || "stub"}</span>
+        <span className="rounded-lg bg-surface px-3 py-1.5">CRM-вебхук: {process.env.LEAD_WEBHOOK_URL ? "задан" : "не задан"}</span>
+        <span className="rounded-lg bg-surface px-3 py-1.5">Google Таблица: {sheetsConfigured() ? "подключена" : "не подключена"}</span>
       </div>
+
+      <nav className="mt-6 flex gap-2" aria-label="Разделы">
+        {([["clients", "Клиенты"], ["specialists", `Специалисты: ${applications.length}`]] as const).map(([key, label]) => (
+          <a
+            key={key}
+            href={key === "clients" ? "/admin" : "/admin?tab=specialists"}
+            aria-current={tab === key ? "page" : undefined}
+            className={`rounded-xl px-4 py-2.5 text-sm font-bold ${tab === key ? "bg-accent text-on-accent" : "border border-line text-muted"}`}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      {tab === "clients" && (
+        <>
 
       <h2 className="mt-8 text-xl font-bold">Воронка</h2>
       <ol className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-5">
@@ -143,8 +170,8 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
 
       <div className="mt-6 grid gap-3 lg:grid-cols-2">
         <Breakdown title="По сегменту" rows={stats.bySegment} />
-        <Breakdown title="По архетипу" rows={stats.byArchetype} label={name} />
-        <Breakdown title="По работе" rows={stats.byJob} label={(k) => t.jobs[k] ?? k} />
+        <Breakdown title="По потолку" rows={stats.byCeiling} label={ceilingName} />
+        <Breakdown title="По сфере" rows={stats.bySphere} label={sphereName} />
         <Breakdown title="По utm_source" rows={stats.byUtm} />
       </div>
 
@@ -176,9 +203,10 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
 
       <h2 className="mt-8 text-xl font-bold">Лиды</h2>
       <form method="get" className="mt-3 flex flex-wrap items-end gap-3">
-        <Select name="segment" label="Сегмент" value={filters.segment} options={[["A", "A"], ["B", "B"], ["specialist", "specialist"]]} />
-        <Select name="archetype" label="Архетип" value={filters.archetype} options={test.archetypes.map((c) => [c, name(c)])} />
-        <Select name="job" label="Работа" value={filters.job} options={Object.entries(t.jobs)} />
+        <Select name="segment" label="Сегмент" value={filters.segment} options={[["A", "A"], ["B", "B"], ["pro", "pro"]]} />
+        <Select name="ceiling" label="Результат" value={filters.ceiling} options={CEILING_CODES.map((c) => [c, ceilingName(c)])} />
+        <Select name="sphere" label="Сфера" value={filters.sphere} options={test.spheres.map((s) => [s, sphereName(s)])} />
+        <Select name="priority" label="Приоритет" value={filters.priority} options={[["1", "Только приоритетные"]]} />
         <Select name="status" label="Статус" value={filters.status} options={Object.entries(STATUS)} />
         <Select name="utm" label="utm_source" value={filters.utm} options={stats.byUtm.filter((r) => r.key !== "—").map((r) => [r.key, r.key])} />
         <button className="btn btn-primary !min-h-11 !px-4 !py-2 !text-sm">Показать</button>
@@ -189,9 +217,9 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
 
       <div className="card mt-3 overflow-x-auto !p-0">
         <table className="w-full min-w-[1000px] text-sm">
-          <thead className="bg-cream text-left text-muted">
+          <thead className="bg-bg text-left text-muted">
             <tr>
-              {["Дата", "Имя", "WhatsApp", "Архетип", "Работа", "Сегмент", "Статус", "UTM", ""].map((h) => (
+              {["Дата", "Имя", "WhatsApp", "Результат", "Сфера", "Сегмент", "Приоритет", "Статус", "UTM", "Написать", ""].map((h) => (
                 <th key={h} className="px-3 py-2 font-semibold">
                   {h}
                 </th>
@@ -201,7 +229,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <tbody>
             {leads.length === 0 && (
               <tr>
-                <td colSpan={9} className="px-3 py-6 text-muted">
+                <td colSpan={11} className="px-3 py-6 text-muted">
                   Лидов пока нет
                 </td>
               </tr>
@@ -216,16 +244,39 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                 </td>
                 <td className="px-3 py-2">
                   <a href={`/result/${lead.publicId}`} className="underline">
-                    {name(lead.primary)}
-                    {lead.isPair ? " и " : " / "}
-                    {name(lead.secondary)}
+                    {ceilingName(lead.ceiling) || "версия 1"}
                   </a>
                 </td>
-                <td className="px-3 py-2">{t.jobs[lead.job] ?? lead.job}</td>
+                <td className="px-3 py-2">{sphereName(lead.mainSphere) || "—"}</td>
                 <td className="px-3 py-2 font-semibold">{lead.segment}</td>
+                <td className="px-3 py-2">{lead.priority ? <span className="font-bold text-accent">Звонок</span> : "—"}</td>
                 <td className="px-3 py-2">{STATUS[lead.status] ?? lead.status}</td>
                 <td className="px-3 py-2 text-xs text-muted">
                   {[lead.utmSource, lead.utmMedium, lead.utmCampaign].filter(Boolean).join(" / ") || "—"}
+                </td>
+                <td className="px-3 py-2">
+                  {lead.whatsapp && !lead.whatsappOptOut ? (
+                    <span className="flex flex-wrap gap-x-3 gap-y-1 text-xs font-semibold">
+                      {managerMessages.client.map((m) => (
+                        <a
+                          key={m.id}
+                          href={wa(lead.whatsapp!, m.text, {
+                            name: lead.name ?? "",
+                            result: ceilingName(lead.ceiling),
+                            resultUrl: `${base}/result/${lead.publicId}`,
+                            intensiveUrl: `${base}/intensive?lead=${lead.publicId}`,
+                          })}
+                          target="_blank"
+                          rel="noopener"
+                          className="text-accent underline"
+                        >
+                          {m.label}
+                        </a>
+                      ))}
+                    </span>
+                  ) : (
+                    "—"
+                  )}
                 </td>
                 <td className="px-3 py-2">
                   <form method="post" action={`/api/admin/leads/${lead.id}/delete`}>
@@ -241,12 +292,17 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
       </div>
       <p className="mt-2 text-xs text-muted">Показаны последние 200. В выгрузке CSV все лиды по фильтру.</p>
 
+        </>
+      )}
+
+      {tab === "specialists" && (
+        <>
       <h2 className="mt-8 text-xl font-bold">Анкеты специалистов: {applications.length}</h2>
       <div className="card mt-3 overflow-x-auto !p-0">
         <table className="w-full min-w-[900px] text-sm">
-          <thead className="bg-cream text-left text-muted">
+          <thead className="bg-bg text-left text-muted">
             <tr>
-              {["Дата", "Имя", "WhatsApp", "Уровень", "Обучение", "Практика, ч", "В неделю, ч"].map((h) => (
+              {["Дата", "Имя", "WhatsApp", "Город", "Роль", "Обучение", "Практика, ч", "В неделю, ч", "Зачем и профиль", "Написать"].map((h) => (
                 <th key={h} className="px-3 py-2 font-semibold">
                   {h}
                 </th>
@@ -256,7 +312,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <tbody>
             {applications.length === 0 && (
               <tr>
-                <td colSpan={7} className="px-3 py-6 text-muted">
+                <td colSpan={10} className="px-3 py-6 text-muted">
                   Анкет пока нет
                 </td>
               </tr>
@@ -264,12 +320,30 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
             {applications.map((a) => (
               <tr key={a.id} className="border-t border-line align-top">
                 <td className="whitespace-nowrap px-3 py-2 tabular-nums">{dt(a.createdAt)}</td>
-                <td className="px-3 py-2">{a.name}</td>
+                <td className="px-3 py-2">
+                  {a.name}
+                  {a.priority && <span className="ml-2 text-xs font-bold text-accent">Приоритет</span>}
+                </td>
                 <td className="whitespace-nowrap px-3 py-2 tabular-nums">{a.whatsapp}</td>
-                <td className="px-3 py-2">{t.specialists.form.levels[a.level] ?? a.level}</td>
-                <td className="px-3 py-2">{a.education}</td>
+                <td className="px-3 py-2">{a.city ?? "—"}</td>
+                <td className="px-3 py-2 font-semibold">{ROLE[a.role ?? ""] ?? a.role ?? "—"}</td>
+                <td className="px-3 py-2">
+                  {a.education}
+                  {a.certificate && <span className="block text-xs text-muted">Сертификат: {a.certificate}</span>}
+                </td>
                 <td className="px-3 py-2">{a.practiceHours}</td>
                 <td className="px-3 py-2">{a.weeklyHours}</td>
+                <td className="max-w-[260px] px-3 py-2 text-xs text-muted">
+                  {a.motivation ?? "—"}
+                  {a.profileUrl && <span className="block break-all">{a.profileUrl}</span>}
+                </td>
+                <td className="px-3 py-2 text-xs font-semibold">
+                  {managerMessages.specialist.map((m) => (
+                    <a key={m.id} href={wa(a.whatsapp, m.text, { name: a.name })} target="_blank" rel="noopener" className="text-accent underline">
+                      {m.label}
+                    </a>
+                  ))}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -280,6 +354,8 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           Выгрузить анкеты в CSV
         </a>
       </p>
+        </>
+      )}
     </main>
   );
 }

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/admin-auth";
 import { listApplications, listLeads } from "@/lib/admin-stats";
-import { archetypeName, type ArchetypeCode } from "@/lib/content";
+import { ceilingName, sphereName } from "@/lib/content";
 
 export const runtime = "nodejs";
 
@@ -33,8 +33,8 @@ export async function GET(request: Request) {
   if (params.get("type") === "specialists") {
     const rows = await listApplications(10000);
     return csv(
-      ["created_at", "name", "whatsapp", "level", "education", "practice_hours", "weekly_hours", "utm_source", "utm_medium", "utm_campaign"],
-      rows.map((a) => [a.createdAt, a.name, a.whatsapp, a.level, a.education, a.practiceHours, a.weeklyHours, a.utmSource, a.utmMedium, a.utmCampaign]),
+      ["created_at", "name", "whatsapp", "role", "education", "practice_hours", "weekly_hours", "utm_source", "utm_medium", "utm_campaign"],
+      rows.map((a) => [a.createdAt, a.name, a.whatsapp, a.role, a.education, a.practiceHours, a.weeklyHours, a.utmSource, a.utmMedium, a.utmCampaign]),
       `specialists-${stamp}.csv`,
     );
   }
@@ -42,8 +42,9 @@ export async function GET(request: Request) {
   const leads = await listLeads(
     {
       segment: params.get("segment") || undefined,
-      archetype: params.get("archetype") || undefined,
-      job: params.get("job") || undefined,
+      ceiling: params.get("ceiling") || undefined,
+      sphere: params.get("sphere") || undefined,
+      priority: params.get("priority") || undefined,
       status: params.get("status") || undefined,
       utm: params.get("utm") || undefined,
     },
@@ -51,16 +52,15 @@ export async function GET(request: Request) {
   );
   return csv(
     [
-      "created_at", "public_id", "name", "whatsapp", "consent_at", "status", "segment",
-      "primary", "secondary", "is_pair", "scores", "job", "cost", "goal", "goal_text",
+      "created_at", "public_id", "name", "whatsapp", "consent_at", "status", "segment", "priority",
+      "result", "main_sphere", "main_belief", "scores", "sphere_scores", "sphere_a1", "cost", "goal", "goal_text",
       "occupation", "income_band", "paid_amount",
       "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "referrer",
       "getcourse_synced_at", "whatsapp_opt_out",
     ],
     leads.map((l) => [
-      l.createdAt, l.publicId, l.name, l.whatsapp, l.consentAt, l.status, l.segment,
-      archetypeName(l.primary as ArchetypeCode), archetypeName(l.secondary as ArchetypeCode), l.isPair, l.scores,
-      l.job, l.cost, l.goal, l.goalText, l.occupation, l.incomeBand, l.paidAmount,
+      l.createdAt, l.publicId, l.name, l.whatsapp, l.consentAt, l.status, l.segment, l.priority,
+      ceilingName(l.ceiling), sphereName(l.mainSphere), l.mainBelief, l.scores, l.sphereScores, l.sphere, l.cost, l.goal, l.goalText, l.occupation, l.incomeBand, l.paidAmount,
       l.utmSource, l.utmMedium, l.utmCampaign, l.utmContent, l.utmTerm, l.fbclid, l.referrer,
       l.getcourseSyncedAt, l.whatsappOptOut,
     ]),

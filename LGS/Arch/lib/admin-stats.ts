@@ -8,8 +8,12 @@ const { leads, events, specialistApplications } = schema;
 
 export interface LeadFilters {
   segment?: string;
-  archetype?: string;
-  job?: string;
+  /** Название результата: H, B, W или F */
+  ceiling?: string;
+  /** Главная сфера */
+  sphere?: string;
+  /** "1": только лиды для личного звонка */
+  priority?: string;
   status?: string;
   utm?: string;
 }
@@ -17,8 +21,9 @@ export interface LeadFilters {
 function where(filters: LeadFilters): SQL | undefined {
   const parts: SQL[] = [];
   if (filters.segment) parts.push(eq(leads.segment, filters.segment));
-  if (filters.archetype) parts.push(eq(leads.primary, filters.archetype));
-  if (filters.job) parts.push(eq(leads.job, filters.job));
+  if (filters.ceiling) parts.push(eq(leads.ceiling, filters.ceiling));
+  if (filters.sphere) parts.push(eq(leads.mainSphere, filters.sphere));
+  if (filters.priority === "1") parts.push(eq(leads.priority, true));
   if (filters.status) parts.push(eq(leads.status, filters.status));
   if (filters.utm) parts.push(eq(leads.utmSource, filters.utm));
   return parts.length ? and(...parts) : undefined;
@@ -45,7 +50,7 @@ export interface BreakdownRow {
   paid: number;
 }
 
-async function breakdown(column: typeof leads.segment | typeof leads.primary | typeof leads.job | typeof leads.utmSource) {
+async function breakdown(column: typeof leads.segment | typeof leads.ceiling | typeof leads.mainSphere | typeof leads.utmSource) {
   const db = await getDb();
   const rows = await db
     .select({
@@ -96,10 +101,10 @@ export async function getStats() {
     return { n, answered: count, dropOff: previous > 0 ? Math.max(0, 1 - count / previous) : 0 };
   });
 
-  const [bySegment, byArchetype, byJob, byUtm] = await Promise.all([
+  const [bySegment, byCeiling, bySphere, byUtm] = await Promise.all([
     breakdown(leads.segment),
-    breakdown(leads.primary),
-    breakdown(leads.job),
+    breakdown(leads.ceiling),
+    breakdown(leads.mainSphere),
     breakdown(leads.utmSource),
   ]);
 
@@ -113,8 +118,8 @@ export async function getStats() {
     ],
     questions,
     bySegment,
-    byArchetype,
-    byJob,
+    byCeiling,
+    bySphere,
     byUtm,
   };
 }
