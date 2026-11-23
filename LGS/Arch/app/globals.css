@@ -1,15 +1,34 @@
 @import "tailwindcss";
 
-@theme {
-  --color-cream: #f8f8f2;
-  --color-paper: #ffffff;
-  --color-ink: #173c35;
-  --color-green: #164f46;
-  --color-deep: #103d35;
-  --color-lime: #d9efad;
-  --color-line: #dce1d6;
-  --color-muted: #5a6961;
-  --color-danger: #a3301f;
+/*
+ * Тема ТЗ v2: чёрный фон, белый текст, один акцент (приглушённый оранжевый).
+ * Красного, синего и зелёного нет. Светлой темы нет.
+ * Контраст на --bg: --text 19:1, --muted 8.6:1, --accent 8.4:1 (AA и выше).
+ */
+:root {
+  --bg: #070606;
+  --surface: #141211;
+  --surface-2: #1d1a18;
+  --text: #f6f3ee;
+  --muted: #aaa39a;
+  --line: #2b2724;
+  --accent: #e9924b;
+  --accent-strong: #f2a565;
+  --on-accent: #120b05;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  /* Ошибки показываем акцентом: отдельного красного в палитре нет */
+  --color-danger: var(--accent-strong);
   --font-sans: var(--font-manrope), Arial, sans-serif;
   --radius-card: 20px;
 }
@@ -17,11 +36,12 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  background: var(--bg);
 }
 
 body {
-  background: var(--color-cream);
-  color: var(--color-ink);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.55;
@@ -32,7 +52,7 @@ h1,
 h2,
 h3 {
   text-wrap: balance;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 p,
@@ -40,20 +60,21 @@ li {
   text-wrap: pretty;
 }
 
-:focus-visible {
-  outline: 3px solid var(--color-green);
-  outline-offset: 3px;
-  border-radius: 6px;
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
-.on-dark :focus-visible {
-  outline-color: var(--color-lime);
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 @layer components {
   .container-page {
     width: 100%;
-    max-width: 1080px;
+    max-width: 1120px;
     margin-inline: auto;
     padding-inline: 20px;
   }
@@ -82,42 +103,42 @@ li {
     transform: translateY(1px);
   }
   .btn-primary {
-    background: var(--color-green);
-    color: #fff;
+    background: var(--accent);
+    color: var(--on-accent);
   }
   .btn-primary:hover {
-    background: var(--color-deep);
-  }
-  .btn-lime {
-    background: var(--color-lime);
-    color: var(--color-deep);
-  }
-  .btn-lime:hover {
-    background: #cbe696;
+    background: var(--accent-strong);
   }
   .btn-ghost {
     background: transparent;
-    color: var(--color-ink);
-    border: 1.5px solid var(--color-line);
+    color: var(--text);
+    border: 1.5px solid var(--line);
   }
   .btn-ghost:hover {
-    border-color: var(--color-green);
+    border-color: var(--accent);
   }
   .btn[disabled],
   .btn[aria-disabled="true"] {
-    opacity: 0.6;
+    opacity: 0.55;
     cursor: not-allowed;
   }
   .eyebrow {
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--muted);
+  }
+  .eyebrow-accent {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
   .card {
-    background: var(--color-paper);
-    border: 1px solid var(--color-line);
+    background: var(--surface);
+    border: 1px solid var(--line);
     border-radius: var(--radius-card);
     padding: 24px;
   }
@@ -126,18 +147,21 @@ li {
     min-height: 56px;
     padding: 14px 16px;
     border-radius: 14px;
-    border: 1.5px solid var(--color-line);
-    background: #fff;
-    color: var(--color-ink);
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    color: var(--text);
     font-size: 16px;
   }
+  .field::placeholder {
+    color: #7d766e;
+  }
   .field:focus {
-    border-color: var(--color-green);
+    border-color: var(--accent);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(22, 79, 70, 0.18);
+    box-shadow: 0 0 0 3px rgba(233, 146, 75, 0.25);
   }
   .field[aria-invalid="true"] {
-    border-color: var(--color-danger);
+    border-color: var(--accent-strong);
   }
   .draft-mark {
     display: inline-block;
@@ -145,10 +169,48 @@ li {
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #7a5b00;
-    background: #fff3c4;
+    color: var(--muted);
+    border: 1px dashed var(--muted);
     border-radius: 6px;
-    padding: 2px 8px;
+    padding: 1px 7px;
+  }
+  /* Крупный номер карточки, как на ориентирах из ТЗ */
+  .num {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .section {
+    border-top: 1px solid var(--line);
+    padding-block: 64px;
+  }
+  @media (min-width: 640px) {
+    .section {
+      padding-block: 96px;
+    }
+  }
+  .h-section {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.1;
+    max-width: 22ch;
+  }
+  @media (min-width: 640px) {
+    .h-section {
+      font-size: 44px;
+    }
+  }
+  /* Фото-плейсхолдер до получения портретов: TODO(content) */
+  .photo-placeholder {
+    display: flex;
+    align-items: flex-end;
+    background: repeating-linear-gradient(135deg, var(--surface) 0 14px, var(--surface-2) 14px 28px);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    padding: 12px;
   }
 }
 

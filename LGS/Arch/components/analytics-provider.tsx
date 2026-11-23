@@ -45,7 +45,7 @@ export function AnalyticsProvider({ ids, text }: Props) {
     <div
       role="region"
       aria-label="Cookie"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white px-4 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 shadow-[0_-4px_20px_rgba(16,61,53,0.08)] sm:inset-x-auto sm:bottom-4 sm:left-4 sm:max-w-sm sm:rounded-2xl sm:border"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface px-4 pb-[max(12px,env(safe-area-inset-bottom))] pt-3  sm:inset-x-auto sm:bottom-4 sm:left-4 sm:max-w-sm sm:rounded-2xl sm:border"
     >
       <p className="text-[13px] leading-snug text-muted">
         {text.text}{" "}
@@ -57,7 +57,7 @@ export function AnalyticsProvider({ ids, text }: Props) {
         <button
           type="button"
           onClick={() => decide("yes")}
-          className="min-h-11 flex-1 rounded-xl bg-green px-3 text-sm font-bold text-white"
+          className="min-h-11 flex-1 rounded-xl bg-accent px-3 text-sm font-bold text-on-accent"
         >
           {text.accept}
         </button>

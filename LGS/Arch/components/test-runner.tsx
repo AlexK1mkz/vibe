@@ -197,7 +197,7 @@ export function TestRunner({
           {[0, 1, 2].map((i) => (
             <span
               key={i}
-              className="h-3 w-3 rounded-full bg-green"
+              className="h-3 w-3 rounded-full bg-accent"
               style={{ animation: `pulse-dot 0.9s ${i * 0.18}s infinite` }}
             />
           ))}
@@ -241,7 +241,7 @@ export function TestRunner({
           aria-valuenow={index}
           aria-label={fill(strings.progressLabel, { n, total })}
         >
-          <div className="h-full rounded-full bg-green transition-[width] duration-300" style={{ width: `${percent}%` }} />
+          <div className="h-full rounded-full bg-accent transition-[width] duration-300" style={{ width: `${percent}%` }} />
         </div>
         <p className="min-w-16 text-right text-sm font-bold tabular-nums" data-testid="progress">
           {fill(strings.progress, { n, total })}
@@ -249,7 +249,7 @@ export function TestRunner({
       </div>
 
       {resumed && (
-        <p className="mt-4 rounded-xl bg-lime/50 px-4 py-3 text-sm">
+        <p className="mt-4 rounded-xl bg-surface-2 px-4 py-3 text-sm">
           {strings.resumed}{" "}
           <button type="button" onClick={restart} className="font-bold underline">
             {strings.restart}
@@ -257,7 +257,7 @@ export function TestRunner({
         </p>
       )}
       {lastResult && index === 0 && (
-        <p className="mt-4 rounded-xl bg-lime/50 px-4 py-3 text-sm">
+        <p className="mt-4 rounded-xl bg-surface-2 px-4 py-3 text-sm">
           {strings.haveResult}{" "}
           <Link href={`/result/${lastResult}`} className="font-bold underline">
             {strings.openResult}
@@ -283,7 +283,7 @@ export function TestRunner({
                   aria-pressed={active}
                   data-option={option.id}
                   className={`flex min-h-16 w-full items-center rounded-2xl border-[1.5px] px-5 py-4 text-left text-[17px] font-semibold leading-snug transition-colors ${
-                    active ? "border-green bg-green text-white" : "border-line bg-white hover:border-green"
+                    active ? "border-accent bg-accent text-on-accent" : "border-line bg-surface hover:border-accent"
                   }`}
                 >
                   {option.text}

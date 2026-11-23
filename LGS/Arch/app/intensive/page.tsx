@@ -31,7 +31,7 @@ export default async function IntensivePage({ searchParams }: { searchParams: Pr
         <h2 className="mt-12 text-2xl font-bold">{s.programTitle}</h2>
         <ol className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {s.eveningTopics.map((topic, i) => (
-            <li key={i} className="rounded-[20px] border border-line bg-white p-5">
+            <li key={i} className="rounded-[20px] border border-line bg-surface p-5">
               <p className="eyebrow">{fmt(s.evening, { n: i + 1 })}</p>
               {topic ? (
                 <p className="mt-2 text-lg font-bold leading-snug">{topic}</p>
@@ -47,9 +47,9 @@ export default async function IntensivePage({ searchParams }: { searchParams: Pr
           {tariffs.map((tariff) => (
             <div
               key={tariff.key}
-              className={`rounded-[24px] p-7 ${tariff.key === "vip" ? "on-dark bg-deep text-white" : "border border-line bg-white"}`}
+              className={`rounded-[24px] p-7 ${tariff.key === "vip" ? "bg-surface text-ink" : "border border-line bg-surface"}`}
             >
-              <p className={`text-xs font-bold uppercase tracking-[0.14em] ${tariff.key === "vip" ? "text-lime" : "text-muted"}`}>
+              <p className={`text-xs font-bold uppercase tracking-[0.14em] ${tariff.key === "vip" ? "text-accent" : "text-muted"}`}>
                 {tariff.name}
               </p>
               <p className="mt-2 text-4xl font-extrabold">{formatPrice(tariff.price)}</p>
@@ -60,14 +60,14 @@ export default async function IntensivePage({ searchParams }: { searchParams: Pr
                   ))}
                 </ul>
               ) : (
-                <p className={`mt-4 text-sm ${tariff.key === "vip" ? "text-white/75" : "text-muted"}`}>{s.includesPending}</p>
+                <p className={`mt-4 text-sm ${tariff.key === "vip" ? "text-muted" : "text-muted"}`}>{s.includesPending}</p>
               )}
               <TrackedLink
                 href={`/api/pay?product=${tariff.key}${leadParam}`}
                 event="cta_intensive_click"
                 payload={{ from: "intensive", tariff: tariff.key, value: tariff.price, currency: "KZT" }}
                 leadId={leadId}
-                className={`btn mt-6 w-full ${tariff.key === "vip" ? "btn-lime" : "btn-primary"}`}
+                className={`btn mt-6 w-full ${tariff.key === "vip" ? "btn-primary" : "btn-primary"}`}
               >
                 {fmt(tariff.cta)}
               </TrackedLink>

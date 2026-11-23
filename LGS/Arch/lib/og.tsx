@@ -24,13 +24,13 @@ export async function ogImage({ eyebrow, title, subtitle }: { eyebrow: string; t
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#103d35",
-          color: "#ffffff",
+          background: "#070606",
+          color: "#f6f3ee",
           padding: 72,
           fontFamily: "Manrope",
         }}
       >
-        <div style={{ display: "flex", fontSize: 26, fontWeight: 500, letterSpacing: 4, color: "#d9efad" }}>{eyebrow}</div>
+        <div style={{ display: "flex", fontSize: 26, fontWeight: 500, letterSpacing: 4, color: "#e9924b" }}>{eyebrow}</div>
         <div style={{ display: "flex", fontSize: title.length > 48 ? 68 : 84, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>
           {title}
         </div>
@@ -39,8 +39,8 @@ export async function ogImage({ eyebrow, title, subtitle }: { eyebrow: string; t
           <div
             style={{
               display: "flex",
-              background: "#d9efad",
-              color: "#103d35",
+              background: "#e9924b",
+              color: "#120b05",
               fontSize: 30,
               fontWeight: 800,
               padding: "18px 34px",

@@ -129,7 +129,7 @@ export function ContactForm({ publicId, strings }: { publicId: string; strings: 
           <input
             id="contact-consent"
             type="checkbox"
-            className="mt-0.5 h-6 w-6 shrink-0 accent-[#164f46]"
+            className="mt-0.5 h-6 w-6 shrink-0 accent-[#e9924b]"
             checked={consent}
             onChange={(e) => setConsent(e.target.checked)}
             aria-invalid={Boolean(errors.consent)}

@@ -28,7 +28,7 @@ export default async function ConsultationPage({ searchParams }: { searchParams:
         <ol className="mt-6 grid gap-6">
           {c.steps.map((step, i) => (
             <li key={step.title} className="flex gap-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-lime text-sm font-extrabold text-deep">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-extrabold text-on-accent">
                 {i + 1}
               </span>
               <div>
