@@ -10,7 +10,7 @@ import { LEAD_COOKIE } from "@/lib/server-utils";
 const t = getDictionary();
 const c = t.consultation;
 
-export const metadata: Metadata = { title: c.metaTitle, description: fmt(c.lead) };
+export const metadata: Metadata = { title: fmt(c.metaTitle), description: fmt(c.lead) };
 
 export default async function ConsultationPage({ searchParams }: { searchParams: Promise<{ lead?: string }> }) {
   const leadId = (await searchParams).lead || (await cookies()).get(LEAD_COOKIE)?.value;
@@ -21,7 +21,7 @@ export default async function ConsultationPage({ searchParams }: { searchParams:
       <SiteHeader cta={false} />
       <main id="content" className="container-narrow py-10 sm:py-16">
         <p className="eyebrow">{c.eyebrow}</p>
-        <h1 className="mt-3 text-[34px] font-extrabold leading-[1.08] sm:text-5xl">{fmt(c.title)}</h1>
+        <h1 className="display mt-3 text-[44px] sm:text-[80px]">{fmt(c.title)}</h1>
         <p className="mt-5 text-lg text-muted">{fmt(c.lead)}</p>
 
         <h2 className="mt-12 text-2xl font-bold">{c.whatTitle}</h2>

@@ -20,7 +20,7 @@ async function answerAll(page: Page, pick: Record<string, string>) {
 
 test("лендинг → тест → контакт → полный результат, сегмент A", async ({ page }) => {
   await page.goto("/?utm_source=e2e&utm_campaign=funnel");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Что держит вас на текущем уровне");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Станьте НЛП-практиком за 3 месяца");
   await page.getByRole("button", { name: "Только необходимые" }).click();
   await page.getByRole("link", { name: "Пройти тест" }).first().click();
   await expect(page).toHaveURL(/\/test$/);

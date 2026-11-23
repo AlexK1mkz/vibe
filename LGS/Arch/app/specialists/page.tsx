@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { TrackOnMount } from "@/components/client-bits";
-import { Portrait, SiteFooter, SiteHeader, StickyCta } from "@/components/site-chrome";
+import { Portrait, Rich, SiteFooter, SiteHeader, StickyCta } from "@/components/site-chrome";
 import { SpecialistForm } from "@/components/specialist-form";
 import { getDictionary } from "@/dictionaries";
 import { specialists as s } from "@/lib/specialists-content";
@@ -39,8 +39,8 @@ export default function SpecialistsPage() {
         {/* 1. Первый экран: целиком помещается на 360×740 вместе с закреплённой кнопкой */}
         <section className="container-page pb-14 pt-8 sm:pb-24 sm:pt-20" aria-labelledby="sp-hero">
           <p className="eyebrow-accent">{s.hero.eyebrow}</p>
-          <h1 id="sp-hero" className="mt-3 max-w-[16ch] text-[32px] font-extrabold leading-[1.06] sm:mt-5 sm:text-6xl lg:text-7xl">
-            {s.hero.title}
+          <h1 id="sp-hero" className="display mt-3 max-w-[14ch] text-[46px] sm:mt-5 sm:text-[88px] lg:text-[104px]">
+            <Rich text={s.hero.title} />
           </h1>
           <p className="mt-4 max-w-2xl text-base text-muted sm:mt-6 sm:text-xl">{s.hero.subtitle}</p>
           <a href="#form" className="btn btn-primary mt-6 w-full sm:mt-9 sm:w-auto sm:min-w-64">

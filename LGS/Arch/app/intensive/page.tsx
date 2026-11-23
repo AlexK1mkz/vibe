@@ -25,7 +25,7 @@ export default async function IntensivePage({ searchParams }: { searchParams: Pr
       <SiteHeader cta={false} />
       <main id="content" className="container-page py-10 sm:py-16">
         <p className="eyebrow">{fmt(s.eyebrow)}</p>
-        <h1 className="mt-3 max-w-3xl text-[34px] font-extrabold leading-[1.08] sm:text-5xl">{fmt(s.title)}</h1>
+        <h1 className="display mt-3 max-w-4xl text-[44px] sm:text-[80px]">{fmt(s.title)}</h1>
         <p className="mt-5 text-lg text-muted">{fmt(s.lead)}</p>
 
         <h2 className="mt-12 text-2xl font-bold">{s.programTitle}</h2>

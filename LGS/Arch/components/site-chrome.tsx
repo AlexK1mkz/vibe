@@ -184,3 +184,23 @@ export function Portrait({ src, alt, className = "" }: { src?: string | null; al
   }
   return <Image src={src} alt={alt} width={640} height={640} sizes="(max-width: 640px) 60vw, 320px" className={`object-cover ${className}`} />;
 }
+
+/** Заголовок с акцентом: слова в [квадратных скобках] выделяются акцентным цветом */
+export function Rich({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/(\[[^\]]+\])/g).map((part, i) =>
+        part.startsWith("[") && part.endsWith("]") ? (
+          <span key={i} className="accent">
+            {part.slice(1, -1)}
+          </span>
+        ) : (
+          part
+        ),
+      )}
+    </>
+  );
+}
+
+/** Убирает разметку акцента: для мета-тегов и картинок */
+export const plain = (text: string) => text.replace(/[\[\]]/g, "");

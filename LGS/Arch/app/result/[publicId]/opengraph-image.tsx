@@ -17,7 +17,7 @@ export default async function Image({ params }: { params: Promise<{ publicId: st
   const lead = await getLead(publicId).catch(() => null);
   const known = lead && isCeiling(lead.ceiling);
   return ogImage({
-    eyebrow: (known ? t.result.ogEyebrow : landing.hero.eyebrow).toUpperCase(),
+    eyebrow: (known ? t.result.ogEyebrow : landing.meta.ogEyebrow).toUpperCase(),
     title: known ? ceilingName(lead.ceiling) : t.meta.ogTitle,
     subtitle: t.result.ogSubtitle,
   });

@@ -60,7 +60,7 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
         <div aria-hidden="true" className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-2xl font-bold text-on-accent">
           ✓
         </div>
-        <h1 className="mt-6 text-[34px] font-extrabold leading-tight sm:text-5xl">{copy.title}</h1>
+        <h1 className="display mt-6 text-[44px] sm:text-[72px]">{copy.title}</h1>
         <p className="mt-4 text-lg text-muted">{fmt(copy.text)}</p>
         {isSpecialist && (
           <section className="mt-10 border-t border-line pt-8" aria-labelledby="thanks-next">

@@ -12,7 +12,7 @@ export const alt = "Институт современного NLP / LGS";
 export default function Image() {
   if (currentSite() === "specialists") {
     const hero = (specialists as { hero: { title: string } }).hero;
-    return ogImage({ eyebrow: "НЛП-СПЕЦИАЛИСТАМ", title: hero.title, subtitle: "Практика, рост, клиенты" });
+    return ogImage({ eyebrow: "НЛП-СПЕЦИАЛИСТАМ", title: hero.title.split("[").join("").split("]").join(""), subtitle: "Практика, рост, клиенты" });
   }
-  return ogImage({ eyebrow: "БЕСПЛАТНЫЙ ТЕСТ · 3 МИНУТЫ", title: landing.hero.title, subtitle: landing.hero.note });
+  return ogImage({ eyebrow: landing.meta.ogEyebrow, title: landing.meta.ogTitle, subtitle: landing.meta.ogSubtitle });
 }

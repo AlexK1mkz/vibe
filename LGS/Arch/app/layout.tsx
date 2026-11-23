@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Oswald } from "next/font/google";
 import { AnalyticsProvider } from "@/components/analytics-provider";
 import { getDictionary } from "@/dictionaries";
 import { siteUrl } from "@/lib/server-utils";
@@ -10,6 +10,13 @@ const manrope = Manrope({
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
   variable: "--font-manrope",
+});
+
+const oswald = Oswald({
+  subsets: ["latin", "cyrillic"],
+  weight: ["500", "700"],
+  display: "swap",
+  variable: "--font-display",
 });
 
 const t = getDictionary();
@@ -37,7 +44,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className={manrope.variable} data-scroll-behavior="smooth">
+    <html lang="ru" className={`${manrope.variable} ${oswald.variable}`} data-scroll-behavior="smooth">
       <body>
         <a
           href="#content"
