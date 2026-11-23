@@ -3,10 +3,12 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { funnel, type Product } from "@/config/funnel";
 import { TrackOnMount } from "@/components/client-bits";
-import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { SiteFooter, SiteHeader, SmartLink } from "@/components/site-chrome";
 import { fmt, getDictionary } from "@/dictionaries";
 import { getLead, purchaseEvents } from "@/lib/leads";
 import { LEAD_COOKIE } from "@/lib/server-utils";
+import { specialistsHref } from "@/lib/site";
+import { specialists } from "@/lib/specialists-content";
 
 const t = getDictionary();
 const th = t.thanks;
@@ -20,9 +22,10 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
   const leadId = params.lead || (await cookies()).get(LEAD_COOKIE)?.value;
   const lead = leadId ? await getLead(leadId).catch(() => null) : null;
 
+  const isSpecialist = type === "specialist";
   const copy =
-    type === "specialist"
-      ? th.specialist
+    isSpecialist
+      ? specialists.thanks
       : type === "pay_pending"
         ? th.payPending
         : type === "consult" || type === "intensive" || type === "vip"
@@ -54,12 +57,34 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
             countersOnly
           />
         )}
-        <div aria-hidden="true" className="flex h-14 w-14 items-center justify-center rounded-full bg-lime text-2xl font-bold text-deep">
+        <div aria-hidden="true" className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-2xl font-bold text-on-accent">
           ✓
         </div>
         <h1 className="mt-6 text-[34px] font-extrabold leading-tight sm:text-5xl">{copy.title}</h1>
         <p className="mt-4 text-lg text-muted">{fmt(copy.text)}</p>
+        {isSpecialist && (
+          <section className="mt-10 border-t border-line pt-8" aria-labelledby="thanks-next">
+            <h2 id="thanks-next" className="eyebrow">
+              {specialists.thanks.nextTitle}
+            </h2>
+            <ol className="mt-5 grid gap-4">
+              {specialists.thanks.steps.map((step, i) => (
+                <li key={step} className="flex gap-4">
+                  <span className="num w-7 shrink-0 pt-0.5" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          {isSpecialist && (
+            <SmartLink href={specialistsHref()} className="btn btn-ghost">
+              {specialists.thanks.back}
+            </SmartLink>
+          )}
           {type === "pay_pending" && (
             <a href={funnel.contacts.whatsappHref} className="btn btn-primary" rel="noopener">
               {t.common.whatsapp}
@@ -70,9 +95,11 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
               {th.toResult}
             </Link>
           )}
-          <Link href="/" className="btn btn-ghost">
-            {t.common.home}
-          </Link>
+          {!isSpecialist && (
+            <Link href="/" className="btn btn-ghost">
+              {t.common.home}
+            </Link>
+          )}
         </div>
       </main>
       <SiteFooter />

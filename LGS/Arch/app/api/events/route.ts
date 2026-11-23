@@ -5,7 +5,7 @@ import { clientIp, rateLimited } from "@/lib/server-utils";
 export const runtime = "nodejs";
 
 /** События воронки с клиента. Покупки пишет только вебхук оплаты. */
-const ALLOWED = /^(page_view|test_start|test_question_(?:[1-9]|1[0-7])|test_complete|contact_submit|result_view|cta_consult_click|cta_intensive_click|cta_specialists_click|specialist_submit)$/;
+const ALLOWED = /^(page_view|test_start|test_question_(?:[1-9]|1[0-7])|test_complete|contact_submit|result_view|cta_consult_click|cta_intensive_click|cta_specialists_click|specialist_view|specialist_form_start|specialist_submit)$/;
 
 export async function POST(request: Request) {
   if (rateLimited(`event:${clientIp(request.headers)}`, 400)) {
