@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Стратегия Busurman Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+<style>:root{
+  /* Один мир: чёрный и золото бренда Айдара. Три потока — три цвета, одна шкала на блок. */
+  --bg:#141414;--panel:#1d1c1a;--line:#34312b;--text:#ece7dc;--muted:#a39c8d;
+  --gold:#b08d57;--mint:#2fd3bd;--warn:#d9775f;
+  --display:"Oswald","Arial Narrow",Arial,sans-serif;--body:"Golos Text","Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.5}
+main{max-width:1040px;margin:0 auto;padding:28px 18px 56px;display:flex;flex-direction:column;gap:38px}
+h1,h2,h3{font-family:var(--display);font-weight:500;margin:0;text-wrap:balance;letter-spacing:.01em}
+h1{font-size:clamp(34px,7vw,54px);line-height:1.05;text-transform:uppercase}
+h2{font-size:24px;text-transform:uppercase;color:var(--gold)}
+h3{font-size:15px;text-transform:uppercase;color:var(--muted);letter-spacing:.06em;margin-bottom:6px}
+p{margin:0;max-width:65ch}
+.lead{color:var(--muted);font-size:17px}
+.meta{font-family:var(--display);color:var(--gold);letter-spacing:.12em;text-transform:uppercase;font-size:14px}
+section{display:flex;flex-direction:column;gap:16px}
+.note{color:var(--muted);font-size:14px;max-width:80ch}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.tile{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--gold);padding:16px;display:flex;flex-direction:column;gap:6px}
+.tile b{font-family:var(--display);font-weight:500;font-size:36px;line-height:1.05;font-variant-numeric:tabular-nums}
+.tile span{color:var(--muted);font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;color:var(--muted);font-size:14px}
+.legend i{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.group{padding:14px;background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column}
+.tri{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;flex-direction:column;gap:3px}
+.rl{font-size:14px}
+.rb{display:flex;flex-direction:column;gap:2px}
+.b{display:grid;grid-template-columns:1fr 46px;gap:8px;align-items:center}
+.b .t{height:9px;background:#262521}
+.b .t div{height:100%}
+.b b{font-family:var(--display);font-weight:500;font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+.b b.na{color:#5c574d}
+.one .b .t{height:12px}
+section>.tri{background:var(--panel);border:1px solid var(--line);padding:14px}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--panel);border:1px solid var(--line)}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+th:not(:first-child){text-align:right}
+tbody tr:last-child td{border-bottom:0}
+.card{background:var(--panel);border:1px solid var(--line);padding:16px}
+.card ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:15px}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+blockquote{margin:0;padding:14px 16px;border-left:3px solid var(--gold);background:var(--panel);font-size:16px}
+cite{display:block;margin-top:8px;color:var(--muted);font-size:13px;font-style:normal}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+
+.stack{display:flex;height:44px;border:1px solid var(--line)}
+.stack div{display:flex;align-items:center;justify-content:center;min-width:26px}
+.stack b{font-family:var(--display);font-weight:500;font-size:18px;color:#141414}
+
+.hero{display:flex;flex-direction:column;gap:14px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.big{font-family:var(--display);font-size:clamp(22px,4.4vw,30px);line-height:1.2;max-width:28ch}
+.gap{display:flex;flex-direction:column;gap:10px;background:var(--panel);border:1px solid var(--line);padding:16px}
+.gap .r{display:grid;grid-template-columns:150px 1fr 92px;gap:10px;align-items:center;font-size:14px}
+.gap .t{height:18px;background:#262521}.gap .t div{height:100%}
+.gap b{font-family:var(--display);font-weight:500;font-size:16px;text-align:right;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
+.card h3{color:var(--gold)}
+.vals{display:flex;flex-wrap:wrap;gap:8px}
+.vals span{border:1px solid var(--line);padding:6px 10px;font-size:14px;background:var(--panel)}
+.vals span.k{border-color:var(--gold);color:var(--gold)}
+.tl{display:flex;flex-direction:column;border-left:2px solid var(--gold);margin-left:6px}
+.tl>div{position:relative;padding:0 0 20px 22px}
+.tl>div:last-child{padding-bottom:0}
+.tl>div:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;background:var(--gold);border-radius:50%}
+.tl .y{font-family:var(--display);font-size:20px;text-transform:uppercase;letter-spacing:.03em}
+.tl .g{color:var(--gold);font-size:14px;text-transform:uppercase;letter-spacing:.05em;margin:2px 0 4px}
+.tl p{font-size:15px;max-width:70ch}
+.tl ul{margin:4px 0 0;padding-left:18px;font-size:15px;display:flex;flex-direction:column;gap:3px}
+.own .r{display:grid;grid-template-columns:90px 1fr 34px;gap:10px;align-items:center;font-size:15px}
+.own{display:flex;flex-direction:column;gap:8px;background:var(--panel);border:1px solid var(--line);padding:16px}
+.own .t{height:14px;background:#262521}.own .t div{height:100%;background:var(--gold)}
+.own b{font-family:var(--display);font-weight:500;text-align:right}
+td.o{white-space:nowrap;color:var(--gold)}
+th:not(:first-child){text-align:left}
+.q li b{color:var(--text)}
+a{color:var(--gold)}
+@media(max-width:560px){.gap .r{grid-template-columns:1fr 70px}.gap .r span{grid-column:1/-1}}
+</style></head><body><main>
+
+<header class="hero">
+<div class="meta">Busurman Group · по итогам сессии 20.11.2026</div>
+<h1>Стратегия и дорожная карта</h1>
+<div class="big">Рост через имя Айдара Бусурмана, группы до 100 человек и высокий чек. Не через массовые залы.</div>
+<p class="lead">Участники сессии: Айдар Бусурман, Кымбат, Нуржан, Alex, Ризабек. Источник: четыре расшифровки встреч 19–20 ноября и исследования трёх последних потоков.</p>
+</header>
+
+<section>
+<h2>Куда идём</h2>
+<div class="tiles"><div class="tile"><b>300 млн ₸</b><span>выручка в месяц к ноябрю 2029</span></div><div class="tile"><b>3 000 м²</b><span>свой комплекс в Астане к ноябрю 2029</span></div><div class="tile"><b>$10 000</b><span>цена тренинга к 2036 году</span></div><div class="tile"><b>100 000</b><span>человек прошли через метод к 2056 году</span></div></div>
+</section>
+
+<section>
+<h2>Главный разрыв</h2>
+<p>Флагманы при 600 участниках в год и ценах 2027 года дают около шестой части цели. Остальное должны дать подписка, онлайн, наставничество, годовой продукт и программы других тренеров. Их доли на сессии не определили.</p>
+<div class="gap">
+<div class="r"><span>Флагманы, оценка</span><div class="t"><div style="width:14%;background:var(--gold)"></div></div><b>≈ 0,5 млрд ₸</b></div>
+<div class="r"><span>Цель на 2029 год</span><div class="t"><div style="width:100%;background:var(--mint)"></div></div><b>3–3,6 млрд ₸</b></div>
+</div>
+<p class="note">Оценка: 400 мест Batyr Joly по 630 тыс. ₸, 200 мест PRO LIFE по 720 тыс. ₸, 200 мест женской программы по сопоставимой цене. Цель в записи звучала тремя разными цифрами, её нужно утвердить одной.</p>
+</section>
+
+<section>
+<h2>Точка А</h2>
+<div class="tiles"><div class="tile"><b>95</b><span>участников в трёх последних потоках</span></div><div class="tile"><b>77 из 95</b><span>узнали о тренинге от близких</span></div><div class="tile"><b>×15,5</b><span>окупаемость таргета на Batyr Joly</span></div><div class="tile"><b>199 → 2</b><span>лиды и продажи таргета на PRO LIFE</span></div><div class="tile"><b>86 · 78 · 65</b><span>NPS: PRO LIFE Астана, Batyr Joly, Кипр</span></div><div class="tile"><b>35 из 52</b><span>недель в году выходные Айдара заняты</span></div></div>
+<div class="card"><h3>Что мешает росту</h3><ul><li>После тренинга 56–89% участников важно не откатиться. Системы, которая ведёт человека после выпуска, нет.</li><li>Привлечение одного клиента на PRO LIFE стоит около 283 тыс. ₸.</li><li>По наставничеству висит задолженность участников: называли 50 и 86 млн ₸.</li><li>Ежедневных управленческих отчётов нет. Исследования не доходят до решений.</li><li>На наставничество за 1,2 млн ₸ зашло 20 человек: больше, чем по прежней цене.</li></ul></div>
+</section>
+
+<section>
+<h2>Предназначение и ценности</h2>
+<blockquote>Создавать условия для трансформации людей: раскрыть потенциал, взять ответственность за свою жизнь, стать сильнее на пути к свободной и счастливой жизни.<cite>Компания создаёт возможность и не обещает «изменим вашу жизнь».</cite></blockquote>
+<div class="vals"><span class="k">Здоровье участников</span><span class="k">Репутация</span><span class="k">Здоровый образ жизни</span><span>Безопасность</span><span>Эффективность программы</span><span>Ответственность за слова</span><span>Семья</span><span>Уважение</span></div>
+<p class="note">Золотым выделены три ценности, за нарушение которых компания расстаётся с человеком. Отказ даже при прибыли: проекты с алкоголем и веществами, неэкологичные инструменты продвижения.</p>
+</section>
+
+<section>
+<h2>Решения сессии</h2>
+<div class="grid2">
+<div class="card"><h3>Бренд</h3><ul><li>Главный бренд на 2–3 года: Айдар Бусурман. Предприниматель, основатель, трансформационный тренер.</li><li>Batyr Pro остаётся его проектом и названием сообщества.</li><li>Busurman Group как холдинг выводится на следующем этапе.</li><li>Сайт начинается с Айдара. «Программы» и «Проекты» идут отдельно.</li></ul></div>
+<div class="card"><h3>Модель роста</h3><ul><li>50–100 человек в зале, высокий чек.</li><li>Цена одна для всех стран.</li><li>Аудитория: доход от 1,5 млн ₸ в месяц.</li><li>Ориентир: около 600 участников флагманов в год.</li></ul></div>
+<div class="card"><h3>Цены 2027</h3><ul><li>Batyr Joly: 630 000 ₸.</li><li>PRO LIFE: 720 000 ₸.</li><li>Наставничество: 1 200 000 ₸.</li><li>Интенсив: от 39 990 ₸, стандарт 49 990 ₸. Оставлять ли его в линейке, не решено.</li><li>Мастер-класс: предложение команды в течение недели.</li></ul></div>
+<div class="card"><h3>Удержание и приложение</h3><ul><li>Старт с прототипа Улжаса: регистрация всех выпускников и профиль.</li><li>Дальше: поиск по сфере, чаты, клубы, лента тренера, наставничество с заданиями, челленджи.</li><li>Цена подписки: от ценности сообщества Batyr Pro и мыслей Айдара.</li><li>Айдар 2–3 раза в неделю записывает голосовые мысли для выпускников.</li></ul></div>
+<div class="card"><h3>Онлайн и новые продукты</h3><ul><li>Автовебинар с оплатой и доступом сразу.</li><li>Годовой продукт и клуб по подписке.</li><li>AI-ассистент в продажах: в тесте продал два мастер-класса.</li></ul></div>
+<div class="card"><h3>Айдар и другие тренеры</h3><ul><li>Айдар ведёт флагманы. Франшизу не рассматривает.</li><li>Другие тренеры возможны на входных программах, по контракту.</li><li>Решение о втором тренере на Batyr Joly не принято.</li></ul></div>
+</div>
+</section>
+
+<section>
+<h2>Видение по горизонтам</h2>
+<div class="tl"><div><div class="y">2027 · 1 год</div><p>Новые цены. Потоки растут к 60–100 участникам. Работают подписка и автовебинар. Начато строительство комплекса. Ежедневные отчёты и понятные роли.</p></div><div><div class="y">Ноябрь 2029 · 3 года</div><p>Свой комплекс в Астане: три этажа, конференц-зал, спортзал, студия, кафе, номера, паркинг. Выручка около 300 млн ₸ в месяц. Команда: ОКК, РОП, шесть менеджеров, AI-ассистенты, маркетолог, проектный менеджер, операционный и финансовый директора, свой продакшен.</p></div><div><div class="y">2031 · 5 лет</div><p>Чек флагмана 2,5–3 млн ₸, около 5 000 долларов.</p></div><div><div class="y">2036 · 10 лет</div><p>Тренинг стоит 10 000 долларов. В зале до 100 человек. Поток даёт до 1 млн долларов.</p></div><div><div class="y">2046 · 20 лет</div><p>Айдар акционер и ведёт отдельные программы. Компанией руководит другой человек.</p></div><div><div class="y">2056 · 30 лет</div><p>Через метод прошло около 100 000 человек. Остались книги, научные работы, метод, ученики, тренеры, центры, имя.</p></div></div>
+</section>
+
+<section>
+<h2>Дорожная карта</h2>
+<div class="tl"><div><div class="y">Ноябрь–декабрь 2026</div><div class="g">Порядок в управлении и первые шаги удержания</div><ul><li>Ежедневные отчёты, роли в маркетинге и продажах</li><li>Новые цены входных продуктов</li><li>Обновлённый опросник</li><li>Первая версия приложения на одном потоке</li><li>Канал с голосовыми мыслями Айдара</li></ul></div><div><div class="y">I квартал 2027</div><div class="g">Новые источники выручки</div><ul><li>Цены флагманов и наставничества 2027 года</li><li>Платная подписка</li><li>Автовебинар с таргетом</li><li>Решения: реферальная программа, комплекс, второй тренер</li></ul></div><div><div class="y">II квартал 2027</div><div class="g">Рост потока и география</div><ul><li>Поток Batyr Joly 60+ участников</li><li>Мастер-классы в Латвии и Германии под PRO LIFE на Кипре</li><li>Маркетинг по сферам участников</li><li>У каждого клуба руководитель</li></ul></div><div><div class="y">II полугодие 2027</div><div class="g">Масштаб без роста нагрузки на Айдара</div><ul><li>Начало строительства</li><li>Другой тренер ведёт входные программы</li><li>Годовой продукт запущен</li><li>Поток до 100 участников</li></ul></div><div><div class="y">2028</div><div class="g">Экосистема</div><ul><li>Онлайн-линейка работает без Айдара в эфире</li><li>Подписка окупает сообщество</li><li>Клубы оформлены как проекты</li></ul></div><div><div class="y">2029</div><div class="g">Картина трёх лет</div><ul><li>Комплекс открыт</li><li>Выручка около 300 млн ₸ в месяц</li><li>Команда в полном составе</li></ul></div><div><div class="y">2031–2036</div><div class="g">Премиальный сегмент</div><ul><li>Чек 5 000, затем 10 000 долларов</li><li>Группы до 100 человек</li><li>Участники прилетают из других стран</li></ul></div></div>
+</section>
+
+<section>
+<h2>Задачи: 33</h2>
+<p>Полный список со сроками, статусами и фильтрами лежит в <a href="https://docs.google.com/spreadsheets/d/1bbFKvZ2ejIcdvmeRo2nzj9NjrSwVuIHOzyD25qpEJ_I/edit">таблице задач</a>.</p>
+<div class="grid2">
+<div><h3>По ответственным</h3><div class="own"><div class="r"><span>Alex</span><div class="t"><div style="width:100%"></div></div><b>13</b></div><div class="r"><span>Кымбат</span><div class="t"><div style="width:62%"></div></div><b>8</b></div><div class="r"><span>Айдар</span><div class="t"><div style="width:46%"></div></div><b>6</b></div><div class="r"><span>Нуржан</span><div class="t"><div style="width:38%"></div></div><b>5</b></div><div class="r"><span>Улжас</span><div class="t"><div style="width:8%"></div></div><b>1</b></div></div></div>
+<div><h3>По периодам</h3><div class="own"><div class="r"><span>До 27.11</span><div class="t"><div style="width:100%"></div></div><b>13</b></div><div class="r"><span>Декабрь</span><div class="t"><div style="width:92%"></div></div><b>12</b></div><div class="r"><span>I кв. 2027</span><div class="t"><div style="width:62%"></div></div><b>8</b></div></div></div>
+</div>
+<h3>До 27 ноября</h3>
+<div class="scroll"><table><thead><tr><th>№</th><th>Задача</th><th>Ответственный</th></tr></thead><tbody><tr><td>1</td><td>Доработать опросник выпускников</td><td class="o">Alex</td></tr><tr><td>2</td><td>Обзвонить пятерых участников с ответом «другое», добрать ответы по Кипру</td><td class="o">Нуржан</td></tr><tr><td>3</td><td>Провести маркетинговую стратсессию по выводам исследований</td><td class="o">Alex</td></tr><tr><td>4</td><td>Концепция удержания выпускников с вариантами и цифрами</td><td class="o">Alex</td></tr><tr><td>5</td><td>Приложение: обратная связь по прототипу и план внедрения</td><td class="o">Alex</td></tr><tr><td>6</td><td>Разобрать таргет PRO LIFE: 199 лидов, 2 продажи</td><td class="o">Alex</td></tr><tr><td>7</td><td>Система управленческих отчётов: виды, формат, кто кому сдаёт</td><td class="o">Alex</td></tr><tr><td>8</td><td>Расклад по реферальной программе с цифрами</td><td class="o">Нуржан</td></tr><tr><td>9</td><td>Определить роль Нуржана: РОП или развитие</td><td class="o">Кымбат</td></tr><tr><td>10</td><td>Утвердить дресс-код команды</td><td class="o">Кымбат</td></tr><tr><td>11</td><td>Решить по входным продуктам: цена мастер-класса, судьба интенсива</td><td class="o">Кымбат</td></tr><tr><td>12</td><td>Оцифровать цели контента</td><td class="o">Alex</td></tr><tr><td>13</td><td>Перерисовать структуру сайта и согласовать до дизайна</td><td class="o">Alex</td></tr></tbody></table></div>
+<p class="note">Срок 27.11 стоит там, где на сессии прозвучало «в течение недели». Остальные сроки и часть ответственных предложены и ждут подтверждения.</p>
+</section>
+
+<section>
+<h2>Что подтвердить</h2>
+<div class="card q"><ul>
+<li><b>Цель по выручке на 2029 год.</b> Звучали 300 млн ₸ в месяц, 3,6 млрд ₸ в год и около 6,6 млн долларов в год.</li>
+<li><b>Из чего складывается выручка.</b> Доли подписки, онлайна, наставничества и других программ.</li>
+<li><b>Комплекс.</b> Бюджет и источник денег. Чтобы открыться к ноябрю 2029 года, стройка начинается в 2027 году.</li>
+<li><b>Нагрузка Айдара.</b> 600 участников при малых группах увеличивают число потоков, а выходные уже заняты 35 недель.</li>
+<li><b>Интенсив.</b> Убирать из линейки или оставить с новой ценой.</li>
+<li><b>Суммы со слов.</b> Задолженность по наставничеству и стоимость привлечения клиента PRO LIFE.</li>
+<li><b>Имена и формулировки.</b> Расшифровка местами неразборчива.</li>
+</ul></div>
+</section>
+
+<footer>Busurman Group · стратегия по итогам сессии 20 ноября 2026 года</footer>
+</main></body></html>
